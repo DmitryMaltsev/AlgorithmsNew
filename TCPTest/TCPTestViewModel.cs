@@ -15,7 +15,7 @@ namespace TCPTest
     public class TCPTestViewModel : INotifyPropertyChanged
     {
         #region Rising properties
-        private string _serverIP = "192.168.0.12";
+        private string _serverIP = "192.168.0.15";
         public string ServerIP
         {
             get
@@ -287,17 +287,17 @@ namespace TCPTest
 
         private void ExecuteGetIPCommand()
         {
-           Task.Run(()=>SendBuffer("GetIP"));
+           Task.Run(()=>SendBuffer("0"));
         }
 
         private void ExecuteGetSubnetCommand()
         {
-           
+            Task.Run(() => SendBuffer("1"));
         }
 
         private void ExecuteGetGatewayCommand()
         {
-           
+            Task.Run(() => SendBuffer("2"));
         }
 
 
