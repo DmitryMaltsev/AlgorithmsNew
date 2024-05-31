@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmsNew", "AlgorithmsNew.csproj", "{E725498E-3594-41BE-9D51-FD84C9262295}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPTest", "..\TCPTest\TCPTest.csproj", "{B875F88C-1FA2-43E4-B9F1-C92EB28FD3A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPTest", "TCPTest\TCPTest.csproj", "{53F5FB80-2D1E-4C99-97AB-A3A0086AE61F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{E725498E-3594-41BE-9D51-FD84C9262295}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E725498E-3594-41BE-9D51-FD84C9262295}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E725498E-3594-41BE-9D51-FD84C9262295}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B875F88C-1FA2-43E4-B9F1-C92EB28FD3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B875F88C-1FA2-43E4-B9F1-C92EB28FD3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B875F88C-1FA2-43E4-B9F1-C92EB28FD3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B875F88C-1FA2-43E4-B9F1-C92EB28FD3A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53F5FB80-2D1E-4C99-97AB-A3A0086AE61F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F5FB80-2D1E-4C99-97AB-A3A0086AE61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F5FB80-2D1E-4C99-97AB-A3A0086AE61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F5FB80-2D1E-4C99-97AB-A3A0086AE61F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
