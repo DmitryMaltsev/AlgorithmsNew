@@ -16,8 +16,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
             <TextBox Text="{Binding ServerIP}"  Margin="10,0"
@@ -25,13 +24,15 @@
             <TextBox Text="{Binding Port, StringFormat='Порт сервера={0}'}"  Margin="10,0"
                   Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
-     
-        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Margin="5">
             <!--Получить значение счетчика-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button Width="100" Height="30"  HorizontalAlignment="Left"  Margin="5"
                 Command="{Binding SendCommand}" IsEnabled="{Binding SendIsActive}">Тест счетчик</Button>
-                <TextBlock Text="{Binding }" VerticalAlignment="Center" FontSize="15"/>
+                <TextBox Text="{Binding SendMessageToClient}" VerticalAlignment="Center" FontSize="15" Width="100"/>
+                <TextBlock Text="{Binding MessageToClient}" VerticalAlignment="Center"
+                                                 FontSize="15" Width="100" Height="25" />
             </StackPanel>
             <!--Получить IP-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -54,9 +55,8 @@
 
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2">
-           
-                <TextBlock Text="{Binding SystemMessage, StringFormat='Сообщения={0}'}" 
-                                             HorizontalAlignment="Center"   Width="270" Height="60"/>
+            <TextBox Text="{Binding SystemMessage, StringFormat='Сообщение={0}'}" 
+                   HorizontalAlignment="Center"   Width="200" Height="50" TextWrapping="Wrap"/>
             <StackPanel Orientation="Horizontal">
                 <Button Width="100" Height="30"  HorizontalAlignment="Left"  Margin="5"
                 Command="{Binding ConnectCommand}" IsEnabled="{Binding Connected, 

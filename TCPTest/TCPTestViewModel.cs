@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+
 using TCPTest.Entities;
 
 
@@ -15,7 +16,7 @@ namespace TCPTest
     public class TCPTestViewModel : INotifyPropertyChanged
     {
         #region Rising properties
-        private string _serverIP = "192.168.0.15";
+        private string _serverIP = "192.168.0.103";
         public string ServerIP
         {
             get
@@ -65,6 +66,16 @@ namespace TCPTest
             }
         }
 
+        private string _sendMessageToClient;
+        public string SendMessageToClient
+        {
+            get { return _sendMessageToClient; }
+            set
+            {
+                _sendMessageToClient = value;
+                OnPropertyChanged(nameof(SendMessageToClient));
+            }
+        }
         private string _systemMessage;
 
         public string SystemMessage
@@ -126,7 +137,7 @@ namespace TCPTest
                 return _sendCommand ??
                     (_sendCommand = new RelayCommand(obj =>
                     {
-                        Task.Run(() => ExecuteSendData());
+                        ExecuteSendData();
                     }));
             }
         }
@@ -166,24 +177,25 @@ namespace TCPTest
         {
             get
             {
-              return _getSubnetCommand ??
-                    (_getSubnetCommand = new RelayCommand(obj =>
-            {
-                ExecuteGetSubnetCommand();
-            }));
+                return _getSubnetCommand ??
+                      (_getSubnetCommand = new RelayCommand(obj =>
+              {
+                  ExecuteGetSubnetCommand();
+              }));
             }
         }
 
         private RelayCommand _getGatewayCommand;
         public RelayCommand GetGatewayCommand
         {
-            get {
+            get
+            {
                 return _getGatewayCommand ??
                     (_getGatewayCommand = new RelayCommand(obj =>
                     {
                         ExecuteGetGatewayCommand();
                     }));
-                }
+            }
         }
         #endregion
 
@@ -204,12 +216,6 @@ namespace TCPTest
         int counter = 0;
         private void T_Tick(object? sender, EventArgs e)
         {
-            // EthernetEntities.IP = "aseasd"+ counter;
-            counter += 1;
-            if (_cData != String.Empty)
-            {
-                MessageToClient = _cData;
-            }
         }
 
         public void ExecuteConnect()
@@ -240,41 +246,6 @@ namespace TCPTest
 
         #region Execute methods
         int val = 135;
-        private void ExecuteSendData()
-        {
-            SendIsActive = false;
-            do
-            {
-                try
-                {
-                    _stream = _tcpClient.GetStream();
-                    StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
-                    writer.WriteLine(val.ToString());
-                    writer.Flush();
-                    _cData = val.ToString();
-                    byte[] data = new byte[20];
-                    StringBuilder responseData = new StringBuilder();
-                    int bytes = _stream.Read(data, 0, data.Length);
-                    do
-                    {
-                        responseData.Append(Encoding.ASCII.GetString(data, 0, bytes));
-                    }
-                    while (_stream.DataAvailable);
-                    if (responseData.ToString().Contains("OK/n"))
-                    {
-                        SendIsActive = true;
-                        SystemMessage = $"Успешная передача {val}";
-                        val += 1;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    SystemMessage = ex.Message;
-                }
-                Task.Delay(300);
-            }
-            while (!SendIsActive);
-        }
 
         private void ExecuteDisconnect()
         {
@@ -284,20 +255,27 @@ namespace TCPTest
             _tcpClient.Close();
             _tcpClient.Dispose();
         }
+        private Task sendBufTask;
+
+        void ExecuteSendData()
+        {
+            sendBufTask = new Task(()=> SendBuffer(SendMessageToClient));
+            sendBufTask.Start();
+        }
 
         private void ExecuteGetIPCommand()
         {
-           Task.Run(()=>SendBuffer("0"));
+            SendBuffer("0");
         }
 
         private void ExecuteGetSubnetCommand()
         {
-            Task.Run(() => SendBuffer("1"));
+            SendBuffer("1");
         }
 
         private void ExecuteGetGatewayCommand()
         {
-            Task.Run(() => SendBuffer("2"));
+            SendBuffer("2");
         }
 
 
@@ -308,8 +286,10 @@ namespace TCPTest
             {
                 try
                 {
+
                     _stream = _tcpClient.GetStream();
-                    StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
+                    StreamWriter writer = new StreamWriter(_stream, Encoding.
+                        ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
                     _cData = command.ToString();
@@ -321,21 +301,25 @@ namespace TCPTest
                         responseData.Append(Encoding.ASCII.GetString(data, 0, bytes));
                     }
                     while (_stream.DataAvailable);
-                    if (responseData.ToString().Length>0)
+                    if (responseData.Length > 0)
                     {
-                        EthernetEntities.IP = responseData.ToString();
+                        MessageToClient = responseData.ToString();
+                        SystemMessage = $"Получены данные{responseData}";
                         SendIsActive = true;
-                        SystemMessage = $"Успешная передача {val}";
-                        val += 1;
+                    }
+                    else
+                    {
+                        SystemMessage = "Данных не получено";
                     }
                 }
                 catch (Exception ex)
                 {
                     SystemMessage = ex.Message;
                 }
-                Task.Delay(300);
+                Task.Delay(200);
             }
             while (!SendIsActive);
+
         }
         #endregion
 
