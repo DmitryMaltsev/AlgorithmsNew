@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
@@ -16,7 +17,7 @@ namespace TCPTest
     public class TCPTestViewModel : INotifyPropertyChanged
     {
         #region Rising properties
-        private string _serverIP = "192.168.0.15";
+        private string _serverIP = "192.168.0.10";
         public string ServerIP
         {
             get
@@ -303,11 +304,13 @@ namespace TCPTest
                     while (_stream.DataAvailable);
                     if (responseData.Length > 1)
                     {
-                        string buf = responseData.ToString() ;
-                      //  string val=responseData.ToString().Remove(0, 3);
-                     //   GetValueByTag(int.Parse(buf), val);
-                        SystemMessage = $"Получены данные{responseData}";
-                        SendIsActive = true;
+                        Response response = new();
+                        if (GetResponseData(responseData, response))
+                        {
+                            GetValueByTag(response);
+                            SystemMessage = $"Получены данные{responseData}";
+                            SendIsActive = true;
+                        }
                     }
                     else
                     {
@@ -323,24 +326,55 @@ namespace TCPTest
             while (!SendIsActive);
         }
 
-
-        void GetValueByTag(int tag, string value)
+        private bool GetResponseData(StringBuilder rSB, Response response)
         {
-            switch (tag)
+            bool isRightResponse=false;
+            string stringTag = string.Empty;
+            bool isTag = true;
+            for (int i = 0; i < rSB.Length; i++)
+            {
+                if (string.Compare(rSB[i].ToString(), ",") == 0)
+                {
+                    isTag = false;
+                    isRightResponse= Int16.TryParse(stringTag, out Int16 buf);
+                    if (isRightResponse)
+                    {
+                        response.Tag = buf;
+                    }
+                }
+                if (isTag)
+                {
+                    stringTag += rSB[i];
+                }
+                else
+                 if (!(string.Compare(rSB[i].ToString(), ",") == 0))
+                {
+                    response.ValueString += rSB[i];
+                }
+              
+            }
+            return isRightResponse;
+        }
+
+
+
+        void GetValueByTag(Response resp)
+        {
+            switch (resp.Tag)
             {
                 case 100:
                     {
-                        EthernetEntities.IP = value;
+                        EthernetEntities.IP = resp.ValueString;
                     }
                     break;
                 case 101:
                     {
-                        EthernetEntities.Subnet = value;
+                        EthernetEntities.Subnet = resp.ValueString;
                     }
                     break;
                 case 102:
                     {
-                        EthernetEntities.GateWay = value;
+                        EthernetEntities.GateWay = resp.ValueString;
                     }
                     break;
             }

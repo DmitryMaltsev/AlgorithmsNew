@@ -37,7 +37,7 @@ namespace TCPTest.Entities
             }
         }
 
-
+        public Response ResponseValue { get ; set ; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -48,5 +48,7 @@ namespace TCPTest.Entities
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
             }
         }
+
+        
     }
 }
