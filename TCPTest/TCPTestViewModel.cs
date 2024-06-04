@@ -16,7 +16,7 @@ namespace TCPTest
     public class TCPTestViewModel : INotifyPropertyChanged
     {
         #region Rising properties
-        private string _serverIP = "192.168.0.103";
+        private string _serverIP = "192.168.0.15";
         public string ServerIP
         {
             get
@@ -259,7 +259,7 @@ namespace TCPTest
 
         void ExecuteSendData()
         {
-            sendBufTask = new Task(()=> SendBuffer(SendMessageToClient));
+            sendBufTask = new Task(() => SendBuffer(SendMessageToClient));
             sendBufTask.Start();
         }
 
@@ -293,7 +293,7 @@ namespace TCPTest
                     writer.WriteLine(command);
                     writer.Flush();
                     _cData = command.ToString();
-                    byte[] data = new byte[20];
+                    byte[] data = new byte[50];
                     StringBuilder responseData = new StringBuilder();
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
@@ -301,9 +301,11 @@ namespace TCPTest
                         responseData.Append(Encoding.ASCII.GetString(data, 0, bytes));
                     }
                     while (_stream.DataAvailable);
-                    if (responseData.Length > 0)
+                    if (responseData.Length > 1)
                     {
-                        MessageToClient = responseData.ToString();
+                        string buf = responseData.ToString() ;
+                      //  string val=responseData.ToString().Remove(0, 3);
+                     //   GetValueByTag(int.Parse(buf), val);
                         SystemMessage = $"Получены данные{responseData}";
                         SendIsActive = true;
                     }
@@ -319,7 +321,29 @@ namespace TCPTest
                 Task.Delay(200);
             }
             while (!SendIsActive);
+        }
 
+
+        void GetValueByTag(int tag, string value)
+        {
+            switch (tag)
+            {
+                case 100:
+                    {
+                        EthernetEntities.IP = value;
+                    }
+                    break;
+                case 101:
+                    {
+                        EthernetEntities.Subnet = value;
+                    }
+                    break;
+                case 102:
+                    {
+                        EthernetEntities.GateWay = value;
+                    }
+                    break;
+            }
         }
         #endregion
 
