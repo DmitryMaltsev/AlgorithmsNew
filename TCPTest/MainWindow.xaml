@@ -36,20 +36,14 @@
             </StackPanel>
             <!--Получить IP-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Width="100" Height="30"  HorizontalAlignment="Left"  Margin="5"
-                Command="{Binding GetIPCommand}" IsEnabled="{Binding SendIsActive}">Тек IP</Button>
                 <TextBlock Text="{Binding EthernetEntities.IP}" VerticalAlignment="Center" FontSize="15"/>
             </StackPanel>
             <!--Получить значение Subnet mask-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Width="100" Height="30"  HorizontalAlignment="Left"  Margin="5"
-                Command="{Binding GetSubnetCommand}" IsEnabled="{Binding SendIsActive}">Маска подсети</Button>
                 <TextBlock Text="{Binding EthernetEntities.Subnet}" VerticalAlignment="Center" FontSize="15"/>
             </StackPanel>
             <!--Получить значение gateway-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Width="100" Height="30"  HorizontalAlignment="Left"  Margin="5"
-                Command="{Binding GetGatewayCommand}" IsEnabled="{Binding SendIsActive}">Шлюз</Button>
                 <TextBlock Text="{Binding EthernetEntities.GateWay}" VerticalAlignment="Center" FontSize="15"/>
             </StackPanel>
 

@@ -17,7 +17,7 @@ namespace TCPTest
     public class TCPTestViewModel : INotifyPropertyChanged
     {
         #region Rising properties
-        private string _serverIP = "192.168.0.10";
+        private string _serverIP = "192.168.0.15";
         public string ServerIP
         {
             get
@@ -166,38 +166,11 @@ namespace TCPTest
                 return _getIPCommand ??
                     (_getIPCommand = new RelayCommand(obj =>
                     {
-                        ExecuteGetIPCommand();
-                    }));
-            }
-
-        }
-
-
-        private RelayCommand _getSubnetCommand;
-        public RelayCommand GetSubnetCommand
-        {
-            get
-            {
-                return _getSubnetCommand ??
-                      (_getSubnetCommand = new RelayCommand(obj =>
-              {
-                  ExecuteGetSubnetCommand();
-              }));
-            }
-        }
-
-        private RelayCommand _getGatewayCommand;
-        public RelayCommand GetGatewayCommand
-        {
-            get
-            {
-                return _getGatewayCommand ??
-                    (_getGatewayCommand = new RelayCommand(obj =>
-                    {
-                        ExecuteGetGatewayCommand();
+                      
                     }));
             }
         }
+
         #endregion
 
         TcpClient _tcpClient;
@@ -209,7 +182,7 @@ namespace TCPTest
             EthernetEntities = DIContainer.Resolve<IEthernetEntities>();
 
             //   Task.Run(() => ExecuteSendData());
-            DispatcherTimer t = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(100) };
+            DispatcherTimer t = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(200) };
             t.Tick += T_Tick;
             t.Start();
         }
@@ -217,6 +190,7 @@ namespace TCPTest
         int counter = 0;
         private void T_Tick(object? sender, EventArgs e)
         {
+            
         }
 
         public void ExecuteConnect()
@@ -260,23 +234,9 @@ namespace TCPTest
 
         void ExecuteSendData()
         {
+            SendMessageToClient += ",3,";
             sendBufTask = new Task(() => SendBuffer(SendMessageToClient));
             sendBufTask.Start();
-        }
-
-        private void ExecuteGetIPCommand()
-        {
-            SendBuffer("0");
-        }
-
-        private void ExecuteGetSubnetCommand()
-        {
-            SendBuffer("1");
-        }
-
-        private void ExecuteGetGatewayCommand()
-        {
-            SendBuffer("2");
         }
 
 
@@ -328,7 +288,7 @@ namespace TCPTest
 
         private bool GetResponseData(StringBuilder rSB, Response response)
         {
-            bool isRightResponse=false;
+            bool isRightResponse = false;
             string stringTag = string.Empty;
             bool isTag = true;
             for (int i = 0; i < rSB.Length; i++)
@@ -336,7 +296,7 @@ namespace TCPTest
                 if (string.Compare(rSB[i].ToString(), ",") == 0)
                 {
                     isTag = false;
-                    isRightResponse= Int16.TryParse(stringTag, out Int16 buf);
+                    isRightResponse = Int16.TryParse(stringTag, out Int16 buf);
                     if (isRightResponse)
                     {
                         response.Tag = buf;
@@ -351,12 +311,10 @@ namespace TCPTest
                 {
                     response.ValueString += rSB[i];
                 }
-              
+
             }
             return isRightResponse;
         }
-
-
 
         void GetValueByTag(Response resp)
         {
