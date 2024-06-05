@@ -17,7 +17,7 @@ namespace TCPTest
     public class TCPTestViewModel : INotifyPropertyChanged
     {
         #region Rising properties
-        private string _serverIP = "192.168.0.15";
+        private string _serverIP = "192.168.0.101";
         public string ServerIP
         {
             get
@@ -234,7 +234,7 @@ namespace TCPTest
 
         void ExecuteSendData()
         {
-            SendMessageToClient += ",3,";
+            SendMessageToClient += ",3";
             sendBufTask = new Task(() => SendBuffer(SendMessageToClient));
             sendBufTask.Start();
         }
@@ -254,7 +254,7 @@ namespace TCPTest
                     writer.WriteLine(command);
                     writer.Flush();
                     _cData = command.ToString();
-                    byte[] data = new byte[50];
+                    byte[] data = new byte[100];
                     StringBuilder responseData = new StringBuilder();
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
