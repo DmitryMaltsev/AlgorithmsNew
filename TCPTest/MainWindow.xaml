@@ -34,6 +34,31 @@
                 <TextBlock Text="{Binding MessageToClient}" VerticalAlignment="Center"
                                                  FontSize="15" Width="100" Height="25" />
             </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="230">
+                <Label  VerticalAlignment="Center" FontSize="15" Width="120">"Темпер ул"</Label>
+                <TextBlock Text="{Binding  CSensorsEntities.OutdoorTemp}" VerticalAlignment="Center"
+                                                 FontSize="15" Width="100" Height="25" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="230">
+                <Label  VerticalAlignment="Center" FontSize="15" >"Темпер прит"</Label>
+                <TextBlock Text="{Binding  CSensorsEntities.SupplyTemp}" VerticalAlignment="Center"
+                                                 FontSize="15" Width="100" Height="25" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="230">
+                <Label  VerticalAlignment="Center" FontSize="15" >"Темпер выт"</Label>
+                <TextBlock Text="{Binding  CSensorsEntities.ExhaustTemp}" VerticalAlignment="Center"
+                                                 FontSize="15" Width="100" Height="25" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="230">
+                <Label  VerticalAlignment="Center" FontSize="15" >"Темпер комн"</Label>
+                <TextBlock Text="{Binding  CSensorsEntities.RoomTemp}" VerticalAlignment="Center"
+                                                 FontSize="15" Width="100" Height="25" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="230">
+                <Label  VerticalAlignment="Center" FontSize="15" >"Темпер обр"</Label>
+                <TextBlock Text="{Binding  CSensorsEntities.ReturnWaterTemp}" VerticalAlignment="Center"
+                                                 FontSize="15" Width="100" Height="25" />
+            </StackPanel>
             <!--Получить IP-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Text="{Binding EthernetEntities.IP}" VerticalAlignment="Center" FontSize="15"/>

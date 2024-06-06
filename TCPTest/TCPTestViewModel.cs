@@ -1,5 +1,8 @@
 ﻿using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -17,7 +20,7 @@ namespace TCPTest
     public class TCPTestViewModel : INotifyPropertyChanged
     {
         #region Rising properties
-        private string _serverIP = "192.168.0.101";
+        private string _serverIP = "192.168.0.15";
         public string ServerIP
         {
             get
@@ -116,6 +119,7 @@ namespace TCPTest
         public IEthernetEntities EthernetEntities { get; set; }
         #endregion
 
+        public SensorsEntities CSensorsEntities { get; set; } = new();
         #region Send commands
         private RelayCommand _connectCommand;
         public RelayCommand ConnectCommand
@@ -166,7 +170,7 @@ namespace TCPTest
                 return _getIPCommand ??
                     (_getIPCommand = new RelayCommand(obj =>
                     {
-                      
+
                     }));
             }
         }
@@ -188,9 +192,10 @@ namespace TCPTest
         }
         string _cData;
         int counter = 0;
+
         private void T_Tick(object? sender, EventArgs e)
         {
-            
+
         }
 
         public void ExecuteConnect()
@@ -234,11 +239,10 @@ namespace TCPTest
 
         void ExecuteSendData()
         {
-            SendMessageToClient += ",3";
+            SendMessageToClient = "103,05";
             sendBufTask = new Task(() => SendBuffer(SendMessageToClient));
             sendBufTask.Start();
         }
-
 
         private void SendBuffer(string command)
         {
@@ -264,10 +268,14 @@ namespace TCPTest
                     while (_stream.DataAvailable);
                     if (responseData.Length > 1)
                     {
-                        Response response = new();
-                        if (GetResponseData(responseData, response))
+                        List<Response> responseList = new();
+                        if (GetResponseData(responseData, responseList))
                         {
-                            GetValueByTag(response);
+                            foreach (var response in responseList)
+                            {
+                                GetValueByTag(response);
+                            }
+                            
                             SystemMessage = $"Получены данные{responseData}";
                             SendIsActive = true;
                         }
@@ -286,32 +294,15 @@ namespace TCPTest
             while (!SendIsActive);
         }
 
-        private bool GetResponseData(StringBuilder rSB, Response response)
+        private bool GetResponseData(StringBuilder rSB, List<Response> response)
         {
-            bool isRightResponse = false;
-            string stringTag = string.Empty;
-            bool isTag = true;
-            for (int i = 0; i < rSB.Length; i++)
+            bool isRightResponse = true;
+            string[] resultVals = rSB.ToString().Split(",");
+            ushort startTag = ushort.Parse(resultVals[0]);
+     
+            for (ushort i = 2; i < resultVals.Length;i++)
             {
-                if (string.Compare(rSB[i].ToString(), ",") == 0)
-                {
-                    isTag = false;
-                    isRightResponse = Int16.TryParse(stringTag, out Int16 buf);
-                    if (isRightResponse)
-                    {
-                        response.Tag = buf;
-                    }
-                }
-                if (isTag)
-                {
-                    stringTag += rSB[i];
-                }
-                else
-                 if (!(string.Compare(rSB[i].ToString(), ",") == 0))
-                {
-                    response.ValueString += rSB[i];
-                }
-
+                response.Add(new Response() { Tag = (ushort)(startTag + i - 2), ValueString = resultVals[i] });
             }
             return isRightResponse;
         }
@@ -333,6 +324,41 @@ namespace TCPTest
                 case 102:
                     {
                         EthernetEntities.GateWay = resp.ValueString;
+                    }
+                    break;
+                case 103:
+                    {
+                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
+                        CSensorsEntities.OutdoorTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
+                    }
+                    break;
+                case 104:
+                    {
+                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
+                        CSensorsEntities.SupplyTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
+                    }
+                    break;
+                case 105:
+                    {
+                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
+                        CSensorsEntities.ExhaustTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
+                    }
+                    break;
+                case 106:
+                    {
+                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
+                        CSensorsEntities.RoomTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
+                    }
+                    break;
+                case 107:
+                    {
+                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
+                        CSensorsEntities.ReturnWaterTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
                     }
                     break;
             }
