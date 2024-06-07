@@ -8,7 +8,7 @@ namespace TCPTest.Entities
 {
     public class Response
     {
-        public UInt16 Tag { get; set; }
+        public ushort Tag { get; set; }
         public string ValueString { get; set; }
     }
 }
