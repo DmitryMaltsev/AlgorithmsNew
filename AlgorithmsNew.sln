@@ -5,6 +5,10 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPTest", "TCPTest\TCPTest.csproj", "{53F5FB80-2D1E-4C99-97AB-A3A0086AE61F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverAndroid.Android", "SilverAndroid\SilverAndroid.Android\SilverAndroid.Android.csproj", "{BE9C9071-4FD0-42A7-A097-D400007F35C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverAndroid", "SilverAndroid\SilverAndroid\SilverAndroid.csproj", "{99059057-05A1-414A-BFE0-5019D1963F47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,16 @@ Global
 		{53F5FB80-2D1E-4C99-97AB-A3A0086AE61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53F5FB80-2D1E-4C99-97AB-A3A0086AE61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53F5FB80-2D1E-4C99-97AB-A3A0086AE61F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE9C9071-4FD0-42A7-A097-D400007F35C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9C9071-4FD0-42A7-A097-D400007F35C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9C9071-4FD0-42A7-A097-D400007F35C7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BE9C9071-4FD0-42A7-A097-D400007F35C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9C9071-4FD0-42A7-A097-D400007F35C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE9C9071-4FD0-42A7-A097-D400007F35C7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{99059057-05A1-414A-BFE0-5019D1963F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99059057-05A1-414A-BFE0-5019D1963F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99059057-05A1-414A-BFE0-5019D1963F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99059057-05A1-414A-BFE0-5019D1963F47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

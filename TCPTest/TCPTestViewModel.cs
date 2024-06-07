@@ -1,13 +1,10 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
@@ -251,7 +248,6 @@ namespace TCPTest
             {
                 try
                 {
-
                     _stream = _tcpClient.GetStream();
                     StreamWriter writer = new StreamWriter(_stream, Encoding.
                         ASCII);
@@ -275,7 +271,7 @@ namespace TCPTest
                             {
                                 GetValueByTag(response);
                             }
-                            
+
                             SystemMessage = $"Получены данные{responseData}";
                             SendIsActive = true;
                         }
@@ -299,8 +295,8 @@ namespace TCPTest
             bool isRightResponse = true;
             string[] resultVals = rSB.ToString().Split(",");
             ushort startTag = ushort.Parse(resultVals[0]);
-     
-            for (ushort i = 2; i < resultVals.Length;i++)
+
+            for (ushort i = 2; i < resultVals.Length; i++)
             {
                 response.Add(new Response() { Tag = (ushort)(startTag + i - 2), ValueString = resultVals[i] });
             }
