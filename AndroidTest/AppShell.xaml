@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SilverAndroid.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SilverAndroid"
+    Shell.FlyoutBehavior="Flyout"
+   xmlns:localPages="clr-namespace:SilverAndroid.Pages"
+    >
+    <TabBar>
+        <Tab Title="MoonPhase" Icon="moon.png">
+            <ShellContent ContentTemplate="{DataTemplate localPages:MoonPhasePage}"/>
+        </Tab>
+        <Tab Title="SunRise" Icon="sun.png">
+            <ShellContent ContentTemplate="{DataTemplate localPages:SunrisePage}"/>
+        </Tab>
+        <Tab Title="AboutPage" Icon="about.png">
+            <ShellContent ContentTemplate="{DataTemplate localPages:AboutPage}"/>
+        </Tab>
+    </TabBar>
+    <!--<ShellContent
+        ContentTemplate="{DataTemplate local:MainPage}" />-->
+    <FlyoutItem Title="SunRise" Icon="sun.png">
+        <ShellContent
+        ContentTemplate="{DataTemplate localPages:SunrisePage}"/>
+        <ShellContent 
+        ContentTemplate="{DataTemplate localPages:MoonPhasePage}"/>
+    </FlyoutItem>
+    <!--<FlyoutItem Title="MoonPhase" Icon="moon.png">
+        <ShellContent ContentTemplate="{DataTemplate localPages:MoonPhasePage}"/>
+    </FlyoutItem>-->
+    <FlyoutItem Title="About" Icon="question.png">
+        <ShellContent
+        ContentTemplate="{DataTemplate localPages:AboutPage}"
+      />
+    </FlyoutItem>
+</Shell>
