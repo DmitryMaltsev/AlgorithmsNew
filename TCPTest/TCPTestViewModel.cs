@@ -195,6 +195,9 @@ namespace TCPTest
 
         }
 
+
+
+        #region Execute methods
         public void ExecuteConnect()
         {
             try
@@ -221,7 +224,8 @@ namespace TCPTest
             }
         }
 
-        #region Execute methods
+
+
         int val = 135;
 
         private void ExecuteDisconnect()

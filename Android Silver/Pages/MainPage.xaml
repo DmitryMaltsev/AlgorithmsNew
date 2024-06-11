@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Android_Silver.Pages.MainPage">
+    <ContentPage.Resources>
+        <Style TargetType="{Type Button}">
+            <Setter Property="WidthRequest" Value="150"/>
+            <Setter Property="Margin" Value="4,4,0,0"/>
+        </Style>
+        <Style TargetType="{Type Label}">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="10,4"/>
+        </Style>
+        <Style TargetType="{Type Border}">
+            <Setter Property="Stroke" Value="Blue"/>
+            <Setter Property="StrokeThickness" Value="4"/>
+            <Setter Property="Padding" Value="5,5"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="WidthRequest" Value="180"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 5,5,5,5"/>
+        </Style>
+        <Style TargetType="{Type VerticalStackLayout}">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!--Получить IP-->
+        <Border Grid.Column="0" Grid.Row="0">
+            <Label Text="{Binding EthernetEntities.IP,StringFormat='IP={0}'}"/>
+        </Border>
+        <!--Получить значение Subnet mask-->
+        <Border Grid.Column="0" Grid.Row="1">
+            <Label Text="{Binding EthernetEntities.Subnet, StringFormat='Subnet={0}'}"/>
+        </Border>
+
+        <!--Получить значение Subnet mask-->
+        <Border Grid.Column="0" Grid.Row="2">
+            <Label Text="{Binding EthernetEntities.GateWay, StringFormat='Gateway={0}'}"/>
+        </Border>
+
+        <!--Получить температуры-->
+        <Border Grid.Column="1"   Grid.Row="0">
+            <HorizontalStackLayout>
+                <Label Text="{Binding  CSensorsEntities.OutdoorTemp,StringFormat='Темп ул={0}'}"/>
+            </HorizontalStackLayout>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1">
+            <HorizontalStackLayout>
+                <Label Text="{Binding CSensorsEntities.SupplyTemp, StringFormat='Темп прит={0}'}"/>
+            </HorizontalStackLayout>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="2">
+            <HorizontalStackLayout>
+                <Label Text="{Binding  CSensorsEntities.ExhaustTemp, StringFormat='Темп выт={0}'}"/>
+            </HorizontalStackLayout>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="3">
+            <HorizontalStackLayout>
+                <Label Text="{Binding  CSensorsEntities.RoomTemp, StringFormat='Темп комн={0}'}"/>
+            </HorizontalStackLayout>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="4">
+            <HorizontalStackLayout>
+                <Label Text="{Binding  CSensorsEntities.ReturnWaterTemp, StringFormat='Темп обр.={0}'}"/>
+            </HorizontalStackLayout>
+        </Border>
+
+        <HorizontalStackLayout Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalOptions="Center">
+                <Button Text="Подключиться" Command="{Binding ConnectCommand}"/>
+                <Button Text="Отправка" Command="{Binding SendCommand}"/>
+            </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2">
+            <Label Text="{Binding SystemMessage}" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

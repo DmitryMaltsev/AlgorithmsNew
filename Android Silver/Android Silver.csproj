@@ -50,6 +50,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Unity" Version="5.11.10" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\StartPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

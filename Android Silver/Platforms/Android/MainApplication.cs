@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-using Xamarin.Essentials;
 
 namespace Android_Silver
 {
@@ -16,21 +15,6 @@ namespace Android_Silver
 
         private void Test()
         {
-            // Проверка статуса подключения к WiFi
-            var current = Connectivity.NetworkAccess;
-
-            if (current == NetworkAccess.Internet)
-            {
-                // Подключение к WiFi
-                var currentWifi = Connectivity.WiFiSSID;
-                var currentBSSID = Connectivity.WiFiBSSID;
-
-                // Проверка доступных WiFi сетей
-                var wifiNetworks = Connectivity.WiFi.GetConnectedNetworks();
-
-                // Получение информации о текущем подключении
-                var connectionProfiles = Connectivity.ConnectionProfiles;
-            }
 
         }
 

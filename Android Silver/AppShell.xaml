@@ -3,12 +3,11 @@
     x:Class="Android_Silver.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Android_Silver"
+    xmlns:local="clr-namespace:Android_Silver.Pages"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate local:StartPage}"
         Route="MainPage" />
-
 </Shell>
