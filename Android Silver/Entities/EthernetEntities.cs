@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,10 @@ namespace Android_Silver.Entities
 {
     public class EthernetEntities : INotifyPropertyChanged, IEthernetEntities
     {
+    
+        public TcpClient Client { get; set; }
+
+
         private string _connectIP = "192.168.0.14";
         public string ConnectIP
         {

@@ -21,32 +21,6 @@ namespace Android_Silver.Pages
     {
   
         #region Rising properties
-        private string _serverIP = "192.168.0.14";
-        public string ServerIP
-        {
-            get
-            {
-                return _serverIP;
-            }
-            set
-            {
-                _serverIP = value;
-                OnPropertyChanged(nameof(ServerIP));
-            }
-        }
-
-        private int _port = 8887;
-
-        public int Port
-        {
-            get { return _port; }
-            set
-            {
-                _port = value;
-                OnPropertyChanged(nameof(Port));
-            }
-        }
-
         private string _messageToServer = "Test";
 
         public string MessageToServer
@@ -94,7 +68,6 @@ namespace Android_Silver.Pages
 
 
         private bool _sendIsActive = false;
-
         public bool SendIsActive
         {
             get { return _sendIsActive; }
@@ -117,7 +90,6 @@ namespace Android_Silver.Pages
         }
 
         private string _currentTime;
-
         public string CurrentTime
         {
             get { return _currentTime; }
@@ -127,7 +99,6 @@ namespace Android_Silver.Pages
                 OnPropertyChanged(nameof(CurrentTime));
             }
         }
-
         #endregion
 
         #region Send commands
@@ -140,7 +111,6 @@ namespace Android_Silver.Pages
         public IEthernetEntities EthernetEntities { get; set; }
         public SensorsEntities CSensorsEntities { get; set; } = new();
 
-        TcpClient _tcpClient;
         NetworkStream _stream;
         int counter = 0;
         string _cData;
@@ -156,13 +126,13 @@ namespace Android_Silver.Pages
         {
             try
             {
-                _tcpClient = new TcpClient();
-                _tcpClient.ReceiveTimeout = 3000;
-                _tcpClient.SendTimeout = 3000;
+                EthernetEntities.Client = new TcpClient();
+                EthernetEntities.Client.ReceiveTimeout = 3000;
+                EthernetEntities.Client.SendTimeout = 3000;
                 SendIsActive = false;
                 Connected = true;
                 SystemMessage = "Попытка подключения";
-                _tcpClient.Connect(ServerIP, Port);
+                EthernetEntities.Client.Connect(EthernetEntities.ConnectIP, EthernetEntities.ConnectPort);
                 SystemMessage = "Подключение прошло успешно";
                 SendIsActive = true;
                 Connected = true;
@@ -172,8 +142,8 @@ namespace Android_Silver.Pages
                 SendIsActive = false;
                 Connected = false;
                 SystemMessage = ex.Message;
-                _tcpClient.Close();
-                _tcpClient.Dispose();
+                EthernetEntities.Client.Close();
+                EthernetEntities.Client.Dispose();
             }
         }
 
@@ -185,8 +155,8 @@ namespace Android_Silver.Pages
             SendIsActive = false;
             Connected = false;
             SystemMessage = "Соединение разорвано";
-            _tcpClient.Close();
-            _tcpClient.Dispose();
+            EthernetEntities.Client.Close();
+            EthernetEntities.Client.Dispose();
         }
         private Task sendBufTask;
 
@@ -205,7 +175,7 @@ namespace Android_Silver.Pages
             {
                 try
                 {
-                    _stream = _tcpClient.GetStream();
+                    _stream = EthernetEntities.Client.GetStream();
                     StreamWriter writer = new StreamWriter(_stream, Encoding.
                         ASCII);
                     writer.WriteLine(command);

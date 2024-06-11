@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Android_Silver.Pages.StartPage"
              Title="StartPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="150">
+        <Entry Text="{Binding EthernetEntities.ConnectIP, Mode=TwoWay}" HorizontalOptions="Center" Keyboard="Text" WidthRequest="150"/>
+        <Entry Text="{Binding EthernetEntities.ConnectPort, Mode=TwoWay}" HorizontalOptions="Center" Keyboard="Numeric"  WidthRequest="150"/>
+        <HorizontalStackLayout>
+            <Button Text="Подключиться" Command="{Binding ConnectCommand}"/>
+        </HorizontalStackLayout>
+        <Label Text="{Binding SystemMessage}" />
     </VerticalStackLayout>
 </ContentPage>
