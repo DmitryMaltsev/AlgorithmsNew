@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Android_Silver.Entities
 {
     public class EthernetEntities : INotifyPropertyChanged, IEthernetEntities
     {
-    
+
         public TcpClient Client { get; set; }
 
-
-        private string _connectIP = "192.168.0.14";
+        private string _connectIP = "192.168.0.20";
         public string ConnectIP
         {
             get { return _connectIP; }
@@ -38,20 +32,24 @@ namespace Android_Silver.Entities
         }
 
 
-        private string _ip=String.Empty;
+        private string _ip = String.Empty;
         public string IP
         {
             get { return _ip; }
-            set { _ip = value;
+            set
+            {
+                _ip = value;
                 OnPropertyChanged(nameof(IP));
             }
         }
 
-        private string _subnet=String.Empty;
+        private string _subnet = String.Empty;
         public string Subnet
         {
             get { return _subnet; }
-            set { _subnet = value;
+            set
+            {
+                _subnet = value;
                 OnPropertyChanged(nameof(Subnet));
             }
         }
@@ -60,12 +58,37 @@ namespace Android_Silver.Entities
         public string GateWay
         {
             get { return _gateWay; }
-            set { _gateWay = value;
+            set
+            {
+                _gateWay = value;
                 OnPropertyChanged(nameof(GateWay));
             }
         }
 
-        public Response ResponseValue { get ; set ; }
+        private bool _isConnected;
+
+        public bool IsConnected
+        {
+            get { return _isConnected; }
+            set {
+                _isConnected = value;
+                OnPropertyChanged(nameof(IsConnected));
+            }
+        }
+
+        private string _systemMessage;
+        public string SystemMessage
+        {
+            get { return _systemMessage; }
+            set { 
+                _systemMessage = value;
+                OnPropertyChanged(nameof(SystemMessage));
+            }
+        }
+
+
+
+        public Response ResponseValue { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -76,7 +99,5 @@ namespace Android_Silver.Entities
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
             }
         }
-
-        
     }
 }

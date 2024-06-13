@@ -89,7 +89,7 @@
                 <Button Text="Отправка" Command="{Binding SendCommand}"/>
             </HorizontalStackLayout>
         <HorizontalStackLayout Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2">
-            <Label Text="{Binding SystemMessage}" />
+            <Label Text="{Binding   EthernetEntities.SystemMessage}" />
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>

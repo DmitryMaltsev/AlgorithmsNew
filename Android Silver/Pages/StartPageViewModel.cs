@@ -1,4 +1,5 @@
 using Android_Silver.Entities;
+using Android_Silver.Services;
 
 using System.ComponentModel;
 using System.Net.Sockets;
@@ -8,8 +9,9 @@ using System.Windows.Input;
 namespace Android_Silver.Pages;
 
 public class StartPageViewModel : INotifyPropertyChanged
-{
+{ 
     public IEthernetEntities EthernetEntities { get; set; }
+    public ITcpClientService TcpClientService { get; set; }
 
     private string _systemMessage;
 
@@ -27,34 +29,31 @@ public class StartPageViewModel : INotifyPropertyChanged
     public StartPageViewModel()
     {
         EthernetEntities = DIContainer.Resolve<IEthernetEntities>();
+        TcpClientService = DIContainer.Resolve<ITcpClientService>();
         ConnectCommand = new Command(ExecuteConnect);
+       
     }
 
 
     async private void ExecuteConnect()
     {
-        try
+        EthernetEntities.SystemMessage = "Check";
+        if (!TcpClientService.IsConnecting)
         {
-            EthernetEntities.Client = new TcpClient();
-            EthernetEntities.Client.ReceiveTimeout = 3000;
-            EthernetEntities.Client.SendTimeout = 3000;
-
-            SystemMessage = "Попытка подключения";
-            EthernetEntities.Client.Connect(EthernetEntities.ConnectIP, EthernetEntities.ConnectPort);
-            SystemMessage = "Подключение прошло успешно";
-            //  SendIsActive = true;
-            //  Connected = true;
-            await Shell.Current.GoToAsync("mainPage");
+            await TcpClientService.Connect();
+            if (EthernetEntities.IsConnected)
+            {
+                await Shell.Current.GoToAsync("mainPage");
+               TcpClientService.RecieveData("100,05");
+            }
         }
-        catch (Exception ex)
+        else
         {
-            //  SendIsActive = false;
-            //  Connected = false;
-            SystemMessage = ex.Message;
-            EthernetEntities.Client.Close();
-            EthernetEntities.Client.Dispose();
+            EthernetEntities.SystemMessage = "В данный момент подключаемся";
         }
     }
+
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     public void OnPropertyChanged([CallerMemberName] string prop = "")

@@ -1,4 +1,6 @@
-﻿using Unity;
+﻿using Android_Silver.Services;
+
+using Unity;
 
 namespace Android_Silver.Entities
 {
@@ -10,6 +12,7 @@ namespace Android_Silver.Entities
             _container = new UnityContainer();
             _container.RegisterSingleton<IEthernetEntities, EthernetEntities>();
             _container.RegisterSingleton<SensorsEntities>();
+            _container.RegisterSingleton<ITcpClientService,TcpClientService>();
         }
 
         public static T Resolve<T>()

@@ -9,6 +9,6 @@
         <HorizontalStackLayout>
             <Button Text="Подключиться" Command="{Binding ConnectCommand}"/>
         </HorizontalStackLayout>
-        <Label Text="{Binding SystemMessage}" />
+        <Label Text="{Binding EthernetEntities.SystemMessage}" />
     </VerticalStackLayout>
 </ContentPage>

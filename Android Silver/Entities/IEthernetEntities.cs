@@ -7,9 +7,12 @@ namespace Android_Silver.Entities
         string GateWay { get; set; }
         string IP { get; set; }
         string Subnet { get; set; }
+
         Response ResponseValue { get; set; }
         string ConnectIP { get; set; }
         int ConnectPort { get; set; }
         TcpClient Client { get; set; }
+        bool IsConnected { get; set; }
+        string SystemMessage { get; set; }
     }
 }

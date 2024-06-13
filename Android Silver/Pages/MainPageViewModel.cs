@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Android_Silver.Entities;
+using Android_Silver.Services;
+
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-
-using Android_Silver.Entities;
-
-using Microsoft.Maui.Controls;
-
-
-
 namespace Android_Silver.Pages
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-  
         #region Rising properties
         private string _messageToServer = "Test";
 
@@ -54,19 +44,7 @@ namespace Android_Silver.Pages
                 OnPropertyChanged(nameof(SendMessageToClient));
             }
         }
-        private string _systemMessage;
-
-        public string SystemMessage
-        {
-            get { return _systemMessage; }
-            set
-            {
-                _systemMessage = value;
-                OnPropertyChanged(nameof(SystemMessage));
-            }
-        }
-
-
+ 
         private bool _sendIsActive = false;
         public bool SendIsActive
         {
@@ -109,42 +87,26 @@ namespace Android_Silver.Pages
         #endregion
 
         public IEthernetEntities EthernetEntities { get; set; }
-        public SensorsEntities CSensorsEntities { get; set; } = new();
+        public SensorsEntities CSensorsEntities { get; set; }
+
+        public ITcpClientService TcpClientService { get; set; }
 
         NetworkStream _stream;
         int counter = 0;
         string _cData;
         public MainPageViewModel()
         {
-            EthernetEntities= DIContainer.Resolve<IEthernetEntities>();
-            CSensorsEntities=DIContainer.Resolve<SensorsEntities>();
+            EthernetEntities = DIContainer.Resolve<IEthernetEntities>();
+            CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
+            TcpClientService = DIContainer.Resolve<ITcpClientService>();
             ConnectCommand = new Command(ExecuteConnect);
             SendCommand = new Command(ExecuteSendData);
         }
 
-        public void ExecuteConnect()
+        public  void ExecuteConnect()
         {
-            try
-            {
-                EthernetEntities.Client = new TcpClient();
-                EthernetEntities.Client.ReceiveTimeout = 3000;
-                EthernetEntities.Client.SendTimeout = 3000;
-                SendIsActive = false;
-                Connected = true;
-                SystemMessage = "Попытка подключения";
-                EthernetEntities.Client.Connect(EthernetEntities.ConnectIP, EthernetEntities.ConnectPort);
-                SystemMessage = "Подключение прошло успешно";
-                SendIsActive = true;
-                Connected = true;
-            }
-            catch (Exception ex)
-            {
-                SendIsActive = false;
-                Connected = false;
-                SystemMessage = ex.Message;
-                EthernetEntities.Client.Close();
-                EthernetEntities.Client.Dispose();
-            }
+            TcpClientService.Connect();
+         
         }
 
         #region Execute methods
@@ -152,139 +114,17 @@ namespace Android_Silver.Pages
 
         private void ExecuteDisconnect()
         {
-            SendIsActive = false;
-            Connected = false;
-            SystemMessage = "Соединение разорвано";
-            EthernetEntities.Client.Close();
-            EthernetEntities.Client.Dispose();
+         
         }
         private Task sendBufTask;
 
-        void ExecuteSendData()
+        async void ExecuteSendData()
         {
-            SystemMessage = "";
-            SendMessageToClient = "100,08";
-            sendBufTask = new Task(() => SendBuffer(SendMessageToClient));
-            sendBufTask.Start();
-        }
-
-        private void SendBuffer(string command)
-        {
-            SendIsActive = false;
-            do
-            {
-                try
-                {
-                    _stream = EthernetEntities.Client.GetStream();
-                    StreamWriter writer = new StreamWriter(_stream, Encoding.
-                        ASCII);
-                    writer.WriteLine(command);
-                    writer.Flush();
-                    _cData = command.ToString();
-                    byte[] data = new byte[100];
-                    StringBuilder responseData = new StringBuilder();
-                    int bytes = _stream.Read(data, 0, data.Length);
-                    do
-                    {
-                        responseData.Append(Encoding.ASCII.GetString(data, 0, bytes));
-                    }
-                    while (_stream.DataAvailable);
-                    if (responseData.Length > 1)
-                    {
-                        List<Response> responseList = new();
-                        if (GetResponseData(responseData, responseList))
-                        {
-                            foreach (var response in responseList)
-                            {
-                                GetValueByTag(response);
-                            }
-                            SystemMessage = $"Получены данные {responseData}";
-                            SendIsActive = true;
-                        }
-                    }
-                    else
-                    {
-                        SystemMessage = "Данных не получено";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    SystemMessage = ex.Message;
-                }
-                Task.Delay(200);
-            }
-            while (!SendIsActive);
+            EthernetEntities.SystemMessage = "";
+            await TcpClientService.SendData("100,08");
         }
         #endregion
-        private bool GetResponseData(StringBuilder rSB, List<Response> response)
-        {
-            bool isRightResponse = true;
-            string[] resultVals = rSB.ToString().Split(",");
-            ushort startTag = ushort.Parse(resultVals[0]);
-
-            for (ushort i = 2; i < resultVals.Length; i++)
-            {
-                response.Add(new Response() { Tag = (ushort)(startTag + i - 2), ValueString = resultVals[i] });
-            }
-            return isRightResponse;
-        }
-
-        void GetValueByTag(Response resp)
-        {
-            switch (resp.Tag)
-            {
-                case 100:
-                    {
-                        EthernetEntities.IP = resp.ValueString;
-                    }
-                    break;
-                case 101:
-                    {
-                        EthernetEntities.Subnet = resp.ValueString;
-                    }
-                    break;
-                case 102:
-                    {
-                        EthernetEntities.GateWay = resp.ValueString;
-                    }
-                    break;
-                case 103:
-                    {
-                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
-                        CSensorsEntities.OutdoorTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
-                    }
-                    break;
-                case 104:
-                    {
-                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
-                        CSensorsEntities.SupplyTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
-                    }
-                    break;
-                case 105:
-                    {
-                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
-                        CSensorsEntities.ExhaustTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
-                    }
-                    break;
-                case 106:
-                    {
-                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
-                        CSensorsEntities.RoomTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
-                    }
-                    break;
-                case 107:
-                    {
-                        CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-                        ci.NumberFormat.CurrencyDecimalSeparator = ".";
-                        CSensorsEntities.ReturnWaterTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
-                    }
-                    break;
-            }
-        }
+      
 
         private void OnPropertyChanged(string propName)
         {
@@ -292,33 +132,30 @@ namespace Android_Silver.Pages
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*  private void Timer()
+          {
+              var wifiManager = (WifiManager)Android.App.Application.Context.GetSystemService(Context.WifiService);
 
+              MainThread.BeginInvokeOnMainThread(() =>
+              {
+                  timer = new System.Threading.Timer(obj =>
+                  {
+                      MainThread.InvokeOnMainThreadAsync(() =>
+                      {
+                          wifiManager.StartScan();
+                          if (wifiManager.ScanResults.Count > 0)
+                          {
+                              foreach (var item in wifiManager.ScanResults)
+                              {
+                                  AnroidWIFIEntity.StrScans.Add(item.Bssid);
+                              }
 
-      /*  private void Timer()
-        {
-            var wifiManager = (WifiManager)Android.App.Application.Context.GetSystemService(Context.WifiService);
+                          }
 
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                timer = new System.Threading.Timer(obj =>
-                {
-                    MainThread.InvokeOnMainThreadAsync(() =>
-                    {
-                        wifiManager.StartScan();
-                        if (wifiManager.ScanResults.Count > 0)
-                        {
-                            foreach (var item in wifiManager.ScanResults)
-                            {
-                                AnroidWIFIEntity.StrScans.Add(item.Bssid);
-                            }
-
-                        }
-
-                    });
-                },
-                null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
-            });
-        }*/
-
+                      });
+                  },
+                  null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+              });
+          }*/
     }
 }
