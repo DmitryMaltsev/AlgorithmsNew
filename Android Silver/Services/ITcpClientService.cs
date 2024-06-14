@@ -4,9 +4,11 @@
     {
         bool IsConnecting { get;}
         bool IsSending { get; }
+        int ResieveCounter { get; set; }
 
         public  Task Connect();
-       public void RecieveData(string val);
-        public Task SendData(string data);
+        void Disconnect();
+        public void RecieveData(string val);
+        public  void SendData(string data);
     }
 }

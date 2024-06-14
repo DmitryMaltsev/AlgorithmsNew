@@ -16,6 +16,10 @@ namespace Android_Silver.Services
 
         public bool IsConnecting { get; private set; } = false;
         public bool IsSending { get; private set; } = false;
+        public bool IsRecieving { get; private set; } = false;
+
+
+        public int ResieveCounter { get; set; }
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<IEthernetEntities>();
@@ -47,7 +51,6 @@ namespace Android_Silver.Services
                     _ethernetEntities.IsConnected = true;
                     IsConnecting = false;
                 }
-
             }
             catch (Exception ex)
             {
@@ -58,15 +61,19 @@ namespace Android_Silver.Services
                 IsConnecting = false;
             }
         }
+
+
         StringBuilder sbResult;
-        async public Task SendData(string val)
+        public void SendData(string val)
         {
             if (_ethernetEntities.IsConnected)
             {
                 if (!IsSending)
                 {
+                    Task.Run(() =>
+                {
                     string messToClient = val;
-                    await Task.Run(() => SendCommand(messToClient));
+                    SendCommand(messToClient);
                     if (sbResult.Length > 0)
                     {
                         List<Response> responseList = new();
@@ -87,6 +94,7 @@ namespace Android_Silver.Services
                     {
                         _ethernetEntities.SystemMessage = "длина возвр значения ==0";
                     }
+                });
                 }
                 else
                 {
@@ -104,58 +112,45 @@ namespace Android_Silver.Services
         {
             Task.Run(() =>
             {
-                do
+                while (_ethernetEntities.IsConnected)
                 {
-                    if (_ethernetEntities.IsConnected)
+                    if (!IsSending)
                     {
-                        if (!IsSending)
+                        string messToClient = val;
+                        SendCommand(messToClient);
+                        if (sbResult != null && sbResult.Length > 0)
                         {
-                            string messToClient = val;
-                            Task.Run(() => SendCommand(messToClient));
-                            if (sbResult!=null && sbResult.Length > 0)
+                            List<Response> responseList = new();
+                            if (GetResponseData(sbResult, responseList))
                             {
-                                List<Response> responseList = new();
-                                if (GetResponseData(sbResult, responseList))
+                                foreach (var response in responseList)
                                 {
-                                    foreach (var response in responseList)
-                                    {
-                                        GetValueByTag(response);
-                                    }
-                                    _ethernetEntities.SystemMessage = $"Получены данные {sbResult}";
+                                    GetValueByTag(response);
                                 }
-                                else
-                                {
-                                    _ethernetEntities.SystemMessage = $"Данные не получены";
-                                }
+                                //    _ethernetEntities.SystemMessage = $"Получены данные {sbResult} счетчик={ResieveCounter}";
                             }
                             else
                             {
-                                _ethernetEntities.SystemMessage = "длина возвр значения ==0";
+                                _ethernetEntities.SystemMessage = $"Данные не получены";
                             }
-                        }
-                        else
-                        {
-                            _ethernetEntities.SystemMessage = "Данные уже передаются";
                         }
                     }
                     else
                     {
-                        _ethernetEntities.SystemMessage = "Не подключен";
+                        _ethernetEntities.SystemMessage = "Данные уже передаются";
                     }
                     Task.Delay(1000);
                 }
-                while (_ethernetEntities.IsConnected);
+
             });
         }
 
 
-
-
-
-
         int counter = 0;
+
         private StringBuilder SendCommand(string command)
         {
+
             IsSending = true;
             sbResult = new StringBuilder();
             counter = 0;
@@ -175,15 +170,16 @@ namespace Android_Silver.Services
                     }
                     while (_stream.DataAvailable);
                     IsSending = false;
+                    ResieveCounter += 1;
                 }
-                catch
+                catch (Exception ex)
                 {
-                    //_ethernetEntities.SystemMessage = ex.Message;
+                    //  _ethernetEntities.SystemMessage = ex.Message;
                 }
                 counter += 1;
-                Task.Delay(200);
+                Task.Delay(300);
             }
-            while (IsSending && counter < 6);
+            while (IsSending && counter < 5);
             IsSending = false;
             return sbResult;
         }
@@ -205,13 +201,12 @@ namespace Android_Silver.Services
             return isRightResponse;
         }
 
-        void Disconnect()
+        public void Disconnect()
         {
-            /* SendIsActive = false;
-             Connected = false;
-             SystemMessage = "Соединение разорвано";
-             EthernetEntities.Client.Close();
-             EthernetEntities.Client.Dispose();*/
+            _ethernetEntities.IsConnected = false;
+            //SystemMessage = "Соединение разорвано";
+            _ethernetEntities.Client.Close();
+            _ethernetEntities.Client.Dispose();
         }
 
         void GetValueByTag(Response resp)
@@ -266,6 +261,21 @@ namespace Android_Silver.Services
                         CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
                         ci.NumberFormat.CurrencyDecimalSeparator = ".";
                         _sensorsEntities.ReturnWaterTemp = float.Parse(resp.ValueString, NumberStyles.Any, ci);
+                    }
+                    break;
+                case 300:
+                    {
+
+                    }
+                    break;
+                case 301:
+                    {
+
+                    }
+                    break;
+                case 302:
+                    {
+
                     }
                     break;
             }

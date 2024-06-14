@@ -44,7 +44,7 @@ public class StartPageViewModel : INotifyPropertyChanged
             if (EthernetEntities.IsConnected)
             {
                 await Shell.Current.GoToAsync("mainPage");
-               TcpClientService.RecieveData("100,05");
+              //  TcpClientService.RecieveData("100,08");
             }
         }
         else

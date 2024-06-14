@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Android_Silver.Services"
              x:Class="Android_Silver.Pages.MainPage">
+
     <ContentPage.Resources>
+        <local:InvertBoolConverter x:Key="InvertBoolConverter"/>
         <Style TargetType="{Type Button}">
             <Setter Property="WidthRequest" Value="150"/>
             <Setter Property="Margin" Value="4,4,0,0"/>
@@ -85,11 +88,14 @@
         </Border>
 
         <HorizontalStackLayout Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalOptions="Center">
-                <Button Text="Подключиться" Command="{Binding ConnectCommand}"/>
-                <Button Text="Отправка" Command="{Binding SendCommand}"/>
+            <Button Text="Подключиться" Command="{Binding ConnectCommand}"  
+                    IsEnabled="{Binding EthernetEntities.IsConnected, Converter={StaticResource InvertBoolConverter}}"/>
+            <Button Text="Отключиться" Command="{Binding DisconnectCommand}"
+                     IsEnabled="{Binding EthernetEntities.IsConnected}"/>
+            <Button Text="Отправка" Command="{Binding SendCommand}"/>
             </HorizontalStackLayout>
         <HorizontalStackLayout Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2">
-            <Label Text="{Binding   EthernetEntities.SystemMessage}" />
+            <Label Text="{Binding EthernetEntities.SystemMessage}" />
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>

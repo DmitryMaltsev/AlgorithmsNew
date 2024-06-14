@@ -44,7 +44,7 @@ namespace Android_Silver.Pages
                 OnPropertyChanged(nameof(SendMessageToClient));
             }
         }
- 
+
         private bool _sendIsActive = false;
         public bool SendIsActive
         {
@@ -99,14 +99,28 @@ namespace Android_Silver.Pages
             EthernetEntities = DIContainer.Resolve<IEthernetEntities>();
             CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
             TcpClientService = DIContainer.Resolve<ITcpClientService>();
+            
             ConnectCommand = new Command(ExecuteConnect);
             SendCommand = new Command(ExecuteSendData);
+            DisconnectCommand = new Command(ExecuteDisconnect);
+            StartTimer();
         }
 
-        public  void ExecuteConnect()
+        async private void ExecuteConnect()
         {
-            TcpClientService.Connect();
-         
+            EthernetEntities.SystemMessage = "Check";
+            if (!TcpClientService.IsConnecting)
+            {
+                await TcpClientService.Connect();
+                if (EthernetEntities.IsConnected)
+                {
+                    TcpClientService.RecieveData("100,08");
+                }
+            }
+            else
+            {
+                EthernetEntities.SystemMessage = "В данный момент подключаемся";
+            }
         }
 
         #region Execute methods
@@ -114,48 +128,37 @@ namespace Android_Silver.Pages
 
         private void ExecuteDisconnect()
         {
-         
+            TcpClientService.Disconnect();
         }
         private Task sendBufTask;
 
-        async void ExecuteSendData()
+         void ExecuteSendData()
         {
             EthernetEntities.SystemMessage = "";
-            await TcpClientService.SendData("100,08");
+           TcpClientService.SendData("300,03,-15,-20,-30");
         }
         #endregion
-      
+
 
         private void OnPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
         public event PropertyChangedEventHandler PropertyChanged;
-
-        /*  private void Timer()
-          {
-              var wifiManager = (WifiManager)Android.App.Application.Context.GetSystemService(Context.WifiService);
-
-              MainThread.BeginInvokeOnMainThread(() =>
-              {
-                  timer = new System.Threading.Timer(obj =>
-                  {
-                      MainThread.InvokeOnMainThreadAsync(() =>
-                      {
-                          wifiManager.StartScan();
-                          if (wifiManager.ScanResults.Count > 0)
-                          {
-                              foreach (var item in wifiManager.ScanResults)
-                              {
-                                  AnroidWIFIEntity.StrScans.Add(item.Bssid);
-                              }
-
-                          }
-
-                      });
-                  },
-                  null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
-              });
-          }*/
+        Timer timer;
+        private void StartTimer()
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                timer = new Timer(obj =>
+                {
+                    MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        EthernetEntities.SystemMessage = $"Счетчик принятий ={TcpClientService.ResieveCounter}";
+                    });
+                },
+                null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+            });
+        }
     }
 }

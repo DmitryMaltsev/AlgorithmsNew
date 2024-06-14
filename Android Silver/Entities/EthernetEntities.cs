@@ -71,11 +71,14 @@ namespace Android_Silver.Entities
         {
             get { return _isConnected; }
             set {
-                _isConnected = value;
-                OnPropertyChanged(nameof(IsConnected));
+                if(_isConnected!=value)
+                {
+                    _isConnected = value;
+                    OnPropertyChanged(nameof(IsConnected));
+                }
             }
         }
-
+       
         private string _systemMessage;
         public string SystemMessage
         {
