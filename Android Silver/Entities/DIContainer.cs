@@ -13,6 +13,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<IEthernetEntities, EthernetEntities>();
             _container.RegisterSingleton<SensorsEntities>();
             _container.RegisterSingleton<ITcpClientService,TcpClientService>();
+            _container.RegisterSingleton<SetPoints>();
         }
 
         public static T Resolve<T>()

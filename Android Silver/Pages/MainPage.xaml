@@ -9,6 +9,7 @@
         <Style TargetType="{Type Button}">
             <Setter Property="WidthRequest" Value="150"/>
             <Setter Property="Margin" Value="4,4,0,0"/>
+            <Setter Property="TextColor" Value="White"/>
         </Style>
         <Style TargetType="{Type Label}">
             <Setter Property="HorizontalOptions" Value="Start"/>
@@ -32,15 +33,16 @@
     </ContentPage.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*"/>
             <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -61,40 +63,65 @@
         </Border>
 
         <!--Получить температуры-->
-        <Border Grid.Column="1"   Grid.Row="0">
+        <Border Grid.Column="0"   Grid.Row="3">
             <HorizontalStackLayout>
                 <Label Text="{Binding  CSensorsEntities.OutdoorTemp,StringFormat='Темп ул={0}'}"/>
             </HorizontalStackLayout>
         </Border>
-        <Border Grid.Column="1" Grid.Row="1">
+        <Border Grid.Column="0" Grid.Row="4">
             <HorizontalStackLayout>
                 <Label Text="{Binding CSensorsEntities.SupplyTemp, StringFormat='Темп прит={0}'}"/>
             </HorizontalStackLayout>
         </Border>
-        <Border Grid.Column="1" Grid.Row="2">
+        <Border Grid.Column="0" Grid.Row="5">
             <HorizontalStackLayout>
                 <Label Text="{Binding  CSensorsEntities.ExhaustTemp, StringFormat='Темп выт={0}'}"/>
             </HorizontalStackLayout>
         </Border>
-        <Border Grid.Column="1" Grid.Row="3">
+        <Border Grid.Column="0" Grid.Row="6">
             <HorizontalStackLayout>
                 <Label Text="{Binding  CSensorsEntities.RoomTemp, StringFormat='Темп комн={0}'}"/>
             </HorizontalStackLayout>
         </Border>
-        <Border Grid.Column="1" Grid.Row="4">
+        <Border Grid.Column="0" Grid.Row="7">
             <HorizontalStackLayout>
                 <Label Text="{Binding  CSensorsEntities.ReturnWaterTemp, StringFormat='Темп обр.={0}'}"/>
             </HorizontalStackLayout>
         </Border>
+        <!--Передача уставок-->
+        <HorizontalStackLayout Grid.Column="1"   Grid.Row="0">
+            <Label Text="Уставка 1="/>
+            <Entry Text="{Binding  CSetPoints.SetPoint1}" Keyboard="Numeric" FontSize="15"/>
+            <Button Text="Send" Command="{Binding SendSPCommand}"  CommandParameter="{Binding  CSetPoints.SetPoint1}" />
+            <Label Text="{Binding  CSetPoints.SP1Count, StringFormat='Отправлено раз={0}'}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Column="1"   Grid.Row="1">
+                <Label Text="Уставка 2="/>
+                <Entry Text="{Binding    CSetPoints.SetPoint2}" FontSize="15" />
+            <Button Text="Send" Command="{Binding SendSPCommand}" CommandParameter="{Binding  CSetPoints.SetPoint2}" />
+            <Label Text="{Binding  CSetPoints.SP2Count, StringFormat='Отправлено раз={0}'}" />
+            </HorizontalStackLayout>
 
-        <HorizontalStackLayout Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalOptions="Center">
+        <HorizontalStackLayout Grid.Column="1"   Grid.Row="2">
+                <Label Text="Уставка 3="/>
+                <Entry Text="{Binding  CSetPoints.SetPoint3}" FontSize="15" />
+            <Button Text="Send" Command="{Binding SendSPCommand}" CommandParameter="{Binding  CSetPoints.SetPoint3}" />
+            <Label Text="{Binding  CSetPoints.SP3Count, StringFormat='Отправлено раз={0}'}" />
+            </HorizontalStackLayout>
+        
+        <HorizontalStackLayout Grid.Column="1"   Grid.Row="3">
+            <Label Text="Уставка c плавающей точкой="/>
+            <Entry Text="{Binding  CSetPoints.SetPointF}" FontSize="15" />
+            <Button Text="Send" Command="{Binding SendFloatCommand}" CommandParameter="{Binding  CSetPoints.SetPointF}" />
+        </HorizontalStackLayout>
+        <!--Основная панель-->
+        <HorizontalStackLayout Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalOptions="Center">
             <Button Text="Подключиться" Command="{Binding ConnectCommand}"  
                     IsEnabled="{Binding EthernetEntities.IsConnected, Converter={StaticResource InvertBoolConverter}}"/>
             <Button Text="Отключиться" Command="{Binding DisconnectCommand}"
                      IsEnabled="{Binding EthernetEntities.IsConnected}"/>
-            <Button Text="Отправка" Command="{Binding SendCommand}"/>
-            </HorizontalStackLayout>
-        <HorizontalStackLayout Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2">
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2">
             <Label Text="{Binding EthernetEntities.SystemMessage}" />
         </HorizontalStackLayout>
     </Grid>

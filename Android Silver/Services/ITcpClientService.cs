@@ -8,7 +8,7 @@
 
         public  Task Connect();
         void Disconnect();
-        public void RecieveData(string val);
+        public void SendRecieveTask(string val);
         public  void SendData(string data);
     }
 }

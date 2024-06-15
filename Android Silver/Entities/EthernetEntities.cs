@@ -9,7 +9,7 @@ namespace Android_Silver.Entities
 
         public TcpClient Client { get; set; }
 
-        private string _connectIP = "192.168.0.20";
+        private string _connectIP = "192.168.0.103";
         public string ConnectIP
         {
             get { return _connectIP; }
@@ -89,7 +89,16 @@ namespace Android_Silver.Entities
             }
         }
 
-
+        private string _messageToSend;
+        public string MessageToSend
+        {
+            get { return _messageToSend; }
+            set
+            {
+                _messageToSend = value;
+                OnPropertyChanged(nameof(SystemMessage));
+            }
+        }
 
         public Response ResponseValue { get; set; }
 

@@ -81,15 +81,18 @@ namespace Android_Silver.Pages
 
         #region Send commands
         public ICommand ConnectCommand { get; private set; }
-        public ICommand SendCommand { get; private set; }
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
+
+        public ICommand SendSPCommand { get; private set; }
+        public ICommand SendFloatCommand { get;private set; }
         #endregion
 
         public IEthernetEntities EthernetEntities { get; set; }
         public SensorsEntities CSensorsEntities { get; set; }
 
         public ITcpClientService TcpClientService { get; set; }
+        public SetPoints CSetPoints { get; set; }
 
         NetworkStream _stream;
         int counter = 0;
@@ -99,12 +102,16 @@ namespace Android_Silver.Pages
             EthernetEntities = DIContainer.Resolve<IEthernetEntities>();
             CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
             TcpClientService = DIContainer.Resolve<ITcpClientService>();
-            
+            CSetPoints = DIContainer.Resolve<SetPoints>();
             ConnectCommand = new Command(ExecuteConnect);
-            SendCommand = new Command(ExecuteSendData);
             DisconnectCommand = new Command(ExecuteDisconnect);
+            SendSPCommand = new Command(ExecuteSendSP);
+            SendFloatCommand = new Command(ExecuteSendFloat);
             StartTimer();
+
         }
+
+
 
         async private void ExecuteConnect()
         {
@@ -114,7 +121,7 @@ namespace Android_Silver.Pages
                 await TcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    TcpClientService.RecieveData("100,08");
+                    TcpClientService.SendRecieveTask("100,08");
                 }
             }
             else
@@ -132,11 +139,20 @@ namespace Android_Silver.Pages
         }
         private Task sendBufTask;
 
-         void ExecuteSendData()
+
+        private void ExecuteSendSP(object obj)
         {
-            EthernetEntities.SystemMessage = "";
-           TcpClientService.SendData("300,03,-15,-20,-30");
+            
+               EthernetEntities.MessageToSend = $"300,01,{(int)(CSetPoints.SetPoint1)}";
+            
         }
+
+        private void ExecuteSendFloat(object obj)
+        {
+            EthernetEntities.MessageToSend = $"303,01,{(int)(CSetPoints.SetPointF*10)}";
+
+        }
+
         #endregion
 
 
