@@ -1,4 +1,6 @@
-﻿namespace Android_Silver.Pages
+﻿
+
+namespace Android_Silver.Pages
 {
     public partial class MainPage : ContentPage
     {
@@ -10,5 +12,7 @@
             _viewModel = new MainPageViewModel();
             BindingContext = _viewModel;
         }
+
+      
     }
 }

@@ -153,6 +153,13 @@ namespace Android_Silver.Services
             return sbResult;
         }
 
+        public void Disconnect()
+        {
+            _ethernetEntities.IsConnected = false;
+            //SystemMessage = "Соединение разорвано";
+            _ethernetEntities.Client.Close();
+            _ethernetEntities.Client.Dispose();
+        }
 
         private bool GetResponseData(StringBuilder rSB, List<Response> response)
         {
@@ -181,14 +188,6 @@ namespace Android_Silver.Services
                 _ethernetEntities.SystemMessage = "2 слово не является количеством адресов";
             }
             return isRightResponse;
-        }
-
-        public void Disconnect()
-        {
-            _ethernetEntities.IsConnected = false;
-            //SystemMessage = "Соединение разорвано";
-            _ethernetEntities.Client.Close();
-            _ethernetEntities.Client.Dispose();
         }
 
         void GetValueByTag(Response resp)
@@ -266,6 +265,11 @@ namespace Android_Silver.Services
                 case 302:
                     {
                         _setPoints.SP3Count += 1;
+                    }
+                    break;
+                case 303:
+                    {
+                        _setPoints.SPFCount += 1;
                     }
                     break;
             }

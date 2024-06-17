@@ -11,6 +11,21 @@ namespace Android_Silver.Pages
     public class MainPageViewModel : INotifyPropertyChanged
     {
         #region Rising properties
+
+        private int _value;
+
+        public int Value
+        {
+            get { return _value; }
+            set
+            {
+                _value = value;
+                OnPropertyChanged(nameof(Value));
+            }
+        }
+
+
+
         private string _messageToServer = "Test";
 
         public string MessageToServer
@@ -85,7 +100,7 @@ namespace Android_Silver.Pages
         public ICommand GetIPCommand { get; private set; }
 
         public ICommand SendSPCommand { get; private set; }
-        public ICommand SendFloatCommand { get;private set; }
+        public ICommand SendFloatCommand { get; private set; }
         #endregion
 
         public IEthernetEntities EthernetEntities { get; set; }
@@ -107,6 +122,7 @@ namespace Android_Silver.Pages
             DisconnectCommand = new Command(ExecuteDisconnect);
             SendSPCommand = new Command(ExecuteSendSP);
             SendFloatCommand = new Command(ExecuteSendFloat);
+            Value = 15;
             StartTimer();
 
         }
@@ -142,19 +158,15 @@ namespace Android_Silver.Pages
 
         private void ExecuteSendSP(object obj)
         {
-            
-               EthernetEntities.MessageToSend = $"300,01,{(int)(CSetPoints.SetPoint1)}";
-            
+            EthernetEntities.MessageToSend = $"300,01,{(int)(CSetPoints.SetPoint1)}";
         }
 
         private void ExecuteSendFloat(object obj)
         {
-            EthernetEntities.MessageToSend = $"303,01,{(int)(CSetPoints.SetPointF*10)}";
+            EthernetEntities.MessageToSend = $"303,01,{(int)(CSetPoints.SetPointF * 10)}";
 
         }
-
         #endregion
-
 
         private void OnPropertyChanged(string propName)
         {

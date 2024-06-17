@@ -91,6 +91,18 @@ namespace Android_Silver.Entities
             }
         }
 
+        private int _spfCount;
+
+        public int SPFCount
+        {
+            get { return _spfCount; }
+            set
+            {
+                _spfCount = value;
+                OnPropertyChanged(nameof(SPFCount));
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")

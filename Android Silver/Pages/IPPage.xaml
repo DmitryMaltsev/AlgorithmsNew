@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Android_Silver.Services"
+             x:Class="Android_Silver.Pages.IPPage">
+    <ContentPage.Resources>
+        <local:InvertBoolConverter x:Key="InvertBoolConverter"/>
+        <Style TargetType="{Type Button}">
+            <!--<Setter Property="WidthRequest" Value="150"/>-->
+            <Setter Property="Margin" Value="4,4,0,0"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+        <Style TargetType="{Type Label}">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="10,4"/>
+        </Style>
+        <Style TargetType="{Type Border}">
+            <Setter Property="Stroke" Value="Blue"/>
+            <Setter Property="StrokeThickness" Value="4"/>
+            <Setter Property="Padding" Value="5,5"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <!--<Setter Property="WidthRequest" Value="180"/>-->
+            <Setter Property="StrokeShape" Value="RoundRectangle 5,5,5,5"/>
+        </Style>
+        <Style TargetType="{Type VerticalStackLayout}">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!--Получить IP-->
+        <Border Grid.Column="0" Grid.Row="0">
+            <Label Text="{Binding EthernetEntities.IP,StringFormat='IP={0}'}"/>
+        </Border>
+        <!--Получить значение Subnet mask-->
+        <Border Grid.Column="0" Grid.Row="1">
+            <HorizontalStackLayout>
+                <Label Text="{Binding EthernetEntities.Subnet, StringFormat='Subnet={0}'}"/>
+            </HorizontalStackLayout>
+        </Border>
+        <!--Получить значение Subnet mask-->
+        <Border Grid.Column="0" Grid.Row="2">
+            <HorizontalStackLayout>
+                <Label Text="{Binding EthernetEntities.GateWay, StringFormat='Gateway={0}'}"/>
+            </HorizontalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>
