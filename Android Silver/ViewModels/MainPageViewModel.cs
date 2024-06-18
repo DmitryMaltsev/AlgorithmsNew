@@ -1,5 +1,6 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Services;
+using Android_Silver.ViewModels;
 
 using System.ComponentModel;
 using System.Globalization;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Windows.Input;
 namespace Android_Silver.Pages
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : BindableBase
     {
         #region Rising properties
 
@@ -99,6 +100,8 @@ namespace Android_Silver.Pages
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
 
+        public ICommand SettingsCommand {get; private set; }    
+
         public ICommand SendSPCommand { get; private set; }
         public ICommand SendFloatCommand { get; private set; }
         #endregion
@@ -122,12 +125,11 @@ namespace Android_Silver.Pages
             DisconnectCommand = new Command(ExecuteDisconnect);
             SendSPCommand = new Command(ExecuteSendSP);
             SendFloatCommand = new Command(ExecuteSendFloat);
+            SettingsCommand = new Command(ExecuiteSettings);
             Value = 15;
             StartTimer();
 
         }
-
-
 
         async private void ExecuteConnect()
         {
@@ -166,13 +168,15 @@ namespace Android_Silver.Pages
             EthernetEntities.MessageToSend = $"303,01,{(int)(CSetPoints.SetPointF * 10)}";
 
         }
+
+
+        async private void ExecuiteSettings(object obj)
+        {
+            await Shell.Current.GoToAsync("chooseModePage");
+        }
+
         #endregion
 
-        private void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
         Timer timer;
         private void StartTimer()
         {

@@ -62,7 +62,13 @@
 	  <None Remove="Resources\Images\Pages\background.png" />
 	  <None Remove="Resources\Images\Pages\Modes_main\min.jpg" />
 	  <None Remove="Resources\Images\Pages\Modes_main\minimum.jpg" />
-	  <None Remove="Resources\Images\Pages\Modes_selected\mins.jpg" />
+	  <None Remove="Resources\Images\Pages\Modes_selected\kitchen_s.jpg" />
+	  <None Remove="Resources\Images\Pages\Modes_selected\max_s.jpg" />
+	  <None Remove="Resources\Images\Pages\Modes_selected\min_s.jpg" />
+	  <None Remove="Resources\Images\Pages\Modes_selected\norm_s.jpg" />
+	  <None Remove="Resources\Images\Pages\Modes_selected\shed_s.jpg" />
+	  <None Remove="Resources\Images\Pages\Modes_selected\turn_off_s.jpg" />
+	  <None Remove="Resources\Images\Pages\Modes_selected\vac_s.jpg" />
 	  <None Remove="Resources\Images\Pages\settings.png" />
 	</ItemGroup>
 
@@ -72,6 +78,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\ChooseModePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\IPPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -87,7 +96,13 @@
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Pages\background.png" />
 	  <MauiImage Include="Resources\Images\Pages\Modes_main\min.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Modes_selected\mins.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Modes_selected\kitchen_s.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Modes_selected\max_s.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Modes_selected\min_s.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Modes_selected\norm_s.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Modes_selected\shed_s.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Modes_selected\turn_off_s.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Modes_selected\vac_s.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\qwe.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\settings.png" />
 	</ItemGroup>

@@ -63,24 +63,27 @@
         <!--Кнопка перехода в выбор режима-->
         <HorizontalStackLayout Grid.Column="0" Grid.ColumnSpan="4"  Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="Center"
                                VerticalOptions="Center" >
-            <ImageButton WidthRequest="100" HeightRequest="100"/>
+            <ImageButton WidthRequest="100" HeightRequest="100" Source="mins.jpg"/>
         </HorizontalStackLayout>
-
+        <!--Кнопка перехода в настройки текущего режима режима-->
+            <Button Text="SetttingsButton"  Command="{Binding SettingsCommand}" BackgroundColor="Transparent" BorderColor="AliceBlue"
+                 BorderWidth="3" Margin="5"  Grid.Row="5"  Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" />
+        
+        
         <!--Кнопка перехода в настройку режима-->
         <Label Text="Приточный вохдух"   Grid.Row="5" Grid.Column="0"/>
         <Slider   Grid.Row="5"  Grid.Column="1" Grid.ColumnSpan="2" Value="{Binding Value}" Maximum="100" Minimum="0" ThumbColor="Red" IsEnabled="False"/>
         <Label Text="зн"   Grid.Row="5" Grid.Column="4"/>
-
         <!--Кнопка перехода в настройку режима-->
         <Label Text="Выт вохдух"   Grid.Row="6" Grid.Column="0"/>
         <Slider  Grid.Row="6"  Grid.Column="1" Grid.ColumnSpan="2"  IsEnabled="False" ThumbColor="DarkGreen"/>
         <Label Text="зн"   Grid.Row="6" Grid.Column="4"/>
-        <!--Кнопка перехода в настройку режима-->
-        <Label Text="Выт вохдух"   Grid.Row="7" Grid.Column="0"/>
+        <Label Text="Выт воздух"   Grid.Row="7" Grid.Column="0" />
         <Slider  Grid.Row="7"  Grid.Column="1" Grid.ColumnSpan="2" IsEnabled="False" ThumbColor="DarkGreen"/>
         <Label Text="зн"   Grid.Row="7" Grid.Column="7"/>
+        
         <!--Основная панель-->
-        <HorizontalStackLayout Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalOptions="Center">
+        <HorizontalStackLayout Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="4" Grid.RowSpan="1" HorizontalOptions="Center">
             <Button Text="Подключиться" Command="{Binding ConnectCommand}"  
                     IsEnabled="{Binding EthernetEntities.IsConnected, Converter={StaticResource InvertBoolConverter}}"/>
             <Button Text="Отключиться" Command="{Binding DisconnectCommand}"
