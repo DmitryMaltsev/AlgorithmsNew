@@ -14,6 +14,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<SensorsEntities>();
             _container.RegisterSingleton<ITcpClientService,TcpClientService>();
             _container.RegisterSingleton<SetPoints>();
+            _container.RegisterSingleton<ModesEntities>();
         }
 
         public static T Resolve<T>()

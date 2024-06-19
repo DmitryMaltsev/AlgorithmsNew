@@ -50,25 +50,38 @@
 
 	<ItemGroup>
 	  <AndroidResource Remove="Resources\Images\Pages\Modes\**" />
+	  <AndroidResource Remove="Resources\Images\Pages\Modes_main\**" />
+	  <AndroidResource Remove="Resources\Images\Pages\Modes_selected\**" />
 	  <Compile Remove="Resources\Images\Pages\Modes\**" />
+	  <Compile Remove="Resources\Images\Pages\Modes_main\**" />
+	  <Compile Remove="Resources\Images\Pages\Modes_selected\**" />
 	  <EmbeddedResource Remove="Resources\Images\Pages\Modes\**" />
+	  <EmbeddedResource Remove="Resources\Images\Pages\Modes_main\**" />
+	  <EmbeddedResource Remove="Resources\Images\Pages\Modes_selected\**" />
 	  <MauiCss Remove="Resources\Images\Pages\Modes\**" />
+	  <MauiCss Remove="Resources\Images\Pages\Modes_main\**" />
+	  <MauiCss Remove="Resources\Images\Pages\Modes_selected\**" />
 	  <MauiImage Remove="Resources\Images\Pages\Modes\**" />
+	  <MauiImage Remove="Resources\Images\Pages\Modes_main\**" />
+	  <MauiImage Remove="Resources\Images\Pages\Modes_selected\**" />
 	  <MauiXaml Remove="Resources\Images\Pages\Modes\**" />
+	  <MauiXaml Remove="Resources\Images\Pages\Modes_main\**" />
+	  <MauiXaml Remove="Resources\Images\Pages\Modes_selected\**" />
 	  <None Remove="Resources\Images\Pages\Modes\**" />
+	  <None Remove="Resources\Images\Pages\Modes_main\**" />
+	  <None Remove="Resources\Images\Pages\Modes_selected\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\Pages\background.png" />
-	  <None Remove="Resources\Images\Pages\Modes_main\min.jpg" />
-	  <None Remove="Resources\Images\Pages\Modes_main\minimum.jpg" />
-	  <None Remove="Resources\Images\Pages\Modes_selected\kitchen_s.jpg" />
-	  <None Remove="Resources\Images\Pages\Modes_selected\max_s.jpg" />
-	  <None Remove="Resources\Images\Pages\Modes_selected\min_s.jpg" />
-	  <None Remove="Resources\Images\Pages\Modes_selected\norm_s.jpg" />
-	  <None Remove="Resources\Images\Pages\Modes_selected\shed_s.jpg" />
-	  <None Remove="Resources\Images\Pages\Modes_selected\turn_off_s.jpg" />
-	  <None Remove="Resources\Images\Pages\Modes_selected\vac_s.jpg" />
+	  <None Remove="Resources\Images\Pages\modes main\modes_main_0.jpg" />
+	  <None Remove="Resources\Images\Pages\modes main\modes_main_1.jpg" />
+	  <None Remove="Resources\Images\Pages\modes main\modes_main_2.jpg" />
+	  <None Remove="Resources\Images\Pages\modes main\modes_main_3.jpg" />
+	  <None Remove="Resources\Images\Pages\modes main\modes_main_4.jpg" />
+	  <None Remove="Resources\Images\Pages\modes main\modes_main_5.jpg" />
+	  <None Remove="Resources\Images\Pages\modes main\modes_main_6.jpg" />
+	  <None Remove="Resources\Images\Pages\modes main\modes_main_7.jpg" />
 	  <None Remove="Resources\Images\Pages\settings.png" />
 	</ItemGroup>
 
@@ -84,7 +97,25 @@
 	  <MauiXaml Update="Pages\IPPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\KitchenSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\MaxSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\MinSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\NormalSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ShedulerSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\StartPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\VacationSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -95,14 +126,14 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Pages\background.png" />
-	  <MauiImage Include="Resources\Images\Pages\Modes_main\min.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Modes_selected\kitchen_s.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Modes_selected\max_s.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Modes_selected\min_s.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Modes_selected\norm_s.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Modes_selected\shed_s.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Modes_selected\turn_off_s.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Modes_selected\vac_s.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_0.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_1.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_2.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_3.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_4.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_5.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_6.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_7.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\qwe.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\settings.png" />
 	</ItemGroup>

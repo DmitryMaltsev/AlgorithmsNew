@@ -29,13 +29,13 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <ImageButton Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="settings.png"/>
-            <ImageButton Grid.Row="1" Grid.Column="0" Source="min_s.jpg" />
-            <ImageButton Grid.Row="1" Grid.Column="1" Source="norm_s.jpg"/>
-            <ImageButton Grid.Row="2" Grid.Column="0" Source="max_s.jpg"/>
-            <ImageButton Grid.Row="2" Grid.Column="1" Source="kitchen_s.jpg"/>
-            <ImageButton Grid.Row="3" Grid.Column="0" Source="vac_s.jpg"/>
-            <ImageButton Grid.Row="3" Grid.Column="1" Source="shed_s.jpg"/>
-            <ImageButton Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Source="turn_off_s.jpg"/>
+            <ImageButton Grid.Row="1" Grid.Column="0" Source="min_s.jpg" Command="{Binding MinModeCommand}"/>
+            <ImageButton Grid.Row="1" Grid.Column="1" Source="norm_s.jpg" Command="{Binding NormalModeCommand}"/>
+            <ImageButton Grid.Row="2" Grid.Column="0" Source="max_s.jpg" Command="{Binding MaxModeCommand}"/>
+            <ImageButton Grid.Row="2" Grid.Column="1" Source="kitchen_s.jpg" Command="{Binding KitchenModeCommand}"/>
+            <ImageButton Grid.Row="3" Grid.Column="0" Source="vac_s.jpg" Command="{Binding VacationModeCommand}"/>
+            <ImageButton Grid.Row="3" Grid.Column="1" Source="shed_s.jpg" Command="{Binding ShedulerModeCommand}"/>
+            <ImageButton Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Source="turn_off_s.jpg" Command="{Binding TurnOffModeCommand}"/>
         </Grid>
     </ScrollView>
 </ContentPage>

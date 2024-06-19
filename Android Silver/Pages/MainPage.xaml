@@ -62,14 +62,13 @@
 
         <!--Кнопка перехода в выбор режима-->
         <HorizontalStackLayout Grid.Column="0" Grid.ColumnSpan="4"  Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="Center"
-                               VerticalOptions="Center" >
-            <ImageButton WidthRequest="100" HeightRequest="100" Source="mins.jpg"/>
+                               VerticalOptions="Center">
+            <ImageButton WidthRequest="100" HeightRequest="100" Source="{Binding CModesEntities.CMode1Pic}" Command="{Binding ChooseModeCommand}"/>
         </HorizontalStackLayout>
         <!--Кнопка перехода в настройки текущего режима режима-->
-            <Button Text="SetttingsButton"  Command="{Binding SettingsCommand}" BackgroundColor="Transparent" BorderColor="AliceBlue"
+        <Button Text="SetttingsButton"  Command="{Binding SettingsCommand}" BackgroundColor="Transparent" BorderColor="AliceBlue"
                  BorderWidth="3" Margin="5"  Grid.Row="5"  Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" />
-        
-        
+
         <!--Кнопка перехода в настройку режима-->
         <Label Text="Приточный вохдух"   Grid.Row="5" Grid.Column="0"/>
         <Slider   Grid.Row="5"  Grid.Column="1" Grid.ColumnSpan="2" Value="{Binding Value}" Maximum="100" Minimum="0" ThumbColor="Red" IsEnabled="False"/>

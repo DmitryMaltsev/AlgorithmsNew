@@ -95,21 +95,25 @@ namespace Android_Silver.Pages
         }
         #endregion
 
-        #region Send commands
+        #region Commands
         public ICommand ConnectCommand { get; private set; }
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
-
         public ICommand SettingsCommand {get; private set; }    
-
         public ICommand SendSPCommand { get; private set; }
         public ICommand SendFloatCommand { get; private set; }
+
+        public ICommand ChooseModeCommand { get; private set; }
+
         #endregion
 
         public IEthernetEntities EthernetEntities { get; set; }
         public SensorsEntities CSensorsEntities { get; set; }
 
         public ITcpClientService TcpClientService { get; set; }
+
+        public ModesEntities CModesEntities { get; set; }
+
         public SetPoints CSetPoints { get; set; }
 
         NetworkStream _stream;
@@ -121,15 +125,18 @@ namespace Android_Silver.Pages
             CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
             TcpClientService = DIContainer.Resolve<ITcpClientService>();
             CSetPoints = DIContainer.Resolve<SetPoints>();
+            CModesEntities = DIContainer.Resolve<ModesEntities>();
             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SendSPCommand = new Command(ExecuteSendSP);
             SendFloatCommand = new Command(ExecuteSendFloat);
             SettingsCommand = new Command(ExecuiteSettings);
+            ChooseModeCommand = new Command(ExecuteChooseMode);
             Value = 15;
             StartTimer();
-
+        
         }
+
 
         async private void ExecuteConnect()
         {
@@ -171,6 +178,11 @@ namespace Android_Silver.Pages
 
 
         async private void ExecuiteSettings(object obj)
+        {
+          
+        }
+
+        async private void ExecuteChooseMode(object obj)
         {
             await Shell.Current.GoToAsync("chooseModePage");
         }
