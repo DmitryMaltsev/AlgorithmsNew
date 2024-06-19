@@ -99,12 +99,13 @@ namespace Android_Silver.Pages
         public ICommand ConnectCommand { get; private set; }
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
-        public ICommand SettingsCommand {get; private set; }    
+        public ICommand SettingsCommand { get; private set; }
         public ICommand SendSPCommand { get; private set; }
         public ICommand SendFloatCommand { get; private set; }
-
+        public ICommand SetSettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
 
+       // public ICommand SettingsCommand { get; private set; }
         #endregion
 
         public IEthernetEntities EthernetEntities { get; set; }
@@ -132,11 +133,16 @@ namespace Android_Silver.Pages
             SendFloatCommand = new Command(ExecuteSendFloat);
             SettingsCommand = new Command(ExecuiteSettings);
             ChooseModeCommand = new Command(ExecuteChooseMode);
+            SetSettingsCommand = new Command(ExecuteSetSettings);
             Value = 15;
             StartTimer();
-        
+
         }
 
+        async void ExecuteSetSettings(object obj)
+        {
+            await Shell.Current.GoToAsync(CModesEntities.CModeSettingsRoute);
+        }
 
         async private void ExecuteConnect()
         {
@@ -179,7 +185,7 @@ namespace Android_Silver.Pages
 
         async private void ExecuiteSettings(object obj)
         {
-          
+            await Shell.Current.GoToAsync("settingsPage");
         }
 
         async private void ExecuteChooseMode(object obj)

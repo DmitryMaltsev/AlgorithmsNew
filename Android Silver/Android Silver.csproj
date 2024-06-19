@@ -82,6 +82,14 @@
 	  <None Remove="Resources\Images\Pages\modes main\modes_main_5.jpg" />
 	  <None Remove="Resources\Images\Pages\modes main\modes_main_6.jpg" />
 	  <None Remove="Resources\Images\Pages\modes main\modes_main_7.jpg" />
+	  <None Remove="Resources\Images\Pages\Pages pics\kitchen_timer.jpg" />
+	  <None Remove="Resources\Images\Pages\Pages pics\settings_1.jpg" />
+	  <None Remove="Resources\Images\Pages\Pages pics\settings_2.jpg" />
+	  <None Remove="Resources\Images\Pages\Pages pics\settings_3.jpg" />
+	  <None Remove="Resources\Images\Pages\Pages pics\settings_4.jpg" />
+	  <None Remove="Resources\Images\Pages\Pages pics\settings_5.jpg" />
+	  <None Remove="Resources\Images\Pages\Pages pics\settings_background.jpg" />
+	  <None Remove="Resources\Images\Pages\Pages pics\settings_time.jpg" />
 	  <None Remove="Resources\Images\Pages\settings.png" />
 	</ItemGroup>
 
@@ -97,7 +105,7 @@
 	  <MauiXaml Update="Pages\IPPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\KitchenSettingsPage.xaml">
+	  <MauiXaml Update="Pages\KitchenTimerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MaxSettingsPage.xaml">
@@ -107,6 +115,24 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\NormalSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ModesSettings\SettingsPage1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ModesSettings\SettingsPage2.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ModesSettings\SettingsPage3.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ModesSettings\SettingsPage4.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ModesSettings\SettingsPage5.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ShedulerSettingsPage.xaml">
@@ -125,7 +151,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\Images\Pages\background.png" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\background.png" />
 	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_0.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_1.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_2.jpg" />
@@ -134,7 +160,14 @@
 	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_5.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_6.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_7.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\qwe.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\kitchen_timer.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_1.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_2.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_3.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_4.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_5.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_background.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_time.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\settings.png" />
 	</ItemGroup>
 

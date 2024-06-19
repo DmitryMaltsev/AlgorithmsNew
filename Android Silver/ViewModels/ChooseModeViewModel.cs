@@ -38,12 +38,14 @@ namespace Android_Silver.ViewModels
         {
             Modes.CMode1 = 0;
             Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
+            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];
             await  Shell.Current.GoToAsync("mainPage");
         }
         async private void ExecuteMinMode(object obj)
         {
             Modes.CMode1 = 1;
             Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
+            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];
             await Shell.Current.GoToAsync("mainPage");
         }
 
@@ -51,6 +53,7 @@ namespace Android_Silver.ViewModels
         {
             Modes.CMode1 = 2;
             Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
+            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];
             await Shell.Current.GoToAsync("mainPage");
         }
 
@@ -58,6 +61,7 @@ namespace Android_Silver.ViewModels
         {
             Modes.CMode1 = 3;
             Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
+            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];
             await Shell.Current.GoToAsync("mainPage");
         }
 
@@ -65,13 +69,15 @@ namespace Android_Silver.ViewModels
         {
             Modes.CMode1 = 4;
             Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
-            await Shell.Current.GoToAsync("mainPage");
+            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];
+            await Shell.Current.GoToAsync("kitchenTimerPage");
         }
 
         async private void ExecuteVacationMode(object obj)
         {
             Modes.CMode1 = 5;
             Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
+            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];
             await Shell.Current.GoToAsync("mainPage");
         }
 
@@ -79,12 +85,9 @@ namespace Android_Silver.ViewModels
         {
             Modes.CMode1 = 6;
             Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
+            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];
             await Shell.Current.GoToAsync("mainPage");
         }
-
-    
-
-
         #endregion
     }
 }
