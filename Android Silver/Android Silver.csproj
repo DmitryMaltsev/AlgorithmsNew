@@ -74,6 +74,13 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\Pages\background.png" />
+	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_0.jpg" />
+	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_1.jpg" />
+	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_2.jpg" />
+	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_3.jpg" />
+	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_4.jpg" />
+	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_5.jpg" />
+	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_6.jpg" />
 	  <None Remove="Resources\Images\Pages\modes main\modes_main_0.jpg" />
 	  <None Remove="Resources\Images\Pages\modes main\modes_main_1.jpg" />
 	  <None Remove="Resources\Images\Pages\modes main\modes_main_2.jpg" />
@@ -151,6 +158,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_0.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_1.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_2.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_3.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_4.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_5.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_6.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\background.png" />
 	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_0.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_1.jpg" />

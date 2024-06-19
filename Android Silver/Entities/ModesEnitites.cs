@@ -119,6 +119,7 @@ namespace Android_Silver.Entities
             ModeSettingsRoutes.Add("settingsPage3");
             ModeSettingsRoutes.Add("settingsPage4");
             ModeSettingsRoutes.Add("settingsPage5");
+            ModeSettingsRoutes.Add("settingsPage1");
             CModeSettingsRoute = ModeSettingsRoutes[1];
         }
     }

@@ -8,6 +8,9 @@ namespace Android_Silver
         public AppShell()
         {
             InitializeComponent();
+
+
+
             Routing.RegisterRoute("mainPage", typeof(MainPage));
             Routing.RegisterRoute("startPage", typeof(StartPage));
             Routing.RegisterRoute("chooseModePage", typeof(ChooseModePage));
