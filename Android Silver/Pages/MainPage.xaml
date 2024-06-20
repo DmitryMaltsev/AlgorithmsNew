@@ -13,6 +13,12 @@
             <Setter Property="Margin" Value="4,4,0,0"/>
             <Setter Property="TextColor" Value="White"/>
         </Style>
+        <Style  TargetType="{Type ImageButton}">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
         <Style TargetType="{Type Label}">
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -24,8 +30,6 @@
             <Setter Property="Stroke" Value="Blue"/>
             <Setter Property="StrokeThickness" Value="4"/>
             <Setter Property="Padding" Value="5,5"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
             <!--<Setter Property="WidthRequest" Value="180"/>-->
             <Setter Property="StrokeShape" Value="RoundRectangle 5,5,5,5"/>
         </Style>
@@ -42,59 +46,58 @@
     </ContentPage.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
             <RowDefinition Height="0.3*"/>
             <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.03*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!--Текущее время-->
-        <HorizontalStackLayout Grid.Column="0" Grid.Row="0">
-            <Label Text="00:00" TextColor="White" FontSize="15"/>
-        </HorizontalStackLayout>
+        <Label Text="00:00" TextColor="White" FontSize="15" Grid.Column="0" Grid.Row="0"/>
         <!--Кнопка настроек-->
-        <HorizontalStackLayout Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" HorizontalOptions="Center">
-            <ImageButton Source="settings.png" Command="{Binding SettingsCommand}"  BackgroundColor="Transparent"/>
-        </HorizontalStackLayout>
+        <ImageButton Source="settings.png" Command="{Binding SettingsCommand}" 
+                     Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0"   Grid.ColumnSpan="6"/>
         <!--Кнопка перехода в выбор режима-->
-        <HorizontalStackLayout Grid.Column="0" Grid.ColumnSpan="4"  Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="Center"
-                               VerticalOptions="Center">
-            <ImageButton  Source="{Binding CModesEntities.CMode1Pic}" Command="{Binding ChooseModeCommand}"/>
-        </HorizontalStackLayout>
+        <ImageButton  Source="{Binding CModesEntities.CMode1Pic}" Command="{Binding ChooseModeCommand}"
+                           Grid.Row="2"  Grid.RowSpan="3" Grid.Column="0"    Grid.ColumnSpan="6" />
         <!--Кнопка перехода в настройки текущего режима режима-->
-        <Button Text="SetttingsButton"  Command="{Binding SetSettingsCommand}" BackgroundColor="Transparent" BorderColor="AliceBlue"
-                 BorderWidth="3" Margin="5"  Grid.Row="5"  Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" />
+        <ImageButton  Command="{Binding SetSettingsCommand}" BackgroundColor="Transparent" BorderColor="AliceBlue"
+               Source="substrate.png"  BorderWidth="0" Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="6"  Grid.RowSpan="3" 
+               Aspect="Fill" Margin="5"/>
         <!--Приточный воздух-->
-        <Label Text="Приточный вохдух"   Grid.Row="5" Grid.Column="0"/>
-        <Slider   Grid.Row="5"  Grid.Column="1" Grid.ColumnSpan="2" Value="{Binding Value}"/>
-        <Label Text="зн"   Grid.Row="5" Grid.Column="4"/>
+        <Label Text="Приток"   Grid.Row="6" Grid.Column="0" />
+        <Slider   Grid.Row="6"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding CModesEntities.CMode1.SypplySP}"/>
+        <Label Text="{Binding  CModesEntities.CMode1.SypplySP, StringFormat='{0} %'}"   Grid.Row="6" Grid.Column="6"/>
         <!--Вытяжной воздух-->
-        <Label Text="Выт вохдух"   Grid.Row="6" Grid.Column="0"/>
-        <Slider  Grid.Row="6"  Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label Text="зн"   Grid.Row="6" Grid.Column="4"/>
+        <Label Text="Вытяжка"   Grid.Row="7" Grid.Column="0"/>
+        <Slider  Grid.Row="7"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding  CModesEntities.CMode1.ExhaustSP}"/>
+        <Label Text="{Binding  CModesEntities.CMode1.ExhaustSP}"   Grid.Row="7" Grid.Column="6"/>
         <!--Температура -->
-        <Label Text="Температура"   Grid.Row="7" Grid.Column="0" />
-        <Slider  Grid.Row="7"  Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label Text="зн"   Grid.Row="7" Grid.Column="7"/>
+        <Label Text="t уст"   Grid.Row="8" Grid.Column="0" />
+        <Slider  Grid.Row="8"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding  CModesEntities.CMode1.TempSP}"/>
+        <Label Text="{Binding  CModesEntities.CMode1.TempSP}"   Grid.Row="8" Grid.Column="6"/>
         <!--Основная панель-->
-        <HorizontalStackLayout Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="4" Grid.RowSpan="1" HorizontalOptions="Center">
+        <HorizontalStackLayout Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="6" Grid.RowSpan="1" HorizontalOptions="Center">
             <Button Text="Подключиться" Command="{Binding ConnectCommand}"  
                     IsEnabled="{Binding EthernetEntities.IsConnected, Converter={StaticResource InvertBoolConverter}}"/>
             <Button Text="Отключиться" Command="{Binding DisconnectCommand}"
                      IsEnabled="{Binding EthernetEntities.IsConnected}"/>
         </HorizontalStackLayout>
-        <HorizontalStackLayout Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2">
+        <HorizontalStackLayout Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2">
             <Label Text="{Binding EthernetEntities.SystemMessage}" />
         </HorizontalStackLayout>
     </Grid>

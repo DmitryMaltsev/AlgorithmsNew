@@ -117,6 +117,8 @@ namespace Android_Silver.Pages
 
         public SetPoints CSetPoints { get; set; }
 
+  
+
         NetworkStream _stream;
         int counter = 0;
         string _cData;
@@ -136,7 +138,6 @@ namespace Android_Silver.Pages
             SetSettingsCommand = new Command(ExecuteSetSettings);
             Value = 15;
             StartTimer();
-
         }
 
         async void ExecuteSetSettings(object obj)
@@ -152,7 +153,8 @@ namespace Android_Silver.Pages
                 await TcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    TcpClientService.SendRecieveTask("100,08");
+                    //TcpClientService.SendRecieveTask("100,08");
+                    TcpClientService.SendRecieveTask("108,06");
                 }
             }
             else

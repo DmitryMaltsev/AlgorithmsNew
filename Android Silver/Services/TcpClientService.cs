@@ -19,6 +19,8 @@ namespace Android_Silver.Services
 
         private SensorsEntities _sensorsEntities { get; set; }
 
+        private ModesEntities _modesEntities { get; set; }
+
         public bool IsConnecting { get; private set; } = false;
         public bool IsSending { get; private set; } = false;
         public bool IsRecieving { get; private set; } = false;
@@ -30,6 +32,7 @@ namespace Android_Silver.Services
             _ethernetEntities = DIContainer.Resolve<IEthernetEntities>();
             _sensorsEntities = DIContainer.Resolve<SensorsEntities>();
             _setPoints = DIContainer.Resolve<SetPoints>();
+            _modesEntities=DIContainer.Resolve<ModesEntities>();
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
         }
@@ -249,6 +252,54 @@ namespace Android_Silver.Services
                         if (StringToFloat(resp.ValueString, floatPrec, ref bufF))
                         {
                             _sensorsEntities.ReturnWaterTemp = bufF;
+                        }
+                    }
+                    break;
+                case 108:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.CMode1 = _modesEntities.Mode1ValuesList[Val];
+                        }
+                    }
+                    break;
+                case 109:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.CMode2 = Val;
+                        }
+                    }
+                    break;
+                case 110:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.CMode1.SypplySP = Val;
+                        }
+                    }
+                    break;
+                case 111:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.CMode1.ExhaustSP = Val;
+                        }
+                    }
+                    break;
+                case 112:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.CMode1.TempSP = Val;
+                        }
+                    }
+                    break;
+                case 113:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.CMode1.PowerLimitSP = Val;
                         }
                     }
                     break;

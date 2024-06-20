@@ -11,8 +11,8 @@ namespace Android_Silver.Entities
 {
     public class ModesEntities : BindableBase
     {
-        private int _cMode1;
-        public int CMode1
+        private Mode1Values _cMode1;
+        public Mode1Values CMode1
         {
             get { return _cMode1; }
             set
@@ -33,6 +33,12 @@ namespace Android_Silver.Entities
             }
         }
 
+        
+        public List<Mode1Values> Mode1ValuesList { get; set; } = new List<Mode1Values>();
+
+
+
+
         private string _cMode1Pic;
         public string CMode1Pic
         {
@@ -43,6 +49,7 @@ namespace Android_Silver.Entities
                 OnPropertyChanged(nameof(CMode1Pic));
             }
         }
+
 
 
         private string _cModeSettingsRoute;
@@ -98,19 +105,22 @@ namespace Android_Silver.Entities
             }
         }
 
-
-
-
-
         public ModesEntities()
         {
-            _mode1Pics.Add("modes_main_0.jpg");
-            _mode1Pics.Add("modes_main_1.jpg");
-            _mode1Pics.Add("modes_main_2.jpg");
-            _mode1Pics.Add("modes_main_3.jpg");
-            _mode1Pics.Add("modes_main_4.jpg");
-            _mode1Pics.Add("modes_main_5.jpg");
-            _mode1Pics.Add("modes_main_6.jpg");
+            for (int i = 0; i < 8; i++)
+            {
+                Mode1ValuesList.Add(new Mode1Values());
+            }
+
+            _mode1Pics.Add("main_mode_0.png");
+            _mode1Pics.Add("main_mode_1.png");
+            _mode1Pics.Add("main_mode_2.png");
+            _mode1Pics.Add("main_mode_3.png");
+            _mode1Pics.Add("main_mode_4.png");
+            _mode1Pics.Add("main_mode_5.png");
+            _mode1Pics.Add("main_mode_6.png");
+            _mode1Pics.Add("main_mode_7.png");
+            _mode1Pics.Add("main_mode_8.png");
             _cMode1Pic = _mode1Pics[1];
 
             ModeSettingsRoutes.Add("settingsPage1");

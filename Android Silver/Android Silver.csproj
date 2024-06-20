@@ -74,22 +74,28 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\Pages\background.png" />
-	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_0.jpg" />
-	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_1.jpg" />
-	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_2.jpg" />
-	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_3.jpg" />
-	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_4.jpg" />
-	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_5.jpg" />
-	  <None Remove="Resources\Images\Pages\choose modes\choose_mode_6.jpg" />
-	  <None Remove="Resources\Images\Pages\modes main\modes_main_0.jpg" />
-	  <None Remove="Resources\Images\Pages\modes main\modes_main_1.jpg" />
-	  <None Remove="Resources\Images\Pages\modes main\modes_main_2.jpg" />
-	  <None Remove="Resources\Images\Pages\modes main\modes_main_3.jpg" />
-	  <None Remove="Resources\Images\Pages\modes main\modes_main_4.jpg" />
-	  <None Remove="Resources\Images\Pages\modes main\modes_main_5.jpg" />
-	  <None Remove="Resources\Images\Pages\modes main\modes_main_6.jpg" />
-	  <None Remove="Resources\Images\Pages\modes main\modes_main_7.jpg" />
+	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_0.jpg" />
+	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_1.jpg" />
+	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_2.jpg" />
+	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_3.jpg" />
+	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_4.jpg" />
+	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_5.jpg" />
+	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_6.jpg" />
+	  <None Remove="Resources\Images\Pages\Main page\line.png" />
+	  <None Remove="Resources\Images\Pages\Main page\mainButtons\home.png" />
+	  <None Remove="Resources\Images\Pages\Main page\mainButtons\settings.png" />
+	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_0.png" />
+	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_1.png" />
+	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_2.png" />
+	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_3.png" />
+	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_4.png" />
+	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_5.png" />
+	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_6.png" />
+	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_7.png" />
+	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_8.png" />
+	  <None Remove="Resources\Images\Pages\Main page\substrate.png" />
 	  <None Remove="Resources\Images\Pages\Pages pics\kitchen_timer.jpg" />
+	  <None Remove="Resources\Images\Pages\Pages pics\Panel.png" />
 	  <None Remove="Resources\Images\Pages\Pages pics\settings_1.jpg" />
 	  <None Remove="Resources\Images\Pages\Pages pics\settings_2.jpg" />
 	  <None Remove="Resources\Images\Pages\Pages pics\settings_3.jpg" />
@@ -97,7 +103,6 @@
 	  <None Remove="Resources\Images\Pages\Pages pics\settings_5.jpg" />
 	  <None Remove="Resources\Images\Pages\Pages pics\settings_background.jpg" />
 	  <None Remove="Resources\Images\Pages\Pages pics\settings_time.jpg" />
-	  <None Remove="Resources\Images\Pages\settings.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -154,27 +159,30 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Resources\Images\Icons\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_0.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_1.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_2.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_3.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_4.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_5.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\choose modes\choose_mode_6.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_0.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_1.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_2.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_3.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_4.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_5.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_6.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\mainButtons\home.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\mainButtons\settings.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_0.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_1.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_2.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_3.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_4.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_5.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_6.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_7.png" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_8.png">
+	    <CopyToOutputDirectory></CopyToOutputDirectory>
+	  </MauiImage>
+	  <MauiImage Include="Resources\Images\Pages\Main page\substrate.png" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\background.png" />
-	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_0.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_1.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_2.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_3.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_4.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_5.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_6.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\modes main\modes_main_7.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\kitchen_timer.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Pages pics\panel.png" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_1.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_2.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_3.jpg" />
@@ -182,7 +190,6 @@
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_5.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_background.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_time.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\settings.png" />
 	</ItemGroup>
 
 </Project>
