@@ -105,7 +105,7 @@ namespace Android_Silver.Pages
         public ICommand SetSettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
 
-       // public ICommand SettingsCommand { get; private set; }
+        // public ICommand SettingsCommand { get; private set; }
         #endregion
 
         public IEthernetEntities EthernetEntities { get; set; }
@@ -113,11 +113,16 @@ namespace Android_Silver.Pages
 
         public ITcpClientService TcpClientService { get; set; }
 
+
+        private ModesEntities _cModesEntities;
+
         public ModesEntities CModesEntities { get; set; }
+
+
 
         public SetPoints CSetPoints { get; set; }
 
-  
+
 
         NetworkStream _stream;
         int counter = 0;
@@ -154,7 +159,7 @@ namespace Android_Silver.Pages
                 if (EthernetEntities.IsConnected)
                 {
                     //TcpClientService.SendRecieveTask("100,08");
-                    TcpClientService.SendRecieveTask("108,06");
+                    TcpClientService.SendRecieveTask("108,26");
                 }
             }
             else

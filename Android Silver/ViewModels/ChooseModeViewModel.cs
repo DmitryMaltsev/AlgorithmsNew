@@ -19,8 +19,8 @@ namespace Android_Silver.ViewModels
         public ICommand VacationModeCommand { get; private set; }
         public ICommand TurnOffModeCommand { get; private set; }
         public ICommand HomeCommand { get; private set; }
-        
-        public ModesEntities Modes { get; set; }
+
+        public ModesEntities CModesEntities { get; set; }
 
         public ChooseModeViewModel()
         {
@@ -32,7 +32,7 @@ namespace Android_Silver.ViewModels
             VacationModeCommand = new Command(ExecuteVacationMode);
             TurnOffModeCommand = new Command(ExecuteTurnOffMode);
             HomeCommand = new Command(ExecuteHomeCommand);
-            Modes=DIContainer.Resolve<ModesEntities>();
+            CModesEntities = DIContainer.Resolve<ModesEntities>();
         }
 
         async void ExecuteHomeCommand(object obj)
@@ -43,57 +43,57 @@ namespace Android_Silver.ViewModels
         #region Execute modes
         async private void ExecuteTurnOffMode(object obj)
         {
-          /*  Modes.CMode1 = 0;
-            Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
-            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];*/
-            await  Shell.Current.GoToAsync("mainPage");
+            int index = 0;
+            SetMode1ValuesByIndex(index);
+            await Shell.Current.GoToAsync("mainPage");
         }
         async private void ExecuteMinMode(object obj)
         {
-          /*  Modes.CMode1 = 1;
-            Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
-            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];*/
+            int index = 1;
+            SetMode1ValuesByIndex(index);
             await Shell.Current.GoToAsync("mainPage");
         }
 
         async private void ExecuteNormal(object obj)
         {
-           /* Modes.CMode1 = 2;
-            Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
-            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];*/
+            int index = 2;
+            SetMode1ValuesByIndex(index);
             await Shell.Current.GoToAsync("mainPage");
         }
 
         async private void ExecuteMaxMode(object obj)
         {
-          /*  Modes.CMode1 = 3;
-            Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
-            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];*/
+            int index = 3;
+            SetMode1ValuesByIndex(index);
             await Shell.Current.GoToAsync("mainPage");
         }
 
         async private void ExecuteKitchenMode(object obj)
         {
-         /*   Modes.CMode1 = 4;
-            Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
-            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];*/
+            int index = 4;
+            SetMode1ValuesByIndex(index);
             await Shell.Current.GoToAsync("kitchenTimerPage");
         }
 
         async private void ExecuteVacationMode(object obj)
         {
-         /*   Modes.CMode1 = 5;
-            Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
-            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];*/
+            int index = 5;
+            SetMode1ValuesByIndex(index);
             await Shell.Current.GoToAsync("mainPage");
         }
 
         async private void ExecuteSheduler(object obj)
         {
-          /*  Modes.CMode1 = 6;
-            Modes.CMode1Pic = Modes.Mode1Pics[Modes.CMode1];
-            Modes.CModeSettingsRoute = Modes.ModeSettingsRoutes[Modes.CMode1];*/
+            int index =1;
+            SetMode1ValuesByIndex(index);
             await Shell.Current.GoToAsync("mainPage");
+        }
+
+        private void SetMode1ValuesByIndex(int index)
+        {
+            CModesEntities.CMode1 = CModesEntities.Mode1ValuesList[index];
+            CModesEntities.CMode1Pic = CModesEntities.Mode1Pics[index];
+            CModesEntities.CModeSettingsRoute = CModesEntities.ModeSettingsRoutes[index];
         }
         #endregion
     }

@@ -11,14 +11,23 @@ namespace Android_Silver.Entities
 {
     public class ModesEntities : BindableBase
     {
-        private Mode1Values _cMode1;
+        private Mode1Values _cMode1=new();
         public Mode1Values CMode1
         {
             get { return _cMode1; }
             set
             {
-                _cMode1 = value;
-                OnPropertyChanged(nameof(CMode1));
+                if (_cMode1 != value)
+                {
+                    _cMode1 = value;
+                    OnPropertyChanged(nameof(CMode1));
+                   // CMode1.SypplySP = value.SypplySP;
+                   // CMode1.ExhaustSP = value.ExhaustSP;
+                   // CMode1.TempSP = value.TempSP;
+                   // CMode1.PowerLimitSP = value.PowerLimitSP;
+                }
+                
+              
             }
         }
 
