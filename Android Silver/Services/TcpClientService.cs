@@ -445,7 +445,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[7].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[8].SypplySP = Val;
                         }
                     }
                     break;
@@ -453,7 +453,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[7].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[8].ExhaustSP = Val;
                         }
                     }
                     break;
@@ -461,7 +461,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[7].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[8].TempSP = Val;
                         }
                     }
                     break;
@@ -469,9 +469,10 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[7].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[8].PowerLimitSP = Val;
                         }
                     }
+
                     break;
                 case 300:
                     {
