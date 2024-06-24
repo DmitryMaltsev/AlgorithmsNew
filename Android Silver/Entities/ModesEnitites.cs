@@ -11,7 +11,7 @@ namespace Android_Silver.Entities
 {
     public class ModesEntities : BindableBase
     {
-        private Mode1Values _cMode1=new();
+        private Mode1Values _cMode1 = new();
         public Mode1Values CMode1
         {
             get { return _cMode1; }
@@ -21,13 +21,13 @@ namespace Android_Silver.Entities
                 {
                     _cMode1 = value;
                     OnPropertyChanged(nameof(CMode1));
-                   // CMode1.SypplySP = value.SypplySP;
-                   // CMode1.ExhaustSP = value.ExhaustSP;
-                   // CMode1.TempSP = value.TempSP;
-                   // CMode1.PowerLimitSP = value.PowerLimitSP;
+                    // CMode1.SypplySP = value.SypplySP;
+                    // CMode1.ExhaustSP = value.ExhaustSP;
+                    // CMode1.TempSP = value.TempSP;
+                    // CMode1.PowerLimitSP = value.PowerLimitSP;
                 }
-                
-              
+
+
             }
         }
 
@@ -42,7 +42,7 @@ namespace Android_Silver.Entities
             }
         }
 
-        
+
         public List<Mode1Values> Mode1ValuesList { get; set; } = new List<Mode1Values>();
 
 
@@ -92,16 +92,13 @@ namespace Android_Silver.Entities
         }
 
 
-        private List<string> _modeSettingsRoutes=new();
+        private List<string> _modeSettingsRoutes = new();
 
         public List<string> ModeSettingsRoutes
         {
             get { return _modeSettingsRoutes; }
             set { _modeSettingsRoutes = value; }
         }
-
-
-
 
         private string _cMode2Pic;
         public string CMode2Pic
@@ -116,11 +113,11 @@ namespace Android_Silver.Entities
 
         public ModesEntities()
         {
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 9; i++)
             {
-                Mode1ValuesList.Add(new Mode1Values());
+                Mode1ValuesList.Add(new Mode1Values() { Num=i});
             }
-
+            //Иконка режима
             _mode1Pics.Add("main_mode_0.png");
             _mode1Pics.Add("main_mode_1.png");
             _mode1Pics.Add("main_mode_2.png");
@@ -130,8 +127,9 @@ namespace Android_Silver.Entities
             _mode1Pics.Add("main_mode_6.png");
             _mode1Pics.Add("main_mode_7.png");
             _mode1Pics.Add("main_mode_8.png");
-            _cMode1Pic = _mode1Pics[1];
+            _cMode1Pic = _mode1Pics[0];
 
+            //Маршрут настройки режима
             ModeSettingsRoutes.Add("settingsPage1");
             ModeSettingsRoutes.Add("settingsPage1");
             ModeSettingsRoutes.Add("settingsPage2");
@@ -139,7 +137,19 @@ namespace Android_Silver.Entities
             ModeSettingsRoutes.Add("settingsPage4");
             ModeSettingsRoutes.Add("settingsPage5");
             ModeSettingsRoutes.Add("settingsPage1");
-            CModeSettingsRoute = ModeSettingsRoutes[1];
+            CModeSettingsRoute = ModeSettingsRoutes[0];
+        }
+
+
+        public void SetMode1ValuesByIndex(int index)
+        {
+            if (CMode1 != Mode1ValuesList[index])
+            {
+                CMode1 = Mode1ValuesList[index];
+                CMode1Pic = Mode1Pics[index];
+                CModeSettingsRoute = ModeSettingsRoutes[index];
+
+            }
         }
     }
 }

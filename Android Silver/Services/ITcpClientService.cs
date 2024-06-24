@@ -5,6 +5,7 @@
         bool IsConnecting { get;}
         bool IsSending { get; }
         int ResieveCounter { get; set; }
+        Action<int> SetMode1Action { get; set; }
 
         public  Task Connect();
         void Disconnect();

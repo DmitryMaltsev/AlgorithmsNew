@@ -14,6 +14,6 @@ namespace Android_Silver.Entities
         TcpClient Client { get; set; }
         bool IsConnected { get; set; }
         string SystemMessage { get; set; }
-        string MessageToSend { get; set; }
+        string MessageToServer { get; set; }
     }
 }

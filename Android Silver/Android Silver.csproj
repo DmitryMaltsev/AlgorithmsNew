@@ -81,6 +81,7 @@
 	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_4.jpg" />
 	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_5.jpg" />
 	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_6.jpg" />
+	  <None Remove="Resources\Images\Pages\Main page\background.png" />
 	  <None Remove="Resources\Images\Pages\Main page\line.png" />
 	  <None Remove="Resources\Images\Pages\Main page\mainButtons\home.png" />
 	  <None Remove="Resources\Images\Pages\Main page\mainButtons\settings.png" />
@@ -103,6 +104,10 @@
 	  <None Remove="Resources\Images\Pages\Pages pics\settings_5.jpg" />
 	  <None Remove="Resources\Images\Pages\Pages pics\settings_background.jpg" />
 	  <None Remove="Resources\Images\Pages\Pages pics\settings_time.jpg" />
+	  <None Remove="Resources\Images\Pages\SPsettings\sp_button.png" />
+	  <None Remove="Resources\Images\Pages\SPsettings\sp_header.png" />
+	  <None Remove="Resources\Images\Pages\SPsettings\sp_next_page.png" />
+	  <None Remove="Resources\Images\Pages\SPsettings\sp_ok_button.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -124,6 +129,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MinSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ModesSettings\SetPointsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\NormalSettingsPage.xaml">
@@ -166,6 +174,7 @@
 	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_4.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_5.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_6.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\Main page\background.png" />
 	  <MauiImage Include="Resources\Images\Pages\Main page\mainButtons\home.png" />
 	  <MauiImage Include="Resources\Images\Pages\Main page\mainButtons\settings.png" />
 	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_0.png" />
@@ -180,7 +189,6 @@
 	    <CopyToOutputDirectory></CopyToOutputDirectory>
 	  </MauiImage>
 	  <MauiImage Include="Resources\Images\Pages\Main page\substrate.png" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\background.png" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\kitchen_timer.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\panel.png" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_1.jpg" />
@@ -190,6 +198,10 @@
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_5.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_background.jpg" />
 	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_time.jpg" />
+	  <MauiImage Include="Resources\Images\Pages\SPsettings\sp_button.png" />
+	  <MauiImage Include="Resources\Images\Pages\SPsettings\sp_header.png" />
+	  <MauiImage Include="Resources\Images\Pages\SPsettings\sp_next_page.png" />
+	  <MauiImage Include="Resources\Images\Pages\SPsettings\sp_ok_button.png" />
 	</ItemGroup>
 
 </Project>

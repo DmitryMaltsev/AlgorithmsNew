@@ -105,6 +105,7 @@ namespace Android_Silver.Pages
         public ICommand SetSettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
 
+        public ICommand GoToPageCommand { get; private set; }
         // public ICommand SettingsCommand { get; private set; }
         #endregion
 
@@ -145,9 +146,11 @@ namespace Android_Silver.Pages
             StartTimer();
         }
 
+
+
         async void ExecuteSetSettings(object obj)
         {
-            await Shell.Current.GoToAsync(CModesEntities.CModeSettingsRoute);
+            await Shell.Current.GoToAsync("setPointsPage");
         }
 
         async private void ExecuteConnect()
@@ -180,15 +183,14 @@ namespace Android_Silver.Pages
 
         private void ExecuteSendSP(object obj)
         {
-            EthernetEntities.MessageToServer = $"300,01,{(int)(CSetPoints.SetPoint1)}";
+            EthernetEntities.MessageToServer = $"300,01,{(int)(CSetPoints.SetPoint1 * 10)}";
         }
 
         private void ExecuteSendFloat(object obj)
         {
-            EthernetEntities.MessageToSend = $"303,01,{(int)(CSetPoints.SetPointF * 10)}";
+            EthernetEntities.MessageToServer = $"303,01,{(int)(CSetPoints.SetPointF * 10)}";
 
         }
-
 
         async private void ExecuiteSettings(object obj)
         {
@@ -217,5 +219,10 @@ namespace Android_Silver.Pages
                 null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
             });
         }
+
+
+
+
+  
     }
 }

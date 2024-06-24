@@ -90,7 +90,7 @@ namespace Android_Silver.Entities
         }
 
         private string _messageToSend;
-        public string MessageToSend
+        public string MessageToServer
         {
             get { return _messageToSend; }
             set

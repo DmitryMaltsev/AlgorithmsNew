@@ -8,52 +8,64 @@ using System.Threading.Tasks;
 
 namespace Android_Silver.Entities
 {
-    public class Mode1Values:BindableBase
+    public class Mode1Values : BindableBase
     {
-		private int _supplySP;
+        private int _num;
 
-		public int SypplySP
-		{
-			get { return _supplySP; }
-			set { 
-				_supplySP = value;
-				OnPropertyChanged(nameof(SypplySP));
-			}
-		}
+        public int Num
+        {
+            get { return _num; }
+            set { _num = value; }
+        }
 
-		private int _exhaustSP;
 
-		public int ExhaustSP
-		{
-			get { return _exhaustSP; }
-			set { 
-				_exhaustSP = value;
+
+        private int _supplySP;
+
+        public int SypplySP
+        {
+            get { return _supplySP; }
+            set
+            {
+                _supplySP = value;
+                OnPropertyChanged(nameof(SypplySP));
+            }
+        }
+
+        private int _exhaustSP;
+
+        public int ExhaustSP
+        {
+            get { return _exhaustSP; }
+            set
+            {
+                _exhaustSP = value;
                 OnPropertyChanged(nameof(ExhaustSP));
             }
-		}
+        }
 
-		private int _tempSP;
+        private int _tempSP;
 
-		public int TempSP
-		{
-			get { return _tempSP; }
-			set {
-				_tempSP = value; 
-				OnPropertyChanged(nameof(TempSP));
-			}
-		}
-		private int _powerLimitSP;
+        public int TempSP
+        {
+            get { return _tempSP; }
+            set
+            {
+                _tempSP = value;
+                OnPropertyChanged(nameof(TempSP));
+            }
+        }
+        private int _powerLimitSP;
 
-		public int PowerLimitSP
-		{
-			get { return _powerLimitSP; }
-			set {
-				_powerLimitSP = value; 
-				OnPropertyChanged(nameof(PowerLimitSP));
-			}
-		}
+        public int PowerLimitSP
+        {
+            get { return _powerLimitSP; }
+            set
+            {
+                _powerLimitSP = value;
+                OnPropertyChanged(nameof(PowerLimitSP));
+            }
+        }
 
-
-
-	}
+    }
 }

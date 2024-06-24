@@ -1,17 +1,15 @@
 ﻿using Android_Silver.Entities;
 
+using System;
 using System.Globalization;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 
 namespace Android_Silver.Services
 {
-
     public class TcpClientService : ITcpClientService
     {
-
-
-
         private NetworkStream _stream;
         private IEthernetEntities _ethernetEntities { get; set; }
 
@@ -25,8 +23,10 @@ namespace Android_Silver.Services
         public bool IsSending { get; private set; } = false;
         public bool IsRecieving { get; private set; } = false;
 
-
         public int ResieveCounter { get; set; }
+
+        public Action<int> SetMode1Action { get; set; }
+
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<IEthernetEntities>();
@@ -35,6 +35,7 @@ namespace Android_Silver.Services
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
+
         }
 
         public async Task Connect()
@@ -81,10 +82,9 @@ namespace Android_Silver.Services
             {
                 while (_ethernetEntities.IsConnected)
                 {
-                    string messToClient = String.IsNullOrEmpty(_ethernetEntities.MessageToSend) ? val : _ethernetEntities.MessageToSend;
+                    string messToClient = String.IsNullOrEmpty(_ethernetEntities.MessageToServer) ? val : _ethernetEntities.MessageToServer;
                     if (!IsSending)
                     {
-
                         SendCommand(messToClient);
                         if (sbResult != null && sbResult.Length > 0)
                         {
@@ -95,8 +95,8 @@ namespace Android_Silver.Services
                                 {
                                     GetValueByTag(response);
                                 }
-                                if (String.Compare(messToClient, _ethernetEntities.MessageToSend, true) == 0)
-                                    _ethernetEntities.MessageToSend = String.Empty;
+                                if (String.Compare(messToClient, _ethernetEntities.MessageToServer, true) == 0)
+                                    _ethernetEntities.MessageToServer = String.Empty;
                             }
                             else
                             {
@@ -108,11 +108,10 @@ namespace Android_Silver.Services
                     {
                         _ethernetEntities.SystemMessage = "Данные уже передаются";
                     }
-                    Task.Delay(600);
+                    Task.Delay(300);
                 }
             });
         }
-
 
         private int _trySendcounter = 0;
 
@@ -193,11 +192,10 @@ namespace Android_Silver.Services
             return isRightResponse;
         }
 
-        void GetValueByTag(Response resp)
+        async void GetValueByTag(Response resp)
         {
             int floatPrec = 1;
             float bufF = 0;
-            int bufInt = 0;
             switch (resp.Tag)
             {
                 case 100:
@@ -255,18 +253,21 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                //Режим 1
                 case 108:
                     {
-                        if (int.TryParse(resp.ValueString, out int Val))
+
+                        if (int.TryParse(resp.ValueString, out int val))
                         {
-                            if (_modesEntities.CMode1 != _modesEntities.Mode1ValuesList[Val])
+                            if (val != _modesEntities.CMode1.Num)
                             {
-                       //         _modesEntities.CMode1 = _modesEntities.Mode1ValuesList[Val];
+                                _modesEntities.SetMode1ValuesByIndex(val);
                             }
-                           
+
                         }
                     }
                     break;
+                //Режим 2
                 case 109:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
@@ -275,7 +276,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                //Минимальный режим
+                #region Минимальный режим
                 case 110:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
@@ -308,7 +309,8 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                //Нормальный режим
+                #endregion
+                #region Нормальный режим
                 case 114:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
@@ -341,7 +343,8 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                //Максимальный режим
+                #endregion
+                #region Максимальный режим
                 case 118:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
@@ -374,7 +377,8 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                //Режим кухни
+                #endregion
+                #region Режим кухни
                 case 122:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
@@ -407,7 +411,8 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                //Режим отпуска
+                #endregion
+                #region Режим отпуска
                 case 126:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
@@ -440,7 +445,8 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                //Специальный режим
+                #endregion
+                #region Специальный режим
                 case 130:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
@@ -472,7 +478,7 @@ namespace Android_Silver.Services
                             _modesEntities.Mode1ValuesList[8].PowerLimitSP = Val;
                         }
                     }
-
+                    #endregion
                     break;
                 case 300:
                     {
@@ -492,6 +498,15 @@ namespace Android_Silver.Services
                 case 303:
                     {
                         _setPoints.SPFCount += 1;
+                    }
+                    break;
+                case 308:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.SetMode1ValuesByIndex(Val);
+                        }
+                      
                     }
                     break;
             }
@@ -554,6 +569,22 @@ namespace Android_Silver.Services
                 _ethernetEntities.SystemMessage = "Не подключен";
             }
         }
+
+        public void SetCommandToServer(int address, int[] values)
+        {
+            string bufLength = values.Length > 9 ? values.Length.ToString() : "0" + values.Length.ToString();
+            _ethernetEntities.MessageToServer = $"{address},{bufLength},";
+            for (int i = 0; i < values.Length; i++)
+            {
+                _ethernetEntities.MessageToServer += values[i];
+                if (i < values.Length - 1)
+                {
+                    _ethernetEntities.MessageToServer += ",";
+                }
+            }
+            _ethernetEntities.MessageToServer += "\r\n";
+        }
+
 
 
     }
