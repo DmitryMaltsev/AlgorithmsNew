@@ -180,7 +180,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteSendSP(object obj)
         {
-            EthernetEntities.MessageToSend = $"300,01,{(int)(CSetPoints.SetPoint1)}";
+            EthernetEntities.MessageToServer = $"300,01,{(int)(CSetPoints.SetPoint1)}";
         }
 
         private void ExecuteSendFloat(object obj)
