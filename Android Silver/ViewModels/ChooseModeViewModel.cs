@@ -1,4 +1,5 @@
 ﻿using Android_Silver.Entities;
+using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 
 using System;
@@ -25,6 +26,7 @@ namespace Android_Silver.ViewModels
 
         private TcpClientService _tcpClientService;
 
+        public PicturesSet CPictureSet { get; set; }
         public ChooseModeViewModel()
         {
             MinModeCommand = new Command(ExecuteMinMode);
@@ -37,6 +39,8 @@ namespace Android_Silver.ViewModels
             HomeCommand = new Command(ExecuteHomeCommand);
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             _tcpClientService = DIContainer.Resolve<TcpClientService>();
+            CPictureSet = DIContainer.Resolve<PicturesSet>();
+            
         }
 
         async void ExecuteHomeCommand(object obj)

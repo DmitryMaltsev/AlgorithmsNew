@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Android_Silver.Services"
-             BackgroundImageSource="background.png"
+             BackgroundImageSource="{Binding CPictureSet.Background}"
              Title="Главная страница"
              x:Class="Android_Silver.Pages.MainPage">
 
@@ -69,14 +69,16 @@
         <!--Текущее время-->
         <Label Text="00:00" TextColor="White" FontSize="15" Grid.Column="0" Grid.Row="0"/>
         <!--Кнопка настроек-->
-        <ImageButton Source="settings.png" Command="{Binding SettingsCommand}" 
-                     Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0"   Grid.ColumnSpan="6"/>
+        <ImageButton Source="{Binding CPictureSet.SettingsButton.Current}" Command="{Binding SettingsCommand}" 
+                     Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0"   Grid.ColumnSpan="6"  Pressed="Settings_Pressed"
+                     Released="Settings_Released" />
         <!--Кнопка перехода в выбор режима-->
-        <ImageButton  Source="{Binding CModesEntities.CMode1Pic}" Command="{Binding ChooseModeCommand}"
-                           Grid.Row="2"  Grid.RowSpan="3" Grid.Column="0"    Grid.ColumnSpan="6" />
+        <ImageButton  Source="{Binding  CModesEntities.CMode1.ActiveModePics.Current}" Command="{Binding ChooseModeCommand}"
+                           Grid.Row="2"  Grid.RowSpan="3" Grid.Column="0"    Grid.ColumnSpan="6"
+                                                             Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"/>
         <!--Кнопка перехода в настройки текущего режима режима-->
-        <ImageButton  Command="{Binding SetSettingsCommand}" BackgroundColor="Transparent" BorderColor="AliceBlue"
-               Source="substrate.png"  BorderWidth="0" Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="6"  Grid.RowSpan="3" 
+        <ImageButton  Command="{Binding SetSettingsCommand}" Pressed="Substrate_Pressed" Released="Substrate_Released"
+               Source="{Binding  CPictureSet.Substrate.Current}"  BorderWidth="0" Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="6"  Grid.RowSpan="3" 
                Aspect="Fill" Margin="5"/>
         <!--Приточный воздух-->
         <Label Text="Приток"   Grid.Row="6" Grid.Column="0" />

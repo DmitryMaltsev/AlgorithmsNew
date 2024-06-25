@@ -1,6 +1,8 @@
 ﻿using Android_Silver.Entities.Visual;
 using Android_Silver.ViewModels;
 
+using Microsoft.Maui.Controls.PlatformConfiguration;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,13 +70,24 @@ namespace Android_Silver.Entities
             }
         }
 
-        private PicByStates  _modePics;
-
-        public PicByStates ModePics
+        private PicByStates  _activeModePics;
+        public PicByStates ActiveModePics
         {
-            get { return _modePics; }
-            set { _modePics = value; 
-                OnPropertyChanged(nameof(ModePics));
+            get { return _activeModePics; }
+            set { _activeModePics = value; 
+                OnPropertyChanged(nameof(ActiveModePics));
+            }
+        }
+
+        private PicByStates _selectModePics;
+
+        public PicByStates SelectModePics
+        {
+            get { return _selectModePics; }
+            set
+            {
+                _selectModePics = value;
+                OnPropertyChanged(nameof(SelectModePics));
             }
         }
 
@@ -100,7 +113,14 @@ namespace Android_Silver.Entities
             }
         }
 
-
+        public Mode1Values(int num ,PicByStates activeModePics,PicByStates selectModePicks, PicByStates modeIcons, string modeSettingsRoute)
+        {
+            Num = num;
+            ActiveModePics = activeModePics;
+            SelectModePics = selectModePicks;
+            ModeIcons = modeIcons;
+            ModeSettingsRoute = modeSettingsRoute;
+        }
 
     }
 }

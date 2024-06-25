@@ -1,4 +1,5 @@
-﻿using Android_Silver.Services;
+﻿using Android_Silver.Entities.Visual;
+using Android_Silver.Services;
 
 using Unity;
 
@@ -15,6 +16,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<ITcpClientService,TcpClientService>();
             _container.RegisterSingleton<SetPoints>();
             _container.RegisterSingleton<ModesEntities>();
+            _container.RegisterSingleton<PicturesSet>();
         }
 
         public static T Resolve<T>()

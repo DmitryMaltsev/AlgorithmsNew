@@ -19,7 +19,7 @@ namespace Android_Silver.Entities.Visual
                 case PicturesSetStates.Base:
                     {
                         Background = "background_base.png";
-                        Substrate = new PicByStates(def: "substrate_base.png", selected: "");
+                        Substrate = new PicByStates(def: "substrate_base.png", selected: "test.jpg");
 
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "accept_but_base.png");
@@ -27,32 +27,34 @@ namespace Android_Silver.Entities.Visual
                         DigitalButton = new PicByStates("dig_but_base.png", "dig_but_base.png");
                         #endregion
                         #region Кнопки настроек
-                        HomeButton = new PicByStates("accept_but_base.png", "accept_but_base.png");
+                        HomeButton = new PicByStates("home_but_base.png", "home_but_base.png");
                         NextButton = new PicByStates("next_but_base.png", "next_but_base.png");
                         OkButton = new PicByStates("ok_but_base.png", "ok_but_base.png");
-                        SettingsButton = new PicByStates("settings_but_base.png", "settings_but_base.png");
+                        SettingsButton = new PicByStates("settings_but_base.png", "test.jpg");
                         #endregion
                         #region Кнопки активных режимов
                         ActiveModesPicks = new ObservableCollection<PicByStates>();
-                        ActiveModesPicks.Add(new PicByStates("turnoff_but_on_base.png", "turnoff_but_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("min_but_on_base.png", "min_but_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("norm_but_on_base.png", "norm_but_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("max_but_on_base.png", "max_but_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("kitchen_but_on_base.png", "kitchen_but_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("vac_but_on_base.png", "vac_but_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("shed_but_on_base.png", "shed_but_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("alarm_but_base.png", "alarm_but_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("spec_but_on_base.png", "spec_but_on_base.png"));
+                        ActiveModesPicks.Add(new PicByStates("turnoff_but_on_base.png", "test.jpg"));
+                        ActiveModesPicks.Add(new PicByStates("min_but_on_base.png", "test.jpg"));
+                        ActiveModesPicks.Add(new PicByStates("norm_but_on_base.png", "test.jpg"));
+                        ActiveModesPicks.Add(new PicByStates("max_but_on_base.png", "test.jpg"));
+                        ActiveModesPicks.Add(new PicByStates("kitchen_but_on_base.png", "test.jpg"));
+                        ActiveModesPicks.Add(new PicByStates("vac_but_on_base.png", "test.jpg"));
+                        ActiveModesPicks.Add(new PicByStates("shed_but_on_base.png", "test.jpg"));
+                        ActiveModesPicks.Add(new PicByStates("alarm_but_base.png", "test.jpg"));
+                        ActiveModesPicks.Add(new PicByStates("spec_but_on_base.png", "test.jpg"));
                         #endregion
                         #region Кнопки выбора режимов
                         SelectModesPicks = new ObservableCollection<PicByStates>();
-                        ActiveModesPicks.Add(new PicByStates("kitchen_but_select_on_base.png", "kitchen_but_select_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("min_but_select_on_base.png", "min_but_select_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("norm_but_select_on_base.png", "norm_but_select_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("max_but_select_on_base.png", "max_but_select_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("kitchen_but_select_on_base.png", "kitchen_but_select_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("vac_but_select_on_base.png", "vac_but_select_on_base.png"));
-                        ActiveModesPicks.Add(new PicByStates("shed_but_select_on_base.png", "shed_but_select_on_base.png"));
+                        SelectModesPicks.Add(new PicByStates("turnoff_but_select_on_base.png", "test.jpg"));
+                        SelectModesPicks.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
+                        SelectModesPicks.Add(new PicByStates("norm_but_select_on_base.png", "test.jpg"));
+                        SelectModesPicks.Add(new PicByStates("max_but_select_on_base.png", "test.jpg"));
+                        SelectModesPicks.Add(new PicByStates("kitchen_but_select_on_base.png", "test.jpg"));
+                        SelectModesPicks.Add(new PicByStates("vac_but_select_on_base.png", "test.jpg"));
+                        SelectModesPicks.Add(new PicByStates("shed_but_select_on_base.png", "test.jpg"));
+                        SelectModesPicks.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
+                        SelectModesPicks.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
                         #endregion
                         #region Иконки режимов 
                         IconsPics = new ObservableCollection<PicByStates>();
@@ -62,6 +64,9 @@ namespace Android_Silver.Entities.Visual
                         IconsPics.Add(new PicByStates("max_icon_off_base.png", "max_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("shed_icon_off_base.png", "shed_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("vac_icon_off_base.png", "vac_icon_off_base.png"));
+                        IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
+                        IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
+                        IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
 
                         #endregion
                         #region Кнопки настроек

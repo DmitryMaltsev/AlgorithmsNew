@@ -1,4 +1,5 @@
 ﻿using Android_Silver.Entities;
+using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
@@ -119,7 +120,7 @@ namespace Android_Silver.Pages
 
         public ModesEntities CModesEntities { get; set; }
 
-
+        public PicturesSet CPictureSet { get; set; }
 
         public SetPoints CSetPoints { get; set; }
 
@@ -135,7 +136,9 @@ namespace Android_Silver.Pages
             TcpClientService = DIContainer.Resolve<ITcpClientService>();
             CSetPoints = DIContainer.Resolve<SetPoints>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
-            ConnectCommand = new Command(ExecuteConnect);
+            CPictureSet = DIContainer.Resolve<PicturesSet>();
+           
+             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SendSPCommand = new Command(ExecuteSendSP);
             SendFloatCommand = new Command(ExecuteSendFloat);
@@ -143,7 +146,7 @@ namespace Android_Silver.Pages
             ChooseModeCommand = new Command(ExecuteChooseMode);
             SetSettingsCommand = new Command(ExecuteSetSettings);
             Value = 15;
-            StartTimer();
+           // StartTimer();
         }
 
 

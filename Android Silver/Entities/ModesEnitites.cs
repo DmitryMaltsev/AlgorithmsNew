@@ -12,7 +12,7 @@ namespace Android_Silver.Entities
 {
     public class ModesEntities : BindableBase
     {
-        private Mode1Values _cMode1 = new();
+        private Mode1Values _cMode1;
         public Mode1Values CMode1
         {
             get { return _cMode1; }
@@ -27,21 +27,11 @@ namespace Android_Silver.Entities
                     // CMode1.TempSP = value.TempSP;
                     // CMode1.PowerLimitSP = value.PowerLimitSP;
                 }
-
-
             }
         }
 
-        private PicturesSet _cPictures;
-        public PicturesSet CPictures
-        {
-            get { return _cPictures; }
-            set
-            {
-                _cPictures = value;
-                OnPropertyChanged($"{nameof(CPictures)}");
-            }
-        }
+        private PicturesSet _cPicturesSet { get; set; }
+
 
 
         private int _cMode2;
@@ -55,11 +45,7 @@ namespace Android_Silver.Entities
             }
         }
 
-
         public List<Mode1Values> Mode1ValuesList { get; set; } = new List<Mode1Values>();
-
-
-
 
         private List<string> _modeSettingsRoutes = new();
 
@@ -82,30 +68,27 @@ namespace Android_Silver.Entities
 
         public ModesEntities()
         {
-          
-            Mode1ValuesList = new List<Mode1Values>
-            {
-            new Mode1Values() { Num = 0, ModePics = new("", ""), ModeSettingsRoute = "settingsPage1"},
-            new Mode1Values() { Num = 1, ModePics = new("", ""), ModeSettingsRoute = "settingsPage1"},
-            new Mode1Values() { Num = 2, ModePics = new("", ""), ModeSettingsRoute = "settingsPage2"},
-            new Mode1Values() { Num = 3, ModePics = new("", ""), ModeSettingsRoute = "settingsPage3"},
-            new Mode1Values() { Num = 4, ModePics = new("", ""), ModeSettingsRoute = "settingsPage4"},
-            new Mode1Values() { Num = 5, ModePics = new("", ""), ModeSettingsRoute = "settingsPage5"},
-            new Mode1Values() { Num = 6, ModePics = new("", ""), ModeSettingsRoute = "settingsPage6"}
-        };
+            _cPicturesSet = DIContainer.Resolve<PicturesSet>();
+            _cPicturesSet.Init(PicturesSetStates.Base);
 
-          //  CModeSettingsRoute = ModeSettingsRoutes[0];
+            Mode1ValuesList = new List<Mode1Values>();
+            for (int i = 0; i < 9; i++)
+            {
+                Mode1ValuesList.Add(new Mode1Values(i, _cPicturesSet.ActiveModesPicks[i],
+            _cPicturesSet.SelectModesPicks[i], _cPicturesSet.IconsPics[i], "settingsPage1"));
+            }
+              CMode1 = Mode1ValuesList[0];
         }
 
-    public void SetMode1ValuesByIndex(int index)
-    {
-        if (CMode1 != Mode1ValuesList[index])
+        public void SetMode1ValuesByIndex(int index)
         {
-            CMode1 = Mode1ValuesList[index];
-           // CMode1Pic = Mode1Pics[index];
-           // CModeSettingsRoute = ModeSettingsRoutes[index];
+            if (CMode1 != Mode1ValuesList[index])
+            {
+                CMode1 = Mode1ValuesList[index];
+                // CMode1Pic = Mode1Pics[index];
+                // CModeSettingsRoute = ModeSettingsRoutes[index];
 
+            }
         }
     }
-}
 }
