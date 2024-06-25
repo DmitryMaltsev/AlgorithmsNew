@@ -1,4 +1,5 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.Visual;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,18 @@ namespace Android_Silver.Entities
             }
         }
 
+        private PicturesSet _cPictures;
+        public PicturesSet CPictures
+        {
+            get { return _cPictures; }
+            set
+            {
+                _cPictures = value;
+                OnPropertyChanged($"{nameof(CPictures)}");
+            }
+        }
+
+
         private int _cMode2;
         public int CMode2
         {
@@ -46,50 +59,6 @@ namespace Android_Silver.Entities
         public List<Mode1Values> Mode1ValuesList { get; set; } = new List<Mode1Values>();
 
 
-
-
-        private string _cMode1Pic;
-        public string CMode1Pic
-        {
-            get { return _cMode1Pic; }
-            set
-            {
-                _cMode1Pic = value;
-                OnPropertyChanged(nameof(CMode1Pic));
-            }
-        }
-
-
-
-        private string _cModeSettingsRoute;
-        public string CModeSettingsRoute
-        {
-            get { return _cModeSettingsRoute; }
-            set
-            {
-                _cModeSettingsRoute = value;
-                OnPropertyChanged($"{nameof(CModeSettingsRoute)}");
-            }
-        }
-
-
-        private List<string> _mode1Pics = new List<string>();
-        public List<string> Mode1Pics
-        {
-
-            get { return _mode1Pics; }
-            set
-            {
-                _mode1Pics = value;
-            }
-        }
-
-        private List<string> _mode2Pics = new List<string>();
-        public List<string> Mode2Pics
-        {
-            get { return _mode2Pics; }
-            set { _mode2Pics = value; }
-        }
 
 
         private List<string> _modeSettingsRoutes = new();
@@ -113,43 +82,30 @@ namespace Android_Silver.Entities
 
         public ModesEntities()
         {
-            for (int i = 0; i < 9; i++)
+          
+            Mode1ValuesList = new List<Mode1Values>
             {
-                Mode1ValuesList.Add(new Mode1Values() { Num=i});
-            }
-            //Иконка режима
-            _mode1Pics.Add("main_mode_0.png");
-            _mode1Pics.Add("main_mode_1.png");
-            _mode1Pics.Add("main_mode_2.png");
-            _mode1Pics.Add("main_mode_3.png");
-            _mode1Pics.Add("main_mode_4.png");
-            _mode1Pics.Add("main_mode_5.png");
-            _mode1Pics.Add("main_mode_6.png");
-            _mode1Pics.Add("main_mode_7.png");
-            _mode1Pics.Add("main_mode_8.png");
-            _cMode1Pic = _mode1Pics[0];
+            new Mode1Values() { Num = 0, ModePics = new("", ""), ModeSettingsRoute = "settingsPage1"},
+            new Mode1Values() { Num = 1, ModePics = new("", ""), ModeSettingsRoute = "settingsPage1"},
+            new Mode1Values() { Num = 2, ModePics = new("", ""), ModeSettingsRoute = "settingsPage2"},
+            new Mode1Values() { Num = 3, ModePics = new("", ""), ModeSettingsRoute = "settingsPage3"},
+            new Mode1Values() { Num = 4, ModePics = new("", ""), ModeSettingsRoute = "settingsPage4"},
+            new Mode1Values() { Num = 5, ModePics = new("", ""), ModeSettingsRoute = "settingsPage5"},
+            new Mode1Values() { Num = 6, ModePics = new("", ""), ModeSettingsRoute = "settingsPage6"}
+        };
 
-            //Маршрут настройки режима
-            ModeSettingsRoutes.Add("settingsPage1");
-            ModeSettingsRoutes.Add("settingsPage1");
-            ModeSettingsRoutes.Add("settingsPage2");
-            ModeSettingsRoutes.Add("settingsPage3");
-            ModeSettingsRoutes.Add("settingsPage4");
-            ModeSettingsRoutes.Add("settingsPage5");
-            ModeSettingsRoutes.Add("settingsPage1");
-            CModeSettingsRoute = ModeSettingsRoutes[0];
+          //  CModeSettingsRoute = ModeSettingsRoutes[0];
         }
 
-
-        public void SetMode1ValuesByIndex(int index)
+    public void SetMode1ValuesByIndex(int index)
+    {
+        if (CMode1 != Mode1ValuesList[index])
         {
-            if (CMode1 != Mode1ValuesList[index])
-            {
-                CMode1 = Mode1ValuesList[index];
-                CMode1Pic = Mode1Pics[index];
-                CModeSettingsRoute = ModeSettingsRoutes[index];
+            CMode1 = Mode1ValuesList[index];
+           // CMode1Pic = Mode1Pics[index];
+           // CModeSettingsRoute = ModeSettingsRoutes[index];
 
-            }
         }
     }
+}
 }

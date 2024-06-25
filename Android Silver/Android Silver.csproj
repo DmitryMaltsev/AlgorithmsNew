@@ -49,65 +49,81 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Resources\Images\Pages\Modes\**" />
-	  <AndroidResource Remove="Resources\Images\Pages\Modes_main\**" />
-	  <AndroidResource Remove="Resources\Images\Pages\Modes_selected\**" />
-	  <Compile Remove="Resources\Images\Pages\Modes\**" />
-	  <Compile Remove="Resources\Images\Pages\Modes_main\**" />
-	  <Compile Remove="Resources\Images\Pages\Modes_selected\**" />
-	  <EmbeddedResource Remove="Resources\Images\Pages\Modes\**" />
-	  <EmbeddedResource Remove="Resources\Images\Pages\Modes_main\**" />
-	  <EmbeddedResource Remove="Resources\Images\Pages\Modes_selected\**" />
-	  <MauiCss Remove="Resources\Images\Pages\Modes\**" />
-	  <MauiCss Remove="Resources\Images\Pages\Modes_main\**" />
-	  <MauiCss Remove="Resources\Images\Pages\Modes_selected\**" />
-	  <MauiImage Remove="Resources\Images\Pages\Modes\**" />
-	  <MauiImage Remove="Resources\Images\Pages\Modes_main\**" />
-	  <MauiImage Remove="Resources\Images\Pages\Modes_selected\**" />
-	  <MauiXaml Remove="Resources\Images\Pages\Modes\**" />
-	  <MauiXaml Remove="Resources\Images\Pages\Modes_main\**" />
-	  <MauiXaml Remove="Resources\Images\Pages\Modes_selected\**" />
-	  <None Remove="Resources\Images\Pages\Modes\**" />
-	  <None Remove="Resources\Images\Pages\Modes_main\**" />
-	  <None Remove="Resources\Images\Pages\Modes_selected\**" />
+	  <None Remove="Resources\Images\Базовые\Влажность\accept_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\Влажность\cancel_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\Влажность\dig_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\Главное меню\line.png" />
+	  <None Remove="Resources\Images\Базовые\Главное меню\substrate_base.png" />
+	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\kitchen_icon_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\max_icon_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\min_icon_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\shed_icon_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\turn_off_icon_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\vac_icon_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки режимов\alarm_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки режимов\kitchen_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки режимов\max_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки режимов\min_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки режимов\norm_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки режимов\shed_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки режимов\spec_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки режимов\turnoff_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки режимов\vac_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Настройки\journal_but_base.jpg" />
+	  <None Remove="Resources\Images\Базовые\Настройки\modes_set_but_base.jpg" />
+	  <None Remove="Resources\Images\Базовые\Настройки\settings_other_but_base.jpg" />
+	  <None Remove="Resources\Images\Базовые\Настройки\shed_set_but_base.jpg" />
+	  <None Remove="Resources\Images\Базовые\Настройки\vac_set_but_base.jpg" />
+	  <None Remove="Resources\Images\Базовые\обзор\cons_exh_icon_base.png" />
+	  <None Remove="Resources\Images\Базовые\обзор\cons_sup_icon_base.png" />
+	  <None Remove="Resources\Images\Базовые\обзор\rec_pers_icon_base.png" />
+	  <None Remove="Resources\Images\Базовые\обзор\temp_exh_icon_base.png" />
+	  <None Remove="Resources\Images\Базовые\обзор\temp_street_icon_base.png" />
+	  <None Remove="Resources\Images\Базовые\обзор\temp_sup_icon_base.png" />
+	  <None Remove="Resources\Images\Базовые\общие кнопки\home_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\общие кнопки\next_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\общие кнопки\ok_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\общие кнопки\settings_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\Уставки режимов\sp_dig_but_base.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\Pages\background.png" />
-	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_0.jpg" />
-	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_1.jpg" />
-	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_2.jpg" />
-	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_3.jpg" />
-	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_4.jpg" />
-	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_5.jpg" />
-	  <None Remove="Resources\Images\Pages\Choose modes\choose_mode_6.jpg" />
-	  <None Remove="Resources\Images\Pages\Main page\background.png" />
-	  <None Remove="Resources\Images\Pages\Main page\line.png" />
-	  <None Remove="Resources\Images\Pages\Main page\mainButtons\home.png" />
-	  <None Remove="Resources\Images\Pages\Main page\mainButtons\settings.png" />
-	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_0.png" />
-	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_1.png" />
-	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_2.png" />
-	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_3.png" />
-	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_4.png" />
-	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_5.png" />
-	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_6.png" />
-	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_7.png" />
-	  <None Remove="Resources\Images\Pages\Main page\modesicons\main_mode_8.png" />
-	  <None Remove="Resources\Images\Pages\Main page\substrate.png" />
-	  <None Remove="Resources\Images\Pages\Pages pics\kitchen_timer.jpg" />
-	  <None Remove="Resources\Images\Pages\Pages pics\Panel.png" />
-	  <None Remove="Resources\Images\Pages\Pages pics\settings_1.jpg" />
-	  <None Remove="Resources\Images\Pages\Pages pics\settings_2.jpg" />
-	  <None Remove="Resources\Images\Pages\Pages pics\settings_3.jpg" />
-	  <None Remove="Resources\Images\Pages\Pages pics\settings_4.jpg" />
-	  <None Remove="Resources\Images\Pages\Pages pics\settings_5.jpg" />
-	  <None Remove="Resources\Images\Pages\Pages pics\settings_background.jpg" />
-	  <None Remove="Resources\Images\Pages\Pages pics\settings_time.jpg" />
-	  <None Remove="Resources\Images\Pages\SPsettings\sp_button.png" />
-	  <None Remove="Resources\Images\Pages\SPsettings\sp_header.png" />
-	  <None Remove="Resources\Images\Pages\SPsettings\sp_next_page.png" />
-	  <None Remove="Resources\Images\Pages\SPsettings\sp_ok_button.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Влажность\accept_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Влажность\cancel_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Главное меню\line.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Главное меню\substrate_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\kitchen_icon_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\max_icon_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\min_icon_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\shed_icon_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\turn_off_icon_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\vac_icon_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\alarm_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\kitchen_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\max_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\min_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\norm_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\shed_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\spec_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\turnoff_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\vac_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Настройки\journal_but_base.jpg" />
+	  <MauiImage Include="Resources\Images\Базовые\Настройки\modes_set_but_base.jpg" />
+	  <MauiImage Include="Resources\Images\Базовые\Настройки\settings_other_but_base.jpg" />
+	  <MauiImage Include="Resources\Images\Базовые\Настройки\shed_set_but_base.jpg" />
+	  <MauiImage Include="Resources\Images\Базовые\Настройки\vac_set_but_base.jpg" />
+	  <MauiImage Include="Resources\Images\Базовые\обзор\cons_exh_icon_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\обзор\cons_sup_icon_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\обзор\rec_pers_icon_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\обзор\temp_exh_icon_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\обзор\temp_street_icon_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\обзор\temp_sup_icon_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\home_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\next_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\ok_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\settings_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Уставки режимов\sp_dig_but_base.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -164,44 +180,6 @@
 	  <MauiXaml Update="Pages\VacationSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_0.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_1.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_2.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_3.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_4.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_5.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Choose modes\choose_mode_6.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\background.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\mainButtons\home.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\mainButtons\settings.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_0.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_1.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_2.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_3.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_4.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_5.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_6.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_7.png" />
-	  <MauiImage Include="Resources\Images\Pages\Main page\modesicons\main_mode_8.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Include="Resources\Images\Pages\Main page\substrate.png" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\kitchen_timer.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\panel.png" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_1.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_2.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_3.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_4.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_5.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_background.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\Pages pics\settings_time.jpg" />
-	  <MauiImage Include="Resources\Images\Pages\SPsettings\sp_button.png" />
-	  <MauiImage Include="Resources\Images\Pages\SPsettings\sp_header.png" />
-	  <MauiImage Include="Resources\Images\Pages\SPsettings\sp_next_page.png" />
-	  <MauiImage Include="Resources\Images\Pages\SPsettings\sp_ok_button.png" />
 	</ItemGroup>
 
 </Project>

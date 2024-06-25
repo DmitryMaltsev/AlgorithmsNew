@@ -1,4 +1,5 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.Visual;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,40 @@ namespace Android_Silver.Entities
                 OnPropertyChanged(nameof(PowerLimitSP));
             }
         }
+
+        private PicByStates  _modePics;
+
+        public PicByStates ModePics
+        {
+            get { return _modePics; }
+            set { _modePics = value; 
+                OnPropertyChanged(nameof(ModePics));
+            }
+        }
+
+        private PicByStates _modeIcons;
+
+        public PicByStates ModeIcons
+        {
+            get { return _modeIcons; }
+            set { 
+                _modeIcons = value;
+                OnPropertyChanged(nameof(ModeIcons));
+            }
+        }
+
+        private string _modeSettingsRoute;
+
+        public string ModeSettingsRoute
+        {
+            get { return _modeSettingsRoute; }
+            set { 
+                _modeSettingsRoute = value; 
+                OnPropertyChanged(nameof(ModeSettingsRoute));
+            }
+        }
+
+
 
     }
 }
