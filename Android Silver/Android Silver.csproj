@@ -60,15 +60,15 @@
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\shed_icon_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\turn_off_icon_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\vac_icon_off_base.png" />
-	  <None Remove="Resources\Images\Базовые\Кнопки режимов\alarm_but_base.png" />
-	  <None Remove="Resources\Images\Базовые\Кнопки режимов\kitchen_but_on_base.png" />
-	  <None Remove="Resources\Images\Базовые\Кнопки режимов\max_but_on_base.png" />
-	  <None Remove="Resources\Images\Базовые\Кнопки режимов\min_but_on_base.png" />
-	  <None Remove="Resources\Images\Базовые\Кнопки режимов\norm_but_on_base.png" />
-	  <None Remove="Resources\Images\Базовые\Кнопки режимов\shed_but_on_base.png" />
-	  <None Remove="Resources\Images\Базовые\Кнопки режимов\spec_but_on_base.png" />
-	  <None Remove="Resources\Images\Базовые\Кнопки режимов\turnoff_but_on_base.png" />
-	  <None Remove="Resources\Images\Базовые\Кнопки режимов\vac_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки активных режимов\alarm_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки активных режимов\kitchen_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки активных режимов\max_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки активных режимов\min_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки активных режимов\norm_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки активных режимов\shed_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки активных режимов\spec_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки активных режимов\turnoff_but_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Кнопки активных режимов\vac_but_on_base.png" />
 	  <None Remove="Resources\Images\Базовые\Настройки\journal_but_base.jpg" />
 	  <None Remove="Resources\Images\Базовые\Настройки\modes_set_but_base.jpg" />
 	  <None Remove="Resources\Images\Базовые\Настройки\settings_other_but_base.jpg" />
@@ -99,15 +99,15 @@
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\shed_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\turn_off_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\vac_icon_off_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\alarm_but_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\kitchen_but_on_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\max_but_on_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\min_but_on_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\norm_but_on_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\shed_but_on_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\spec_but_on_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\turnoff_but_on_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Кнопки режимов\vac_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки активных режимов\alarm_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки активных режимов\kitchen_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки активных режимов\max_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки активных режимов\min_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки активных режимов\norm_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки активных режимов\shed_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки активных режимов\spec_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки активных режимов\turnoff_but_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Кнопки активных режимов\vac_but_on_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Настройки\journal_but_base.jpg" />
 	  <MauiImage Include="Resources\Images\Базовые\Настройки\modes_set_but_base.jpg" />
 	  <MauiImage Include="Resources\Images\Базовые\Настройки\settings_other_but_base.jpg" />
@@ -180,6 +180,10 @@
 	  <MauiXaml Update="Pages\VacationSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\Images\Базовые\Кнопки выбора режимов\" />
 	</ItemGroup>
 
 </Project>

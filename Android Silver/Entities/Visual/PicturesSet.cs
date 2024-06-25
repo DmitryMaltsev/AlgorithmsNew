@@ -26,6 +26,12 @@ namespace Android_Silver.Entities.Visual
                         CancelButton = new PicByStates("cancel_but_base.png", "cancel_but_base.png");
                         DigitalButton = new PicByStates("dig_but_base.png", "dig_but_base.png");
                         #endregion
+                        #region Кнопки настроек
+                        HomeButton = new PicByStates("accept_but_base.png", "accept_but_base.png");
+                        NextButton = new PicByStates("next_but_base.png", "next_but_base.png");
+                        OkButton = new PicByStates("ok_but_base.png", "ok_but_base.png");
+                        SettingsButton = new PicByStates("settings_but_base.png", "settings_but_base.png");
+                        #endregion
                         #region Кнопки активных режимов
                         ActiveModesPicks = new ObservableCollection<PicByStates>();
                         ActiveModesPicks.Add(new PicByStates("turnoff_but_on_base.png", "turnoff_but_on_base.png"));
@@ -38,7 +44,6 @@ namespace Android_Silver.Entities.Visual
                         ActiveModesPicks.Add(new PicByStates("alarm_but_base.png", "alarm_but_base.png"));
                         ActiveModesPicks.Add(new PicByStates("spec_but_on_base.png", "spec_but_on_base.png"));
                         #endregion
-
                         #region Кнопки выбора режимов
                         SelectModesPicks = new ObservableCollection<PicByStates>();
                         ActiveModesPicks.Add(new PicByStates("kitchen_but_select_on_base.png", "kitchen_but_select_on_base.png"));
@@ -49,7 +54,6 @@ namespace Android_Silver.Entities.Visual
                         ActiveModesPicks.Add(new PicByStates("vac_but_select_on_base.png", "vac_but_select_on_base.png"));
                         ActiveModesPicks.Add(new PicByStates("shed_but_select_on_base.png", "shed_but_select_on_base.png"));
                         #endregion
-
                         #region Иконки режимов 
                         IconsPics = new ObservableCollection<PicByStates>();
                         IconsPics.Add(new PicByStates("turn_off_icon_off_base.png", "turn_off_icon_off_base.png"));
@@ -96,6 +100,58 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged($"{nameof(Substrate)}");
             }
         }
+
+        #region Общие кнопки
+        private PicByStates _homeButton;
+
+        public PicByStates HomeButton
+        {
+            get { return _homeButton; }
+            set
+            {
+                _homeButton = value;
+                OnPropertyChanged(nameof(HomeButton));
+            }
+        }
+
+        private PicByStates _nextButton;
+
+        public PicByStates NextButton
+        {
+            get { return _nextButton; }
+            set
+            {
+                _nextButton = value;
+                OnPropertyChanged(nameof(NextButton));
+            }
+        }
+
+        private PicByStates _okButton;
+
+        public PicByStates OkButton
+        {
+            get { return _okButton; }
+            set
+            {
+                _okButton = value;
+                OnPropertyChanged(nameof(OkButton));
+            }
+        }
+
+        private PicByStates _settingsButton;
+
+        public PicByStates SettingsButton
+        {
+            get { return _settingsButton; }
+            set
+            {
+                _settingsButton = value;
+                OnPropertyChanged(nameof(SettingsButton));
+            }
+        }
+
+        #endregion
+
 
         #region Кухня+влажность
         private PicByStates _acceptButton;
