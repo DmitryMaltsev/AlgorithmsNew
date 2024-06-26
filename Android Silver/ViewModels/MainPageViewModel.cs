@@ -183,7 +183,6 @@ namespace Android_Silver.Pages
         }
         private Task sendBufTask;
 
-
         private void ExecuteSendSP(object obj)
         {
             EthernetEntities.MessageToServer = $"300,01,{(int)(CSetPoints.SetPoint1 * 10)}";

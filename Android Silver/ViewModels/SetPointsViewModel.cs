@@ -73,7 +73,7 @@ namespace Android_Silver.ViewModels
 
         private void SetM1ValuesByIndex(int index)
         {
-
+            index = index > 0 ? index : 1;
 
             Mode1Values bufVals = CModesEntities.Mode1ValuesList[index];
             M1Values = new Mode1Values(bufVals.Num, bufVals.ActiveModePics,
@@ -106,7 +106,7 @@ namespace Android_Silver.ViewModels
             else
             if (M1Values.Num < 5)
             {
-                ind += 1;
+                ind = M1Values.Num + 1;
             }
             SetM1ValuesByIndex(ind);
         }
@@ -138,6 +138,7 @@ namespace Android_Silver.ViewModels
         private void ExecuteBtnUP2(object obj)
         {
             M1Values.TempSP = M1Values.TempSP + 1 < 35 ? M1Values.TempSP + 1 : 35;
+            if(M1Values.TempSP < 16) M1Values.TempSP = 16;
         }
         private void ExecuteBtnDn2(object obj)
         {
@@ -152,9 +153,6 @@ namespace Android_Silver.ViewModels
         {
             M1Values.PowerLimitSP = M1Values.PowerLimitSP - 5 > 0 ? M1Values.PowerLimitSP - 5 : 0;
         }
-
-
-
         #endregion
     }
 }

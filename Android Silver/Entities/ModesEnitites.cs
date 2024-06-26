@@ -69,19 +69,23 @@ namespace Android_Silver.Entities
             for (int i = 0; i < 9; i++)
             {
                 Mode1ValuesList.Add(new Mode1Values(i, _cPicturesSet.ActiveModesPicks[i],
-            _cPicturesSet.SelectModesPicks[i], _cPicturesSet.IconsPics[i], "settingsPage", 310 + i * 4));
+            _cPicturesSet.SelectModesPicks[i], _cPicturesSet.IconsPics[i], "settingsPage", 306 + i * 4));
             }
             CMode1 = Mode1ValuesList[0];
         }
 
         public void SetMode1ValuesByIndex(int index)
         {
-            if (CMode1 != Mode1ValuesList[index])
+            if (index < Mode1ValuesList.Count)
             {
-                CMode1 = Mode1ValuesList[index];
-                // CMode1Pic = Mode1Pics[index];
-                // CModeSettingsRoute = ModeSettingsRoutes[index];
+                if (CMode1 != Mode1ValuesList[index])
+                {
+                    CMode1 = Mode1ValuesList[index];
+                    // CMode1Pic = Mode1Pics[index];
+                    // CModeSettingsRoute = ModeSettingsRoutes[index];
+                }
             }
+   
         }
     }
 }
