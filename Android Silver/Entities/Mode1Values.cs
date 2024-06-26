@@ -13,8 +13,21 @@ namespace Android_Silver.Entities
 {
     public class Mode1Values : BindableBase
     {
-        private int _num;
+        public int StartAddress = 0;
 
+        private string _title;
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
+
+        private int _num;
         public int Num
         {
             get { return _num; }
@@ -70,11 +83,13 @@ namespace Android_Silver.Entities
             }
         }
 
-        private PicByStates  _activeModePics;
+        private PicByStates _activeModePics;
         public PicByStates ActiveModePics
         {
             get { return _activeModePics; }
-            set { _activeModePics = value; 
+            set
+            {
+                _activeModePics = value;
                 OnPropertyChanged(nameof(ActiveModePics));
             }
         }
@@ -96,7 +111,8 @@ namespace Android_Silver.Entities
         public PicByStates ModeIcons
         {
             get { return _modeIcons; }
-            set { 
+            set
+            {
                 _modeIcons = value;
                 OnPropertyChanged(nameof(ModeIcons));
             }
@@ -107,19 +123,62 @@ namespace Android_Silver.Entities
         public string ModeSettingsRoute
         {
             get { return _modeSettingsRoute; }
-            set { 
-                _modeSettingsRoute = value; 
+            set
+            {
+                _modeSettingsRoute = value;
                 OnPropertyChanged(nameof(ModeSettingsRoute));
             }
         }
 
-        public Mode1Values(int num ,PicByStates activeModePics,PicByStates selectModePicks, PicByStates modeIcons, string modeSettingsRoute)
+        public Mode1Values(int num, PicByStates activeModePics, PicByStates selectModePicks, PicByStates modeIcons, string modeSettingsRoute, int startAddress)
         {
             Num = num;
             ActiveModePics = activeModePics;
             SelectModePics = selectModePicks;
             ModeIcons = modeIcons;
             ModeSettingsRoute = modeSettingsRoute;
+            switch (num)
+            {
+                case 0:
+                    {
+
+                        Title = "Выключен";
+                    }
+                    break;
+                case 1:
+                    {
+                        Title = "Минимальный";
+
+                    }
+                    break;
+                case 2:
+                    {
+                        Title = "Нормальный";
+
+                    }
+                    break;
+                case 3:
+                    {
+                        Title = "Максимальный";
+                    }
+                    break;
+                case 4:
+                    {
+                        Title = "Кухня";
+                    }
+                    break;
+                case 5:
+                    {
+                        Title = "Отпуск";
+                    }
+                    break;
+                default:
+                    {
+                        Title = "";
+                    }
+                    break;
+            }
+            StartAddress = startAddress;
         }
 
     }

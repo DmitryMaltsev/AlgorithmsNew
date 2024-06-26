@@ -11,5 +11,6 @@
         void Disconnect();
         public void SendRecieveTask(string val);
         public  void SendData(string data);
+        void SetCommandToServer(int address, int[] values);
     }
 }
