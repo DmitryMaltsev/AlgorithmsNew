@@ -82,7 +82,11 @@ namespace Android_Silver.Services
             {
                 while (_ethernetEntities.IsConnected)
                 {
-                    string messToClient = String.IsNullOrEmpty(_ethernetEntities.MessageToServer) ? val : _ethernetEntities.MessageToServer;
+                    string messToClient = val;
+                    if (!String.IsNullOrEmpty(_ethernetEntities.MessageToServer))
+                    {
+                        messToClient = _ethernetEntities.MessageToServer;
+                    }
                     if (!IsSending)
                     {
                         SendCommand(messToClient);
@@ -478,8 +482,9 @@ namespace Android_Silver.Services
                             _modesEntities.Mode1ValuesList[8].PowerLimitSP = Val;
                         }
                     }
-                    #endregion
                     break;
+                #endregion
+            //Проверка того, что данные записаны
                 case 300:
                     {
                         _setPoints.SP1Count += 1;
@@ -509,6 +514,210 @@ namespace Android_Silver.Services
                       
                     }
                     break;
+                #region Минимальный режим
+                case 310:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[1].SypplySP = Val;
+                        }
+                    }
+                    break;
+                case 311:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[1].ExhaustSP = Val;
+                        }
+                    }
+                    break;
+                case 312:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[1].TempSP = Val;
+                        }
+                    }
+                    break;
+                case 313:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[1].PowerLimitSP = Val;
+                        }
+                    }
+                    break;
+                #endregion
+                #region Нормальный режим
+                case 314:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[2].SypplySP = Val;
+                        }
+                    }
+                    break;
+                case 315:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[2].ExhaustSP = Val;
+                        }
+                    }
+                    break;
+                case 316:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[2].TempSP = Val;
+                        }
+                    }
+                    break;
+                case 317:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[2].PowerLimitSP = Val;
+                        }
+                    }
+                    break;
+                #endregion
+                #region Максимальный режим
+                case 318:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[3].SypplySP = Val;
+                        }
+                    }
+                    break;
+                case 319:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[3].ExhaustSP = Val;
+                        }
+                    }
+                    break;
+                case 320:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[3].TempSP = Val;
+                        }
+                    }
+                    break;
+                case 321:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[3].PowerLimitSP = Val;
+                        }
+                    }
+                    break;
+                #endregion
+                #region Режим кухни
+                case 322:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[4].SypplySP = Val;
+                        }
+                    }
+                    break;
+                case 323:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[4].ExhaustSP = Val;
+                        }
+                    }
+                    break;
+                case 324:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[4].TempSP = Val;
+                        }
+                    }
+                    break;
+                case 325:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[4].PowerLimitSP = Val;
+                        }
+                    }
+                    break;
+                #endregion
+                #region Режим отпуска
+                case 326:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[5].SypplySP = Val;
+                        }
+                    }
+                    break;
+                case 327:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[5].ExhaustSP = Val;
+                        }
+                    }
+                    break;
+                case 328:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[5].TempSP = Val;
+                        }
+                    }
+                    break;
+                case 329:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[5].PowerLimitSP = Val;
+                        }
+                    }
+                    break;
+                #endregion
+                #region Специальный режим
+                case 330:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[8].SypplySP = Val;
+                        }
+                    }
+                    break;
+                case 331:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[8].ExhaustSP = Val;
+                        }
+                    }
+                    break;
+                case 332:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[8].TempSP = Val;
+                        }
+                    }
+                    break;
+                case 333:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.Mode1ValuesList[8].PowerLimitSP = Val;
+                        }
+                    }
+                    break;
+                    #endregion
             }
         }
 

@@ -22,17 +22,11 @@ namespace Android_Silver.Entities
                 {
                     _cMode1 = value;
                     OnPropertyChanged(nameof(CMode1));
-                    // CMode1.SypplySP = value.SypplySP;
-                    // CMode1.ExhaustSP = value.ExhaustSP;
-                    // CMode1.TempSP = value.TempSP;
-                    // CMode1.PowerLimitSP = value.PowerLimitSP;
                 }
             }
         }
 
         private PicturesSet _cPicturesSet { get; set; }
-
-
 
         private int _cMode2;
         public int CMode2
@@ -75,8 +69,7 @@ namespace Android_Silver.Entities
             for (int i = 0; i < 9; i++)
             {
                 Mode1ValuesList.Add(new Mode1Values(i, _cPicturesSet.ActiveModesPicks[i],
-            _cPicturesSet.SelectModesPicks[i], _cPicturesSet.IconsPics[i], "settingsPage", 310 + i * 4)
-           );
+            _cPicturesSet.SelectModesPicks[i], _cPicturesSet.IconsPics[i], "settingsPage", 310 + i * 4));
             }
             CMode1 = Mode1ValuesList[0];
         }

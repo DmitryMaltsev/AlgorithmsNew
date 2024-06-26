@@ -54,6 +54,11 @@
 	  <None Remove="Resources\Images\Базовые\Влажность\accept_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\Влажность\cancel_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\Влажность\dig_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\Влажность\dig_but_dn_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Влажность\dig_but_dn_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Влажность\dig_but_up_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Влажность\dig_but_up_on_base.png" />
+	  <None Remove="Resources\Images\Базовые\Влажность\dig_img_base.png" />
 	  <None Remove="Resources\Images\Базовые\Главное меню\line.png" />
 	  <None Remove="Resources\Images\Базовые\Главное меню\substrate_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\kitchen_icon_off_base.png" />
@@ -101,7 +106,11 @@
 	  <MauiImage Include="Resources\Images\Базовые\test.jpg" />
 	  <MauiImage Include="Resources\Images\Базовые\Влажность\accept_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Влажность\cancel_but_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_but_dn_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_but_dn_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_but_up_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_but_up_on_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_img_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Главное меню\line.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Главное меню\substrate_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\kitchen_icon_off_base.png" />

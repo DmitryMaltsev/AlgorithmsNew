@@ -34,8 +34,7 @@ namespace Android_Silver.Entities
             set { _num = value; }
         }
 
-
-
+        #region Уставки
         private int _supplySP;
 
         public int SypplySP
@@ -81,7 +80,9 @@ namespace Android_Silver.Entities
                 _powerLimitSP = value;
                 OnPropertyChanged(nameof(PowerLimitSP));
             }
-        }
+        } 
+        #endregion
+
 
         private PicByStates _activeModePics;
         public PicByStates ActiveModePics
@@ -95,7 +96,6 @@ namespace Android_Silver.Entities
         }
 
         private PicByStates _selectModePics;
-
         public PicByStates SelectModePics
         {
             get { return _selectModePics; }
@@ -107,7 +107,6 @@ namespace Android_Silver.Entities
         }
 
         private PicByStates _modeIcons;
-
         public PicByStates ModeIcons
         {
             get { return _modeIcons; }
@@ -119,7 +118,6 @@ namespace Android_Silver.Entities
         }
 
         private string _modeSettingsRoute;
-
         public string ModeSettingsRoute
         {
             get { return _modeSettingsRoute; }

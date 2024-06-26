@@ -146,7 +146,7 @@ namespace Android_Silver.Pages
             ChooseModeCommand = new Command(ExecuteChooseMode);
             SetSettingsCommand = new Command(ExecuteSetSettings);
             Value = 15;
-           // StartTimer();
+            StartTimer();
         }
 
 
