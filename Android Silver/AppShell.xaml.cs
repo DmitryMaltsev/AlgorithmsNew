@@ -14,7 +14,7 @@ namespace Android_Silver
             Routing.RegisterRoute("mainPage", typeof(MainPage));
             Routing.RegisterRoute("startPage", typeof(StartPage));
             Routing.RegisterRoute("chooseModePage", typeof(ChooseModePage));
-            Routing.RegisterRoute("normalSettingsPage", typeof(NormalSettingsPage));
+            Routing.RegisterRoute("kitchenTimerPage", typeof(KitchenTimerPage));
             Routing.RegisterRoute("vacationSettingsPage", typeof(VacationSettingsPage));
 
             #region ModesSettings pages

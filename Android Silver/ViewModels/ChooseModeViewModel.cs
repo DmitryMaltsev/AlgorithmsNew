@@ -1,4 +1,5 @@
 ﻿using Android_Silver.Entities;
+using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 
@@ -78,8 +79,8 @@ namespace Android_Silver.ViewModels
 
         async private void ExecuteKitchenMode(object obj)
         {
-            int[] index = { 4 };
-            _tcpClientService.SetCommandToServer(308, index);
+          //  int[] index = { 4 };
+          //  _tcpClientService.SetCommandToServer(308, index);
             await Shell.Current.GoToAsync("kitchenTimerPage");
         }
 

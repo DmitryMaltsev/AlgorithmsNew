@@ -1,5 +1,5 @@
 ﻿using Android_Silver.Entities;
-
+using Android_Silver.Entities.Modes;
 using System;
 using System.Globalization;
 using System.Net.Sockets;

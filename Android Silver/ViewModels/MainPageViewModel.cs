@@ -1,4 +1,5 @@
 ﻿using Android_Silver.Entities;
+using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static System.Net.Mime.MediaTypeNames;
+
 namespace Android_Silver.Entities.Visual
 {
     public class PicturesSet : BindableBase
@@ -135,6 +137,30 @@ namespace Android_Silver.Entities.Visual
             {
                 _digitalButtonsUp = value;
                 OnPropertyChanged(nameof(DigitalButtonsUp));
+            }
+        }
+
+        private PicByStates _kitchenButtonUp;
+
+        public PicByStates KitchenButtonUp
+        {
+            get { return _kitchenButtonUp; }
+            set
+            {
+                _kitchenButtonUp = value;
+                OnPropertyChanged(nameof(KitchenButtonUp));
+            }
+        }
+
+        private PicByStates _kitchenButtonDn;
+
+        public PicByStates KitchenButtonDn
+        {
+            get { return _kitchenButtonDn; }
+            set
+            {
+                _kitchenButtonDn = value;
+                OnPropertyChanged(nameof(KitchenButtonDn));
             }
         }
 
@@ -270,8 +296,8 @@ namespace Android_Silver.Entities.Visual
                         Substrate = new PicByStates(def: "substrate_base.png", selected: "test.jpg");
                         Title = "title_base.png";
                         #region Кухня, счетчики
-                        AcceptButton = new PicByStates("accept_but_base.png", "accept_but_base.png");
-                        CancelButton = new PicByStates("cancel_but_base.png", "cancel_but_base.png");
+                        AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
+                        CancelButton = new PicByStates("cancel_but_base.png", "test.jpg");
                         DigitalImage = "dig_img_base.png";
                         #region 4 кнопки вверх+низ
                         DigitalButtonsUp = new List<PicByStates>();
@@ -286,6 +312,9 @@ namespace Android_Silver.Entities.Visual
                         DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
                         DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
                         DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
+
+                        KitchenButtonUp = new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png");
+                        KitchenButtonDn = new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png");
                         #endregion
 
                         #endregion

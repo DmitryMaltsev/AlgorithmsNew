@@ -83,15 +83,15 @@
         <!--Приточный воздух-->
         <Label Text="Приток"   Grid.Row="6" Grid.Column="0" />
         <Slider   Grid.Row="6"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding CModesEntities.CMode1.SypplySP}"/>
-        <Label Text="{Binding  CModesEntities.CMode1.SypplySP, StringFormat='{0} %',Mode=TwoWay}"   Grid.Row="6" Grid.Column="6"/>
+        <Label Text="{Binding  CModesEntities.CMode1.SypplySP, StringFormat='{0}%',Mode=TwoWay}"   Grid.Row="6" Grid.Column="6"/>
         <!--Вытяжной воздух-->
         <Label Text="Вытяжка"   Grid.Row="7" Grid.Column="0"/>
         <Slider  Grid.Row="7"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding  CModesEntities.CMode1.ExhaustSP}"/>
-        <Label Text="{Binding  CModesEntities.CMode1.ExhaustSP, StringFormat='{0} %'}"   Grid.Row="7" Grid.Column="6"/>
+        <Label Text="{Binding  CModesEntities.CMode1.ExhaustSP, StringFormat='{0}%'}"   Grid.Row="7" Grid.Column="6"/>
         <!--Температура -->
         <Label Text="t уст"   Grid.Row="8" Grid.Column="0" />
         <Slider  Grid.Row="8"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding  CModesEntities.CMode1.TempSP}"/>
-        <Label Text="{Binding  CModesEntities.CMode1.TempSP, StringFormat='{0} C°'}"   Grid.Row="8" Grid.Column="6"/>
+        <Label Text="{Binding  CModesEntities.CMode1.TempSP, StringFormat='{0}°C'}"   Grid.Row="8" Grid.Column="6"/>
         <!--Основная панель-->
         <HorizontalStackLayout Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="6" Grid.RowSpan="1" HorizontalOptions="Center">
             <Button Text="Подключиться" Command="{Binding ConnectCommand}"  

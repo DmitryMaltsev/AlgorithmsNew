@@ -163,16 +163,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\KitchenTimerPage.xaml.cs">
+	    <DependentUpon>KitchenTimerPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Pages\ChooseModePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\IPPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ModesSettings\SetPointsPage.xaml">
+	  <MauiXaml Update="Pages\KitchenTimerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\NormalSettingsPage.xaml">
+	  <MauiXaml Update="Pages\ModesSettings\SetPointsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SettingsPage.xaml">

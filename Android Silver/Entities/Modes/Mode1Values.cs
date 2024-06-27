@@ -9,14 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Android_Silver.Entities
+namespace Android_Silver.Entities.Modes
 {
     public class Mode1Values : BindableBase
     {
         public int StartAddress = 0;
 
         private string _title;
-
         public string Title
         {
             get { return _title; }
@@ -34,9 +33,22 @@ namespace Android_Silver.Entities
             set { _num = value; }
         }
 
+        /// <summary>
+        /// Путь к странице настройки уставок
+        /// </summary>
+        private string _modeSettingsRoute;
+        public string ModeSettingsRoute
+        {
+            get { return _modeSettingsRoute; }
+            set
+            {
+                _modeSettingsRoute = value;
+                OnPropertyChanged(nameof(ModeSettingsRoute));
+            }
+        }
+
         #region Уставки
         private int _supplySP;
-
         public int SypplySP
         {
             get { return _supplySP; }
@@ -48,7 +60,6 @@ namespace Android_Silver.Entities
         }
 
         private int _exhaustSP;
-
         public int ExhaustSP
         {
             get { return _exhaustSP; }
@@ -60,7 +71,6 @@ namespace Android_Silver.Entities
         }
 
         private int _tempSP;
-
         public int TempSP
         {
             get { return _tempSP; }
@@ -71,7 +81,6 @@ namespace Android_Silver.Entities
             }
         }
         private int _powerLimitSP;
-
         public int PowerLimitSP
         {
             get { return _powerLimitSP; }
@@ -80,10 +89,11 @@ namespace Android_Silver.Entities
                 _powerLimitSP = value;
                 OnPropertyChanged(nameof(PowerLimitSP));
             }
-        } 
+        }
         #endregion
 
 
+        #region Адреса картинок для текущего режима
         private PicByStates _activeModePics;
         public PicByStates ActiveModePics
         {
@@ -115,18 +125,8 @@ namespace Android_Silver.Entities
                 _modeIcons = value;
                 OnPropertyChanged(nameof(ModeIcons));
             }
-        }
-
-        private string _modeSettingsRoute;
-        public string ModeSettingsRoute
-        {
-            get { return _modeSettingsRoute; }
-            set
-            {
-                _modeSettingsRoute = value;
-                OnPropertyChanged(nameof(ModeSettingsRoute));
-            }
-        }
+        } 
+        #endregion
 
         public Mode1Values(int num, PicByStates activeModePics, PicByStates selectModePicks, PicByStates modeIcons, string modeSettingsRoute, int startAddress)
         {

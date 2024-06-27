@@ -1,11 +1,12 @@
-﻿using Android_Silver.Entities.Visual;
+﻿using Android_Silver.Entities.Modes;
+using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 
 using Unity;
 
 namespace Android_Silver.Entities
 {
-    internal static class DIContainer
+    public static class DIContainer
     {
         private static UnityContainer _container;
         public static void RegisterDependencies()

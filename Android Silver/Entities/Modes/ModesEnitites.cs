@@ -8,63 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Android_Silver.Entities
+namespace Android_Silver.Entities.Modes
 {
     public class ModesEntities : BindableBase
     {
-        private Mode1Values _cMode1;
-        public Mode1Values CMode1
-        {
-            get { return _cMode1; }
-            set
-            {
-                if (_cMode1 != value)
-                {
-                    _cMode1 = value;
-                    OnPropertyChanged(nameof(CMode1));
-                }
-            }
-        }
 
-        private PicturesSet _cPicturesSet { get; set; }
-
-        private int _cMode2;
-        public int CMode2
-        {
-            get { return _cMode2; }
-            set
-            {
-                _cMode2 = value;
-                OnPropertyChanged($"{nameof(CMode2)}");
-            }
-        }
+        public Mode1Values CMode1 { get; set; }
 
         public List<Mode1Values> Mode1ValuesList { get; set; } = new List<Mode1Values>();
 
-        private List<string> _modeSettingsRoutes = new();
+        public Mode2Values CMode2 { get; set; }
 
-        public List<string> ModeSettingsRoutes
-        {
-            get { return _modeSettingsRoutes; }
-            set { _modeSettingsRoutes = value; }
-        }
+        public List<Mode2Values> Mode2ValuesList { get; set; } = new List<Mode2Values>();
 
-        private string _cMode2Pic;
-        public string CMode2Pic
-        {
-            get { return _cMode2Pic; }
-            set
-            {
-                _cMode2Pic = value;
-                OnPropertyChanged(nameof(CMode2Pic));
-            }
-        }
+        private PicturesSet _cPicturesSet { get; set; }
 
         public ModesEntities()
         {
             _cPicturesSet = DIContainer.Resolve<PicturesSet>();
             _cPicturesSet.Init(PicturesSetStates.Base);
-
             Mode1ValuesList = new List<Mode1Values>();
             for (int i = 0; i < 9; i++)
             {
@@ -72,6 +34,15 @@ namespace Android_Silver.Entities
             _cPicturesSet.SelectModesPicks[i], _cPicturesSet.IconsPics[i], "settingsPage", 306 + i * 4));
             }
             CMode1 = Mode1ValuesList[0];
+            Mode2ValuesList = new List<Mode2Values>();
+            //Стандартный режим, работает всегда
+            Mode2ValuesList.Add(new Mode2Values(1));
+            //Режим кухни
+            Mode2ValuesList.Add(new Mode2Values(1));
+            //Режим отпуска
+            Mode2ValuesList.Add(new Mode2Values(4));
+            //Режим  календаря
+            Mode2ValuesList.Add(new Mode2Values(28));
         }
 
         public void SetMode1ValuesByIndex(int index)
