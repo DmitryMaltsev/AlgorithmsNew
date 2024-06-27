@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows.Input;
+
 namespace Android_Silver.Pages
 {
     public class MainPageViewModel : BindableBase
@@ -148,6 +149,7 @@ namespace Android_Silver.Pages
             SetSettingsCommand = new Command(ExecuteSetSettings);
             Value = 15;
             StartTimer();
+           
         }
 
 

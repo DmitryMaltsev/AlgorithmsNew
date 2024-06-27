@@ -1,5 +1,6 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.Modes;
+
 using System;
 using System.Globalization;
 using System.Net.Sockets;
@@ -267,16 +268,15 @@ namespace Android_Silver.Services
                             {
                                 _modesEntities.SetMode1ValuesByIndex(val);
                             }
-
                         }
                     }
                     break;
                 //Режим 2
                 case 109:
                     {
-                        if (int.TryParse(resp.ValueString, out int Val))
+                        if (int.TryParse(resp.ValueString, out int val))
                         {
-                            _modesEntities.CMode2 = Val;
+                            _modesEntities.SetMode2ValuesByIndex(val);
                         }
                     }
                     break;
@@ -484,7 +484,15 @@ namespace Android_Silver.Services
                     }
                     break;
                 #endregion
-            //Проверка того, что данные записаны
+                case 134:
+                    {
+                        if (int.TryParse(resp.ValueString, out int val))
+                        {
+                            _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
+                        }
+                    }
+                    break;
+                //Проверка того, что данные записаны
                 case 300:
                     {
                         _setPoints.SP1Count += 1;
@@ -511,7 +519,14 @@ namespace Android_Silver.Services
                         {
                             _modesEntities.SetMode1ValuesByIndex(Val);
                         }
-                      
+                    }
+                    break;
+                case 309:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.SetMode2ValuesByIndex(Val);
+                        }
                     }
                     break;
                 #region Минимальный режим
@@ -717,7 +732,16 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                    #endregion
+                #endregion
+                    //Режим кухни.
+                case 334:
+                    {
+                        if (int.TryParse(resp.ValueString, out int val))
+                        {
+                            _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
+                        }
+                    }
+                    break;
             }
         }
 

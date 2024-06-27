@@ -12,12 +12,31 @@ namespace Android_Silver.Entities.Modes
 {
     public class ModesEntities : BindableBase
     {
+        private Mode1Values _CMode1;
 
-        public Mode1Values CMode1 { get; set; }
+        public Mode1Values CMode1
+        {
+            get { return _CMode1; }
+            set
+            {
+                _CMode1 = value;
+                OnPropertyChanged(nameof(CMode1));
+            }
+        }
 
         public List<Mode1Values> Mode1ValuesList { get; set; } = new List<Mode1Values>();
 
-        public Mode2Values CMode2 { get; set; }
+        private Mode2Values _cMode2;
+
+        public Mode2Values CMode2
+        {
+            get { return _cMode2; }
+            set
+            {
+                _cMode2 = value;
+                OnPropertyChanged(nameof(CMode2));
+            }
+        }
 
         public List<Mode2Values> Mode2ValuesList { get; set; } = new List<Mode2Values>();
 
@@ -33,16 +52,18 @@ namespace Android_Silver.Entities.Modes
                 Mode1ValuesList.Add(new Mode1Values(i, _cPicturesSet.ActiveModesPicks[i],
             _cPicturesSet.SelectModesPicks[i], _cPicturesSet.IconsPics[i], "settingsPage", 306 + i * 4));
             }
-            CMode1 = Mode1ValuesList[0];
+
             Mode2ValuesList = new List<Mode2Values>();
             //Стандартный режим, работает всегда
-            Mode2ValuesList.Add(new Mode2Values(1));
+            Mode2ValuesList.Add(new Mode2Values(0, 1, _cPicturesSet.ActiveModesPicks[0].Default));
             //Режим кухни
-            Mode2ValuesList.Add(new Mode2Values(1));
+            Mode2ValuesList.Add(new Mode2Values(1, 1, _cPicturesSet.ActiveModesPicks[4].Default));
             //Режим отпуска
-            Mode2ValuesList.Add(new Mode2Values(4));
+            Mode2ValuesList.Add(new Mode2Values(2, 4, _cPicturesSet.ActiveModesPicks[5].Default));
             //Режим  календаря
-            Mode2ValuesList.Add(new Mode2Values(28));
+            Mode2ValuesList.Add(new Mode2Values(3, 28, _cPicturesSet.ActiveModesPicks[6].Default));
+            CMode1 = Mode1ValuesList[0];
+            CMode2 = Mode2ValuesList[0];
         }
 
         public void SetMode1ValuesByIndex(int index)
@@ -54,6 +75,18 @@ namespace Android_Silver.Entities.Modes
                     CMode1 = Mode1ValuesList[index];
                     // CMode1Pic = Mode1Pics[index];
                     // CModeSettingsRoute = ModeSettingsRoutes[index];
+                }
+            }
+        }
+
+        public void SetMode2ValuesByIndex(int index)
+        {
+
+            if (index < Mode2ValuesList.Count)
+            {
+                if (CMode2 != Mode2ValuesList[index])
+                {
+                    CMode2 = Mode2ValuesList[index];
                 }
             }
         }

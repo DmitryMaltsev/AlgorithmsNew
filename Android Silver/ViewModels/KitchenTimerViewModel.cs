@@ -1,10 +1,12 @@
 ﻿using Android_Silver.Entities;
+using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -26,10 +28,15 @@ namespace Android_Silver.ViewModels
             }
         }
 
+        #region Commands
         public ICommand UpMInutesCommand { get; private set; }
         public ICommand DnMinutesCommand { get; private set; }
         public ICommand OkCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
+        #endregion
+
+        ITcpClientService _tcpClientService;
+        ModesEntities _modesEntities;
 
         public KitchenTimerViewModel()
         {
@@ -38,6 +45,9 @@ namespace Android_Silver.ViewModels
             DnMinutesCommand = new Command(ExecuteDnMinutes);
             OkCommand = new Command(ExecuteOk);
             CancelCommand = new Command(ExecuteCancel);
+            _tcpClientService = DIContainer.Resolve<ITcpClientService>();
+            _modesEntities=DIContainer.Resolve<ModesEntities>();
+            Minutes = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute;
         }
 
 
@@ -73,6 +83,8 @@ namespace Android_Silver.ViewModels
 
         async void ExecuteOk(object obj)
         {
+            int[] values = { Minutes };
+            _tcpClientService.SetCommandToServer(334, values);
             await Shell.Current.GoToAsync("mainPage");
         }
     }

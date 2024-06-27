@@ -6,9 +6,15 @@
         public TimeModeValues CTimeMode { get; set; }
         public List<TimeModeValues> TimeModeValues { get; set; } = new List<TimeModeValues>();
 
-        public Mode2Values(int tModesCount)
+        public int CNum { get; private set; }
+
+        public string Mode2Icon { get; set; }
+
+        public Mode2Values(int cNum, int tModesCount, string mode2Icon)
         {
             TimeModeValues = SetTModes(tModesCount);
+            Mode2Icon = mode2Icon;
+            cNum = CNum;
         }
 
         private List<TimeModeValues> SetTModes(int count)

@@ -58,21 +58,21 @@ namespace Android_Silver.ViewModels
         }
         async private void ExecuteMinMode(object obj)
         {
-            int[] index = { 1 };
+            int[] index = { 1,0 };
             _tcpClientService.SetCommandToServer(308, index);
             await Shell.Current.GoToAsync("mainPage");
         }
 
         async private void ExecuteNormal(object obj)
         {
-            int[] index = { 2 };
+            int[] index = { 2,0 };
             _tcpClientService.SetCommandToServer(308, index);
             await Shell.Current.GoToAsync("mainPage");
         }
 
         async private void ExecuteMaxMode(object obj)
         {
-            int[] index = { 3 };
+            int[] index = { 3,0 };
             _tcpClientService.SetCommandToServer(308, index);
             await Shell.Current.GoToAsync("mainPage");
         }
@@ -86,15 +86,15 @@ namespace Android_Silver.ViewModels
 
         async private void ExecuteVacationMode(object obj)
         {
-            int[] index = { 5 };
-            _tcpClientService.SetCommandToServer(308, index);
+            int[] index = { 2 };
+            _tcpClientService.SetCommandToServer(309, index);
             await Shell.Current.GoToAsync("mainPage");
         }
 
         async private void ExecuteSheduler(object obj)
         {
-            int[] index = { 1 };
-            _tcpClientService.SetCommandToServer(308, index);
+            int[] index = { 3 };
+            _tcpClientService.SetCommandToServer(309, index);
             await Shell.Current.GoToAsync("mainPage");
         }
 

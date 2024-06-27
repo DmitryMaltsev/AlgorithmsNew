@@ -354,9 +354,9 @@ namespace Android_Silver.Entities.Visual
                         IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("norm_icon_off_base", "norm_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("max_icon_off_base.png", "max_icon_off_base.png"));
+                        IconsPics.Add(new PicByStates("kitchen_icon_off_base.png", "kitchen_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("shed_icon_off_base.png", "shed_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("vac_icon_off_base.png", "vac_icon_off_base.png"));
-                        IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
 

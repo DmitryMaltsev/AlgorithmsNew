@@ -76,6 +76,9 @@
         <ImageButton  Source="{Binding  CModesEntities.CMode1.ActiveModePics.Current}" Command="{Binding ChooseModeCommand}"
                            Grid.Row="2"  Grid.RowSpan="3" Grid.Column="0"    Grid.ColumnSpan="6"
                                                              Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"/>
+        <!--Иконка режима 2-->
+        <Image  Source="{Binding CModesEntities.CMode2.Mode2Icon}" 
+                           Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0"    Grid.ColumnSpan="1" Scale="0.7" HorizontalOptions="End" VerticalOptions="End" />
         <!--Кнопка перехода в настройки текущего режима режима-->
         <ImageButton  Command="{Binding SetSettingsCommand}" Pressed="Substrate_Pressed" Released="Substrate_Released"
                Source="{Binding  CPictureSet.Substrate.Current}"  BorderWidth="0" Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="6"  Grid.RowSpan="3" 
