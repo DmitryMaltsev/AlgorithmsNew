@@ -85,7 +85,6 @@ namespace Android_Silver.Entities
                     // CModeSettingsRoute = ModeSettingsRoutes[index];
                 }
             }
-   
         }
     }
 }

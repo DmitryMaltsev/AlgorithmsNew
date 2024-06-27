@@ -25,6 +25,18 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private string _title;
+
+        public string Title
+        {
+            get { return _title; }
+            set { 
+                _title = value; 
+                OnPropertyChanged($"{nameof(Title)}");
+            }
+        }
+
+
         private PicByStates _substrate;
 
         public PicByStates Substrate
@@ -85,6 +97,8 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged(nameof(SettingsButton));
             }
         }
+
+
 
         #endregion
 
@@ -254,7 +268,7 @@ namespace Android_Silver.Entities.Visual
                     {
                         Background = "background_base.png";
                         Substrate = new PicByStates(def: "substrate_base.png", selected: "test.jpg");
-
+                        Title = "title_base.png";
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "accept_but_base.png");
                         CancelButton = new PicByStates("cancel_but_base.png", "cancel_but_base.png");
@@ -275,9 +289,9 @@ namespace Android_Silver.Entities.Visual
                         #endregion
 
                         #endregion
-                        #region Кнопки настроек
-                        HomeButton = new PicByStates("home_but_base.png", "home_but_base.png");
-                        NextButton = new PicByStates("next_but_base.png", "next_but_base.png");
+                        #region Уставки
+                        HomeButton = new PicByStates("home_but_base.png", "test.jpg");
+                        NextButton = new PicByStates("next_but_base.png", "test.jpg");
                         OkButton = new PicByStates("ok_but_base.png", "ok_but_base.png");
                         SettingsButton = new PicByStates("settings_but_base.png", "test.jpg");
                         #endregion

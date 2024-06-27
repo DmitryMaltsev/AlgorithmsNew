@@ -50,7 +50,9 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\Базовые\background_base.png" />
+	  <None Remove="Resources\Images\Базовые\loading_base.png" />
 	  <None Remove="Resources\Images\Базовые\Test.jpg" />
+	  <None Remove="Resources\Images\Базовые\title_base.png" />
 	  <None Remove="Resources\Images\Базовые\Влажность\accept_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\Влажность\cancel_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\Влажность\dig_but_base.png" />
@@ -103,7 +105,9 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Базовые\background_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\loading_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\test.jpg" />
+	  <MauiImage Include="Resources\Images\Базовые\title_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Влажность\accept_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Влажность\cancel_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_but_dn_off_base.png" />
