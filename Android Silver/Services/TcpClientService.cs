@@ -733,7 +733,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 #endregion
-                    //Режим кухни.
+                //Режим кухни.
                 case 334:
                     {
                         if (int.TryParse(resp.ValueString, out int val))

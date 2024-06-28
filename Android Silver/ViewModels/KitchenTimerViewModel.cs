@@ -33,6 +33,7 @@ namespace Android_Silver.ViewModels
         public ICommand DnMinutesCommand { get; private set; }
         public ICommand OkCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
+        public ICommand HomeCommand { get; private set; }
         #endregion
 
         ITcpClientService _tcpClientService;
@@ -43,6 +44,7 @@ namespace Android_Silver.ViewModels
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
+            HomeCommand = new Command(ExecuteHomeCommand);
             OkCommand = new Command(ExecuteOk);
             CancelCommand = new Command(ExecuteCancel);
             _tcpClientService = DIContainer.Resolve<ITcpClientService>();
@@ -50,7 +52,10 @@ namespace Android_Silver.ViewModels
             Minutes = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute;
         }
 
-
+        async void ExecuteHomeCommand(object obj)
+        {
+            await Shell.Current.GoToAsync("mainPage");
+        }
 
         private void ExecuteDnMinutes(object obj)
         {
