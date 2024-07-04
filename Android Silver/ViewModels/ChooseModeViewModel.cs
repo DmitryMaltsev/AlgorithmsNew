@@ -73,16 +73,16 @@ namespace Android_Silver.ViewModels
         {
             int[] index = { 2, 0 };
             _tcpClientService.SetCommandToServer(308, index);
-            await Shell.Current.GoToAsync("loadingPage", false);
-          //  await Shell.Current.Navigation.PopToRootAsync(false);
+        //    _tcpClientService.SendData("108,02");
+            await Shell.Current.GoToAsync("loadingPage", true);
         }
 
         async private void ExecuteMaxMode(object obj)
         {
             int[] index = { 3, 0 };
             _tcpClientService.SetCommandToServer(308, index);
-            await Shell.Current.GoToAsync("mainPage", true);
-            await Shell.Current.Navigation.PopToRootAsync(false);
+         //   _tcpClientService.SendData("108,02");
+            await Shell.Current.GoToAsync("loadingPage", true);
         }
 
         async private void ExecuteKitchenMode(object obj)
