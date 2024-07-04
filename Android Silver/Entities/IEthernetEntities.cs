@@ -15,5 +15,6 @@ namespace Android_Silver.Entities
         bool IsConnected { get; set; }
         string SystemMessage { get; set; }
         string MessageToServer { get; set; }
+        bool Loaded { get; set; }
     }
 }

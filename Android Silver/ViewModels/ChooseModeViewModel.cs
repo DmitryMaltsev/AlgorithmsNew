@@ -5,6 +5,7 @@ using Android_Silver.Services;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,12 +42,12 @@ namespace Android_Silver.ViewModels
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             _tcpClientService = DIContainer.Resolve<TcpClientService>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
-            
+
         }
 
         async void ExecuteHomeCommand(object obj)
         {
-            await Shell.Current.GoToAsync("mainPage");
+            await Shell.Current.GoToAsync("mainPage", false);
         }
 
         #region Execute modes
@@ -54,48 +55,58 @@ namespace Android_Silver.ViewModels
         {
             int[] index = { 0 };
             _tcpClientService.SetCommandToServer(308, index);
-            await Shell.Current.GoToAsync("mainPage");
+
+            await Shell.Current.GoToAsync("mainPage", false);
+            await Shell.Current.Navigation.PopToRootAsync(false);
+
         }
         async private void ExecuteMinMode(object obj)
         {
-            int[] index = { 1,0 };
+            int[] index = { 1, 0 };
             _tcpClientService.SetCommandToServer(308, index);
-            await Shell.Current.GoToAsync("mainPage");
+            await Shell.Current.GoToAsync("mainPage", false);
+            await Shell.Current.Navigation.PopToRootAsync(false);
+
         }
 
         async private void ExecuteNormal(object obj)
         {
-            int[] index = { 2,0 };
+            int[] index = { 2, 0 };
             _tcpClientService.SetCommandToServer(308, index);
-            await Shell.Current.GoToAsync("mainPage");
+            await Shell.Current.GoToAsync("loadingPage", false);
+          //  await Shell.Current.Navigation.PopToRootAsync(false);
         }
 
         async private void ExecuteMaxMode(object obj)
         {
-            int[] index = { 3,0 };
+            int[] index = { 3, 0 };
             _tcpClientService.SetCommandToServer(308, index);
-            await Shell.Current.GoToAsync("mainPage");
+            await Shell.Current.GoToAsync("mainPage", true);
+            await Shell.Current.Navigation.PopToRootAsync(false);
         }
 
         async private void ExecuteKitchenMode(object obj)
         {
-          //  int[] index = { 4 };
-          //  _tcpClientService.SetCommandToServer(308, index);
-            await Shell.Current.GoToAsync("kitchenTimerPage");
+            //  int[] index = { 4 };
+            //  _tcpClientService.SetCommandToServer(308, index);
+            await Shell.Current.GoToAsync("kitchenTimerPage", false);
+            await Shell.Current.Navigation.PopToRootAsync(false);
         }
 
         async private void ExecuteVacationMode(object obj)
         {
             int[] index = { 2 };
             _tcpClientService.SetCommandToServer(309, index);
-            await Shell.Current.GoToAsync("mainPage");
+            await Shell.Current.GoToAsync("mainPage", false);
+            await Shell.Current.Navigation.PopToRootAsync(false);
         }
 
         async private void ExecuteSheduler(object obj)
         {
             int[] index = { 3 };
             _tcpClientService.SetCommandToServer(309, index);
-            await Shell.Current.GoToAsync("mainPage");
+            await Shell.Current.GoToAsync("mainPage", false);
+            await Shell.Current.Navigation.PopToRootAsync(false);
         }
 
         #endregion

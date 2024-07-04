@@ -31,7 +31,6 @@ namespace Android_Silver.Entities
             }
         }
 
-
         private string _ip = String.Empty;
         public string IP
         {
@@ -111,5 +110,18 @@ namespace Android_Silver.Entities
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
             }
         }
+
+
+        private bool _loaded=false;
+
+        public bool Loaded
+        {
+            get { return _loaded; }
+            set {
+                _loaded = value;
+                OnPropertyChanged(nameof(Loaded));
+            }
+        }
+
     }
 }

@@ -148,7 +148,7 @@ namespace Android_Silver.Pages
             ChooseModeCommand = new Command(ExecuteChooseMode);
             SetSettingsCommand = new Command(ExecuteSetSettings);
             Value = 15;
-            StartTimer();
+           // StartTimer();
            
         }
 
@@ -156,7 +156,7 @@ namespace Android_Silver.Pages
 
         async void ExecuteSetSettings(object obj)
         {
-            await Shell.Current.GoToAsync("setPointsPage");
+            await Shell.Current.GoToAsync("setPointsPage",false);
         }
 
         async private void ExecuteConnect()
@@ -204,7 +204,7 @@ namespace Android_Silver.Pages
 
         async private void ExecuteChooseMode(object obj)
         {
-            await Shell.Current.GoToAsync("chooseModePage");
+            await Shell.Current.GoToAsync("chooseModePage",false);
         }
 
         #endregion

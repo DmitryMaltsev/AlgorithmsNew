@@ -45,8 +45,8 @@ namespace Android_Silver.Services
             {
                 IsConnecting = true;
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 500;
-                _ethernetEntities.Client.SendTimeout = 500;
+                _ethernetEntities.Client.ReceiveTimeout = 900;
+                _ethernetEntities.Client.SendTimeout = 900;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
                 if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
                 {
@@ -72,7 +72,6 @@ namespace Android_Silver.Services
                 IsConnecting = false;
             }
         }
-
 
         StringBuilder sbResult;
 
@@ -113,7 +112,7 @@ namespace Android_Silver.Services
                     {
                         _ethernetEntities.SystemMessage = "Данные уже передаются";
                     }
-                    Task.Delay(300);
+                    Task.Delay(1);
                 }
             });
         }
@@ -146,14 +145,15 @@ namespace Android_Silver.Services
                 }
                 catch (Exception ex)
                 {
-                    //  _ethernetEntities.SystemMessage = ex.Message;
+                    _trySendcounter += 1;
+                    Task.Delay(10);
+                    _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
-                _trySendcounter += 1;
-                Task.Delay(800);
+            
             }
-            while (IsSending && _trySendcounter < 4);
+            while (IsSending && _trySendcounter < 10);
             IsSending = false;
-            if (_trySendcounter == 4)
+            if (_trySendcounter == 10)
             {
                 _ethernetEntities.IsConnected = false;
             }
@@ -266,7 +266,7 @@ namespace Android_Silver.Services
                         {
                             if (val != _modesEntities.CMode1.Num)
                             {
-                                _modesEntities.SetMode1ValuesByIndex(val);
+                        //        _modesEntities.SetMode1ValuesByIndex(val);
                             }
                         }
                     }
@@ -276,7 +276,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
-                            _modesEntities.SetMode2ValuesByIndex(val);
+                    //      _modesEntities.SetMode2ValuesByIndex(val);
                         }
                     }
                     break;
@@ -517,7 +517,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.SetMode1ValuesByIndex(Val);
+                           _modesEntities.SetMode1ValuesByIndex(Val);
                         }
                     }
                     break;
@@ -739,6 +739,23 @@ namespace Android_Silver.Services
                         if (int.TryParse(resp.ValueString, out int val))
                         {
                             _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
+                        }
+                    }
+                    break;
+                case 335:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.SetMode1ValuesByIndex(Val);
+                            _ethernetEntities.Loaded=true;
+                        }
+                    }
+                    break;
+                case 336:
+                    {
+                        if (int.TryParse(resp.ValueString, out int Val))
+                        {
+                            _modesEntities.SetMode2ValuesByIndex(Val);
                         }
                     }
                     break;
