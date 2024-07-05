@@ -5,18 +5,18 @@
              x:Class="Android_Silver.Pages.IPPage">
     <ContentPage.Resources>
         <local:InvertBoolConverter x:Key="InvertBoolConverter"/>
-        <Style TargetType="{Type Button}">
+        <Style TargetType="Button">
             <!--<Setter Property="WidthRequest" Value="150"/>-->
             <Setter Property="Margin" Value="4,4,0,0"/>
             <Setter Property="TextColor" Value="White"/>
         </Style>
-        <Style TargetType="{Type Label}">
+        <Style TargetType="Label">
             <Setter Property="HorizontalOptions" Value="Start"/>
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Margin" Value="10,4"/>
         </Style>
-        <Style TargetType="{Type Border}">
+        <Style TargetType="Border">
             <Setter Property="Stroke" Value="Blue"/>
             <Setter Property="StrokeThickness" Value="4"/>
             <Setter Property="Padding" Value="5,5"/>
@@ -25,7 +25,7 @@
             <!--<Setter Property="WidthRequest" Value="180"/>-->
             <Setter Property="StrokeShape" Value="RoundRectangle 5,5,5,5"/>
         </Style>
-        <Style TargetType="{Type VerticalStackLayout}">
+        <Style TargetType="VerticalStackLayout">
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
         </Style>

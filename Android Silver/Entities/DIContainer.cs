@@ -1,6 +1,8 @@
 ﻿using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
+using Android_Silver.Pages;
 using Android_Silver.Services;
+using Android_Silver.ViewModels;
 
 using Unity;
 
@@ -18,6 +20,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<SetPoints>();
             _container.RegisterSingleton<ModesEntities>();
             _container.RegisterSingleton<PicturesSet>();
+
         }
 
         public static T Resolve<T>()

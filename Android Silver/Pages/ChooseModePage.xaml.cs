@@ -1,14 +1,36 @@
+using Android_Silver.Entities;
 using Android_Silver.ViewModels;
+
+using System.Xml.Linq;
 
 namespace Android_Silver.Pages;
 
 public partial class ChooseModePage : ContentPage
 {
 	private ChooseModeViewModel _chooseModeViewModel;
-	public ChooseModePage()
+    ChooseModePage _chPage;
+    public ChooseModePage()
 	{
 		InitializeComponent();
-		_chooseModeViewModel = new ChooseModeViewModel();
+        ImBut1.Pressed -= Home_Pressed;
+        ImBut1.Released -= Home_Released;
+        ImBut2.Pressed -= Min_Pressed;
+        ImBut2.Released -= Min_Released;
+        ImBut3.Pressed -= Norm_Pressed;
+        ImBut3.Released -= Norm_Released;
+        ImBut4.Pressed -= Max_Pressed;
+        ImBut4.Released -= Max_Released;
+        ImBut5.Pressed -= Kitchen_Pressed;
+        ImBut5.Released -= Kitchen_Released;
+        //  BindingContext = null;
+        ImBut6.Pressed -= Vac_Pressed;
+        ImBut6.Released -= Vac_Released;
+        ImBut7.Pressed -= Shed_Pressed;
+        ImBut7.Released -= Shed_Released;
+        ImBut8.Pressed -= TurnOff_Pressed;
+        ImBut8.Released -= TurnOff_Released;
+        _chPage = this;
+        _chooseModeViewModel =new ChooseModeViewModel();
 		BindingContext = _chooseModeViewModel;
 	}
 
@@ -84,4 +106,14 @@ public partial class ChooseModePage : ContentPage
         _chooseModeViewModel.CPictureSet.SelectModesPicks[0].Current = _chooseModeViewModel.CPictureSet.SelectModesPicks[0].Default;
     }
 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        if (_chPage != null)
+        {
+          
+            _chPage = null;
+        }
+    }
 }

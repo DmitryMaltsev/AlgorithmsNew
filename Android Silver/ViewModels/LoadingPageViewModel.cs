@@ -22,16 +22,16 @@ namespace Android_Silver.ViewModels
             timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromMilliseconds(100);
             pageCommand = new Command(ExecutePageCommand);
-            timer.Tick += (s, e) => GoHome();
-            timer.Start();
-        
+            pageCommand.Execute(this);
+         //   timer.Tick += (s, e) => GoHome();
+         //   timer.Start();
         }
 
         async void ExecutePageCommand(object obj)
         {
-           
+            await Task.Delay(1);
             await Shell.Current.GoToAsync("mainPage", false);
-            await Shell.Current.Navigation.PopToRootAsync(false);
+         
         }
 
          private void GoHome()

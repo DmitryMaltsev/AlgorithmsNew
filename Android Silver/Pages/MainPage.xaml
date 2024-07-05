@@ -8,36 +8,36 @@
 
     <ContentPage.Resources>
         <local:InvertBoolConverter x:Key="InvertBoolConverter"/>
-        <Style TargetType="{Type Button}">
+        <Style TargetType="Button">
             <!--<Setter Property="WidthRequest" Value="150"/>-->
             <Setter Property="Margin" Value="4,4,0,0"/>
             <Setter Property="TextColor" Value="White"/>
         </Style>
-        <Style  TargetType="{Type ImageButton}">
+        <Style  TargetType="ImageButton">
             <Setter Property="BackgroundColor" Value="Transparent" />
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
-        <Style TargetType="{Type Label}">
+        <Style TargetType="Label">
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="FontSize" Value="9"/>
             <Setter Property="Margin" Value="10,4"/>
             <Setter Property="TextColor" Value="White"/>
         </Style>
-        <Style TargetType="{Type Border}">
+        <Style TargetType="Border">
             <Setter Property="Stroke" Value="Blue"/>
             <Setter Property="StrokeThickness" Value="4"/>
             <Setter Property="Padding" Value="5,5"/>
             <!--<Setter Property="WidthRequest" Value="180"/>-->
             <Setter Property="StrokeShape" Value="RoundRectangle 5,5,5,5"/>
         </Style>
-        <Style TargetType="{Type VerticalStackLayout}">
+        <Style TargetType="VerticalStackLayout">
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
         </Style>
-        <Style TargetType="{Type Slider}">
+        <Style TargetType="Slider">
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="IsEnabled" Value="False"/>
             <Setter Property="Minimum" Value="0"/>
@@ -69,32 +69,32 @@
         <!--Текущее время-->
         <Label Text="00:00" TextColor="White" FontSize="15" Grid.Column="0" Grid.Row="0"/>
         <!--Кнопка настроек-->
-        <ImageButton Source="{Binding CPictureSet.SettingsButton.Current}" Command="{Binding SettingsCommand}" 
+        <ImageButton x:Name="im1But" Source="{Binding CPictureSet.SettingsButton.Current}" Command="{Binding SettingsCommand}" 
                      Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0"   Grid.ColumnSpan="6"  Pressed="Settings_Pressed"
                      Released="Settings_Released" />
         <!--Кнопка перехода в выбор режима-->
-        <ImageButton  Source="{Binding  CModesEntities.CMode1.ActiveModePics.Current}" Command="{Binding ChooseModeCommand}"
+        <ImageButton x:Name="im2But" Source="{Binding  CModesEntities.CMode1.ActiveModePics.Current}" Command="{Binding ChooseModeCommand}"
                            Grid.Row="2"  Grid.RowSpan="3" Grid.Column="0"    Grid.ColumnSpan="6"
                                                              Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"/>
         <!--Иконка режима 2-->
         <Image  Source="{Binding CModesEntities.CMode2.Mode2Icon}" 
                            Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0"    Grid.ColumnSpan="1" Scale="0.7" HorizontalOptions="End" VerticalOptions="End" />
-        <!--Кнопка перехода в настройки текущего режима режима-->
-        <ImageButton  Command="{Binding SetSettingsCommand}" Pressed="Substrate_Pressed" Released="Substrate_Released"
-               Source="{Binding  CPictureSet.Substrate.Current}"  BorderWidth="0" Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="6"  Grid.RowSpan="3" 
-               Aspect="Fill" Margin="5"/>
+        <!--Кнопка перехода в настройки текущего режима -->
+        <ImageButton x:Name="im3But" Command="{Binding SetSettingsCommand}" Pressed="Substrate_Pressed" Released="Substrate_Released"
+               Source="{Binding  CPictureSet.Substrate.Current}"  BorderWidth="0" Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="5"  Grid.RowSpan="3" 
+               Aspect="AspectFill" Margin="5"/>
         <!--Приточный воздух-->
-        <Label Text="Приток"   Grid.Row="6" Grid.Column="0" />
-        <Slider   Grid.Row="6"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding CModesEntities.CMode1.SypplySP}"/>
-        <Label Text="{Binding  CModesEntities.CMode1.SypplySP, StringFormat='{0}%',Mode=TwoWay}"   Grid.Row="6" Grid.Column="6"/>
+        <Label Text="Приток"   Grid.Row="5" Grid.Column="0" />
+        <Slider   Grid.Row="5"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding CModesEntities.CMode1.SypplySP}"/>
+        <Label Text="{Binding  CModesEntities.CMode1.SypplySP, StringFormat='{0}',Mode=TwoWay}"   Grid.Row="5" Grid.Column="6"/>
         <!--Вытяжной воздух-->
-        <Label Text="Вытяжка"   Grid.Row="7" Grid.Column="0"/>
-        <Slider  Grid.Row="7"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding  CModesEntities.CMode1.ExhaustSP}"/>
-        <Label Text="{Binding  CModesEntities.CMode1.ExhaustSP, StringFormat='{0}%'}"   Grid.Row="7" Grid.Column="6"/>
+        <Label Text="Вытяжка"   Grid.Row="6" Grid.Column="0"/>
+        <Slider  Grid.Row="6"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding  CModesEntities.CMode1.ExhaustSP}"/>
+        <Label Text="{Binding  CModesEntities.CMode1.ExhaustSP, StringFormat='{0}'}"   Grid.Row="6" Grid.Column="6"/>
         <!--Температура -->
-        <Label Text="t уст"   Grid.Row="8" Grid.Column="0" />
-        <Slider  Grid.Row="8"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding  CModesEntities.CMode1.TempSP}"/>
-        <Label Text="{Binding  CModesEntities.CMode1.TempSP, StringFormat='{0}°C'}"   Grid.Row="8" Grid.Column="6"/>
+        <Label Text="t уст"   Grid.Row="7" Grid.Column="0" />
+        <Slider  Grid.Row="7"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding  CModesEntities.CMode1.TempSP}"/>
+        <Label Text="{Binding  CModesEntities.CMode1.TempSP, StringFormat='{0}'}"   Grid.Row="7" Grid.Column="6"/>
         <!--Основная панель-->
         <HorizontalStackLayout Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="6" Grid.RowSpan="1" HorizontalOptions="Center">
             <Button Text="Подключиться" Command="{Binding ConnectCommand}"  

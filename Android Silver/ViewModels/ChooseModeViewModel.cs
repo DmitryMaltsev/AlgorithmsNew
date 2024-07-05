@@ -56,7 +56,7 @@ namespace Android_Silver.ViewModels
             int[] index = { 0 };
             _tcpClientService.SetCommandToServer(308, index);
 
-            await Shell.Current.GoToAsync("mainPage", false);
+            await Shell.Current.GoToAsync("MainPage", false);
             await Shell.Current.Navigation.PopToRootAsync(false);
 
         }
@@ -64,8 +64,7 @@ namespace Android_Silver.ViewModels
         {
             int[] index = { 1, 0 };
             _tcpClientService.SetCommandToServer(308, index);
-            await Shell.Current.GoToAsync("mainPage", false);
-            await Shell.Current.Navigation.PopToRootAsync(false);
+            await Shell.Current.GoToAsync("mainPage", true);
 
         }
 
@@ -74,7 +73,7 @@ namespace Android_Silver.ViewModels
             int[] index = { 2, 0 };
             _tcpClientService.SetCommandToServer(308, index);
         //    _tcpClientService.SendData("108,02");
-            await Shell.Current.GoToAsync("loadingPage", true);
+            await Shell.Current.GoToAsync("MainPage", true);
         }
 
         async private void ExecuteMaxMode(object obj)
@@ -82,14 +81,14 @@ namespace Android_Silver.ViewModels
             int[] index = { 3, 0 };
             _tcpClientService.SetCommandToServer(308, index);
          //   _tcpClientService.SendData("108,02");
-            await Shell.Current.GoToAsync("loadingPage", true);
+            await Shell.Current.GoToAsync("/mainPage", true);
         }
 
         async private void ExecuteKitchenMode(object obj)
         {
             //  int[] index = { 4 };
             //  _tcpClientService.SetCommandToServer(308, index);
-            await Shell.Current.GoToAsync("kitchenTimerPage", false);
+            await Shell.Current.GoToAsync("mainPage", false);
             await Shell.Current.Navigation.PopToRootAsync(false);
         }
 

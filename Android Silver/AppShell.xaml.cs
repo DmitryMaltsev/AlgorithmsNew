@@ -11,9 +11,7 @@ namespace Android_Silver
         {
             InitializeComponent();
 
-
-
-            Routing.RegisterRoute("mainPage", typeof(MainPage));
+           // Routing.RegisterRoute("mainPage", typeof(MainPage));
             Routing.RegisterRoute("startPage", typeof(StartPage));
             Routing.RegisterRoute("chooseModePage", typeof(ChooseModePage));
             Routing.RegisterRoute("kitchenTimerPage", typeof(KitchenTimerPage));
@@ -25,11 +23,5 @@ namespace Android_Silver
             Routing.RegisterRoute("settingsPage", typeof(SettingsPage));
         }
 
-        protected override async void OnNavigating(ShellNavigatingEventArgs args)
-        {
-            base.OnNavigating(args);
-
-
-        }
     }
 }

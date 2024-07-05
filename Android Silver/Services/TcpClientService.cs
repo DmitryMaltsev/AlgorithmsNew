@@ -112,7 +112,7 @@ namespace Android_Silver.Services
                     {
                         _ethernetEntities.SystemMessage = "Данные уже передаются";
                     }
-                 //   Task.Delay(10);
+                    //   Task.Delay(10);
                 }
             });
         }
@@ -149,7 +149,7 @@ namespace Android_Silver.Services
                     Task.Delay(50);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
-            
+
             }
             while (IsSending && _trySendcounter < 10);
             IsSending = false;
@@ -276,8 +276,8 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
-                          _modesEntities.SetMode2ValuesByIndex(val);
-                           // _ethernetEntities.Loaded = true;
+                            _modesEntities.SetMode2ValuesByIndex(val);
+                            // _ethernetEntities.Loaded = true;
                         }
                     }
                     break;
@@ -518,7 +518,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                     //      _modesEntities.SetMode1ValuesByIndex(Val);
+                            //      _modesEntities.SetMode1ValuesByIndex(Val);
                         }
                     }
                     break;
@@ -526,7 +526,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                      //      _modesEntities.SetMode2ValuesByIndex(Val);
+                            //      _modesEntities.SetMode2ValuesByIndex(Val);
                         }
                     }
                     break;
@@ -748,7 +748,7 @@ namespace Android_Silver.Services
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
                             _modesEntities.SetMode1ValuesByIndex(Val);
-                          
+
                         }
                     }
                     break;
@@ -757,7 +757,7 @@ namespace Android_Silver.Services
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
                             _modesEntities.SetMode2ValuesByIndex(Val);
-                           
+
                         }
                     }
                     break;
@@ -782,39 +782,39 @@ namespace Android_Silver.Services
         public void SendData(string val)
         {
             Task.Run(() =>
-            {                   
+            {
                 string messToClient = val;
-                    if (!String.IsNullOrEmpty(_ethernetEntities.MessageToServer))
+                if (!String.IsNullOrEmpty(_ethernetEntities.MessageToServer))
+                {
+                    messToClient = _ethernetEntities.MessageToServer;
+                }
+                if (!IsSending)
+                {
+                    SendCommand(messToClient);
+                    if (sbResult != null && sbResult.Length > 0)
                     {
-                        messToClient = _ethernetEntities.MessageToServer;
-                    }
-                    if (!IsSending)
-                    {
-                        SendCommand(messToClient);
-                        if (sbResult != null && sbResult.Length > 0)
+                        List<Response> responseList = new();
+                        if (GetResponseData(sbResult, responseList))
                         {
-                            List<Response> responseList = new();
-                            if (GetResponseData(sbResult, responseList))
+                            foreach (var response in responseList)
                             {
-                                foreach (var response in responseList)
-                                {
-                                    GetValueByTag(response);
-                                }
-                                if (String.Compare(messToClient, _ethernetEntities.MessageToServer, true) == 0)
-                                    _ethernetEntities.MessageToServer = String.Empty;
+                                GetValueByTag(response);
                             }
-                            else
-                            {
-                                _ethernetEntities.SystemMessage = $"Данные не получены";
-                            }
+                            if (String.Compare(messToClient, _ethernetEntities.MessageToServer, true) == 0)
+                                _ethernetEntities.MessageToServer = String.Empty;
+                        }
+                        else
+                        {
+                            _ethernetEntities.SystemMessage = $"Данные не получены";
                         }
                     }
-                    else
-                    {
-                        _ethernetEntities.SystemMessage = "Данные уже передаются";
-                    }
-                    //   Task.Delay(10);
-                
+                }
+                else
+                {
+                    _ethernetEntities.SystemMessage = "Данные уже передаются";
+                }
+                //   Task.Delay(10);
+
             });
         }
 

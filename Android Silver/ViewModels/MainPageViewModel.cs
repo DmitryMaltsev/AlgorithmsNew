@@ -7,6 +7,7 @@ using Android_Silver.ViewModels;
 using System.ComponentModel;
 using System.Globalization;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 
@@ -126,7 +127,7 @@ namespace Android_Silver.Pages
 
         public SetPoints CSetPoints { get; set; }
 
-
+        private  ICommand UpdateRouting;
 
         NetworkStream _stream;
         int counter = 0;
@@ -147,15 +148,30 @@ namespace Android_Silver.Pages
             SettingsCommand = new Command(ExecuiteSettings);
             ChooseModeCommand = new Command(ExecuteChooseMode);
             SetSettingsCommand = new Command(ExecuteSetSettings);
+            UpdateRouting = new Command(ExecuteUpdateRouting);
             Value = 15;
            // StartTimer();
            
+
+
         }
 
+         async void ExecuteUpdateRouting(object obj)
+        {
 
+            //  await Shell.Current.Navigation.PopToRootAsync(false);
+
+
+        }
+
+        public void Init()
+        {
+          //  UpdateRouting.Execute(this);
+        }
 
         async void ExecuteSetSettings(object obj)
         {
+
             await Shell.Current.GoToAsync("setPointsPage",false);
         }
 
@@ -204,6 +220,15 @@ namespace Android_Silver.Pages
 
         async private void ExecuteChooseMode(object obj)
         {
+            Page[] stack = Shell.Current.Navigation.NavigationStack.ToArray();
+            for (int i = stack.Length - 1; i > 0; i--)
+            {
+              //  Shell.Current.Navigation.RemovePage(stack[i]);
+                //  Shell.Current.Navigation.RemovePage(stack[i]);
+            }
+            await Task.Delay(1);
+            await Shell.Current.Navigation.PopToRootAsync(false);
+            await Task.Delay(1);
             await Shell.Current.GoToAsync("chooseModePage",false);
         }
 

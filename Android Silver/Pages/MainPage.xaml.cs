@@ -1,16 +1,34 @@
 ﻿
 
+using Android_Silver.Entities;
+
 namespace Android_Silver.Pages
 {
     public partial class MainPage : ContentPage
     {
         int count = 0;
+        MainPage _mp;
         private MainPageViewModel _viewModel;
         public MainPage()
         {
+          
             InitializeComponent();
+           /* im1But.Pressed -= Settings_Pressed;
+            im1But.Released -= Settings_Released;
+            im2But.Pressed -= ActiveMode_Pressed;
+            im2But.Released -= ActiveMode_Released;
+            im3But.Pressed -= Substrate_Pressed;
+            im3But.Released -= Substrate_Released;
+           /* im1But.Pressed += Settings_Pressed;
+            im1But.Released += Settings_Released;
+            im2But.Pressed += ActiveMode_Pressed;
+            im2But.Released += ActiveMode_Released;
+            im3But.Pressed += Substrate_Pressed;
+            im3But.Released += Substrate_Released;*/
             _viewModel = new MainPageViewModel();
             BindingContext = _viewModel;
+            _viewModel.Init();
+            _mp = this;
         }
 
         #region Settings
@@ -24,10 +42,6 @@ namespace Android_Silver.Pages
             _viewModel.CPictureSet.SettingsButton.Current = _viewModel.CPictureSet.SettingsButton.Default;
         }
 
-        private void Settings_Unfocused(object sender, FocusEventArgs e)
-        {
-            _viewModel.CPictureSet.SettingsButton.Current = _viewModel.CPictureSet.SettingsButton.Default;
-        } 
         #endregion
 
         private void Substrate_Pressed(object sender, EventArgs e)
@@ -51,6 +65,19 @@ namespace Android_Silver.Pages
             _viewModel.CModesEntities.CMode1.ActiveModePics.Current =
                 _viewModel.CModesEntities.CMode1.ActiveModePics.Default;
         }
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+          
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            if (_mp != null)
+            {
+                _mp=null;
+            }
+           
+        }
     }
 }
