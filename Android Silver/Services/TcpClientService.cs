@@ -45,8 +45,8 @@ namespace Android_Silver.Services
             {
                 IsConnecting = true;
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 300;
-                _ethernetEntities.Client.SendTimeout = 300;
+                _ethernetEntities.Client.ReceiveTimeout = 200;
+                _ethernetEntities.Client.SendTimeout = 200;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
                 if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
                 {
@@ -151,9 +151,9 @@ namespace Android_Silver.Services
                   //  Task.Delay(50);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
-
+                // && _ethernetEntities.MessageToServer==String.Empty
             }
-            while (IsSending && _trySendcounter < 10 && _ethernetEntities.MessageToServer==String.Empty);
+            while (IsSending && _trySendcounter < 10 && _ethernetEntities.MessageToServer == String.Empty);
             IsSending = false;
             if (_trySendcounter == 10)
             {
