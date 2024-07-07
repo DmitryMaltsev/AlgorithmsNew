@@ -10,8 +10,7 @@ namespace Android_Silver
         public AppShell()
         {
             InitializeComponent();
-
-           // Routing.RegisterRoute("mainPage", typeof(MainPage));
+        
             Routing.RegisterRoute("startPage", typeof(StartPage));
             Routing.RegisterRoute("chooseModePage", typeof(ChooseModePage));
             Routing.RegisterRoute("kitchenTimerPage", typeof(KitchenTimerPage));
@@ -21,7 +20,7 @@ namespace Android_Silver
             Routing.RegisterRoute("setPointsPage", typeof(SetPointsPage));
             #endregion
             Routing.RegisterRoute("settingsPage", typeof(SettingsPage));
+            Routing.RegisterRoute("mainPage", typeof(MainPage));
         }
-
     }
 }

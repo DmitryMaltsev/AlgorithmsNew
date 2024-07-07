@@ -27,6 +27,7 @@ namespace Android_Silver.Services
         public int ResieveCounter { get; set; }
 
         public Action<int> SetMode1Action { get; set; }
+    
 
         public TcpClientService()
         {
@@ -36,7 +37,6 @@ namespace Android_Silver.Services
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
-
         }
 
         public async Task Connect()
@@ -45,8 +45,8 @@ namespace Android_Silver.Services
             {
                 IsConnecting = true;
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 900;
-                _ethernetEntities.Client.SendTimeout = 900;
+                _ethernetEntities.Client.ReceiveTimeout = 300;
+                _ethernetEntities.Client.SendTimeout = 300;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
                 if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
                 {
@@ -75,10 +75,10 @@ namespace Android_Silver.Services
 
         StringBuilder sbResult;
 
-
+     
         public void SendRecieveTask(string val)
         {
-            Task.Run(() =>
+           Task.Run(() =>
             {
                 while (_ethernetEntities.IsConnected)
                 {
@@ -112,13 +112,14 @@ namespace Android_Silver.Services
                     {
                         _ethernetEntities.SystemMessage = "Данные уже передаются";
                     }
-                    //   Task.Delay(10);
+                      // Task.Delay(100);
                 }
             });
         }
 
-        private int _trySendcounter = 0;
+      
 
+        private int _trySendcounter = 0;
         private StringBuilder SendCommand(string command)
         {
 
@@ -146,12 +147,13 @@ namespace Android_Silver.Services
                 catch (Exception ex)
                 {
                     _trySendcounter += 1;
-                    Task.Delay(50);
+                    
+                  //  Task.Delay(50);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
 
             }
-            while (IsSending && _trySendcounter < 10);
+            while (IsSending && _trySendcounter < 10 && _ethernetEntities.MessageToServer==String.Empty);
             IsSending = false;
             if (_trySendcounter == 10)
             {

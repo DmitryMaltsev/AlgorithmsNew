@@ -27,7 +27,7 @@ namespace Android_Silver.Pages
             im3But.Released += Substrate_Released;*/
             _viewModel = new MainPageViewModel();
             BindingContext = _viewModel;
-            _viewModel.Init();
+          //  _viewModel.Init();
             _mp = this;
         }
 
@@ -73,11 +73,7 @@ namespace Android_Silver.Pages
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            if (_mp != null)
-            {
-                _mp=null;
-            }
-           
+            mainPageGrid.Resources.Clear();
         }
     }
 }

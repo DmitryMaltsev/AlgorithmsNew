@@ -44,7 +44,7 @@
             <Setter Property="Maximum" Value="100"/>
         </Style>
     </ContentPage.Resources>
-    <Grid>
+    <Grid x:Name="mainPageGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"/>
             <RowDefinition Height="0.2*"/>
@@ -69,9 +69,9 @@
         <!--Текущее время-->
         <Label Text="00:00" TextColor="White" FontSize="15" Grid.Column="0" Grid.Row="0"/>
         <!--Кнопка настроек-->
-        <ImageButton x:Name="im1But" Source="{Binding CPictureSet.SettingsButton.Current}" Command="{Binding SettingsCommand}" 
+        <ImageButton  Source="{Binding CPictureSet.SettingsButton.Current}" Command="{Binding SettingsCommand}" 
                      Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0"   Grid.ColumnSpan="6"  Pressed="Settings_Pressed"
-                     Released="Settings_Released" />
+                     Released="Settings_Released" IsVisible="{Binding M1Enable}" />
         <!--Кнопка перехода в выбор режима-->
         <ImageButton x:Name="im2But" Source="{Binding  CModesEntities.CMode1.ActiveModePics.Current}" Command="{Binding ChooseModeCommand}"
                            Grid.Row="2"  Grid.RowSpan="3" Grid.Column="0"    Grid.ColumnSpan="6"
@@ -82,7 +82,7 @@
         <!--Кнопка перехода в настройки текущего режима -->
         <ImageButton x:Name="im3But" Command="{Binding SetSettingsCommand}" Pressed="Substrate_Pressed" Released="Substrate_Released"
                Source="{Binding  CPictureSet.Substrate.Current}"  BorderWidth="0" Grid.Column="0" Grid.ColumnSpan="6"  Grid.Row="5"  Grid.RowSpan="3" 
-               Aspect="AspectFill" Margin="5"/>
+               Aspect="Fill" Margin="5"/>
         <!--Приточный воздух-->
         <Label Text="Приток"   Grid.Row="5" Grid.Column="0" />
         <Slider   Grid.Row="5"  Grid.Column="1" Grid.ColumnSpan="4" Value="{Binding CModesEntities.CMode1.SypplySP}"/>

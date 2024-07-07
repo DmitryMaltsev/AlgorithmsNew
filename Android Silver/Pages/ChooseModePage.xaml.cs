@@ -109,11 +109,8 @@ public partial class ChooseModePage : ContentPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
+        chModeGrid.Resources.Clear();
 
-        if (_chPage != null)
-        {
-          
-            _chPage = null;
-        }
+
     }
 }

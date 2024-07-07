@@ -17,6 +17,28 @@ namespace Android_Silver.Pages
     {
         #region Rising properties
 
+        private bool _m1Enable;
+
+        public bool M1Enable
+        {
+            get { return _m1Enable; }
+            set { 
+                _m1Enable = value; 
+                OnPropertyChanged(nameof(M1Enable));
+            }
+        }
+
+        private bool _m2Enable;
+        public bool M2Enable
+        {
+            get { return _m2Enable; }
+            set
+            {
+                _m2Enable = value;
+                OnPropertyChanged(nameof(M2Enable));
+            }
+        }
+
         private int _value;
 
         public int Value
@@ -108,8 +130,8 @@ namespace Android_Silver.Pages
         public ICommand SendFloatCommand { get; private set; }
         public ICommand SetSettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
-
         public ICommand GoToPageCommand { get; private set; }
+
         // public ICommand SettingsCommand { get; private set; }
         #endregion
 
@@ -156,7 +178,8 @@ namespace Android_Silver.Pages
 
         }
 
-         async void ExecuteUpdateRouting(object obj)
+
+        async void ExecuteUpdateRouting(object obj)
         {
 
             //  await Shell.Current.Navigation.PopToRootAsync(false);
@@ -210,7 +233,6 @@ namespace Android_Silver.Pages
         private void ExecuteSendFloat(object obj)
         {
             EthernetEntities.MessageToServer = $"303,01,{(int)(CSetPoints.SetPointF * 10)}";
-
         }
 
         async private void ExecuiteSettings(object obj)
@@ -220,15 +242,15 @@ namespace Android_Silver.Pages
 
         async private void ExecuteChooseMode(object obj)
         {
-            Page[] stack = Shell.Current.Navigation.NavigationStack.ToArray();
-            for (int i = stack.Length - 1; i > 0; i--)
-            {
-              //  Shell.Current.Navigation.RemovePage(stack[i]);
-                //  Shell.Current.Navigation.RemovePage(stack[i]);
-            }
-            await Task.Delay(1);
-            await Shell.Current.Navigation.PopToRootAsync(false);
-            await Task.Delay(1);
+            /* Page[] stack = Shell.Current.Navigation.NavigationStack.ToArray();
+             for (int i = stack.Length - 1; i > 0; i--)
+             {
+                 Shell.Current.Navigation.RemovePage(stack[i]);
+                 Shell.Current.Navigation.RemovePage(stack[i]);
+             }
+             await Task.Delay(1);
+             await Shell.Current.Navigation.PopToRootAsync(false);
+             await Task.Delay(1);*/
             await Shell.Current.GoToAsync("chooseModePage",false);
         }
 
@@ -249,10 +271,5 @@ namespace Android_Silver.Pages
                 null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
             });
         }
-
-
-
-
-  
     }
 }
