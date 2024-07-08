@@ -347,14 +347,16 @@ namespace Android_Silver.Pages
             }
         }
 
-        async void ExecuteCancel(object obj)
+        private void ExecuteCancel(object obj)
         {
-            await Shell.Current.GoToAsync("mainPage");
+            int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour, 0, 1 };
+            TcpClientService.SetCommandToServer(334, values);
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage); ;
         }
 
         private void ExecuteOk(object obj)
         {
-            int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour };
+            int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour,1,0};
             TcpClientService.SetCommandToServer(334, values);
             CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);;
         }
