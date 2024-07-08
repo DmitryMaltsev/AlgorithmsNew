@@ -4,6 +4,7 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Net.Sockets;
@@ -16,31 +17,7 @@ namespace Android_Silver.Pages
     public class MainPageViewModel : BindableBase
     {
         #region Rising properties
-
-        private bool _m1Enable;
-
-        public bool M1Enable
-        {
-            get { return _m1Enable; }
-            set { 
-                _m1Enable = value; 
-                OnPropertyChanged(nameof(M1Enable));
-            }
-        }
-
-        private bool _m2Enable;
-        public bool M2Enable
-        {
-            get { return _m2Enable; }
-            set
-            {
-                _m2Enable = value;
-                OnPropertyChanged(nameof(M2Enable));
-            }
-        }
-
         private int _value;
-
         public int Value
         {
             get { return _value; }
@@ -50,8 +27,6 @@ namespace Android_Silver.Pages
                 OnPropertyChanged(nameof(Value));
             }
         }
-
-
 
         private string _messageToServer = "Test";
 
@@ -119,9 +94,11 @@ namespace Android_Silver.Pages
                 OnPropertyChanged(nameof(CurrentTime));
             }
         }
+
         #endregion
 
         #region Commands
+        #region MainPageCommands
         public ICommand ConnectCommand { get; private set; }
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
@@ -131,17 +108,35 @@ namespace Android_Silver.Pages
         public ICommand SetSettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
         public ICommand GoToPageCommand { get; private set; }
+        #endregion
+
+        #region Choose mode page commands
+        public ICommand MinModeCommand { get; private set; }
+        public ICommand NormalModeCommand { get; private set; }
+        public ICommand MaxModeCommand { get; private set; }
+        public ICommand KitchenModeCommand { get; private set; }
+        public ICommand ShedulerModeCommand { get; private set; }
+        public ICommand VacationModeCommand { get; private set; }
+        public ICommand TurnOffModeCommand { get; private set; }
+        public ICommand HomeCommand { get; private set; }
+        #endregion
+
+        #region KitchenTimerCommands
+        public ICommand UpMInutesCommand { get; private set; }
+        public ICommand DnMinutesCommand { get; private set; }
+        public ICommand OkCommand { get; private set; }
+        public ICommand CancelCommand { get; private set; }
+        #endregion
 
         // public ICommand SettingsCommand { get; private set; }
         #endregion
 
         public IEthernetEntities EthernetEntities { get; set; }
+
         public SensorsEntities CSensorsEntities { get; set; }
 
         public ITcpClientService TcpClientService { get; set; }
 
-
-        private ModesEntities _cModesEntities;
 
         public ModesEntities CModesEntities { get; set; }
 
@@ -149,21 +144,25 @@ namespace Android_Silver.Pages
 
         public SetPoints CSetPoints { get; set; }
 
-        private  ICommand UpdateRouting;
+        public ActivePagesEntities CActivePagesEntities { get; set; }
+
+        private ICommand UpdateRouting;
 
         NetworkStream _stream;
         int counter = 0;
         string _cData;
         public MainPageViewModel()
         {
+
             EthernetEntities = DIContainer.Resolve<IEthernetEntities>();
             CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
             TcpClientService = DIContainer.Resolve<ITcpClientService>();
             CSetPoints = DIContainer.Resolve<SetPoints>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
+            CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
-           
-             ConnectCommand = new Command(ExecuteConnect);
+
+            ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SendSPCommand = new Command(ExecuteSendSP);
             SendFloatCommand = new Command(ExecuteSendFloat);
@@ -172,9 +171,24 @@ namespace Android_Silver.Pages
             SetSettingsCommand = new Command(ExecuteSetSettings);
             UpdateRouting = new Command(ExecuteUpdateRouting);
             Value = 15;
-           // StartTimer();
-           
+            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
 
+            MinModeCommand = new Command(ExecuteMinMode);
+            NormalModeCommand = new Command(ExecuteNormal);
+            MaxModeCommand = new Command(ExecuteMaxMode);
+            KitchenModeCommand = new Command(ExecuteKitchenMode);
+            ShedulerModeCommand = new Command(ExecuteSheduler);
+            VacationModeCommand = new Command(ExecuteVacationMode);
+            TurnOffModeCommand = new Command(ExecuteTurnOffMode);
+            HomeCommand = new Command(ExecuteHomeCommand);
+            // StartTimer();
+            #region Kitchen timer commands
+            UpMInutesCommand = new Command(ExecuteUpMinutes);
+            DnMinutesCommand = new Command(ExecuteDnMinutes);
+            HomeCommand = new Command(ExecuteHomeCommand);
+            OkCommand = new Command(ExecuteOk);
+            CancelCommand = new Command(ExecuteCancel); 
+            #endregion
 
         }
 
@@ -187,16 +201,6 @@ namespace Android_Silver.Pages
 
         }
 
-        public void Init()
-        {
-          //  UpdateRouting.Execute(this);
-        }
-
-        async void ExecuteSetSettings(object obj)
-        {
-
-            await Shell.Current.GoToAsync("setPointsPage",false);
-        }
 
         async private void ExecuteConnect()
         {
@@ -216,8 +220,12 @@ namespace Android_Silver.Pages
             }
         }
 
-        #region Execute methods
-        int val = 135;
+        #region Main page execute methods
+        void ExecuteSetSettings(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.ChooseModePage);
+            // await Shell.Current.GoToAsync("setPointsPage", false);
+        }
 
         private void ExecuteDisconnect()
         {
@@ -240,7 +248,7 @@ namespace Android_Silver.Pages
             await Shell.Current.GoToAsync("settingsPage");
         }
 
-        async private void ExecuteChooseMode(object obj)
+        private void ExecuteChooseMode(object obj)
         {
             /* Page[] stack = Shell.Current.Navigation.NavigationStack.ToArray();
              for (int i = stack.Length - 1; i > 0; i--)
@@ -251,10 +259,108 @@ namespace Android_Silver.Pages
              await Task.Delay(1);
              await Shell.Current.Navigation.PopToRootAsync(false);
              await Task.Delay(1);*/
-            await Shell.Current.GoToAsync("chooseModePage",false);
+            CActivePagesEntities.SetActivePageState(ActivePageState.ChooseModePage);
+            //  await Shell.Current.GoToAsync("chooseModePage", false);
+        }
+        #endregion
+
+        #region Execute modes
+
+        private void ExecuteTurnOffMode(object obj)
+        {
+            int[] index = { 0 };
+            TcpClientService.SetCommandToServer(308, index);
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);
+        }
+        private void ExecuteMinMode(object obj)
+        {
+            int[] index = { 1, 0 };
+            TcpClientService.SetCommandToServer(308, index);
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);
         }
 
+        private void ExecuteNormal(object obj)
+        {
+            int[] index = { 2, 0 };
+            TcpClientService.SetCommandToServer(308, index);
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);
+        }
+
+        private void ExecuteMaxMode(object obj)
+        {
+            int[] index = { 3, 0 };
+            TcpClientService.SetCommandToServer(308, index);
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);
+        }
+
+        private void ExecuteKitchenMode(object obj)
+        {
+              int[] index = { 1 };
+              TcpClientService.SetCommandToServer(309, index);
+            CActivePagesEntities.SetActivePageState(ActivePageState.KithchenTimerPage);
+        }
+
+        private void ExecuteVacationMode(object obj)
+        {
+            int[] index = { 2 };
+            TcpClientService.SetCommandToServer(309, index);
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);
+        }
+
+        private void ExecuteSheduler(object obj)
+        {
+            int[] index = { 3 };
+            TcpClientService.SetCommandToServer(309, index);
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);
+        }
+
+        void ExecuteHomeCommand(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+        }
         #endregion
+
+        #region Kithen timer execute commands
+
+        private void ExecuteDnMinutes(object obj)
+        {
+
+            if (CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour >= 10)
+            {
+                CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour -= 10;
+            }
+            else
+            {
+                CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour = 0;
+            }
+        }
+
+        private void ExecuteUpMinutes(object obj)
+        {
+            if (CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour < 600)
+            {
+                CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour += 10;
+            }
+            else
+            {
+                CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour = 600;
+            }
+        }
+
+        async void ExecuteCancel(object obj)
+        {
+            await Shell.Current.GoToAsync("mainPage");
+        }
+
+        private void ExecuteOk(object obj)
+        {
+            int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour };
+            TcpClientService.SetCommandToServer(334, values);
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);;
+        }
+        #endregion
+
+
 
         Timer timer;
         private void StartTimer()

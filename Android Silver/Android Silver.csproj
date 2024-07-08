@@ -66,6 +66,7 @@
 	  <None Remove="Resources\Images\Базовые\Влажность\dig_img_base.png" />
 	  <None Remove="Resources\Images\Базовые\Главное меню\line.png" />
 	  <None Remove="Resources\Images\Базовые\Главное меню\substrate_base.png" />
+	  <None Remove="Resources\Images\Базовые\Загрузка\loading_pic_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\kitchen_icon_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\max_icon_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\min_icon_off_base.png" />
@@ -120,6 +121,7 @@
 	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_img_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Главное меню\line.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Главное меню\substrate_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Загрузка\loading_pic_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\kitchen_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\max_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\min_icon_off_base.png" />

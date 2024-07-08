@@ -38,6 +38,17 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private string _loadingPic;
+        public string LoadingPic
+        {
+            get { return _loadingPic; }
+            set { 
+                _loadingPic = value;
+                OnPropertyChanged(nameof(LoadingPic));
+            }
+        }
+
+
 
         private string _title;
 
@@ -306,6 +317,7 @@ namespace Android_Silver.Entities.Visual
                     {
                         Background = "background_base.png";
                         Loading = "loading_base.jpg";
+                        LoadingPic = "loading_pic_base.png";
                         Substrate = new PicByStates(def: "substrate_base.png", selected: "test.jpg");
                         Title = "title_base.png";
                         #region Кухня, счетчики

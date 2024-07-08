@@ -1,5 +1,6 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.Modes;
+using Android_Silver.Entities.Visual;
 
 using System;
 using System.Globalization;
@@ -27,7 +28,8 @@ namespace Android_Silver.Services
         public int ResieveCounter { get; set; }
 
         public Action<int> SetMode1Action { get; set; }
-    
+
+        private ActivePagesEntities _activePageEntities { get; set; }
 
         public TcpClientService()
         {
@@ -35,6 +37,7 @@ namespace Android_Silver.Services
             _sensorsEntities = DIContainer.Resolve<SensorsEntities>();
             _setPoints = DIContainer.Resolve<SetPoints>();
             _modesEntities = DIContainer.Resolve<ModesEntities>();
+            _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
         }
@@ -45,8 +48,8 @@ namespace Android_Silver.Services
             {
                 IsConnecting = true;
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 200;
-                _ethernetEntities.Client.SendTimeout = 200;
+                _ethernetEntities.Client.ReceiveTimeout = 300;
+                _ethernetEntities.Client.SendTimeout = 300;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
                 if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
                 {
@@ -75,49 +78,49 @@ namespace Android_Silver.Services
 
         StringBuilder sbResult;
 
-     
+
         public void SendRecieveTask(string val)
         {
-           Task.Run(() =>
-            {
-                while (_ethernetEntities.IsConnected)
-                {
-                    string messToClient = val;
-                    if (!String.IsNullOrEmpty(_ethernetEntities.MessageToServer))
-                    {
-                        messToClient = _ethernetEntities.MessageToServer;
-                    }
-                    if (!IsSending)
-                    {
-                        SendCommand(messToClient);
-                        if (sbResult != null && sbResult.Length > 0)
-                        {
-                            List<Response> responseList = new();
-                            if (GetResponseData(sbResult, responseList))
-                            {
-                                foreach (var response in responseList)
-                                {
-                                    GetValueByTag(response);
-                                }
-                                if (String.Compare(messToClient, _ethernetEntities.MessageToServer, true) == 0)
-                                    _ethernetEntities.MessageToServer = String.Empty;
-                            }
-                            else
-                            {
-                                _ethernetEntities.SystemMessage = $"Данные не получены";
-                            }
-                        }
-                    }
-                    else
-                    {
-                        _ethernetEntities.SystemMessage = "Данные уже передаются";
-                    }
-                      // Task.Delay(100);
-                }
-            });
+            Task.Run(() =>
+             {
+                 while (_ethernetEntities.IsConnected)
+                 {
+                     string messToClient = val;
+                     if (!String.IsNullOrEmpty(_ethernetEntities.MessageToServer))
+                     {
+                         messToClient = _ethernetEntities.MessageToServer;
+                     }
+                     if (!IsSending)
+                     {
+                         SendCommand(messToClient);
+                         if (sbResult != null && sbResult.Length > 0)
+                         {
+                             List<Response> responseList = new();
+                             if (GetResponseData(sbResult, responseList))
+                             {
+                                 foreach (var response in responseList)
+                                 {
+                                     GetValueByTag(response);
+                                 }
+                                 if (String.Compare(messToClient, _ethernetEntities.MessageToServer, true) == 0)
+                                     _ethernetEntities.MessageToServer = String.Empty;
+                             }
+                             else
+                             {
+                                 _ethernetEntities.SystemMessage = $"Данные не получены";
+                             }
+                         }
+                     }
+                     else
+                     {
+                         _ethernetEntities.SystemMessage = "Данные уже передаются";
+                     }
+                     // Task.Delay(100);
+                 }
+             });
         }
 
-      
+
 
         private int _trySendcounter = 0;
         private StringBuilder SendCommand(string command)
@@ -147,8 +150,8 @@ namespace Android_Silver.Services
                 catch (Exception ex)
                 {
                     _trySendcounter += 1;
-                    
-                  //  Task.Delay(50);
+
+                    //  Task.Delay(50);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
@@ -520,7 +523,8 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            //      _modesEntities.SetMode1ValuesByIndex(Val);
+                            _modesEntities.SetMode1ValuesByIndex(Val);
+                            _activePageEntities.SetActivePageState(ActivePageState.MainPage);
                         }
                     }
                     break;
@@ -528,7 +532,8 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            //      _modesEntities.SetMode2ValuesByIndex(Val);
+                            _modesEntities.SetMode2ValuesByIndex(Val);
+                            _activePageEntities.SetActivePageState(ActivePageState.MainPage);
                         }
                     }
                     break;
@@ -741,25 +746,8 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
-                            _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
-                        }
-                    }
-                    break;
-                case 335:
-                    {
-                        if (int.TryParse(resp.ValueString, out int Val))
-                        {
-                            _modesEntities.SetMode1ValuesByIndex(Val);
-
-                        }
-                    }
-                    break;
-                case 336:
-                    {
-                        if (int.TryParse(resp.ValueString, out int Val))
-                        {
-                            _modesEntities.SetMode2ValuesByIndex(Val);
-
+           //                 _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
+           //                 _activePageEntities.SetActivePageState(ActivePageState.MainPage);
                         }
                     }
                     break;

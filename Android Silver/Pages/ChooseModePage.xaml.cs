@@ -110,7 +110,5 @@ public partial class ChooseModePage : ContentPage
     {
         base.OnDisappearing();
         chModeGrid.Resources.Clear();
-
-
     }
 }

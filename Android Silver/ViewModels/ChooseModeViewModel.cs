@@ -23,11 +23,9 @@ namespace Android_Silver.ViewModels
         public ICommand VacationModeCommand { get; private set; }
         public ICommand TurnOffModeCommand { get; private set; }
         public ICommand HomeCommand { get; private set; }
-
         public ModesEntities CModesEntities { get; set; }
 
         private TcpClientService _tcpClientService;
-
         public PicturesSet CPictureSet { get; set; }
 
         private IEthernetEntities _ethernetEntities;
@@ -45,7 +43,6 @@ namespace Android_Silver.ViewModels
             _tcpClientService = DIContainer.Resolve<TcpClientService>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             _ethernetEntities=DIContainer.Resolve<IEthernetEntities>();
-
         }
 
         async void ExecuteHomeCommand(object obj)
@@ -60,7 +57,7 @@ namespace Android_Silver.ViewModels
             int[] index = { 0 };
             _tcpClientService.SetCommandToServer(308, index);
 
-            await Shell.Current.GoToAsync("mainPage", false);
+            await Shell.Current.GoToAsync("//mainPage", false);
             await Shell.Current.Navigation.PopToRootAsync(false);
 
         }

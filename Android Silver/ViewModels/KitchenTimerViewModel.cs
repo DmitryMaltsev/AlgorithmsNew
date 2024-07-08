@@ -17,6 +17,8 @@ namespace Android_Silver.ViewModels
     {
         public PicturesSet CPictureSet { get; set; }
 
+
+
         private int _minutes;
         public int Minutes
         {
@@ -42,6 +44,7 @@ namespace Android_Silver.ViewModels
         public KitchenTimerViewModel()
         {
             CPictureSet = DIContainer.Resolve<PicturesSet>();
+
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
             HomeCommand = new Command(ExecuteHomeCommand);

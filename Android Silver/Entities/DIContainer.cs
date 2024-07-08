@@ -20,7 +20,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<SetPoints>();
             _container.RegisterSingleton<ModesEntities>();
             _container.RegisterSingleton<PicturesSet>();
-
+            _container.RegisterSingleton<ActivePagesEntities>();
         }
 
         public static T Resolve<T>()
