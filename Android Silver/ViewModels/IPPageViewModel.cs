@@ -12,13 +12,13 @@ namespace Android_Silver.Pages
     public class IPPageViewModel
         : INotifyPropertyChanged
     {
-        public IEthernetEntities EthernetEntities { get; set; }
+        public EthernetEntities EthernetEntities { get; set; }
 
 
 
         public IPPageViewModel()
         {
-            EthernetEntities = DIContainer.Resolve<IEthernetEntities>();
+            EthernetEntities = DIContainer.Resolve<EthernetEntities>();
         }
 
 

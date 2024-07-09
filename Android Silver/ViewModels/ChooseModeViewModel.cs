@@ -28,7 +28,7 @@ namespace Android_Silver.ViewModels
         private TcpClientService _tcpClientService;
         public PicturesSet CPictureSet { get; set; }
 
-        private IEthernetEntities _ethernetEntities;
+        private EthernetEntities _ethernetEntities;
         public ChooseModeViewModel()
         {
             MinModeCommand = new Command(ExecuteMinMode);
@@ -42,7 +42,7 @@ namespace Android_Silver.ViewModels
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             _tcpClientService = DIContainer.Resolve<TcpClientService>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
-            _ethernetEntities=DIContainer.Resolve<IEthernetEntities>();
+            _ethernetEntities=DIContainer.Resolve<EthernetEntities>();
         }
 
         async void ExecuteHomeCommand(object obj)
@@ -59,7 +59,6 @@ namespace Android_Silver.ViewModels
 
             await Shell.Current.GoToAsync("//mainPage", false);
             await Shell.Current.Navigation.PopToRootAsync(false);
-
         }
         async private void ExecuteMinMode(object obj)
         {

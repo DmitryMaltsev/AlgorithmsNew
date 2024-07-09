@@ -14,7 +14,8 @@ namespace Android_Silver.Entities.Visual
         MainPage,
         ChooseModePage,
         LoadingPage,
-        KithchenTimerPage
+        KithchenTimerPage,
+        SetPointsPage
     }
 
     public class ActivePagesEntities : BindableBase
@@ -60,11 +61,24 @@ namespace Android_Silver.Entities.Visual
         public bool IsKitchenTimerPage
         {
             get { return _isKitchenTimerPage; }
-            set { 
+            set
+            {
                 _isKitchenTimerPage = value;
                 OnPropertyChanged(nameof(IsKitchenTimerPage));
             }
         }
+
+        private bool _isSetPointsPage;
+
+        public bool IsSetPointsPage
+        {
+            get { return _isSetPointsPage; }
+            set { 
+                _isSetPointsPage = value; 
+                OnPropertyChanged(nameof(IsSetPointsPage));
+            }
+        }
+
 
         #endregion
         ModesEntities _modesEntities;
@@ -84,6 +98,7 @@ namespace Android_Silver.Entities.Visual
                         IsChooseModePage = false;
                         IsLoadingPage = false;
                         IsKitchenTimerPage = false;
+                        IsSetPointsPage = false;
                     }
                     break;
                 case ActivePageState.ChooseModePage:
@@ -92,6 +107,7 @@ namespace Android_Silver.Entities.Visual
                         IsMainPage = false;
                         IsLoadingPage = false;
                         IsKitchenTimerPage = false;
+                        IsSetPointsPage = false;
                     }
                     break;
                 case ActivePageState.LoadingPage:
@@ -100,6 +116,7 @@ namespace Android_Silver.Entities.Visual
                         IsChooseModePage = false;
                         IsMainPage = false;
                         IsKitchenTimerPage = false;
+                        IsSetPointsPage = false;
                     }
                     break;
                 case ActivePageState.KithchenTimerPage:
@@ -108,11 +125,22 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
-                        _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute;
+                        IsSetPointsPage = false;
+                        _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour;
+                    }
+                    break;
+                case ActivePageState.SetPointsPage:
+                    {
+                        IsSetPointsPage = true;
+                        IsKitchenTimerPage = false;
+                        IsLoadingPage = false;
+                        IsChooseModePage = false;
+                        IsMainPage = false;
                     }
                     break;
             }
         }
     }
-
 }
+
+

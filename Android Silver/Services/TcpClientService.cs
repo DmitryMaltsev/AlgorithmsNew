@@ -10,10 +10,10 @@ using System.Text;
 
 namespace Android_Silver.Services
 {
-    public class TcpClientService : ITcpClientService
+    public class TcpClientService
     {
         private NetworkStream _stream;
-        private IEthernetEntities _ethernetEntities { get; set; }
+        private EthernetEntities _ethernetEntities { get; set; }
 
         private SetPoints _setPoints { get; set; }
 
@@ -33,7 +33,7 @@ namespace Android_Silver.Services
 
         public TcpClientService()
         {
-            _ethernetEntities = DIContainer.Resolve<IEthernetEntities>();
+            _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
             _sensorsEntities = DIContainer.Resolve<SensorsEntities>();
             _setPoints = DIContainer.Resolve<SetPoints>();
             _modesEntities = DIContainer.Resolve<ModesEntities>();
@@ -115,7 +115,7 @@ namespace Android_Silver.Services
                      {
                          _ethernetEntities.SystemMessage = "Данные уже передаются";
                      }
-                     // Task.Delay(100);
+                     Task.Delay(100);
                  }
              });
         }
@@ -151,7 +151,7 @@ namespace Android_Silver.Services
                 {
                     _trySendcounter += 1;
 
-                    //  Task.Delay(50);
+                      Task.Delay(50);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
@@ -161,6 +161,7 @@ namespace Android_Silver.Services
             if (_trySendcounter == 10)
             {
                 _ethernetEntities.IsConnected = false;
+                _ethernetEntities.SystemMessage = "Превышено максимальное количество попыток - 10";
             }
             return sbResult;
         }
@@ -494,7 +495,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
-                            _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
+                            _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour = val;
                         }
                     }
                     break;
@@ -533,7 +534,7 @@ namespace Android_Silver.Services
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
                             _modesEntities.SetMode2ValuesByIndex(Val);
-                            _activePageEntities.SetActivePageState(ActivePageState.MainPage);
+                            // _activePageEntities.SetActivePageState(ActivePageState.MainPage);
                         }
                     }
                     break;
@@ -746,8 +747,8 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
-           //                 _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
-           //                 _activePageEntities.SetActivePageState(ActivePageState.MainPage);
+                            //                 _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
+                            //                 _activePageEntities.SetActivePageState(ActivePageState.MainPage);
                         }
                     }
                     break;

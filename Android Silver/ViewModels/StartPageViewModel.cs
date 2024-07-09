@@ -11,8 +11,8 @@ namespace Android_Silver.Pages;
 
 public class StartPageViewModel : BindableBase
 {
-    public IEthernetEntities EthernetEntities { get; set; }
-    public ITcpClientService TcpClientService { get; set; }
+    public EthernetEntities EthernetEntities { get; set; }
+    public TcpClientService TcpClientService { get; set; }
 
     private string _systemMessage;
 
@@ -29,8 +29,8 @@ public class StartPageViewModel : BindableBase
     public ICommand ConnectCommand { get; private set; }
     public StartPageViewModel()
     {
-        EthernetEntities = DIContainer.Resolve<IEthernetEntities>();
-        TcpClientService = DIContainer.Resolve<ITcpClientService>();
+        EthernetEntities = DIContainer.Resolve<EthernetEntities>();
+        TcpClientService = DIContainer.Resolve<TcpClientService>();
         ConnectCommand = new Command(ExecuteConnect);
 
     }

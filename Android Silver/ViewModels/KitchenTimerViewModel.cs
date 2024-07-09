@@ -38,7 +38,7 @@ namespace Android_Silver.ViewModels
         public ICommand HomeCommand { get; private set; }
         #endregion
 
-        ITcpClientService _tcpClientService;
+        TcpClientService _tcpClientService;
         ModesEntities _modesEntities;
 
         public KitchenTimerViewModel()
@@ -50,7 +50,7 @@ namespace Android_Silver.ViewModels
             HomeCommand = new Command(ExecuteHomeCommand);
             OkCommand = new Command(ExecuteOk);
             CancelCommand = new Command(ExecuteCancel);
-            _tcpClientService = DIContainer.Resolve<ITcpClientService>();
+            _tcpClientService = DIContainer.Resolve<TcpClientService>();
             _modesEntities=DIContainer.Resolve<ModesEntities>();
             Minutes = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute;
         }

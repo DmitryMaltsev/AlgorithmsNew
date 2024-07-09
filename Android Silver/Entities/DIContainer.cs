@@ -14,9 +14,9 @@ namespace Android_Silver.Entities
         public static void RegisterDependencies()
         {
             _container = new UnityContainer();
-            _container.RegisterSingleton<IEthernetEntities, EthernetEntities>();
+            _container.RegisterSingleton<EthernetEntities>();
             _container.RegisterSingleton<SensorsEntities>();
-            _container.RegisterSingleton<ITcpClientService,TcpClientService>();
+            _container.RegisterSingleton<TcpClientService>();
             _container.RegisterSingleton<SetPoints>();
             _container.RegisterSingleton<ModesEntities>();
             _container.RegisterSingleton<PicturesSet>();

@@ -66,6 +66,7 @@ namespace Android_Silver.Pages
                 _viewModel.CModesEntities.CMode1.ActiveModePics.Default;
         }
 
+        #region Choose modes callbacks
         private void Home_Pressed(object sender, EventArgs e)
         {
             _viewModel.CPictureSet.HomeButton.Current = _viewModel.CPictureSet.HomeButton.Selected;
@@ -136,7 +137,8 @@ namespace Android_Silver.Pages
         private void TurnOff_Released(object sender, EventArgs e)
         {
             _viewModel.CPictureSet.SelectModesPicks[0].Current = _viewModel.CPictureSet.SelectModesPicks[0].Default;
-        }
+        } 
+        #endregion
 
         #region Kitchen callbacks
         private void UpDigit_Pressed(object sender, EventArgs e)
@@ -197,7 +199,129 @@ namespace Android_Silver.Pages
         private void CancelButton_Released(object sender, EventArgs e)
         {
             _viewModel.CPictureSet.CancelButton.Current = _viewModel.CPictureSet.CancelButton.Default;
-        } 
+        }
+        #endregion
+
+
+        #region SetPointsCallbacks
+
+        private void UpDigit_Pressed0(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsUp[0].Current = _viewModel.CPictureSet.DigitalButtonsUp[0].Selected;
+        }
+
+        private void UpDigit_Released0(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsUp[0].Current = _viewModel.CPictureSet.DigitalButtonsUp[0].Default;
+        }
+
+        private void UpDigit_Pressed1(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsUp[1].Current = _viewModel.CPictureSet.DigitalButtonsUp[1].Selected;
+        }
+
+        private void UpDigit_Released1(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsUp[1].Current = _viewModel.CPictureSet.DigitalButtonsUp[1].Default;
+        }
+
+        private void UpDigit_Pressed2(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsUp[2].Current = _viewModel.CPictureSet.DigitalButtonsUp[2].Selected;
+        }
+
+        private void UpDigit_Released2(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsUp[2].Current = _viewModel.CPictureSet.DigitalButtonsUp[2].Default;
+        }
+
+        private void UpDigit_Pressed3(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsUp[3].Current = _viewModel.CPictureSet.DigitalButtonsUp[3].Selected;
+        }
+
+        private void UpDigit_Released3(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsUp[3].Current = _viewModel.CPictureSet.DigitalButtonsUp[3].Default;
+        }
+
+
+
+        private void DnDigit_Pressed0(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsDn[0].Current = _viewModel.CPictureSet.DigitalButtonsDn[0].Selected;
+        }
+
+        private void DnDigit_Released0(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsDn[0].Current = _viewModel.CPictureSet.DigitalButtonsDn[0].Default;
+        }
+
+
+        private void DnDigit_Pressed1(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsDn[1].Current = _viewModel.CPictureSet.DigitalButtonsDn[1].Selected;
+        }
+
+        private void DnDigit_Released1(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsDn[1].Current = _viewModel.CPictureSet.DigitalButtonsDn[1].Default;
+        }
+
+
+        private void DnDigit_Pressed2(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsDn[2].Current = _viewModel.CPictureSet.DigitalButtonsDn[2].Selected;
+        }
+
+        private void DnDigit_Released2(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsDn[2].Current = _viewModel.CPictureSet.DigitalButtonsDn[2].Default;
+        }
+
+
+        private void DnDigit_Pressed3(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsDn[3].Current = _viewModel.CPictureSet.DigitalButtonsDn[3].Selected;
+        }
+
+        private void DnDigit_Released3(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.DigitalButtonsDn[3].Current = _viewModel.CPictureSet.DigitalButtonsDn[3].Default;
+        }
+
+
+        private void Next_SPPressed(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.NextButton.Current = _viewModel.CPictureSet.NextButton.Selected;
+        }
+
+        private void Next_SPReleased(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.NextButton.Current = _viewModel.CPictureSet.NextButton.Default;
+        }
+
+        private void HomeButton_SPPressed(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.HomeButton.Current = _viewModel.CPictureSet.HomeButton.Selected;
+        }
+
+        private void HomeButton_SPReleased(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.HomeButton.Current = _viewModel.CPictureSet.HomeButton.Default;
+        }
+
+        private void OK_SPPressed(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.OkButton.Current = _viewModel.CPictureSet.OkButton.Selected;
+        }
+
+        private void Ok_SPReleased(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.OkButton.Current = _viewModel.CPictureSet.OkButton.Default;
+        }
+
+
         #endregion
 
         protected override void OnAppearing()

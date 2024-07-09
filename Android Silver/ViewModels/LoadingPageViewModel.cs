@@ -12,12 +12,12 @@ namespace Android_Silver.ViewModels
     public class LoadingPageViewModel : BindableBase
     {
         IDispatcherTimer timer;
-        IEthernetEntities _ethernetEntities;
+        EthernetEntities _ethernetEntities;
         ICommand pageCommand;
         private int _counter;
         public LoadingPageViewModel()
         {
-            _ethernetEntities=DIContainer.Resolve<IEthernetEntities>();
+            _ethernetEntities=DIContainer.Resolve<EthernetEntities>();
             _counter = 0;
             timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromMilliseconds(100);

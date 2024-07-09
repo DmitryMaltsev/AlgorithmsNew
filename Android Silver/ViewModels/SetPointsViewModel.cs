@@ -13,9 +13,9 @@ namespace Android_Silver.ViewModels
         public ModesEntities CModesEntities { get; set; }
         public PicturesSet CPictureSet { get; set; }
 
-        private IEthernetEntities _ethernetEntities;
+        private EthernetEntities _ethernetEntities;
 
-        private ITcpClientService _tcpClientService;
+        private TcpClientService _tcpClientService;
 
         #region Commands
         public ICommand NextSetPointsCommand { get; private set; }
@@ -49,8 +49,8 @@ namespace Android_Silver.ViewModels
         {
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
-            _ethernetEntities = DIContainer.Resolve<IEthernetEntities>();
-            _tcpClientService = DIContainer.Resolve<ITcpClientService>();
+            _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
+            _tcpClientService = DIContainer.Resolve<TcpClientService>();
             NextSetPointsCommand = new Command(ExecuteNextSetPoints);
             HomeCommand = new Command(ExecuteHome);
             OkCommand = new Command(ExecuteOk);
@@ -67,10 +67,6 @@ namespace Android_Silver.ViewModels
             BtnUpCommand3 = new Command(ExecuteBtnUP3);
             BtnDnCommand3 = new Command(ExecuteBtnDn3);
         }
-
-
-
-
 
         private void SetM1ValuesByIndex(int index)
         {

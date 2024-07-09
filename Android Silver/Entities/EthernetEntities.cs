@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 
 namespace Android_Silver.Entities
 {
-    public class EthernetEntities : INotifyPropertyChanged, IEthernetEntities
+    public class EthernetEntities : INotifyPropertyChanged
     {
 
         public TcpClient Client { get; set; }
 
-        private string _connectIP = "192.168.0.101";
+        private string _connectIP = "192.168.0.11";
         public string ConnectIP
         {
             get { return _connectIP; }
@@ -41,7 +41,7 @@ namespace Android_Silver.Entities
                 OnPropertyChanged(nameof(IP));
             }
         }
-
+ 
         private string _subnet = String.Empty;
         public string Subnet
         {
@@ -88,14 +88,14 @@ namespace Android_Silver.Entities
             }
         }
 
-        private string _messageToSend;
+        private string _messageToServer=String.Empty;
         public string MessageToServer
         {
-            get { return _messageToSend; }
+            get { return _messageToServer; }
             set
             {
-                _messageToSend = value;
-                OnPropertyChanged(nameof(SystemMessage));
+                _messageToServer = value;
+                OnPropertyChanged(nameof(MessageToServer));
             }
         }
 
