@@ -235,6 +235,9 @@ namespace Android_Silver.Pages
             BtnUpCommand3 = new Command(ExecuteBtnUP3);
             BtnDnCommand3 = new Command(ExecuteBtnDn3);
             #endregion
+
+
+            var res=CAlarms.GetAlarmsByBits(30);
         }
 
         private void ExecuteResetJournal(object obj)

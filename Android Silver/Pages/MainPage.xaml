@@ -315,11 +315,9 @@
         <ImageButton Source="{Binding  CPictureSet.ShedSetBut.Current}"    Grid.Row="5"  Grid.RowSpan="3" Grid.Column="5" Grid.ColumnSpan="4" 
          Pressed="ShedSettings_Pressed" Released="ShedSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
         <!--#endregion-->
-        
         <!--#endregion-->
 
         <!--#region JOURNAL PAGE -->
-       
         <ImageButton  Source="{Binding  CPictureSet.BackButton.Current}" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0"  Grid.RowSpan="1"
              HeightRequest="30"  WidthRequest="30"    IsVisible="{Binding CActivePagesEntities.IsJournalPage}"/>
         <ImageButton Source="{Binding  CPictureSet.HomeButton.Current}" Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="9" HeightRequest="50"  

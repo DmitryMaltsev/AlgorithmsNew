@@ -1,7 +1,7 @@
 ﻿using Android_Silver.Entities.Visual;
 using Android_Silver.ViewModels;
-
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -34,19 +34,31 @@ namespace Android_Silver.Entities.FBEntities
             }
         }
 
-        public Alarm(string name, string imageName)
+        public int Index { get;private set; }
+
+        public Alarm(string name, string imageName, int index)
         {
-                Name = name;    
+            Name = name;    
             ImageName = imageName;
+            Index = index;
+
         }
-
-
     }
 
 
     public class Alarms:BindableBase
     {
 		private ObservableCollection<Alarm> _alarmsCollection;
+
+        private List<Alarm> _alarmsList;
+
+
+        public ushort Alarms1;
+        public ushort Alarms2;
+
+
+ 
+                   
 
 		public ObservableCollection<Alarm> AlarmsCollection
         {
@@ -57,28 +69,32 @@ namespace Android_Silver.Entities.FBEntities
 			}
 		}
         private PicturesSet _pictureSet;
+
         public Alarms()
         {
             _pictureSet=DIContainer.Resolve<PicturesSet>();
             AlarmsCollection = new ObservableCollection<Alarm>();
-            AlarmsCollection.Add(new Alarm("1. Пожар",_pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("2. Авария 1", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("3. Авария 2", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("4. Авария 3", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("5. Авария 4", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("6. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("7. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("8. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("9. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("10. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("11. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("7. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("8. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("9. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("10. Авария 5", _pictureSet.JournalStroke));
-            AlarmsCollection.Add(new Alarm("11. Авария 5", _pictureSet.JournalStroke));
+            _alarmsList=new List<Alarm>();
+
+            _alarmsList.Add(new Alarm("", "", 0));
         }
 
+        public BitArray GetAlarmsByBits(ushort alarm)
+        {
+            BitArray bits = new BitArray(new int[] { alarm });
+            bits = new BitArray(bits.Cast<bool>().ToArray());
+            return bits;
+        }
 
+        private void ConverBoolToAlarms(BitArray bits)
+        {
+            for (int i = 0; i < bits.Count; i++)
+            {
+                foreach (Alarm alarm in _alarmsCollection)
+                {
+
+                }
+            }
+        }
     }
 }
