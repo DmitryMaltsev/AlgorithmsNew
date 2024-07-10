@@ -14,8 +14,6 @@ namespace Android_Silver.Entities.Visual
     public class PicturesSet : BindableBase
     {
 
-     
-
         private string _background = String.Empty;
         public string Background
         {
@@ -123,6 +121,37 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private PicByStates _backButton;
+
+        public PicByStates BackButton
+        {
+            get { return _backButton; }
+            set { 
+                _backButton = value;
+                OnPropertyChanged(nameof(BackButton));
+            }
+        }
+
+        private PicByStates _resetButton;
+
+        public PicByStates ResetButton
+        {
+            get { return _resetButton; }
+            set { 
+                _resetButton = value;
+                OnPropertyChanged(nameof(_resetButton));            
+            }
+        }
+
+        private string _journalStroke;
+        public string JournalStroke
+        {
+            get { return _journalStroke; }
+            set { 
+                _journalStroke = value; 
+                OnPropertyChanged(nameof(JournalStroke));
+            }
+        }
 
 
         #endregion
@@ -222,19 +251,32 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-        private ObservableCollection<PicByStates> _selectModesPicks = new ObservableCollection<PicByStates>();
+        private ObservableCollection<PicByStates> _selectModesPics = new ObservableCollection<PicByStates>();
 
-        public ObservableCollection<PicByStates> SelectModesPicks
+        public ObservableCollection<PicByStates> SelectModesPics
         {
-            get { return _selectModesPicks; }
+            get { return _selectModesPics; }
             set
             {
-                _selectModesPicks = value;
-                OnPropertyChanged(nameof(SelectModesPicks));
+                _selectModesPics = value;
+                OnPropertyChanged(nameof(SelectModesPics));
             }
         }
 
-        //Иконки а календаре, возможно при сменен уставок режима
+        private ObservableCollection<string> _miniIconsPics;
+
+        public ObservableCollection<string> MiniIconsPics
+        {
+            get { return _miniIconsPics; }
+            set { 
+                _miniIconsPics = value;
+                OnPropertyChanged(nameof(MiniIconsPics));
+            }
+        }
+
+
+
+        //Иконки в календаре, возможно при смене уставок режима
         private ObservableCollection<PicByStates> _iconsPics;
 
         public ObservableCollection<PicByStates> IconsPics
@@ -320,6 +362,9 @@ namespace Android_Silver.Entities.Visual
                         LoadingPic = "loading_pic_base.png";
                         Substrate = new PicByStates(def: "substrate_base.png", selected: "test.jpg");
                         Title = "title_base.png";
+                        BackButton = new PicByStates("back_arrow_base.png", "back_arrow_base.png");
+                        ResetButton = new PicByStates("reset_but_base.png", "test.jpg");
+                        JournalStroke = "journal_stroke_base.png";
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
                         CancelButton = new PicByStates("cancel_but_base.png", "test.jpg");
@@ -362,16 +407,16 @@ namespace Android_Silver.Entities.Visual
                         ActiveModesPicks.Add(new PicByStates("spec_but_on_base.png", "test.jpg"));
                         #endregion
                         #region Кнопки выбора режимов
-                        SelectModesPicks = new ObservableCollection<PicByStates>();
-                        SelectModesPicks.Add(new PicByStates("turnoff_but_select_on_base.png", "test.jpg"));
-                        SelectModesPicks.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
-                        SelectModesPicks.Add(new PicByStates("norm_but_select_on_base.png", "test.jpg"));
-                        SelectModesPicks.Add(new PicByStates("max_but_select_on_base.png", "test.jpg"));
-                        SelectModesPicks.Add(new PicByStates("kitchen_but_select_on_base.png", "test.jpg"));
-                        SelectModesPicks.Add(new PicByStates("vac_but_select_on_base.png", "test.jpg"));
-                        SelectModesPicks.Add(new PicByStates("shed_but_select_on_base.png", "test.jpg"));
-                        SelectModesPicks.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
-                        SelectModesPicks.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics = new ObservableCollection<PicByStates>();
+                        SelectModesPics.Add(new PicByStates("turnoff_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics.Add(new PicByStates("norm_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics.Add(new PicByStates("max_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics.Add(new PicByStates("kitchen_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics.Add(new PicByStates("vac_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics.Add(new PicByStates("shed_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
                         #endregion
                         #region Иконки режимов 
                         IconsPics = new ObservableCollection<PicByStates>();
@@ -384,15 +429,27 @@ namespace Android_Silver.Entities.Visual
                         IconsPics.Add(new PicByStates("vac_icon_off_base.png", "vac_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
                         IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
-
+                        #endregion
+                        #region Минииконки режимов
+                        MiniIconsPics = new ObservableCollection<string>();
+                        MiniIconsPics.Add("turnoff_but_on_base.png");
+                        MiniIconsPics.Add("min_but_on_base.png");
+                        MiniIconsPics.Add("norm_but_on_base.png");
+                        MiniIconsPics.Add("max_but_on_base.png");
+                        MiniIconsPics.Add("kitchen_but_on_base.png");
+                        MiniIconsPics.Add("shed_but_on_base.png");
+                        MiniIconsPics.Add("");
+                        MiniIconsPics.Add("");
+                        MiniIconsPics.Add("");
                         #endregion
                         #region Кнопки настроек
-                        JournalBut = new PicByStates("journal_but_base.png", "journal_but_base.png");
-                        ModesSetBut = new PicByStates("modes_set_but_base.png", "modes_set_but_base.png");
-                        SettingsOtherBut = new PicByStates("settings_other_but_base.png", "settings_other_but_base.png");
-                        ShedSetBut = new PicByStates("shed_set_but_base.png", "shed_set_but_base.png");
-                        VacSetBut = new PicByStates("vac_set_but_base.png", "vac_set_but_base.png");
+                        JournalBut = new PicByStates("journal_but_base.jpg", "test.jpg");
+                        ModesSetBut = new PicByStates("modes_set_but_base.jpg", "test.jpg");
+                        SettingsOtherBut = new PicByStates("settings_other_but_base.jpg", "test.jpg");
+                        ShedSetBut = new PicByStates("shed_set_but_base.jpg", "test.jpg");
+                        VacSetBut = new PicByStates("vac_set_but_base.jpg", "test.jpg");
                         #endregion
+
                     }
                     break;
                 default:

@@ -50,6 +50,12 @@
             <Setter Property="FontSize" Value="19"/>
             <Setter Property="Margin" Value="0,0,0,0"/>
         </Style>
+        <Style TargetType="Label" x:Key="Journal">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="Margin" Value="10,0,-10,0"/>
+        </Style>
         <Style TargetType="ImageButton" x:Key="Updigit">
             <Setter Property="Margin" Value="0,10,0,-10"/>
             <Setter Property="Grid.Row" Value="6" />
@@ -81,7 +87,6 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
         </Style>
-
         <!--#endregion-->
     </ContentPage.Resources>
     <Grid x:Name="mainPageGrid">
@@ -95,8 +100,7 @@
             <RowDefinition Height="0.3*"/>
             <RowDefinition Height="0.3*"/>
             <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="0.3*"/>
+  
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -125,7 +129,7 @@
                            Grid.Row="4"  Grid.RowSpan="1" Grid.Column="1"    Grid.ColumnSpan="1" Scale="0.7" HorizontalOptions="End" VerticalOptions="End" 
                  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
         <!--Кнопка перехода в настройки текущего режима-->
-        <ImageButton x:Name="im3But" Command="{Binding SetSettingsCommand}" Pressed="Substrate_Pressed" Released="Substrate_Released"
+        <ImageButton x:Name="im3But" Command="{Binding SPCommand}" Pressed="Substrate_Pressed" Released="Substrate_Released"
                Source="{Binding  CPictureSet.Substrate.Current}"  BorderWidth="0" Grid.Column="0" Grid.ColumnSpan="9"  Grid.Row="5"  Grid.RowSpan="3" 
                Aspect="Fill" Margin="5"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
         <!--Приточный воздух-->
@@ -153,19 +157,19 @@
         <!--#region CHOOSE MODE PAGE -->
         <ImageButton x:Name="ImBut1" Source="{Binding  CPictureSet.HomeButton.Current}" Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="9" 
                Command="{Binding HomeCommand}" Pressed="Home_Pressed" Released="Home_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
-        <ImageButton x:Name="ImBut2" Source="{Binding  CPictureSet.SelectModesPicks[1].Current}"    Grid.Row="2"  Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" 
+        <ImageButton x:Name="ImBut2" Source="{Binding  CPictureSet.SelectModesPics[1].Current}"    Grid.Row="2"  Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" 
                Command="{Binding MinModeCommand}"  Pressed="Min_Pressed" Released="Min_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
-        <ImageButton x:Name="ImBut3" Source="{Binding  CPictureSet.SelectModesPicks[2].Current}"    Grid.Row="2"  Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="3" 
+        <ImageButton x:Name="ImBut3" Source="{Binding  CPictureSet.SelectModesPics[2].Current}"    Grid.Row="2"  Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="3" 
                Command="{Binding NormalModeCommand}"  Pressed="Norm_Pressed" Released="Norm_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
-        <ImageButton x:Name="ImBut4" Source="{Binding  CPictureSet.SelectModesPicks[3].Current}"    Grid.Row="2"  Grid.RowSpan="3" Grid.Column="6" Grid.ColumnSpan="3" 
+        <ImageButton x:Name="ImBut4" Source="{Binding  CPictureSet.SelectModesPics[3].Current}"    Grid.Row="2"  Grid.RowSpan="3" Grid.Column="6" Grid.ColumnSpan="3" 
                Command="{Binding MaxModeCommand}"  Pressed="Max_Pressed" Released="Max_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
-        <ImageButton x:Name="ImBut5" Source="{Binding  CPictureSet.SelectModesPicks[4].Current}"    Grid.Row="5"  Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" 
+        <ImageButton x:Name="ImBut5" Source="{Binding  CPictureSet.SelectModesPics[4].Current}"    Grid.Row="5"  Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" 
                Command="{Binding KitchenModeCommand}"  Pressed="Kitchen_Pressed" Released="Kitchen_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
-        <ImageButton x:Name="ImBut6" Source="{Binding  CPictureSet.SelectModesPicks[5].Current}"    Grid.Row="5"  Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="3" 
+        <ImageButton x:Name="ImBut6" Source="{Binding  CPictureSet.SelectModesPics[5].Current}"    Grid.Row="5"  Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="3" 
                Command="{Binding VacationModeCommand}"  Pressed="Vac_Pressed" Released="Vac_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
-        <ImageButton x:Name="ImBut7" Source="{Binding  CPictureSet.SelectModesPicks[6].Current}"    Grid.Row="5"  Grid.RowSpan="3" Grid.Column="6" Grid.ColumnSpan="3" 
+        <ImageButton x:Name="ImBut7" Source="{Binding  CPictureSet.SelectModesPics[6].Current}"    Grid.Row="5"  Grid.RowSpan="3" Grid.Column="6" Grid.ColumnSpan="3" 
                Command="{Binding ShedulerModeCommand}"  Pressed="Shed_Pressed" Released="Shed_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
-        <ImageButton x:Name="ImBut8"  Source="{Binding CPictureSet.SelectModesPicks[0].Current}" Grid.Row="8"  Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="9"  
+        <ImageButton x:Name="ImBut8"  Source="{Binding CPictureSet.SelectModesPics[0].Current}" Grid.Row="8"  Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="9"  
                Command="{Binding TurnOffModeCommand}"  Pressed="TurnOff_Pressed" Released="TurnOff_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
         <!--#endregion-->
 
@@ -200,14 +204,20 @@
         <!--#region SETPOINTS PAGE -->
         <ImageButton  Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0"   Grid.ColumnSpan="9" Source="{Binding CPictureSet.HomeButton.Current}" 
                       Command="{Binding HomeCommand}" Pressed="HomeButton_SPPressed" Released="HomeButton_SPReleased"  
-                      IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Image Source="{Binding CPictureSet.Title}"  Grid.Row="1"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="7"    
+                      IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
+        <!--#region Заголовок -->
+        <Image Source="{Binding M1Values.MiniIcon}"  Grid.Row="2"  Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1"
+                                                       IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+
+        <Image Source="{Binding CPictureSet.Title}"  Grid.Row="2"  Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="4"    
                                                             IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Text="{Binding  M1Values.Title}"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Style="{StaticResource Title}"
+        <Label Text="{Binding  M1Values.Title}"  Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Style="{StaticResource Title}"
                                                                      IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton  Grid.Row="0" Grid.RowSpan="3"  Grid.Column="7" Grid.ColumnSpan="2"  Source="{Binding CPictureSet.NextButton.Current}" 
+        <ImageButton  Grid.Row="2" Grid.RowSpan="1"  Grid.Column="7" Grid.ColumnSpan="1" Margin="0,0,0,0"  
+                      Source="{Binding CPictureSet.NextButton.Current}" 
                       Command="{Binding NextSetPointsCommand}" Pressed="Next_Pressed" Released="Next_Released"
                       IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <!--#endregion-->
         <!--#region 1 колонка Binding  M1Values.SypplySP-->
         <Label Text="Приток"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  Style="{StaticResource SPsTextL}" 
                                                                             IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
@@ -265,23 +275,73 @@
         <!--#region 4 колонка -->
         <Label Text="Нагрев-ль"  Grid.Row="3" Grid.Column="7" Grid.ColumnSpan="2" Style="{StaticResource SPsTextR}"
                                                                       IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Image Source="{Binding CPictureSet.DigitalImage}" Grid.Row="4" Grid.RowSpan="4" Grid.Column="7" Grid.ColumnSpan="2" Margin="-10,0,10,0"
-                                                                      IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <Image Grid.Row="4" Grid.RowSpan="4" Grid.Column="7" Grid.ColumnSpan="2" Source="{Binding CPictureSet.DigitalImage}"  Margin="-10,0,10,0"
+                                                                                   IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
         <ImageButton Command="{Binding BtnUpCommand3}" Source="{Binding  CPictureSet.DigitalButtonsUp[3].Current}"
-                        Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Margin="-10,0,10,0"
-                     Pressed="UpDigit_Pressed3" Released="UpDigit_Released3"
-                     IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Text="{Binding M1Values.PowerLimitSP}" Grid.Row="5"  Grid.Column="7" Grid.ColumnSpan="2" Style="{StaticResource SPsTextR}"
+                                                     Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Margin="-10,0,10,0"
+                                                                                   Pressed="UpDigit_Pressed3" Released="UpDigit_Released3"
+                                                                          IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <Label Grid.Row="5"  Grid.Column="7" Grid.ColumnSpan="2" Text="{Binding M1Values.PowerLimitSP}"  Style="{StaticResource SPsTextR}"
                                                                          IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
         <Label Text="%"  Grid.Row="6"  Grid.Column="7" Grid.ColumnSpan="2" Style="{StaticResource SPsTextR}" 
                                                                          IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton Command="{Binding BtnDnCommand3}" Source="{Binding  CPictureSet.DigitalButtonsDn[3].Current}" 
-                        Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="1" Margin="-10,0,10,0"
+        <ImageButton  Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="1" Margin="-10,0,10,0"
+                                             Command="{Binding BtnDnCommand3}" Source="{Binding  CPictureSet.DigitalButtonsDn[3].Current}" 
                                                                               Pressed="DnDigit_Pressed3" Released="DnDigit_Released3"
                                                                          IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
         <!--#endregion-->
         <ImageButton Source="{Binding CPictureSet.OkButton.Current}" Command="{Binding SPOkCommand}" Grid.Row="9" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="3"
                        Pressed="OK_SPPressed" Released="Ok_SPReleased" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <!--#endregion-->
+
+        <!--#region SETTINGS PAGE -->
+        <ImageButton  Source="{Binding  CPictureSet.HomeButton.Current}" Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="9" 
+          Command="{Binding HomeCommand}" Pressed="Home_Pressed" Released="Home_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
+        <!--#region Верхний уровень -->
+
+        <ImageButton  Source="{Binding  CPictureSet.JournalBut.Current}"    Grid.Row="2"  Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" 
+         Command="{Binding JournalCommand}"  Pressed="Journal_Pressed" Released="Journal_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
+        <ImageButton  Source="{Binding  CPictureSet.SettingsOtherBut.Current}"    Grid.Row="2"  Grid.RowSpan="3" Grid.Column="5" Grid.ColumnSpan="4" 
+         Command="{Binding MaxModeCommand}"  Pressed="OtherSettings_Pressed" Released="OtherSettings_Released" 
+                                                                                           IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
+        <!--#endregion-->
+        <!--#region Середина -->
+        <ImageButton  Source="{Binding  CPictureSet.ModesSetBut.Current}"    Grid.Row="4"  Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="9" 
+            Command="{Binding SPCommand}"  Pressed="SPSettings_Pressed" Released="SPSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
+        <!--#endregion-->
+        <!--#region Нижний уровень -->
+        <ImageButton  Source="{Binding  CPictureSet.VacSetBut.Current}"    Grid.Row="5"  Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" 
+         Command="{Binding KitchenModeCommand}"  Pressed="VacSettings_Pressed" Released="VacSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
+        <ImageButton Source="{Binding  CPictureSet.ShedSetBut.Current}"    Grid.Row="5"  Grid.RowSpan="3" Grid.Column="5" Grid.ColumnSpan="4" 
+         Pressed="ShedSettings_Pressed" Released="ShedSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
+        <!--#endregion-->
+        
+        <!--#endregion-->
+
+        <!--#region JOURNAL PAGE -->
+       
+        <ImageButton  Source="{Binding  CPictureSet.BackButton.Current}" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0"  Grid.RowSpan="1"
+             HeightRequest="30"  WidthRequest="30"    IsVisible="{Binding CActivePagesEntities.IsJournalPage}"/>
+        <ImageButton Source="{Binding  CPictureSet.HomeButton.Current}" Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="9" HeightRequest="50"  
+         Command="{Binding HomeCommand}" Pressed="Home_Pressed" Released="Home_Released" IsVisible="{Binding CActivePagesEntities.IsJournalPage}"/>
+        <Label  Grid.ColumnSpan="9"  Grid.Row="2" Text="Журнал неисправностей 1 из 1" Style="{StaticResource Title}"  IsVisible="{Binding CActivePagesEntities.IsJournalPage}" />
+        <ListView Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="9" ItemsSource="{Binding CAlarms.AlarmsCollection}" 
+                  SelectionMode="None" SeparatorColor="Transparent" VerticalScrollBarVisibility="Always"  IsVisible="{Binding CActivePagesEntities.IsJournalPage}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Grid Margin="5,5" BackgroundColor="Transparent">
+                                <Image  Source="{Binding ImageName}" Aspect="Fill"/>
+                                <Label  Text="{Binding Name}" TextColor="White" FontSize="19" HorizontalOptions="Start"/>
+                            </Grid>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ImageButton Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="7" VerticalOptions="Fill" Source="{Binding CPictureSet.ResetButton.Current}"
+                     Command="{Binding ResetJournalCommand}"  IsVisible="{Binding CActivePagesEntities.IsJournalPage}"/>
         <!--#endregion-->
     </Grid>
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using Android_Silver.Entities.Modes;
+﻿using Android_Silver.Entities.FBEntities;
+using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Pages;
 using Android_Silver.Services;
@@ -21,6 +22,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<ModesEntities>();
             _container.RegisterSingleton<PicturesSet>();
             _container.RegisterSingleton<ActivePagesEntities>();
+            _container.RegisterSingleton<Alarms>();
         }
 
         public static T Resolve<T>()

@@ -1,4 +1,5 @@
 ﻿using Android_Silver.Entities;
+using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
@@ -111,10 +112,10 @@ namespace Android_Silver.Pages
         public ICommand ConnectCommand { get; private set; }
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
-        public ICommand SettingsCommand { get; private set; }
+        public ICommand SPCommand { get; private set; }
         public ICommand SendSPCommand { get; private set; }
         public ICommand SendFloatCommand { get; private set; }
-        public ICommand SetSettingsCommand { get; private set; }
+        public ICommand SettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
         public ICommand GoToPageCommand { get; private set; }
         #endregion
@@ -152,6 +153,14 @@ namespace Android_Silver.Pages
         public ICommand BtnDnCommand3 { get; private set; }
         #endregion
 
+        #region SettingsCommands
+        public ICommand JournalCommand { get; private set; }
+        #endregion
+
+        #region ResetCommand
+        public ICommand ResetJournalCommand { get; private set; }
+
+        #endregion
         // public ICommand SettingsCommand { get; private set; }
         #endregion
 
@@ -170,13 +179,14 @@ namespace Android_Silver.Pages
 
         public ActivePagesEntities CActivePagesEntities { get; set; }
 
+        public Alarms CAlarms { get; set; }
+
 
         NetworkStream _stream;
         int counter = 0;
         string _cData;
         public MainPageViewModel()
         {
-
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
             TcpClientService = DIContainer.Resolve<TcpClientService>();
@@ -184,18 +194,16 @@ namespace Android_Silver.Pages
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
-           
-           
-            ConnectCommand = new Command(ExecuteConnect);
+            CAlarms=DIContainer.Resolve<Alarms>();
+             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SendSPCommand = new Command(ExecuteSendSP);
             SendFloatCommand = new Command(ExecuteSendFloat);
-            SettingsCommand = new Command(ExecuiteSettings);
+            SPCommand = new Command(ExecuteSetSP);
             ChooseModeCommand = new Command(ExecuteChooseMode);
-            SetSettingsCommand = new Command(ExecuteSetSettings);
+            SettingsCommand = new Command(ExecuiteSettings);
             Value = 15;
-            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
-
+            CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
             MinModeCommand = new Command(ExecuteMinMode);
             NormalModeCommand = new Command(ExecuteNormal);
             MaxModeCommand = new Command(ExecuteMaxMode);
@@ -203,7 +211,9 @@ namespace Android_Silver.Pages
             ShedulerModeCommand = new Command(ExecuteSheduler);
             VacationModeCommand = new Command(ExecuteVacationMode);
             TurnOffModeCommand = new Command(ExecuteTurnOffMode);
+            JournalCommand = new Command(ExecuteJournal);
             HomeCommand = new Command(ExecuteHomeCommand);
+            ResetJournalCommand = new Command(ExecuteResetJournal);// ExecuteResetJournal();
             // StartTimer();
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
@@ -227,8 +237,10 @@ namespace Android_Silver.Pages
             #endregion
         }
 
-
-
+        private void ExecuteResetJournal(object obj)
+        {
+            CAlarms.AlarmsCollection.Clear();
+        }
 
         async private void ExecuteConnect()
         {
@@ -249,7 +261,7 @@ namespace Android_Silver.Pages
         }
 
         #region Main page execute methods
-        void ExecuteSetSettings(object obj)
+        void ExecuteSetSP(object obj)
         {
             SetM1ValuesByIndex(CModesEntities.CMode1.Num);
             CActivePagesEntities.SetActivePageState(ActivePageState.SetPointsPage);
@@ -272,9 +284,9 @@ namespace Android_Silver.Pages
             EthernetEntities.MessageToServer = $"303,01,{(int)(CSetPoints.SetPointF * 10)}";
         }
 
-        async private void ExecuiteSettings(object obj)
+         private void ExecuiteSettings(object obj)
         {
-            await Shell.Current.GoToAsync("settingsPage");
+            CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
         }
 
         private void ExecuteChooseMode(object obj)
@@ -461,13 +473,21 @@ namespace Android_Silver.Pages
                       bufVals.SelectModePics,
                       bufVals.ModeIcons,
                       bufVals.ModeSettingsRoute,
-                      bufVals.StartAddress);
+                      bufVals.StartAddress, bufVals.MiniIcon);
             M1Values.SypplySP = bufVals.SypplySP;
             M1Values.ExhaustSP = bufVals.ExhaustSP;
             M1Values.TempSP = bufVals.TempSP;
             M1Values.PowerLimitSP = bufVals.PowerLimitSP;
         }
         #endregion
+
+        #region Settings execute methods
+        private void ExecuteJournal(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);    
+        }
+        #endregion
+
 
         Timer timer;
         private void StartTimer()

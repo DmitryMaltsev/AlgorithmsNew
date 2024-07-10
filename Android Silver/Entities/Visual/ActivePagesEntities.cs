@@ -15,7 +15,9 @@ namespace Android_Silver.Entities.Visual
         ChooseModePage,
         LoadingPage,
         KithchenTimerPage,
-        SetPointsPage
+        SetPointsPage,
+        SettingsPage,
+        JournalPage
     }
 
     public class ActivePagesEntities : BindableBase
@@ -73,9 +75,33 @@ namespace Android_Silver.Entities.Visual
         public bool IsSetPointsPage
         {
             get { return _isSetPointsPage; }
-            set { 
-                _isSetPointsPage = value; 
+            set
+            {
+                _isSetPointsPage = value;
                 OnPropertyChanged(nameof(IsSetPointsPage));
+            }
+        }
+
+        private bool _isSettingsPage;
+
+        public bool IsSettingsPage
+        {
+            get { return _isSettingsPage; }
+            set
+            {
+                _isSettingsPage = value;
+                OnPropertyChanged(nameof(IsSettingsPage));
+            }
+        }
+
+        private bool _isJournalPage;
+
+        public bool IsJournalPage
+        {
+            get { return _isJournalPage; }
+            set { 
+                _isJournalPage = value;
+                OnPropertyChanged($"{nameof(IsJournalPage)}");
             }
         }
 
@@ -99,6 +125,8 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsKitchenTimerPage = false;
                         IsSetPointsPage = false;
+                        IsSettingsPage = false;
+                        IsJournalPage = false;
                     }
                     break;
                 case ActivePageState.ChooseModePage:
@@ -108,6 +136,8 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsKitchenTimerPage = false;
                         IsSetPointsPage = false;
+                        IsSettingsPage = false;
+                        IsJournalPage = false;
                     }
                     break;
                 case ActivePageState.LoadingPage:
@@ -117,6 +147,8 @@ namespace Android_Silver.Entities.Visual
                         IsMainPage = false;
                         IsKitchenTimerPage = false;
                         IsSetPointsPage = false;
+                        IsSettingsPage = false;
+                        IsJournalPage = false;
                     }
                     break;
                 case ActivePageState.KithchenTimerPage:
@@ -126,12 +158,38 @@ namespace Android_Silver.Entities.Visual
                         IsChooseModePage = false;
                         IsMainPage = false;
                         IsSetPointsPage = false;
+                        IsSettingsPage = false;
+                        IsJournalPage = false;
                         _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour;
                     }
                     break;
                 case ActivePageState.SetPointsPage:
                     {
                         IsSetPointsPage = true;
+                        IsKitchenTimerPage = false;
+                        IsLoadingPage = false;
+                        IsChooseModePage = false;
+                        IsMainPage = false;
+                        IsSettingsPage = false;
+                        IsJournalPage = false;
+                    }
+                    break;
+                case ActivePageState.SettingsPage:
+                    {
+                        IsSettingsPage = true;
+                        IsSetPointsPage = false;
+                        IsKitchenTimerPage = false;
+                        IsLoadingPage = false;
+                        IsChooseModePage = false;
+                        IsMainPage = false;
+                        IsJournalPage = false;
+                    }
+                    break;
+                case ActivePageState.JournalPage:
+                    {
+                        IsJournalPage = true;
+                        IsSettingsPage = false;
+                        IsSetPointsPage = false;
                         IsKitchenTimerPage = false;
                         IsLoadingPage = false;
                         IsChooseModePage = false;

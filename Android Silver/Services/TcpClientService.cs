@@ -151,7 +151,7 @@ namespace Android_Silver.Services
                 {
                     _trySendcounter += 1;
 
-                      Task.Delay(50);
+                    Task.Delay(50);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
@@ -747,8 +747,8 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
-                            //                 _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
-                            //                 _activePageEntities.SetActivePageState(ActivePageState.MainPage);
+                            //_modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = val;
+                            //_activePageEntities.SetActivePageState(ActivePageState.MainPage);
                         }
                     }
                     break;

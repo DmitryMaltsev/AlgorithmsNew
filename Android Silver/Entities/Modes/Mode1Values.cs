@@ -47,6 +47,8 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
+
+
         #region Уставки
         private int _supplySP;
         public int SypplySP
@@ -125,16 +127,49 @@ namespace Android_Silver.Entities.Modes
                 _modeIcons = value;
                 OnPropertyChanged(nameof(ModeIcons));
             }
-        } 
+        }
+
+        private string _modeMiniIcon;
+        public string ModeMiniIcon
+        {
+            get { return _modeMiniIcon; }
+            set {
+                _modeMiniIcon = value;
+                OnPropertyChanged(nameof(ModeMiniIcon));
+            }
+        }
+
+        private string _miniIcon;
+
+        public string MiniIcon
+        {
+            get { return _miniIcon; }
+            set { 
+                _miniIcon = value;
+                OnPropertyChanged(nameof(MiniIcon));    
+            }
+        }
+
+
         #endregion
 
-        public Mode1Values(int num, PicByStates activeModePics, PicByStates selectModePicks, PicByStates modeIcons, string modeSettingsRoute, int startAddress)
+        /// <summary>
+        /// Задаем текущему режиму соответветствующие значения.
+        /// </summary>
+        /// <param name="num"></param>
+        /// <param name="activeModePics"></param>
+        /// <param name="selectModePics"></param>
+        /// <param name="modeIcons"></param>
+        /// <param name="modeSettingsRoute"></param>
+        /// <param name="startAddress"></param>
+        public Mode1Values(int num, PicByStates activeModePics, PicByStates selectModePics, PicByStates modeIcons, string modeSettingsRoute, int startAddress, string miniIcon)
         {
             Num = num;
             ActiveModePics = activeModePics;
-            SelectModePics = selectModePicks;
+            SelectModePics = selectModePics;
             ModeIcons = modeIcons;
             ModeSettingsRoute = modeSettingsRoute;
+            MiniIcon= miniIcon;
             switch (num)
             {
                 case 0:

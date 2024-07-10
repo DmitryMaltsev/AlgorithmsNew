@@ -78,65 +78,65 @@ namespace Android_Silver.Pages
 
         private void Min_Pressed(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[1].Current = _viewModel.CPictureSet.SelectModesPicks[1].Selected;
+            _viewModel.CPictureSet.SelectModesPics[1].Current = _viewModel.CPictureSet.SelectModesPics[1].Selected;
         }
         private void Min_Released(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[1].Current = _viewModel.CPictureSet.SelectModesPicks[1].Default;
+            _viewModel.CPictureSet.SelectModesPics[1].Current = _viewModel.CPictureSet.SelectModesPics[1].Default;
         }
 
         private void Norm_Pressed(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[2].Current = _viewModel.CPictureSet.SelectModesPicks[2].Selected;
+            _viewModel.CPictureSet.SelectModesPics[2].Current = _viewModel.CPictureSet.SelectModesPics[2].Selected;
         }
         private void Norm_Released(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[2].Current = _viewModel.CPictureSet.SelectModesPicks[2].Default;
+            _viewModel.CPictureSet.SelectModesPics[2].Current = _viewModel.CPictureSet.SelectModesPics[2].Default;
         }
 
         private void Max_Pressed(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[3].Current = _viewModel.CPictureSet.SelectModesPicks[3].Selected;
+            _viewModel.CPictureSet.SelectModesPics[3].Current = _viewModel.CPictureSet.SelectModesPics[3].Selected;
         }
         private void Max_Released(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[3].Current = _viewModel.CPictureSet.SelectModesPicks[3].Default;
+            _viewModel.CPictureSet.SelectModesPics[3].Current = _viewModel.CPictureSet.SelectModesPics[3].Default;
         }
 
         private void Kitchen_Pressed(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[4].Current = _viewModel.CPictureSet.SelectModesPicks[4].Selected;
+            _viewModel.CPictureSet.SelectModesPics[4].Current = _viewModel.CPictureSet.SelectModesPics[4].Selected;
         }
         private void Kitchen_Released(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[4].Current = _viewModel.CPictureSet.SelectModesPicks[4].Default;
+            _viewModel.CPictureSet.SelectModesPics[4].Current = _viewModel.CPictureSet.SelectModesPics[4].Default;
         }
 
         private void Vac_Pressed(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[5].Current = _viewModel.CPictureSet.SelectModesPicks[5].Selected;
+            _viewModel.CPictureSet.SelectModesPics[5].Current = _viewModel.CPictureSet.SelectModesPics[5].Selected;
         }
         private void Vac_Released(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[5].Current = _viewModel.CPictureSet.SelectModesPicks[5].Default;
+            _viewModel.CPictureSet.SelectModesPics[5].Current = _viewModel.CPictureSet.SelectModesPics[5].Default;
         }
 
         private void Shed_Pressed(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[6].Current = _viewModel.CPictureSet.SelectModesPicks[6].Selected;
+            _viewModel.CPictureSet.SelectModesPics[6].Current = _viewModel.CPictureSet.SelectModesPics[6].Selected;
         }
         private void Shed_Released(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[6].Current = _viewModel.CPictureSet.SelectModesPicks[6].Default;
+            _viewModel.CPictureSet.SelectModesPics[6].Current = _viewModel.CPictureSet.SelectModesPics[6].Default;
         }
 
         private void TurnOff_Pressed(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[0].Current = _viewModel.CPictureSet.SelectModesPicks[0].Selected;
+            _viewModel.CPictureSet.SelectModesPics[0].Current = _viewModel.CPictureSet.SelectModesPics[0].Selected;
         }
         private void TurnOff_Released(object sender, EventArgs e)
         {
-            _viewModel.CPictureSet.SelectModesPicks[0].Current = _viewModel.CPictureSet.SelectModesPicks[0].Default;
+            _viewModel.CPictureSet.SelectModesPics[0].Current = _viewModel.CPictureSet.SelectModesPics[0].Default;
         } 
         #endregion
 
@@ -324,10 +324,63 @@ namespace Android_Silver.Pages
 
         #endregion
 
+        #region SETTINGS PAGE
+
+        private void Journal_Pressed(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.JournalBut.Current = _viewModel.CPictureSet.JournalBut.Selected;
+        }
+
+        private void Journal_Released(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.JournalBut.Current = _viewModel.CPictureSet.JournalBut.Default;
+        }
+
+        private void OtherSettings_Pressed(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.SettingsOtherBut.Current = _viewModel.CPictureSet.SettingsOtherBut.Selected;
+        }
+
+        private void OtherSettings_Released(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.SettingsOtherBut.Current = _viewModel.CPictureSet.SettingsOtherBut.Default;
+        }
+
+        private void SPSettings_Pressed(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.ModesSetBut.Current = _viewModel.CPictureSet.ModesSetBut.Selected;
+        }
+
+        private void SPSettings_Released(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.ModesSetBut.Current = _viewModel.CPictureSet.ModesSetBut.Default;
+        }
+
+        private void ShedSettings_Pressed(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.ShedSetBut.Current = _viewModel.CPictureSet.ShedSetBut.Selected;
+        }
+
+        private void ShedSettings_Released(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.ShedSetBut.Current = _viewModel.CPictureSet.ShedSetBut.Default;
+        }
+
+        private void VacSettings_Pressed(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.VacSetBut.Current = _viewModel.CPictureSet.VacSetBut.Selected;
+        }
+
+        private void VacSettings_Released(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.VacSetBut.Current = _viewModel.CPictureSet.VacSetBut.Default;
+        }
+        #endregion
+
+  
         protected override void OnAppearing()
         {
             base.OnAppearing();
-          
         }
         protected override void OnDisappearing()
         {

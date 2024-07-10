@@ -77,7 +77,8 @@ namespace Android_Silver.ViewModels
                       bufVals.SelectModePics,
                       bufVals.ModeIcons,
                       bufVals.ModeSettingsRoute,
-                      bufVals.StartAddress);
+                      bufVals.StartAddress,
+                      bufVals.MiniIcon);
             M1Values.SypplySP = bufVals.SypplySP;
             M1Values.ExhaustSP = bufVals.ExhaustSP;
             M1Values.TempSP = bufVals.TempSP;

@@ -50,7 +50,7 @@ namespace Android_Silver.Entities.Modes
             for (int i = 0; i < 9; i++)
             {
                 Mode1ValuesList.Add(new Mode1Values(i, _cPicturesSet.ActiveModesPicks[i],
-            _cPicturesSet.SelectModesPicks[i], _cPicturesSet.IconsPics[i], "settingsPage", 306 + i * 4));
+            _cPicturesSet.SelectModesPics[i], _cPicturesSet.IconsPics[i], "settingsPage", 306 + i * 4, _cPicturesSet.MiniIconsPics[i]));
             }
 
             Mode2ValuesList = new List<Mode2Values>();
