@@ -1,8 +1,10 @@
 ﻿using Android_Silver.Entities;
+using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 
 using System;
+using System.Collections;
 using System.Globalization;
 using System.Net.Sockets;
 using System.Reflection;
@@ -14,21 +16,23 @@ namespace Android_Silver.Services
     {
         private NetworkStream _stream;
         private EthernetEntities _ethernetEntities { get; set; }
-
         private SetPoints _setPoints { get; set; }
-
         private SensorsEntities _sensorsEntities { get; set; }
-
         private ModesEntities _modesEntities { get; set; }
-
+        private Alarms _alarms { get; set; }
         public bool IsConnecting { get; private set; } = false;
         public bool IsSending { get; private set; } = false;
         public bool IsRecieving { get; private set; } = false;
 
+        private string _messageToServer = String.Empty;
+        public string MessageToServer
+        {
+            get { return _messageToServer; }
+            private set
+            { _messageToServer = value; }
+        }
         public int ResieveCounter { get; set; }
-
         public Action<int> SetMode1Action { get; set; }
-
         private ActivePagesEntities _activePageEntities { get; set; }
 
         public TcpClientService()
@@ -38,6 +42,7 @@ namespace Android_Silver.Services
             _setPoints = DIContainer.Resolve<SetPoints>();
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
+            _alarms = DIContainer.Resolve<Alarms>();
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
         }
@@ -78,7 +83,6 @@ namespace Android_Silver.Services
 
         StringBuilder sbResult;
 
-
         public void SendRecieveTask(string val)
         {
             Task.Run(() =>
@@ -86,9 +90,9 @@ namespace Android_Silver.Services
                  while (_ethernetEntities.IsConnected)
                  {
                      string messToClient = val;
-                     if (!String.IsNullOrEmpty(_ethernetEntities.MessageToServer))
+                     if (!String.IsNullOrEmpty(MessageToServer))
                      {
-                         messToClient = _ethernetEntities.MessageToServer;
+                         messToClient = MessageToServer;
                      }
                      if (!IsSending)
                      {
@@ -102,8 +106,8 @@ namespace Android_Silver.Services
                                  {
                                      GetValueByTag(response);
                                  }
-                                 if (String.Compare(messToClient, _ethernetEntities.MessageToServer, true) == 0)
-                                     _ethernetEntities.MessageToServer = String.Empty;
+                                 if (String.Compare(messToClient, MessageToServer, true) == 0)
+                                     MessageToServer = String.Empty;
                              }
                              else
                              {
@@ -115,12 +119,10 @@ namespace Android_Silver.Services
                      {
                          _ethernetEntities.SystemMessage = "Данные уже передаются";
                      }
-                     Task.Delay(100);
+                     Task.Delay(50);
                  }
              });
         }
-
-
 
         private int _trySendcounter = 0;
         private StringBuilder SendCommand(string command)
@@ -156,7 +158,7 @@ namespace Android_Silver.Services
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
             }
-            while (IsSending && _trySendcounter < 10 && _ethernetEntities.MessageToServer == String.Empty);
+            while (IsSending && _trySendcounter < 10 && MessageToServer == String.Empty);
             IsSending = false;
             if (_trySendcounter == 10)
             {
@@ -203,7 +205,7 @@ namespace Android_Silver.Services
             return isRightResponse;
         }
 
-        async void GetValueByTag(Response resp)
+        private void GetValueByTag(Response resp)
         {
             int floatPrec = 1;
             float bufF = 0;
@@ -499,6 +501,32 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                case 135:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (_alarms.Alarms1 != val)
+                            {
+                                _alarms.Alarms1 = val;
+                                BitArray bitArrrayBuf = _alarms.GetAlarmsByBits(_alarms.Alarms1);
+                                _alarms.ConverBitArrayToAlarms(bitArrrayBuf, 0);
+                            }
+                        }
+                    }
+                    break;
+                case 136:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (_alarms.Alarms2 != val)
+                            {
+                                _alarms.Alarms2 = val;
+                                BitArray bitArrrayBuf = _alarms.GetAlarmsByBits(_alarms.Alarms2);
+                                _alarms.ConverBitArrayToAlarms(bitArrrayBuf, 1);
+                            }
+                        }
+                    }
+                    break;
                 //Проверка того, что данные записаны
                 case 300:
                     {
@@ -752,6 +780,14 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                case 337:
+                    {
+                        if (int.TryParse(resp.ValueString, out int val))
+                        {
+
+                        }
+                    }
+                    break;
             }
         }
 
@@ -775,9 +811,9 @@ namespace Android_Silver.Services
             Task.Run(() =>
             {
                 string messToClient = val;
-                if (!String.IsNullOrEmpty(_ethernetEntities.MessageToServer))
+                if (!String.IsNullOrEmpty(MessageToServer))
                 {
-                    messToClient = _ethernetEntities.MessageToServer;
+                    messToClient = MessageToServer;
                 }
                 if (!IsSending)
                 {
@@ -791,8 +827,8 @@ namespace Android_Silver.Services
                             {
                                 GetValueByTag(response);
                             }
-                            if (String.Compare(messToClient, _ethernetEntities.MessageToServer, true) == 0)
-                                _ethernetEntities.MessageToServer = String.Empty;
+                            if (String.Compare(messToClient, MessageToServer, true) == 0)
+                                MessageToServer = String.Empty;
                         }
                         else
                         {
@@ -812,16 +848,16 @@ namespace Android_Silver.Services
         public void SetCommandToServer(int address, int[] values)
         {
             string bufLength = values.Length > 9 ? values.Length.ToString() : "0" + values.Length.ToString();
-            _ethernetEntities.MessageToServer = $"{address},{bufLength},";
+            MessageToServer = $"{address},{bufLength},";
             for (int i = 0; i < values.Length; i++)
             {
-                _ethernetEntities.MessageToServer += values[i];
+                MessageToServer += values[i];
                 if (i < values.Length - 1)
                 {
-                    _ethernetEntities.MessageToServer += ",";
+                    MessageToServer += ",";
                 }
             }
-            _ethernetEntities.MessageToServer += "\r\n";
+            MessageToServer += "\r\n";
         }
 
 

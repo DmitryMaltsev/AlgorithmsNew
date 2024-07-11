@@ -11,7 +11,6 @@ namespace Android_Silver.Pages
         private MainPageViewModel _viewModel;
         public MainPage()
         {
-          
             InitializeComponent();
            /* im1But.Pressed -= Settings_Pressed;
             im1But.Released -= Settings_Released;
@@ -325,7 +324,6 @@ namespace Android_Silver.Pages
         #endregion
 
         #region SETTINGS PAGE
-
         private void Journal_Pressed(object sender, EventArgs e)
         {
             _viewModel.CPictureSet.JournalBut.Current = _viewModel.CPictureSet.JournalBut.Selected;
@@ -376,12 +374,24 @@ namespace Android_Silver.Pages
             _viewModel.CPictureSet.VacSetBut.Current = _viewModel.CPictureSet.VacSetBut.Default;
         }
         #endregion
+      
+        #region  JOURNAL PAGE
+        private void ResetJournal_Pressed(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.ResetButton.Current = _viewModel.CPictureSet.VacSetBut.Selected;
+        }
 
-  
+        private void ResetJournal_Released(object sender, EventArgs e)
+        {
+            _viewModel.CPictureSet.ResetButton.Current = _viewModel.CPictureSet.ResetButton.Default;
+        }
+        #endregion
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
         }
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

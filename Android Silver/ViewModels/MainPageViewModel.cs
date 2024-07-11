@@ -27,15 +27,6 @@ namespace Android_Silver.Pages
 
         private string _messageToServer = "Test";
 
-        public string MessageToServer
-        {
-            get { return _messageToServer; }
-            set
-            {
-                _messageToServer = value;
-                OnPropertyChanged(nameof(MessageToServer));
-            }
-        }
 
         private string _messageToClient;
         public string MessageToClient
@@ -113,8 +104,6 @@ namespace Android_Silver.Pages
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
         public ICommand SPCommand { get; private set; }
-        public ICommand SendSPCommand { get; private set; }
-        public ICommand SendFloatCommand { get; private set; }
         public ICommand SettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
         public ICommand GoToPageCommand { get; private set; }
@@ -194,16 +183,13 @@ namespace Android_Silver.Pages
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
-            CAlarms=DIContainer.Resolve<Alarms>();
-             ConnectCommand = new Command(ExecuteConnect);
+            CAlarms = DIContainer.Resolve<Alarms>();
+
+            ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
-            SendSPCommand = new Command(ExecuteSendSP);
-            SendFloatCommand = new Command(ExecuteSendFloat);
             SPCommand = new Command(ExecuteSetSP);
             ChooseModeCommand = new Command(ExecuteChooseMode);
             SettingsCommand = new Command(ExecuiteSettings);
-            Value = 15;
-            CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
             MinModeCommand = new Command(ExecuteMinMode);
             NormalModeCommand = new Command(ExecuteNormal);
             MaxModeCommand = new Command(ExecuteMaxMode);
@@ -214,14 +200,15 @@ namespace Android_Silver.Pages
             JournalCommand = new Command(ExecuteJournal);
             HomeCommand = new Command(ExecuteHomeCommand);
             ResetJournalCommand = new Command(ExecuteResetJournal);// ExecuteResetJournal();
-            // StartTimer();
+            Value = 15;
+
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
             HomeCommand = new Command(ExecuteHomeCommand);
             KitchenOkCommand = new Command(ExecuteKitchenOk);
             KitchenCancelCommand = new Command(ExecuteKitchenCancel);
-            StartTimer();
+
             #endregion
             #region Set ponts commands
             NextSetPointsCommand = new Command(ExecuteNextSetPoints);
@@ -235,15 +222,12 @@ namespace Android_Silver.Pages
             BtnUpCommand3 = new Command(ExecuteBtnUP3);
             BtnDnCommand3 = new Command(ExecuteBtnDn3);
             #endregion
-
-
-            var res=CAlarms.GetAlarmsByBits(30);
+            //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.SetPointsPage);
+            StartTimer();
         }
 
-        private void ExecuteResetJournal(object obj)
-        {
-            CAlarms.AlarmsCollection.Clear();
-        }
+
 
         async private void ExecuteConnect()
         {
@@ -254,7 +238,8 @@ namespace Android_Silver.Pages
                 if (EthernetEntities.IsConnected)
                 {
                     //TcpClientService.SendRecieveTask("100,08");
-                    TcpClientService.SendRecieveTask("108,27");
+                    //TcpClientService.SendRecieveTask("108,02");
+                    TcpClientService.SendRecieveTask("108,29");
                 }
             }
             else
@@ -268,7 +253,7 @@ namespace Android_Silver.Pages
         {
             SetM1ValuesByIndex(CModesEntities.CMode1.Num);
             CActivePagesEntities.SetActivePageState(ActivePageState.SetPointsPage);
-            
+
         }
 
         private void ExecuteDisconnect()
@@ -277,17 +262,8 @@ namespace Android_Silver.Pages
         }
         private Task sendBufTask;
 
-        private void ExecuteSendSP(object obj)
-        {
-            EthernetEntities.MessageToServer = $"300,01,{(int)(CSetPoints.SetPoint1 * 10)}";
-        }
 
-        private void ExecuteSendFloat(object obj)
-        {
-            EthernetEntities.MessageToServer = $"303,01,{(int)(CSetPoints.SetPointF * 10)}";
-        }
-
-         private void ExecuiteSettings(object obj)
+        private void ExecuiteSettings(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
         }
@@ -303,7 +279,12 @@ namespace Android_Silver.Pages
              await Task.Delay(1);
              await Shell.Current.Navigation.PopToRootAsync(false);
              await Task.Delay(1);*/
-            CActivePagesEntities.SetActivePageState(ActivePageState.ChooseModePage);
+            if (CModesEntities.CMode1.Num == 7)
+            {
+                CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
+            }
+            else
+                CActivePagesEntities.SetActivePageState(ActivePageState.ChooseModePage);
             //  await Shell.Current.GoToAsync("chooseModePage", false);
         }
         #endregion
@@ -410,40 +391,50 @@ namespace Android_Silver.Pages
 
         private void ExecuteBtnUP0(object obj)
         {
-
-            M1Values.SypplySP = M1Values.SypplySP + 5 < 100 ? M1Values.SypplySP + 5 : 100;
+            if (M1Values != null)
+                M1Values.SypplySP = M1Values.SypplySP + 5 < 100 ? M1Values.SypplySP + 5 : 100;
         }
         private void ExecuteBtnDn0(object obj)
         {
-            M1Values.SypplySP = M1Values.SypplySP - 5 > 0 ? M1Values.SypplySP - 5 : 0;
+            if (M1Values != null)
+                M1Values.SypplySP = M1Values.SypplySP - 5 > 0 ? M1Values.SypplySP - 5 : 0;
         }
 
         private void ExecuteBtnUP1(object obj)
         {
-            M1Values.ExhaustSP = M1Values.ExhaustSP + 5 < 100 ? M1Values.ExhaustSP + 5 : 100;
+            if (M1Values != null)
+                M1Values.ExhaustSP = M1Values.ExhaustSP + 5 < 100 ? M1Values.ExhaustSP + 5 : 100;
         }
         private void ExecuteBtnDn1(object obj)
         {
-            M1Values.ExhaustSP = M1Values.ExhaustSP - 5 > 0 ? M1Values.ExhaustSP - 5 : 0;
+            if (M1Values != null)
+                M1Values.ExhaustSP = M1Values.ExhaustSP - 5 > 0 ? M1Values.ExhaustSP - 5 : 0;
         }
 
         private void ExecuteBtnUP2(object obj)
         {
-            M1Values.TempSP = M1Values.TempSP + 1 < 35 ? M1Values.TempSP + 1 : 35;
-            if (M1Values.TempSP < 16) M1Values.TempSP = 16;
+            if (M1Values != null)
+            {
+                M1Values.TempSP = M1Values.TempSP + 1 < 35 ? M1Values.TempSP + 1 : 35;
+                if (M1Values.TempSP < 16) M1Values.TempSP = 16;
+
+            }
         }
         private void ExecuteBtnDn2(object obj)
         {
-            M1Values.TempSP = M1Values.TempSP - 1 > 16 ? M1Values.TempSP - 1 : 16;
+            if (M1Values != null)
+                M1Values.TempSP = M1Values.TempSP - 1 > 16 ? M1Values.TempSP - 1 : 16;
         }
 
         private void ExecuteBtnUP3(object obj)
         {
-            M1Values.PowerLimitSP = M1Values.PowerLimitSP + 5 < 100 ? M1Values.PowerLimitSP + 5 : 100;
+            if (M1Values != null)
+                M1Values.PowerLimitSP = M1Values.PowerLimitSP + 5 < 100 ? M1Values.PowerLimitSP + 5 : 100;
         }
         private void ExecuteBtnDn3(object obj)
         {
-            M1Values.PowerLimitSP = M1Values.PowerLimitSP - 5 > 0 ? M1Values.PowerLimitSP - 5 : 0;
+            if (M1Values != null)
+                M1Values.PowerLimitSP = M1Values.PowerLimitSP - 5 > 0 ? M1Values.PowerLimitSP - 5 : 0;
         }
 
         private void ExecuteSPSOK(object obj)
@@ -487,10 +478,18 @@ namespace Android_Silver.Pages
         #region Settings execute methods
         private void ExecuteJournal(object obj)
         {
-            CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);    
+            CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
         }
         #endregion
 
+        #region Alarms execute methods
+        private void ExecuteResetJournal(object obj)
+        {
+
+            int[] arr = { 1 };
+            TcpClientService.SetCommandToServer(337, arr);
+        }
+        #endregion
 
         Timer timer;
         private void StartTimer()

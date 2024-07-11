@@ -88,16 +88,7 @@ namespace Android_Silver.Entities
             }
         }
 
-        private string _messageToServer=String.Empty;
-        public string MessageToServer
-        {
-            get { return _messageToServer; }
-            set
-            {
-                _messageToServer = value;
-                OnPropertyChanged(nameof(MessageToServer));
-            }
-        }
+
 
         public Response ResponseValue { get; set; }
 

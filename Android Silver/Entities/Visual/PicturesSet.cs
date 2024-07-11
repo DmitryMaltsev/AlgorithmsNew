@@ -363,7 +363,7 @@ namespace Android_Silver.Entities.Visual
                         Substrate = new PicByStates(def: "substrate_base.png", selected: "test.jpg");
                         Title = "title_base.png";
                         BackButton = new PicByStates("back_arrow_base.png", "back_arrow_base.png");
-                        ResetButton = new PicByStates("reset_but_base.png", "test.jpg");
+                        ResetButton = new PicByStates("reset_but_base.png","test.jpg");
                         JournalStroke = "journal_stroke_base.png";
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
