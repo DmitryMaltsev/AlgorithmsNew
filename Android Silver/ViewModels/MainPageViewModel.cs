@@ -439,9 +439,12 @@ namespace Android_Silver.Pages
 
         private void ExecuteSPSOK(object obj)
         {
-            int[] values = { M1Values.SypplySP, M1Values.ExhaustSP, M1Values.TempSP, M1Values.PowerLimitSP };
-            TcpClientService.SetCommandToServer(M1Values.StartAddress, values);
-            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+            if (M1Values != null)
+            {
+                int[] values = { M1Values.SypplySP, M1Values.ExhaustSP, M1Values.TempSP, M1Values.PowerLimitSP };
+                TcpClientService.SetCommandToServer(M1Values.StartAddress, values);
+                CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+            }
         }
 
         private void ExecuteNextSetPoints(object obj)

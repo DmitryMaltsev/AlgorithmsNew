@@ -37,7 +37,6 @@
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
         </Style>
-
         <Style TargetType="Slider">
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="IsEnabled" Value="False"/>
@@ -73,26 +72,12 @@
             <Setter Property="Grid.Row" Value="10" />
           
         </Style>
-        <!--#region Set points styple -->
-        <Style TargetType="Label" x:Key="SPsTextL">
-            <Setter Property="Margin" Value="10,0,-10,0"/>
-            <Setter Property="FontSize" Value="15"/>
+        <!--#region Set points style -->
+        <Style TargetType="Label" x:Key="SPsText">
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
-        </Style>
-        <Style TargetType="Label" x:Key="SPsTextLC">
-            <Setter Property="Margin" Value="20,0,-20,0"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
-        </Style>
-        <Style TargetType="Label" x:Key="SPsTextRC">
-            <Setter Property="Margin" Value="-20,0,20,0"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
-        </Style>
-        <Style TargetType="Label" x:Key="SPsTextR">
-            <Setter Property="Margin" Value="-10,0,10,0"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="Grid.ColumnSpan" Value="4"/>
+            <Setter Property="Grid.RowSpan" Value="4"/>
         </Style>
         <Style TargetType="ImageButton" x:Key="SPBtn">
             <Setter Property="Grid.ColumnSpan" Value="4"/>
@@ -102,8 +87,8 @@
         </Style>
         <Style TargetType="Image" x:Key="SPImg">
             <Setter Property="Grid.ColumnSpan" Value="4"/>
-            <Setter Property="Grid.RowSpan" Value="8"/>
-            <Setter Property="MaximumWidthRequest" Value="70" />
+            <Setter Property="Grid.RowSpan" Value="10"/>
+            <Setter Property="MaximumWidthRequest" Value="80" />
             <Setter Property="Aspect" Value="Fill"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
         </Style>
@@ -155,10 +140,10 @@
         <!--Текущее время-->
         <Label Text="00:00" TextColor="White" FontSize="15" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
         <!--Кнопка настроек-->
-        <ImageButton  Source="{Binding CPictureSet.SettingsButton.Current}" Command="{Binding SettingsCommand}"  Style="{StaticResource HeaderBut}"
+        <ImageButton Source="{Binding CPictureSet.SettingsButton.Current}" Command="{Binding SettingsCommand}"  Style="{StaticResource HeaderBut}"
                      Grid.Row="0"  Grid.RowSpan="1" Grid.Column="0"   Grid.ColumnSpan="9"  
-                      Pressed="Settings_Pressed"  Released="Settings_Released"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"
-                       Aspect="AspectFit"/>
+                     Pressed="Settings_Pressed"  Released="Settings_Released"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"
+                     Aspect="AspectFit"/> 
         <!--Кнопка перехода в выбор режима-->
         <ImageButton Source="{Binding  CModesEntities.CMode1.ActiveModePics.Current}" Command="{Binding ChooseModeCommand}"
                            Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0"    Grid.ColumnSpan="9" Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"
@@ -258,77 +243,61 @@
                       IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
         <!--#endregion-->
         <!--#region 1 колонка Binding  M1Values.SypplySP-->
-        <Label Text="Приток"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"  Style="{StaticResource SPsTextL}" 
-                                                                            IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
-        <Image   Source="{Binding CPictureSet.DigitalImage}" Grid.Row="6" Grid.Column="0" Style="{StaticResource SPImg}"
-                 IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton Source="{Binding  CPictureSet.DigitalButtonsUp[0].Current}"  Command="{Binding BtnUpCommand0}" 
-                     Grid.Column="0" Grid.Row="5" Style="{StaticResource SPBtn}"  
-                     Pressed="UpDigit_Pressed0" Released="UpDigit_Released0"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Text="asd"  Grid.Column="0" Grid.ColumnSpan="4"  Grid.Row="9"  Style="{StaticResource SPsTextL}"
-                                                IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Text="%" Grid.Column="1" Grid.ColumnSpan="3"   Grid.Row="10"  Style="{StaticResource SPsTextL}"
-                                                    IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton Command="{Binding BtnDnCommand0}" Source="{Binding  CPictureSet.DigitalButtonsDn[0].Current}" 
-                        Grid.Column="0" Grid.Row="11" Style="{StaticResource SPBtn}"
-                     Pressed="DnDigit_Pressed0" Released="DnDigit_Released0" IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
+        <Label Text="Приток"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="3" Style="{StaticResource SPsText}" FontSize="16" 
+                                                                                    IsVisible="{Binding CActivePagesEntities.IsSetPointsPage}"/>
+        <Image Source="{Binding CPictureSet.DigitalImage}" Grid.Row="6" Grid.Column="1" Style="{StaticResource SPImg}"
+                                                                                    IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
+        <ImageButton Source="{Binding  CPictureSet.DigitalButtonsUp[0].Current}"  Command="{Binding BtnUpCommand0}"  Grid.Column="1"  Grid.Row="6" 
+                     Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed0" Released="UpDigit_Released0" IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
+        <Label Text="{Binding M1Values.SupSP}" Grid.Column="1" Grid.Row="8"  Style="{StaticResource SPsText}" IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
+        <Label Text="%"  Grid.Column="1"   Grid.Row="10"   Style="{StaticResource SPsText}"  IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
+        <ImageButton  Source="{Binding  CPictureSet.DigitalButtonsDn[0].Current}" Command="{Binding BtnDnCommand0}"  Grid.Row="12" Grid.Column="1" 
+         Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed0" Released="DnDigit_Released0" IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
         <!--#endregion-->
         <!--#region 2 колонка-->
-        <Label Text="Вытяжка" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="4" Style="{StaticResource SPsTextLC}"
-                                                        IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Image Source="{Binding CPictureSet.DigitalImage}" Grid.Row="6" Grid.RowSpan="8" Grid.Column="4" Grid.ColumnSpan="5" Margin="20,0,-20,0"
-                                                         IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton Command="{Binding BtnUpCommand1}"  Source="{Binding  CPictureSet.DigitalButtonsUp[1].Current}" 
-                       Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Margin="20,0,-20,0"
-                                                       Pressed="UpDigit_Pressed1" Released="UpDigit_Released1"
-                                                            IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Text="{Binding  M1Values.ExhaustSP}" Grid.Row="5"  Grid.Column="2" Grid.ColumnSpan="2"  Style="{StaticResource SPsTextLC}"
+        <Label Text="Вытяж" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="4" Grid.RowSpan="3"  Style="{StaticResource SPsText}" FontSize="16"
+                                                                                        IsVisible="{Binding CActivePagesEntities.IsSetPointsPage}"/>
+        <Image Source="{Binding CPictureSet.DigitalImage}" Grid.Row="6" Grid.Column="5"   Style="{StaticResource SPImg}"
+                                                                                        IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <ImageButton  Source="{Binding  CPictureSet.DigitalButtonsUp[1].Current}" Command="{Binding BtnUpCommand1}"  Grid.Row="6"  Grid.Column="5"  
+                      Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed1" Released="UpDigit_Released1" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <Label Text="{Binding  M1Values.ExhaustSP}" Grid.Row="8"  Grid.Column="5" Style="{StaticResource SPsText}"
                                                                 IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Text="%"  Grid.Row="6"  Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource SPsTextLC}"
-                                                                    IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton Command="{Binding BtnDnCommand1}" Source="{Binding  CPictureSet.DigitalButtonsDn[1].Current}"  
-                        Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="1" Margin="20,0,-20,0"
-                                                                     Pressed="DnDigit_Pressed1" Released="DnDigit_Released1"
-                                                                     IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <Label Text="%"  Grid.Row="10"  Grid.Column="5" Style="{StaticResource SPsText}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <ImageButton  Source="{Binding  CPictureSet.DigitalButtonsDn[1].Current}" Command="{Binding BtnDnCommand1}" Grid.Row="12" Grid.Column="5"  
+         Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed1" Released="DnDigit_Released1" IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
         <!--#endregion-->
         <!--#region 3 колонка -->
-        <Label Text="t° воздуха"  Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" Style="{StaticResource SPsTextRC}"
-                                                                                    IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Image Source="{Binding CPictureSet.DigitalImage}" Grid.Row="6" Grid.RowSpan="8" Grid.Column="10" Grid.ColumnSpan="5" Margin="-20,0,20,0"
+        <Label Text="t° воздуха"  Grid.Row="4" Grid.Column="9" Grid.ColumnSpan="4" Grid.RowSpan="3"  Style="{StaticResource SPsText}" FontSize="16"
+                                                                                    IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
+        <Image Source="{Binding CPictureSet.DigitalImage}" Grid.Row="6" Grid.Column="9" Style="{StaticResource SPImg}"
                                                                                         IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton Command="{Binding BtnUpCommand2}" Source="{Binding  CPictureSet.DigitalButtonsUp[2].Current}"
-                      Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Margin="-20,0,20,0"
-                     Pressed="UpDigit_Pressed2" Released="UpDigit_Released2"
-                                                                       IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Text="{Binding M1Values.TempSP}"  Grid.Row="5"  Grid.Column="5" Grid.ColumnSpan="2"  Style="{StaticResource SPsTextRC}"
+        <ImageButton Source="{Binding  CPictureSet.DigitalButtonsUp[2].Current}" Command="{Binding BtnUpCommand2}" Grid.Row="6"  Grid.Column="9"  
+                      Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed2" Released="UpDigit_Released2" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
+        <Label Text="{Binding M1Values.TempSP}"   Grid.Row="8"  Grid.Column="9" Style="{StaticResource SPsText}" 
                                                                     IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Text="°С"  Grid.Row="6"  Grid.Column="5" Grid.ColumnSpan="2" Style="{StaticResource SPsTextRC}" 
+        <Label Text="°С"  Grid.Row="10"  Grid.Column="9" Style="{StaticResource SPsText}"
                                                                     IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton Command="{Binding BtnDnCommand2}" Source="{Binding  CPictureSet.DigitalButtonsDn[2].Current}"
-                      Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="1" Margin="-20,0,20,0"
-                     Pressed="DnDigit_Pressed2" Released="DnDigit_Released2"
-                                                                     IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <ImageButton  Source="{Binding  CPictureSet.DigitalButtonsDn[2].Current}" Command="{Binding BtnDnCommand2}" Grid.Row="12" Grid.Column="9"  
+         Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed2" Released="DnDigit_Released2"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
         <!--#endregion-->
         <!--#region 4 колонка -->
-        <Label Text="Нагрев-ль"  Grid.Row="3" Grid.Column="7" Grid.ColumnSpan="2" Style="{StaticResource SPsTextR}"
-                                                                      IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Image   Grid.Row="6" Grid.RowSpan="8" Grid.Column="13" Grid.ColumnSpan="5"
-               Source="{Binding CPictureSet.DigitalImage}"  Margin="-10,0,10,0" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton Command="{Binding BtnUpCommand3}" Source="{Binding  CPictureSet.DigitalButtonsUp[3].Current}"
-                                                     Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Margin="-10,0,10,0"
-                                                                                   Pressed="UpDigit_Pressed3" Released="UpDigit_Released3"
-                                                                          IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Grid.Row="5"  Grid.Column="7" Grid.ColumnSpan="2" Text="{Binding M1Values.PowerLimitSP}"  Style="{StaticResource SPsTextR}"
+        <Label Text="Нагрев-ль"  Grid.Row="4" Grid.Column="13" Grid.ColumnSpan="4" Grid.RowSpan="3"  Style="{StaticResource SPsText}" FontSize="16" 
+                                                                                        IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
+        <Image Source="{Binding CPictureSet.DigitalImage}"  Grid.Row="6" Grid.Column="13" Style="{StaticResource SPImg}"
+                                                                         IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
+        <ImageButton Source="{Binding CPictureSet.DigitalButtonsUp[3].Current}" Command="{Binding BtnUpCommand3}" Grid.Row="6"  Grid.Column="13"  
+                     Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed3" Released="UpDigit_Released3" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
+        <Label Text="{Binding M1Values.PowerLimitSP}" Grid.Row="5"  Grid.Column="7" Style="{StaticResource SPsText}" 
+                                                                           IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <Label Text="%"  Grid.Row="10"  Grid.Column="13"  Style="{StaticResource SPsText}" 
                                                                          IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <Label Text="%"  Grid.Row="6"  Grid.Column="7" Grid.ColumnSpan="2" Style="{StaticResource SPsTextR}" 
-                                                                         IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-        <ImageButton  Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="1" Margin="-10,0,10,0"
-                                             Command="{Binding BtnDnCommand3}" Source="{Binding  CPictureSet.DigitalButtonsDn[3].Current}" 
-                                                                              Pressed="DnDigit_Pressed3" Released="DnDigit_Released3"
-                                                                         IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <ImageButton  Source="{Binding  CPictureSet.DigitalButtonsDn[3].Current}"  Command="{Binding BtnDnCommand3}" Grid.Row="12" Grid.Column="13"  
+             Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed3" Released="DnDigit_Released3"
+                                                                       IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
         <!--#endregion-->
-        <ImageButton Source="{Binding CPictureSet.OkButton.Current}" Command="{Binding SPOkCommand}" Grid.Row="15" Grid.RowSpan="3" Grid.Column="5" Grid.ColumnSpan="9"
-                       Pressed="OK_SPPressed" Released="Ok_SPReleased" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+        <ImageButton Source="{Binding CPictureSet.OkButton.Current}" Command="{Binding SPOkCommand}" Grid.Row="15" Grid.RowSpan="3" Grid.Column="5" Grid.ColumnSpan="8"
+                       Pressed="OK_SPPressed" Released="Ok_SPReleased" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
         <!--#endregion-->
 
         <!--#region SETTINGS PAGE -->
