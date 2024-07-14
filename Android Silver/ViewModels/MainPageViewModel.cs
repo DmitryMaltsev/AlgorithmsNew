@@ -184,7 +184,7 @@ namespace Android_Silver.Pages
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CAlarms = DIContainer.Resolve<Alarms>();
-
+            
             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SPCommand = new Command(ExecuteSetSP);
@@ -223,7 +223,7 @@ namespace Android_Silver.Pages
             BtnDnCommand3 = new Command(ExecuteBtnDn3);
             #endregion
             //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
-            CActivePagesEntities.SetActivePageState(ActivePageState.SetPointsPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             StartTimer();
         }
 
