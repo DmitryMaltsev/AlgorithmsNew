@@ -396,7 +396,7 @@
             Command="{Binding HomeCommand}" Pressed="Home_Pressed" Released="Home_Released" IsVisible="{Binding CActivePagesEntities.IsVacationPage}"/>
         <Label Text="Расписание для отпуска"  Grid.Row="3"  Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="12"  Style="{StaticResource Title}"
                                                                IsVisible = "{Binding   CActivePagesEntities.IsVacationPage}"/>
-        <!--#region Чтот троторортрошнтонторекуегоннеонкыогнерревагнок   75решг5елггнауавыапрпрыфправрп -->
+        <!--#region Список отпускных дней -->
         <ListView Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="18" ItemsSource="{Binding CAlarms.AlarmsCollection}" 
                  SeparatorColor="Transparent" VerticalScrollBarVisibility="Always"  IsVisible="{Binding CActivePagesEntities.IsVacationPage}">
             <ListView.ItemTemplate>

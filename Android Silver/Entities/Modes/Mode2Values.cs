@@ -20,7 +20,8 @@
         private List<TimeModeValues> SetTModes(int count)
         {
             List<TimeModeValues> tModeList = new List<TimeModeValues>();
-            for (int i = 0; i < count; i++)
+            //0 режим всегда стандартный
+            for (int i = 0; i <= count; i++)
             {
                 tModeList.Add(new TimeModeValues() { TimeModeNum = i });
             }

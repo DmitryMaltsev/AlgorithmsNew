@@ -4,7 +4,6 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
-
 using System.Net.Sockets;
 using System.Windows.Input;
 
@@ -239,9 +238,8 @@ namespace Android_Silver.Pages
                 await TcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    //TcpClientService.SendRecieveTask("100,08");
-                    //TcpClientService.SendRecieveTask("108,02");
-                    TcpClientService.SendRecieveTask("108,29");
+                    //TcpClientService.SendRecieveTask("108,29");
+                    TcpClientService.SendRecieveTask("137,4");
                 }
             }
             else

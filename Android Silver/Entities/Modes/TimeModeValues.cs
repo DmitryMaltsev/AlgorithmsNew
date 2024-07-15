@@ -8,52 +8,83 @@ using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.Modes
 {
-    public class TimeModeValues:BindableBase
+    public class TimeModeValues : BindableBase
     {
-		private int _timeModeNum;
-		public int TimeModeNum
-		{
-			get { return _timeModeNum; }
-			set { 
-				_timeModeNum = value;
-				OnPropertyChanged(nameof(TimeModeNum));
-			}
-		}
+        private int _timeModeNum;
+        public int TimeModeNum
+        {
+            get { return _timeModeNum; }
+            set
+            {
+                _timeModeNum = value;
+                OnPropertyChanged(nameof(TimeModeNum));
+            }
+        }
 
-		private int _dayOfWeek;
+        private List<string> _days;
+        
+        public List<string> Days
+        {
+            get { return _days; }
+            set
+            {
+                _days = value;
+            }
+        }
 
-		public int DayOfWeek
-		{
-			get { return _dayOfWeek; }
-			set { 
-				_dayOfWeek = value;
-				OnPropertyChanged(nameof(DayOfWeek));
-			}
-		}
 
-		private int _hour;
-		public int Hour
-		{
-			get { return _hour; }
-			set { 
-				_hour = value; 
-				OnPropertyChanged(nameof(Hour));
-			}
-		}
+        private int _dayOfWeek;
 
-		private int _minute;
+        public int DayOfWeek
+        {
+            get { return _dayOfWeek; }
+            set
+            {
+                _dayOfWeek = value;
+                OnPropertyChanged(nameof(DayOfWeek));
+            }
+        }
 
-		public int Minute
-		{
-			get { return _minute; }
-			set { 
-				_minute = value;
-				OnPropertyChanged($"{nameof(Minute)}");
-			}
-		}
+
+        private int _hour;
+        public int Hour
+        {
+            get { return _hour; }
+            set
+            {
+                _hour = value;
+                OnPropertyChanged(nameof(Hour));
+            }
+        }
+
+        private int _minute;
+
+        public int Minute
+        {
+            get { return _minute; }
+            set
+            {
+                _minute = value;
+                OnPropertyChanged($"{nameof(Minute)}");
+            }
+        }
 
         public Mode1Values CMode1 { get; set; }
 
-
+        public TimeModeValues()
+        {
+            Days = new List<string>
+            {
+                "",
+                "Понедельник",
+                "Вторник",
+                "Среда",
+                "Четверг",
+                "Пятница",
+                "Суббота",
+                "Воскресенье",
+                "Все"
+             };
+        }
     }
 }

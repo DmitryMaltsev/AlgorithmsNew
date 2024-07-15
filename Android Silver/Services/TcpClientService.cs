@@ -527,6 +527,42 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                //Данные о режиме отпуска
+                case 137:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].DayOfWeek=val;
+                        }
+                    }
+                    break;
+                case 138:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Hour = val;
+                        }
+                    }
+                    break;
+                case 139:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Minute = val;
+                        }
+                    }
+                    break;
+                case 140:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].CMode1 = _modesEntities.Mode1ValuesList[val];
+                        }
+                    }
+                    break;
                 //Проверка того, что данные записаны
                 case 300:
                     {
