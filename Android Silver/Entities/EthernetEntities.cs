@@ -1,15 +1,17 @@
-﻿using System.ComponentModel;
+﻿using Android_Silver.ViewModels;
+
+using System.ComponentModel;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 
 namespace Android_Silver.Entities
 {
-    public class EthernetEntities : INotifyPropertyChanged
+    public class EthernetEntities : BindableBase
     {
 
         public TcpClient Client { get; set; }
 
-        private string _connectIP = "192.168.0.103";
+        private string _connectIP = "192.168.0.11";
         public string ConnectIP
         {
             get { return _connectIP; }
@@ -92,15 +94,6 @@ namespace Android_Silver.Entities
 
         public Response ResponseValue { get; set; }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-            }
-        }
 
 
         private bool _loaded=false;

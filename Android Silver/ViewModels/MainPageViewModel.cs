@@ -144,6 +144,8 @@ namespace Android_Silver.Pages
 
         #region SettingsCommands
         public ICommand JournalCommand { get; private set; }
+
+        public ICommand VacationCommand { get; private set; }
         #endregion
 
         #region ResetCommand
@@ -198,6 +200,7 @@ namespace Android_Silver.Pages
             VacationModeCommand = new Command(ExecuteVacationMode);
             TurnOffModeCommand = new Command(ExecuteTurnOffMode);
             JournalCommand = new Command(ExecuteJournal);
+            VacationCommand = new Command(ExecuteVacation);
             HomeCommand = new Command(ExecuteHomeCommand);
             ResetJournalCommand = new Command(ExecuteResetJournal);// ExecuteResetJournal();
             Value = 15;
@@ -227,8 +230,7 @@ namespace Android_Silver.Pages
             StartTimer();
         }
 
-
-
+ 
         async private void ExecuteConnect()
         {
             EthernetEntities.SystemMessage = "Check";
@@ -483,6 +485,12 @@ namespace Android_Silver.Pages
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
         }
+
+        private void ExecuteVacation(object obj)
+        {
+           CActivePagesEntities.SetActivePageState((ActivePageState.VacationPage));
+        }
+
         #endregion
 
         #region Alarms execute methods
