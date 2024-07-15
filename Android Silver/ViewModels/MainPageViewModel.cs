@@ -225,7 +225,7 @@ namespace Android_Silver.Pages
             BtnDnCommand3 = new Command(ExecuteBtnDn3);
             #endregion
             //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
-            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.VacationPage);
             StartTimer();
         }
 
@@ -246,6 +246,7 @@ namespace Android_Silver.Pages
             {
                 EthernetEntities.SystemMessage = "В данный момент подключаемся";
             }
+
         }
 
         #region Main page execute methods

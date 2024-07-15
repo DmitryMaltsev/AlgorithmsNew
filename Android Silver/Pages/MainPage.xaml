@@ -397,16 +397,15 @@
         <Label Text="Расписание для отпуска"  Grid.Row="3"  Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="12"  Style="{StaticResource Title}"
                                                                IsVisible = "{Binding   CActivePagesEntities.IsVacationPage}"/>
         <!--#region Список отпускных дней -->
-        <ListView Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="18" ItemsSource="{Binding CAlarms.AlarmsCollection}" 
+        <ListView Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="18" ItemsSource="{Binding  CModesEntities.Mode2ValuesList[2].TimeModeValues}" 
                  SeparatorColor="Transparent" VerticalScrollBarVisibility="Always"  IsVisible="{Binding CActivePagesEntities.IsVacationPage}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <Grid Margin="5,5" BackgroundColor="Transparent">
-                                <Image  Source="{Binding ImageName}" Aspect="Fill"/>
-                                <Label  Text="{Binding Name}" TextColor="White" FontSize="19" HorizontalOptions="Start"/>
-                            </Grid>
+                            <HorizontalStackLayout>
+                                
+                            </HorizontalStackLayout>
                         </ViewCell.View>
                     </ViewCell>
                 </DataTemplate>
