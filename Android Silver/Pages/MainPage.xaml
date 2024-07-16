@@ -490,8 +490,8 @@
                                                                          IsVisible = "{Binding CActivePagesEntities.IsSetTSettingsPage}"/>
         <ImageButton Source="{Binding CPictureSet.DigitalButtonsUp[3].Current}" Command="{Binding TSetBtnUpCommand3}" Grid.Row="6"  Grid.Column="13"  
                      Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed3" Released="UpDigit_Released3" IsVisible = "{Binding CActivePagesEntities.IsSetTSettingsPage}"/>
-        <Image Source="{Binding TValues.CMode1.MiniIcon}" Grid.Row="9"  Grid.Column="14" Style="{StaticResource MiniIcons}" WidthRequest="50" HeightRequest="50" 
-               IsVisible = "{Binding   CActivePagesEntities.IsSetTSettingsPage}"/>
+        <Image Source="{Binding TValues.M1Image}" Grid.Row="9"  Grid.Column="14" Style="{StaticResource MiniIcons}" 
+               WidthRequest="50" HeightRequest="50" IsVisible = "{Binding   CActivePagesEntities.IsSetTSettingsPage}"/>
         <Label Text="Режим"  Grid.Row="8"  Grid.Column="13"  Style="{StaticResource SPsText}" 
                                                                          IsVisible = "{Binding   CActivePagesEntities.IsSetTSettingsPage}"/>
         <ImageButton  Source="{Binding  CPictureSet.DigitalButtonsDn[3].Current}"  Command="{Binding TSetBtnDnCommand3}" Grid.Row="10" Grid.Column="13"  

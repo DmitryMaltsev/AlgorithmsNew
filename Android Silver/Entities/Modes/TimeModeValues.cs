@@ -100,12 +100,25 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
+        private string _m1Image;
+
+        public string M1Image
+        {
+            get { return _m1Image; }
+            set { 
+                _m1Image = value;
+                OnPropertyChanged(nameof(M1Image));
+            }
+        }
+
+
 
         public int CMode1Num { get; set; }
+        public int WriteAddress { get;private set; }
 
-        public TimeModeValues(int index, int cMode1Num)
+        public TimeModeValues(int timeIndex, int cMode1Num, int startAddress)
         {
-            TimeModeNum= index+1;
+            TimeModeNum= timeIndex+1;
             Days = new List<string>
             {
                 "Нет",
@@ -119,9 +132,14 @@ namespace Android_Silver.Entities.Modes
                 "Все"
              };
             DayName = Days[0];
-            CMode1Num = cMode1Num;
-          
+            CMode1Num = cMode1Num;  
+            WriteAddress = startAddress;
+        }
 
+        public void SetTValues(int m1Index, string image)
+        {
+            CMode1Num= m1Index;
+            M1Image= image;
         }
     }
 }

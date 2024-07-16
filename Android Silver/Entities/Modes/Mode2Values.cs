@@ -14,13 +14,15 @@ namespace Android_Silver.Entities.Modes
 
         public string Mode2Icon { get; set; }
 
-        public Mode2Values(int cNum, int tModesCount, string mode2Icon, Mode1Values cMode1)
+        public int StartAddress { get; set; }
+
+        public Mode2Values(int cNum, int tModesCount, string mode2Icon, Mode1Values cMode1, int startAddress)
         {
             Mode2Icon = mode2Icon;
             cNum = CNum;
             CMode1 = cMode1;
-            TimeModeValues = SetTModes(tModesCount,CMode1);
-          
+            TimeModeValues = SetTModes(tModesCount, CMode1);
+            StartAddress = startAddress;
         }
 
         private List<TimeModeValues> SetTModes(int count, Mode1Values cMode1)
@@ -30,7 +32,7 @@ namespace Android_Silver.Entities.Modes
             CMode1 = cMode1;
             for (int i = 0; i < count; i++)
             {
-                tModeList.Add(new TimeModeValues(i, CMode1.Num));
+                tModeList.Add(new TimeModeValues(i, CMode1.Num, StartAddress + i*4));
                 tModeList[i].StrokeImg = new PicByStates(_pictureSet.SelectStroke.Default, _pictureSet.SelectStroke.Selected);
             }
             return tModeList;

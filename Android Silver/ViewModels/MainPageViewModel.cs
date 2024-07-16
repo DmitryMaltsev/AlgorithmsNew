@@ -209,7 +209,7 @@ namespace Android_Silver.Pages
         string _cData;
         public MainPageViewModel()
         {
-           
+
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
             TcpClientService = DIContainer.Resolve<TcpClientService>();
@@ -260,7 +260,7 @@ namespace Android_Silver.Pages
             SetVacDataCommand = new Command(ExecuteVacData);
             #endregion
             #region TSet commands
-            TSetOkCommand = new Command(TSetExecuteSPSOK);
+            TSetOkCommand = new Command(TSetExecuteOK);
             TSetBtnUpCommand0 = new Command(TSetExecuteBtnUP0);
             TSetBtnDnCommand0 = new Command(TSetExecuteBtnDn0);
             TSetBtnUpCommand1 = new Command(TSetExecuteBtnUP1);
@@ -273,9 +273,9 @@ namespace Android_Silver.Pages
             #endregion
             //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
             CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
-            SetTValuesByIndex(0,0);
+            SetTValuesByIndex(0, 0);
             StartTimer();
-          
+
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIcon
 
         }
@@ -597,7 +597,9 @@ namespace Android_Silver.Pages
             if (TValues != null)
             {
                 int mode1Num = TValues.CMode1Num;
-                TValues.CMode1Num = mode1Num + 1 <= 5 ? mode1Num + 1 : TValues.CMode1Num;
+                mode1Num = mode1Num + 1 <= 5 ? mode1Num + 1 :5;
+                TValues.SetTValues(mode1Num, CModesEntities.Mode1ValuesList[mode1Num].MiniIcon);
+
             }
         }
         private void TSetExecuteBtnDn3(object obj)
@@ -605,7 +607,10 @@ namespace Android_Silver.Pages
             if (TValues != null)
             {
                 int mode1Num = TValues.CMode1Num;
-                TValues.CMode1Num = mode1Num - 1 >= 0 ? mode1Num - 1 : TValues.CMode1Num;
+                mode1Num = mode1Num - 1 >= 0 ? mode1Num - 1 : 0;
+
+                TValues.SetTValues(mode1Num, CModesEntities.Mode1ValuesList[mode1Num].MiniIcon);
+                
             }
         }
 
@@ -613,12 +618,12 @@ namespace Android_Silver.Pages
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
         }
-        private void TSetExecuteSPSOK(object obj)
+        private void TSetExecuteOK(object obj)
         {
-            if (M1Values != null)
+            if (TValues != null)
             {
-                int[] values = { M1Values.SypplySP, M1Values.ExhaustSP, M1Values.TempSP, M1Values.PowerLimitSP };
-                TcpClientService.SetCommandToServer(M1Values.StartAddress, values);
+                int[] values = { TValues.DayNum, TValues.Hour, TValues.Minute, TValues.CMode1Num };
+                TcpClientService.SetCommandToServer(TValues.WriteAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             }
         }
@@ -629,8 +634,11 @@ namespace Android_Silver.Pages
         /// <param name="index"></param>
         private void SetTValuesByIndex(int m2Num, int tModeNum)
         {
-            TValues = new TimeModeValues(0, 0);
-
+            TValues = new TimeModeValues(CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].TimeModeNum,
+                                        CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1Num,
+                                        CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].WriteAddress);
+            TValues.Hour = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Hour;
+            TValues.Minute = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Minute;
         }
 
 
