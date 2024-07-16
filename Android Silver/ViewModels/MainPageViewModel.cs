@@ -4,7 +4,10 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
+
+using System;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace Android_Silver.Pages
@@ -95,6 +98,19 @@ namespace Android_Silver.Pages
             }
         }
 
+
+        private TimeModeValues _tValues;
+        public TimeModeValues TValues
+        {
+            get { return _tValues; }
+            set
+            {
+                _tValues = value;
+                OnPropertyChanged(nameof(TValues));
+            }
+        }
+
+
         #endregion
 
         #region Commands
@@ -106,6 +122,7 @@ namespace Android_Silver.Pages
         public ICommand SettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
         public ICommand GoToPageCommand { get; private set; }
+        public ICommand SetVacDataCommand { get; private set; }
         #endregion
 
         #region Choose mode page commands
@@ -141,12 +158,27 @@ namespace Android_Silver.Pages
         public ICommand BtnDnCommand3 { get; private set; }
         #endregion
 
-        #region SettingsCommands
+
+
+        #region TSettingsCommands
         public ICommand JournalCommand { get; private set; }
 
         public ICommand VacationCommand { get; private set; }
         #endregion
 
+        #region SetTSettingsCommands
+        public ICommand TSetReturnCommand { get; private set; }
+        public ICommand TSetOkCommand { get; private set; }
+        public ICommand TSetBtnUpCommand0 { get; private set; }
+        public ICommand TSetBtnDnCommand0 { get; private set; }
+        public ICommand TSetBtnUpCommand1 { get; private set; }
+        public ICommand TSetBtnDnCommand1 { get; private set; }
+
+        public ICommand TSetBtnUpCommand2 { get; private set; }
+        public ICommand TSetBtnDnCommand2 { get; private set; }
+        public ICommand TSetBtnUpCommand3 { get; private set; }
+        public ICommand TSetBtnDnCommand3 { get; private set; }
+        #endregion
         #region ResetCommand
         public ICommand ResetJournalCommand { get; private set; }
 
@@ -177,6 +209,7 @@ namespace Android_Silver.Pages
         string _cData;
         public MainPageViewModel()
         {
+           
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
             TcpClientService = DIContainer.Resolve<TcpClientService>();
@@ -185,7 +218,6 @@ namespace Android_Silver.Pages
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CAlarms = DIContainer.Resolve<Alarms>();
-            
             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SPCommand = new Command(ExecuteSetSP);
@@ -224,12 +256,30 @@ namespace Android_Silver.Pages
             BtnUpCommand3 = new Command(ExecuteBtnUP3);
             BtnDnCommand3 = new Command(ExecuteBtnDn3);
             #endregion
+            #region Vac commands
+            SetVacDataCommand = new Command(ExecuteVacData);
+            #endregion
+            #region TSet commands
+            TSetOkCommand = new Command(TSetExecuteSPSOK);
+            TSetBtnUpCommand0 = new Command(TSetExecuteBtnUP0);
+            TSetBtnDnCommand0 = new Command(TSetExecuteBtnDn0);
+            TSetBtnUpCommand1 = new Command(TSetExecuteBtnUP1);
+            TSetBtnDnCommand1 = new Command(TSetExecuteBtnDn1);
+            TSetBtnUpCommand2 = new Command(TSetExecuteBtnUP2);
+            TSetBtnDnCommand2 = new Command(TSetExecuteBtnDn2);
+            TSetBtnUpCommand3 = new Command(TSetExecuteBtnUP3);
+            TSetBtnDnCommand3 = new Command(TSetExecuteBtnDn3);
+            TSetReturnCommand = new Command(TSetExecuteReturn);
+            #endregion
             //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
-            CActivePagesEntities.SetActivePageState(ActivePageState.VacationPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
+            SetTValuesByIndex(0,0);
             StartTimer();
+          
+            // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIcon
+
         }
 
- 
         async private void ExecuteConnect()
         {
             EthernetEntities.SystemMessage = "Check";
@@ -487,7 +537,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteVacation(object obj)
         {
-           CActivePagesEntities.SetActivePageState((ActivePageState.VacationPage));
+            CActivePagesEntities.SetActivePageState((ActivePageState.TSettingsPage));
         }
 
         #endregion
@@ -500,6 +550,92 @@ namespace Android_Silver.Pages
             TcpClientService.SetCommandToServer(337, arr);
         }
         #endregion
+
+        #region Vacs execute methods
+        private void ExecuteVacData(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.SetTSettingsPage);
+        }
+        #endregion
+
+        #region TSet execute methods
+        private void TSetExecuteBtnUP0(object obj)
+        {
+            if (TValues != null)
+                TValues.DayNum = TValues.DayNum + 1 <= 8 ? TValues.DayNum + 1 : 8;
+        }
+        private void TSetExecuteBtnDn0(object obj)
+        {
+            if (TValues != null)
+                TValues.DayNum = TValues.DayNum - 1 >= 0 ? TValues.DayNum - 1 : 0;
+        }
+
+        private void TSetExecuteBtnUP1(object obj)
+        {
+            if (TValues != null)
+                TValues.Hour = TValues.Hour + 1 <= 60 ? TValues.Hour + 1 : 60;
+        }
+        private void TSetExecuteBtnDn1(object obj)
+        {
+            if (TValues != null)
+                TValues.Hour = TValues.Hour - 1 >= 0 ? TValues.Hour - 1 : 0;
+        }
+
+        private void TSetExecuteBtnUP2(object obj)
+        {
+            if (TValues != null)
+                TValues.Minute = TValues.Minute + 1 <= 60 ? TValues.Minute + 1 : 60;
+        }
+        private void TSetExecuteBtnDn2(object obj)
+        {
+            if (TValues != null)
+                TValues.Minute = TValues.Minute - 1 >= 0 ? TValues.Minute - 1 : 0;
+        }
+
+        private void TSetExecuteBtnUP3(object obj)
+        {
+            if (TValues != null)
+            {
+                int mode1Num = TValues.CMode1Num;
+                TValues.CMode1Num = mode1Num + 1 <= 5 ? mode1Num + 1 : TValues.CMode1Num;
+            }
+        }
+        private void TSetExecuteBtnDn3(object obj)
+        {
+            if (TValues != null)
+            {
+                int mode1Num = TValues.CMode1Num;
+                TValues.CMode1Num = mode1Num - 1 >= 0 ? mode1Num - 1 : TValues.CMode1Num;
+            }
+        }
+
+        private void TSetExecuteReturn(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
+        }
+        private void TSetExecuteSPSOK(object obj)
+        {
+            if (M1Values != null)
+            {
+                int[] values = { M1Values.SypplySP, M1Values.ExhaustSP, M1Values.TempSP, M1Values.PowerLimitSP };
+                TcpClientService.SetCommandToServer(M1Values.StartAddress, values);
+                CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+            }
+        }
+
+        /// <summary>
+        /// Промежуточное значение TValue
+        /// </summary>
+        /// <param name="index"></param>
+        private void SetTValuesByIndex(int m2Num, int tModeNum)
+        {
+            TValues = new TimeModeValues(0, 0);
+
+        }
+
+
+        #endregion
+
 
         Timer timer;
         private void StartTimer()

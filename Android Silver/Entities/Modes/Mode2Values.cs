@@ -1,4 +1,6 @@
-﻿namespace Android_Silver.Entities.Modes
+﻿using Android_Silver.Entities.Visual;
+
+namespace Android_Silver.Entities.Modes
 {
     public class Mode2Values
     {
@@ -6,24 +8,30 @@
         public TimeModeValues CTimeMode { get; set; }
         public List<TimeModeValues> TimeModeValues { get; set; } = new List<TimeModeValues>();
 
+        private PicturesSet _pictureSet;
+
         public int CNum { get; private set; }
 
         public string Mode2Icon { get; set; }
 
-        public Mode2Values(int cNum, int tModesCount, string mode2Icon)
+        public Mode2Values(int cNum, int tModesCount, string mode2Icon, Mode1Values cMode1)
         {
-            TimeModeValues = SetTModes(tModesCount);
             Mode2Icon = mode2Icon;
             cNum = CNum;
+            CMode1 = cMode1;
+            TimeModeValues = SetTModes(tModesCount,CMode1);
+          
         }
 
-        private List<TimeModeValues> SetTModes(int count)
+        private List<TimeModeValues> SetTModes(int count, Mode1Values cMode1)
         {
+            _pictureSet=DIContainer.Resolve<PicturesSet>();
             List<TimeModeValues> tModeList = new List<TimeModeValues>();
-            //0 режим всегда стандартный
-            for (int i = 0; i <= count; i++)
+            CMode1 = cMode1;
+            for (int i = 0; i < count; i++)
             {
-                tModeList.Add(new TimeModeValues() { TimeModeNum = i });
+                tModeList.Add(new TimeModeValues(i, CMode1.Num));
+                tModeList[i].StrokeImg = new PicByStates(_pictureSet.SelectStroke.Default, _pictureSet.SelectStroke.Selected);
             }
             return tModeList;
         }

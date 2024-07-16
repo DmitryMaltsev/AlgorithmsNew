@@ -1,4 +1,5 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.Visual;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ namespace Android_Silver.Entities.Modes
 {
     public class TimeModeValues : BindableBase
     {
+
+
+
         private int _timeModeNum;
         public int TimeModeNum
         {
@@ -33,15 +37,30 @@ namespace Android_Silver.Entities.Modes
         }
 
 
-        private int _dayOfWeek;
+        private int _dayNum;
 
-        public int DayOfWeek
+        public int DayNum
         {
-            get { return _dayOfWeek; }
+            get { return _dayNum; }
             set
             {
-                _dayOfWeek = value;
-                OnPropertyChanged(nameof(DayOfWeek));
+                if (_dayNum != value)
+                {
+
+                    _dayNum = value;
+                    DayName = Days[_dayNum];
+                }
+            }
+        }
+
+        private string _dayName;
+
+        public string DayName
+        {
+            get { return _dayName; }
+            set { 
+                _dayName = value;
+                OnPropertyChanged(nameof(DayName));
             }
         }
 
@@ -69,22 +88,40 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
-        public Mode1Values CMode1 { get; set; }
 
-        public TimeModeValues()
+        private PicByStates _strokeImg;
+
+        public PicByStates StrokeImg
         {
+            get { return _strokeImg; }
+            set { 
+                _strokeImg = value; 
+                OnPropertyChanged(nameof(StrokeImg));
+            }
+        }
+
+
+        public int CMode1Num { get; set; }
+
+        public TimeModeValues(int index, int cMode1Num)
+        {
+            TimeModeNum= index+1;
             Days = new List<string>
             {
-                "",
-                "Понедельник",
-                "Вторник",
-                "Среда",
-                "Четверг",
-                "Пятница",
-                "Суббота",
-                "Воскресенье",
+                "Нет",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
                 "Все"
              };
+            DayName = Days[0];
+            CMode1Num = cMode1Num;
+          
+
         }
     }
 }

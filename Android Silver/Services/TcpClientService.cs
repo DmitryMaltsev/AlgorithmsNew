@@ -533,7 +533,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].DayOfWeek=val;
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].DayNum=val;
                         }
                     }
                     break;

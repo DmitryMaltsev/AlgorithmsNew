@@ -72,6 +72,16 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private PicByStates _selectStroke;
+
+        public PicByStates SelectStroke
+        {
+            get { return _selectStroke; }
+            set { _selectStroke = value; }
+        }
+
+
+
         #region Общие кнопки
         private PicByStates _homeButton;
 
@@ -365,6 +375,7 @@ namespace Android_Silver.Entities.Visual
                         BackButton = new PicByStates("back_arrow_base.png", "back_arrow_base.png");
                         ResetButton = new PicByStates("reset_but_base.png","test.jpg");
                         JournalStroke = "journal_stroke_base.png";
+                        SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
                         CancelButton = new PicByStates("cancel_but_base.png", "test.jpg");
@@ -449,7 +460,6 @@ namespace Android_Silver.Entities.Visual
                         ShedSetBut = new PicByStates("shed_set_but_base.jpg", "test.jpg");
                         VacSetBut = new PicByStates("vac_set_but_base.jpg", "test.jpg");
                         #endregion
-
                     }
                     break;
                 default:

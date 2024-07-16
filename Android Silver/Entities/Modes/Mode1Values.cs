@@ -157,11 +157,12 @@ namespace Android_Silver.Entities.Modes
         /// Задаем текущему режиму соответветствующие значения.
         /// </summary>
         /// <param name="num"></param>
-        /// <param name="activeModePics"></param>
-        /// <param name="selectModePics"></param>
+        /// <param name="activeModePics"></param>картинка активная
+        /// <param name="selectModePics"></param>картинка активная с названием
         /// <param name="modeIcons"></param>
         /// <param name="modeSettingsRoute"></param>
         /// <param name="startAddress"></param>
+        ///  /// <param name="miniIcon"></param>картинка, как активная пока что, может измениться в дальнейшейм
         public Mode1Values(int num, PicByStates activeModePics, PicByStates selectModePics, PicByStates modeIcons, string modeSettingsRoute, int startAddress, string miniIcon)
         {
             Num = num;
@@ -213,6 +214,5 @@ namespace Android_Silver.Entities.Modes
             }
             StartAddress = startAddress;
         }
-
     }
 }

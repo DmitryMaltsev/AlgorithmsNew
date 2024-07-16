@@ -18,7 +18,8 @@ namespace Android_Silver.Entities.Visual
         SetPointsPage,
         SettingsPage,
         JournalPage,
-        VacationPage
+        TSettingsPage,
+        SetTSettingsPage
     }
 
     public class ActivePagesEntities : BindableBase
@@ -100,22 +101,37 @@ namespace Android_Silver.Entities.Visual
         public bool IsJournalPage
         {
             get { return _isJournalPage; }
-            set { 
+            set
+            {
                 _isJournalPage = value;
                 OnPropertyChanged(nameof(IsJournalPage));
             }
         }
 
-        private bool _isVacationPage;
+        private bool _isTSettingsPage;
 
-        public bool IsVacationPage
+        public bool IsTSettingsPage
         {
-            get { return _isVacationPage; }
-            set {
-                _isVacationPage = value;
-                OnPropertyChanged(nameof(IsVacationPage));
+            get { return _isTSettingsPage; }
+            set
+            {
+                _isTSettingsPage = value;
+                OnPropertyChanged(nameof(IsTSettingsPage));
             }
         }
+
+        private bool _isSetTSettingsPage;
+
+        public bool IsSetTSettingsPage
+        {
+            get { return _isSetTSettingsPage; }
+            set
+            {
+                _isSetTSettingsPage = value;
+                OnPropertyChanged(nameof(IsSetTSettingsPage));
+            }
+        }
+
 
         #endregion
         ModesEntities _modesEntities;
@@ -138,7 +154,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetPointsPage = false;
                         IsSettingsPage = false;
                         IsJournalPage = false;
-                        IsVacationPage = false;
+                        IsTSettingsPage = false;
+                        IsSetTSettingsPage = false;
                     }
                     break;
                 case ActivePageState.ChooseModePage:
@@ -150,7 +167,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetPointsPage = false;
                         IsSettingsPage = false;
                         IsJournalPage = false;
-                        IsVacationPage = false;
+                        IsTSettingsPage = false;
+                        IsSetTSettingsPage = false;
                     }
                     break;
                 case ActivePageState.LoadingPage:
@@ -162,7 +180,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetPointsPage = false;
                         IsSettingsPage = false;
                         IsJournalPage = false;
-                        IsVacationPage = false;
+                        IsTSettingsPage = false;
+                        IsSetTSettingsPage = false;
                     }
                     break;
                 case ActivePageState.KithchenTimerPage:
@@ -174,7 +193,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetPointsPage = false;
                         IsSettingsPage = false;
                         IsJournalPage = false;
-                        IsVacationPage = false;
+                        IsTSettingsPage = false;
+                        IsSetTSettingsPage = false;
                         _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour;
                     }
                     break;
@@ -187,7 +207,8 @@ namespace Android_Silver.Entities.Visual
                         IsMainPage = false;
                         IsSettingsPage = false;
                         IsJournalPage = false;
-                        IsVacationPage = false;
+                        IsTSettingsPage = false;
+                        IsSetTSettingsPage = false;
                     }
                     break;
                 case ActivePageState.SettingsPage:
@@ -199,7 +220,8 @@ namespace Android_Silver.Entities.Visual
                         IsChooseModePage = false;
                         IsMainPage = false;
                         IsJournalPage = false;
-                        IsVacationPage = false;
+                        IsTSettingsPage = false;
+                        IsSetTSettingsPage = false;
                     }
                     break;
                 case ActivePageState.JournalPage:
@@ -211,12 +233,27 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
-                        IsVacationPage = false;
+                        IsTSettingsPage = false;
+                        IsSetTSettingsPage = false;
                     }
                     break;
-                case ActivePageState.VacationPage:
+                case ActivePageState.TSettingsPage:
                     {
-                        IsVacationPage = true;
+                        IsTSettingsPage = true;
+                        IsJournalPage = false;
+                        IsSettingsPage = false;
+                        IsSetPointsPage = false;
+                        IsKitchenTimerPage = false;
+                        IsLoadingPage = false;
+                        IsChooseModePage = false;
+                        IsMainPage = false;
+                        IsSetTSettingsPage = false;
+                    }
+                    break;
+                case ActivePageState.SetTSettingsPage:
+                    {
+                        IsSetTSettingsPage = true;
+                        IsTSettingsPage = false;
                         IsJournalPage = false;
                         IsSettingsPage = false;
                         IsSetPointsPage = false;
