@@ -538,7 +538,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            _modesEntities.Mode2ValuesList[2].TimeModeValues[0].DayNum=val;
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[0].DayNum = val;
                         }
                     }
                     break;
@@ -564,11 +564,11 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[0].CMode1Num!=val)
+                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[0].CMode1Num != val)
                             {
                                 _modesEntities.Mode2ValuesList[2].TimeModeValues[0].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
                             }
-                          
+
                         }
                     }
                     break;
@@ -950,10 +950,10 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                    //Получение режима 1
+                //Получение режима 1
                 case 338:
                     {
-                       GetTModeDay(2,0,resp.ValueString);
+                        GetTModeDay(2, 0, resp.ValueString);
                     }
                     break;
                 case 339:
@@ -969,6 +969,69 @@ namespace Android_Silver.Services
                 case 341:
                     {
                         GetTModeCMode1(2, 0, resp.ValueString);
+                    }
+                    break;
+                //Получение режима 2
+                case 342:
+                    {
+                        GetTModeDay(2, 1, resp.ValueString);
+                    }
+                    break;
+                case 343:
+                    {
+                        GetTModeHours(2, 1, resp.ValueString);
+                    }
+                    break;
+                case 344:
+                    {
+                        GetTModeMinutes(2, 1, resp.ValueString);
+                    }
+                    break;
+                case 345:
+                    {
+                        GetTModeCMode1(2, 1, resp.ValueString);
+                    }
+                    break;
+                //Получение режима 3
+                case 346:
+                    {
+                        GetTModeDay(2, 2, resp.ValueString);
+                    }
+                    break;
+                case 347:
+                    {
+                        GetTModeHours(2, 2, resp.ValueString);
+                    }
+                    break;
+                case 348:
+                    {
+                        GetTModeMinutes(2, 2, resp.ValueString);
+                    }
+                    break;
+                case 349:
+                    {
+                        GetTModeCMode1(2, 2, resp.ValueString);
+                    }
+                    break;
+                //Получение режима 4
+                case 350:
+                    {
+                        GetTModeDay(2, 3, resp.ValueString);
+                    }
+                    break;
+                case 351:
+                    {
+                        GetTModeHours(2, 3, resp.ValueString);
+                    }
+                    break;
+                case 352:
+                    {
+                        GetTModeMinutes(2, 3, resp.ValueString);
+                    }
+                    break;
+                case 353:
+                    {
+                        GetTModeCMode1(2, 3, resp.ValueString);
                     }
                     break;
             }
@@ -1090,7 +1153,7 @@ namespace Android_Silver.Services
                     _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1Num = val;
                 }
             }
-        } 
+        }
         #endregion
 
     }
