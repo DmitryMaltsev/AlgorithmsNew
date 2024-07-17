@@ -94,6 +94,11 @@ namespace Android_Silver.Services
                      {
                          messToClient = MessageToServer;
                      }
+                     else
+                     if (_activePageEntities.IsTSettingsPage)
+                     {
+                         messToClient = "137,16\r\n";
+                     }
                      if (!IsSending)
                      {
                          SendCommand(messToClient);
@@ -559,7 +564,11 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            _modesEntities.Mode2ValuesList[2].TimeModeValues[0].CMode1Num = val;
+                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[0].CMode1Num!=val)
+                            {
+                                _modesEntities.Mode2ValuesList[2].TimeModeValues[0].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
+                            }
+                          
                         }
                     }
                     break;
@@ -595,7 +604,10 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].CMode1Num = val;
+                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[1].CMode1Num != val)
+                            {
+                                _modesEntities.Mode2ValuesList[2].TimeModeValues[1].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
+                            }
                         }
                     }
                     break;
@@ -631,7 +643,10 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            _modesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1Num = val;
+                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1Num != val)
+                            {
+                                _modesEntities.Mode2ValuesList[2].TimeModeValues[2].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
+                            }
                         }
                     }
                     break;
@@ -667,7 +682,10 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            _modesEntities.Mode2ValuesList[2].TimeModeValues[3].CMode1Num = val;
+                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[3].CMode1Num != val)
+                            {
+                                _modesEntities.Mode2ValuesList[2].TimeModeValues[3].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
+                            }
                         }
                     }
                     break;
@@ -932,8 +950,33 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                    //Получение режима 1
+                case 338:
+                    {
+                       GetTModeDay(2,0,resp.ValueString);
+                    }
+                    break;
+                case 339:
+                    {
+                        GetTModeHours(2, 0, resp.ValueString);
+                    }
+                    break;
+                case 340:
+                    {
+                        GetTModeMinutes(2, 0, resp.ValueString);
+                    }
+                    break;
+                case 341:
+                    {
+                        GetTModeCMode1(2, 0, resp.ValueString);
+                    }
+                    break;
             }
         }
+
+
+
+
 
         private bool StringToFloat(string val, int precision, ref float result)
         {
@@ -1004,7 +1047,51 @@ namespace Android_Silver.Services
             MessageToServer += "\r\n";
         }
 
+        #region Получение временнных режимов
+        private void GetTModeDay(int m2Num, int tModeNum, string valueString)
+        {
+            if (int.TryParse(valueString, out int val))
+            {
+                if (val >= 0 && val <= 8)
+                {
+                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].DayNum = val;
+                }
+            }
+        }
 
+        private void GetTModeHours(int m2Num, int tModeNum, string valueString)
+        {
+            if (int.TryParse(valueString, out int val))
+            {
+                if (val >= 0 && val <= 23)
+                {
+                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Hour = val;
+                }
+            }
+        }
+
+        private void GetTModeMinutes(int m2Num, int tModeNum, string valueString)
+        {
+            if (int.TryParse(valueString, out int val))
+            {
+                if (val >= 0 && val <= 60)
+                {
+                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Minute = val;
+                }
+            }
+        }
+
+        private void GetTModeCMode1(int m2Num, int tModeNum, string valueString)
+        {
+            if (int.TryParse(valueString, out int val))
+            {
+                if (val >= 0 && val <= 5)
+                {
+                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1Num = val;
+                }
+            }
+        } 
+        #endregion
 
     }
 }

@@ -12,8 +12,6 @@ namespace Android_Silver.Entities.Modes
     public class TimeModeValues : BindableBase
     {
 
-
-
         private int _timeModeNum;
         public int TimeModeNum
         {
@@ -25,8 +23,7 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
-        private List<string> _days;
-        
+        private List<string> _days;       
         public List<string> Days
         {
             get { return _days; }
@@ -38,7 +35,6 @@ namespace Android_Silver.Entities.Modes
 
 
         private int _dayNum;
-
         public int DayNum
         {
             get { return _dayNum; }
@@ -122,13 +118,13 @@ namespace Android_Silver.Entities.Modes
             Days = new List<string>
             {
                 "Нет",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
+                "Пн",
+                "Вт",
+                "Ср",
+                "Чт",
+                "Пт",
+                "Сб",
+                "Вс",
                 "Все"
              };
             DayName = Days[0];

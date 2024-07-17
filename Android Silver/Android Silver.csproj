@@ -107,6 +107,8 @@
 	  <None Remove="Resources\Images\Базовые\общие кнопки\next_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\общие кнопки\ok_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\общие кнопки\settings_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\Режим времени\tmode_stroke_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Режим времени\tmode_stroke_on_base.png" />
 	  <None Remove="Resources\Images\Базовые\Уставки режимов\sp_dig_but_base.png" />
 	</ItemGroup>
 
@@ -165,6 +167,8 @@
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\next_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\ok_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\settings_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Режим времени\tmode_stroke_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Режим времени\tmode_stroke_on_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Уставки режимов\sp_dig_but_base.png" />
 	</ItemGroup>
 

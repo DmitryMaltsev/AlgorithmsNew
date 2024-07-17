@@ -209,7 +209,6 @@ namespace Android_Silver.Pages
         string _cData;
         public MainPageViewModel()
         {
-
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
             TcpClientService = DIContainer.Resolve<TcpClientService>();
@@ -235,7 +234,6 @@ namespace Android_Silver.Pages
             HomeCommand = new Command(ExecuteHomeCommand);
             ResetJournalCommand = new Command(ExecuteResetJournal);// ExecuteResetJournal();
             Value = 15;
-
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
@@ -272,12 +270,10 @@ namespace Android_Silver.Pages
             TSetReturnCommand = new Command(TSetExecuteReturn);
             #endregion
             //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
-            CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             SetTValuesByIndex(0, 0);
             StartTimer();
-
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIcon
-
         }
 
         async private void ExecuteConnect()
@@ -288,8 +284,8 @@ namespace Android_Silver.Pages
                 await TcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    //TcpClientService.SendRecieveTask("108,29");
-                    TcpClientService.SendRecieveTask("137,4");
+                    TcpClientService.SendRecieveTask("108,29");
+                   // TcpClientService.SendRecieveTask("137,4");
                 }
             }
             else
@@ -555,6 +551,13 @@ namespace Android_Silver.Pages
         private void ExecuteVacData(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.SetTSettingsPage);
+            int tIndex = (int)obj-1;
+            TimeModeValues tVal = CModesEntities.Mode2ValuesList[2].TimeModeValues[tIndex];
+            TValues = new TimeModeValues(tIndex, tVal.CMode1Num, tVal.WriteAddress);
+            TValues.SetTValues(tVal.CMode1Num, tVal.M1Image);
+            TValues.DayNum = tVal.DayNum;
+            TValues.Hour = tVal.Hour;
+            TValues.Minute= tVal.Minute;
         }
         #endregion
 
@@ -573,7 +576,7 @@ namespace Android_Silver.Pages
         private void TSetExecuteBtnUP1(object obj)
         {
             if (TValues != null)
-                TValues.Hour = TValues.Hour + 1 <= 60 ? TValues.Hour + 1 : 60;
+                TValues.Hour = TValues.Hour + 1 <= 23 ? TValues.Hour + 1 : 23;
         }
         private void TSetExecuteBtnDn1(object obj)
         {
@@ -640,10 +643,7 @@ namespace Android_Silver.Pages
             TValues.Hour = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Hour;
             TValues.Minute = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Minute;
         }
-
-
         #endregion
-
 
         Timer timer;
         private void StartTimer()

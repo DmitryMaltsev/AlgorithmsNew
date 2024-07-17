@@ -430,7 +430,7 @@
                                 <Label Text="{Binding DayName}" Grid.Column="2" Grid.ColumnSpan="5" FontSize="18"/>
                                 <Label Text="{Binding Hour, StringFormat='{0}ч.'}"  Grid.Column="7" Grid.ColumnSpan="3" FontSize="18"/>
                                 <Label Text="{Binding Minute, StringFormat='{0}м.'}" Grid.Column="10" Grid.ColumnSpan="3" FontSize="18"/>
-                                <Image Source="{Binding CMode1.MiniIcon}"  Grid.Column="13" Grid.ColumnSpan="5" WidthRequest="35"/>
+                                <Image Source="{Binding M1Image}"  Grid.Column="13" Grid.ColumnSpan="5" WidthRequest="35"/>
                                 <ImageButton Command="{Binding Source={x:Reference vacList}, Path=BindingContext.SetVacDataCommand}"
                                                               CommandParameter="{Binding TimeModeNum}" Source="{Binding StrokeImg.Current}" 
                                                            Pressed="VacPage_Pressed"  Grid.Column="0"  Grid.ColumnSpan="18" Aspect="Fill"/>
@@ -495,8 +495,7 @@
         <Label Text="Режим"  Grid.Row="8"  Grid.Column="13"  Style="{StaticResource SPsText}" 
                                                                          IsVisible = "{Binding   CActivePagesEntities.IsSetTSettingsPage}"/>
         <ImageButton  Source="{Binding  CPictureSet.DigitalButtonsDn[3].Current}"  Command="{Binding TSetBtnDnCommand3}" Grid.Row="10" Grid.Column="13"  
-             Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed3" Released="DnDigit_Released3"
-                                                                       IsVisible = "{Binding  CActivePagesEntities.IsSetTSettingsPage}"/>
+             Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed3" Released="DnDigit_Released3" IsVisible = "{Binding  CActivePagesEntities.IsSetTSettingsPage}"/>
         <!--#endregion-->
         <ImageButton Source="{Binding CPictureSet.OkButton.Current}" Command="{Binding TSetOkCommand}" Grid.Row="15" Grid.RowSpan="3" Grid.Column="5" Grid.ColumnSpan="8"
                        Pressed="OK_SPPressed" Released="Ok_SPReleased" IsVisible = "{Binding CActivePagesEntities.IsSetTSettingsPage}"/>

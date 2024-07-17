@@ -33,7 +33,8 @@ namespace Android_Silver.Entities.Modes
             for (int i = 0; i < count; i++)
             {
                 tModeList.Add(new TimeModeValues(i, CMode1.Num, StartAddress + i*4));
-                tModeList[i].StrokeImg = new PicByStates(_pictureSet.SelectStroke.Default, _pictureSet.SelectStroke.Selected);
+                tModeList[i].SetTValues(i, cMode1.MiniIcon);
+                tModeList[i].StrokeImg = new PicByStates(_pictureSet.TModeStroke.Default, _pictureSet.TModeStroke.Selected);
             }
             return tModeList;
         }

@@ -249,6 +249,19 @@ namespace Android_Silver.Entities.Visual
         }
         #endregion
 
+        #region Временные режимы
+        private PicByStates _tModeStroke;
+
+        public PicByStates TModeStroke
+        {
+            get { return _tModeStroke; }
+            set { 
+                _tModeStroke = value; }
+        }
+
+
+
+        #endregion
         private ObservableCollection<PicByStates> _activeModesPics = new ObservableCollection<PicByStates>();
 
         public ObservableCollection<PicByStates> ActiveModesPicks
@@ -376,6 +389,7 @@ namespace Android_Silver.Entities.Visual
                         ResetButton = new PicByStates("reset_but_base.png","test.jpg");
                         JournalStroke = "journal_stroke_base.png";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
+                        TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
                         CancelButton = new PicByStates("cancel_but_base.png", "test.jpg");
