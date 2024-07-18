@@ -552,12 +552,7 @@ namespace Android_Silver.Pages
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.SetTSettingsPage);
             int tIndex = (int)obj-1;
-            TimeModeValues tVal = CModesEntities.Mode2ValuesList[2].TimeModeValues[tIndex];
-            TValues = new TimeModeValues(tIndex, tVal.CMode1Num, tVal.WriteAddress);
-            TValues.SetTValues(tVal.CMode1Num, tVal.M1Image);
-            TValues.DayNum = tVal.DayNum;
-            TValues.Hour = tVal.Hour;
-            TValues.Minute= tVal.Minute;
+            SetTValuesByIndex(2, tIndex);
         }
         #endregion
 
@@ -627,7 +622,7 @@ namespace Android_Silver.Pages
             {
                 int[] values = { TValues.DayNum, TValues.Hour, TValues.Minute, TValues.CMode1Num };
                 TcpClientService.SetCommandToServer(TValues.WriteAddress, values);
-                CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+                CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
             }
         }
 
@@ -637,11 +632,12 @@ namespace Android_Silver.Pages
         /// <param name="index"></param>
         private void SetTValuesByIndex(int m2Num, int tModeNum)
         {
-            TValues = new TimeModeValues(CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].TimeModeNum,
-                                        CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1Num,
-                                        CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].WriteAddress);
-            TValues.Hour = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Hour;
-            TValues.Minute = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Minute;
+            var tVal = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum];
+            TValues = new TimeModeValues(tVal.TimeModeNum,tVal.CMode1Num, tVal.WriteAddress);
+            TValues.SetTValues(tVal.CMode1Num, tVal.M1Image);
+            TValues.DayNum = tVal.DayNum;
+            TValues.Hour = tVal.Hour;
+            TValues.Minute = tVal.Minute;
         }
         #endregion
 

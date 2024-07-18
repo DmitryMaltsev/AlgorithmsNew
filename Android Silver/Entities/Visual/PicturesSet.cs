@@ -264,13 +264,13 @@ namespace Android_Silver.Entities.Visual
         #endregion
         private ObservableCollection<PicByStates> _activeModesPics = new ObservableCollection<PicByStates>();
 
-        public ObservableCollection<PicByStates> ActiveModesPicks
+        public ObservableCollection<PicByStates> ActiveModesPics
         {
             get { return _activeModesPics; }
             set
             {
                 _activeModesPics = value;
-                OnPropertyChanged(nameof(ActiveModesPicks));
+                OnPropertyChanged(nameof(ActiveModesPics));
             }
         }
 
@@ -385,7 +385,7 @@ namespace Android_Silver.Entities.Visual
                         LoadingPic = "loading_pic_base.png";
                         Substrate = new PicByStates(def: "substrate_base.png", selected: "test.jpg");
                         Title = "title_base.png";
-                        BackButton = new PicByStates("back_arrow_base.png", "back_arrow_base.png");
+                        BackButton = new PicByStates("back_arrow_base.png", "test.jpg");
                         ResetButton = new PicByStates("reset_but_base.png","test.jpg");
                         JournalStroke = "journal_stroke_base.png";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
@@ -420,16 +420,16 @@ namespace Android_Silver.Entities.Visual
                         SettingsButton = new PicByStates("settings_but_base.png", "test.jpg");
                         #endregion
                         #region Кнопки активных режимов
-                        ActiveModesPicks = new ObservableCollection<PicByStates>();
-                        ActiveModesPicks.Add(new PicByStates("turnoff_but_on_base.png", "test.jpg"));
-                        ActiveModesPicks.Add(new PicByStates("min_but_on_base.png", "test.jpg"));
-                        ActiveModesPicks.Add(new PicByStates("norm_but_on_base.png", "test.jpg"));
-                        ActiveModesPicks.Add(new PicByStates("max_but_on_base.png", "test.jpg"));
-                        ActiveModesPicks.Add(new PicByStates("kitchen_but_on_base.png", "test.jpg"));
-                        ActiveModesPicks.Add(new PicByStates("vac_but_on_base.png", "test.jpg"));
-                        ActiveModesPicks.Add(new PicByStates("shed_but_on_base.png", "test.jpg"));
-                        ActiveModesPicks.Add(new PicByStates("alarm_but_base.png", "test.jpg"));
-                        ActiveModesPicks.Add(new PicByStates("spec_but_on_base.png", "test.jpg"));
+                        ActiveModesPics = new ObservableCollection<PicByStates>();
+                        ActiveModesPics.Add(new PicByStates("turnoff_but_on_base.png", "test.jpg"));
+                        ActiveModesPics.Add(new PicByStates("min_but_on_base.png", "test.jpg"));
+                        ActiveModesPics.Add(new PicByStates("norm_but_on_base.png", "test.jpg"));
+                        ActiveModesPics.Add(new PicByStates("max_but_on_base.png", "test.jpg"));
+                        ActiveModesPics.Add(new PicByStates("kitchen_but_on_base.png", "test.jpg"));
+                        ActiveModesPics.Add(new PicByStates("vac_but_on_base.png", "test.jpg"));
+                        ActiveModesPics.Add(new PicByStates("shed_but_on_base.png", "test.jpg"));
+                        ActiveModesPics.Add(new PicByStates("alarm_but_base.png", "test.jpg"));
+                        ActiveModesPics.Add(new PicByStates("spec_but_on_base.png", "test.jpg"));
                         #endregion
                         #region Кнопки выбора режимов
                         SelectModesPics = new ObservableCollection<PicByStates>();
@@ -456,14 +456,15 @@ namespace Android_Silver.Entities.Visual
                         IconsPics.Add(new PicByStates("min_icon_off_base.png", "min_icon_off_base.png"));
                         #endregion
                         #region Минииконки режимов
+                        //Что это и зачем нужно
                         MiniIconsPics = new ObservableCollection<string>();
-                        MiniIconsPics.Add("turnoff_but_on_base.png");
-                        MiniIconsPics.Add("min_but_on_base.png");
-                        MiniIconsPics.Add("norm_but_on_base.png");
-                        MiniIconsPics.Add("max_but_on_base.png");
-                        MiniIconsPics.Add("kitchen_but_on_base.png");
-                        MiniIconsPics.Add("shed_but_on_base.png");
-                        MiniIconsPics.Add("");
+                        MiniIconsPics.Add("turn_off_icon_off_base.png");
+                        MiniIconsPics.Add("min_icon_off_base.png");
+                        MiniIconsPics.Add("norm_icon_off_base.png");
+                        MiniIconsPics.Add("max_icon_off_base.png");
+                        MiniIconsPics.Add("kitchen_icon_off_base.png");
+                        MiniIconsPics.Add("vac_icon_off_base.png");
+                        MiniIconsPics.Add("shed_icon_off_base");
                         MiniIconsPics.Add("");
                         MiniIconsPics.Add("");
                         #endregion

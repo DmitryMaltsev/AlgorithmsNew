@@ -97,7 +97,7 @@ namespace Android_Silver.Services
                      else
                      if (_activePageEntities.IsTSettingsPage)
                      {
-                         messToClient = "137,16\r\n";
+                         messToClient = "167,16\r\n";
                      }
                      if (!IsSending)
                      {
@@ -533,7 +533,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Данные о режиме отпуска
-                case 137:
+                case 167:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -542,7 +542,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 138:
+                case 168:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -551,7 +551,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 139:
+                case 169:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -560,7 +560,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 140:
+                case 170:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -573,7 +573,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Строка 2
-                case 141:
+                case 171:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -582,7 +582,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 142:
+                case 172:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -591,7 +591,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 143:
+                case 173:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -600,7 +600,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 144:
+                case 174:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -612,7 +612,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Строка 3
-                case 145:
+                case 175:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -621,7 +621,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 146:
+                case 176:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -630,7 +630,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 147:
+                case 177:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -639,7 +639,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 148:
+                case 178:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -651,7 +651,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Строка 4
-                case 149:
+                case 179:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -660,7 +660,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 150:
+                case 180:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -669,7 +669,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 151:
+                case 181:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -678,7 +678,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 152:
+                case 182:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -1150,7 +1150,8 @@ namespace Android_Silver.Services
             {
                 if (val >= 0 && val <= 5)
                 {
-                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1Num = val;
+
+                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
                 }
             }
         }

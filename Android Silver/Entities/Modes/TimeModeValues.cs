@@ -109,7 +109,7 @@ namespace Android_Silver.Entities.Modes
 
 
 
-        public int CMode1Num { get; set; }
+        public int CMode1Num { get;private set; }
         public int WriteAddress { get;private set; }
 
         public TimeModeValues(int timeIndex, int cMode1Num, int startAddress)

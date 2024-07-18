@@ -1,13 +1,23 @@
 ﻿using Android_Silver.Entities.Visual;
+using Android_Silver.ViewModels;
 
 namespace Android_Silver.Entities.Modes
 {
-    public class Mode2Values
+    public class Mode2Values : BindableBase
     {
         public Mode1Values CMode1 { get; set; }
         public TimeModeValues CTimeMode { get; set; }
-        public List<TimeModeValues> TimeModeValues { get; set; } = new List<TimeModeValues>();
 
+        private List<TimeModeValues> _timeModeValues = new();
+
+        public List<TimeModeValues> TimeModeValues
+        {
+            get { return _timeModeValues; }
+            set { 
+                _timeModeValues = value; 
+                OnPropertyChanged(nameof(TimeModeValues));
+            }
+        }
         private PicturesSet _pictureSet;
 
         public int CNum { get; private set; }
@@ -21,8 +31,9 @@ namespace Android_Silver.Entities.Modes
             Mode2Icon = mode2Icon;
             cNum = CNum;
             CMode1 = cMode1;
-            TimeModeValues = SetTModes(tModesCount, CMode1);
             StartAddress = startAddress;
+            TimeModeValues = SetTModes(tModesCount, CMode1);
+          
         }
 
         private List<TimeModeValues> SetTModes(int count, Mode1Values cMode1)

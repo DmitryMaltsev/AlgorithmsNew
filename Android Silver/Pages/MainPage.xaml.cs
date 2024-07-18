@@ -69,6 +69,16 @@ namespace Android_Silver.Pages
                 ViewModel.CModesEntities.CMode1.ActiveModePics.Default;
         }
 
+        private void BackButton_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.BackButton.Current= ViewModel.CPictureSet.BackButton.Selected;
+        }
+
+        private void BackButton_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.BackButton.Current = ViewModel.CPictureSet.BackButton.Default;
+        }
+
         #region Choose modes callbacks
         private void Home_Pressed(object sender, EventArgs e)
         {
@@ -404,11 +414,8 @@ namespace Android_Silver.Pages
             ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[index - 1].StrokeImg.Current =
                  ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[index - 1].StrokeImg.Selected;
         }
-
-
-
-
         #endregion
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -420,5 +427,6 @@ namespace Android_Silver.Pages
             mainPageGrid.Resources.Clear();
         }
 
+   
     }
 }

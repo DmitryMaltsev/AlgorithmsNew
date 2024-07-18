@@ -73,6 +73,7 @@
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\kitchen_icon_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\max_icon_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\min_icon_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\norm_icon_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\shed_icon_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\turn_off_icon_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Иконки выбора режимов\vac_icon_off_base.png" />
@@ -103,6 +104,7 @@
 	  <None Remove="Resources\Images\Базовые\обзор\temp_exh_icon_base.png" />
 	  <None Remove="Resources\Images\Базовые\обзор\temp_street_icon_base.png" />
 	  <None Remove="Resources\Images\Базовые\обзор\temp_sup_icon_base.png" />
+	  <None Remove="Resources\Images\Базовые\общие кнопки\back_arrow_base.png" />
 	  <None Remove="Resources\Images\Базовые\общие кнопки\home_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\общие кнопки\next_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\общие кнопки\ok_but_base.png" />
@@ -126,13 +128,13 @@
 	  <MauiImage Include="Resources\Images\Базовые\Влажность\dig_img_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Главное меню\line.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Главное меню\substrate_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\Журнал\back_arrow_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Журнал\journal_stroke_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Журнал\reset_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Загрузка\loading_pic_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\kitchen_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\max_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\min_icon_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\norm_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\shed_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\turn_off_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Иконки выбора режимов\vac_icon_off_base.png" />
@@ -163,6 +165,7 @@
 	  <MauiImage Include="Resources\Images\Базовые\обзор\temp_exh_icon_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\обзор\temp_street_icon_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\обзор\temp_sup_icon_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\back_arrow_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\home_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\next_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\ok_but_base.png" />

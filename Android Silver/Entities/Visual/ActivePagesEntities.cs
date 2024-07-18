@@ -248,6 +248,11 @@ namespace Android_Silver.Entities.Visual
                         IsChooseModePage = false;
                         IsMainPage = false;
                         IsSetTSettingsPage = false;
+                        for (int i = 0; i < _modesEntities.Mode2ValuesList[2].TimeModeValues.Count; i++)
+                        {
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[i].StrokeImg.Current =
+                           _modesEntities.Mode2ValuesList[2].TimeModeValues[1].StrokeImg.Default;
+                        }
                     }
                     break;
                 case ActivePageState.SetTSettingsPage:
