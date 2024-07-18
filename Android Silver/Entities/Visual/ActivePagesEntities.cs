@@ -19,13 +19,13 @@ namespace Android_Silver.Entities.Visual
         SettingsPage,
         JournalPage,
         TSettingsPage,
-        SetTSettingsPage
+        SetTSettingsPage,
+        OtherSettingsPage
     }
 
     public class ActivePagesEntities : BindableBase
     {
         #region Rising properties
-
         private bool _isMainPage;
         public bool IsMainPage
         {
@@ -108,6 +108,19 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private bool _isOtherSettingsPage;
+
+        public bool IsOtherSettingsPage
+        {
+            get { return _isOtherSettingsPage; }
+            set
+            {
+                _isOtherSettingsPage = value;
+                OnPropertyChanged($"{nameof(IsOtherSettingsPage)}");
+            }
+        }
+
+
         private bool _isTSettingsPage;
 
         public bool IsTSettingsPage
@@ -156,6 +169,7 @@ namespace Android_Silver.Entities.Visual
                         IsJournalPage = false;
                         IsTSettingsPage = false;
                         IsSetTSettingsPage = false;
+                        IsOtherSettingsPage = false;
                     }
                     break;
                 case ActivePageState.ChooseModePage:
@@ -169,6 +183,7 @@ namespace Android_Silver.Entities.Visual
                         IsJournalPage = false;
                         IsTSettingsPage = false;
                         IsSetTSettingsPage = false;
+                        IsOtherSettingsPage = false;
                     }
                     break;
                 case ActivePageState.LoadingPage:
@@ -182,6 +197,7 @@ namespace Android_Silver.Entities.Visual
                         IsJournalPage = false;
                         IsTSettingsPage = false;
                         IsSetTSettingsPage = false;
+                        IsOtherSettingsPage = false;
                     }
                     break;
                 case ActivePageState.KithchenTimerPage:
@@ -195,6 +211,7 @@ namespace Android_Silver.Entities.Visual
                         IsJournalPage = false;
                         IsTSettingsPage = false;
                         IsSetTSettingsPage = false;
+                        IsOtherSettingsPage = false;
                         _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour;
                     }
                     break;
@@ -209,6 +226,7 @@ namespace Android_Silver.Entities.Visual
                         IsJournalPage = false;
                         IsTSettingsPage = false;
                         IsSetTSettingsPage = false;
+                        IsOtherSettingsPage = false;
                     }
                     break;
                 case ActivePageState.SettingsPage:
@@ -222,6 +240,7 @@ namespace Android_Silver.Entities.Visual
                         IsJournalPage = false;
                         IsTSettingsPage = false;
                         IsSetTSettingsPage = false;
+                        IsOtherSettingsPage = false;
                     }
                     break;
                 case ActivePageState.JournalPage:
@@ -235,6 +254,7 @@ namespace Android_Silver.Entities.Visual
                         IsMainPage = false;
                         IsTSettingsPage = false;
                         IsSetTSettingsPage = false;
+                        IsOtherSettingsPage = false;
                     }
                     break;
                 case ActivePageState.TSettingsPage:
@@ -248,6 +268,7 @@ namespace Android_Silver.Entities.Visual
                         IsChooseModePage = false;
                         IsMainPage = false;
                         IsSetTSettingsPage = false;
+                        IsOtherSettingsPage = false;
                         for (int i = 0; i < _modesEntities.Mode2ValuesList[2].TimeModeValues.Count; i++)
                         {
                             _modesEntities.Mode2ValuesList[2].TimeModeValues[i].StrokeImg.Current =
@@ -258,6 +279,21 @@ namespace Android_Silver.Entities.Visual
                 case ActivePageState.SetTSettingsPage:
                     {
                         IsSetTSettingsPage = true;
+                        IsTSettingsPage = false;
+                        IsJournalPage = false;
+                        IsSettingsPage = false;
+                        IsSetPointsPage = false;
+                        IsKitchenTimerPage = false;
+                        IsLoadingPage = false;
+                        IsChooseModePage = false;
+                        IsMainPage = false;
+                        IsOtherSettingsPage = false;
+                    }
+                    break;
+                case ActivePageState.OtherSettingsPage:
+                    {
+                        IsOtherSettingsPage = true;
+                        IsSetTSettingsPage = false;
                         IsTSettingsPage = false;
                         IsJournalPage = false;
                         IsSettingsPage = false;

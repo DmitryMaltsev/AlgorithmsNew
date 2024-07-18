@@ -262,6 +262,41 @@ namespace Android_Silver.Entities.Visual
 
 
         #endregion
+
+        #region Настройки прочие
+        private PicByStates _defaultBut;
+
+        public PicByStates DefaultBut
+        {
+            get { return _defaultBut; }
+            set {
+                _defaultBut = value;
+                OnPropertyChanged(nameof(DefaultBut));
+            }
+        }
+
+        private PicByStates _arrowButLeft;
+        public PicByStates ArrowButLeft
+        {
+            get { return _arrowButLeft; }
+            set { 
+                _arrowButLeft = value;
+                OnPropertyChanged(nameof(_arrowButLeft));
+            }
+        }
+
+        private PicByStates _arrowButRight;
+
+        public PicByStates ArrowButRight
+        {
+            get { return _arrowButRight; }
+            set { 
+                _arrowButRight = value; 
+                OnPropertyChanged($"{nameof(ArrowButRight)}");
+            }
+        }
+        #endregion
+
         private ObservableCollection<PicByStates> _activeModesPics = new ObservableCollection<PicByStates>();
 
         public ObservableCollection<PicByStates> ActiveModesPics
@@ -390,6 +425,10 @@ namespace Android_Silver.Entities.Visual
                         JournalStroke = "journal_stroke_base.png";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
+                        DefaultBut = new PicByStates("other_set_but_off_base.png","test.jpg");
+                        ArrowButLeft = new PicByStates("but_left_off_base", "test.jpg");
+                        ArrowButRight = new PicByStates("but_right_off_base", "test.jpg");
+
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
                         CancelButton = new PicByStates("cancel_but_base.png", "test.jpg");
