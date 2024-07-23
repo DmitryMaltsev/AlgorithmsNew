@@ -4,7 +4,6 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
-
 using System;
 using System.Net.Sockets;
 using System.Reflection;
@@ -179,10 +178,9 @@ namespace Android_Silver.Pages
 
         #region Other settings commands
         public ICommand OtherSettingsReturnCommand { get; private set; }
-
-
-
+        public ICommand NextOtherSettingsCommand { get; private set; }
         #endregion
+
         #region ResetCommand
         public ICommand ResetJournalCommand { get; private set; }
 
@@ -236,6 +234,7 @@ namespace Android_Silver.Pages
             VacationCommand = new Command(ExecuteVacation);
             HomeCommand = new Command(ExecuteHomeCommand);
             ResetJournalCommand = new Command(ExecuteResetJournal);// ExecuteResetJournal();
+            NextOtherSettingsCommand = new Command(ExecuteNextOtherSetiings);
             Value = 15;
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
@@ -281,11 +280,14 @@ namespace Android_Silver.Pages
 
             #endregion
             //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
-            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.SetPointsPage);
             SetTValuesByIndex(0, 0);
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIcon
         }
+
+  
+
         async private void ExecuteConnect()
         {
             EthernetEntities.SystemMessage = "Check";
@@ -568,6 +570,11 @@ namespace Android_Silver.Pages
         private void ExecuteOtherSettingsReturn(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
+        }
+
+        private void ExecuteNextOtherSetiings(object obj)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

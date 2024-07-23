@@ -71,7 +71,7 @@ namespace Android_Silver.Pages
 
         private void BackButton_Pressed(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.BackButton.Current= ViewModel.CPictureSet.BackButton.Selected;
+            ViewModel.CPictureSet.BackButton.Current = ViewModel.CPictureSet.BackButton.Selected;
         }
 
         private void BackButton_Released(object sender, EventArgs e)
@@ -401,7 +401,7 @@ namespace Android_Silver.Pages
         }
         #endregion
 
-        #region VacPags
+        #region VacPage
         private void VacPage_Pressed(object sender, EventArgs e)
         {
             for (int i = 0; i < ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues.Count; i++)
@@ -413,6 +413,37 @@ namespace Android_Silver.Pages
             int index =(int)clickedButton.CommandParameter;
             ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[index - 1].StrokeImg.Current =
                  ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[index - 1].StrokeImg.Selected;
+        }
+        #endregion
+
+        #region OtherSettings Page
+        private void FilterChanged_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.FilterChangedBut.Current = ViewModel.CPictureSet.FilterChangedBut.Selected;
+        }
+
+        private void FilterChanged_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.FilterChangedBut.Current = ViewModel.CPictureSet.FilterChangedBut.Default;
+        }
+        private void Time_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.TimeBut.Current = ViewModel.CPictureSet.TimeBut.Selected;
+        }
+
+        private void Time_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.TimeBut.Current = ViewModel.CPictureSet.TimeBut.Default;
+        }
+
+        private void Humidity_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.HumidityBut.Current = ViewModel.CPictureSet.HumidityBut.Selected;
+        }
+
+        private void Humidity_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.HumidityBut.Current = ViewModel.CPictureSet.HumidityBut.Default;
         }
         #endregion
 

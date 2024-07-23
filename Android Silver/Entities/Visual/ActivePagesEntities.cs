@@ -20,7 +20,8 @@ namespace Android_Silver.Entities.Visual
         JournalPage,
         TSettingsPage,
         SetTSettingsPage,
-        OtherSettingsPage
+        OtherSettingsPage,
+        OtherSettingsPage2
     }
 
     public class ActivePagesEntities : BindableBase

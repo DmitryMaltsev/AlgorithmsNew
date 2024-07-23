@@ -264,14 +264,35 @@ namespace Android_Silver.Entities.Visual
         #endregion
 
         #region Настройки прочие
-        private PicByStates _defaultBut;
-
-        public PicByStates DefaultBut
+        private PicByStates _filterChangedBut;
+        public PicByStates FilterChangedBut
         {
-            get { return _defaultBut; }
+            get { return _filterChangedBut; }
             set {
-                _defaultBut = value;
-                OnPropertyChanged(nameof(DefaultBut));
+                _filterChangedBut = value;
+                OnPropertyChanged(nameof(FilterChangedBut));
+            }
+        }
+
+        private PicByStates _timeBut;
+        public PicByStates TimeBut
+        {
+            get { return _timeBut; }
+            set
+            {
+                _timeBut = value;
+                OnPropertyChanged(nameof(TimeBut));
+            }
+        }
+
+        private PicByStates _humidityBut;
+        public PicByStates HumidityBut
+        {
+            get { return _humidityBut; }
+            set
+            {
+                _humidityBut = value;
+                OnPropertyChanged(nameof(HumidityBut));
             }
         }
 
@@ -425,9 +446,7 @@ namespace Android_Silver.Entities.Visual
                         JournalStroke = "journal_stroke_base.png";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
-                        DefaultBut = new PicByStates("other_set_but_off_base.png","test.jpg");
-                        ArrowButLeft = new PicByStates("but_left_off_base", "test.jpg");
-                        ArrowButRight = new PicByStates("but_right_off_base", "test.jpg");
+                     
 
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
@@ -513,6 +532,13 @@ namespace Android_Silver.Entities.Visual
                         SettingsOtherBut = new PicByStates("settings_other_but_base.jpg", "test.jpg");
                         ShedSetBut = new PicByStates("shed_set_but_base.jpg", "test.jpg");
                         VacSetBut = new PicByStates("vac_set_but_base.jpg", "test.jpg");
+                        #endregion
+                        #region Другие настройки
+                        FilterChangedBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
+                        TimeBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
+                        HumidityBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
+                        ArrowButLeft = new PicByStates("but_left_off_base.png", "test.jpg");
+                        ArrowButRight = new PicByStates("but_right_off_base.png", "test.jpg");
                         #endregion
                     }
                     break;
