@@ -280,7 +280,7 @@ namespace Android_Silver.Pages
 
             #endregion
             //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
-            CActivePagesEntities.SetActivePageState(ActivePageState.SetPointsPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
             SetTValuesByIndex(0, 0);
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIcon
