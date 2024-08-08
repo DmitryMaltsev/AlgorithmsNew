@@ -13,7 +13,6 @@ namespace Android_Silver.Pages
 {
     public class MainPageViewModel : BindableBase
     {
-
         #region Rising properties
         private int _value;
         public int Value
@@ -27,7 +26,6 @@ namespace Android_Silver.Pages
         }
 
         private string _messageToServer = "Test";
-
 
         private string _messageToClient;
         public string MessageToClient
@@ -109,6 +107,17 @@ namespace Android_Silver.Pages
             }
         }
 
+        private string _contactModeImg;
+
+        public string ContactModeImg
+        {
+            get { return _contactModeImg; }
+            set {
+                _contactModeImg = value; 
+                OnPropertyChanged(nameof(_contactModeImg));
+            }
+        }
+
 
         #endregion
 
@@ -122,6 +131,7 @@ namespace Android_Silver.Pages
         public ICommand ChooseModeCommand { get; private set; }
         public ICommand GoToPageCommand { get; private set; }
         public ICommand SetVacDataCommand { get; private set; }
+
         #endregion
         #region Choose mode page commands
         public ICommand MinModeCommand { get; private set; }
@@ -160,7 +170,7 @@ namespace Android_Silver.Pages
 
         #endregion
         #region TSettingsCommands
-
+        public ICommand TRetCommand { get; private set; }
         #endregion
         #region SetTSettingsCommands
         public ICommand TSetReturnCommand { get; private set; }
@@ -175,14 +185,18 @@ namespace Android_Silver.Pages
         public ICommand TSetBtnUpCommand3 { get; private set; }
         public ICommand TSetBtnDnCommand3 { get; private set; }
         #endregion
-
         #region Other settings commands
         public ICommand OtherSettingsReturnCommand { get; private set; }
         public ICommand NextOtherSettingsCommand { get; private set; }
+        public ICommand ContactArrLeftCommand { get; private set; } 
+        public ICommand ContactArrRightCommand { get; private set; }
         #endregion
-
         #region ResetCommand
         public ICommand ResetJournalCommand { get; private set; }
+
+        #endregion
+        #region MyRegion
+        public ICommand JournalReturnCommand { get; private set; }
 
         #endregion
         // public ICommand SettingsCommand { get; private set; }
@@ -203,7 +217,6 @@ namespace Android_Silver.Pages
         public ActivePagesEntities CActivePagesEntities { get; set; }
 
         public Alarms CAlarms { get; set; }
-
 
         NetworkStream _stream;
         int counter = 0;
@@ -235,6 +248,10 @@ namespace Android_Silver.Pages
             HomeCommand = new Command(ExecuteHomeCommand);
             ResetJournalCommand = new Command(ExecuteResetJournal);// ExecuteResetJournal();
             NextOtherSettingsCommand = new Command(ExecuteNextOtherSetiings);
+            JournalReturnCommand = new Command(ExecuteJournalReturn);
+            ContactArrLeftCommand = new Command(ExecuteContactArrLeft);
+            ContactArrRightCommand = new Command(ExecuteContactArrRight);
+
             Value = 15;
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
@@ -259,8 +276,11 @@ namespace Android_Silver.Pages
             #region Vac commands
             SetVacDataCommand = new Command(ExecuteVacData);
             #endregion
+            #region TCommands
+            TRetCommand = new Command(ExecuteTRet);
+            #endregion
             #region TSet commands
-            TSetOkCommand = new Command(TSetExecuteOK);
+               TSetOkCommand = new Command(TSetExecuteOK);
             TSetBtnUpCommand0 = new Command(TSetExecuteBtnUP0);
             TSetBtnDnCommand0 = new Command(TSetExecuteBtnDn0);
             TSetBtnUpCommand1 = new Command(TSetExecuteBtnUP1);
@@ -280,14 +300,13 @@ namespace Android_Silver.Pages
 
             #endregion
             //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
-            CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
             SetTValuesByIndex(0, 0);
             StartTimer();
-            // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIcon
+            // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
+            var contactM1Num = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1Num;
+            ContactModeImg = CModesEntities.Mode1ValuesList[contactM1Num].MiniIcon;
         }
-
-  
-
         async private void ExecuteConnect()
         {
             EthernetEntities.SystemMessage = "Check";
@@ -567,6 +586,21 @@ namespace Android_Silver.Pages
         #endregion
 
         #region Execute other settings
+
+        private void ExecuteContactArrLeft(object obj)
+        {
+            int contactM1Num = CModesEntities.Mode2ValuesList[4].CMode1.Num;
+            CModesEntities.Mode2ValuesList[4].CMode1.Num = contactM1Num > 0 ? contactM1Num - 1 : 0;
+            ContactModeImg = CModesEntities.Mode2ValuesList[4].CMode1.MiniIcon;
+        }
+        private void ExecuteContactArrRight(object obj)
+        {
+            int contactM1Num = CModesEntities.Mode2ValuesList[4].CMode1.Num;
+            contactM1Num = contactM1Num < 5 ? contactM1Num + 1 : 5;
+         //  CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1Num=contactM1Num;
+            ContactModeImg = CModesEntities.Mode2ValuesList[4].CMode1.MiniIcon;
+        }
+
         private void ExecuteOtherSettingsReturn(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
@@ -585,6 +619,20 @@ namespace Android_Silver.Pages
             int tIndex = (int)obj - 1;
             SetTValuesByIndex(2, tIndex);
         }
+
+        private void ExecuteTRet(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
+        }
+        #endregion
+
+        #region Execute journal
+        private void ExecuteJournalReturn(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
+        }
+
+
         #endregion
 
         #region TSet execute methods
@@ -663,8 +711,8 @@ namespace Android_Silver.Pages
         /// <param name="index"></param>
         private void SetTValuesByIndex(int m2Num, int tModeNum)
         {
-            var tVal = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum];
-            TValues = new TimeModeValues(tVal.TimeModeNum, tVal.CMode1Num, tVal.WriteAddress);
+            TimeModeValues tVal = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum];
+            TValues = new TimeModeValues(tVal.TimeModeNum, tVal.CMode1Num, tVal.WriteAddress, tVal.TimeModeNum);
             TValues.SetTValues(tVal.CMode1Num, tVal.M1Image);
             TValues.DayNum = tVal.DayNum;
             TValues.Hour = tVal.Hour;

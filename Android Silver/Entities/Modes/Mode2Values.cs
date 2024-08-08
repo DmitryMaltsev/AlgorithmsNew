@@ -18,6 +18,7 @@ namespace Android_Silver.Entities.Modes
                 OnPropertyChanged(nameof(TimeModeValues));
             }
         }
+
         private PicturesSet _pictureSet;
 
         public int CNum { get; private set; }
@@ -43,7 +44,7 @@ namespace Android_Silver.Entities.Modes
             CMode1 = cMode1;
             for (int i = 0; i < count; i++)
             {
-                tModeList.Add(new TimeModeValues(i, CMode1.Num, StartAddress + i*4));
+                tModeList.Add(new TimeModeValues(i, CMode1.Num, StartAddress + i*4, i+1));
                 tModeList[i].SetTValues(i, cMode1.MiniIcon);
                 tModeList[i].StrokeImg = new PicByStates(_pictureSet.TModeStroke.Default, _pictureSet.TModeStroke.Selected);
             }

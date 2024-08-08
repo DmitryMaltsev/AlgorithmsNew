@@ -94,7 +94,9 @@
 	  <None Remove="Resources\Images\Базовые\Кнопки выбора режимов\turnoff_but_select_on_base.png" />
 	  <None Remove="Resources\Images\Базовые\Кнопки выбора режимов\vac_but_select_on_base.png" />
 	  <None Remove="Resources\Images\Базовые\Настройки прочие\but_left_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Настройки прочие\but_left_on_base.png" />
 	  <None Remove="Resources\Images\Базовые\Настройки прочие\but_right_off_base.png" />
+	  <None Remove="Resources\Images\Базовые\Настройки прочие\but_right_on_base.png" />
 	  <None Remove="Resources\Images\Базовые\Настройки прочие\other_set_but_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Настройки\journal_but_base.jpg" />
 	  <None Remove="Resources\Images\Базовые\Настройки\modes_set_but_base.jpg" />
@@ -158,7 +160,9 @@
 	  <MauiImage Include="Resources\Images\Базовые\Кнопки выбора режимов\turnoff_but_select_on_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Кнопки выбора режимов\vac_but_select_on_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Настройки прочие\but_left_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Настройки прочие\but_left_on_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Настройки прочие\but_right_off_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\Настройки прочие\but_right_on_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Настройки прочие\other_set_but_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Настройки\journal_but_base.jpg" />
 	  <MauiImage Include="Resources\Images\Базовые\Настройки\modes_set_but_base.jpg" />

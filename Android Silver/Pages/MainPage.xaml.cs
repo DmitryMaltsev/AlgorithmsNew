@@ -401,6 +401,8 @@ namespace Android_Silver.Pages
         }
         #endregion
 
+
+
         #region VacPage
         private void VacPage_Pressed(object sender, EventArgs e)
         {
@@ -445,6 +447,27 @@ namespace Android_Silver.Pages
         {
             ViewModel.CPictureSet.HumidityBut.Current = ViewModel.CPictureSet.HumidityBut.Default;
         }
+
+        private void ArrowButLeft_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.ArrowButLeft.Current = ViewModel.CPictureSet.ArrowButLeft.Selected;
+        }
+
+        private void ArrowButLeft_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.ArrowButLeft.Current = ViewModel.CPictureSet.ArrowButLeft.Default;
+        }
+
+        private void ArrowButRight_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.ArrowButRight.Current = ViewModel.CPictureSet.ArrowButRight.Selected;
+        }
+
+        private void ArrowButRight_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.ArrowButRight.Current = ViewModel.CPictureSet.ArrowButRight.Default;
+        }
+
         #endregion
 
         protected override void OnAppearing()

@@ -23,6 +23,7 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
+
         private List<string> _days;       
         public List<string> Days
         {
@@ -112,9 +113,9 @@ namespace Android_Silver.Entities.Modes
         public int CMode1Num { get;private set; }
         public int WriteAddress { get;private set; }
 
-        public TimeModeValues(int timeIndex, int cMode1Num, int startAddress)
+        public TimeModeValues(int timeIndex, int cMode1Num, int startAddress, int tModeNum)
         {
-            TimeModeNum= timeIndex+1;
+            TimeModeNum = tModeNum;
             Days = new List<string>
             {
                 "Нет",
@@ -136,6 +137,7 @@ namespace Android_Silver.Entities.Modes
         {
             CMode1Num= m1Index;
             M1Image= image;
+
         }
     }
 }

@@ -264,6 +264,16 @@ namespace Android_Silver.Entities.Visual
         #endregion
 
         #region Настройки прочие
+        private string  _contactBackGround;
+        public string  ContactBackGround
+        {
+            get { return _contactBackGround; }
+            set { 
+                _contactBackGround = value; 
+                OnPropertyChanged(nameof(ContactBackGround));
+            }
+        }
+
         private PicByStates _filterChangedBut;
         public PicByStates FilterChangedBut
         {
@@ -537,8 +547,9 @@ namespace Android_Silver.Entities.Visual
                         FilterChangedBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
                         TimeBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
                         HumidityBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
-                        ArrowButLeft = new PicByStates("but_left_off_base.png", "test.jpg");
-                        ArrowButRight = new PicByStates("but_right_off_base.png", "test.jpg");
+                        ArrowButLeft = new PicByStates("but_left_off_base.png","but_left_on_base.png");
+                        ArrowButRight = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
+                        ContactBackGround = "other_set_but_off_base.png";
                         #endregion
                     }
                     break;

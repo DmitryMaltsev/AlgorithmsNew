@@ -62,6 +62,10 @@ namespace Android_Silver.Entities.Modes
             Mode2ValuesList.Add(new Mode2Values(2, 4, _cPicturesSet.ActiveModesPics[5].Default, Mode1ValuesList[0], 338));
             //Режим  календаря
             Mode2ValuesList.Add(new Mode2Values(3, 28, _cPicturesSet.ActiveModesPics[6].Default, Mode1ValuesList[0],0));
+            //Режим по контакту
+            Mode2ValuesList.Add(new Mode2Values(4, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
+            //Специальный режим
+            Mode2ValuesList.Add(new Mode2Values(5, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
             CMode1 = Mode1ValuesList[0];
             CMode2 = Mode2ValuesList[0];
         }
