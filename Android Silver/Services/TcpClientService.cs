@@ -562,14 +562,7 @@ namespace Android_Silver.Services
                     break;
                 case 170:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[0].Mode1Num != val)
-                            {
-                                _modesEntities.Mode2ValuesList[2].TimeModeValues[0].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
-                            }
-
-                        }
+                        GetTModeCMode1(2, 0, resp.ValueString);
                     }
                     break;
                 //Строка 2
@@ -602,13 +595,7 @@ namespace Android_Silver.Services
                     break;
                 case 174:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[1].Mode1Num != val)
-                            {
-                                _modesEntities.Mode2ValuesList[2].TimeModeValues[1].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
-                            }
-                        }
+                        GetTModeCMode1(2, 1, resp.ValueString);
                     }
                     break;
                 //Строка 3
@@ -641,13 +628,8 @@ namespace Android_Silver.Services
                     break;
                 case 178:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[2].Mode1Num != val)
-                            {
-                                _modesEntities.Mode2ValuesList[2].TimeModeValues[2].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
-                            }
-                        }
+                        GetTModeCMode1(2, 2, resp.ValueString);
+                       
                     }
                     break;
                 //Строка 4
@@ -680,13 +662,7 @@ namespace Android_Silver.Services
                     break;
                 case 182:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[3].Mode1Num != val)
-                            {
-                                _modesEntities.Mode2ValuesList[2].TimeModeValues[3].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
-                            }
-                        }
+                        GetTModeCMode1(2, 3, resp.ValueString);
                     }
                     break;
                 //Проверка того, что данные записаны
@@ -1148,10 +1124,10 @@ namespace Android_Silver.Services
         {
             if (int.TryParse(valueString, out int val))
             {
-                if (val >= 0 && val <= 5)
+                if (val >= 0 && val <= 5 && _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1.Num!= val)
                 {
 
-                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
+                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1 = _modesEntities.Mode1ValuesList[val];
                 }
             }
         }

@@ -301,8 +301,7 @@ namespace Android_Silver.Pages
             SetTValuesByIndex(0, 0);
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
-            var contactM1Num = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].Mode1Num;
-            ContactModeImg = CModesEntities.Mode1ValuesList[contactM1Num].MiniIcon;
+            ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
         }
         async private void ExecuteConnect()
         {
@@ -320,7 +319,6 @@ namespace Android_Silver.Pages
             {
                 EthernetEntities.SystemMessage = "В данный момент подключаемся";
             }
-
         }
 
         #region Main page execute methods
@@ -586,18 +584,19 @@ namespace Android_Silver.Pages
 
         private void ExecuteContactArrLeft(object obj)
         {
-            int contactM1Num = CModesEntities.Mode2ValuesList[4].CMode1.Num;
+            var contactTMode = CModesEntities.Mode2ValuesList[4].TimeModeValues[0];
+            int contactM1Num = contactTMode.CMode1.Num;
             contactM1Num = contactM1Num > 0 ? contactM1Num - 1 : 0;
-            CModesEntities.Mode2ValuesList[4].CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
-            ContactModeImg = CModesEntities.Mode2ValuesList[4].CMode1.MiniIcon;
+            contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
+            ContactModeImg = contactTMode.CMode1.MiniIcon;
         }
         private void ExecuteContactArrRight(object obj)
         {
-            int contactM1Num = CModesEntities.Mode2ValuesList[4].CMode1.Num;
+            var contactTMode = CModesEntities.Mode2ValuesList[4].TimeModeValues[0];
+            int contactM1Num = contactTMode.CMode1.Num;
             contactM1Num = contactM1Num < 5 ? contactM1Num + 1 : 5;
-            //  CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1Num=contactM1Num;
-            CModesEntities.Mode2ValuesList[4].CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
-            ContactModeImg = CModesEntities.Mode2ValuesList[4].CMode1.MiniIcon;
+            contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
+            ContactModeImg = contactTMode.CMode1.MiniIcon;
         }
 
         private void ExecuteOtherSettingsReturn(object obj)
@@ -672,21 +671,18 @@ namespace Android_Silver.Pages
         {
             if (TValues != null)
             {
-                int mode1Num = TValues.Mode1Num;
+                int mode1Num = TValues.CMode1.Num;
                 mode1Num = mode1Num + 1 <= 5 ? mode1Num + 1 : 5;
-                TValues.SetTValues(mode1Num, CModesEntities.Mode1ValuesList[mode1Num].MiniIcon);
-
+                TValues.CMode1 = CModesEntities.Mode1ValuesList[mode1Num];
             }
         }
         private void TSetExecuteBtnDn3(object obj)
         {
             if (TValues != null)
             {
-                int mode1Num = TValues.Mode1Num;
+                int mode1Num = TValues.CMode1.Num;
                 mode1Num = mode1Num - 1 >= 0 ? mode1Num - 1 : 0;
-
-                TValues.SetTValues(mode1Num, CModesEntities.Mode1ValuesList[mode1Num].MiniIcon);
-
+                TValues.CMode1 = CModesEntities.Mode1ValuesList[mode1Num];
             }
         }
 
@@ -698,7 +694,7 @@ namespace Android_Silver.Pages
         {
             if (TValues != null)
             {
-                int[] values = { TValues.DayNum, TValues.Hour, TValues.Minute, TValues.Mode1Num };
+                int[] values = { TValues.DayNum, TValues.Hour, TValues.Minute, TValues.CMode1.Num};
                 TcpClientService.SetCommandToServer(TValues.WriteAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
             }
@@ -711,8 +707,7 @@ namespace Android_Silver.Pages
         private void SetTValuesByIndex(int m2Num, int tModeNum)
         {
             TimeModeValues tVal = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum];
-            TValues = new TimeModeValues(tVal.TimeModeNum, tVal.Mode1Num, tVal.WriteAddress, tVal.TimeModeNum);
-            TValues.SetTValues(tVal.Mode1Num, tVal.M1Image);
+            TValues = new TimeModeValues(tVal.TimeModeNum, tVal.CMode1, tVal.WriteAddress, tVal.TimeModeNum);
             TValues.DayNum = tVal.DayNum;
             TValues.Hour = tVal.Hour;
             TValues.Minute = tVal.Minute;

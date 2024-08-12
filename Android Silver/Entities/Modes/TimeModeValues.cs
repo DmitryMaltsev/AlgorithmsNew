@@ -97,22 +97,20 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
-        private string _m1Image;
+        private Mode1Values _cMode1;
 
-        public string M1Image
+        public Mode1Values CMode1
         {
-            get { return _m1Image; }
+            get { return _cMode1; }
             set { 
-                _m1Image = value;
-                OnPropertyChanged(nameof(M1Image));
+                _cMode1 = value;
+                OnPropertyChanged(nameof(CMode1));
             }
         }
 
-
-        public int Mode1Num { get;private set; }
         public int WriteAddress { get;private set; }
 
-        public TimeModeValues(int timeIndex, int cMode1Num, int startAddress, int tModeNum)
+        public TimeModeValues(int timeIndex, Mode1Values mode1, int startAddress, int tModeNum)
         {
             TimeModeNum = tModeNum;
             Days = new List<string>
@@ -128,14 +126,8 @@ namespace Android_Silver.Entities.Modes
                 "Все"
              };
             DayName = Days[0];
-            Mode1Num = cMode1Num;  
+            CMode1 = _cMode1;  
             WriteAddress = startAddress;
-        }
-
-        public void SetTValues(int m1Index, string image)
-        {
-            Mode1Num= m1Index;
-            M1Image= image;
         }
     }
 }
