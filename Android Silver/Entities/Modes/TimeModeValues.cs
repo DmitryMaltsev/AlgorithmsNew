@@ -109,8 +109,7 @@ namespace Android_Silver.Entities.Modes
         }
 
 
-
-        public int CMode1Num { get;private set; }
+        public int Mode1Num { get;private set; }
         public int WriteAddress { get;private set; }
 
         public TimeModeValues(int timeIndex, int cMode1Num, int startAddress, int tModeNum)
@@ -129,15 +128,14 @@ namespace Android_Silver.Entities.Modes
                 "Все"
              };
             DayName = Days[0];
-            CMode1Num = cMode1Num;  
+            Mode1Num = cMode1Num;  
             WriteAddress = startAddress;
         }
 
         public void SetTValues(int m1Index, string image)
         {
-            CMode1Num= m1Index;
+            Mode1Num= m1Index;
             M1Image= image;
-
         }
     }
 }

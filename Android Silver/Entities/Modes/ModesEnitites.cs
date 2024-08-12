@@ -40,6 +40,7 @@ namespace Android_Silver.Entities.Modes
 
         public List<Mode2Values> Mode2ValuesList { get; set; } = new List<Mode2Values>();
 
+
         private PicturesSet _cPicturesSet { get; set; }
 
         public ModesEntities()

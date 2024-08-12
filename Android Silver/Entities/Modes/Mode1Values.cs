@@ -140,7 +140,6 @@ namespace Android_Silver.Entities.Modes
         }
 
         private string _miniIcon;
-
         public string MiniIcon
         {
             get { return _miniIcon; }
@@ -149,7 +148,6 @@ namespace Android_Silver.Entities.Modes
                 OnPropertyChanged(nameof(MiniIcon));    
             }
         }
-
 
         #endregion
 

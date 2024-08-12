@@ -5,7 +5,7 @@ namespace Android_Silver.Entities.Modes
 {
     public class Mode2Values : BindableBase
     {
-        public Mode1Values CMode1 { get; set; }
+
         public TimeModeValues CTimeMode { get; set; }
 
         private List<TimeModeValues> _timeModeValues = new();
@@ -27,21 +27,19 @@ namespace Android_Silver.Entities.Modes
 
         public int StartAddress { get; set; }
 
-        public Mode2Values(int cNum, int tModesCount, string mode2Icon, Mode1Values cMode1, int startAddress)
+        public Mode2Values(int cNum, int tModesCount, string mode2Icon, int startAddress)
         {
             Mode2Icon = mode2Icon;
             cNum = CNum;
-            CMode1 = cMode1;
             StartAddress = startAddress;
-            TimeModeValues = SetTModes(tModesCount, CMode1);
+            TimeModeValues = SetTModes(tModesCount);
           
         }
 
-        private List<TimeModeValues> SetTModes(int count, Mode1Values cMode1)
+        private List<TimeModeValues> SetTModes(int count)
         {
             _pictureSet=DIContainer.Resolve<PicturesSet>();
             List<TimeModeValues> tModeList = new List<TimeModeValues>();
-            CMode1 = cMode1;
             for (int i = 0; i < count; i++)
             {
                 tModeList.Add(new TimeModeValues(i, CMode1.Num, StartAddress + i*4, i+1));

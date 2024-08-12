@@ -46,8 +46,6 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-
-
         private string _title;
 
         public string Title
@@ -58,7 +56,6 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged($"{nameof(Title)}");
             }
         }
-
 
         private PicByStates _substrate;
 
@@ -73,14 +70,11 @@ namespace Android_Silver.Entities.Visual
         }
 
         private PicByStates _selectStroke;
-
         public PicByStates SelectStroke
         {
             get { return _selectStroke; }
             set { _selectStroke = value; }
         }
-
-
 
         #region Общие кнопки
         private PicByStates _homeButton;
@@ -456,7 +450,6 @@ namespace Android_Silver.Entities.Visual
                         JournalStroke = "journal_stroke_base.png";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
-                     
 
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");

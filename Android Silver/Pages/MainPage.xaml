@@ -248,7 +248,7 @@
             <!--Иконка режима 2-->
             <Image Source="{Binding CModesEntities.CMode2.Mode2Icon}"
                            Grid.Row="4"  Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="3"  
-                 IsVisible="{Binding CActivePagesEntities.IsMainPage}" MaximumHeightRequest="60" MaximumWidthRequest="60" />
+                 IsVisible="{Binding CActivePagesEntities.IsMainPage}" MaximumHeightRequest="60" MaximumWidthRequest="60"/>
             <!--Кнопка перехода в настройки текущего режима-->
             <Button Command="{Binding SPCommand}" 
                ImageSource="{Binding  CPictureSet.Substrate.Current}"  Grid.Column="0" Grid.ColumnSpan="18"  Grid.Row="5"   Grid.RowSpan="4" 
@@ -514,7 +514,7 @@
             </ListView>
             <!--#endregion-->
 
-            <!--#region SetTSettingsPage -->
+            <!--#region SetTSettings page -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"  Command="{Binding HomeCommand}"
                      Style="{StaticResource HeaderBut}" Pressed="HomeButton_SPPressed" Released="HomeButton_SPReleased"  
                      IsVisible = "{Binding  CActivePagesEntities.IsSetTSettingsPage}"/>
@@ -592,8 +592,6 @@
             <Label Text="Настройки прочие"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="12"  Style="{StaticResource Title}"
                                                                                         IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}" />
             <!--#endregion-->
-
-
             <!--#region Замена -->
             <Label Text="Замена фильтра" Grid.Row="5" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <Label Text="Заменить" Grid.Row="5" Grid.Column="8" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>

@@ -564,7 +564,7 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[0].CMode1Num != val)
+                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[0].Mode1Num != val)
                             {
                                 _modesEntities.Mode2ValuesList[2].TimeModeValues[0].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
                             }
@@ -604,7 +604,7 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[1].CMode1Num != val)
+                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[1].Mode1Num != val)
                             {
                                 _modesEntities.Mode2ValuesList[2].TimeModeValues[1].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
                             }
@@ -643,7 +643,7 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1Num != val)
+                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[2].Mode1Num != val)
                             {
                                 _modesEntities.Mode2ValuesList[2].TimeModeValues[2].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
                             }
@@ -682,7 +682,7 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[3].CMode1Num != val)
+                            if (_modesEntities.Mode2ValuesList[2].TimeModeValues[3].Mode1Num != val)
                             {
                                 _modesEntities.Mode2ValuesList[2].TimeModeValues[3].SetTValues(val, _modesEntities.Mode1ValuesList[val].MiniIcon);
                             }

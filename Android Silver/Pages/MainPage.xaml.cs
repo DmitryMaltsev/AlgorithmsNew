@@ -401,8 +401,6 @@ namespace Android_Silver.Pages
         }
         #endregion
 
-
-
         #region VacPage
         private void VacPage_Pressed(object sender, EventArgs e)
         {
@@ -475,11 +473,6 @@ namespace Android_Silver.Pages
             base.OnAppearing();
         }
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            mainPageGrid.Resources.Clear();
-        }
 
    
     }
