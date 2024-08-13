@@ -19,7 +19,7 @@ namespace Android_Silver.Services
         private SetPoints _setPoints { get; set; }
         private SensorsEntities _sensorsEntities { get; set; }
         private ModesEntities _modesEntities { get; set; }
-        private Alarms _alarms { get; set; }
+        private FBs _fbs { get; set; }
         public bool IsConnecting { get; private set; } = false;
         public bool IsSending { get; private set; } = false;
         public bool IsRecieving { get; private set; } = false;
@@ -42,7 +42,7 @@ namespace Android_Silver.Services
             _setPoints = DIContainer.Resolve<SetPoints>();
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
-            _alarms = DIContainer.Resolve<Alarms>();
+            _fbs = DIContainer.Resolve<FBs>();
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
         }
@@ -510,11 +510,11 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (_alarms.Alarms1 != val)
+                            if (_fbs.CAlarms.Alarms1 != val)
                             {
-                                _alarms.Alarms1 = val;
-                                BitArray bitArrrayBuf = _alarms.GetAlarmsByBits(_alarms.Alarms1);
-                                _alarms.ConverBitArrayToAlarms(bitArrrayBuf, 0);
+                                _fbs.CAlarms.Alarms1 = val;
+                                BitArray bitArrrayBuf = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms1);
+                                _fbs.CAlarms.ConverBitArrayToAlarms(bitArrrayBuf, 0);
                             }
                         }
                     }
@@ -523,11 +523,27 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (_alarms.Alarms2 != val)
+                            if (_fbs.CAlarms.Alarms2 != val)
                             {
-                                _alarms.Alarms2 = val;
-                                BitArray bitArrrayBuf = _alarms.GetAlarmsByBits(_alarms.Alarms2);
-                                _alarms.ConverBitArrayToAlarms(bitArrrayBuf, 1);
+                                _fbs.CAlarms.Alarms2 = val;
+                                BitArray bitArrrayBuf = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms2);
+                                _fbs.CAlarms.ConverBitArrayToAlarms(bitArrrayBuf, 1);
+                            }
+                        }
+                    }
+                    break;
+                case 137:
+                    {
+                        GetTModeCMode1(4, 0, resp.ValueString);
+                    }
+                    break;
+                case 138:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (_fbs.CHumiditySPS.HumiditySP != val)
+                            {
+                                _fbs.CHumiditySPS.HumiditySP = val;
                             }
                         }
                     }
@@ -629,7 +645,7 @@ namespace Android_Silver.Services
                 case 178:
                     {
                         GetTModeCMode1(2, 2, resp.ValueString);
-                       
+
                     }
                     break;
                 //Строка 4
@@ -1010,12 +1026,21 @@ namespace Android_Silver.Services
                         GetTModeCMode1(2, 3, resp.ValueString);
                     }
                     break;
+                case 354:
+                    {
+                        GetTModeCMode1(4, 0, resp.ValueString);
+                    }
+                    break;
+                case 355:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            _fbs.CHumiditySPS.HumiditySP = val;
+                        }
+                    }
+                    break;
             }
         }
-
-
-
-
 
         private bool StringToFloat(string val, int precision, ref float result)
         {
@@ -1124,7 +1149,7 @@ namespace Android_Silver.Services
         {
             if (int.TryParse(valueString, out int val))
             {
-                if (val >= 0 && val <= 5 && _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1.Num!= val)
+                if (val >= 0 && val <= 5 && _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1.Num != val)
                 {
 
                     _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1 = _modesEntities.Mode1ValuesList[val];

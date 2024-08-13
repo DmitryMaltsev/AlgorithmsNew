@@ -5,6 +5,7 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 using System;
+using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Windows.Input;
@@ -107,15 +108,17 @@ namespace Android_Silver.Pages
             }
         }
 
-        private string _contactModeImg;
-        public string ContactModeImg
+        private int _humiditySP;
+
+        public int HumiditySP
         {
-            get { return _contactModeImg; }
-            set {
-                _contactModeImg = value; 
-                OnPropertyChanged(nameof(ContactModeImg));
+            get { return _humiditySP; }
+            set { 
+                _humiditySP = value; 
+                OnPropertyChanged(nameof(HumiditySP));
             }
         }
+
         #endregion
 
         #region Commands
@@ -185,8 +188,16 @@ namespace Android_Silver.Pages
         #region Other settings commands
         public ICommand OtherSettingsReturnCommand { get; private set; }
         public ICommand NextOtherSettingsCommand { get; private set; }
-        public ICommand ContactArrLeftCommand { get; private set; } 
+        public ICommand ContactArrLeftCommand { get; private set; }
         public ICommand ContactArrRightCommand { get; private set; }
+        public ICommand HumidityCommand {get; private set;}
+        #endregion
+        #region Humidity commands
+        public ICommand HumidityReturnCommand { get; private set; }
+        public ICommand OkHumidityCommand { get; private set; }
+        public ICommand CancelHumidityCommand { get; private set; }
+        public ICommand HumidityBtnUpCommand { get; private set; }
+        public ICommand HumidityBtnDnCommand { get; private set; }  
         #endregion
         #region ResetCommand
         public ICommand ResetJournalCommand { get; private set; }
@@ -203,7 +214,7 @@ namespace Android_Silver.Pages
 
         public SensorsEntities CSensorsEntities { get; set; }
 
-        public TcpClientService TcpClientService { get; set; }
+        public TcpClientService CTcpClientService { get; set; }
 
         public ModesEntities CModesEntities { get; set; }
 
@@ -213,7 +224,7 @@ namespace Android_Silver.Pages
 
         public ActivePagesEntities CActivePagesEntities { get; set; }
 
-        public Alarms CAlarms { get; set; }
+        public FBs CFBs { get; set; }
 
         NetworkStream _stream;
         int counter = 0;
@@ -222,12 +233,12 @@ namespace Android_Silver.Pages
         {
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
-            TcpClientService = DIContainer.Resolve<TcpClientService>();
+            CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CSetPoints = DIContainer.Resolve<SetPoints>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
-            CAlarms = DIContainer.Resolve<Alarms>();
+            CFBs = DIContainer.Resolve<FBs>();
             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SPCommand = new Command(ExecuteSetSP);
@@ -248,7 +259,8 @@ namespace Android_Silver.Pages
             JournalReturnCommand = new Command(ExecuteJournalReturn);
             ContactArrLeftCommand = new Command(ExecuteContactArrLeft);
             ContactArrRightCommand = new Command(ExecuteContactArrRight);
-
+            HumidityCommand = new Command(ExecuteHumidity);
+          
             Value = 15;
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
@@ -293,25 +305,31 @@ namespace Android_Silver.Pages
             #endregion
             #region Other settings commands
             OtherSettingsReturnCommand = new Command(ExecuteOtherSettingsReturn);
-
-
             #endregion
-            //  CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
-            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+            #region Humidity commands
+            HumidityReturnCommand = new Command(ExecuteHumidityReturn);
+            OkHumidityCommand = new Command(ExecuteOkHumidity);
+            CancelHumidityCommand = new Command(CancelHumidity);
+            HumidityBtnUpCommand=new Command(ExecuteHumidityBtnUp);
+            HumidityBtnDnCommand=new Command(ExecuteHumidityBtnDn);
+            #endregion
+            CActivePagesEntities.SetActivePageState(ActivePageState.HumidityPage);
+
             SetTValuesByIndex(0, 0);
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
-            ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
+            //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
         }
+
         async private void ExecuteConnect()
         {
             EthernetEntities.SystemMessage = "Check";
-            if (!TcpClientService.IsConnecting)
+            if (!CTcpClientService.IsConnecting)
             {
-                await TcpClientService.Connect();
+                await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    TcpClientService.SendRecieveTask("108,29");
+                    CTcpClientService.SendRecieveTask("108,38");
                     // TcpClientService.SendRecieveTask("137,4");
                 }
             }
@@ -331,7 +349,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteDisconnect()
         {
-            TcpClientService.Disconnect();
+            CTcpClientService.Disconnect();
         }
         private Task sendBufTask;
 
@@ -367,27 +385,27 @@ namespace Android_Silver.Pages
         private void ExecuteTurnOffMode(object obj)
         {
             int[] index = { 0 };
-            TcpClientService.SetCommandToServer(308, index);
+            CTcpClientService.SetCommandToServer(308, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
         private void ExecuteMinMode(object obj)
         {
             int[] index = { 1, 0 };
-            TcpClientService.SetCommandToServer(308, index);
+            CTcpClientService.SetCommandToServer(308, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         private void ExecuteNormal(object obj)
         {
             int[] index = { 2, 0 };
-            TcpClientService.SetCommandToServer(308, index);
+            CTcpClientService.SetCommandToServer(308, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         private void ExecuteMaxMode(object obj)
         {
             int[] index = { 3, 0 };
-            TcpClientService.SetCommandToServer(308, index);
+            CTcpClientService.SetCommandToServer(308, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
@@ -401,14 +419,14 @@ namespace Android_Silver.Pages
         private void ExecuteVacationMode(object obj)
         {
             int[] index = { 2 };
-            TcpClientService.SetCommandToServer(309, index);
+            CTcpClientService.SetCommandToServer(309, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         private void ExecuteSheduler(object obj)
         {
             int[] index = { 3 };
-            TcpClientService.SetCommandToServer(309, index);
+            CTcpClientService.SetCommandToServer(309, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
@@ -448,14 +466,14 @@ namespace Android_Silver.Pages
         private void ExecuteKitchenCancel(object obj)
         {
             int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute, 0, 1 };
-            TcpClientService.SetCommandToServer(334, values);
+            CTcpClientService.SetCommandToServer(334, values);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage); ;
         }
 
         private void ExecuteKitchenOk(object obj)
         {
             int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute, 1, 0 };
-            TcpClientService.SetCommandToServer(334, values);
+            CTcpClientService.SetCommandToServer(334, values);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
         #endregion
@@ -515,7 +533,7 @@ namespace Android_Silver.Pages
             if (M1Values != null)
             {
                 int[] values = { M1Values.SypplySP, M1Values.ExhaustSP, M1Values.TempSP, M1Values.PowerLimitSP };
-                TcpClientService.SetCommandToServer(M1Values.StartAddress, values);
+                CTcpClientService.SetCommandToServer(M1Values.StartAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             }
         }
@@ -569,7 +587,7 @@ namespace Android_Silver.Pages
         {
 
             int[] arr = { 1 };
-            TcpClientService.SetCommandToServer(337, arr);
+            CTcpClientService.SetCommandToServer(337, arr);
         }
         #endregion
 
@@ -581,14 +599,14 @@ namespace Android_Silver.Pages
         #endregion
 
         #region Execute other settings
-
         private void ExecuteContactArrLeft(object obj)
         {
             var contactTMode = CModesEntities.Mode2ValuesList[4].TimeModeValues[0];
             int contactM1Num = contactTMode.CMode1.Num;
             contactM1Num = contactM1Num > 0 ? contactM1Num - 1 : 0;
             contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
-            ContactModeImg = contactTMode.CMode1.MiniIcon;
+            int[] vals = { contactM1Num };
+            CTcpClientService.SetCommandToServer(354, vals);
         }
         private void ExecuteContactArrRight(object obj)
         {
@@ -596,7 +614,8 @@ namespace Android_Silver.Pages
             int contactM1Num = contactTMode.CMode1.Num;
             contactM1Num = contactM1Num < 5 ? contactM1Num + 1 : 5;
             contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
-            ContactModeImg = contactTMode.CMode1.MiniIcon;
+            int[] vals = { contactM1Num };
+            CTcpClientService.SetCommandToServer(354, vals);
         }
 
         private void ExecuteOtherSettingsReturn(object obj)
@@ -607,6 +626,12 @@ namespace Android_Silver.Pages
         private void ExecuteNextOtherSetiings(object obj)
         {
             throw new NotImplementedException();
+        }
+
+        private void ExecuteHumidity(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.HumidityPage);
+            HumiditySP= CFBs.CHumiditySPS.HumiditySP;
         }
         #endregion
 
@@ -695,7 +720,7 @@ namespace Android_Silver.Pages
             if (TValues != null)
             {
                 int[] values = { TValues.DayNum, TValues.Hour, TValues.Minute, TValues.CMode1.Num};
-                TcpClientService.SetCommandToServer(TValues.WriteAddress, values);
+                CTcpClientService.SetCommandToServer(TValues.WriteAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
             }
         }
@@ -714,6 +739,35 @@ namespace Android_Silver.Pages
         }
         #endregion
 
+        #region Execute humidity
+        private void ExecuteHumidityReturn(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+            HumiditySP= CFBs.CHumiditySPS.HumiditySP;
+        }
+
+        private void CancelHumidity(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+        }
+
+        private void ExecuteOkHumidity(object obj)
+        {
+            int[] vals = { HumiditySP };
+            CTcpClientService.SetCommandToServer(355, vals);
+            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+        }
+
+        private void ExecuteHumidityBtnUp(object obj)
+        {
+            HumiditySP = HumiditySP+5 <= 40 ? HumiditySP+5 : 40;
+        }
+        private void ExecuteHumidityBtnDn(object obj)
+        {
+            HumiditySP = HumiditySP - 5 >= 0 ? HumiditySP - 5 : 0;
+        }
+        #endregion
+
         Timer timer;
         private void StartTimer()
         {
@@ -723,7 +777,7 @@ namespace Android_Silver.Pages
                 {
                     MainThread.InvokeOnMainThreadAsync(() =>
                     {
-                        EthernetEntities.SystemMessage = $"Счетчик принятий ={TcpClientService.ResieveCounter}";
+                        EthernetEntities.SystemMessage = $"Счетчик принятий ={CTcpClientService.ResieveCounter}";
                     });
                 },
                 null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));

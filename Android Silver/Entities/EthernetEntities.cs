@@ -8,10 +8,10 @@ namespace Android_Silver.Entities
 {
     public class EthernetEntities : BindableBase
     {
-
+         
         public TcpClient Client { get; set; }
 
-        private string _connectIP = "192.168.0.14";
+        private string _connectIP = "192.168.0.111";
         public string ConnectIP
         {
             get { return _connectIP; }

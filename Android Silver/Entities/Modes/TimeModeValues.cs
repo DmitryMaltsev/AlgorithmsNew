@@ -126,7 +126,7 @@ namespace Android_Silver.Entities.Modes
                 "Все"
              };
             DayName = Days[0];
-            CMode1 = _cMode1;  
+            CMode1 = mode1;  
             WriteAddress = startAddress;
         }
     }

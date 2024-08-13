@@ -33,7 +33,6 @@ namespace Android_Silver.Entities.Modes
             cNum = CNum;
             StartAddress = startAddress;
             TimeModeValues = SetTModes(tModesCount, defaultMode1);
-          
         }
 
         private List<TimeModeValues> SetTModes(int count, Mode1Values defaultM1)
