@@ -313,7 +313,7 @@ namespace Android_Silver.Pages
             HumidityBtnUpCommand=new Command(ExecuteHumidityBtnUp);
             HumidityBtnDnCommand=new Command(ExecuteHumidityBtnDn);
             #endregion
-            CActivePagesEntities.SetActivePageState(ActivePageState.HumidityPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
 
             SetTValuesByIndex(0, 0);
             StartTimer();
@@ -329,7 +329,7 @@ namespace Android_Silver.Pages
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    CTcpClientService.SendRecieveTask("108,38");
+                    CTcpClientService.SendRecieveTask("108,33");
                     // TcpClientService.SendRecieveTask("137,4");
                 }
             }
@@ -630,7 +630,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteHumidity(object obj)
         {
-            CActivePagesEntities.SetActivePageState(ActivePageState.HumidityPage);
+            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
             HumiditySP= CFBs.CHumiditySPS.HumiditySP;
         }
         #endregion

@@ -13,11 +13,14 @@ namespace Android_Silver.Entities.FBEntities
 
         public FilterVals CFilterVals { get; set; }
 
+        public OtherSettings OtherSettings { get; set; }
+
         public FBs()
         {
             CAlarms=DIContainer.Resolve<Alarms>();
             CHumiditySPS=DIContainer.Resolve<HumiditySPS>();
             CFilterVals=DIContainer.Resolve<FilterVals>();
+            OtherSettings = DIContainer.Resolve<OtherSettings>();
         }
     }
 }

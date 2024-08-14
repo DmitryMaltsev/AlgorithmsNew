@@ -531,7 +531,7 @@ namespace Android_Silver.Entities.Visual
                         #endregion
                         #region Кнопки настроек
                         JournalBut = new PicByStates("journal_but_base.jpg", "test.jpg");
-                        ModesSetBut = new PicByStates("modes_set_but_base.jpg", "test.jpg");
+                        ModesSetBut = new PicByStates("modes_set_but_base.jpg", "modes_set_but_base.jpg");
                         SettingsOtherBut = new PicByStates("settings_other_but_base.jpg", "test.jpg");
                         ShedSetBut = new PicByStates("shed_set_but_base.jpg", "test.jpg");
                         VacSetBut = new PicByStates("vac_set_but_base.jpg", "test.jpg");
@@ -540,7 +540,7 @@ namespace Android_Silver.Entities.Visual
                         FilterChangedBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
                         TimeBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
                         HumidityBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
-                        ArrowButLeft = new PicByStates("but_left_off_base.png","but_left_on_base.png");
+                        ArrowButLeft = new PicByStates("but_left_off_base.png", "but_left_on_base.png");
                         ArrowButRight = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
                         ContactBackGround = "other_set_but_off_base.png";
                         #endregion

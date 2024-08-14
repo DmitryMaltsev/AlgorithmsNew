@@ -25,7 +25,9 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<Alarms>();
             _container.RegisterSingleton<HumiditySPS>();
             _container.RegisterSingleton<FilterVals>();
+            _container.RegisterSingleton<OtherSettings>();
             _container.RegisterSingleton<FBs>();
+           
         }
 
         public static T Resolve<T>()

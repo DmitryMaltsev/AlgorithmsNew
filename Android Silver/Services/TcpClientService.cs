@@ -43,6 +43,8 @@ namespace Android_Silver.Services
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
             _fbs = DIContainer.Resolve<FBs>();
+            _fbs.OtherSettings.MFloorAction += MFloorCallback;
+            _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
         }
@@ -532,6 +534,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                //Режим по контакту
                 case 137:
                     {
                         GetTModeCMode1(4, 0, resp.ValueString);
@@ -544,6 +547,32 @@ namespace Android_Silver.Services
                             if (_fbs.CHumiditySPS.HumiditySP != val)
                             {
                                 _fbs.CHumiditySPS.HumiditySP = val;
+                            }
+                        }
+                    }
+                    break;
+                    //Включен ли спец режим
+                case 139:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            bool isSpec=val>0?true:false;
+                            if (_fbs.OtherSettings.IsSpecMode != isSpec)
+                            {
+                                _fbs.OtherSettings.IsSpecMode = isSpec;
+                            }
+                        }
+                    }
+                    break;
+                //Включен ли режим многоэтажки
+                case 140:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            bool isMF = val > 0 ? true : false;
+                            if (_fbs.OtherSettings.IsMF != isMF)
+                            {
+                                _fbs.OtherSettings.IsMF = isMF;
                             }
                         }
                     }
@@ -1039,6 +1068,31 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                case 356:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            bool isSpecMode = val > 0 ? true : false;
+                            if (_fbs.OtherSettings.IsSpecMode != isSpecMode)
+                            {
+                                _fbs.OtherSettings.IsSpecMode = isSpecMode;
+                            }
+                        
+                        }
+                    }
+                    break;
+                case 357:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            bool isMF = val > 0 ? true : false;
+                            if (_fbs.OtherSettings.IsMF != isMF)
+                            {
+                                _fbs.OtherSettings.IsMF = isMF;
+                            }
+                        }
+                    }
+                    break;
             }
         }
 
@@ -1157,6 +1211,19 @@ namespace Android_Silver.Services
             }
         }
         #endregion
-
+        #region OtherSettings callbacks
+        private void SpecModeCallback(bool val)
+        {
+            int specActive = val ? 1 : 0;
+            int[] vals = { specActive };
+            SetCommandToServer(356, vals);
+        }
+        private void MFloorCallback(bool val)
+        {
+            int mfActive = val ? 1 : 0;
+            int[] vals = { mfActive };
+            SetCommandToServer(357, vals);
+        }
+        #endregion
     }
 }
