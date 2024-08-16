@@ -22,7 +22,9 @@ namespace Android_Silver.Entities.Visual
         SetTSettingsPage,
         OtherSettingsPage,
         OtherSettingsPage2,
-        HumidityPage
+        HumidityPage,
+        TimePage,
+        SwipePage
     }
 
     public class ActivePagesEntities : BindableBase
@@ -154,7 +156,29 @@ namespace Android_Silver.Entities.Visual
             get { return _isHumidityPage; }
             set {
                 _isHumidityPage = value;
-                OnPropertyChanged($"{nameof(IsHumidityPage)}");
+                OnPropertyChanged(nameof(IsHumidityPage));
+            }
+        }
+
+        private bool _isTimerPage;
+
+        public bool IsTimePage
+        {
+            get { return _isTimerPage; }
+            set { 
+                _isTimerPage = value;
+                OnPropertyChanged(nameof(IsTimePage));
+            }
+        }
+
+        private bool _isSwipePage;
+
+        public bool IsSwipePage
+        {
+            get { return _isSwipePage; }
+            set { 
+                _isSwipePage = value; 
+                OnPropertyChanged(nameof(IsSwipePage));
             }
         }
 
@@ -184,6 +208,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                     }
                     break;
                 case ActivePageState.ChooseModePage:
@@ -199,6 +225,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                     }
                     break;
                 case ActivePageState.LoadingPage:
@@ -214,6 +242,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                     }
                     break;
                 case ActivePageState.KithchenTimerPage:
@@ -229,6 +259,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                         _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour;
                     }
                     break;
@@ -245,6 +277,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                     }
                     break;
                 case ActivePageState.SettingsPage:
@@ -260,6 +294,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                     }
                     break;
                 case ActivePageState.JournalPage:
@@ -275,6 +311,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                     }
                     break;
                 case ActivePageState.TSettingsPage:
@@ -290,6 +328,8 @@ namespace Android_Silver.Entities.Visual
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                         for (int i = 0; i < _modesEntities.Mode2ValuesList[2].TimeModeValues.Count; i++)
                         {
                             _modesEntities.Mode2ValuesList[2].TimeModeValues[i].StrokeImg.Current =
@@ -310,6 +350,8 @@ namespace Android_Silver.Entities.Visual
                         IsMainPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                     }
                     break;
                 case ActivePageState.OtherSettingsPage:
@@ -325,11 +367,49 @@ namespace Android_Silver.Entities.Visual
                         IsChooseModePage = false;
                         IsMainPage = false;
                         IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
                     }
                     break;
                 case    ActivePageState.HumidityPage:
                     {
                         IsHumidityPage = true;
+                        IsOtherSettingsPage = false;
+                        IsSetTSettingsPage = false;
+                        IsTSettingsPage = false;
+                        IsJournalPage = false;
+                        IsSettingsPage = false;
+                        IsSetPointsPage = false;
+                        IsKitchenTimerPage = false;
+                        IsLoadingPage = false;
+                        IsChooseModePage = false;
+                        IsMainPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
+                    }
+                    break;
+                case ActivePageState.TimePage:
+                    {
+                        IsTimePage = true;
+                        IsHumidityPage = false;
+                        IsOtherSettingsPage = false;
+                        IsSetTSettingsPage = false;
+                        IsTSettingsPage = false;
+                        IsJournalPage = false;
+                        IsSettingsPage = false;
+                        IsSetPointsPage = false;
+                        IsKitchenTimerPage = false;
+                        IsLoadingPage = false;
+                        IsChooseModePage = false;
+                        IsMainPage = false;
+                        IsSwipePage = false;
+                    }
+                    break;
+                case ActivePageState.SwipePage:
+                    {
+                        IsSwipePage=true;
+                        IsTimePage = false;
+                        IsHumidityPage = false;
                         IsOtherSettingsPage = false;
                         IsSetTSettingsPage = false;
                         IsTSettingsPage = false;

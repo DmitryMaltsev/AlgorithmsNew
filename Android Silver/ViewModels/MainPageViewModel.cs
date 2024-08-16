@@ -4,6 +4,7 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
+
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -72,16 +73,6 @@ namespace Android_Silver.Pages
             }
         }
 
-        private string _currentTime;
-        public string CurrentTime
-        {
-            get { return _currentTime; }
-            set
-            {
-                _currentTime = value;
-                OnPropertyChanged(nameof(CurrentTime));
-            }
-        }
 
         //Текущее значение M1, отбраженное на экране
         private Mode1Values _m1Values;
@@ -113,11 +104,25 @@ namespace Android_Silver.Pages
         public int HumiditySP
         {
             get { return _humiditySP; }
-            set { 
-                _humiditySP = value; 
+            set
+            {
+                _humiditySP = value;
                 OnPropertyChanged(nameof(HumiditySP));
             }
         }
+
+        private Time _timeBuffer;
+        public Time TimeBuffer
+        {
+            get { return _timeBuffer; }
+            set
+            {
+                _timeBuffer = value;
+                OnPropertyChanged(nameof(TimeBuffer));
+            }
+        }
+
+
 
         #endregion
 
@@ -190,14 +195,15 @@ namespace Android_Silver.Pages
         public ICommand NextOtherSettingsCommand { get; private set; }
         public ICommand ContactArrLeftCommand { get; private set; }
         public ICommand ContactArrRightCommand { get; private set; }
-        public ICommand HumidityCommand {get; private set;}
+        public ICommand HumidityCommand { get; private set; }
+        public ICommand SetTimeCommand { get; private set; }
         #endregion
         #region Humidity commands
         public ICommand HumidityReturnCommand { get; private set; }
         public ICommand OkHumidityCommand { get; private set; }
         public ICommand CancelHumidityCommand { get; private set; }
         public ICommand HumidityBtnUpCommand { get; private set; }
-        public ICommand HumidityBtnDnCommand { get; private set; }  
+        public ICommand HumidityBtnDnCommand { get; private set; }
         #endregion
         #region ResetCommand
         public ICommand ResetJournalCommand { get; private set; }
@@ -206,6 +212,20 @@ namespace Android_Silver.Pages
         #region MyRegion
         public ICommand JournalReturnCommand { get; private set; }
 
+        #endregion
+        #region Time command
+        public ICommand TimeReturnCommand { get; private set; }
+        public ICommand TimeBtnUpCommand0 { get; private set; }
+        public ICommand TimeBtnDnCommand0 { get; private set; }
+        public ICommand TimeBtnUpCommand1 { get; private set; }
+        public ICommand TimeBtnDnCommand1 { get; private set; }
+        public ICommand TimeBtnUpCommand2 { get; private set; }
+        public ICommand TimeBtnDnCommand2 { get; private set; }
+        public ICommand TimeBtnUpCommand3 { get; private set; }
+        public ICommand TimeBtnDnCommand3 { get; private set; }
+        public ICommand TimeBtnUpCommand4 { get; private set; }
+        public ICommand TimeBtnDnCommand4 { get; private set; }
+        public ICommand TimeOkCommand { get; private set; }
         #endregion
         // public ICommand SettingsCommand { get; private set; }
         #endregion
@@ -260,7 +280,8 @@ namespace Android_Silver.Pages
             ContactArrLeftCommand = new Command(ExecuteContactArrLeft);
             ContactArrRightCommand = new Command(ExecuteContactArrRight);
             HumidityCommand = new Command(ExecuteHumidity);
-          
+            TimeReturnCommand = new Command(ExecuteTimeReturn);
+            TimeBuffer = new();
             Value = 15;
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
@@ -289,7 +310,7 @@ namespace Android_Silver.Pages
             TRetCommand = new Command(ExecuteTRet);
             #endregion
             #region TSet commands
-               TSetOkCommand = new Command(TSetExecuteOK);
+            TSetOkCommand = new Command(TSetExecuteOK);
             TSetBtnUpCommand0 = new Command(TSetExecuteBtnUP0);
             TSetBtnDnCommand0 = new Command(TSetExecuteBtnDn0);
             TSetBtnUpCommand1 = new Command(TSetExecuteBtnUP1);
@@ -305,16 +326,29 @@ namespace Android_Silver.Pages
             #endregion
             #region Other settings commands
             OtherSettingsReturnCommand = new Command(ExecuteOtherSettingsReturn);
+            SetTimeCommand = new Command(ExecuteSetTime);
             #endregion
             #region Humidity commands
             HumidityReturnCommand = new Command(ExecuteHumidityReturn);
             OkHumidityCommand = new Command(ExecuteOkHumidity);
             CancelHumidityCommand = new Command(CancelHumidity);
-            HumidityBtnUpCommand=new Command(ExecuteHumidityBtnUp);
-            HumidityBtnDnCommand=new Command(ExecuteHumidityBtnDn);
+            HumidityBtnUpCommand = new Command(ExecuteHumidityBtnUp);
+            HumidityBtnDnCommand = new Command(ExecuteHumidityBtnDn);
             #endregion
-            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
-
+            #region Time commands
+            TimeBtnUpCommand0 = new Command(ExecuteTimeBtnUp0);
+            TimeBtnDnCommand0 = new Command(ExecuteTimeBtnDn0);
+            TimeBtnUpCommand1 = new Command(ExecuteTimeBtnUp1);
+            TimeBtnDnCommand1 = new Command(ExecuteTimeBtnDn1);
+            TimeBtnUpCommand2 = new Command(ExecuteTimeBtnUp2);
+            TimeBtnDnCommand2 = new Command(ExecuteTimeBtnDn2);
+            TimeBtnUpCommand3 = new Command(ExecuteTimeBtnUp3);
+            TimeBtnDnCommand3 = new Command(ExecuteTimeBtnDn3);
+            TimeBtnUpCommand4 = new Command(ExecuteTimeBtnUp4);
+            TimeBtnDnCommand4 = new Command(ExecuteTimeBtnDn4);
+            TimeOkCommand = new Command(ExecuteTimeOk);
+            #endregion
+            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             SetTValuesByIndex(0, 0);
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
@@ -329,7 +363,7 @@ namespace Android_Silver.Pages
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    CTcpClientService.SendRecieveTask("108,33");
+                    CTcpClientService.SendRecieveTask("108,39");
                     // TcpClientService.SendRecieveTask("137,4");
                 }
             }
@@ -630,8 +664,19 @@ namespace Android_Silver.Pages
 
         private void ExecuteHumidity(object obj)
         {
-            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
-            HumiditySP= CFBs.CHumiditySPS.HumiditySP;
+            CActivePagesEntities.SetActivePageState(ActivePageState.HumidityPage);
+            HumiditySP = CFBs.CHumiditySPS.HumiditySP;
+        }
+
+        private void ExecuteSetTime(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.TimePage);
+            TimeBuffer = new();
+            TimeBuffer.Year = CFBs.CTime.Year;
+            TimeBuffer.Month = CFBs.CTime.Month;
+            TimeBuffer.Day = CFBs.CTime.Day;
+            TimeBuffer.Hour = CFBs.CTime.Hour;
+            TimeBuffer.Minute = CFBs.CTime.Minute;
         }
         #endregion
 
@@ -719,7 +764,7 @@ namespace Android_Silver.Pages
         {
             if (TValues != null)
             {
-                int[] values = { TValues.DayNum, TValues.Hour, TValues.Minute, TValues.CMode1.Num};
+                int[] values = { TValues.DayNum, TValues.Hour, TValues.Minute, TValues.CMode1.Num };
                 CTcpClientService.SetCommandToServer(TValues.WriteAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
             }
@@ -743,7 +788,7 @@ namespace Android_Silver.Pages
         private void ExecuteHumidityReturn(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
-            HumiditySP= CFBs.CHumiditySPS.HumiditySP;
+            HumiditySP = CFBs.CHumiditySPS.HumiditySP;
         }
 
         private void CancelHumidity(object obj)
@@ -760,7 +805,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteHumidityBtnUp(object obj)
         {
-            HumiditySP = HumiditySP+5 <= 40 ? HumiditySP+5 : 40;
+            HumiditySP = HumiditySP + 5 <= 40 ? HumiditySP + 5 : 40;
         }
         private void ExecuteHumidityBtnDn(object obj)
         {
@@ -768,6 +813,75 @@ namespace Android_Silver.Pages
         }
         #endregion
 
+        #region Time
+        private void ExecuteTimeBtnUp0(object obj)
+        {
+            if (TimeBuffer != null)
+                TimeBuffer.Year = TimeBuffer.Year + 1 < 99 ? TimeBuffer.Year + 1 : 99;
+        }
+        private void ExecuteTimeBtnDn0(object obj)
+        {
+            if (TimeBuffer != null)
+                TimeBuffer.Year = TimeBuffer.Year - 1 > 0 ? TimeBuffer.Year - 1 : 0;
+        }
+
+        private void ExecuteTimeBtnUp1(object obj)
+        {
+            if (TimeBuffer != null)
+                TimeBuffer.Month = TimeBuffer.Month + 1 < 12 ? TimeBuffer.Month + 1 : 12;
+        }
+        private void ExecuteTimeBtnDn1(object obj)
+        {
+            if (TimeBuffer != null)
+                TimeBuffer.Month = TimeBuffer.Month - 1 > 0 ? TimeBuffer.Month - 1 : 0;
+        }
+
+        private void ExecuteTimeBtnUp2(object obj)
+        {
+            if (TimeBuffer != null)
+                TimeBuffer.Day = TimeBuffer.Day + 1 < 31 ? TimeBuffer.Day + 1 : 31;
+        }
+        private void ExecuteTimeBtnDn2(object obj)
+        {
+            if(TimeBuffer != null)
+                TimeBuffer.Day = TimeBuffer.Day - 1 > 0 ? TimeBuffer.Day - 1 : 0;
+        }
+
+        private void ExecuteTimeBtnUp3(object obj)
+        {
+            if (TimeBuffer != null)
+                TimeBuffer.Hour = TimeBuffer.Hour + 1 < 60? TimeBuffer.Hour + 1 : 60;
+        }
+        private void ExecuteTimeBtnDn3(object obj)
+        {
+            if (TimeBuffer != null)
+                TimeBuffer.Hour = TimeBuffer.Hour - 1 > 0 ? TimeBuffer.Hour - 1 : 0;
+        }
+
+        private void ExecuteTimeBtnUp4(object obj)
+        {
+            if (TimeBuffer != null)
+                TimeBuffer.Minute = TimeBuffer.Minute + 1 < 60 ? TimeBuffer.Minute + 1 : 60;
+        }
+
+        private void ExecuteTimeBtnDn4(object obj)
+        {
+            if (TimeBuffer != null)
+                TimeBuffer.Minute = TimeBuffer.Minute - 1 > 0 ? TimeBuffer.Minute - 1 : 0;
+        }
+
+        private void ExecuteTimeReturn(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+        }
+
+        private void ExecuteTimeOk(object obj)
+        {
+            int[] vals = {_timeBuffer.Year,_timeBuffer.Month,_timeBuffer.Day,_timeBuffer.Hour,_timeBuffer.Minute };
+            CTcpClientService.SetCommandToServer(358,vals);
+            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+        }
+        #endregion
         Timer timer;
         private void StartTimer()
         {

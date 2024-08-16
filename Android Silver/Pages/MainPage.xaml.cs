@@ -32,6 +32,25 @@ namespace Android_Silver.Pages
             BindingContext = ViewModel;
           //  _viewModel.Init();
             _mp = this;
+            var swipeLeft = new SwipeGestureRecognizer();
+            swipeLeft.Swiped += OnSwipeLeft;
+
+            var swipeRight = new SwipeGestureRecognizer();
+            swipeRight.Swiped += OnSwipeRight;
+      
+            // Add the gestures to your content 
+            //  ContentView.GestureRecognizers.Add(swipeLeft);
+            //  ContentView.GestureRecognizers.Add(swipeRight)
+        }
+
+        private void OnSwipeRight(object sender, SwipedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnSwipeLeft(object sender, SwipedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #region Settings
@@ -215,7 +234,6 @@ namespace Android_Silver.Pages
         }
         #endregion
 
-
         #region SetPointsCallbacks
 
         private void UpDigit_Pressed0(object sender, EventArgs e)
@@ -258,7 +276,16 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.DigitalButtonsUp[3].Current = ViewModel.CPictureSet.DigitalButtonsUp[3].Default;
         }
 
+        private void UpDigit_Pressed4(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.DigitalButtonsUp[4].Current = ViewModel.CPictureSet.DigitalButtonsUp[3].Selected;
+        }
 
+        private void UpDigit_Released4(object sender, EventArgs e)
+        {
+            Button button = new Button();
+            ViewModel.CPictureSet.DigitalButtonsUp[4].Current = ViewModel.CPictureSet.DigitalButtonsUp[3].Default;
+        }
 
         private void DnDigit_Pressed0(object sender, EventArgs e)
         {
@@ -303,6 +330,15 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.DigitalButtonsDn[3].Current = ViewModel.CPictureSet.DigitalButtonsDn[3].Default;
         }
 
+        private void DnDigit_Pressed4(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.DigitalButtonsDn[4].Current = ViewModel.CPictureSet.DigitalButtonsDn[3].Selected;
+        }
+
+        private void DnDigit_Released4(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.DigitalButtonsDn[4].Current = ViewModel.CPictureSet.DigitalButtonsDn[3].Default;
+        }
 
         private void Next_SPPressed(object sender, EventArgs e)
         {
@@ -473,7 +509,9 @@ namespace Android_Silver.Pages
             base.OnAppearing();
         }
 
+        private void OnSwiped(object sender, SwipedEventArgs e)
+        {
 
-   
+        }
     }
 }

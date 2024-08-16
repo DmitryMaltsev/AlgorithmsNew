@@ -10,10 +10,9 @@ namespace Android_Silver.Entities.FBEntities
     { 
         public Alarms CAlarms { get; set; }
         public HumiditySPS CHumiditySPS {get;set;}
-
         public FilterVals CFilterVals { get; set; }
-
         public OtherSettings OtherSettings { get; set; }
+        public Time CTime { get; set; }
 
         public FBs()
         {
@@ -21,6 +20,7 @@ namespace Android_Silver.Entities.FBEntities
             CHumiditySPS=DIContainer.Resolve<HumiditySPS>();
             CFilterVals=DIContainer.Resolve<FilterVals>();
             OtherSettings = DIContainer.Resolve<OtherSettings>();
+            CTime=DIContainer.Resolve<Time>();
         }
     }
 }

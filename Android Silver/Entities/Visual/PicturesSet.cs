@@ -241,6 +241,18 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged($"{nameof(DigitalImage)}");
             }
         }
+
+        private string _timeDigitalImage;
+
+        public string TimeDigitalImage
+        {
+            get { return _timeDigitalImage; }
+            set
+            {
+                _timeDigitalImage = value;
+                OnPropertyChanged($"{nameof(TimeDigitalImage)}");
+            }
+        }
         #endregion
 
         #region Временные режимы
@@ -450,7 +462,7 @@ namespace Android_Silver.Entities.Visual
                         JournalStroke = "journal_stroke_base.png";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
-
+                        TimeDigitalImage = "time_dig_img_base.png";
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
                         CancelButton = new PicByStates("cancel_but_base.png", "test.jpg");
@@ -462,8 +474,10 @@ namespace Android_Silver.Entities.Visual
                         DigitalButtonsUp.Add(new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png"));
                         DigitalButtonsUp.Add(new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png"));
                         DigitalButtonsUp.Add(new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png"));
+                        DigitalButtonsUp.Add(new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png"));
 
                         DigitalButtonsDn = new List<PicByStates>();
+                        DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
                         DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
                         DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
                         DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
@@ -530,11 +544,11 @@ namespace Android_Silver.Entities.Visual
                         MiniIconsPics.Add("");
                         #endregion
                         #region Кнопки настроек
-                        JournalBut = new PicByStates("journal_but_base.jpg", "test.jpg");
-                        ModesSetBut = new PicByStates("modes_set_but_base.jpg", "modes_set_but_base.jpg");
-                        SettingsOtherBut = new PicByStates("settings_other_but_base.jpg", "test.jpg");
-                        ShedSetBut = new PicByStates("shed_set_but_base.jpg", "test.jpg");
-                        VacSetBut = new PicByStates("vac_set_but_base.jpg", "test.jpg");
+                        JournalBut = new PicByStates("journal_but_off_base.png", "journal_but_on_base.png");
+                        ModesSetBut = new PicByStates("modes_set_but_off_base.png", "modes_set_but_on_base.png");
+                        SettingsOtherBut = new PicByStates("settings_other_but_off_base.png", "settings_other_but_on_base.png");
+                        ShedSetBut = new PicByStates("shed_set_but_off_base.png", "shed_set_but_on_base.png");
+                        VacSetBut = new PicByStates("vac_set_but_off_base.png", "vac_set_but_on_base.png");
                         #endregion
                         #region Другие настройки
                         FilterChangedBut = new PicByStates("other_set_but_off_base.png", "test.jpg");

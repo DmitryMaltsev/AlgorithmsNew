@@ -146,7 +146,7 @@ namespace Android_Silver.Services
                     StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
-                    byte[] data = new byte[100];
+                    byte[] data = new byte[200];
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
                     {
@@ -573,6 +573,79 @@ namespace Android_Silver.Services
                             if (_fbs.OtherSettings.IsMF != isMF)
                             {
                                 _fbs.OtherSettings.IsMF = isMF;
+                            }
+                        }
+                    }
+                    break;
+                //Текущий год
+                case 141:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 99)
+                            {
+                                _fbs.CTime.Year = val;
+                            }
+                        }
+                    }
+                    break;
+                //Текущий месяц
+                case 142:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 12)
+                            {
+                                _fbs.CTime.Month = val;
+                            }
+                        }
+                    }
+                    break;
+                //Текущий день
+                case 143:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 31)
+                            {
+                                _fbs.CTime.Day = val;
+                            }
+                        }
+                    }
+                    break;
+                //Текущий час
+                case 144:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 60)
+                            {
+                                _fbs.CTime.Hour = val;
+                            }
+                        }
+                    }
+                    break;
+                //Текущая минута
+                case 145:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 60)
+                            {
+                                _fbs.CTime.Minute = val;
+                                _fbs.CTime.SetTimerInterface();
+                            }
+                        }
+                    }
+                    break;
+                //День недели
+                case 146:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 6)
+                            {
+                                _fbs.CTime.DayOfWeek = val;
                             }
                         }
                     }
@@ -1093,6 +1166,81 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                //Текущий год
+                case 358:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 99)
+                            {
+                                _fbs.CTime.Year = val;
+                            }
+                        }
+                    }
+                    break;
+                //Текущий месяц
+                case 359:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 12)
+                            {
+                                _fbs.CTime.Month = val;
+                            }
+                        }
+                    }
+                    break;
+                //Текущий день
+                case 360:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 31)
+                            {
+                                _fbs.CTime.Day = val;
+                            }
+                        }
+                    }
+                    break;
+                //Текущий час
+                case 361:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 60)
+                            {
+                                _fbs.CTime.Hour = val;
+                            }
+                        }
+                    }
+                    break;
+                //Текущая минута
+                case 362:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 60)
+                            {
+                                _fbs.CTime.Minute = val;
+                                _fbs.CTime.SetTimerInterface();
+                            }
+                        }
+                    }
+                    break;
+                //День недели
+                case 363:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 6)
+                            {
+                                _fbs.CTime.DayOfWeek = val;
+                            }
+                        }
+                    }
+                    break;
+
+
             }
         }
 
@@ -1211,6 +1359,7 @@ namespace Android_Silver.Services
             }
         }
         #endregion
+
         #region OtherSettings callbacks
         private void SpecModeCallback(bool val)
         {

@@ -27,7 +27,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<FilterVals>();
             _container.RegisterSingleton<OtherSettings>();
             _container.RegisterSingleton<FBs>();
-           
+            _container.RegisterSingleton<Time>();
         }
 
         public static T Resolve<T>()
