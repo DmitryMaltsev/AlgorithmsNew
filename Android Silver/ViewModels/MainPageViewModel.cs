@@ -246,6 +246,8 @@ namespace Android_Silver.Pages
 
         public FBs CFBs { get; set; }
 
+        public CarouselViewData CCarouselViewData { get; set; }
+
         NetworkStream _stream;
         int counter = 0;
         string _cData;
@@ -259,6 +261,7 @@ namespace Android_Silver.Pages
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CFBs = DIContainer.Resolve<FBs>();
+            CCarouselViewData=DIContainer.Resolve<CarouselViewData>();
             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SPCommand = new Command(ExecuteSetSP);
@@ -283,6 +286,7 @@ namespace Android_Silver.Pages
             TimeReturnCommand = new Command(ExecuteTimeReturn);
             TimeBuffer = new();
             Value = 15;
+            
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
@@ -353,6 +357,7 @@ namespace Android_Silver.Pages
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
+
         }
 
         async private void ExecuteConnect()

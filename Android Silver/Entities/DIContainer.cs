@@ -28,6 +28,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<OtherSettings>();
             _container.RegisterSingleton<FBs>();
             _container.RegisterSingleton<Time>();
+            _container.RegisterSingleton<CarouselViewData>();
         }
 
         public static T Resolve<T>()

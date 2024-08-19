@@ -67,6 +67,19 @@
             <Setter Property="Grid.RowSpan" Value="2"/>
             <Setter Property="FontSize" Value="9"/>
         </Style>
+        <Style TargetType="Label" x:Key="MiscellText">
+            <Setter Property="Grid.ColumnSpan" Value="6"/>
+            <Setter Property="Grid.RowSpan" Value="1"/>
+            <Setter Property="Margin" Value="0,30,0,-30"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style TargetType="Image" x:Key="MiscellaneousImg">
+            <Setter Property="Grid.RowSpan" Value="1"/>
+            <Setter Property="Grid.ColumnSpan" Value="6"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="WidthRequest" Value="120"/>
+            <Setter Property="HeightRequest" Value="120"/>
+        </Style>
         <!--#endregion-->
         <!--#region ChooseMode Styles -->
         <Style TargetType="Button" x:Key="ChooseModeBut">
@@ -93,8 +106,8 @@
             <Setter Property="WidthRequest" Value="50"/>
             <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="Margin" Value="0,0,0,0" />
-       </Style>
-            
+        </Style>
+
         <Style TargetType="Button" x:Key="SPBtn">
             <Setter Property="Grid.ColumnSpan" Value="4"/>
             <Setter Property="MaximumWidthRequest" Value="50"/>
@@ -226,6 +239,12 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -250,48 +269,104 @@
 
             <!--#region MAIN PAGE -->
             <!--Текущее время-->
-            <Label Text="{Binding CFBs.CTime.TimeInterface}" TextColor="White" FontSize="19" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="1" 
-                                                                                            IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-
+            <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CFBs.CTime.TimeInterface}" 
+                                   TextColor="White" FontSize="19" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="1"
+                                    IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <!--Кнопка настроек-->
-            <Button ImageSource="{Binding CPictureSet.SettingsButton.Current}" Command="{Binding SettingsCommand}"  Style="{StaticResource HeaderBut}"
-                     Pressed="Settings_Pressed"  Released="Settings_Released"  IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
+            <Button ImageSource="{Binding Source={x:Reference mPage}, Path=BindingContext.CPictureSet.SettingsButton.Current}" 
+                             Command="{Binding Source={x:Reference mPage},Path=BindingContext.SettingsCommand}"  Style="{StaticResource HeaderBut}"
+                             Pressed="Settings_Pressed"  Released="Settings_Released"  
+                             IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}" />
             <!--Иконка режима 1-->
-            <Button ImageSource="{Binding  CModesEntities.CMode1.ActiveModePics.Current}" Command="{Binding ChooseModeCommand}" Padding="0"
-                           Grid.Row="4"  Grid.RowSpan="1" Grid.Column="7"    Grid.ColumnSpan="4" Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"
-                             IsVisible="{Binding CActivePagesEntities.IsMainPage}"  HeightRequest="120"  WidthRequest="120" BackgroundColor="Transparent"/>
+            <Button ImageSource="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ActiveModePics.Current}"
+                             Command="{Binding Source={x:Reference mPage},Path=BindingContext.ChooseModeCommand}" Padding="0"
+                             HeightRequest="120"  WidthRequest="120" BackgroundColor="Transparent"
+                             Grid.Row="4"  Grid.RowSpan="1" Grid.Column="7"    Grid.ColumnSpan="4" Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}" 
+                             />
             <!--Иконка режима 2-->
-            <Image Source="{Binding CModesEntities.CMode2.Mode2Icon}"
-                           Grid.Row="4"  Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="3"  
-                 IsVisible="{Binding CActivePagesEntities.IsMainPage}" MaximumHeightRequest="60" MaximumWidthRequest="60"/>
+            <Image Source="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode2.Mode2Icon}"
+                             Grid.Row="4"  Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="3" MaximumHeightRequest="60" MaximumWidthRequest="60"
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Кнопка перехода в настройки текущего режима-->
-            <Button Command="{Binding SPCommand}" 
-               ImageSource="{Binding  CPictureSet.Substrate.Current}"  Grid.Column="0" Grid.ColumnSpan="18"  Grid.Row="5"   Grid.RowSpan="4" 
-                  Padding="0" CornerRadius="10" MaximumHeightRequest="550" Background="Transparent" 
-                 Pressed="Substrate_Pressed" Released="Substrate_Released" IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Button Command="{Binding Source={x:Reference mPage},Path=BindingContext.SPCommand}" 
+                            ImageSource="{Binding  Source={x:Reference mPage}, Path=BindingContext.CPictureSet.Substrate.Current}"  
+                            Grid.Column="0" Grid.ColumnSpan="18"  Grid.Row="5"   Grid.RowSpan="4" 
+                            Padding="0" CornerRadius="10" MaximumHeightRequest="550" Background="Transparent" 
+                            Pressed="Substrate_Pressed" Released="Substrate_Released" 
+                            IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Приточный воздух-->
-            <Label Text="Приток"   Grid.Row="5" Grid.Column="0" Style="{StaticResource SliderText}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Slider   Grid.Row="5" Style="{StaticResource MainPageSlider}" Value="{Binding CModesEntities.CMode1.SypplySP}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding  CModesEntities.CMode1.SypplySP, StringFormat='{0}%',Mode=TwoWay}"   
-              Grid.Row="5" Grid.Column="15" Style="{StaticResource SliderText}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="Приток"   Grid.Row="5" Grid.Column="0" Style="{StaticResource SliderText}"  
+                             IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
+            <Slider   Grid.Row="5" Style="{StaticResource MainPageSlider}" 
+                             Value="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP}"  
+                             IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP, StringFormat='{0}%'}"   
+                            Grid.Row="5" Grid.Column="15" Style="{StaticResource SliderText}"  
+                            IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Вытяжной воздух-->
-            <Label Text="Выт-ка"   Grid.Row="6" Grid.Column="0" Style="{StaticResource SliderText}" IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Slider  Grid.Row="6"   Style="{StaticResource MainPageSlider}" Value="{Binding  CModesEntities.CMode1.ExhaustSP}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding  CModesEntities.CMode1.ExhaustSP, StringFormat='{0}%'}"  
-              Grid.Row="6" Grid.Column="15" Style="{StaticResource SliderText}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="Выт-ка"   Grid.Row="6" Grid.Column="0" Style="{StaticResource SliderText}" 
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
+            <Slider  Grid.Row="6"   Style="{StaticResource MainPageSlider}"
+                             Value="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP}"  
+                             IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP, StringFormat='{0}%'}"  
+                             Grid.Row="6" Grid.Column="15" Style="{StaticResource SliderText}"  
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
 
-            <Label Text="t уст"   Grid.Row="7" Grid.Column="0" Style="{StaticResource SliderText}" IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Slider  Grid.Row="7" Style="{StaticResource MainPageSlider}" Value="{Binding  CModesEntities.CMode1.TempSP}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding  CModesEntities.CMode1.TempSP, StringFormat='{0}°C'}"  
-               Grid.Row="7" Grid.Column="15" Style="{StaticResource SliderText}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="t уст"   Grid.Row="7" Grid.Column="0" Style="{StaticResource SliderText}" 
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
+            <Slider  Grid.Row="7" Style="{StaticResource MainPageSlider}" 
+                             Value="{Binding  Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.TempSP}"  
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.TempSP, StringFormat='{0}°C'}"  
+                             Grid.Row="7" Grid.Column="15" Style="{StaticResource SliderText}" 
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Основная панель-->
-            <HorizontalStackLayout  Grid.Row="10" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" HorizontalOptions="Center"  IsVisible="{Binding CActivePagesEntities.IsMainPage}">
-                <Button Text="Подключиться" Command="{Binding ConnectCommand}" IsEnabled="{Binding EthernetEntities.IsConnected, Converter={StaticResource InvertBoolConverter}}"/>
-                <Button Text="Отключиться" Command="{Binding DisconnectCommand}"  IsEnabled="{Binding EthernetEntities.IsConnected}"/>
+            <HorizontalStackLayout  Grid.Row="12" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" HorizontalOptions="Center"  
+                                IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}">
+                <Button Text="Подключиться" Command="{Binding Source={x:Reference mPage}, Path=BindingContext.ConnectCommand}" 
+                                        IsEnabled="{Binding Source={x:Reference mPage},Path=BindingContext.EthernetEntities.IsConnected, 
+                                        Converter={StaticResource InvertBoolConverter}}"/>
+                <Button Text="Отключиться" Command="{Binding Source={x:Reference mPage},Path=BindingContext.DisconnectCommand}"  
+                                        IsEnabled="{Binding Source={x:Reference mPage}, Path=BindingContext.EthernetEntities.IsConnected}"/>
             </HorizontalStackLayout>
-            <HorizontalStackLayout Grid.Row="9" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="4"    IsVisible="{Binding CActivePagesEntities.IsMainPage}">
-                <Label Text="{Binding EthernetEntities.SystemMessage}"/>
+            <HorizontalStackLayout Grid.Row="11" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="4"
+                              IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}">
+                <Label Text="{Binding Source={x:Reference mPage},Path=BindingContext.EthernetEntities.SystemMessage}"/>
             </HorizontalStackLayout>
+            <!--#endregion-->
+            <!--#region Разное-->
+            <!--#region Расход притока -->
+            <Image Source="{Binding CPictureSet.SupCons}"    Grid.Row="16"  Grid.Column="0" Style="{StaticResource MiscellaneousImg}" 
+            IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="12 м3/час"  Grid.Row="16"  Grid.Column="0" Style="{StaticResource MiscellText}"/>
+            <!--#endregion-->
+            <!--#region Расход вытяжка -->
+            <Image Source="{Binding  CPictureSet.ExhaustCons}"    Grid.Row="16"  Grid.Column="6" Style="{StaticResource MiscellaneousImg}"
+            IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="1 м3/час"  Grid.Row="16"  Grid.Column="6" Style="{StaticResource MiscellText}"/>
+            <!--#endregion-->
+            <!--#region Температура улица -->
+            <Image Source="{Binding  CPictureSet.OutDoorTemp}"    Grid.Row="16" Grid.Column="12" Style="{StaticResource MiscellaneousImg}"
+            IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="13 °C"  Grid.Row="16"  Grid.Column="12" Style="{StaticResource MiscellText}"/>
+            <!--#endregion-->
+            <!--#region Температура комнаты -->
+            <Image Source="{Binding  CPictureSet.RoomTemp}"    Grid.Row="17" Grid.Column="0" Style="{StaticResource MiscellaneousImg}"
+             IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="14 °C"  Grid.Row="17"  Grid.Column="0" Style="{StaticResource MiscellText}"/>
+            <!--#endregion-->
+            <!--#region КПД -->
+            <Image Source="{Binding  CPictureSet.Efficiency}"    Grid.Row="17" Grid.Column="6" Style="{StaticResource MiscellaneousImg}"
+             IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="2 %"  Grid.Row="17"  Grid.Column="6" Style="{StaticResource MiscellText}"/>
+            <!--#endregion-->
+            <!--#region Загрязненнось фильтра -->
+            <Image Source="{Binding  CPictureSet.FilterPol}" Grid.Row="17"  Grid.Column="12" Style="{StaticResource MiscellaneousImg}"
+            IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="1 %"  Grid.Row="17"  Grid.Column="12" Style="{StaticResource MiscellText}"/>
+            <!--#endregion-->
             <!--#endregion-->
 
             <!--#region CHOOSE MODE PAGE -->
@@ -318,11 +393,9 @@
             <Image Source="{Binding  CPictureSet.LoadingPic}" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}" 
                                                         Grid.Row="3"  Grid.RowSpan="6" Grid.Column="0" Grid.ColumnSpan="9"/>
             <!--#endregion-->
-
             <!--#region KITCHEN TIMER PAGE -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}" Style="{StaticResource HeaderBut}" Command="{Binding HomeCommand}" 
-                                                                            Pressed="HomeButton_SPPressed" Released="HomeButton_SPReleased"  
-                                                                             IsVisible = "{Binding  CActivePagesEntities.IsKitchenTimerPage}"/>
+                 Pressed="HomeButton_SPPressed" Released="HomeButton_SPReleased" IsVisible = "{Binding  CActivePagesEntities.IsKitchenTimerPage}"/>
             <Label Text="Взвод таймера"   Grid.Row="4"  Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="12"  Style="{StaticResource Title}"
                                                                      IsVisible = "{Binding   CActivePagesEntities.IsKitchenTimerPage}"/>
             <!--#region 1 колонка -->
@@ -763,9 +836,4 @@
 
         </Grid>
     </ScrollView>
-    <BoxView Color="Teal" Grid.ColumnSpan="18" Grid.RowSpan="18" >
-        <BoxView.GestureRecognizers >
-            <SwipeGestureRecognizer Direction="Left,Right" Swiped="OnSwiped" />
-        </BoxView.GestureRecognizers>
-    </BoxView>
 </ContentPage>

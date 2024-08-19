@@ -334,6 +334,75 @@ namespace Android_Silver.Entities.Visual
         }
         #endregion
 
+        #region Разное
+
+        private string _efficiency;
+        public string Efficiency
+        {
+            get { return _efficiency; }
+            set
+            {
+                _efficiency = value;
+                OnPropertyChanged($"{nameof(Efficiency)}");
+            }
+        }
+
+        private string _supCons;
+        public string SupCons
+        {
+            get { return _supCons; }
+            set
+            {
+                _supCons = value;
+                OnPropertyChanged($"{nameof(SupCons)}");
+            }
+        }
+
+        private string _exhaustCons;
+        public string ExhaustCons
+        {
+            get { return _exhaustCons; }
+            set
+            {
+                _exhaustCons = value;
+                OnPropertyChanged($"{nameof(ExhaustCons)}");
+            }
+        }
+
+        private string _outdoorTemp;
+        public string OutDoorTemp
+        {
+            get { return _outdoorTemp; }
+            set
+            {
+                _outdoorTemp = value;
+                OnPropertyChanged($"{nameof(OutDoorTemp)}");
+            }
+        }
+
+        private string _roomTemp;
+
+        public string RoomTemp
+        {
+            get { return _roomTemp; }
+            set { 
+                _roomTemp = value;
+                OnPropertyChanged(nameof(RoomTemp));
+            }
+        }
+
+        private string _filterPol;
+
+        public string FilterPol
+        {
+            get { return _filterPol; }
+            set { 
+                _filterPol = value; 
+                OnPropertyChanged($"{nameof(FilterPol)}");
+            }
+        }
+
+        #endregion
         private ObservableCollection<PicByStates> _activeModesPics = new ObservableCollection<PicByStates>();
 
         public ObservableCollection<PicByStates> ActiveModesPics
@@ -455,7 +524,7 @@ namespace Android_Silver.Entities.Visual
                         Background = "background_base.png";
                         Loading = "loading_base.jpg";
                         LoadingPic = "loading_pic_base.png";
-                        Substrate = new PicByStates(def: "substrate_base.png", selected: "test.jpg");
+                        Substrate = new PicByStates(def: "substrate_off_base.png", selected: "substrate_on_base.png");
                         Title = "title_base.png";
                         BackButton = new PicByStates("back_arrow_base.png", "test.jpg");
                         ResetButton = new PicByStates("reset_but_base.png","test.jpg");
@@ -463,6 +532,14 @@ namespace Android_Silver.Entities.Visual
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
                         TimeDigitalImage = "time_dig_img_base.png";
+                        #region Разное
+                        FilterPol = "filter_pol_base.png";
+                        Efficiency = "eff_base.png";
+                        SupCons = "supply_cons_base.png";
+                        ExhaustCons = "exhaust_cons_base.png";
+                        OutDoorTemp = "out_temp_base.png";
+                        RoomTemp = "room_temp_base.png";
+                        #endregion
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
                         CancelButton = new PicByStates("cancel_but_base.png", "test.jpg");
