@@ -23,6 +23,17 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
+        private int _timeCodeNum;
+
+        public int TimeCodeNum
+        {
+            get { return _timeCodeNum; }
+            set {
+                _timeCodeNum = value;
+                OnPropertyChanged(nameof(TimeCodeNum));
+            }
+        }
+
 
         private List<string> _days;       
         public List<string> Days
@@ -110,7 +121,7 @@ namespace Android_Silver.Entities.Modes
 
         public int WriteAddress { get;private set; }
 
-        public TimeModeValues(int timeIndex, Mode1Values mode1, int startAddress, int tModeNum)
+        public TimeModeValues(int timeIndex, Mode1Values mode1, int startAddress, int tModeNum, int mode2Num)
         {
             TimeModeNum = tModeNum;
             Days = new List<string>
@@ -128,6 +139,7 @@ namespace Android_Silver.Entities.Modes
             DayName = Days[0];
             CMode1 = mode1;  
             WriteAddress = startAddress;
+            TimeCodeNum = mode2Num * 100 + TimeModeNum;
         }
     }
 }

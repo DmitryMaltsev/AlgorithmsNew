@@ -5,10 +5,7 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
-using System;
-using System.Net;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Windows.Input;
 
 namespace Android_Silver.Pages
@@ -197,6 +194,8 @@ namespace Android_Silver.Pages
         public ICommand ContactArrRightCommand { get; private set; }
         public ICommand HumidityCommand { get; private set; }
         public ICommand SetTimeCommand { get; private set; }
+
+        public ICommand ChangeFilterCommand { get; private set; }
         #endregion
         #region Humidity commands
         public ICommand HumidityReturnCommand { get; private set; }
@@ -232,8 +231,6 @@ namespace Android_Silver.Pages
 
         public EthernetEntities EthernetEntities { get; set; }
 
-        public SensorsEntities CSensorsEntities { get; set; }
-
         public TcpClientService CTcpClientService { get; set; }
 
         public ModesEntities CModesEntities { get; set; }
@@ -254,14 +251,13 @@ namespace Android_Silver.Pages
         public MainPageViewModel()
         {
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
-            CSensorsEntities = DIContainer.Resolve<SensorsEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CSetPoints = DIContainer.Resolve<SetPoints>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CFBs = DIContainer.Resolve<FBs>();
-            CCarouselViewData=DIContainer.Resolve<CarouselViewData>();
+            CCarouselViewData = DIContainer.Resolve<CarouselViewData>();
             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SPCommand = new Command(ExecuteSetSP);
@@ -284,9 +280,10 @@ namespace Android_Silver.Pages
             ContactArrRightCommand = new Command(ExecuteContactArrRight);
             HumidityCommand = new Command(ExecuteHumidity);
             TimeReturnCommand = new Command(ExecuteTimeReturn);
+            ChangeFilterCommand = new Command(ExecuteChangeFilter);
             TimeBuffer = new();
             Value = 15;
-            
+
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
@@ -368,7 +365,7 @@ namespace Android_Silver.Pages
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    CTcpClientService.SendRecieveTask("108,39");
+                    CTcpClientService.SendRecieveTask("103,46");
                     // TcpClientService.SendRecieveTask("137,4");
                 }
             }
@@ -616,7 +613,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteVacation(object obj)
         {
-            CActivePagesEntities.SetActivePageState((ActivePageState.TSettingsPage));
+            CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage,1);
         }
 
         #endregion
@@ -683,11 +680,18 @@ namespace Android_Silver.Pages
             TimeBuffer.Hour = CFBs.CTime.Hour;
             TimeBuffer.Minute = CFBs.CTime.Minute;
         }
+
+        private void ExecuteChangeFilter(object obj)
+        {
+            int[] vals = { 1 };
+            CTcpClientService.SetCommandToServer(363, vals);
+        }
         #endregion
 
         #region Vacs execute methods
         private void ExecuteVacData(object obj)
         {
+             //TimeModeCode
             CActivePagesEntities.SetActivePageState(ActivePageState.SetTSettingsPage);
             int tIndex = (int)obj - 1;
             SetTValuesByIndex(2, tIndex);
@@ -782,7 +786,7 @@ namespace Android_Silver.Pages
         private void SetTValuesByIndex(int m2Num, int tModeNum)
         {
             TimeModeValues tVal = CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum];
-            TValues = new TimeModeValues(tVal.TimeModeNum, tVal.CMode1, tVal.WriteAddress, tVal.TimeModeNum);
+            TValues = new TimeModeValues(tVal.TimeModeNum, tVal.CMode1, tVal.WriteAddress, tVal.TimeModeNum,m2Num);
             TValues.DayNum = tVal.DayNum;
             TValues.Hour = tVal.Hour;
             TValues.Minute = tVal.Minute;
@@ -848,14 +852,14 @@ namespace Android_Silver.Pages
         }
         private void ExecuteTimeBtnDn2(object obj)
         {
-            if(TimeBuffer != null)
+            if (TimeBuffer != null)
                 TimeBuffer.Day = TimeBuffer.Day - 1 > 0 ? TimeBuffer.Day - 1 : 0;
         }
 
         private void ExecuteTimeBtnUp3(object obj)
         {
             if (TimeBuffer != null)
-                TimeBuffer.Hour = TimeBuffer.Hour + 1 < 60? TimeBuffer.Hour + 1 : 60;
+                TimeBuffer.Hour = TimeBuffer.Hour + 1 < 60 ? TimeBuffer.Hour + 1 : 60;
         }
         private void ExecuteTimeBtnDn3(object obj)
         {
@@ -882,8 +886,8 @@ namespace Android_Silver.Pages
 
         private void ExecuteTimeOk(object obj)
         {
-            int[] vals = {_timeBuffer.Year,_timeBuffer.Month,_timeBuffer.Day,_timeBuffer.Hour,_timeBuffer.Minute };
-            CTcpClientService.SetCommandToServer(358,vals);
+            int[] vals = { _timeBuffer.Year, _timeBuffer.Month, _timeBuffer.Day, _timeBuffer.Hour, _timeBuffer.Minute };
+            CTcpClientService.SetCommandToServer(358, vals);
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
         #endregion

@@ -12,6 +12,17 @@ namespace Android_Silver.Entities.Modes
 {
     public class ModesEntities : BindableBase
     {
+        private List<TimeModeValues> _cTimeModeValues;
+
+        public List<TimeModeValues> CTimeModeValues
+        {
+            get { return _cTimeModeValues; }
+            set { 
+                _cTimeModeValues = value;
+                OnPropertyChanged(nameof(CTimeModeValues));
+            }
+        }
+
         private Mode1Values _CMode1;
 
         public Mode1Values CMode1

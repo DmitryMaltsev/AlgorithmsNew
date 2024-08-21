@@ -16,7 +16,6 @@ namespace Android_Silver.Entities
         {
             _container = new UnityContainer();
             _container.RegisterSingleton<EthernetEntities>();
-            _container.RegisterSingleton<SensorsEntities>();
             _container.RegisterSingleton<TcpClientService>();
             _container.RegisterSingleton<SetPoints>();
             _container.RegisterSingleton<ModesEntities>();
@@ -29,6 +28,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<FBs>();
             _container.RegisterSingleton<Time>();
             _container.RegisterSingleton<CarouselViewData>();
+            _container.RegisterSingleton<Recup>();
         }
 
         public static T Resolve<T>()

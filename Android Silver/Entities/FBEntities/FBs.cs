@@ -14,6 +14,8 @@ namespace Android_Silver.Entities.FBEntities
         public OtherSettings OtherSettings { get; set; }
         public Time CTime { get; set; }
 
+        public Temps CTemps { get; set; }
+        public Recup CRecup { get; set; }
         public FBs()
         {
             CAlarms=DIContainer.Resolve<Alarms>();
@@ -21,6 +23,8 @@ namespace Android_Silver.Entities.FBEntities
             CFilterVals=DIContainer.Resolve<FilterVals>();
             OtherSettings = DIContainer.Resolve<OtherSettings>();
             CTime=DIContainer.Resolve<Time>();
+            CRecup=DIContainer.Resolve<Recup>();
+            CTemps=DIContainer.Resolve<Temps>();
         }
     }
 }

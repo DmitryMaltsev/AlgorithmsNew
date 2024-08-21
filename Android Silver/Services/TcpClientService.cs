@@ -17,7 +17,6 @@ namespace Android_Silver.Services
         private NetworkStream _stream;
         private EthernetEntities _ethernetEntities { get; set; }
         private SetPoints _setPoints { get; set; }
-        private SensorsEntities _sensorsEntities { get; set; }
         private ModesEntities _modesEntities { get; set; }
         private FBs _fbs { get; set; }
         public bool IsConnecting { get; private set; } = false;
@@ -38,7 +37,6 @@ namespace Android_Silver.Services
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
-            _sensorsEntities = DIContainer.Resolve<SensorsEntities>();
             _setPoints = DIContainer.Resolve<SetPoints>();
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
@@ -215,7 +213,7 @@ namespace Android_Silver.Services
         private void GetValueByTag(Response resp)
         {
             int floatPrec = 1;
-            float bufF = 0;
+            float buff = 0;
             switch (resp.Tag)
             {
                 case 100:
@@ -235,41 +233,41 @@ namespace Android_Silver.Services
                     break;
                 case 103:
                     {
-                        if (StringToFloat(resp.ValueString, floatPrec, ref bufF))
+                        if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _sensorsEntities.OutdoorTemp = bufF;
+                            _fbs.CTemps.OutDoorTemp = buff;
                         }
                     }
                     break;
                 case 104:
                     {
-                        if (StringToFloat(resp.ValueString, floatPrec, ref bufF))
+                        if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _sensorsEntities.SupplyTemp = bufF;
+                            _fbs.CTemps.SupplyTemp = buff;
                         }
                     }
                     break;
                 case 105:
                     {
-                        if (StringToFloat(resp.ValueString, floatPrec, ref bufF))
+                        if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _sensorsEntities.ExhaustTemp = bufF;
+                            _fbs.CTemps.ExhaustTemp = buff;
                         }
                     }
                     break;
                 case 106:
                     {
-                        if (StringToFloat(resp.ValueString, floatPrec, ref bufF))
+                        if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _sensorsEntities.RoomTemp = bufF;
+                            _fbs.CTemps.RoomTemp = buff;
                         }
                     }
                     break;
                 case 107:
                     {
-                        if (StringToFloat(resp.ValueString, floatPrec, ref bufF))
+                        if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _sensorsEntities.ReturnWaterTemp = bufF;
+                            _fbs.CTemps.ReturnWaterTemp = buff;
                         }
                     }
                     break;
@@ -646,6 +644,30 @@ namespace Android_Silver.Services
                             if (val >= 0 && val <= 6)
                             {
                                 _fbs.CTime.DayOfWeek = val;
+                            }
+                        }
+                    }
+                    break;
+                //День недели
+                case 147:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 100)
+                            {
+                                _fbs.CRecup.Efficiency = val;
+                            }
+                        }
+                    }
+                    break;
+                //День недели
+                case 148:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 100)
+                            {
+                                _fbs.CFilterVals.FilterPolPercent = val;
                             }
                         }
                     }

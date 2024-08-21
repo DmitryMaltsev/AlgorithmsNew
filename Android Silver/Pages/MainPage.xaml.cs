@@ -446,9 +446,11 @@ namespace Android_Silver.Pages
                ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[1].StrokeImg.Default;
             }
             ImageButton clickedButton = (ImageButton)sender;
-            int index =(int)clickedButton.CommandParameter;
-            ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[index - 1].StrokeImg.Current =
-                 ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[index - 1].StrokeImg.Selected;
+           int index =(int)clickedButton.CommandParameter;
+            int m2Num = index / 100;
+            int tModeNum = index % 100;
+            ViewModel.CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum - 1].StrokeImg.Current =
+                 ViewModel.CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[m2Num - 1].StrokeImg.Selected;
         }
         #endregion
 
