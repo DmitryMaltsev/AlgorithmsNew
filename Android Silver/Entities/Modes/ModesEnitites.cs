@@ -12,9 +12,9 @@ namespace Android_Silver.Entities.Modes
 {
     public class ModesEntities : BindableBase
     {
-        private List<TimeModeValues> _cTimeModeValues;
+        private ObservableCollection<TimeModeValues> _cTimeModeValues;
 
-        public List<TimeModeValues> CTimeModeValues
+        public ObservableCollection<TimeModeValues> CTimeModeValues
         {
             get { return _cTimeModeValues; }
             set { 
@@ -51,7 +51,6 @@ namespace Android_Silver.Entities.Modes
 
         public List<Mode2Values> Mode2ValuesList { get; set; } = new List<Mode2Values>();
 
-
         private PicturesSet _cPicturesSet { get; set; }
 
         public ModesEntities()
@@ -73,7 +72,7 @@ namespace Android_Silver.Entities.Modes
             //Режим отпуска
             Mode2ValuesList.Add(new Mode2Values(2, 4, _cPicturesSet.ActiveModesPics[5].Default, Mode1ValuesList[0], 338));
             //Режим  календаря
-            Mode2ValuesList.Add(new Mode2Values(3, 28, _cPicturesSet.ActiveModesPics[6].Default, Mode1ValuesList[0],0));
+            Mode2ValuesList.Add(new Mode2Values(3, 28, _cPicturesSet.ActiveModesPics[6].Default, Mode1ValuesList[0],364));
             //Режим по контакту
             Mode2ValuesList.Add(new Mode2Values(4, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
             //Специальный режим

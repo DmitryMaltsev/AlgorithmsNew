@@ -56,25 +56,101 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged($"{nameof(Title)}");
             }
         }
-
-        private PicByStates _substrate;
-
-        public PicByStates Substrate
-        {
-            get { return _substrate; }
-            set
-            {
-                _substrate = value;
-                OnPropertyChanged($"{nameof(Substrate)}");
-            }
-        }
-
         private PicByStates _selectStroke;
         public PicByStates SelectStroke
         {
             get { return _selectStroke; }
             set { _selectStroke = value; }
         }
+
+
+
+
+        #region Главное окно
+        private PicByStates _substrate;
+        public PicByStates Substrate
+        {
+            get { return _substrate; }
+            set
+            {
+                _substrate = value;
+                OnPropertyChanged(nameof(Substrate));
+            }
+        }
+
+        private PicByStates _eHeaterHeader;
+
+        public PicByStates EHeaterHeader
+        {
+            get { return _eHeaterHeader; }
+            set {
+                _eHeaterHeader = value;
+                OnPropertyChanged(nameof (EHeaterHeader));
+            }
+        }
+
+        private PicByStates _fanHeader;
+        public PicByStates FanHeader
+        {
+            get { return _fanHeader; }
+            set { 
+                _fanHeader = value;
+                OnPropertyChanged(nameof(FanHeader));
+            }
+        }
+
+        private PicByStates _filter70Header;
+
+        public PicByStates Filter70Header
+        {
+            get { return _filter70Header; }
+            set { 
+                _filter70Header = value;
+                OnPropertyChanged (nameof (Filter70Header));
+            }
+        }
+
+        private PicByStates _linkHeader;
+
+        public PicByStates LinkHeader
+        {
+            get { return _linkHeader; }
+            set {
+                _linkHeader = value;
+                OnPropertyChanged(nameof (LinkHeader));
+            }
+        }
+
+        private PicByStates _recuperatorHeader;
+
+        public PicByStates RecuperatorHeader
+        {
+            get { return _recuperatorHeader; }
+            set { _recuperatorHeader = value; }
+        }
+
+        private PicByStates _filter100MainIcon;
+
+        public PicByStates Filter100MainIcon
+        {
+            get { return _filter100MainIcon; }
+            set {
+                _filter100MainIcon = value;
+                OnPropertyChanged(nameof (Filter100MainIcon));
+            }
+        }
+
+        private PicByStates _alarmMainIcon;
+        public PicByStates AlarmMainIcon
+        {
+            get { return _alarmMainIcon; }
+            set { 
+                _alarmMainIcon = value;
+                OnPropertyChanged(nameof(AlarmMainIcon));
+            }
+        }
+
+        #endregion
 
         #region Общие кнопки
         private PicByStates _homeButton;
@@ -403,6 +479,7 @@ namespace Android_Silver.Entities.Visual
         }
 
         #endregion
+
         private ObservableCollection<PicByStates> _activeModesPics = new ObservableCollection<PicByStates>();
 
         public ObservableCollection<PicByStates> ActiveModesPics
@@ -532,6 +609,15 @@ namespace Android_Silver.Entities.Visual
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
                         TimeDigitalImage = "time_dig_img_base.png";
+                        #region Главное окно
+                        AlarmMainIcon = new PicByStates("", "alarm_main_base.png");
+                        Filter100MainIcon = new PicByStates("", "filter_100_main_base.png");
+                        EHeaterHeader = new PicByStates("", "eheater_header_base.png");
+                        FanHeader = new PicByStates("", "fan_header_base.png");
+                        Filter70Header = new PicByStates("", "filter70_header_base.png");
+                        LinkHeader = new PicByStates("", "link_header_base.png");
+                        RecuperatorHeader = new PicByStates("", "recuperator_header_base.png");
+                        #endregion
                         #region Разное
                         FilterPol = "filter_pol_base.png";
                         Efficiency = "eff_base.png";
@@ -639,6 +725,14 @@ namespace Android_Silver.Entities.Visual
                     break;
                 default:
                     break;
+            }
+        }
+
+        public void SetPicureSetIfNeed(PicByStates picPyStates, string set)
+        { 
+            if (picPyStates.Current!= set)
+            {
+                picPyStates.Current = set;
             }
         }
     }

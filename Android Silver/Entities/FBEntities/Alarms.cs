@@ -65,7 +65,9 @@ namespace Android_Silver.Entities.FBEntities
 				OnPropertyChanged(nameof(AlarmsCollection));
 			}
 		}
+
         private PicturesSet _pictureSet;
+        public bool Warning { get; set; }
 
         public Alarms()
         {

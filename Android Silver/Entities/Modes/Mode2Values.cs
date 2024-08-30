@@ -1,6 +1,8 @@
 ﻿using Android_Silver.Entities.Visual;
 using Android_Silver.ViewModels;
 
+using System.Collections.ObjectModel;
+
 namespace Android_Silver.Entities.Modes
 {
     public class Mode2Values : BindableBase
@@ -8,9 +10,9 @@ namespace Android_Silver.Entities.Modes
 
         public TimeModeValues CTimeMode { get; set; }
 
-        private List<TimeModeValues> _timeModeValues = new();
+        private ObservableCollection<TimeModeValues> _timeModeValues = new();
 
-        public List<TimeModeValues> TimeModeValues
+        public ObservableCollection<TimeModeValues> TimeModeValues
         {
             get { return _timeModeValues; }
             set { 
@@ -35,10 +37,10 @@ namespace Android_Silver.Entities.Modes
             TimeModeValues = SetTModes(tModesCount, defaultMode1);
         }
 
-        private List<TimeModeValues> SetTModes(int count, Mode1Values defaultM1)
+        private ObservableCollection<TimeModeValues> SetTModes(int count, Mode1Values defaultM1)
         {
             _pictureSet=DIContainer.Resolve<PicturesSet>();
-            List<TimeModeValues> tModeList = new List<TimeModeValues>();
+            ObservableCollection<TimeModeValues> tModeList = new ObservableCollection<TimeModeValues>();
             for (int i = 0; i < count; i++)
             {
                 tModeList.Add(new TimeModeValues(i, defaultM1, StartAddress + i*4, i+1, CNum));

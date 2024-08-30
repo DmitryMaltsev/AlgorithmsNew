@@ -80,6 +80,15 @@
             <Setter Property="WidthRequest" Value="120"/>
             <Setter Property="HeightRequest" Value="120"/>
         </Style>
+        <Style TargetType="Image" x:Key="MainPageHeader">
+            <Setter Property="WidthRequest" Value="20"/>
+            <Setter Property="HeightRequest" Value="20"/>
+        </Style>
+        <Style TargetType="Image" x:Key="MainPageIcons">
+            <Setter Property="WidthRequest" Value="60"/>
+            <Setter Property="HeightRequest" Value="60"/>
+            <Setter Property="Margin" Value="10,0,-10,0"/>
+        </Style>
         <!--#endregion-->
         <!--#region ChooseMode Styles -->
         <Style TargetType="Button" x:Key="ChooseModeBut">
@@ -269,25 +278,35 @@
 
             <!--#region MAIN PAGE -->
             <!--Текущее время-->
-            <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CFBs.CTime.TimeInterface}" 
-                                   TextColor="White" FontSize="19" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="1"
-                                    IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <!--Binding Source={x:Reference mPage}, Path=BindingContext.CFBs.CTime.TimeInterface Margin="20,0,0,0" -->
+            <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CFBs.CTime.TimeInterface}"
+                            TextColor="White" FontSize="19" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="1"
+                                                                        IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <!--Заголовочные статусы-->
+            <Image Source="{Binding CPictureSet.LinkHeader.Current}" Grid.Row="1"  Grid.Column="6" Style="{StaticResource MainPageHeader}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
+            <Image Source="{Binding CPictureSet.Filter70Header.Current}" Grid.Row="1"  Grid.Column="11" Style="{StaticResource MainPageHeader}"   IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
+            <Image Source="{Binding CPictureSet.RecuperatorHeader.Current}" Grid.Row="1"  Grid.Column="12" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
+            <Image Source="{Binding CPictureSet.EHeaterHeader.Current}" Grid.Row="1"  Grid.Column="13" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
+            <Image Source="{Binding CPictureSet.FanHeader.Current}" Grid.Row="1"  Grid.Column="14" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
             <!--Кнопка настроек-->
             <Button ImageSource="{Binding Source={x:Reference mPage}, Path=BindingContext.CPictureSet.SettingsButton.Current}" 
                              Command="{Binding Source={x:Reference mPage},Path=BindingContext.SettingsCommand}"  Style="{StaticResource HeaderBut}"
                              Pressed="Settings_Pressed"  Released="Settings_Released"  
-                             IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}" />
+                             IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
+            <!--Иконка предупреждения-->
+            <Image Source="{Binding CPictureSet.AlarmMainIcon.Current}" Grid.Row="4"  Grid.Column="1" Style="{StaticResource MainPageIcons}" IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <!--Иконка режима 1-->
             <Button ImageSource="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ActiveModePics.Current}"
                              Command="{Binding Source={x:Reference mPage},Path=BindingContext.ChooseModeCommand}" Padding="0"
                              HeightRequest="120"  WidthRequest="120" BackgroundColor="Transparent"
                              Grid.Row="4"  Grid.RowSpan="1" Grid.Column="7"    Grid.ColumnSpan="4" Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"
-                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}" 
-                             />
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Иконка режима 2-->
             <Image Source="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode2.Mode2Icon}"
                              Grid.Row="4"  Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="3" MaximumHeightRequest="60" MaximumWidthRequest="60"
-                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
+                             IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <!--Иконка загрязнения фильтра на 100%-->
+            <Image Source="{Binding CPictureSet.Filter100MainIcon.Current}" Grid.Row="4"  Grid.Column="14" Style="{StaticResource MainPageIcons}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <!--Кнопка перехода в настройки текущего режима-->
             <Button Command="{Binding Source={x:Reference mPage},Path=BindingContext.SPCommand}" 
                             ImageSource="{Binding  Source={x:Reference mPage}, Path=BindingContext.CPictureSet.Substrate.Current}"  
@@ -523,12 +542,11 @@
                        ImageSource="{Binding  CPictureSet.ModesSetBut.Current}"  Released="SPSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
             <!--#endregion-->
             <!--#region Нижний уровень -->
-            <Button  
-                ImageSource="{Binding  CPictureSet.VacSetBut.Current}" 
-                Style="{StaticResource SettingsButtons}"  Grid.Row="9"  Grid.Column="0"  Grid.ColumnSpan="9"  Command="{Binding VacationCommand}"  
-                     Pressed="VacSettings_Pressed" Released="VacSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
+            <Button ImageSource="{Binding  CPictureSet.VacSetBut.Current}" Grid.Row="9"  Grid.Column="0"  Grid.ColumnSpan="9"
+                Style="{StaticResource SettingsButtons}"   Command="{Binding VacationTableCommand}"  
+                Pressed="VacSettings_Pressed" Released="VacSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
             <Button ImageSource="{Binding  CPictureSet.ShedSetBut.Current}"    Grid.Row="9" Grid.Column="9" Style="{StaticResource SettingsButtons}" 
-                 Pressed="ShedSettings_Pressed" Released="ShedSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
+               Command="{Binding ShedulerTableCommand}"  Pressed="ShedSettings_Pressed" Released="ShedSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
             <!--#endregion-->
             <!--#endregion-->
 
@@ -567,7 +585,7 @@
              Command="{Binding HomeCommand}" Pressed="Home_Pressed" Released="Home_Released"  IsVisible = "{Binding CActivePagesEntities.IsTSettingsPage}"/>
             <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding TRetCommand}" Style="{StaticResource MiniButtons}" 
              Pressed="BackButton_Pressed"  Released="BackButton_Released" IsVisible = "{Binding   CActivePagesEntities.IsTSettingsPage}"/>
-            <Label Text="Расписание для отпуска"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="12"  Style="{StaticResource Title}"
+            <Label Text="{Binding TTitle}"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="12"  Style="{StaticResource Title}"
                                                                                           IsVisible = "{Binding   CActivePagesEntities.IsTSettingsPage}"/>
             <ListView x:Name="vacList" Grid.Row="5" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="18" 
                   ItemsSource="{Binding  CModesEntities.CTimeModeValues}"
@@ -603,9 +621,9 @@
                                     <Label Text="{Binding Hour, StringFormat='{0}ч.'}"  Grid.Column="7" Grid.ColumnSpan="3" FontSize="18"/>
                                     <Label Text="{Binding Minute, StringFormat='{0}м.'}" Grid.Column="10" Grid.ColumnSpan="3" FontSize="18"/>
                                     <Image Source="{Binding CMode1.MiniIcon}"  Grid.Column="13" Grid.ColumnSpan="5" WidthRequest="35"/>
-                                    <ImageButton Command="{Binding Source={x:Reference vacList}, Path=BindingContext.SetVacDataCommand}"
+                                    <ImageButton Command="{Binding Source={x:Reference vacList}, Path=BindingContext.SetTDataCommand}"
                                      Aspect="AspectFill" Margin="0,10"
-                                     CommandParameter="{Binding TimeCodeNum}" Source="{Binding StrokeImg.Current}" 
+                                     CommandParameter="{Binding TCodeNum}" Source="{Binding StrokeImg.Current}" 
                                      Pressed="VacPage_Pressed"  Grid.Column="0"  Grid.ColumnSpan="18"/>
                                 </Grid>
                             </ViewCell.View>

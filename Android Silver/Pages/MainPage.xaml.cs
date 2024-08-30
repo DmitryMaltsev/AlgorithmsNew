@@ -32,12 +32,6 @@ namespace Android_Silver.Pages
             BindingContext = ViewModel;
           //  _viewModel.Init();
             _mp = this;
-            var swipeLeft = new SwipeGestureRecognizer();
-            swipeLeft.Swiped += OnSwipeLeft;
-
-            var swipeRight = new SwipeGestureRecognizer();
-            swipeRight.Swiped += OnSwipeRight;
-      
             // Add the gestures to your content 
             //  ContentView.GestureRecognizers.Add(swipeLeft);
             //  ContentView.GestureRecognizers.Add(swipeRight)

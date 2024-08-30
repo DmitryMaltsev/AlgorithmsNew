@@ -197,9 +197,10 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-
+        public int QueryStep { get; set; } = 0;
 
         #endregion
+
         ModesEntities _modesEntities;
         public ActivePagesEntities()
         {
