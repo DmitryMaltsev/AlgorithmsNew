@@ -4,6 +4,7 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using System;
 using System.Collections;
+using System.ComponentModel.Design;
 using System.Globalization;
 using System.Net.Sockets;
 using System.Reflection;
@@ -62,11 +63,18 @@ namespace Android_Silver.Services
                     _ethernetEntities.IsConnected = false;
                     IsConnecting = false;
                     _ethernetEntities.Client.Close();
-                    connectTask.Dispose();
-                    throw new Exception("Ошибка: не удалось подключиться к серверу");
+                    _ethernetEntities.EthernetMessage = "Не удалось подключиться модулю WI-FI";
+                    if (connectTask.Status == TaskStatus.RanToCompletion || connectTask.Status == TaskStatus.Faulted
+                        || connectTask.Status == TaskStatus.Canceled) {
+                        connectTask.Dispose();
+                    }
+                   
+                    throw new Exception("Не удалось подключиться модулю WI-FI");
+                   
                 }
                 else
                 {
+                    _ethernetEntities.EthernetMessage = "Успешное подключение";
                     _ethernetEntities.SystemMessage = "Успешное подключение";
                     _ethernetEntities.IsConnected = true;
                     IsConnecting = false;
@@ -183,8 +191,19 @@ namespace Android_Silver.Services
             if (_trySendcounter == 10)
             {
                 _pictureSet.SetPicureSetIfNeed(_pictureSet.LinkHeader, _pictureSet.LinkHeader.Default);
-                _ethernetEntities.IsConnected = false;
-                _ethernetEntities.SystemMessage = "Превышено максимальное количество попыток - 10";
+               if (_ethernetEntities.IsConnected==true ) {                    
+                        _ethernetEntities.SystemMessage = "Превышено максимальное количество попыток - 10";
+                        _ethernetEntities.EthernetMessage = "Превышено максимальное количество попыток передачи данных. Подключитесь повторно";
+                        _activePageEntities.SetActivePageState(ActivePageState.StartPage);
+                        _ethernetEntities.IsConnected = false;
+                    }
+                    else
+                    {
+                    _ethernetEntities.IsConnected = false;
+                }
+                    
+            
+              
             }
             return sbResult;
         }
@@ -234,17 +253,17 @@ namespace Android_Silver.Services
             {
                 case 100:
                     {
-                        _ethernetEntities.IP = resp.ValueString;
+                        //_ethernetEntities.IP = resp.ValueString;
                     }
                     break;
                 case 101:
                     {
-                        _ethernetEntities.Subnet = resp.ValueString;
+                      //  _ethernetEntities.Subnet = resp.ValueString;
                     }
                     break;
                 case 102:
                     {
-                        _ethernetEntities.GateWay = resp.ValueString;
+                       // _ethernetEntities.GateWay = resp.ValueString;
                     }
                     break;
                 case 103:

@@ -144,7 +144,8 @@
 	  <None Remove="Resources\Images\Базовые\общие кнопки\back_arrow_base.png" />
 	  <None Remove="Resources\Images\Базовые\общие кнопки\home_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\общие кнопки\next_but_base.png" />
-	  <None Remove="Resources\Images\Базовые\общие кнопки\ok_but_base.png" />
+	  <None Remove="Resources\Images\Базовые\общие кнопки\ok_but_base_off.png" />
+	  <None Remove="Resources\Images\Базовые\общие кнопки\ok_but_base_on.png" />
 	  <None Remove="Resources\Images\Базовые\общие кнопки\settings_but_base.png" />
 	  <None Remove="Resources\Images\Базовые\Режим времени\tmode_stroke_off_base.png" />
 	  <None Remove="Resources\Images\Базовые\Режим времени\tmode_stroke_on_base.png" />
@@ -224,7 +225,8 @@
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\back_arrow_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\home_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\next_but_base.png" />
-	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\ok_but_base.png" />
+	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\ok_but_base_off.png" />
+	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\ok_but_base_on.png" />
 	  <MauiImage Include="Resources\Images\Базовые\общие кнопки\settings_but_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Режим времени\tmode_stroke_off_base.png" />
 	  <MauiImage Include="Resources\Images\Базовые\Режим времени\tmode_stroke_on_base.png" />
@@ -234,6 +236,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Unity" Version="5.11.10" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
 	</ItemGroup>
 
 	<ItemGroup>

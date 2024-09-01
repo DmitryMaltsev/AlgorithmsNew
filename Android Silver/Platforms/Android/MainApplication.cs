@@ -13,10 +13,7 @@ namespace Android_Silver
 
         }
 
-        private void Test()
-        {
-
-        }
+  
 
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }

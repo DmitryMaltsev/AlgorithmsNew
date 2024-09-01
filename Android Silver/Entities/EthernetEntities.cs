@@ -3,12 +3,13 @@
 using System.ComponentModel;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace Android_Silver.Entities
 {
     public class EthernetEntities : BindableBase
     {
-         
+
         public TcpClient Client { get; set; }
 
         private string _connectIP = "192.168.0.111";
@@ -19,6 +20,59 @@ namespace Android_Silver.Entities
             {
                 _connectIP = value;
                 OnPropertyChanged(nameof(ConnectIP));
+            }
+        }
+
+        private byte _ip1 = 192;
+        public byte IP1
+        {
+            get { return _ip1; }
+            set
+            {
+                _ip1 = value;
+                OnPropertyChanged(nameof(IP1));
+            }
+        }
+
+        private byte _ip2 = 168;
+        public byte IP2
+        {
+            get { return _ip2; }
+            set
+            {
+                _ip2 = value;
+                OnPropertyChanged(nameof(IP2));
+            }
+        }
+        private byte _ip3 = 0;
+        public byte IP3
+        {
+            get { return _ip3; }
+            set
+            {
+                _ip3 = value;
+                OnPropertyChanged(nameof(IP3));
+            }
+        }
+
+        private byte _ip4 = 50;
+        public byte IP4
+        {
+            get { return _ip4; }
+            set
+            {
+                _ip4 = value;
+                OnPropertyChanged(nameof(IP4));
+            }
+        }
+        private string _ethernetMessage = "Введите IP и нажмите подтвердить";
+        public string EthernetMessage
+        {
+            get { return _ethernetMessage; }
+            set
+            {
+                _ethernetMessage = value;
+                OnPropertyChanged(nameof(EthernetMessage));
             }
         }
 
@@ -33,17 +87,7 @@ namespace Android_Silver.Entities
             }
         }
 
-        private string _ip = String.Empty;
-        public string IP
-        {
-            get { return _ip; }
-            set
-            {
-                _ip = value;
-                OnPropertyChanged(nameof(IP));
-            }
-        }
- 
+
         private string _subnet = String.Empty;
         public string Subnet
         {
@@ -71,20 +115,22 @@ namespace Android_Silver.Entities
         public bool IsConnected
         {
             get { return _isConnected; }
-            set {
-                if(_isConnected!=value)
+            set
+            {
+                if (_isConnected != value)
                 {
                     _isConnected = value;
                     OnPropertyChanged(nameof(IsConnected));
                 }
             }
         }
-       
+
         private string _systemMessage;
         public string SystemMessage
         {
             get { return _systemMessage; }
-            set { 
+            set
+            {
                 _systemMessage = value;
                 OnPropertyChanged(nameof(SystemMessage));
             }
@@ -96,17 +142,39 @@ namespace Android_Silver.Entities
 
 
 
-        private bool _loaded=false;
+        private bool _loaded = false;
 
         public bool Loaded
         {
             get { return _loaded; }
-            set {
+            set
+            {
                 _loaded = value;
                 OnPropertyChanged(nameof(Loaded));
             }
         }
 
         public bool WriteMessageSended { get; set; }
+
+        private bool IsValidIp(string ipAddress)
+        {
+            // Проверка на допустимый формат IPv4
+            var regex = new Regex(@"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|
+                                                                                [01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+            return regex.IsMatch(ipAddress);
+        }
+
+        public void WifiStateChangeCallback(bool wifiState)
+        {
+            if (wifiState)
+            {
+                EthernetMessage = "Введите IP и нажмите подтвердить";
+            }
+            else
+            {
+                EthernetMessage = "Для работы приложения требуется включить Wi-Fi и " +
+                                                    "соединиться с модемом";
+            }
+        }
     }
 }

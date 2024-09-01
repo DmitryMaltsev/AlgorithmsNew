@@ -11,6 +11,7 @@ namespace Android_Silver.Entities.Visual
 {
     public enum ActivePageState
     {
+        StartPage,
         MainPage,
         ChooseModePage,
         LoadingPage,
@@ -31,6 +32,20 @@ namespace Android_Silver.Entities.Visual
     public class ActivePagesEntities : BindableBase
     {
         #region Rising properties
+        private bool _isStartPage;
+
+        public bool IsStartPage
+        {
+            get { return _isStartPage; }
+            set {
+                _isStartPage = value;
+                OnPropertyChanged(nameof(IsStartPage));
+            }
+        }
+
+
+
+
         private bool _isMainPage;
         public bool IsMainPage
         {
@@ -212,9 +227,30 @@ namespace Android_Silver.Entities.Visual
         {
             switch (activePageState)
             {
+                case ActivePageState.StartPage:
+                    {
+                        IsStartPage = true;
+                        IsMainPage = false;
+                        IsChooseModePage = false;
+                        IsLoadingPage = false;
+                        IsKitchenTimerPage = false;
+                        IsSetPointsPage = false;
+                        IsSettingsPage = false;
+                        IsJournalPage = false;
+                        IsTSettingsPage = false;
+                        IsSetTSettingsPage = false;
+                        IsOtherSettingsPage = false;
+                        IsHumidityPage = false;
+                        IsTimePage = false;
+                        IsSwipePage = false;
+                        IsShedulerPage = false;
+
+                    }
+                    break;
                 case ActivePageState.MainPage:
                     {
                         IsMainPage = true;
+                        IsStartPage = false;
                         IsChooseModePage = false;
                         IsLoadingPage = false;
                         IsKitchenTimerPage = false;
@@ -234,6 +270,7 @@ namespace Android_Silver.Entities.Visual
                     {
                         IsChooseModePage = true;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsLoadingPage = false;
                         IsKitchenTimerPage = false;
                         IsSetPointsPage = false;
@@ -253,6 +290,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = true;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsKitchenTimerPage = false;
                         IsSetPointsPage = false;
                         IsSettingsPage = false;
@@ -272,6 +310,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsSetPointsPage = false;
                         IsSettingsPage = false;
                         IsJournalPage = false;
@@ -292,6 +331,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsSettingsPage = false;
                         IsJournalPage = false;
                         IsTSettingsPage = false;
@@ -311,6 +351,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsJournalPage = false;
                         IsTSettingsPage = false;
                         IsSetTSettingsPage = false;
@@ -330,6 +371,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsTSettingsPage = false;
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
@@ -368,6 +410,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsSetTSettingsPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
@@ -387,6 +430,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsOtherSettingsPage = false;
                         IsHumidityPage = false;
                         IsTimePage = false;
@@ -406,6 +450,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsHumidityPage = false;
                         IsTimePage = false;
                         IsSwipePage = false;
@@ -425,6 +470,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
@@ -444,6 +490,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
                     }
@@ -463,6 +510,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         IsShedulerPage = false;
                     }
                     break;
@@ -482,6 +530,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                         IsChooseModePage = false;
                         IsMainPage = false;
+                        IsStartPage = false;
                         break;
                     }
             }

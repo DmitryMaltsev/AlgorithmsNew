@@ -16,21 +16,21 @@ namespace Android_Silver.Pages
         public MainPage()
         {
             InitializeComponent();
-           /* im1But.Pressed -= Settings_Pressed;
-            im1But.Released -= Settings_Released;
-            im2But.Pressed -= ActiveMode_Pressed;
-            im2But.Released -= ActiveMode_Released;
-            im3But.Pressed -= Substrate_Pressed;
-            im3But.Released -= Substrate_Released;
-           /* im1But.Pressed += Settings_Pressed;
-            im1But.Released += Settings_Released;
-            im2But.Pressed += ActiveMode_Pressed;
-            im2But.Released += ActiveMode_Released;
-            im3But.Pressed += Substrate_Pressed;
-            im3But.Released += Substrate_Released;*/
+            /* im1But.Pressed -= Settings_Pressed;
+             im1But.Released -= Settings_Released;
+             im2But.Pressed -= ActiveMode_Pressed;
+             im2But.Released -= ActiveMode_Released;
+             im3But.Pressed -= Substrate_Pressed;
+             im3But.Released -= Substrate_Released;
+            /* im1But.Pressed += Settings_Pressed;
+             im1But.Released += Settings_Released;
+             im2But.Pressed += ActiveMode_Pressed;
+             im2But.Released += ActiveMode_Released;
+             im3But.Pressed += Substrate_Pressed;
+             im3But.Released += Substrate_Released;*/
             ViewModel = new MainPageViewModel();
             BindingContext = ViewModel;
-          //  _viewModel.Init();
+            //  _viewModel.Init();
             _mp = this;
             // Add the gestures to your content 
             //  ContentView.GestureRecognizers.Add(swipeLeft);
@@ -91,6 +91,20 @@ namespace Android_Silver.Pages
         {
             ViewModel.CPictureSet.BackButton.Current = ViewModel.CPictureSet.BackButton.Default;
         }
+        #region Start page callbacks
+        private void IPButton_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.IPBut.Current = ViewModel.CPictureSet.IPBut.Selected;
+        }
+
+        private void IPButton_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.IPBut.Current = ViewModel.CPictureSet.IPBut.Default;
+        }
+
+
+
+        #endregion
 
         #region Choose modes callbacks
         private void Home_Pressed(object sender, EventArgs e)
@@ -163,7 +177,7 @@ namespace Android_Silver.Pages
         private void TurnOff_Released(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SelectModesPics[0].Current = ViewModel.CPictureSet.SelectModesPics[0].Default;
-        } 
+        }
         #endregion
 
         #region Kitchen callbacks
@@ -418,7 +432,7 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.VacSetBut.Current = ViewModel.CPictureSet.VacSetBut.Default;
         }
         #endregion
-      
+
         #region  JOURNAL PAGE
         private void ResetJournal_Pressed(object sender, EventArgs e)
         {
@@ -440,7 +454,7 @@ namespace Android_Silver.Pages
                ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[1].StrokeImg.Default;
             }
             ImageButton clickedButton = (ImageButton)sender;
-           int index =(int)clickedButton.CommandParameter;
+            int index = (int)clickedButton.CommandParameter;
             int m2Num = index / 100;
             int tModeNum = index % 100;
             ViewModel.CModesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum - 1].StrokeImg.Current =
@@ -504,10 +518,6 @@ namespace Android_Silver.Pages
         {
             base.OnAppearing();
         }
-
-        private void OnSwiped(object sender, SwipedEventArgs e)
-        {
-
-        }
     }
+
 }

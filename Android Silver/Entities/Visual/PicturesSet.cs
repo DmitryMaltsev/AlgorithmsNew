@@ -30,7 +30,8 @@ namespace Android_Silver.Entities.Visual
         public string Loading
         {
             get { return _loading; }
-            set { 
+            set
+            {
                 _loading = value;
                 OnPropertyChanged(nameof(Loading));
             }
@@ -40,7 +41,8 @@ namespace Android_Silver.Entities.Visual
         public string LoadingPic
         {
             get { return _loadingPic; }
-            set { 
+            set
+            {
                 _loadingPic = value;
                 OnPropertyChanged(nameof(LoadingPic));
             }
@@ -51,8 +53,9 @@ namespace Android_Silver.Entities.Visual
         public string Title
         {
             get { return _title; }
-            set { 
-                _title = value; 
+            set
+            {
+                _title = value;
                 OnPropertyChanged($"{nameof(Title)}");
             }
         }
@@ -62,10 +65,21 @@ namespace Android_Silver.Entities.Visual
             get { return _selectStroke; }
             set { _selectStroke = value; }
         }
+        #region Начальное окно
+        private PicByStates _ipBut;
+        public PicByStates IPBut
+        {
+            get { return _ipBut; }
+            set {
+                _ipBut = value;
+                OnPropertyChanged(nameof(IPBut));
+            }
+        }
 
 
 
 
+        #endregion
         #region Главное окно
         private PicByStates _substrate;
         public PicByStates Substrate
@@ -83,9 +97,10 @@ namespace Android_Silver.Entities.Visual
         public PicByStates EHeaterHeader
         {
             get { return _eHeaterHeader; }
-            set {
+            set
+            {
                 _eHeaterHeader = value;
-                OnPropertyChanged(nameof (EHeaterHeader));
+                OnPropertyChanged(nameof(EHeaterHeader));
             }
         }
 
@@ -93,7 +108,8 @@ namespace Android_Silver.Entities.Visual
         public PicByStates FanHeader
         {
             get { return _fanHeader; }
-            set { 
+            set
+            {
                 _fanHeader = value;
                 OnPropertyChanged(nameof(FanHeader));
             }
@@ -104,9 +120,10 @@ namespace Android_Silver.Entities.Visual
         public PicByStates Filter70Header
         {
             get { return _filter70Header; }
-            set { 
+            set
+            {
                 _filter70Header = value;
-                OnPropertyChanged (nameof (Filter70Header));
+                OnPropertyChanged(nameof(Filter70Header));
             }
         }
 
@@ -115,9 +132,10 @@ namespace Android_Silver.Entities.Visual
         public PicByStates LinkHeader
         {
             get { return _linkHeader; }
-            set {
+            set
+            {
                 _linkHeader = value;
-                OnPropertyChanged(nameof (LinkHeader));
+                OnPropertyChanged(nameof(LinkHeader));
             }
         }
 
@@ -134,9 +152,10 @@ namespace Android_Silver.Entities.Visual
         public PicByStates Filter100MainIcon
         {
             get { return _filter100MainIcon; }
-            set {
+            set
+            {
                 _filter100MainIcon = value;
-                OnPropertyChanged(nameof (Filter100MainIcon));
+                OnPropertyChanged(nameof(Filter100MainIcon));
             }
         }
 
@@ -144,7 +163,8 @@ namespace Android_Silver.Entities.Visual
         public PicByStates AlarmMainIcon
         {
             get { return _alarmMainIcon; }
-            set { 
+            set
+            {
                 _alarmMainIcon = value;
                 OnPropertyChanged(nameof(AlarmMainIcon));
             }
@@ -206,7 +226,8 @@ namespace Android_Silver.Entities.Visual
         public PicByStates BackButton
         {
             get { return _backButton; }
-            set { 
+            set
+            {
                 _backButton = value;
                 OnPropertyChanged(nameof(BackButton));
             }
@@ -217,9 +238,10 @@ namespace Android_Silver.Entities.Visual
         public PicByStates ResetButton
         {
             get { return _resetButton; }
-            set { 
+            set
+            {
                 _resetButton = value;
-                OnPropertyChanged(nameof(_resetButton));            
+                OnPropertyChanged(nameof(_resetButton));
             }
         }
 
@@ -227,8 +249,9 @@ namespace Android_Silver.Entities.Visual
         public string JournalStroke
         {
             get { return _journalStroke; }
-            set { 
-                _journalStroke = value; 
+            set
+            {
+                _journalStroke = value;
                 OnPropertyChanged(nameof(JournalStroke));
             }
         }
@@ -264,7 +287,7 @@ namespace Android_Silver.Entities.Visual
 
         public List<PicByStates> DigitalButtonsUp
         {
-            get{ return _digitalButtonsUp;}
+            get { return _digitalButtonsUp; }
             set
             {
                 _digitalButtonsUp = value;
@@ -301,7 +324,8 @@ namespace Android_Silver.Entities.Visual
         public List<PicByStates> DigitalButtonsDn
         {
             get { return _digitalButtonsDn; }
-            set {
+            set
+            {
                 _digitalButtonsDn = value;
                 OnPropertyChanged(nameof(DigitalButtonsDn));
             }
@@ -312,7 +336,8 @@ namespace Android_Silver.Entities.Visual
         public string DigitalImage
         {
             get { return _digitalImage; }
-            set { 
+            set
+            {
                 _digitalImage = value;
                 OnPropertyChanged($"{nameof(DigitalImage)}");
             }
@@ -337,8 +362,10 @@ namespace Android_Silver.Entities.Visual
         public PicByStates TModeStroke
         {
             get { return _tModeStroke; }
-            set { 
-                _tModeStroke = value; }
+            set
+            {
+                _tModeStroke = value;
+            }
         }
 
 
@@ -346,12 +373,13 @@ namespace Android_Silver.Entities.Visual
         #endregion
 
         #region Настройки прочие
-        private string  _contactBackGround;
-        public string  ContactBackGround
+        private string _contactBackGround;
+        public string ContactBackGround
         {
             get { return _contactBackGround; }
-            set { 
-                _contactBackGround = value; 
+            set
+            {
+                _contactBackGround = value;
                 OnPropertyChanged(nameof(ContactBackGround));
             }
         }
@@ -360,7 +388,8 @@ namespace Android_Silver.Entities.Visual
         public PicByStates FilterChangedBut
         {
             get { return _filterChangedBut; }
-            set {
+            set
+            {
                 _filterChangedBut = value;
                 OnPropertyChanged(nameof(FilterChangedBut));
             }
@@ -392,7 +421,8 @@ namespace Android_Silver.Entities.Visual
         public PicByStates ArrowButLeft
         {
             get { return _arrowButLeft; }
-            set { 
+            set
+            {
                 _arrowButLeft = value;
                 OnPropertyChanged(nameof(_arrowButLeft));
             }
@@ -403,8 +433,9 @@ namespace Android_Silver.Entities.Visual
         public PicByStates ArrowButRight
         {
             get { return _arrowButRight; }
-            set { 
-                _arrowButRight = value; 
+            set
+            {
+                _arrowButRight = value;
                 OnPropertyChanged($"{nameof(ArrowButRight)}");
             }
         }
@@ -461,7 +492,8 @@ namespace Android_Silver.Entities.Visual
         public string RoomTemp
         {
             get { return _roomTemp; }
-            set { 
+            set
+            {
                 _roomTemp = value;
                 OnPropertyChanged(nameof(RoomTemp));
             }
@@ -472,8 +504,9 @@ namespace Android_Silver.Entities.Visual
         public string FilterPol
         {
             get { return _filterPol; }
-            set { 
-                _filterPol = value; 
+            set
+            {
+                _filterPol = value;
                 OnPropertyChanged($"{nameof(FilterPol)}");
             }
         }
@@ -509,7 +542,8 @@ namespace Android_Silver.Entities.Visual
         public ObservableCollection<string> MiniIconsPics
         {
             get { return _miniIconsPics; }
-            set { 
+            set
+            {
                 _miniIconsPics = value;
                 OnPropertyChanged(nameof(MiniIconsPics));
             }
@@ -598,13 +632,14 @@ namespace Android_Silver.Entities.Visual
             {
                 case PicturesSetStates.Base:
                     {
+                        IPBut =new PicByStates("ok_but_base_off.png", "ok_but_base_on.png");
                         Background = "background_base.png";
                         Loading = "loading_base.jpg";
                         LoadingPic = "loading_pic_base.png";
                         Substrate = new PicByStates(def: "substrate_off_base.png", selected: "substrate_on_base.png");
                         Title = "title_base.png";
                         BackButton = new PicByStates("back_arrow_base.png", "test.jpg");
-                        ResetButton = new PicByStates("reset_but_base.png","test.jpg");
+                        ResetButton = new PicByStates("reset_but_base.png", "test.jpg");
                         JournalStroke = "journal_stroke_base.png";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
@@ -654,7 +689,7 @@ namespace Android_Silver.Entities.Visual
                         #region Уставки
                         HomeButton = new PicByStates("home_but_base.png", "test.jpg");
                         NextButton = new PicByStates("next_but_base.png", "test.jpg");
-                        OkButton = new PicByStates("ok_but_base.png", "ok_but_base.png");
+                        OkButton = new PicByStates("ok_but_base_off.png", "ok_but_base_on.png");
                         SettingsButton = new PicByStates("settings_but_base.png", "test.jpg");
                         #endregion
                         #region Кнопки активных режимов
@@ -729,8 +764,8 @@ namespace Android_Silver.Entities.Visual
         }
 
         public void SetPicureSetIfNeed(PicByStates picPyStates, string set)
-        { 
-            if (picPyStates.Current!= set)
+        {
+            if (picPyStates.Current != set)
             {
                 picPyStates.Current = set;
             }
