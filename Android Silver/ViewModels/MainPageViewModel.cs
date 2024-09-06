@@ -173,6 +173,7 @@ namespace Android_Silver.Pages
         #endregion
         #region SPCommands
         public ICommand NextSetPointsCommand { get; private set; }
+        public ICommand SPReturnCommand { get; private set; }
         public ICommand SPOkCommand { get; private set; }
         public ICommand BtnUpCommand0 { get; private set; }
         public ICommand BtnDnCommand0 { get; private set; }
@@ -325,6 +326,7 @@ namespace Android_Silver.Pages
             BtnDnCommand2 = new Command(ExecuteBtnDn2);
             BtnUpCommand3 = new Command(ExecuteBtnUP3);
             BtnDnCommand3 = new Command(ExecuteBtnDn3);
+            SPReturnCommand = new Command(ExecuteSPReturn);
             #endregion
             #region Vac commands
             SetTDataCommand = new Command(ExecuteSetTData);
@@ -379,7 +381,7 @@ namespace Android_Silver.Pages
             
         }
 
-         private void StartPageExecuteConnect()
+        private void StartPageExecuteConnect()
         {
             EthernetEntities.ConnectIP =
                         $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
@@ -640,6 +642,13 @@ namespace Android_Silver.Pages
             M1Values.TempSP = bufVals.TempSP;
             M1Values.PowerLimitSP = bufVals.PowerLimitSP;
         }
+
+        private void ExecuteSPReturn(object obj)
+        {
+
+            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+        }
+
         #endregion
 
         #region Settings execute methods

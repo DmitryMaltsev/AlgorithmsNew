@@ -67,15 +67,18 @@
         <!--#endregion-->
         <!--#region Main page style -->
         <Style TargetType="Slider" x:Key="MainPageSlider">
-            <Setter Property="BackgroundColor" Value="Gray"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="ThumbColor"  Value="White" />
+            <Setter Property="MinimumTrackColor" Value="Red"/>
+            <Setter Property="MaximumTrackColor" Value="GreenYellow"/>
             <Setter Property="Grid.Column" Value="3" />
             <Setter Property="Grid.ColumnSpan" Value="12"/>
             <Setter Property="Grid.RowSpan" Value="2"/>
         </Style>
         <Style TargetType="Label" x:Key="SliderText">
-            <Setter Property="Grid.ColumnSpan" Value="3"/>
+            <Setter Property="Grid.ColumnSpan" Value="4"/>
             <Setter Property="Grid.RowSpan" Value="2"/>
-            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style TargetType="Label" x:Key="MiscellText">
             <Setter Property="Grid.ColumnSpan" Value="6"/>
@@ -235,6 +238,9 @@
         <Style TargetType="Image"  x:Key="TimeImg" BasedOn="{StaticResource SPImg}">
             <Setter Property="Grid.ColumnSpan" Value="3"/>
         </Style>
+        <Style TargetType="Label" x:Key="TimeSpsText" BasedOn="{StaticResource SPsText}">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
         <!--#endregion-->
     </ContentPage.Resources>
     <ScrollView VerticalScrollBarVisibility="Always">
@@ -326,7 +332,7 @@
                              Grid.Row="4"  Grid.RowSpan="1" Grid.Column="7"    Grid.ColumnSpan="4" Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Иконка режима 2-->
-            <Image Source="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode2.Mode2Icon}"
+            <Image Source="{Binding CModesEntities.CMode2.Mode2Icon}"
                              Grid.Row="4"  Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="3" MaximumHeightRequest="60" MaximumWidthRequest="60"
                              IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <!--Иконка загрязнения фильтра на 100%-->
@@ -475,7 +481,7 @@
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
                      Style="{StaticResource HeaderBut}"  Pressed="HomeButton_SPPressed" Released="HomeButton_SPReleased"  
                       IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
-            <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding TSetReturnCommand}" 
+            <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding SPReturnCommand}" 
              Grid.Row="1" Grid.Column="0" Style="{StaticResource MiniButtons}" 
              Pressed="BackButton_Pressed"  Released="BackButton_Released" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             <!--#region Заголовок -->
@@ -832,7 +838,7 @@
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsUp[0].Current}"  Command="{Binding TimeBtnUpCommand0}"  Grid.Column="1"  Grid.Row="5"
             Style="{StaticResource TimeBtn}"  Pressed="UpDigit_Pressed0" Released="UpDigit_Released0" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             <VerticalStackLayout Grid.Row="6" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="3">
-                <Label Text="{Binding TimeBuffer.Year}"   Style="{StaticResource SPsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
+                <Label Text="{Binding TimeBuffer.Year}"   Style="{StaticResource TimeSpsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
                 <Label Text="Год"  Style="{StaticResource SPsText}"  IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             </VerticalStackLayout>
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[0].Current}" Command="{Binding TimeBtnDnCommand0}"  Grid.Row="7" Grid.Column="1" 
@@ -844,7 +850,7 @@
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsUp[1].Current}"  Command="{Binding TimeBtnUpCommand1}"  Grid.Column="4"  Grid.Row="5"
             Style="{StaticResource TimeBtn}"  Pressed="UpDigit_Pressed1" Released="UpDigit_Released1" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             <VerticalStackLayout Grid.Row="6" Grid.Column="4" Grid.RowSpan="1" Grid.ColumnSpan="3">
-                <Label Text="{Binding TimeBuffer.Month}"   Style="{StaticResource SPsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
+                <Label Text="{Binding TimeBuffer.Month}"   Style="{StaticResource TimeSpsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
                 <Label Text="Мес"  Style="{StaticResource SPsText}"  IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             </VerticalStackLayout>
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[1].Current}" Command="{Binding TimeBtnDnCommand1}"  Grid.Row="7" Grid.Column="4" 
@@ -856,7 +862,7 @@
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsUp[2].Current}"  Command="{Binding TimeBtnUpCommand2}"  Grid.Column="8"  Grid.Row="5"  Margin="-10,0,10,0"
             Style="{StaticResource TimeBtn}"  Pressed="UpDigit_Pressed2" Released="UpDigit_Released2" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             <VerticalStackLayout Grid.Row="6" Grid.Column="8" Grid.RowSpan="1" Grid.ColumnSpan="3"  Margin="-10,0,10,0">
-                <Label Text="{Binding TimeBuffer.Day}"   Style="{StaticResource SPsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
+                <Label Text="{Binding TimeBuffer.Day}"   Style="{StaticResource TimeSpsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
                 <Label Text="День"  Style="{StaticResource SPsText}"  IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             </VerticalStackLayout>
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[2].Current}" Command="{Binding TimeBtnDnCommand2}"  Grid.Row="7" Grid.Column="8"   Margin="-10,0,10,0"
@@ -868,7 +874,7 @@
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsUp[3].Current}"  Command="{Binding TimeBtnUpCommand3}"  Grid.Column="11"  Grid.Row="5"
             Style="{StaticResource TimeBtn}"  Pressed="UpDigit_Pressed3" Released="UpDigit_Released3" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             <VerticalStackLayout Grid.Row="6" Grid.Column="11" Grid.RowSpan="1" Grid.ColumnSpan="3">
-                <Label Text="{Binding TimeBuffer.Hour}"   Style="{StaticResource SPsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
+                <Label Text="{Binding TimeBuffer.Hour}"   Style="{StaticResource TimeSpsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
                 <Label Text="Час"  Style="{StaticResource SPsText}"  IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             </VerticalStackLayout>
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[3].Current}" Command="{Binding TimeBtnDnCommand3}"  Grid.Row="7" Grid.Column="11" 
@@ -880,7 +886,7 @@
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsUp[4].Current}"  Command="{Binding TimeBtnUpCommand4}"  Grid.Column="14"  Grid.Row="5"
              Style="{StaticResource TimeBtn}"  Pressed="UpDigit_Pressed4" Released="UpDigit_Released4" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             <VerticalStackLayout Grid.Row="6" Grid.Column="14" Grid.RowSpan="1" Grid.ColumnSpan="3">
-                <Label Text="{Binding TimeBuffer.Minute}"   Style="{StaticResource SPsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
+                <Label Text="{Binding TimeBuffer.Minute}"   Style="{StaticResource TimeSpsText}" IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
                 <Label Text="Мин"  Style="{StaticResource SPsText}"  IsVisible = "{Binding  CActivePagesEntities.IsTimePage}"/>
             </VerticalStackLayout>
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[4].Current}" Command="{Binding TimeBtnDnCommand4}"  Grid.Row="7" Grid.Column="14" 

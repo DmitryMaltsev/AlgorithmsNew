@@ -7,8 +7,15 @@
       WidthRequest="400" HeightRequest="800"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="mainPage"/>
+    <TabBar >
+        <ShellContent
+            Title="Настройки пользователя"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage"/>
+        <ShellContent
+        Title="Сервисные настройки"
+        ContentTemplate="{DataTemplate local:ServicePage}"
+        Route="servicePage"/>
+    </TabBar>
+    
 </Shell>

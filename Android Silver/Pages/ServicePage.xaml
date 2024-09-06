@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Android_Silver.Pages.ServicePage"
+             Title=""
+               BackgroundImageSource="{Binding CPictureSet.Background}">
+    <ContentPage.Resources>
+        <Style TargetType="Entry" x:Key="EntryPass">
+            <Setter Property="MaxLength" Value="4"/>
+            <Setter Property="IsPassword" Value="true" />
+            <Setter Property="Grid.ColumnSpan" Value="4"/>
+            <Setter Property="MaximumWidthRequest" Value="150"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="Keyboard" Value="Numeric"/>
+        </Style>
+        <Style TargetType="Button" x:Key="OKCancelBut">
+            <Setter Property="WidthRequest" Value="150"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Grid.ColumnSpan" Value="8" />
+            <Setter Property="Grid.RowSpan" Value="1"/>
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView VerticalScrollBarVisibility="Always">
+        <Grid x:Name="mainPageGrid" ColumnSpacing="20" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="{Binding EntryMessage}" Grid.Row="6" FontSize="15" Grid.ColumnSpan="18"  HorizontalTextAlignment="Center" />
+            <Entry  Grid.Row="7" Grid.Column="7" Placeholder="****" Text="{Binding EntryPass}"  Style="{StaticResource EntryPass}"/>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding EntryPassedCommand}"  Grid.Row="11" Grid.Column="5" 
+              Style="{StaticResource OKCancelBut}" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

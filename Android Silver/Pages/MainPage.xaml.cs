@@ -436,7 +436,7 @@ namespace Android_Silver.Pages
         #region  JOURNAL PAGE
         private void ResetJournal_Pressed(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.ResetButton.Current = ViewModel.CPictureSet.VacSetBut.Selected;
+            ViewModel.CPictureSet.ResetButton.Current = ViewModel.CPictureSet.ResetButton.Selected;
         }
 
         private void ResetJournal_Released(object sender, EventArgs e)

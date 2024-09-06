@@ -632,14 +632,14 @@ namespace Android_Silver.Entities.Visual
             {
                 case PicturesSetStates.Base:
                     {
-                        IPBut =new PicByStates("ok_but_base_off.png", "ok_but_base_on.png");
+                        IPBut =new PicByStates("ok_but_off_base.png", "ok_but_on_base.png");
                         Background = "background_base.png";
                         Loading = "loading_base.jpg";
                         LoadingPic = "loading_pic_base.png";
                         Substrate = new PicByStates(def: "substrate_off_base.png", selected: "substrate_on_base.png");
                         Title = "title_base.png";
-                        BackButton = new PicByStates("back_arrow_base.png", "test.jpg");
-                        ResetButton = new PicByStates("reset_but_base.png", "test.jpg");
+                        BackButton = new PicByStates("back_arrow_off_base.png", "back_arrow_on_base.png");
+                        ResetButton = new PicByStates("reset_but_off_base.png", "reset_but_on_base.png");
                         JournalStroke = "journal_stroke_base.png";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
@@ -662,8 +662,8 @@ namespace Android_Silver.Entities.Visual
                         RoomTemp = "room_temp_base.png";
                         #endregion
                         #region Кухня, счетчики
-                        AcceptButton = new PicByStates("accept_but_base.png", "test.jpg");
-                        CancelButton = new PicByStates("cancel_but_base.png", "test.jpg");
+                        AcceptButton = new PicByStates("accept_but_off_base.png", "accept_but_on_base.png");
+                        CancelButton = new PicByStates("cancel_but_off_base.png", "cancel_but_on_base.png");
                         DigitalImage = "dig_img_base.png";
                         #region 4 кнопки вверх+низ
                         DigitalButtonsUp = new List<PicByStates>();
@@ -687,34 +687,34 @@ namespace Android_Silver.Entities.Visual
 
                         #endregion
                         #region Уставки
-                        HomeButton = new PicByStates("home_but_base.png", "test.jpg");
-                        NextButton = new PicByStates("next_but_base.png", "test.jpg");
-                        OkButton = new PicByStates("ok_but_base_off.png", "ok_but_base_on.png");
-                        SettingsButton = new PicByStates("settings_but_base.png", "test.jpg");
+                        HomeButton = new PicByStates("home_but_off_base.png", "home_but_on_base.png");
+                        NextButton = new PicByStates("next_but_off_base.png", "next_but_on_base.png");
+                        OkButton = new PicByStates("ok_but_off_base.png", "ok_but_on_base.png");
+                        SettingsButton = new PicByStates("settings_but_off_base.png", "settings_but_on_base.png");
                         #endregion
                         #region Кнопки активных режимов
                         ActiveModesPics = new ObservableCollection<PicByStates>();
-                        ActiveModesPics.Add(new PicByStates("turnoff_but_on_base.png", "test.jpg"));
-                        ActiveModesPics.Add(new PicByStates("min_but_on_base.png", "test.jpg"));
-                        ActiveModesPics.Add(new PicByStates("norm_but_on_base.png", "test.jpg"));
-                        ActiveModesPics.Add(new PicByStates("max_but_on_base.png", "test.jpg"));
-                        ActiveModesPics.Add(new PicByStates("kitchen_but_on_base.png", "test.jpg"));
-                        ActiveModesPics.Add(new PicByStates("vac_but_on_base.png", "test.jpg"));
-                        ActiveModesPics.Add(new PicByStates("shed_but_on_base.png", "test.jpg"));
-                        ActiveModesPics.Add(new PicByStates("alarm_but_base.png", "test.jpg"));
-                        ActiveModesPics.Add(new PicByStates("spec_but_on_base.png", "test.jpg"));
+                        ActiveModesPics.Add(new PicByStates("turnoff_but_on_base.png", "turnoff_but_off_base.png"));
+                        ActiveModesPics.Add(new PicByStates("min_but_on_base.png", "min_but_off_base.png"));
+                        ActiveModesPics.Add(new PicByStates("norm_but_on_base.png", "norm_but_off_base.png"));
+                        ActiveModesPics.Add(new PicByStates("max_but_on_base.png", "max_but_off_base.png"));
+                        ActiveModesPics.Add(new PicByStates("kitchen_but_on_base.png", "kitchen_but_off_base.png"));
+                        ActiveModesPics.Add(new PicByStates("vac_but_on_base.png", "vac_but_off_base.png"));
+                        ActiveModesPics.Add(new PicByStates("shed_but_on_base.png", "shed_but_off_base.png"));
+                        ActiveModesPics.Add(new PicByStates("alarm_but_on_base.png", "alarm_but_off_base.png"));
+                        ActiveModesPics.Add(new PicByStates("spec_but_on_base.png", "spec_but_off_base.png"));
                         #endregion
                         #region Кнопки выбора режимов
                         SelectModesPics = new ObservableCollection<PicByStates>();
-                        SelectModesPics.Add(new PicByStates("turnoff_but_select_on_base.png", "test.jpg"));
-                        SelectModesPics.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
-                        SelectModesPics.Add(new PicByStates("norm_but_select_on_base.png", "test.jpg"));
-                        SelectModesPics.Add(new PicByStates("max_but_select_on_base.png", "test.jpg"));
-                        SelectModesPics.Add(new PicByStates("kitchen_but_select_on_base.png", "test.jpg"));
-                        SelectModesPics.Add(new PicByStates("vac_but_select_on_base.png", "test.jpg"));
-                        SelectModesPics.Add(new PicByStates("shed_but_select_on_base.png", "test.jpg"));
-                        SelectModesPics.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
-                        SelectModesPics.Add(new PicByStates("min_but_select_on_base.png", "test.jpg"));
+                        SelectModesPics.Add(new PicByStates("turnoff_but_select_off_base.png", "turnoff_but_select_on_base.png"));
+                        SelectModesPics.Add(new PicByStates("min_but_select_off_base.png", "min_but_select_on_base.png"));
+                        SelectModesPics.Add(new PicByStates("norm_but_select_off_base.png", "norm_but_select_on_base.png"));
+                        SelectModesPics.Add(new PicByStates("max_but_select_off_base.png", ("max_but_select_on_base.png")));
+                        SelectModesPics.Add(new PicByStates("kitchen_but_select_off_base.png", "kitchen_but_select_on_base.png"));
+                        SelectModesPics.Add(new PicByStates("vac_but_select_off_base.png", "vac_but_select_on_base.png"));
+                        SelectModesPics.Add(new PicByStates("shed_but_select_off_base.png", "shed_but_select_on_base.png"));
+                        SelectModesPics.Add(new PicByStates("min_but_select_off_base.png", "min_but_select_on_base.png"));
+                        SelectModesPics.Add(new PicByStates("min_but_select_off_base.png", "min_but_select_on_base.png"));
                         #endregion
                         #region Иконки режимов 
                         IconsPics = new ObservableCollection<PicByStates>();
@@ -749,9 +749,9 @@ namespace Android_Silver.Entities.Visual
                         VacSetBut = new PicByStates("vac_set_but_off_base.png", "vac_set_but_on_base.png");
                         #endregion
                         #region Другие настройки
-                        FilterChangedBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
-                        TimeBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
-                        HumidityBut = new PicByStates("other_set_but_off_base.png", "test.jpg");
+                        FilterChangedBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
+                        TimeBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
+                        HumidityBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
                         ArrowButLeft = new PicByStates("but_left_off_base.png", "but_left_on_base.png");
                         ArrowButRight = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
                         ContactBackGround = "other_set_but_off_base.png";
