@@ -13,8 +13,8 @@ namespace Android_Silver.ViewModels
     class ServicePageViewModel:BindableBase
     {
         #region Rising properties
-        private int _entryPass;
 
+        private int _entryPass=0000;
         public int EntryPass
         {
             get { return _entryPass; }
@@ -24,7 +24,7 @@ namespace Android_Silver.ViewModels
             }
         }
 
-        private string _entryMessage;
+        private string _entryMessage="Введите пароль для входа";
 
         public string EntryMessage
         {
@@ -46,6 +46,10 @@ namespace Android_Silver.ViewModels
             EntryPassedCommand = new Command(ExecuteEntryPass);
         }
 
+
+
+
+        #region Execute entry
         private void ExecuteEntryPass(object obj)
         {
             if (EntryPass == 4444)
@@ -56,6 +60,7 @@ namespace Android_Silver.ViewModels
             {
                 EntryMessage = "Пароль введен неверно";
             }
-        }
+        } 
+        #endregion
     }
 }

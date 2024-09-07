@@ -23,6 +23,13 @@
             <Setter Property="Grid.ColumnSpan" Value="8" />
             <Setter Property="Grid.RowSpan" Value="1"/>
         </Style>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="Margin" Value="10,4"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
     </ContentPage.Resources>
     <ScrollView VerticalScrollBarVisibility="Always">
         <Grid x:Name="mainPageGrid" ColumnSpacing="20" RowSpacing="20">
