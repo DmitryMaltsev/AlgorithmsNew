@@ -1,5 +1,6 @@
 ﻿using Android_Silver.Pages;
 using Android_Silver.Pages.ModesSettings;
+using Android_Silver.ViewModels;
 
 using System.ComponentModel;
 
@@ -21,6 +22,26 @@ namespace Android_Silver
             #endregion
             Routing.RegisterRoute("settingsPage", typeof(SettingsPage));
             Routing.RegisterRoute("mainPage", typeof(MainPage));
+          
+        }
+
+  
+        private void ShellContent_Appearing(object sender, EventArgs e)
+        {
+            MainPageViewModel mpViewModel=new MainPageViewModel();
+            if (mpViewModel!=null)
+            {
+                mpViewModel.SetActivePageIfNeed();
+            }
+        }
+
+        private void ShellContent_Appearing_1(object sender, EventArgs e)
+        {
+            ServicePageViewModel spViewModel= new ServicePageViewModel();
+            if (spViewModel != null)
+            {
+                spViewModel.SetActivePageIfNeed();
+            }
         }
     }
 }

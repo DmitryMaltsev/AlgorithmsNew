@@ -70,7 +70,8 @@ namespace Android_Silver.Entities.Visual
         public PicByStates IPBut
         {
             get { return _ipBut; }
-            set {
+            set
+            {
                 _ipBut = value;
                 OnPropertyChanged(nameof(IPBut));
             }
@@ -513,6 +514,31 @@ namespace Android_Silver.Entities.Visual
 
         #endregion
 
+        #region Главное меню
+        private PicByStates _baseSettings1But;
+
+        public PicByStates BaseSettings1But
+        {
+            get { return _baseSettings1But; }
+            set
+            {
+                _baseSettings1But = value;
+                OnPropertyChanged(nameof(BaseSettings1But));
+            }
+        }
+
+        private PicByStates _baseSettings2But;
+        public PicByStates BaseSettings2But
+        {
+            get { return _baseSettings2But; }
+            set
+            {
+                _baseSettings2But = value;
+                OnPropertyChanged(nameof(BaseSettings2But));
+            }
+        }
+
+        #endregion
         private ObservableCollection<PicByStates> _activeModesPics = new ObservableCollection<PicByStates>();
 
         public ObservableCollection<PicByStates> ActiveModesPics
@@ -632,7 +658,7 @@ namespace Android_Silver.Entities.Visual
             {
                 case PicturesSetStates.Base:
                     {
-                        IPBut =new PicByStates("ok_but_off_base.png", "ok_but_on_base.png");
+                        IPBut = new PicByStates("ok_but_off_base.png", "ok_but_on_base.png");
                         Background = "background_base.png";
                         Loading = "loading_base.jpg";
                         LoadingPic = "loading_pic_base.png";
@@ -755,6 +781,12 @@ namespace Android_Silver.Entities.Visual
                         ArrowButLeft = new PicByStates("but_left_off_base.png", "but_left_on_base.png");
                         ArrowButRight = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
                         ContactBackGround = "other_set_but_off_base.png";
+                        #endregion
+
+                        #region Основные настройки
+                        BaseSettings1But = new PicByStates("base_settings_but_off_base.png", "base_settings_but_on_base.png");
+                        BaseSettings2But = new PicByStates("base_settings_but_off_base.png", "base_settings_but_on_base.png");
+
                         #endregion
                     }
                     break;

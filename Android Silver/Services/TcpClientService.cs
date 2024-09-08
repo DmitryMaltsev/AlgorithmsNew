@@ -57,6 +57,7 @@ namespace Android_Silver.Services
                 _ethernetEntities.Client = new TcpClient();
                 _ethernetEntities.Client.ReceiveTimeout = 300;
                 _ethernetEntities.Client.SendTimeout = 300;
+                _ethernetEntities.IsConnected = false;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
                 if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
                 {

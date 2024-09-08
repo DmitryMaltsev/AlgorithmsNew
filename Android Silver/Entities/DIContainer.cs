@@ -29,6 +29,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<Time>();
             _container.RegisterSingleton<CarouselViewData>();
             _container.RegisterSingleton<Recup>();
+            _container.RegisterSingleton<ServiceActivePagesEntities>();
         }
 
         public static T Resolve<T>()

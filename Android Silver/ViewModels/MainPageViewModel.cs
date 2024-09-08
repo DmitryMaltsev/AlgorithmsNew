@@ -374,6 +374,14 @@ namespace Android_Silver.Pages
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
             CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
+            if (!EthernetEntities.IsConnected)
+            {
+                CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
+            }
+            else
+            {
+                CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
+            }
             SetTValuesByIndex(0, 0);//?????
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
@@ -413,6 +421,18 @@ namespace Android_Silver.Pages
         }
 
         #region Main page execute methods
+
+        public void SetActivePageIfNeed()
+        {
+            if (!EthernetEntities.IsConnected)
+            {
+                CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
+            }
+            else
+            {
+                CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
+            }
+        }
         void ExecuteSetSP(object obj)
         {
             SetM1ValuesByIndex(CModesEntities.CMode1.Num);

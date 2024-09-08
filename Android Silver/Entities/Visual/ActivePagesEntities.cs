@@ -31,13 +31,15 @@ namespace Android_Silver.Entities.Visual
 
     public class ActivePagesEntities : BindableBase
     {
+        public ActivePageState LastActivePageState { get; private set; } = ActivePageState.MainPage;
         #region Rising properties
         private bool _isStartPage;
 
         public bool IsStartPage
         {
             get { return _isStartPage; }
-            set {
+            set
+            {
                 _isStartPage = value;
                 OnPropertyChanged(nameof(IsStartPage));
             }
@@ -244,7 +246,6 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
-
                     }
                     break;
                 case ActivePageState.MainPage:
@@ -533,6 +534,11 @@ namespace Android_Silver.Entities.Visual
                         IsStartPage = false;
                         break;
                     }
+            }
+
+            if (activePageState != ActivePageState.StartPage)
+            {
+                LastActivePageState = activePageState;
             }
         }
     }
