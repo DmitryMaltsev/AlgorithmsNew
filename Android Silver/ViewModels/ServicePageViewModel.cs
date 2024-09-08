@@ -1,4 +1,5 @@
 ﻿using Android_Silver.Entities;
+using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 
@@ -41,6 +42,8 @@ namespace Android_Silver.ViewModels
         public ICommand StartPageConnectCommand {  get; private set; }
 
         public ICommand FanSettingsCommand { get; private set; }
+
+        public ICommand FansAcceptCommand { get; private set; }
         #endregion
 
         public TcpClientService CTcpClientService { get; set; }
@@ -48,18 +51,24 @@ namespace Android_Silver.ViewModels
         public ServiceActivePagesEntities CActivePagesEntities { get;set;}
         public EthernetEntities EthernetEntities { get; set; }
 
+        public FBs CFBs { get; set; }
+
         public ServicePageViewModel()
         {
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CActivePagesEntities=DIContainer.Resolve<ServiceActivePagesEntities>();
             EthernetEntities=DIContainer.Resolve<EthernetEntities>();
             CTcpClientService=DIContainer.Resolve<TcpClientService>();
+            CFBs = DIContainer.Resolve<FBs>();
             EntryPassedCommand = new Command(ExecuteEntryPass);
             StartPageConnectCommand = new Command(ExecuteConnect);
             FanSettingsCommand = new Command(ExecuteFanSettings);
-            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-
+            FansAcceptCommand = new Command(ExecuteFansAccept);
+            CActivePagesEntities.SetActivePageState(SActivePageState.FanSettingsPage);
+            
         }
+
+    
 
         private void ExecuteFanSettings(object obj)
         {
@@ -118,6 +127,12 @@ namespace Android_Silver.ViewModels
             CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
         }
 
+        private void ExecuteFansAccept(object obj)
+        {
+            int[] vals = { CFBs.CFans.SupNominalFlow, CFBs.CFans.ExhaustNominalFlow };
+            CTcpClientService.SetCommandToServer(400,vals);
+            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+        }
         #endregion
     }
 }
