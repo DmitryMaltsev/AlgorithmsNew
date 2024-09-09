@@ -28,8 +28,7 @@ namespace Android_Silver.Services
         public string MessageToServer
         {
             get { return _messageToServer; }
-            private set
-            { _messageToServer = value; }
+            set { _messageToServer = value; }
         }
         public int ResieveCounter { get; set; }
         public Action<int> SetMode1Action { get; set; }
@@ -69,7 +68,6 @@ namespace Android_Silver.Services
                         || connectTask.Status == TaskStatus.Canceled) {
                         connectTask.Dispose();
                     }
-                   
                     throw new Exception("Не удалось подключиться модулю WI-FI");
                    
                 }
@@ -105,25 +103,27 @@ namespace Android_Silver.Services
                          messToClient = MessageToServer;
                      }
                      else
-                     if (_activePageEntities.IsTSettingsPage && _modesEntities.CTimeModeValues.Count > 0 &&
+                     //????????????
+                     if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
                                                                     _modesEntities.CTimeModeValues[0].Mode2Num == 2)
                      {
                          messToClient = "167,16\r\n";
                      }
                      else
-                         if (_activePageEntities.IsTSettingsPage && _modesEntities.CTimeModeValues.Count > 0 &&
+                         if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
                                                                     _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep==0)
                      {
                          messToClient = "183,56\r\n";
                          _activePageEntities.QueryStep = 1;
                      }
                      else
-                         if (_activePageEntities.IsTSettingsPage && _modesEntities.CTimeModeValues.Count > 0 &&
+                         if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
                                                                     _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 1)
                      {
                          messToClient = "239,56\r\n";
                          _activePageEntities.QueryStep = 0;
                      }
+
                          if (!IsSending)
                      {
                          SendCommand(messToClient);
@@ -182,7 +182,7 @@ namespace Android_Silver.Services
                 catch (Exception ex)
                 {
                     _trySendcounter += 1;
-                    Task.Delay(50);
+                    Task.Delay(10);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
@@ -202,9 +202,6 @@ namespace Android_Silver.Services
                     {
                     _ethernetEntities.IsConnected = false;
                 }
-                    
-            
-              
             }
             return sbResult;
         }
@@ -931,6 +928,11 @@ namespace Android_Silver.Services
                 case 182:
                     {
                         GetTModeCMode1(2, 3, resp.ValueString);
+                        if (_activePageEntities.IsLoadingPage)
+                        {
+                            _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
+                            _modesEntities.TTitle = "Расписание для отпуска";
+                        }
                     }
                     break;
                 //Расписание
@@ -1394,6 +1396,11 @@ namespace Android_Silver.Services
                 case 238:
                     {
                         GetTModeCMode1(3, 13, resp.ValueString);
+                        if (_activePageEntities.IsLoadingPage)
+                        {
+                            _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
+                            _modesEntities.TTitle = "Расписание";
+                        }
                     }
                     break;
                 //Строка 15
@@ -1832,6 +1839,12 @@ namespace Android_Silver.Services
                         {
 
                             _modesEntities.Mode2ValuesList[3].TimeModeValues[27].DayNum = val;
+                            if (_activePageEntities.IsLoadingPage)
+                            {
+                                _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
+                                _modesEntities.TTitle = "Расписание";
+                            }
+                           
                         }
                     }
                     break;
@@ -1841,6 +1854,7 @@ namespace Android_Silver.Services
                         {
 
                             _modesEntities.Mode2ValuesList[3].TimeModeValues[27].Hour = val;
+                           
                         }
                     }
                     break;
@@ -1856,6 +1870,7 @@ namespace Android_Silver.Services
                 case 294:
                     {
                         GetTModeCMode1(3, 27, resp.ValueString);
+                       
                     }
                     break;
                 //Проверка того, что данные записаны

@@ -448,10 +448,10 @@ namespace Android_Silver.Pages
         #region VacPage
         private void VacPage_Pressed(object sender, EventArgs e)
         {
-            for (int i = 0; i < ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues.Count; i++)
+            for (int i = 0; i < ViewModel.CModesEntities.CTimeModeValues.Count; i++)
             {
-                ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[i].StrokeImg.Current =
-               ViewModel.CModesEntities.Mode2ValuesList[2].TimeModeValues[1].StrokeImg.Default;
+                ViewModel.CModesEntities.CTimeModeValues[i].StrokeImg.Current =
+                 ViewModel.CModesEntities.CTimeModeValues[i].StrokeImg.Default;
             }
             ImageButton clickedButton = (ImageButton)sender;
             int index = (int)clickedButton.CommandParameter;

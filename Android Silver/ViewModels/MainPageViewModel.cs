@@ -101,18 +101,6 @@ namespace Android_Silver.Pages
             }
         }
 
-        private string _tTitle = string.Empty;
-
-        public string TTitle
-        {
-            get { return _tTitle; }
-            set
-            {
-                _tTitle = value;
-                OnPropertyChanged(nameof(TTitle));
-            }
-        }
-
 
         private int _humiditySP;
 
@@ -142,9 +130,13 @@ namespace Android_Silver.Pages
         #endregion
 
         #region Commands
-
         public ICommand StartPageConnectCommand { get;private set; }
         #region MainPageCommands
+
+        #region Loading command
+        public ICommand LoadingReturnCommand { get;private set; }   
+        #endregion
+
         public ICommand ConnectCommand { get; private set; }
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
@@ -153,7 +145,6 @@ namespace Android_Silver.Pages
         public ICommand ChooseModeCommand { get; private set; }
         public ICommand GoToPageCommand { get; private set; }
         public ICommand SetTDataCommand { get; private set; }
-
         #endregion
         #region Choose mode page commands
         public ICommand MinModeCommand { get; private set; }
@@ -194,7 +185,6 @@ namespace Android_Silver.Pages
         #region TSettingsCommands
         public ICommand TRetCommand { get; private set; }
         #endregion
-
         #region SetTSettingsCommands
         public ICommand TSetReturnCommand { get; private set; }
         public ICommand TSetOkCommand { get; private set; }
@@ -310,9 +300,11 @@ namespace Android_Silver.Pages
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
-            HomeCommand = new Command(ExecuteHomeCommand);
             KitchenOkCommand = new Command(ExecuteKitchenOk);
             KitchenCancelCommand = new Command(ExecuteKitchenCancel);
+            #endregion
+            #region Loading commands
+            LoadingReturnCommand = new Command(ExecuteLoadingReturn);
 
             #endregion
             #region Set ponts commands
@@ -373,15 +365,8 @@ namespace Android_Silver.Pages
             TimeBtnDnCommand4 = new Command(ExecuteTimeBtnDn4);
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
-            CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
-            if (!EthernetEntities.IsConnected)
-            {
-                CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
-            }
-            else
-            {
-                CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
-            }
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);
+
             SetTValuesByIndex(0, 0);//?????
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
@@ -405,6 +390,7 @@ namespace Android_Silver.Pages
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
+                    CModesEntities.ShedCountQueues = 0;
                     CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);              
                     CTcpClientService.SendRecieveTask("103,50");
@@ -432,6 +418,7 @@ namespace Android_Silver.Pages
             {
                 CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
             }
+            //CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
         }
         void ExecuteSetSP(object obj)
         {
@@ -679,14 +666,30 @@ namespace Android_Silver.Pages
 
         private void ExecuteVacationTable(object obj)
         {
-            CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage, 0);
-            TTitle = "Расписание для отпуска";
+            // CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage, 0);
+            // TTitle = "Расписание для отпуска";
+            CTcpClientService.MessageToServer= "167,16\r\n";
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 0);
         }
 
         private void ExecuteShedulerTable(object obj)
         {
-            CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage, 1);
-            TTitle = "Расписание";
+            if (CModesEntities.ShedCountQueues == 0)
+            {
+                CTcpClientService.MessageToServer = "183,56\r\n";
+                CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 1);
+                CModesEntities.ShedCountQueues += 1;
+            }
+            else
+            {
+                for (int i = 0; i < CModesEntities.Mode2ValuesList[3].TimeModeValues.Count; i++)
+                {
+                    CModesEntities.Mode2ValuesList[3].TimeModeValues[i].StrokeImg.Current =
+                   CModesEntities.Mode2ValuesList[3].TimeModeValues[1].StrokeImg.Default;
+                }
+                CModesEntities.CTimeModeValues = CModesEntities.Mode2ValuesList[3].TimeModeValues;
+                CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
+            }
         }
 
         private void ExecuteOtherSettings(object obj)
@@ -775,13 +778,18 @@ namespace Android_Silver.Pages
         }
         #endregion
 
+        #region Execute loading
+        private void ExecuteLoadingReturn(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
+        }
+        #endregion
+
         #region Execute journal
         private void ExecuteJournalReturn(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
         }
-
-
         #endregion
 
         #region TSet execute methods

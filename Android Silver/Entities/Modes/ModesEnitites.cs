@@ -12,6 +12,8 @@ namespace Android_Silver.Entities.Modes
 {
     public class ModesEntities : BindableBase
     {
+        public int ShedCountQueues = 0;
+
         private ObservableCollection<TimeModeValues> _cTimeModeValues;
 
         public ObservableCollection<TimeModeValues> CTimeModeValues
@@ -20,6 +22,17 @@ namespace Android_Silver.Entities.Modes
             set { 
                 _cTimeModeValues = value;
                 OnPropertyChanged(nameof(CTimeModeValues));
+            }
+        }
+
+        private string _tTitle = string.Empty;
+        public string TTitle
+        {
+            get { return _tTitle; }
+            set
+            {
+                _tTitle = value;
+                OnPropertyChanged(nameof(TTitle));
             }
         }
 

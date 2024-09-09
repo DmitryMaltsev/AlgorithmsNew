@@ -33,6 +33,8 @@ namespace Android_Silver.Entities.Visual
     {
         public ActivePageState LastActivePageState { get; private set; } = ActivePageState.MainPage;
         #region Rising properties
+
+
         private bool _isStartPage;
 
         public bool IsStartPage
@@ -44,9 +46,6 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged(nameof(IsStartPage));
             }
         }
-
-
-
 
         private bool _isMainPage;
         public bool IsMainPage
@@ -303,6 +302,25 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+
+                        if (pageState == 0)
+                        {
+                            for (int i = 0; i < _modesEntities.Mode2ValuesList[2].TimeModeValues.Count; i++)
+                            {
+                                _modesEntities.Mode2ValuesList[2].TimeModeValues[i].StrokeImg.Current =
+                               _modesEntities.Mode2ValuesList[2].TimeModeValues[1].StrokeImg.Default;
+                            }
+                            _modesEntities.CTimeModeValues = _modesEntities.Mode2ValuesList[2].TimeModeValues;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < _modesEntities.Mode2ValuesList[3].TimeModeValues.Count; i++)
+                            {
+                                _modesEntities.Mode2ValuesList[3].TimeModeValues[i].StrokeImg.Current =
+                               _modesEntities.Mode2ValuesList[3].TimeModeValues[1].StrokeImg.Default;
+                            }
+                            _modesEntities.CTimeModeValues = _modesEntities.Mode2ValuesList[3].TimeModeValues;
+                        }
                     }
                     break;
                 case ActivePageState.KithchenTimerPage:
@@ -384,25 +402,6 @@ namespace Android_Silver.Entities.Visual
                     break;
                 case ActivePageState.TSettingsPage:
                     {
-                        if (pageState == 0)
-                        {
-                            for (int i = 0; i < _modesEntities.Mode2ValuesList[2].TimeModeValues.Count; i++)
-                            {
-                                _modesEntities.Mode2ValuesList[2].TimeModeValues[i].StrokeImg.Current =
-                               _modesEntities.Mode2ValuesList[2].TimeModeValues[1].StrokeImg.Default;
-                            }
-                            _modesEntities.CTimeModeValues = _modesEntities.Mode2ValuesList[2].TimeModeValues;
-                        }
-                        else
-                        {
-                            for (int i = 0; i < _modesEntities.Mode2ValuesList[3].TimeModeValues.Count; i++)
-                            {
-                                _modesEntities.Mode2ValuesList[3].TimeModeValues[i].StrokeImg.Current =
-                               _modesEntities.Mode2ValuesList[3].TimeModeValues[1].StrokeImg.Default;
-                            }
-                            _modesEntities.CTimeModeValues = _modesEntities.Mode2ValuesList[3].TimeModeValues;
-                        }
-
                         IsTSettingsPage = true;
                         IsJournalPage = false;
                         IsSettingsPage = false;

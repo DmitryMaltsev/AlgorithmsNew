@@ -43,7 +43,12 @@ namespace Android_Silver.ViewModels
 
         public ICommand FanSettingsCommand { get; private set; }
 
+        public ICommand HomeCommand { get; private set; }
+
+        public ICommand FanReturnCommand { get; private set; }
         public ICommand FansAcceptCommand { get; private set; }
+
+
         #endregion
 
         public TcpClientService CTcpClientService { get; set; }
@@ -64,11 +69,12 @@ namespace Android_Silver.ViewModels
             StartPageConnectCommand = new Command(ExecuteConnect);
             FanSettingsCommand = new Command(ExecuteFanSettings);
             FansAcceptCommand = new Command(ExecuteFansAccept);
+            FanReturnCommand = new Command(ExecuteFanReturn);
+            HomeCommand = new Command(ExecuteHome);
+
             CActivePagesEntities.SetActivePageState(SActivePageState.FanSettingsPage);
             
         }
-
-    
 
         private void ExecuteFanSettings(object obj)
         {
@@ -101,6 +107,7 @@ namespace Android_Silver.ViewModels
 
 
         #region Execute entry
+
         private void ExecuteEntryPass(object obj)
         {
             if (EntryPass == 4444)
@@ -133,6 +140,20 @@ namespace Android_Silver.ViewModels
             CTcpClientService.SetCommandToServer(400,vals);
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
         }
+        #endregion
+
+        #region Fan
+        private void ExecuteHome(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+        }
+
+        private void ExecuteFanReturn(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+        }
+
+
         #endregion
     }
 }

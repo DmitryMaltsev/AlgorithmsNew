@@ -31,6 +31,9 @@
             <Setter Property="Keyboard" Value="Numeric"/>
         </Style>
         <Style TargetType="Entry" x:Key="EntryNum" BasedOn="{StaticResource EntryIP}">
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Grid.ColumnSpan" Value="4"/>
+            <Setter Property="MaximumWidthRequest" Value="140"/>
             <Setter Property="MaxLength" Value="5"/>
         </Style>
         <Style TargetType="Label" x:Key="Title">
@@ -44,13 +47,13 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalOptions" Value="Center" />
-           
             <!--<Setter Property="MinimumHeightRequest" Value="60" />
             <Setter Property="MinimumWidthRequest" Value="200"/>-->
             <!--<Setter Property="HeightRequest" Value="70"/>-->
             <Setter Property="BackgroundColor" Value="Transparent"/>
             <Setter Property="Grid.ColumnSpan" Value="14" />
             <Setter Property="Grid.RowSpan" Value="1"  />
+            <Setter Property="MaximumHeightRequest" Value="60" />
             <Setter Property="BorderWidth" Value="0"/>
         </Style>
         <Style TargetType="Label" x:Key="OtherSettingsLabel">
@@ -63,7 +66,7 @@
             <Setter Property="Grid.RowSpan" Value="1"/>
         </Style>
         <Style TargetType="Label" x:Key="FanSettingsLabel" BasedOn="{StaticResource OtherSettingsLabel}">
-            <Setter Property="Grid.ColumnSpan" Value="12"/>
+            <Setter Property="Grid.ColumnSpan" Value="14"/>
         </Style>
     </ContentPage.Resources>
     <ScrollView VerticalScrollBarVisibility="Always">
@@ -138,11 +141,8 @@
                                            Style="{StaticResource OKCancelBut}"  IsVisible="{Binding CActivePagesEntities.IsEntryPage}"/>
             <!--#endregion-->
             <!--#region Base settings page -->
-            <!--#region Заголовок -->
             <Label Text="Основные настройки"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18"  Style="{StaticResource Title}"
                                                                                IsVisible = "{Binding CActivePagesEntities.IsBaseSettingsPage}" />
-            <!--#endregion-->
-
             <!--#region Общие -->
             <Button    Grid.Row="5" Grid.Column="2" Style="{StaticResource BaseSettingsBut}" ImageSource="{Binding CPictureSet.BaseSettings1But.Current}"  
             Pressed="BaseSettings1Pressed" Released="BaseSettings1Released"  IsVisible = "{Binding  CActivePagesEntities.IsBaseSettingsPage}"/>
@@ -150,9 +150,9 @@
              Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding  CActivePagesEntities.IsBaseSettingsPage}"/>
             <!--#endregion-->
             <!--#region Вентилятор -->
-            <Button    Grid.Row="6" Grid.Column="2" Command="{Binding FanSettingsCommand}"
-                       Style="{StaticResource BaseSettingsBut}" ImageSource="{Binding CPictureSet.BaseSettings1But.Current}"  
-           Pressed="BaseSettings2Pressed" Released="BaseSettings2Released"  IsVisible = "{Binding  CActivePagesEntities.IsBaseSettingsPage}"/>
+            <Button Grid.Row="6" Grid.Column="2" Command="{Binding FanSettingsCommand}"
+                       Style="{StaticResource BaseSettingsBut}" ImageSource="{Binding CPictureSet.BaseSettings2But.Current}"  
+            Pressed="BaseSettings2Pressed" Released="BaseSettings2Released"  IsVisible = "{Binding  CActivePagesEntities.IsBaseSettingsPage}"/>
             <Label Text="Вентилятор" Grid.Row="6" Grid.Column="2"
             Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding  CActivePagesEntities.IsBaseSettingsPage}"/>
             <!--#endregion-->
@@ -162,24 +162,23 @@
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
                      Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
                       IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding SPReturnCommand}" 
+            <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
              Grid.Row="1" Grid.Column="0" Style="{StaticResource MiniButtons}" 
              Pressed="BackButton_Pressed"  Released="BackButton_Released" IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
             <!--#endregion-->
             <!--#region Settings -->
             <Label Text="Номин. расход вент. притока, м3/ч" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" 
                                                                   IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="5"  Grid.Column="10" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+            <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
                                                                    IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
             <Label Text="Номин. расход вент. вытяжки, м3/ч" Grid.Row="6" Style="{StaticResource FanSettingsLabel}" 
                                                        IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="6"  Grid.Column="10" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
+            <Entry Grid.Row="6"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
                                                         IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
 
             <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding FansAcceptCommand}"  Grid.Row="11" Grid.Column="5" 
             Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
                                       IsVisible="{Binding CActivePagesEntities.IsFanSettingsPage}" />
-
             <!--#endregion-->
             <!--#endregion-->
 

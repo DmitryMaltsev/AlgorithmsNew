@@ -7,9 +7,9 @@
       WidthRequest="400" HeightRequest="800"
     Shell.FlyoutBehavior="Disabled"
     TabBarBackgroundColor="Black"
-    TabBarTitleColor="Green"
-    TabBarForegroundColor="Green"
-    TabBarUnselectedColor ="White">
+    TabBarTitleColor="White"
+
+    TabBarUnselectedColor ="Green" >
 
     <TabBar>
         <ShellContent Appearing="ShellContent_Appearing"
