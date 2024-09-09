@@ -44,14 +44,14 @@
         <!--#endregion-->
         <!--#region Main page style -->
         <Style TargetType="Slider" x:Key="MainPageSlider">
+            <Setter Property="MinimumTrackColor" Value="Green"/>
+            <Setter Property="MaximumTrackColor" Value="Gray"/>
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="IsEnabled" Value="False"/>
             <Setter Property="Minimum" Value="0"/>
             <Setter Property="Maximum" Value="100"/>
-            <Setter Property="BackgroundColor" Value="Transparent"/>
-            <Setter Property="ThumbColor"  Value="White" />
-            <Setter Property="MinimumTrackColor" Value="GreenYellow"/>
-            <Setter Property="MaximumTrackColor" Value="Gray"/>
+            <!--<Setter Property="BackgroundColor" Value="Transparent"/>-->
+            <!--<Setter Property="ThumbColor"  Value="White" />-->
             <Setter Property="Grid.Column" Value="3" />
             <Setter Property="Grid.ColumnSpan" Value="12"/>
             <Setter Property="Grid.RowSpan" Value="2"/>
