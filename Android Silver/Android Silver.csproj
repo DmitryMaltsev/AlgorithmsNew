@@ -84,6 +84,9 @@
 	  <None Remove="Resources\Images\base\Журнал\reset_but_off_base.png" />
 	  <None Remove="Resources\Images\base\Журнал\reset_but_on_base.png" />
 	  <None Remove="Resources\Images\base\Загрузка\loading_pic_base.png" />
+	  <None Remove="Resources\Images\base\Иконки активных режимов 2\mode2_kitchen_base.png" />
+	  <None Remove="Resources\Images\base\Иконки активных режимов 2\mode2_shed_base.png" />
+	  <None Remove="Resources\Images\base\Иконки активных режимов 2\mode2_vac_base.png" />
 	  <None Remove="Resources\Images\base\Иконки выбора режимов\kitchen_icon_off_base.png" />
 	  <None Remove="Resources\Images\base\Иконки выбора режимов\max_icon_off_base.png" />
 	  <None Remove="Resources\Images\base\Иконки выбора режимов\min_icon_off_base.png" />
@@ -209,6 +212,9 @@
 	  <MauiImage Include="Resources\Images\base\Журнал\reset_but_off_base.png" />
 	  <MauiImage Include="Resources\Images\base\Журнал\reset_but_on_base.png" />
 	  <MauiImage Include="Resources\Images\base\Загрузка\loading_pic_base.png" />
+	  <MauiImage Include="Resources\Images\base\Иконки активных режимов 2\mode2_kitchen_base.png" />
+	  <MauiImage Include="Resources\Images\base\Иконки активных режимов 2\mode2_shed_base.png" />
+	  <MauiImage Include="Resources\Images\base\Иконки активных режимов 2\mode2_vac_base.png" />
 	  <MauiImage Include="Resources\Images\base\Иконки выбора режимов\kitchen_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\base\Иконки выбора режимов\max_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\base\Иконки выбора режимов\min_icon_off_base.png" />

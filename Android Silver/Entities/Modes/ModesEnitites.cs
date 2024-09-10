@@ -79,13 +79,13 @@ namespace Android_Silver.Entities.Modes
             CMode1 = Mode1ValuesList[0];
             Mode2ValuesList = new List<Mode2Values>();
             //Стандартный режим, работает всегда
-            Mode2ValuesList.Add(new Mode2Values(0, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0],0));
+            Mode2ValuesList.Add(new Mode2Values(0, 1, _cPicturesSet.ActiveMode2Pics[0], Mode1ValuesList[0],0));
             //Режим кухни
-            Mode2ValuesList.Add(new Mode2Values(1, 1, _cPicturesSet.ActiveModesPics[4].Default, Mode1ValuesList[0],0));
+            Mode2ValuesList.Add(new Mode2Values(1, 1, _cPicturesSet.ActiveMode2Pics[1], Mode1ValuesList[0],0));
             //Режим отпуска
-            Mode2ValuesList.Add(new Mode2Values(2, 4, _cPicturesSet.ActiveModesPics[5].Default, Mode1ValuesList[0], 338));
+            Mode2ValuesList.Add(new Mode2Values(2, 4, _cPicturesSet.ActiveMode2Pics[2], Mode1ValuesList[0], 338));
             //Режим  календаря
-            Mode2ValuesList.Add(new Mode2Values(3, 28, _cPicturesSet.ActiveModesPics[6].Default, Mode1ValuesList[0],364));
+            Mode2ValuesList.Add(new Mode2Values(3, 28, _cPicturesSet.ActiveMode2Pics[3], Mode1ValuesList[0],364));
             //Режим по контакту
             Mode2ValuesList.Add(new Mode2Values(4, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
             //Специальный режим

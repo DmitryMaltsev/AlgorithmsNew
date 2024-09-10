@@ -14,16 +14,23 @@ namespace Android_Silver.Entities.Visual
     #endregion
     public enum SActivePageState
     {
-        EntyPage,
+        EntryPage,
         StartPage,
         MainMenuPage,
         BaseSettingsPage,
-        FanSettingsPage
+        DamperSettingsPage,
+        FanSettingsPage,
+        WHSettingsPage,
+        EHSettingsPage,
+        FreonSettingsPage,
+        RecupSettingsPage,
+        HumSettingsPage,
+        CommonSettingsPage
     }
 
     public class ServiceActivePagesEntities : BindableBase
     {
-        public SActivePageState LastActivePageState { get;  set; } = SActivePageState.EntyPage;
+        public SActivePageState LastActivePageState { get; set; } = SActivePageState.EntryPage;
         #region Rising properties
         private bool _isStartPage;
 
@@ -46,6 +53,69 @@ namespace Android_Silver.Entities.Visual
             {
                 _isEntryPage = value;
                 OnPropertyChanged(nameof(IsEntryPage));
+            }
+        }
+
+        private bool _isDamperPage;
+
+        public bool IsDamperPage
+        {
+            get { return _isDamperPage; }
+            set { 
+                _isDamperPage = value;
+                OnPropertyChanged(nameof(IsDamperPage));
+            }
+        }
+
+        private bool _isWHPage;
+
+        public bool IsWHPage
+        {
+            get { return _isWHPage; }
+            set { 
+                _isWHPage = value;
+                OnPropertyChanged(nameof(IsWHPage));
+            }
+        }
+
+        private bool _isEHPage;
+
+        public bool IsEHPage
+        {
+            get { return _isEHPage; }
+            set { _isEHPage = value;
+                OnPropertyChanged(nameof(IsEHPage));
+            }
+        }
+
+        private bool _isRecupPage;
+
+        public bool IsRecupPage
+        {
+            get { return _isRecupPage; }
+            set { 
+                _isRecupPage = value;
+                OnPropertyChanged(nameof(IsEHPage));
+            }
+        }
+
+        private bool _isHumPage;
+        public bool IsHumPage
+        {
+            get { return _isHumPage; }
+            set { 
+                _isHumPage = value;
+                OnPropertyChanged(nameof(IsHumPage));
+            }
+        }
+
+        private bool _isSensorsPage;
+        public bool IsSensorsPage
+        {
+            get { return _isSensorsPage; }
+            set { 
+                _isSensorsPage = value;
+                OnPropertyChanged(nameof(IsSensorsPage));
             }
         }
 
@@ -84,6 +154,19 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged(nameof(IsFanSettingsPage));
             }
         }
+
+        private bool _isCommonSettingsPage;
+
+        public bool IsCommonSettingsPage
+        {
+            get { return _isCommonSettingsPage; }
+            set
+            {
+                _isCommonSettingsPage = value;
+                OnPropertyChanged(nameof(IsCommonSettingsPage));
+            }
+        }
+
         #endregion
 
 
@@ -98,16 +181,17 @@ namespace Android_Silver.Entities.Visual
                         IsMainMenuPage = false;
                         IsBaseSettingsPage = false;
                         IsFanSettingsPage = false;
-
+                        IsCommonSettingsPage = false;
                     }
                     break;
-                case SActivePageState.EntyPage:
+                case SActivePageState.EntryPage:
                     {
                         IsEntryPage = true;
                         IsStartPage = false;
                         IsMainMenuPage = false;
                         IsBaseSettingsPage = false;
                         IsFanSettingsPage = false;
+                        IsCommonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.MainMenuPage:
@@ -117,6 +201,7 @@ namespace Android_Silver.Entities.Visual
                         IsStartPage = false;
                         IsBaseSettingsPage = false;
                         IsFanSettingsPage = false;
+                        IsCommonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.BaseSettingsPage:
@@ -126,11 +211,23 @@ namespace Android_Silver.Entities.Visual
                         IsStartPage = false;
                         IsMainMenuPage = false;
                         IsFanSettingsPage = false;
+                        IsCommonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.FanSettingsPage:
                     {
                         IsFanSettingsPage = true;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsMainMenuPage = false;
+                        IsBaseSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                    }
+                    break;
+                case SActivePageState.CommonSettingsPage:
+                    {
+                        IsCommonSettingsPage = true;
+                        IsFanSettingsPage = false;
                         IsEntryPage = false;
                         IsStartPage = false;
                         IsMainMenuPage = false;

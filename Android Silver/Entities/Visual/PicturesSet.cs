@@ -551,6 +551,18 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private ObservableCollection<string> _activeMode2Pics = new ObservableCollection<string>();
+
+        public ObservableCollection<string> ActiveMode2Pics
+        {
+            get { return _activeMode2Pics; }
+            set {
+                _activeMode2Pics = value;
+                OnPropertyChanged(nameof(ActiveMode2Pics));
+            }
+        }
+            
+
         private ObservableCollection<PicByStates> _selectModesPics = new ObservableCollection<PicByStates>();
 
         public ObservableCollection<PicByStates> SelectModesPics
@@ -729,6 +741,13 @@ namespace Android_Silver.Entities.Visual
                         ActiveModesPics.Add(new PicByStates("shed_but_on_base.png", "shed_but_off_base.png"));
                         ActiveModesPics.Add(new PicByStates("alarm_but_on_base.png", "alarm_but_off_base.png"));
                         ActiveModesPics.Add(new PicByStates("spec_but_on_base.png", "spec_but_off_base.png"));
+                        #endregion
+                        #region Иконки актиыный режимов 2
+                        ActiveMode2Pics = new ObservableCollection<string>();
+                        ActiveMode2Pics.Add("turnoff_but_on_base.png");
+                        ActiveMode2Pics.Add("mode2_kitchen_base,png");
+                        ActiveMode2Pics.Add("mode2_vac_base.png");
+                        ActiveMode2Pics.Add("mode2_shed_base.png");
                         #endregion
                         #region Кнопки выбора режимов
                         SelectModesPics = new ObservableCollection<PicByStates>();

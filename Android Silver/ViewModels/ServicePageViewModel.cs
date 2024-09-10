@@ -19,7 +19,8 @@ namespace Android_Silver.ViewModels
         public int EntryPass
         {
             get { return _entryPass; }
-            set {
+            set
+            {
                 _entryPass = value;
                 OnPropertyChanged(nameof(EntryPass));
             }
@@ -30,7 +31,8 @@ namespace Android_Silver.ViewModels
         public string EntryMessage
         {
             get { return _entryMessage; }
-            set {
+            set
+            {
                 _entryMessage = value;
                 OnPropertyChanged(nameof(EntryMessage));
             }
@@ -39,21 +41,26 @@ namespace Android_Silver.ViewModels
 
         #region Commands
         public ICommand EntryPassedCommand { get; private set; }
-        public ICommand StartPageConnectCommand {  get; private set; }
-
+        public ICommand StartPageConnectCommand { get; private set; }
+        public ICommand DamperSettingsCommand { get; private set; }
         public ICommand FanSettingsCommand { get; private set; }
-
+        public ICommand WHSettingsCommand { get; private set; }
+        public ICommand EHSettingsCommand { get; private set; }
+        public ICommand FreonCoolerSettingsCommand { get; private set; }
+        public ICommand RecupSettingsCommand { get; private set; }
+        public ICommand HumSettingsCommand { get; private set; }
+        public ICommand SensorsSettingsCommand { get; private set; }
         public ICommand HomeCommand { get; private set; }
 
         public ICommand FanReturnCommand { get; private set; }
         public ICommand FansAcceptCommand { get; private set; }
 
-
+        public ICommand CommonSettingsCommand { get; private set; }
         #endregion
 
         public TcpClientService CTcpClientService { get; set; }
         public PicturesSet CPictureSet { get; set; }
-        public ServiceActivePagesEntities CActivePagesEntities { get;set;}
+        public ServiceActivePagesEntities CActivePagesEntities { get; set; }
         public EthernetEntities EthernetEntities { get; set; }
 
         public FBs CFBs { get; set; }
@@ -61,25 +68,29 @@ namespace Android_Silver.ViewModels
         public ServicePageViewModel()
         {
             CPictureSet = DIContainer.Resolve<PicturesSet>();
-            CActivePagesEntities=DIContainer.Resolve<ServiceActivePagesEntities>();
-            EthernetEntities=DIContainer.Resolve<EthernetEntities>();
-            CTcpClientService=DIContainer.Resolve<TcpClientService>();
+            CActivePagesEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
+            EthernetEntities = DIContainer.Resolve<EthernetEntities>();
+            CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CFBs = DIContainer.Resolve<FBs>();
             EntryPassedCommand = new Command(ExecuteEntryPass);
             StartPageConnectCommand = new Command(ExecuteConnect);
+            DamperSettingsCommand = new Command(ExecuteDamperSettings);
             FanSettingsCommand = new Command(ExecuteFanSettings);
+            WHSettingsCommand = new Command(ExecuteWHSettings);
+            EHSettingsCommand = new Command(ExecuteEHSettings);
+            FreonCoolerSettingsCommand = new Command(ExecuteFreonCoolerSettings);
+            RecupSettingsCommand = new Command(ExecuteRecupSettings);
+            HumSettingsCommand = new Command(ExecuteHumSettings);
+            SensorsSettingsCommand = new Command(ExecuteSensorsSettings);
             FansAcceptCommand = new Command(ExecuteFansAccept);
             FanReturnCommand = new Command(ExecuteFanReturn);
             HomeCommand = new Command(ExecuteHome);
+            CommonSettingsCommand = new Command(ExecuteCommonSettings);
+            CActivePagesEntities.SetActivePageState(SActivePageState.CommonSettingsPage);
 
-            CActivePagesEntities.SetActivePageState(SActivePageState.FanSettingsPage);
-            
         }
 
-        private void ExecuteFanSettings(object obj)
-        {
-            CActivePagesEntities.SetActivePageState(SActivePageState.FanSettingsPage);
-        }
+     
 
         async private void ExecuteConnect()
         {
@@ -89,7 +100,7 @@ namespace Android_Silver.ViewModels
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    CActivePagesEntities.SetActivePageState(SActivePageState.EntyPage);
+                    CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     CTcpClientService.SendRecieveTask("103,50");
 
@@ -130,15 +141,54 @@ namespace Android_Silver.ViewModels
             //{
             //    CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
             //}
-           
+
             CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
         }
 
-        private void ExecuteFansAccept(object obj)
+
+        #endregion
+        #region Base settings
+        private void ExecuteCommonSettings(object obj)
         {
-            int[] vals = { CFBs.CFans.SupNominalFlow, CFBs.CFans.ExhaustNominalFlow };
-            CTcpClientService.SetCommandToServer(400,vals);
-            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+            CActivePagesEntities.SetActivePageState(SActivePageState.CommonSettingsPage);
+        }
+        private void ExecuteDamperSettings(object obj)
+        {
+          
+        }
+        private void ExecuteFanSettings(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(SActivePageState.FanSettingsPage);
+        }
+        private void ExecuteWHSettings(object obj)
+        {
+          
+        }
+
+        private void ExecuteEHSettings(object obj)
+        {
+         
+        }
+
+
+        private void ExecuteFreonCoolerSettings(object obj)
+        {
+          
+        }
+
+        private void ExecuteRecupSettings(object obj)
+        {
+          
+        }
+
+        private void ExecuteHumSettings(object obj)
+        {
+           
+        }
+
+        private void ExecuteSensorsSettings(object obj)
+        {
+           
         }
         #endregion
 
@@ -153,7 +203,14 @@ namespace Android_Silver.ViewModels
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
         }
 
-
+        private void ExecuteFansAccept(object obj)
+        {
+            int[] vals = { CFBs.CFans.SupNominalFlow, CFBs.CFans.ExhaustNominalFlow };
+            CTcpClientService.SetCommandToServer(400, vals);
+            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+        }
         #endregion
+
+
     }
 }

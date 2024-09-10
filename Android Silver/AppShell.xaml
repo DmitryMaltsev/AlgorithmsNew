@@ -12,15 +12,18 @@
     TabBarUnselectedColor ="Green" >
 
     <TabBar>
+
+        <ShellContent Appearing="ShellContent_Appearing_1"
+        Title="Сервисные настройки"
+         ContentTemplate="{DataTemplate local:ServicePage}"
+         Route="servicePage"/>
+        
         <ShellContent Appearing="ShellContent_Appearing"
             Title="Настройки пользователя"
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="mainPage"/>
 
-        <ShellContent Appearing="ShellContent_Appearing_1"
-        Title="Сервисные настройки"
-        ContentTemplate="{DataTemplate local:ServicePage}"
-        Route="servicePage"/>
+     
     </TabBar>
     
 </Shell>
