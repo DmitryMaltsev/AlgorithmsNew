@@ -147,6 +147,7 @@ namespace Android_Silver.ViewModels
 
 
         #endregion
+
         #region Base settings
         private void ExecuteCommonSettings(object obj)
         {
@@ -154,7 +155,7 @@ namespace Android_Silver.ViewModels
         }
         private void ExecuteDamperSettings(object obj)
         {
-          
+            CActivePagesEntities.SetActivePageState(SActivePageState.DamperSettingsPage);
         }
         private void ExecuteFanSettings(object obj)
         {
@@ -162,36 +163,35 @@ namespace Android_Silver.ViewModels
         }
         private void ExecuteWHSettings(object obj)
         {
-          
+            CActivePagesEntities.SetActivePageState(SActivePageState.WHSettingsPage);
         }
 
         private void ExecuteEHSettings(object obj)
         {
-         
+            CActivePagesEntities.SetActivePageState(SActivePageState.EHSettingsPage);
         }
 
 
         private void ExecuteFreonCoolerSettings(object obj)
         {
-          
+            CActivePagesEntities.SetActivePageState(SActivePageState.FreonSettingsPage);
         }
 
         private void ExecuteRecupSettings(object obj)
         {
-          
+            CActivePagesEntities.SetActivePageState(SActivePageState.RecupSettingsPage);
         }
 
         private void ExecuteHumSettings(object obj)
         {
-           
+            CActivePagesEntities.SetActivePageState(SActivePageState.HumSettingsPage);
         }
 
         private void ExecuteSensorsSettings(object obj)
         {
-           
+            CActivePagesEntities.SetActivePageState(SActivePageState.SensorsSettingPage);
         }
         #endregion
-
         #region Fan
         private void ExecuteHome(object obj)
         {

@@ -25,7 +25,9 @@ namespace Android_Silver.Entities.Visual
         FreonSettingsPage,
         RecupSettingsPage,
         HumSettingsPage,
-        CommonSettingsPage
+        CommonSettingsPage,
+        SensorsSettingPage,
+        ConfigPage
     }
 
     public class ServiceActivePagesEntities : BindableBase
@@ -56,66 +58,66 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-        private bool _isDamperPage;
+        private bool _isDamperSettingsPage;
 
-        public bool IsDamperPage
+        public bool IsDamperSettingsPage
         {
-            get { return _isDamperPage; }
+            get { return _isDamperSettingsPage; }
             set { 
-                _isDamperPage = value;
-                OnPropertyChanged(nameof(IsDamperPage));
+                _isDamperSettingsPage = value;
+                OnPropertyChanged(nameof(IsDamperSettingsPage));
             }
         }
 
-        private bool _isWHPage;
+        private bool _isWHSettingsPage;
 
-        public bool IsWHPage
+        public bool IsWHSettingsPage
         {
-            get { return _isWHPage; }
+            get { return _isWHSettingsPage; }
             set { 
-                _isWHPage = value;
-                OnPropertyChanged(nameof(IsWHPage));
+                _isWHSettingsPage = value;
+                OnPropertyChanged(nameof(IsWHSettingsPage));
             }
         }
 
-        private bool _isEHPage;
+        private bool _isEHSettingsPage;
 
-        public bool IsEHPage
+        public bool IsEHSettingsPage
         {
-            get { return _isEHPage; }
-            set { _isEHPage = value;
-                OnPropertyChanged(nameof(IsEHPage));
+            get { return _isEHSettingsPage; }
+            set { _isEHSettingsPage = value;
+                OnPropertyChanged(nameof(IsEHSettingsPage));
             }
         }
 
-        private bool _isRecupPage;
+        private bool _isRecupSettingsPage;
 
-        public bool IsRecupPage
+        public bool IsRecupSettingsPage
         {
-            get { return _isRecupPage; }
+            get { return _isRecupSettingsPage; }
             set { 
-                _isRecupPage = value;
-                OnPropertyChanged(nameof(IsEHPage));
+                _isRecupSettingsPage = value;
+                OnPropertyChanged(nameof(IsEHSettingsPage));
             }
         }
 
-        private bool _isHumPage;
-        public bool IsHumPage
+        private bool _isHumSettingsPage;
+        public bool IsHumSettingsPage
         {
-            get { return _isHumPage; }
+            get { return _isHumSettingsPage; }
             set { 
-                _isHumPage = value;
-                OnPropertyChanged(nameof(IsHumPage));
+                _isHumSettingsPage = value;
+                OnPropertyChanged(nameof(IsHumSettingsPage));
             }
         }
 
-        private bool _isSensorsPage;
-        public bool IsSensorsPage
+        private bool _isSensorsSettingsPage;
+        public bool IsSensorsSettingsPage
         {
-            get { return _isSensorsPage; }
+            get { return _isSensorsSettingsPage; }
             set { 
-                _isSensorsPage = value;
-                OnPropertyChanged(nameof(IsSensorsPage));
+                _isSensorsSettingsPage = value;
+                OnPropertyChanged(nameof(IsSensorsSettingsPage));
             }
         }
 
@@ -167,6 +169,18 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private bool _isConfigPage;
+
+        public bool IsConfigPage
+        {
+            get { return _isConfigPage; }
+            set { 
+                _isConfigPage = value; 
+                OnPropertyChanged(nameof(IsConfigPage));
+            }
+        }
+
+
         #endregion
 
 
@@ -180,8 +194,16 @@ namespace Android_Silver.Entities.Visual
                         IsEntryPage = false;
                         IsMainMenuPage = false;
                         IsBaseSettingsPage = false;
-                        IsFanSettingsPage = false;
                         IsCommonSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
+                        
                     }
                     break;
                 case SActivePageState.EntryPage:
@@ -190,48 +212,204 @@ namespace Android_Silver.Entities.Visual
                         IsStartPage = false;
                         IsMainMenuPage = false;
                         IsBaseSettingsPage = false;
-                        IsFanSettingsPage = false;
                         IsCommonSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
                     }
                     break;
                 case SActivePageState.MainMenuPage:
                     {
                         IsMainMenuPage = true;
                         IsEntryPage = false;
-                        IsStartPage = false;
+                        IsStartPage = false; 
                         IsBaseSettingsPage = false;
-                        IsFanSettingsPage = false;
                         IsCommonSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
                     }
                     break;
                 case SActivePageState.BaseSettingsPage:
                     {
                         IsBaseSettingsPage = true;
+                        IsMainMenuPage = false;
                         IsEntryPage = false;
                         IsStartPage = false;
-                        IsMainMenuPage = false;
-                        IsFanSettingsPage = false;
                         IsCommonSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
+                    }
+                    break;
+      
+                case SActivePageState.CommonSettingsPage:
+                    {
+                        IsCommonSettingsPage = true;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsDamperSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
+                    }
+                    break;
+                case SActivePageState.DamperSettingsPage:
+                    {
+                        IsDamperSettingsPage = true;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsFanSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
                     }
                     break;
                 case SActivePageState.FanSettingsPage:
                     {
                         IsFanSettingsPage = true;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
                         IsEntryPage = false;
                         IsStartPage = false;
-                        IsMainMenuPage = false;
-                        IsBaseSettingsPage = false;
-                        IsCommonSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
                     }
                     break;
-                case SActivePageState.CommonSettingsPage:
+                case SActivePageState.WHSettingsPage:
                     {
-                        IsCommonSettingsPage = true;
+                        IsWHSettingsPage = true;
                         IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
                         IsEntryPage = false;
                         IsStartPage = false;
-                        IsMainMenuPage = false;
+                        IsEHSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
+                    }
+                    break;
+                case SActivePageState.EHSettingsPage:
+                    {
+                        IsEHSettingsPage = true;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
                         IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsRecupSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
+                    }
+                    break;
+
+                case SActivePageState.RecupSettingsPage: 
+                    {
+                        IsRecupSettingsPage = true;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
+                    }
+                    break;
+                case SActivePageState.HumSettingsPage:
+                    {
+                        IsHumSettingsPage = true;
+                        IsRecupSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
+                    }
+                    break;
+                case SActivePageState.SensorsSettingPage:
+                    {
+                        IsSensorsSettingsPage = true;
+                        IsHumSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsConfigPage = false;
+                    }
+                    break;
+                case SActivePageState.ConfigPage:
+                    {
+                        IsConfigPage = true;
+                        IsSensorsSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
                     }
                     break;
             }
