@@ -58,6 +58,29 @@ namespace Android_Silver.ViewModels
         public ICommand CommonSettingsCommand { get; private set; }
         #endregion
 
+        private List<string> _sensorPicker=new();
+
+        public List<string> SensorPicker
+        {
+            get { return _sensorPicker; }
+            set { 
+                _sensorPicker = value;
+                OnPropertyChanged(nameof(SensorPicker));    
+            }
+        }
+
+        private string _cString;
+
+        public string CString
+        {
+            get { return _cString; }
+            set { 
+                _cString = value;
+                OnPropertyChanged(nameof(CString));
+            }
+        }
+
+
         public TcpClientService CTcpClientService { get; set; }
         public PicturesSet CPictureSet { get; set; }
         public ServiceActivePagesEntities CActivePagesEntities { get; set; }
@@ -67,6 +90,11 @@ namespace Android_Silver.ViewModels
 
         public ServicePageViewModel()
         {
+           // SensorPicker=new List<string>();
+            SensorPicker.Add("Нет");
+            SensorPicker.Add("NTC10K");
+            SensorPicker.Add("PT1000");
+            CString = SensorPicker[0];
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CActivePagesEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -86,7 +114,7 @@ namespace Android_Silver.ViewModels
             FanReturnCommand = new Command(ExecuteFanReturn);
             HomeCommand = new Command(ExecuteHome);
             CommonSettingsCommand = new Command(ExecuteCommonSettings);
-            CActivePagesEntities.SetActivePageState(SActivePageState.CommonSettingsPage);
+            CActivePagesEntities.SetActivePageState(SActivePageState.SensorsSettingPage);
 
         }
 
@@ -147,7 +175,6 @@ namespace Android_Silver.ViewModels
 
 
         #endregion
-
         #region Base settings
         private void ExecuteCommonSettings(object obj)
         {
@@ -192,6 +219,7 @@ namespace Android_Silver.ViewModels
             CActivePagesEntities.SetActivePageState(SActivePageState.SensorsSettingPage);
         }
         #endregion
+
         #region Fan
         private void ExecuteHome(object obj)
         {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Android_Silver.Entities.Sensors;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +18,7 @@ namespace Android_Silver.Entities.FBEntities
 
         public Fans CFans { get; set; }
 
-        public Temps CTemps { get; set; }
+        public TempSensors CTemps { get; set; }
         public Recup CRecup { get; set; }
         public FBs()
         {
@@ -26,7 +28,7 @@ namespace Android_Silver.Entities.FBEntities
             OtherSettings = DIContainer.Resolve<OtherSettings>();
             CTime=DIContainer.Resolve<Time>();
             CRecup=DIContainer.Resolve<Recup>();
-            CTemps=DIContainer.Resolve<Temps>();
+            CTemps=DIContainer.Resolve<TempSensors>();
             CFans=DIContainer.Resolve<Fans>();
         }
     }

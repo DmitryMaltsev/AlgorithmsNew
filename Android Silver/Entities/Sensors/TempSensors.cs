@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Android_Silver.Entities.FBEntities
+namespace Android_Silver.Entities.Sensors
 {
-    public class Temps:BindableBase
+    public class TempSensors:BindableBase
     {
 		private float _outDoorTemp;
 		public float OutDoorTemp	

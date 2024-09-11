@@ -10,8 +10,8 @@ namespace Android_Silver.Entities.Visual
 {
     #region MyRegion
 
-
     #endregion
+
     public enum SActivePageState
     {
         EntryPage,
@@ -90,6 +90,18 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private bool _isFreonSettingsPage;
+
+        public bool IsFreonSettingsPage
+        {
+            get { return _isFreonSettingsPage; }
+            set { 
+                _isFreonSettingsPage = value;
+                OnPropertyChanged(nameof(IsFreonSettingsPage));
+            }
+        }
+
+
         private bool _isRecupSettingsPage;
 
         public bool IsRecupSettingsPage
@@ -97,7 +109,7 @@ namespace Android_Silver.Entities.Visual
             get { return _isRecupSettingsPage; }
             set { 
                 _isRecupSettingsPage = value;
-                OnPropertyChanged(nameof(IsEHSettingsPage));
+                OnPropertyChanged(nameof(IsRecupSettingsPage));
             }
         }
 
@@ -179,10 +191,7 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged(nameof(IsConfigPage));
             }
         }
-
-
         #endregion
-
 
         public void SetActivePageState(SActivePageState activePageState, int pageState = 0)
         {
@@ -203,7 +212,7 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
-                        
+                        IsFreonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.EntryPage:
@@ -221,6 +230,7 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.MainMenuPage:
@@ -238,6 +248,7 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.BaseSettingsPage:
@@ -255,6 +266,7 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
       
@@ -273,6 +285,7 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.DamperSettingsPage:
@@ -290,6 +303,7 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.FanSettingsPage:
@@ -307,6 +321,7 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.WHSettingsPage:
@@ -324,6 +339,7 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.EHSettingsPage:
@@ -341,6 +357,7 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
 
@@ -359,8 +376,27 @@ namespace Android_Silver.Entities.Visual
                         IsHumSettingsPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
+                case SActivePageState.FreonSettingsPage:
+                    {
+                        IsFreonSettingsPage = true;
+                        IsRecupSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsHumSettingsPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsConfigPage = false;
+                    }
+                break;
                 case SActivePageState.HumSettingsPage:
                     {
                         IsHumSettingsPage = true;
@@ -376,6 +412,7 @@ namespace Android_Silver.Entities.Visual
                         IsStartPage = false;
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.SensorsSettingPage:
@@ -393,6 +430,7 @@ namespace Android_Silver.Entities.Visual
                         IsEntryPage = false;
                         IsStartPage = false;
                         IsConfigPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
                 case SActivePageState.ConfigPage:
@@ -410,6 +448,7 @@ namespace Android_Silver.Entities.Visual
                         IsMainMenuPage = false;
                         IsEntryPage = false;
                         IsStartPage = false;
+                        IsFreonSettingsPage = false;
                     }
                     break;
             }
