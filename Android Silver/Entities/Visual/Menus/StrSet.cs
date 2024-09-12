@@ -96,6 +96,7 @@ namespace Android_Silver.Entities.Visual.Menus
         public StrSet(float minVal, float maxVal, string name,bool isVisible, bool pickerIsVisible, bool entryIsVisible, List<string> pickVals)
         {
             PickVals = pickVals;
+            CPickVal=PickVals[0];
             _minVal = minVal;
             _maxVal = maxVal;
             Name = name;

@@ -28,4 +28,13 @@
         <Setter Property="Grid.ColumnSpan" Value="8" />
         <Setter Property="Grid.RowSpan" Value="1"/>
     </Style>
+    <Style TargetType="ListView" x:Key="TableViews">
+        <Setter Property="SeparatorVisibility" Value="None"/>
+        <Setter Property="SelectionMode" Value="None"/>
+        <Setter Property="Grid.ColumnSpan" Value="18"/>
+        <Setter Property="Grid.RowSpan" Value="1" />
+        <Setter Property="HasUnevenRows" Value="False" />
+        <Setter Property="MinimumHeightRequest" Value="100"/>
+
+    </Style>
 </ResourceDictionary>

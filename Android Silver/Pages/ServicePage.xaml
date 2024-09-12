@@ -155,8 +155,8 @@
             <!--#endregion-->
             
             <!--#region Base settings page -->
-            <ListView ItemsSource="{Binding  CMenusEntities.MenusCollection}"  SeparatorVisibility="None"
-                     Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}">
+            <ListView ItemsSource="{Binding  CMenusEntities.MenusCollection}"  Grid.Row="7"
+                      Style="{StaticResource TableViews}" IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}">
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
@@ -183,8 +183,8 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Button  Grid.Column="2" Style="{StaticResource BaseSettingsBut}" ImageSource="{Binding ImgSource.Current}"  IsVisible="{Binding MenuIsVisible}"
-                                     Command="{Binding ChangeWindowCommand}" Pressed="BaseSettings1Pressed" Released="BaseSettings1Released"  Margin="0,5,0,-5"/>
-                                    <Label Text="{Binding Name}"  Grid.Column="2" Style="{StaticResource OtherSettingsLabel}" IsVisible="{Binding MenuIsVisible}" />
+                                     Command="{Binding ChangeWindowCommand}" Pressed="BaseSettings1Pressed" Released="BaseSettings1Released" Margin="0,10,0,-10"/>
+                                    <Label Text="{Binding Name}"  Grid.Column="2" Style="{StaticResource OtherSettingsLabel}" IsVisible="{Binding MenuIsVisible}" Margin="0,5,0,-5" />
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>
@@ -204,8 +204,8 @@
             <Label Text="Общие параметры"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18"  Style="{StaticResource Title}"
                                                                                IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}" />
             <!--#endregion-->
-            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[0].StrSetsCollection}"   SeparatorVisibility="None"
-              Grid.Row="7" Grid.RowSpan="0" Grid.Column="0" Grid.ColumnSpan="18" IsVisible="{Binding CActivePagesEntities.IsCommonSettingsPage}">
+            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[0].StrSetsCollection}" Grid.Row="5" 
+              Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsCommonSettingsPage}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -242,6 +242,12 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding FansAcceptCommand}"  Grid.Column="5" 
+                         
+                                                        Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
+                                                                               IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}"/>
+                </ListView.Footer>
             </ListView>
             <!--#endregion-->
 

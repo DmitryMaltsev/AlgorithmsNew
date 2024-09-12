@@ -50,27 +50,27 @@ namespace Android_Silver.Entities.Visual.Menus
             //Общие
             ObservableCollection<StrSet> strStes = new ObservableCollection<StrSet>();
             List<string> pickVals = new List<string>(){ "Улица", "комната" };
-            StrSet sSet = new StrSet(0, 50, "Уставка аварийной темп, °C", true, true, true,pickVals);
+            StrSet sSet = new StrSet(0, 50, "Уставка аварийной темп, °C",isVisible: true,pickerIsVisible: false,entryIsVisible: true,pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 1, "Регулирование темп. по", true, true, false, pickVals);
+            sSet = new StrSet(0, 1, "Регулирование темп. по",isVisible: true,pickerIsVisible: true,entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 50, "Уставка темп.кан.макс.,°C", true, false, true, pickVals);
+            sSet = new StrSet(0, 50, "Уставка темп.кан.макс.,°C", isVisible: true, pickerIsVisible: false, entryIsVisible:true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 50, "Уставка темп. кан. мин.,°C", true, false, true, pickVals);
+            sSet = new StrSet(0, 50, "Уставка темп. кан. мин.,°C", isVisible: true, pickerIsVisible: false, entryIsVisible:true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 10, "Задержка аварии по темп, сек", true, false, true, pickVals);
+            sSet = new StrSet(0, 10, "Задержка аварии по темп, сек", isVisible: true,pickerIsVisible: false,entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 40, "Уставка влажности, %", true, false, true, pickVals);
+            sSet = new StrSet(0, 40, "Уставка влажности, %", isVisible: true,pickerIsVisible: false,entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 3, "Время года", true, false, true, pickVals);
+            sSet = new StrSet(0, 3, "Время года", isVisible: true,pickerIsVisible: false,entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(5, 30, "Темп. перехода зима/лето, °С", true, false, true, pickVals);
+            sSet = new StrSet(5, 30, "Темп. перехода зима/лето, °С", isVisible: true,pickerIsVisible: false,entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 3, "Гистерезис темп. перехода,°С", true, false, true, pickVals);
+            sSet = new StrSet(0, 3, "Гистерезис темп. перехода,°С", isVisible: true,pickerIsVisible: false,entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 3, "Перезапуск по питанию", true, false, true, pickVals);
+            sSet = new StrSet(0, 3, "Перезапуск по питанию", isVisible: true,pickerIsVisible: false,entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 3, "Автосброс пожара", true, false, true, pickVals);
+            sSet = new StrSet(0, 3, "Автосброс пожара", isVisible: true,pickerIsVisible: false,entryIsVisible: true, pickVals);
             strStes.Add(sSet);
 
             MenusCollection[0].StrSetsCollection = strStes;
