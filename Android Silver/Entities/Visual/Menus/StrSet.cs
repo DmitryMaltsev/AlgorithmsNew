@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Android_Silver.Entities.Visual
+namespace Android_Silver.Entities.Visual.Menus
 {
     public class StrSet : BindableBase
     {

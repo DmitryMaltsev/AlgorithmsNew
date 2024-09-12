@@ -1,6 +1,7 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Visual;
+using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 
 using System;
@@ -86,6 +87,8 @@ namespace Android_Silver.ViewModels
         public ServiceActivePagesEntities CActivePagesEntities { get; set; }
         public EthernetEntities EthernetEntities { get; set; }
 
+        public MenusEntities CMenusEntities { get; set; }
+
         public FBs CFBs { get; set; }
 
         public ServicePageViewModel()
@@ -100,6 +103,7 @@ namespace Android_Silver.ViewModels
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CFBs = DIContainer.Resolve<FBs>();
+            CMenusEntities=DIContainer.Resolve<MenusEntities>();
             EntryPassedCommand = new Command(ExecuteEntryPass);
             StartPageConnectCommand = new Command(ExecuteConnect);
             DamperSettingsCommand = new Command(ExecuteDamperSettings);
@@ -114,11 +118,24 @@ namespace Android_Silver.ViewModels
             FanReturnCommand = new Command(ExecuteFanReturn);
             HomeCommand = new Command(ExecuteHome);
             CommonSettingsCommand = new Command(ExecuteCommonSettings);
-            CActivePagesEntities.SetActivePageState(SActivePageState.SensorsSettingPage);
+            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+            DecreseMenuItemsCommand = new Command(ExecuteDecreaseMenus);
+
 
         }
 
-     
+        private void ExecuteDecreaseMenus(object obj)
+        {
+            if (CMenusEntities.MenusCollection.Count>0)
+            {
+                CMenusEntities.MenusCollection.Add(
+                    new Entities.Visual.Menus.MenuItem(CMenusEntities.MenusCollection.Count.ToString(), true, CPictureSet.BaseSettings1But,SActivePageState.DamperSettingsPage));
+            }
+           
+        }
+
+        public ICommand DecreseMenuItemsCommand { get;private set; }
+        
 
         async private void ExecuteConnect()
         {

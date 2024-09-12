@@ -1,17 +1,22 @@
 ﻿using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
+using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Pages;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
 using Unity;
+using Unity.Injection;
+using Unity.Resolution;
+
+using MenuItem = Android_Silver.Entities.Visual.Menus.MenuItem;
 
 namespace Android_Silver.Entities
 {
     public static class DIContainer
     {
-        private static UnityContainer _container;
+        public static UnityContainer _container;
         public static void RegisterDependencies()
         {
             _container = new UnityContainer();
@@ -30,13 +35,20 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<CarouselViewData>();
             _container.RegisterSingleton<Recup>();
             _container.RegisterSingleton<ServiceActivePagesEntities>();
-            _container.RegisterSingleton<Fans>(); 
+            _container.RegisterSingleton<Fans>();
+            _container.RegisterType<MenusEntities>();
         }
 
         public static T Resolve<T>()
         {
             return _container.Resolve<T>();
         }
+
+        public static T Resolve<T>(ParameterOverride[] parameters)
+        {
+            return _container.Resolve<T>(parameters);
+        }
+
     }
 }
 

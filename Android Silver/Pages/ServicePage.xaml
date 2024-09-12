@@ -657,10 +657,49 @@
                                                   IsVisible="{Binding CActivePagesEntities.IsHumSettingsPage}"/>
             <!--#endregion-->
 
+            <ListView ItemsSource="{Binding  CMenusEntities.MenusCollection}"
+                     Grid.Row="17" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="18" IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button  Grid.Column="2" Style="{StaticResource BaseSettingsBut}" ImageSource="{Binding ImgSource.Current}"  
+                                     Command="{Binding ChangeWindowCommand}" Pressed="BaseSettings1Pressed" Released="BaseSettings1Released"  Margin="0,20"/>
+                                    <Label Text="{Binding Name}"  Grid.Column="2" Style="{StaticResource OtherSettingsLabel}" Margin="0,20"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <!--#region Modes page -->
-
+            <Button  Grid.Column="2"   Grid.Row="25" Style="{StaticResource BaseSettingsBut}" ImageSource="{Binding CPictureSet.BaseSettings1But.Current}" 
+                   Command="{Binding DecreseMenuItemsCommand}"   Pressed="BaseSettings1Pressed" Released="BaseSettings1Released" />
+            <Label Text="Меняем окна"  Grid.Row="25" Grid.Column="2" Style="{StaticResource OtherSettingsLabel}" Margin="0,20"/>
             <!--#endregion-->
 
+            
         </Grid>
     </ScrollView>
 </ContentPage>
