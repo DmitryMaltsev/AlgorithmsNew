@@ -59,14 +59,15 @@ namespace Android_Silver.ViewModels
         public ICommand CommonSettingsCommand { get; private set; }
         #endregion
 
-        private List<string> _sensorPicker=new();
+        private List<string> _sensorPicker = new();
 
         public List<string> SensorPicker
         {
             get { return _sensorPicker; }
-            set { 
+            set
+            {
                 _sensorPicker = value;
-                OnPropertyChanged(nameof(SensorPicker));    
+                OnPropertyChanged(nameof(SensorPicker));
             }
         }
 
@@ -75,11 +76,25 @@ namespace Android_Silver.ViewModels
         public string CString
         {
             get { return _cString; }
-            set { 
+            set
+            {
                 _cString = value;
                 OnPropertyChanged(nameof(CString));
             }
         }
+
+        private int _menuNum;
+
+        public int MenuNum
+        {
+            get { return _menuNum; }
+            set
+            {
+                _menuNum = value;
+                OnPropertyChanged(nameof(MenuNum));
+            }
+        }
+
 
 
         public TcpClientService CTcpClientService { get; set; }
@@ -93,7 +108,7 @@ namespace Android_Silver.ViewModels
 
         public ServicePageViewModel()
         {
-           // SensorPicker=new List<string>();
+            // SensorPicker=new List<string>();
             SensorPicker.Add("Нет");
             SensorPicker.Add("NTC10K");
             SensorPicker.Add("PT1000");
@@ -103,7 +118,7 @@ namespace Android_Silver.ViewModels
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CFBs = DIContainer.Resolve<FBs>();
-            CMenusEntities=DIContainer.Resolve<MenusEntities>();
+            CMenusEntities = DIContainer.Resolve<MenusEntities>();
             EntryPassedCommand = new Command(ExecuteEntryPass);
             StartPageConnectCommand = new Command(ExecuteConnect);
             DamperSettingsCommand = new Command(ExecuteDamperSettings);
@@ -120,22 +135,38 @@ namespace Android_Silver.ViewModels
             CommonSettingsCommand = new Command(ExecuteCommonSettings);
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
             DecreseMenuItemsCommand = new Command(ExecuteDecreaseMenus);
+            IncreaseMenuItemsCommand = new Command(ExecuteIncrease);
+        }
 
 
+
+        public ICommand IncreaseMenuItemsCommand { get; private set; }
+        private void ExecuteIncrease(object obj)
+        {
+            if (CMenusEntities.MenusCollection.Count > 0)
+            {
+                var menu = CMenusEntities.MenusCollection.FirstOrDefault(menu => menu.ID == MenuNum);
+                if (menu != null)
+                {
+                    menu.MenuIsVisible = true;
+                }
+            }
         }
 
         private void ExecuteDecreaseMenus(object obj)
         {
-            if (CMenusEntities.MenusCollection.Count>0)
+            if (CMenusEntities.MenusCollection.Count > 0)
             {
-                CMenusEntities.MenusCollection.Add(
-                    new Entities.Visual.Menus.MenuItem(CMenusEntities.MenusCollection.Count.ToString(), true, CPictureSet.BaseSettings1But,SActivePageState.DamperSettingsPage));
+                var menu = CMenusEntities.MenusCollection.FirstOrDefault(menu => menu.ID == MenuNum);
+                if (menu != null)
+                {
+                    menu.MenuIsVisible = false;
+                }
             }
-           
         }
 
-        public ICommand DecreseMenuItemsCommand { get;private set; }
-        
+        public ICommand DecreseMenuItemsCommand { get; private set; }
+
 
         async private void ExecuteConnect()
         {

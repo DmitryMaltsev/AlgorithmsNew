@@ -515,15 +515,15 @@ namespace Android_Silver.Entities.Visual
         #endregion
 
         #region Главное меню
-        private PicByStates _baseSettings1But;
+        private List<PicByStates> _baseSettings1ButCollection;
 
-        public PicByStates BaseSettings1But
+        public List<PicByStates> BaseSettings1ButCollection
         {
-            get { return _baseSettings1But; }
+            get { return _baseSettings1ButCollection; }
             set
             {
-                _baseSettings1But = value;
-                OnPropertyChanged(nameof(BaseSettings1But));
+                _baseSettings1ButCollection = value;
+                OnPropertyChanged(nameof(BaseSettings1ButCollection));
             }
         }
 
@@ -801,9 +801,12 @@ namespace Android_Silver.Entities.Visual
                         ArrowButRight = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
                         ContactBackGround = "other_set_but_off_base.png";
                         #endregion
-
                         #region Основные настройки
-                        BaseSettings1But = new PicByStates("base_settings_but_off_base.png", "base_settings_but_on_base.png");
+                        BaseSettings1ButCollection = new List<PicByStates>();
+                        for (int i = 0; i < 20; i++)
+                        {
+                            BaseSettings1ButCollection.Add(new PicByStates("base_settings_but_off_base.png", "base_settings_but_on_base.png"));
+                        }
                         BaseSettings2But = new PicByStates("base_settings_but_off_base.png", "base_settings_but_on_base.png");
 
                         #endregion

@@ -81,12 +81,27 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
+        private bool _isVisible;
 
-
-        public StrSet(float minVal, float maxVal)
+        public bool IsVisible
         {
+            get { return _isVisible; }
+            set { 
+                _isVisible = value;
+                OnPropertyChanged(nameof(IsVisible));
+            }
+        }
+
+
+        public StrSet(float minVal, float maxVal, string name,bool isVisible, bool pickerIsVisible, bool entryIsVisible, List<string> pickVals)
+        {
+            PickVals = pickVals;
             _minVal = minVal;
             _maxVal = maxVal;
+            Name = name;
+            IsVisible = isVisible;
+            PickerIsVisible = pickerIsVisible;
+            EntryIsVisible = entryIsVisible;
         }
 
     }

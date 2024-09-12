@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Android_Silver.Entities.Visual.Menus
 {
-    public class MenuItem:BindableBase
+    public class MItem:BindableBase
     {
 		public ICommand ChangeWindowCommand { get;private set; }
 
@@ -18,23 +18,23 @@ namespace Android_Silver.Entities.Visual.Menus
 		SActivePageState _activePageState;
 
 		private ObservableCollection<StrSet> _strSets;
-		public ObservableCollection<StrSet> StrSets
+		public ObservableCollection<StrSet> StrSetsCollection
 		{
 			get { return _strSets; }
 			set { 
 				_strSets = value;
-				OnPropertyChanged(nameof(StrSets));
+				OnPropertyChanged(nameof(StrSetsCollection));
 			}
 		}
 
 
-		private bool _isVisible;
-		public bool IsVisible
+		private bool _menuIsVisible;
+		public bool MenuIsVisible
 		{
-			get { return _isVisible; }
+			get { return _menuIsVisible; }
 			set {
-				_isVisible = value;
-				OnPropertyChanged(nameof(IsVisible));
+				_menuIsVisible = value;
+				OnPropertyChanged(nameof(MenuIsVisible));
 			}
 		}
 
@@ -60,15 +60,19 @@ namespace Android_Silver.Entities.Visual.Menus
 			}
 		}
 
-		public MenuItem(string name, bool isVisible, PicByStates imgSource, SActivePageState sactivePageState)
+		public MItem(string name, bool isVisible, PicByStates imgSource, SActivePageState sactivePageState, ushort id)
         {
-            StrSets=new ObservableCollection<StrSet>();
+            StrSetsCollection=new ObservableCollection<StrSet>();
 			Name = name;
-			ImgSource = imgSource;
+            MenuIsVisible = isVisible;
+            ImgSource = imgSource;
 			_activePageState = sactivePageState;
-			_sActivePagesentities=DIContainer.Resolve<ServiceActivePagesEntities>();
+			ID = id;
+            _sActivePagesentities =DIContainer.Resolve<ServiceActivePagesEntities>();
             ChangeWindowCommand = new Command(ExecuteChangeWindow);
         }
+
+        public ushort ID { get; private set; }
 
         private void ExecuteChangeWindow(object obj)
         {

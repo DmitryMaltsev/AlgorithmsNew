@@ -1,3 +1,4 @@
+using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.ViewModels;
 
 namespace Android_Silver.Pages;
@@ -49,12 +50,16 @@ public partial class ServicePage : ContentPage
     #region Основные настойки
     private void BaseSettings1Pressed(object sender, EventArgs e)
     {
-        _servicePageViewModel.CPictureSet.BaseSettings1But.Current = _servicePageViewModel.CPictureSet.BaseSettings1But.Selected;
+        Button item = sender as Button;
+        MItem mItem = item.BindingContext as MItem;
+        _servicePageViewModel.CPictureSet.BaseSettings1ButCollection[mItem.ID-1].Current = _servicePageViewModel.CPictureSet.BaseSettings1ButCollection[mItem.ID - 1].Selected;
     }
 
     private void BaseSettings1Released(object sender, EventArgs e)
     {
-        _servicePageViewModel.CPictureSet.BaseSettings1But.Current = _servicePageViewModel.CPictureSet.BaseSettings1But.Default;
+        Button item = sender as Button;
+        MItem mItem = item.BindingContext as MItem;
+        _servicePageViewModel.CPictureSet.BaseSettings1ButCollection[mItem.ID - 1].Current = _servicePageViewModel.CPictureSet.BaseSettings1ButCollection[mItem.ID - 1].Default;
     }
 
     private void BaseSettings2Pressed(object sender, EventArgs e)
