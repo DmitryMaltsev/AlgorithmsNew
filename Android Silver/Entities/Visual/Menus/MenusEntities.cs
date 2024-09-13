@@ -1,17 +1,6 @@
-﻿using Android.Locations;
+﻿using Android_Silver.ViewModels;
 
-using Android_Silver.ViewModels;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Unity;
-using Unity.Resolution;
 
 namespace Android_Silver.Entities.Visual.Menus
 {
@@ -39,7 +28,7 @@ namespace Android_Silver.Entities.Visual.Menus
 
             MenusCollection = new ObservableCollection<MItem>();
             #region Пункты меню 
-            MItem mItem = new MItem("Общие", isVisible: true, _pictureSet.BaseSettings1ButCollection[0], SActivePageState.CommonSettingsPage, 1,startAddress:150);
+            MItem mItem = new MItem("Общие", isVisible: true, _pictureSet.BaseSettings1ButCollection[0], SActivePageState.CommonSettingsPage, 1, startAddress: 150);
             MenusCollection.Add(mItem);
             mItem = new MItem("Жалюзи", isVisible: true, _pictureSet.BaseSettings1ButCollection[1], SActivePageState.DamperSettingsPage, 2, startAddress: 150);
             MenusCollection.Add(mItem);
@@ -58,7 +47,7 @@ namespace Android_Silver.Entities.Visual.Menus
             mItem = new MItem("Конфигурация аналоговых датчиков", isVisible: true, _pictureSet.BaseSettings1ButCollection[8], SActivePageState.SensorsSettingPage, 9, startAddress: 150);
             MenusCollection.Add(mItem);
             #endregion
-           
+
             #region Общие
             ObservableCollection<StrSet> strStes = new ObservableCollection<StrSet>();
             List<string> pickVals = new List<string>() { "Улица", "Комната" };
@@ -71,8 +60,6 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 50, "Уставка темп. кан. мин.,°C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strStes.Add(sSet);
             sSet = new StrSet(0, 10, "Задержка аварии по темп, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
-            strStes.Add(sSet);
-            sSet = new StrSet(0, 40, "Уставка влажности, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strStes.Add(sSet);
             sSet = new StrSet(0, 3, "Время года", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strStes.Add(sSet);
@@ -89,7 +76,7 @@ namespace Android_Silver.Entities.Visual.Menus
             pickVals = new List<string>() { "", "" };
             sSet = new StrSet(0, 10000, "Время открытия, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            MenusCollection[1].StrSetsCollection = strStes; 
+            MenusCollection[1].StrSetsCollection = strStes;
             #endregion
             #region Вентилятор
             strStes = new ObservableCollection<StrSet>();
@@ -227,7 +214,7 @@ namespace Android_Silver.Entities.Visual.Menus
             #endregion
             #region Sensors
             strStes = new ObservableCollection<StrSet>();
-            pickVals = new List<string>() { "Нет", "NTC10K","PT1000" };
+            pickVals = new List<string>() { "Нет", "NTC10K", "PT1000" };
             sSet = new StrSet(0, 3, "Датчик уличной температуры", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strStes.Add(sSet);
             sSet = new StrSet(0, 3, "Датчик температуры приточного канала", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
