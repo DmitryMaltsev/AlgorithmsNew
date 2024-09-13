@@ -72,7 +72,12 @@ public partial class ServicePage : ContentPage
         _servicePageViewModel.CPictureSet.BaseSettings2But.Current = _servicePageViewModel.CPictureSet.BaseSettings2But.Default;
     }
 
+
     #endregion
 
-   
+    private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Picker picker = sender as Picker;
+        picker.Unfocus();
+    }
 }

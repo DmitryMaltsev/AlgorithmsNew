@@ -36,8 +36,8 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
-        private string _cPickVal;
-        public string CPickVal
+        private int _cPickVal;
+        public int CPickVal
         {
             get { return _cPickVal; }
             set
@@ -47,8 +47,8 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
-        private float _cVal;
-        public float CVal
+        private int _cVal;
+        public int CVal
         {
             get { return _cVal; }
             set
@@ -96,7 +96,7 @@ namespace Android_Silver.Entities.Visual.Menus
         public StrSet(float minVal, float maxVal, string name,bool isVisible, bool pickerIsVisible, bool entryIsVisible, List<string> pickVals)
         {
             PickVals = pickVals;
-            CPickVal=PickVals[0];
+            CPickVal=0;
             _minVal = minVal;
             _maxVal = maxVal;
             Name = name;

@@ -108,8 +108,8 @@ namespace Android_Silver.ViewModels
 
         public ServicePageViewModel()
         {
-            // SensorPicker=new List<string>();
-            SensorPicker.Add("Нет");
+           // SensorPicker=new List<string>();
+           SensorPicker.Add("Нет");
             SensorPicker.Add("NTC10K");
             SensorPicker.Add("PT1000");
             CString = SensorPicker[0];
@@ -136,6 +136,10 @@ namespace Android_Silver.ViewModels
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
             DecreseMenuItemsCommand = new Command(ExecuteDecreaseMenus);
             IncreaseMenuItemsCommand = new Command(ExecuteIncrease);
+
+
+
+            
         }
 
 
@@ -283,7 +287,7 @@ namespace Android_Silver.ViewModels
         {
             int[] vals = { CFBs.CFans.SupNominalFlow, CFBs.CFans.ExhaustNominalFlow };
             CTcpClientService.SetCommandToServer(400, vals);
-            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+            CActivePagesEntities.SetActivePageState(SActivePageState.CommonSettingsPage);
         }
         #endregion
 

@@ -1,5 +1,5 @@
-﻿using Android_Silver.ViewModels;
-
+﻿using Android_Silver.Services;
+using Android_Silver.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,16 +12,21 @@ namespace Android_Silver.Entities.Visual.Menus
 {
     public class MItem:BindableBase
     {
-		public ICommand ChangeWindowCommand { get;private set; }
+		public ICommand ToSettingsCommand { get;private set; }
+		public ICommand SetSettingsCommand { get;private set; }
 
+
+		
 		private ServiceActivePagesEntities _sActivePagesentities { get;  set; }
 		SActivePageState _activePageState;
 
+		#region Rising properties 
 		private ObservableCollection<StrSet> _strSets;
 		public ObservableCollection<StrSet> StrSetsCollection
 		{
 			get { return _strSets; }
-			set { 
+			set
+			{
 				_strSets = value;
 				OnPropertyChanged(nameof(StrSetsCollection));
 			}
@@ -32,7 +37,8 @@ namespace Android_Silver.Entities.Visual.Menus
 		public bool MenuIsVisible
 		{
 			get { return _menuIsVisible; }
-			set {
+			set
+			{
 				_menuIsVisible = value;
 				OnPropertyChanged(nameof(MenuIsVisible));
 			}
@@ -43,7 +49,8 @@ namespace Android_Silver.Entities.Visual.Menus
 		public string Name
 		{
 			get { return _name; }
-			set { 
+			set
+			{
 				_name = value;
 				OnPropertyChanged(nameof(Name));
 			}
@@ -54,13 +61,19 @@ namespace Android_Silver.Entities.Visual.Menus
 		public PicByStates ImgSource
 		{
 			get { return _imgSource; }
-			set { 
+			set
+			{
 				_imgSource = value;
 				OnPropertyChanged(nameof(ImgSource));
 			}
-		}
+		} 
+		#endregion
 
-		public MItem(string name, bool isVisible, PicByStates imgSource, SActivePageState sactivePageState, ushort id)
+
+		private int _address = 0;
+		private TcpClientService _tcpClientService;
+
+        public MItem(string name, bool isVisible, PicByStates imgSource, SActivePageState sactivePageState, ushort id, int startAddress)
         {
             StrSetsCollection=new ObservableCollection<StrSet>();
 			Name = name;
@@ -68,15 +81,37 @@ namespace Android_Silver.Entities.Visual.Menus
             ImgSource = imgSource;
 			_activePageState = sactivePageState;
 			ID = id;
+			_address= startAddress;
             _sActivePagesentities =DIContainer.Resolve<ServiceActivePagesEntities>();
-            ChangeWindowCommand = new Command(ExecuteChangeWindow);
+            _tcpClientService=DIContainer.Resolve<TcpClientService>();
+            ToSettingsCommand = new Command(ExecuteToSettingsWindow);
+            SetSettingsCommand=new Command(ExecuteSetSettings);
         }
 
         public ushort ID { get; private set; }
 
-        private void ExecuteChangeWindow(object obj)
+        private void ExecuteToSettingsWindow(object obj)
         {
 			_sActivePagesentities.SetActivePageState(_activePageState);
+        }
+
+		private void ExecuteSetSettings(object obj)
+		{
+			int[] values = new int[StrSetsCollection.Count];
+			for (int i = 0; i < StrSetsCollection.Count; i++)
+			{
+				if (StrSetsCollection[i].EntryIsVisible)
+				{
+					values[i] = StrSetsCollection[i].CVal;
+                }
+				else
+				  if (StrSetsCollection[i].PickerIsVisible)
+				{
+                    values[i] = StrSetsCollection[i].CPickVal;
+                }
+			}
+			_tcpClientService.SetCommandToServer(_address, values);
+            _sActivePagesentities.SetActivePageState(SActivePageState.BaseSettingsPage);
         }
     }
 }

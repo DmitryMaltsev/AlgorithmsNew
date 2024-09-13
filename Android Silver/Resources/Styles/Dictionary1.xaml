@@ -10,8 +10,9 @@
         <Setter Property="BackgroundColor" Value="Transparent"/>
         <Setter Property="WidthRequest" Value="40"/>
         <Setter Property="HeightRequest" Value="40"/>
-        <Setter Property="Margin"  Value="0,0,0,0" />
+        <Setter Property="Margin"  Value="0,30,0,0" />
     </Style>
+    
     <Style TargetType="Button" x:Key="HeaderBut" BasedOn="{StaticResource MiniButtons}">
         <Setter Property="Margin"  Value="0,0,0,0" />
         <Setter Property="WidthRequest" Value="60"/>
@@ -20,8 +21,8 @@
         <Setter Property="Grid.Column" Value="7"/>
     </Style>
     <Style TargetType="Button" x:Key="OKCancelBut">
-        <Setter Property="WidthRequest" Value="150"/>
-        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="WidthRequest" Value="190"/>
+        <Setter Property="HeightRequest" Value="60"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
         <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="Padding" Value="0"/>
@@ -35,6 +36,6 @@
         <Setter Property="Grid.RowSpan" Value="1" />
         <Setter Property="HasUnevenRows" Value="False" />
         <Setter Property="MinimumHeightRequest" Value="100"/>
-
+        <Setter Property="RowHeight" Value="60" />
     </Style>
 </ResourceDictionary>

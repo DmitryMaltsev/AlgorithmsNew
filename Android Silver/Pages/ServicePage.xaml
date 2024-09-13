@@ -4,7 +4,7 @@
              x:Class="Android_Silver.Pages.ServicePage"
              Title=""
                BackgroundImageSource="{Binding CPictureSet.Background}">
-    
+
     <ContentPage.Resources>
         <Style TargetType="Entry" x:Key="EntryPass">
             <Setter Property="MaxLength" Value="4"/>
@@ -35,6 +35,7 @@
             <Setter Property="FontSize" Value="17" />
             <Setter Property="Grid.ColumnSpan" Value="4"/>
             <Setter Property="MaximumWidthRequest" Value="140"/>
+            <Setter Property="MaximumHeightRequest" Value="40"/>
             <Setter Property="MaxLength" Value="5"/>
         </Style>
         <Style TargetType="Picker" x:Key="ConfPicker">
@@ -43,26 +44,26 @@
             <Setter Property="Grid.ColumnSpan" Value="4"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="MaximumWidthRequest" Value="200"/>
+            <Setter Property="MaximumWidthRequest" Value="140"/>
+            <Setter Property="MaximumHeightRequest" Value="40"/>
         </Style>
         <Style TargetType="Label" x:Key="Title">
             <Setter Property="TextColor" Value="White" />
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="FontSize" Value="19"/>
+            <Setter Property="Grid.ColumnSpan" Value="18" />
             <Setter Property="Margin" Value="0,0,0,0"/>
         </Style>
         <Style TargetType="Button" x:Key="BaseSettingsBut">
             <Setter Property="Padding" Value="0"/>
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalOptions" Value="Center" />
-            <!--<Setter Property="MinimumHeightRequest" Value="60" />
-            <Setter Property="MinimumWidthRequest" Value="200"/>-->
-            <!--<Setter Property="HeightRequest" Value="70"/>-->
             <Setter Property="BackgroundColor" Value="Transparent"/>
             <Setter Property="Grid.ColumnSpan" Value="14" />
             <Setter Property="Grid.RowSpan" Value="1"  />
-            <Setter Property="MaximumHeightRequest" Value="60" />
+            <Setter Property="MaximumHeightRequest" Value="100" />
+            <Setter Property="MaximumWidthRequest" Value="400" />
             <Setter Property="BorderWidth" Value="0"/>
         </Style>
         <Style TargetType="Label" x:Key="OtherSettingsLabel">
@@ -77,7 +78,7 @@
         <Style TargetType="Label" x:Key="FanSettingsLabel" BasedOn="{StaticResource OtherSettingsLabel}">
             <Setter Property="HorizontalOptions" Value="Start" />
             <Setter Property="HorizontalTextAlignment" Value="Start"/>
-            <Setter Property="Grid.ColumnSpan" Value="14"/>
+            <Setter Property="Grid.ColumnSpan" Value="13"/>
         </Style>
     </ContentPage.Resources>
     <ScrollView VerticalScrollBarVisibility="Always">
@@ -160,7 +161,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
-                            <ViewCell.View >
+                            <ViewCell.View>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -183,8 +184,8 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Button  Grid.Column="2" Style="{StaticResource BaseSettingsBut}" ImageSource="{Binding ImgSource.Current}"  IsVisible="{Binding MenuIsVisible}"
-                                     Command="{Binding ChangeWindowCommand}" Pressed="BaseSettings1Pressed" Released="BaseSettings1Released" Margin="0,10,0,-10"/>
-                                    <Label Text="{Binding Name}"  Grid.Column="2" Style="{StaticResource OtherSettingsLabel}" IsVisible="{Binding MenuIsVisible}" Margin="0,5,0,-5" />
+                                     Command="{Binding ToSettingsCommand}" Pressed="BaseSettings1Pressed" Released="BaseSettings1Released"/>
+                                    <Label Text="{Binding Name}"  Grid.Column="2" Style="{StaticResource OtherSettingsLabel}" IsVisible="{Binding MenuIsVisible}"/>
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>
@@ -194,18 +195,18 @@
             <!--#endregion-->
             
             <!--#region Common settings page -->
-            <!--#region Header -->
-            <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
-                     Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
-                      IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}"/>
-            <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
-             Grid.Row="1" Grid.Column="0" Style="{StaticResource MiniButtons}" 
-             Pressed="BackButton_Pressed"  Released="BackButton_Released" IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}"/>
-            <Label Text="Общие параметры"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18"  Style="{StaticResource Title}"
-                                                                               IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}" />
-            <!--#endregion-->
-            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[0].StrSetsCollection}" Grid.Row="5" 
-              Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsCommonSettingsPage}">
+                <!--#region Header -->
+                <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
+                Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
+                                                 IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}"/>
+                 <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
+                 Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                                                IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}"/>
+                <Label Text="Общие параметры"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                                                    IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}"/>
+                <!--#endregion-->
+                <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[0].StrSetsCollection}" Grid.Row="5" 
+                Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsCommonSettingsPage}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -231,375 +232,440 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}" Margin="0,5,0,-5"/>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
                                     <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
-                                            IsVisible = "{Binding EntryIsVisible}" Margin="0,5,0,-5" />
-                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}"
-                                                               Margin="0,5,0,-5"  ItemsSource="{Binding PickVals}" SelectedItem="{Binding CPickVal}"/>
-
+                                      IsVisible = "{Binding EntryIsVisible}" />
+                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
+                                                     SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}"  SelectedIndex="{Binding CPickVal}"/>
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <ListView.Footer>
-                    <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding FansAcceptCommand}"  Grid.Column="5" 
-                         
-                                                        Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
-                                                                               IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}"/>
-                </ListView.Footer>
             </ListView>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding  CMenusEntities.MenusCollection[0].SetSettingsCommand}"  
+            Grid.Row="7" Grid.Column="5" Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
+                                        IsVisible = "{Binding CActivePagesEntities.IsCommonSettingsPage}"/>
             <!--#endregion-->
 
             <!--#region Damper page -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
-             Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
-                                                                            IsVisible = "{Binding CActivePagesEntities.IsDamperSettingsPage}"/>
+                            Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
+                                                         IsVisible = "{Binding CActivePagesEntities.IsDamperSettingsPage}"/>
             <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
-                     Grid.Row="1"  Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                         Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                                                          IsVisible = "{Binding CActivePagesEntities.IsDamperSettingsPage}"/>
+            <Label Text="Параметры жалюзи"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                                       IsVisible = "{Binding CActivePagesEntities.IsDamperSettingsPage}" />
+
+            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[1].StrSetsCollection}" Grid.Row="5" 
+                Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsDamperSettingsPage}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                      IsVisible = "{Binding EntryIsVisible}" />
+                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
+                                                     SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding CMenusEntities.MenusCollection[1].SetSettingsCommand}"  
+               Grid.Row="7" Grid.Column="5" Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
                                                                              IsVisible = "{Binding CActivePagesEntities.IsDamperSettingsPage}"/>
-            <Label Text="Параметры жалюзи"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18"  Style="{StaticResource Title}"
-                                                                   IsVisible = "{Binding CActivePagesEntities.IsDamperSettingsPage}"/>
-            <Label Text="Время открытия, сек" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" 
-                                                      IsVisible = "{Binding CActivePagesEntities.IsDamperSettingsPage}"/>
-            <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
-                                                       IsVisible = "{Binding CActivePagesEntities.IsDamperSettingsPage}"/>
             <!--#endregion-->
             
             <!--#region Fan settings page -->
-            <!--#region Header -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
-                     Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
-                      IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
+                 Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
+                                              IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
             <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
-             Grid.Row="1" Grid.Column="0" Style="{StaticResource MiniButtons}" 
-             Pressed="BackButton_Pressed"  Released="BackButton_Released" IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Label Text="Параметры вентилятора"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18"  Style="{StaticResource Title}"
-                                                                               IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}" />
-            <!--#endregion-->
-            <!--#region Fan settings -->
-            <Label Text="Номин. расход вент. притока, м3/ч" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" 
-                                                                  IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
-                                                                   IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
+              Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                                               IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
+            <Label Text="Параметры вентилятора"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                            IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}" />
 
-            <Label Text="Номин. расход вент. вытяжки, м3/ч" Grid.Row="6" Style="{StaticResource FanSettingsLabel}" 
-                                                       IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="6"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                        IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-
-            <Label Text="Верхняя граница запрета, %" Grid.Row="7" Style="{StaticResource FanSettingsLabel}" 
-                                            IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="7"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                             IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-
-            <Label Text="Нижняя граница запрета, %" Grid.Row="8" Style="{StaticResource FanSettingsLabel}" 
-                                    IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="8"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                     IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-
-            <Label Text="Функция снижения оборотов" Grid.Row="9" Style="{StaticResource FanSettingsLabel}" 
-                        IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="9"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                         IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-
-            <Label Text="P коэф. регулятора" Grid.Row="10" Style="{StaticResource FanSettingsLabel}" 
-             IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="10"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-              IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-
-            <Label Text="I коэф. регулятора" Grid.Row="11" Style="{StaticResource FanSettingsLabel}" 
-             IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="11"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-              IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-
-            <Label Text="D коэф. регулятора" Grid.Row="12" Style="{StaticResource FanSettingsLabel}" 
-                                                                    IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <Entry Grid.Row="12"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                                    IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-
-            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding FansAcceptCommand}"  Grid.Row="14" Grid.Column="5" 
-            Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
-                                      IsVisible="{Binding CActivePagesEntities.IsFanSettingsPage}"/>
-            <!--#endregion-->
+            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[2].StrSetsCollection}" Grid.Row="5" 
+             Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsFanSettingsPage}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                                                                                                  IsVisible = "{Binding EntryIsVisible}" />
+                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
+                                          SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding CMenusEntities.MenusCollection[2].SetSettingsCommand}"
+                     Grid.Row="7" Grid.Column="5" Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
+                             IsVisible = "{Binding CActivePagesEntities.IsFanSettingsPage}"/>
             <!--#endregion-->
             
             <!--#region WHHeater page -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
-                                  Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
-                                                                 IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
+                Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
+                                             IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
             <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
-                    Grid.Row="1"  Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
-                                                                 IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Label Text="Параметры водяного нагревателя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18"  Style="{StaticResource Title}"
-                                                       IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
+             Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                                              IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
+            <Label Text="Параметры водяного нагревателя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                           IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}" />
 
-            <Label Text="P коэф. регулят. (работа)" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" 
-                                         IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
-                                          IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="I коэф. регулят. (работа)" Grid.Row="6" Style="{StaticResource FanSettingsLabel}" 
-                              IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="6"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                               IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Label Text="D коэф. регулят. (работа)" Grid.Row="7" Style="{StaticResource FanSettingsLabel}" 
-                                                 IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="7"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="P коэф. регулят. (огран)" Grid.Row="8" Style="{StaticResource FanSettingsLabel}" 
-                                                    IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="8"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                 IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="I коэф. регулят. (огран)" Grid.Row="9" Style="{StaticResource FanSettingsLabel}" 
-                                                 IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="9"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                   IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="D коэф. регулят. (огран)" Grid.Row="10" Style="{StaticResource FanSettingsLabel}" 
-                                                     IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="10"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                  IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="Max. темп. обратки, °C" Grid.Row="11" Style="{StaticResource FanSettingsLabel}" 
-                                                  IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="11"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                   IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="Min. темп. обратки, °C" Grid.Row="12" Style="{StaticResource FanSettingsLabel}" 
-                                           IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="12"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                           IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="Дежурн. темп. обратки, °C" Grid.Row="13" Style="{StaticResource FanSettingsLabel}" 
-                                 IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="13"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                 IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="Авар. темп. обратки, °C" Grid.Row="14" Style="{StaticResource FanSettingsLabel}" 
-                                 IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="14"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                 IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="Пусковая темп. обратки, °C" Grid.Row="15" Style="{StaticResource FanSettingsLabel}" 
-                      IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="15"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                      IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="Время мягкого пуска, сек" Grid.Row="16" Style="{StaticResource FanSettingsLabel}" 
-                        IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="16"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                        IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="Минимальный % КЗР" Grid.Row="17" Style="{StaticResource FanSettingsLabel}" 
-                        IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="17"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                        IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="Температура зимних процедур" Grid.Row="18" Style="{StaticResource FanSettingsLabel}" 
-            IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="18"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-            IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Label Text="Проба насоса летом" Grid.Row="19" Style="{StaticResource FanSettingsLabel}" 
-                                                                    IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-            <Entry Grid.Row="19"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                                    IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
-
-            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding FansAcceptCommand}"  Grid.Row="21" Grid.Column="5" 
-                                 Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
-                                                              IsVisible="{Binding CActivePagesEntities.IsWHSettingsPage}"/>
+            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[3].StrSetsCollection}" Grid.Row="5" 
+            Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsWHSettingsPage}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                                                                                                        IsVisible = "{Binding EntryIsVisible}" />
+                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
+                                         SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding CMenusEntities.MenusCollection[3].SetSettingsCommand}" Grid.Row="7" Grid.Column="5"
+            Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}" IsVisible = "{Binding CActivePagesEntities.IsWHSettingsPage}"/>
             <!--#endregion-->
             
             <!--#region EHHeater settings -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
-                                 Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
-                                                                IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
+             Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
+                                  IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
             <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
-                   Grid.Row="1"  Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
-                                                                IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-            <Label Text="Параметры электрического нагревателя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18"  Style="{StaticResource Title}"
-                                                      IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
+             Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                                   IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
+            <Label Text="Параметры электрического нагревателя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}" />
 
-            <Label Text="Мощность нагревателя, Вт" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" 
-                                                    IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-            <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
-                                                     IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-
-            <Label Text="P коэф. регулятора" Grid.Row="6" Style="{StaticResource FanSettingsLabel}" 
-                                                                 IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-            <Entry Grid.Row="6"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                                 IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-            
-            <Label Text="I коэф. регулятора" Grid.Row="7" Style="{StaticResource FanSettingsLabel}" 
-                                                                   IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-            <Entry Grid.Row="7"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                           IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-            
-            <Label Text="D коэф. регулятора" Grid.Row="8" Style="{StaticResource FanSettingsLabel}" 
-                                                                 IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-            <Entry Grid.Row="8"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                                 IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-
-            <Label Text="Время продувки, сек" Grid.Row="9" Style="{StaticResource FanSettingsLabel}" 
-                                                     IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-            <Entry Grid.Row="9"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                     IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-
-            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding FansAcceptCommand}"  Grid.Row="15" Grid.Column="5" 
-                                            Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
-                                                                         IsVisible="{Binding CActivePagesEntities.IsEHSettingsPage}"/>
-            <!--#endregion-->
-
-            <!--#region Sensors page Page -->
-            <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
-                     Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
-                                                    IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
-            Grid.Row="1"  Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
-                                                    IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Label Text="Конфигурация аналоговых датчиков"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" 
-                       Style="{StaticResource Title}" IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
-            <Label Text="Датчик температуры улицы" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" 
-                                                         IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"
-                    ItemsSource="{Binding SensorPicker}" SelectedItem="{Binding CString}"/>
-
-            <Label Text="Датчик температуры приточного канала" Grid.Row="6" Style="{StaticResource FanSettingsLabel}" 
-                                                              IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="6"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                              IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
-            <Label Text="Датчик температуры вытяжного канала" Grid.Row="7" Style="{StaticResource FanSettingsLabel}" 
-                                                            IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="7"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                              IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
-            <Label Text="Датчик температуры помещения" Grid.Row="8" Style="{StaticResource FanSettingsLabel}" 
-                                                             IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="8"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                             IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
-            <Label Text="Датчик температуры обратной воды" Grid.Row="9" Style="{StaticResource FanSettingsLabel}" 
-                                                             IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="9"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                              IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
-            <Label Text="Датчик качества воздуха" Grid.Row="10" Style="{StaticResource FanSettingsLabel}" 
-                                                                IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="10"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                                  IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
-            <Label Text="Датчик влажности" Grid.Row="11" Style="{StaticResource FanSettingsLabel}" 
-                                                                  IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="11"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                                 IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
-            <Label Text="Коррекция темп. улицы" Grid.Row="12" Style="{StaticResource FanSettingsLabel}" 
-                                                                IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="12"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                                   IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
-            <Label Text="Коррекция темп. приточного канала" Grid.Row="13" Style="{StaticResource FanSettingsLabel}" 
-                                                               IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="13"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                                IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            
-            <Label Text=" Коррекция темп. вытяжного канала" Grid.Row="14" Style="{StaticResource FanSettingsLabel}" 
-                                                                IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="14"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                               IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            
-            <Label Text="Коррекция темп. помещения" Grid.Row="15" Style="{StaticResource FanSettingsLabel}" 
-                                                    IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="15"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                   IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            
-            <Label Text="Коррекция темп. обратной воды" Grid.Row="16" Style="{StaticResource FanSettingsLabel}" 
-                                                    IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-            <Entry Grid.Row="16"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                   IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
-            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding FansAcceptCommand}"  Grid.Row="18" Grid.Column="5" 
-                                Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
-                                                             IsVisible="{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
-
+            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[4].StrSetsCollection}" Grid.Row="5" 
+             Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsEHSettingsPage}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                                                                                                 IsVisible = "{Binding EntryIsVisible}" />
+                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
+                                      SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding CMenusEntities.MenusCollection[4].SetSettingsCommand}"
+                     Grid.Row="7" Grid.Column="5" Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"  
+                                                                                IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}"/>
             <!--#endregion-->
 
             <!--#region FreonCooler page -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
-                      Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
+                    Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
                                                      IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
+                     <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
+                        Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                                                          IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
+            <Label Text="Параметры фреонового охладителя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                                                             IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}" />
+
+            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[5].StrSetsCollection}" Grid.Row="5" 
+             Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsFreonSettingsPage}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                                                                                      IsVisible = "{Binding EntryIsVisible}" />
+                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
+                           SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding CMenusEntities.MenusCollection[5].SetSettingsCommand}"
+                     Grid.Row="7" Grid.Column="5" Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"   
+                                                                            IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
+            <!--#endregion-->
+
+            <!--#region Recuperator page -->
+            <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
+              Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
+                                         IsVisible = "{Binding CActivePagesEntities.IsRecupSettingsPage}"/>
             <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
-             Grid.Row="1"  Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
-                                                     IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-            <Label Text="Параметры фреонового охладителя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" 
-                        Style="{StaticResource Title}" IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-
-            <Label Text="P коэф. регулятора" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" 
-                                         IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-            <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
-                                          IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-
-            <Label Text="I коэф. регулятора" Grid.Row="6" Style="{StaticResource FanSettingsLabel}" 
-                                                      IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-            <Entry Grid.Row="6"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                      IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-
-            <Label Text="D коэф. регулятора" Grid.Row="7" Style="{StaticResource FanSettingsLabel}" 
-                                                        IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-            <Entry Grid.Row="7"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                                IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-
-            <Label Text="Задержка включ. ступени, сек" Grid.Row="8" Style="{StaticResource FanSettingsLabel}" 
-                                          IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-            <Entry Grid.Row="8"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                          IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-
-            <Label Text="Минимальное время работы ступени, сек" Grid.Row="9" Style="{StaticResource FanSettingsLabel}" 
-                              IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-            <Entry Grid.Row="9"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                              IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
-
-            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding FansAcceptCommand}"  Grid.Row="15" Grid.Column="5" 
-                                 Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
-                                                              IsVisible="{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
+            Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                                              IsVisible = "{Binding CActivePagesEntities.IsRecupSettingsPage}"/>
+            <Label Text="Параметры рекуператора"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                                                 IsVisible = "{Binding CActivePagesEntities.IsRecupSettingsPage}" />
+            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[6].StrSetsCollection}" Grid.Row="5" 
+              Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsRecupSettingsPage}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                                                                                                 IsVisible = "{Binding EntryIsVisible}" />
+                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
+                                   SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding CMenusEntities.MenusCollection[6].SetSettingsCommand}" 
+             Grid.Row="7" Grid.Column="5" Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"   
+                                                                            IsVisible = "{Binding CActivePagesEntities.IsRecupSettingsPage}"/>
             <!--#endregion-->
 
             <!--#region Hum page -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
-             Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
+              Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
                                          IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
             <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
-            Grid.Row="1"  Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
-                                         IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
-            <Label Text="Параметры увлажнителя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" 
-            Style="{StaticResource Title}" IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
-
-            <Label Text="P коэф. регулятора" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" 
-                             IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
-            <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
-                              IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
-
-            <Label Text="I коэф. регулятора" Grid.Row="6" Style="{StaticResource FanSettingsLabel}" 
-                                          IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
-            <Entry Grid.Row="6"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                          IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
-
-            <Label Text="D коэф. регулятора" Grid.Row="7" Style="{StaticResource FanSettingsLabel}" 
-                                            IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
-            <Entry Grid.Row="7"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.ExhaustNominalFlow}"
-                                    IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
-
-
-            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding FansAcceptCommand}"  Grid.Row="9" Grid.Column="5" 
-                     Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
-                                                  IsVisible="{Binding CActivePagesEntities.IsHumSettingsPage}"/>
+            Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                                              IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
+            <Label Text="Параметры увлажнителя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                                                 IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}" />
+            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[7].StrSetsCollection}" Grid.Row="5" 
+              Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsHumSettingsPage}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                                                                                                 IsVisible = "{Binding EntryIsVisible}" />
+                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}" SelectedIndexChanged="Picker_SelectedIndexChanged" 
+                                            ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}" IsVisible = "{Binding PickerIsVisible}" />
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding CMenusEntities.MenusCollection[7].SetSettingsCommand}" 
+              Grid.Row="7" Grid.Column="5" Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"  
+                                                                                    IsVisible = "{Binding CActivePagesEntities.IsHumSettingsPage}"/>
             <!--#endregion-->
-            
+
+            <!--#region Sensors page -->
+            <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
+              Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
+                                         IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
+            <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
+            Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
+                                              IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
+            <Label Text="Конфигурация аналоговых датчиков"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                                                 IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}" />
+            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[8].StrSetsCollection}" Grid.Row="5" 
+              Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsSensorsSettingsPage}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                                                                                                 IsVisible = "{Binding EntryIsVisible}" />
+                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
+                                   SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding CMenusEntities.MenusCollection[8].SetSettingsCommand}" Grid.Row="7" Grid.Column="5"
+              Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"   IsVisible = "{Binding CActivePagesEntities.IsSensorsSettingsPage}"/>
+            <!--#endregion-->
         </Grid>
     </ScrollView>
 </ContentPage>
