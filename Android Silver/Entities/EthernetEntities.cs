@@ -12,7 +12,7 @@ namespace Android_Silver.Entities
 
         public TcpClient Client { get; set; }
 
-        private string _connectIP = "192.168.0.103";
+        private string _connectIP = "192.168.0.101";
         public string ConnectIP
         {
             get { return _connectIP; }

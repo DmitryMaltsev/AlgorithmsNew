@@ -138,6 +138,7 @@ namespace Android_Silver.ViewModels
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
             DecreseMenuItemsCommand = new Command(ExecuteDecreaseMenus);
             IncreaseMenuItemsCommand = new Command(ExecuteIncrease);
+            StartTimer();
         }
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
@@ -291,6 +292,22 @@ namespace Android_Silver.ViewModels
         }
         #endregion
 
+        Timer timer;
+
+        private void StartTimer()
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                timer = new Timer(obj =>
+                {
+                    MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        EthernetEntities.SystemMessage = $"Счетчик принятий ={CTcpClientService.ResieveCounter}";
+                    });
+                },
+                null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+            });
+        }
 
     }
 }

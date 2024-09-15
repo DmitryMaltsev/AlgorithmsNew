@@ -1970,9 +1970,9 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val < 100)
+                            if (val < 1000)
                             {
-                                _setPoints.CCommonSetPoints.SPSeason = val;
+                                _setPoints.CCommonSetPoints.SPSeason = val/10;
                             }
                         }
                     }
@@ -1983,9 +1983,9 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val < 20)
+                            if (val < 200)
                             {
-                                _setPoints.CCommonSetPoints.HystSeason = val;
+                                _setPoints.CCommonSetPoints.HystSeason = val/10;
                             }
                         }
                     }

@@ -131,8 +131,8 @@ namespace Android_Silver.Entities.Visual.Menus
                         StrSetsCollection[5].CPickVal = _setPoints.CCommonSetPoints.SeasonMode;
                         StrSetsCollection[6].CVal = _setPoints.CCommonSetPoints.SPSeason;
                         StrSetsCollection[7].CVal = _setPoints.CCommonSetPoints.HystSeason;
-                        StrSetsCollection[8].CVal = _setPoints.CEConfig.AutoResetFire;
-                        StrSetsCollection[9].CVal = _setPoints.CEConfig.AutoRestart;
+                        StrSetsCollection[8].CPickVal = _setPoints.CEConfig.AutoResetFire;
+                        StrSetsCollection[9].CPickVal = _setPoints.CEConfig.AutoRestart;
                     }
 					break;
 				case SActivePageState.SensorsSettingPage:
