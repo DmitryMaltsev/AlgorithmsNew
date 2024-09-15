@@ -2014,12 +2014,35 @@ namespace Android_Silver.Services
                             {
                                 _setPoints.CEConfig.AutoRestart = val;
                             }
+                        }
+                    }
+                    break;
+                case 309:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 10000)
+                            {
+                                _setPoints.CDamperSetPoints.DamperOpenTime = val;
+                            }
 
                         }
                     }
                     break;
+                case 310:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
 
+                            if (val < 10000)
+                            {
+                                _setPoints.CDamperSetPoints.DamperHeatingTime = val;
+                            }
 
+                        }
+                    }
+                    break;
 
 
 

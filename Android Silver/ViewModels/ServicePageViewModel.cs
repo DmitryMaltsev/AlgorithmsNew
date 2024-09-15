@@ -138,10 +138,6 @@ namespace Android_Silver.ViewModels
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
             DecreseMenuItemsCommand = new Command(ExecuteDecreaseMenus);
             IncreaseMenuItemsCommand = new Command(ExecuteIncrease);
-
-
-
-            
         }
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
@@ -182,8 +178,7 @@ namespace Android_Silver.ViewModels
                 {
                    // CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
-                    CTcpClientService.SendRecieveTask("103,50");
-
+                    CTcpClientService.SendRecieveTask("299,12");
                     // TcpClientService.SendRecieveTask("137,4");
                 }
             }

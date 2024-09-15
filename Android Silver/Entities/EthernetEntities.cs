@@ -55,7 +55,7 @@ namespace Android_Silver.Entities
             }
         }
 
-        private byte _ip4 = 100;
+        private byte _ip4 = 103;
         public byte IP4
         {
             get { return _ip4; }

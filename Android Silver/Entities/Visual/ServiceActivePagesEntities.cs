@@ -1,4 +1,5 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.Visual.Menus;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -30,8 +31,10 @@ namespace Android_Silver.Entities.Visual
         ConfigPage
     }
 
+
     public class ServiceActivePagesEntities : BindableBase
     {
+
         public SActivePageState LastActivePageState { get; set; } = SActivePageState.EntryPage;
         #region Rising properties
         private bool _isStartPage;
@@ -193,6 +196,10 @@ namespace Android_Silver.Entities.Visual
         }
         #endregion
 
+        public ServiceActivePagesEntities()
+        {
+         
+        }
         public void SetActivePageState(SActivePageState activePageState, int pageState = 0)
         {
             switch (activePageState)
@@ -272,6 +279,9 @@ namespace Android_Silver.Entities.Visual
       
                 case SActivePageState.CommonSettingsPage:
                     {
+                       // _menuEntities.
+
+
                         IsCommonSettingsPage = true;
                         IsBaseSettingsPage = false;
                         IsMainMenuPage = false;

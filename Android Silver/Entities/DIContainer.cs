@@ -38,7 +38,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<Recup>();
             _container.RegisterSingleton<ServiceActivePagesEntities>();
             _container.RegisterSingleton<Fans>();
-            _container.RegisterType<MenusEntities>();
+            _container.RegisterSingleton<MenusEntities>();
         }
 
         public static T Resolve<T>()

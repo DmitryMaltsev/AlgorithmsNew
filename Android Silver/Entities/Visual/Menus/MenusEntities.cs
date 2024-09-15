@@ -7,14 +7,14 @@ namespace Android_Silver.Entities.Visual.Menus
     public class MenusEntities : BindableBase
     {
 
-        private ObservableCollection<MItem> _menusBufferCollection;
+        private ObservableCollection<MItem> _menusCollection;
 
         public ObservableCollection<MItem> MenusCollection
         {
-            get { return _menusBufferCollection; }
+            get { return _menusCollection; }
             set
             {
-                _menusBufferCollection = value;
+                _menusCollection = value;
                 OnPropertyChanged(nameof(MenusCollection));
             }
         }
@@ -61,21 +61,25 @@ namespace Android_Silver.Entities.Visual.Menus
             strStes.Add(sSet);
             sSet = new StrSet(0, 10, "Задержка аварии по темп, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 3, "Время года", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            pickVals = new List<string>() { "Авто", "Зима","Лето" };
+            sSet = new StrSet(0, 3, "Тип регулиярования времени года", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strStes.Add(sSet);
             sSet = new StrSet(5, 30, "Темп. перехода зима/лето, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strStes.Add(sSet);
             sSet = new StrSet(0, 3, "Гистерезис темп. перехода,°С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 3, "Перезапуск по питанию", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            pickVals = new List<string>() { "Откл","Вкл" };
+            sSet = new StrSet(0, 3, "Перезапуск по питанию", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strStes.Add(sSet);
-            sSet = new StrSet(0, 3, "Автосброс пожара", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 3, "Автосброс пожара", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
+            strStes.Add(sSet);
             MenusCollection[0].StrSetsCollection = strStes;
             //Жалюзи
             strStes = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "", "" };
             sSet = new StrSet(0, 10000, "Время открытия, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strStes.Add(sSet);
+          
             MenusCollection[1].StrSetsCollection = strStes;
             #endregion
             #region Вентилятор
