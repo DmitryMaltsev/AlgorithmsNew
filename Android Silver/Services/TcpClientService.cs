@@ -196,9 +196,9 @@ namespace Android_Silver.Services
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
             }
-            while (IsSending && _trySendcounter < 10 && MessageToServer == String.Empty);
+            while (IsSending && _trySendcounter < 20 && MessageToServer == String.Empty);
             IsSending = false;
-            if (_trySendcounter == 10)
+            if (_trySendcounter == 20)
             {
                 _pictureSet.SetPicureSetIfNeed(_pictureSet.LinkHeader, _pictureSet.LinkHeader.Default);
                 if (_ethernetEntities.IsConnected == true)
@@ -226,6 +226,8 @@ namespace Android_Silver.Services
 
         private bool GetResponseData(StringBuilder rSB, List<Response> response)
         {
+
+            //Дописать проверку исключения, если ответ пришел в неверном формате.
             bool isRightResponse = true;
             string[] resultVals = rSB.ToString().Split(",");
             if (resultVals.Length >= 2)
