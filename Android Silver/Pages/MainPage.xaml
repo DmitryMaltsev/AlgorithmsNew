@@ -345,12 +345,12 @@
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Основная панель-->
             <HorizontalStackLayout  Grid.Row="12" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" HorizontalOptions="Center"  
-                                IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}">
-                <Button Text="Подключиться" Command="{Binding Source={x:Reference mPage}, Path=BindingContext.ConnectCommand}" 
-                                        IsEnabled="{Binding Source={x:Reference mPage},Path=BindingContext.EthernetEntities.IsConnected, 
-                                        Converter={StaticResource InvertBoolConverter}}"/>
-                <Button Text="Отключиться" Command="{Binding Source={x:Reference mPage},Path=BindingContext.DisconnectCommand}"  
-                                        IsEnabled="{Binding Source={x:Reference mPage}, Path=BindingContext.EthernetEntities.IsConnected}"/>
+                                IsVisible="{Binding CActivePagesEntities.IsMainPage}">
+                <Button Text="Подключиться" Command="{Binding ConnectCommand}" 
+                                        IsEnabled="{Binding EthernetEntities.IsConnected, Converter={StaticResource InvertBoolConverter}}"
+                                                                                    IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+                <Button Text="Отключиться" Command="{Binding DisconnectCommand}"  IsEnabled="{Binding EthernetEntities.IsConnected}"
+                                                                                    IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
             </HorizontalStackLayout>
             <HorizontalStackLayout Grid.Row="11" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="4"
                               IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}">

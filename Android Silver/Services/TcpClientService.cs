@@ -9,15 +9,11 @@ using Android_Silver.Entities.FBEntities.SetPoints;
 using Android_Silver.Entities.Modes;
 */
 using Android_Silver.Entities.FBEntities.SetPoints;
-using Android_Silver.Entities.FBEntities.SetPoints.SetPoints;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
-using System;
+
 using System.Collections;
-using System.ComponentModel.Design;
-using System.Globalization;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Text;
 
 namespace Android_Silver.Services
@@ -29,7 +25,8 @@ namespace Android_Silver.Services
         private SetPoints _setPoints { get; set; }
         private ModesEntities _modesEntities { get; set; }
         private FBs _fbs { get; set; }
-        private PicturesSet _pictureSet {  get; set; } 
+        private PicturesSet _pictureSet { get; set; }
+
         public bool IsConnecting { get; private set; } = false;
         public bool IsSending { get; private set; } = false;
         public bool IsRecieving { get; private set; } = false;
@@ -51,9 +48,10 @@ namespace Android_Silver.Services
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
             _fbs = DIContainer.Resolve<FBs>();
-            _pictureSet=DIContainer.Resolve<PicturesSet>();
+            _pictureSet = DIContainer.Resolve<PicturesSet>();
             _fbs.OtherSettings.MFloorAction += MFloorCallback;
             _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
+          
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
         }
@@ -75,11 +73,12 @@ namespace Android_Silver.Services
                     _ethernetEntities.Client.Close();
                     _ethernetEntities.EthernetMessage = "Не удалось подключиться модулю WI-FI";
                     if (connectTask.Status == TaskStatus.RanToCompletion || connectTask.Status == TaskStatus.Faulted
-                        || connectTask.Status == TaskStatus.Canceled) {
+                        || connectTask.Status == TaskStatus.Canceled)
+                    {
                         connectTask.Dispose();
                     }
                     throw new Exception("Не удалось подключиться модулю WI-FI");
-                   
+
                 }
                 else
                 {
@@ -121,7 +120,7 @@ namespace Android_Silver.Services
                      }
                      else
                          if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
-                                                                    _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep==0)
+                                                                    _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 0)
                      {
                          messToClient = "183,56\r\n";
                          _activePageEntities.QueryStep = 1;
@@ -134,7 +133,7 @@ namespace Android_Silver.Services
                          _activePageEntities.QueryStep = 0;
                      }
 
-                         if (!IsSending)
+                     if (!IsSending)
                      {
                          SendCommand(messToClient);
                          if (sbResult != null && sbResult.Length > 0)
@@ -192,7 +191,7 @@ namespace Android_Silver.Services
                 catch (Exception ex)
                 {
                     _trySendcounter += 1;
-                    Task.Delay(10);
+                    Task.Delay(50);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
@@ -202,14 +201,15 @@ namespace Android_Silver.Services
             if (_trySendcounter == 10)
             {
                 _pictureSet.SetPicureSetIfNeed(_pictureSet.LinkHeader, _pictureSet.LinkHeader.Default);
-               if (_ethernetEntities.IsConnected==true ) {                    
-                        _ethernetEntities.SystemMessage = "Превышено максимальное количество попыток - 10";
-                        _ethernetEntities.EthernetMessage = "Превышено максимальное количество попыток передачи данных. Подключитесь повторно";
-                        _activePageEntities.SetActivePageState(ActivePageState.StartPage);
-                        _ethernetEntities.IsConnected = false;
-                    }
-                    else
-                    {
+                if (_ethernetEntities.IsConnected == true)
+                {
+                    _ethernetEntities.SystemMessage = "Превышено максимальное количество попыток - 10";
+                    _ethernetEntities.EthernetMessage = "Превышено максимальное количество попыток передачи данных. Подключитесь повторно";
+                    _activePageEntities.SetActivePageState(ActivePageState.StartPage);
+                    _ethernetEntities.IsConnected = false;
+                }
+                else
+                {
                     _ethernetEntities.IsConnected = false;
                 }
             }
@@ -266,12 +266,12 @@ namespace Android_Silver.Services
                     break;
                 case 101:
                     {
-                      //  _ethernetEntities.Subnet = resp.ValueString;
+                        //  _ethernetEntities.Subnet = resp.ValueString;
                     }
                     break;
                 case 102:
                     {
-                       // _ethernetEntities.GateWay = resp.ValueString;
+                        // _ethernetEntities.GateWay = resp.ValueString;
                     }
                     break;
                 case 103:
@@ -592,12 +592,12 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                    //Включен ли спец режим
+                //Включен ли спец режим
                 case 139:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            bool isSpec=val>0?true:false;
+                            bool isSpec = val > 0 ? true : false;
                             if (_fbs.OtherSettings.IsSpecMode != isSpec)
                             {
                                 _fbs.OtherSettings.IsSpecMode = isSpec;
@@ -757,7 +757,7 @@ namespace Android_Silver.Services
                         {
                             if (val >= 0 && val <= 100)
                             {
-                                if (val>0)
+                                if (val > 0)
                                 {
                                     _pictureSet.SetPicureSetIfNeed(_pictureSet.EHeaterHeader, _pictureSet.EHeaterHeader.Selected);
                                 }
@@ -793,13 +793,13 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (val >= 0 && val <=1)
+                            if (val >= 0 && val <= 1)
                             {
-                                if (val > 0 )
+                                if (val > 0)
                                 {
                                     _pictureSet.SetPicureSetIfNeed(_pictureSet.AlarmMainIcon, _pictureSet.AlarmMainIcon.Selected);
                                 }
-                                else 
+                                else
                                 {
                                     _pictureSet.SetPicureSetIfNeed(_pictureSet.AlarmMainIcon, _pictureSet.AlarmMainIcon.Default);
                                 }
@@ -1854,7 +1854,7 @@ namespace Android_Silver.Services
                                 _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
                                 _modesEntities.TTitle = "Расписание";
                             }
-                           
+
                         }
                     }
                     break;
@@ -1864,7 +1864,7 @@ namespace Android_Silver.Services
                         {
 
                             _modesEntities.Mode2ValuesList[3].TimeModeValues[27].Hour = val;
-                           
+
                         }
                     }
                     break;
@@ -1880,31 +1880,169 @@ namespace Android_Silver.Services
                 case 294:
                     {
                         GetTModeCMode1(3, 27, resp.ValueString);
-                       
+
                     }
                     break;
-                //Проверка того, что данные записаны
+                    //Общие уставки
+                case 299:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 100)
+                            {
+                                _setPoints.CCommonSetPoints.SPTempAlarm = val;
+                            }
+
+                        }
+                    }
+                    break;
                 case 300:
                     {
-                        _setPoints.SP1Count += 1;
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 2)
+                            {
+                                _setPoints.CEConfig.TregularCh_R = val;
+                            }
+                        }
                     }
                     break;
                 case 301:
                     {
-                        _setPoints.SP2Count += 1;
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 100)
+                            {
+                                _setPoints.CCommonSetPoints.SPTempMaxCh = val;
+                            }
+
+                        }
                     }
                     break;
                 case 302:
                     {
-                        _setPoints.SP3Count += 1;
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 100)
+                            {
+                                _setPoints.CCommonSetPoints.SPTempMinCh = val;
+                            }
+
+                        }
                     }
                     break;
+                //Задержка авари по темп(пока 0)
                 case 303:
                     {
-                        _setPoints.SPFCount += 1;
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 60000)
+                            {
+                                _setPoints.CCommonSetPoints.TControlDelayS = val;
+                            }
+
+                        }
                     }
                     break;
+                //Режим времени года
+                case 304:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 3)
+                            {
+                                _setPoints.CCommonSetPoints.SeasonMode = val;
+                            }
+                        }
+                    }
+                    break;
+                //Уставка режима года
+                case 305:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 100)
+                            {
+                                _setPoints.CCommonSetPoints.SPSeason = val;
+                            }
+                        }
+                    }
+                    break;
+                //Гистерезис режима года
+                case 306:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 20)
+                            {
+                                _setPoints.CCommonSetPoints.HystSeason = val;
+                            }
+                        }
+                    }
+                    break;
+                //Автосброс пожара
+                case 307:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 3)
+                            {
+                                _setPoints.CEConfig.AutoResetFire = val;
+                            }
+
+                        }
+                    }
+                    break;
+                //Авторестарт
                 case 308:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val < 3)
+                            {
+                                _setPoints.CEConfig.AutoRestart = val;
+                            }
+
+                        }
+                    }
+                    break;
+
+
+
+
+
+                //Проверка того, что данные записаны
+                case 500:
+                    {
+                        //_setPoints.SP1Count += 1;
+                    }
+                    break;
+                case 501:
+                    {
+                       // _setPoints.SP2Count += 1;
+                    }
+                    break;
+                case 502:
+                    {
+                       // _setPoints.SP3Count += 1;
+                    }
+                    break;
+                case 503:
+                    {
+                        //_setPoints.SPFCount += 1;
+                    }
+                    break;
+                case 508:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1913,7 +2051,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 309:
+                case 509:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1923,7 +2061,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 #region Минимальный режим
-                case 310:
+                case 510:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1931,7 +2069,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 311:
+                case 511:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1939,7 +2077,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 312:
+                case 512:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1947,7 +2085,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 313:
+                case 513:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1957,7 +2095,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Нормальный режим
-                case 314:
+                case 514:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1965,7 +2103,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 315:
+                case 515:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1973,7 +2111,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 316:
+                case 516:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1981,7 +2119,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 317:
+                case 517:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1991,7 +2129,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Максимальный режим
-                case 318:
+                case 518:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -1999,7 +2137,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 319:
+                case 519:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2007,7 +2145,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 320:
+                case 520:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2015,7 +2153,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 321:
+                case 521:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2025,7 +2163,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Режим кухни
-                case 322:
+                case 522:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2033,7 +2171,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 323:
+                case 523:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2041,7 +2179,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 324:
+                case 524:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2049,7 +2187,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 325:
+                case 525:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2059,7 +2197,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Режим отпуска
-                case 326:
+                case 526:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2067,7 +2205,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 327:
+                case 527:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2075,7 +2213,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 328:
+                case 528:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2083,7 +2221,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 329:
+                case 529:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2093,7 +2231,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Специальный режим
-                case 330:
+                case 530:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2101,7 +2239,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 331:
+                case 531:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2109,7 +2247,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 332:
+                case 532:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2117,7 +2255,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 333:
+                case 533:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2127,7 +2265,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 //Режим кухни.
-                case 334:
+                case 534:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2136,7 +2274,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 337:
+                case 537:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2145,95 +2283,95 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Получение режима 1
-                case 338:
+                case 538:
                     {
                         GetTModeDay(2, 0, resp.ValueString);
                     }
                     break;
-                case 339:
+                case 539:
                     {
                         GetTModeHours(2, 0, resp.ValueString);
                     }
                     break;
-                case 340:
+                case 540:
                     {
                         GetTModeMinutes(2, 0, resp.ValueString);
                     }
                     break;
-                case 341:
+                case 541:
                     {
                         GetTModeCMode1(2, 0, resp.ValueString);
                     }
                     break;
                 //Получение режима 2
-                case 342:
+                case 542:
                     {
                         GetTModeDay(2, 1, resp.ValueString);
                     }
                     break;
-                case 343:
+                case 543:
                     {
                         GetTModeHours(2, 1, resp.ValueString);
                     }
                     break;
-                case 344:
+                case 544:
                     {
                         GetTModeMinutes(2, 1, resp.ValueString);
                     }
                     break;
-                case 345:
+                case 545:
                     {
                         GetTModeCMode1(2, 1, resp.ValueString);
                     }
                     break;
                 //Получение режима 3
-                case 346:
+                case 546:
                     {
                         GetTModeDay(2, 2, resp.ValueString);
                     }
                     break;
-                case 347:
+                case 547:
                     {
                         GetTModeHours(2, 2, resp.ValueString);
                     }
                     break;
-                case 348:
+                case 548:
                     {
                         GetTModeMinutes(2, 2, resp.ValueString);
                     }
                     break;
-                case 349:
+                case 549:
                     {
                         GetTModeCMode1(2, 2, resp.ValueString);
                     }
                     break;
                 //Получение режима 4
-                case 350:
+                case 550:
                     {
                         GetTModeDay(2, 3, resp.ValueString);
                     }
                     break;
-                case 351:
+                case 551:
                     {
                         GetTModeHours(2, 3, resp.ValueString);
                     }
                     break;
-                case 352:
+                case 552:
                     {
                         GetTModeMinutes(2, 3, resp.ValueString);
                     }
                     break;
-                case 353:
+                case 553:
                     {
                         GetTModeCMode1(2, 3, resp.ValueString);
                     }
                     break;
-                case 354:
+                case 554:
                     {
                         GetTModeCMode1(4, 0, resp.ValueString);
                     }
                     break;
-                case 355:
+                case 555:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2241,7 +2379,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 356:
+                case 556:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2250,11 +2388,11 @@ namespace Android_Silver.Services
                             {
                                 _fbs.OtherSettings.IsSpecMode = isSpecMode;
                             }
-                        
+
                         }
                     }
                     break;
-                case 357:
+                case 557:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2267,7 +2405,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий год
-                case 358:
+                case 558:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2279,7 +2417,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий месяц
-                case 359:
+                case 559:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2291,7 +2429,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий день
-                case 360:
+                case 560:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2303,7 +2441,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий час
-                case 361:
+                case 561:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2315,7 +2453,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущая минута
-                case 362:
+                case 562:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2328,15 +2466,16 @@ namespace Android_Silver.Services
                     }
                     break;
                 //День недели
-                case 363:
+                case 563:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val >= 0 && val <= 6)
-                            {
-                                _fbs.CTime.DayOfWeek = val;
-                            }
-                        }
+                        //День недели77777
+                        //if (ushort.TryParse(resp.ValueString, out ushort val))
+                        //{
+                        //    if (val >= 0 && val <= 6)
+                        //    {
+                        //        _fbs.CTime.DayOfWeek = val;
+                        //    }
+                        //}
                     }
                     break;
 
@@ -2465,14 +2604,14 @@ namespace Android_Silver.Services
         {
             int specActive = val ? 1 : 0;
             int[] vals = { specActive };
-            SetCommandToServer(356, vals);
+            SetCommandToServer(556, vals);
         }
 
         private void MFloorCallback(bool val)
         {
             int mfActive = val ? 1 : 0;
             int[] vals = { mfActive };
-            SetCommandToServer(357, vals);
+            SetCommandToServer(557, vals);
         }
         #endregion
     }

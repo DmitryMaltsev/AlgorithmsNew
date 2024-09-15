@@ -9,5 +9,12 @@ namespace Android_Silver.Entities.FBEntities.SetPoints
     public class SetPoints
     {
         public CommonSetPoints CCommonSetPoints;
+        public EConfig CEConfig;
+
+        public SetPoints()
+        {
+            CCommonSetPoints = new CommonSetPoints();
+            CEConfig = new EConfig();
+        }
     }
 }

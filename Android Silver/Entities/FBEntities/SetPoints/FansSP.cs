@@ -11,7 +11,6 @@ namespace Android_Silver.Entities.FBEntities.SetPoints
         float Speed0v;
         float Speed10v;
         float CSpeed;
-        float PrevSpeed;
         float MinFanPercent;
         float MaxFanPercent;
         float MFMax;

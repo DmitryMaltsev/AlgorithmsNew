@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:Android_Silver.Services"
              x:Class="Android_Silver.Pages.ServicePage"
              Title=""
                BackgroundImageSource="{Binding CPictureSet.Background}">
 
     <ContentPage.Resources>
+        <local:InvertBoolConverter x:Key="InvertBoolConverter"/>
         <Style TargetType="Entry" x:Key="EntryPass">
             <Setter Property="MaxLength" Value="4"/>
             <Setter Property="IsPassword" Value="true" />
@@ -192,6 +194,19 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <!--Основная панель-->
+            <HorizontalStackLayout  Grid.Row="12" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" HorizontalOptions="Center"  
+                                                                                         IsVisible="{Binding IsBaseSettingsPage}">
+                <Button Text="Подключиться" Command="{Binding StartPageConnectCommand}" 
+                           IsEnabled="{Binding EthernetEntities.IsConnected, Converter={StaticResource InvertBoolConverter}}"
+                                                                       IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}"/>
+                <Button Text="Отключиться" Command="{Binding StartPageDisconnectCommand}"  IsEnabled="{Binding EthernetEntities.IsConnected}"
+                                                                       IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Row="11" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="4" IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}">
+                         <Label Text="{Binding EthernetEntities.SystemMessage}"/>
+            </HorizontalStackLayout>
+            <!--#endregion-->
             <!--#endregion-->
             
             <!--#region Common settings page -->

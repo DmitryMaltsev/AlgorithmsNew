@@ -43,6 +43,7 @@ namespace Android_Silver.ViewModels
         #region Commands
         public ICommand EntryPassedCommand { get; private set; }
         public ICommand StartPageConnectCommand { get; private set; }
+        public ICommand StartPageDisconnectCommand { get; private set; }
         public ICommand DamperSettingsCommand { get; private set; }
         public ICommand FanSettingsCommand { get; private set; }
         public ICommand WHSettingsCommand { get; private set; }
@@ -121,6 +122,7 @@ namespace Android_Silver.ViewModels
             CMenusEntities = DIContainer.Resolve<MenusEntities>();
             EntryPassedCommand = new Command(ExecuteEntryPass);
             StartPageConnectCommand = new Command(ExecuteConnect);
+            StartPageDisconnectCommand = new Command(ExecuteDisconnect);
             DamperSettingsCommand = new Command(ExecuteDamperSettings);
             FanSettingsCommand = new Command(ExecuteFanSettings);
             WHSettingsCommand = new Command(ExecuteWHSettings);
@@ -141,8 +143,6 @@ namespace Android_Silver.ViewModels
 
             
         }
-
-
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
         private void ExecuteIncrease(object obj)
@@ -180,7 +180,7 @@ namespace Android_Silver.ViewModels
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
+                   // CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     CTcpClientService.SendRecieveTask("103,50");
 
@@ -195,6 +195,11 @@ namespace Android_Silver.ViewModels
             }
         }
 
+        private void ExecuteDisconnect(object obj)
+        {
+            CTcpClientService.Disconnect();
+         //   CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Default);
+        }
 
 
         #region Execute entry
@@ -286,7 +291,7 @@ namespace Android_Silver.ViewModels
         private void ExecuteFansAccept(object obj)
         {
             int[] vals = { CFBs.CFans.SupNominalFlow, CFBs.CFans.ExhaustNominalFlow };
-            CTcpClientService.SetCommandToServer(400, vals);
+            CTcpClientService.SetCommandToServer(600, vals);
             CActivePagesEntities.SetActivePageState(SActivePageState.CommonSettingsPage);
         }
         #endregion

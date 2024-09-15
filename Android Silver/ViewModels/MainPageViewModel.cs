@@ -9,7 +9,6 @@ using Android_Silver.Entities.FBEntities.SetPoints;
 using Android_Silver.Entities.Modes;
 */
 using Android_Silver.Entities.FBEntities.SetPoints;
-using Android_Silver.Entities.FBEntities.SetPoints.SetPoints;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
@@ -477,27 +476,27 @@ namespace Android_Silver.Pages
         private void ExecuteTurnOffMode(object obj)
         {
             int[] index = { 0 };
-            CTcpClientService.SetCommandToServer(308, index);
+            CTcpClientService.SetCommandToServer(508, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
         private void ExecuteMinMode(object obj)
         {
             int[] index = { 1, 0 };
-            CTcpClientService.SetCommandToServer(308, index);
+            CTcpClientService.SetCommandToServer(508, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         private void ExecuteNormal(object obj)
         {
             int[] index = { 2, 0 };
-            CTcpClientService.SetCommandToServer(308, index);
+            CTcpClientService.SetCommandToServer(508, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         private void ExecuteMaxMode(object obj)
         {
             int[] index = { 3, 0 };
-            CTcpClientService.SetCommandToServer(308, index);
+            CTcpClientService.SetCommandToServer(508, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
@@ -511,14 +510,14 @@ namespace Android_Silver.Pages
         private void ExecuteVacationMode(object obj)
         {
             int[] index = { 2 };
-            CTcpClientService.SetCommandToServer(309, index);
+            CTcpClientService.SetCommandToServer(509, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         private void ExecuteSheduler(object obj)
         {
             int[] index = { 3 };
-            CTcpClientService.SetCommandToServer(309, index);
+            CTcpClientService.SetCommandToServer(509, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
@@ -558,14 +557,14 @@ namespace Android_Silver.Pages
         private void ExecuteKitchenCancel(object obj)
         {
             int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute, 0, 1 };
-            CTcpClientService.SetCommandToServer(334, values);
+            CTcpClientService.SetCommandToServer(534, values);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage); ;
         }
 
         private void ExecuteKitchenOk(object obj)
         {
             int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute, 1, 0 };
-            CTcpClientService.SetCommandToServer(334, values);
+            CTcpClientService.SetCommandToServer(534, values);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
         #endregion
@@ -714,7 +713,7 @@ namespace Android_Silver.Pages
         {
 
             int[] arr = { 1 };
-            CTcpClientService.SetCommandToServer(337, arr);
+            CTcpClientService.SetCommandToServer(537, arr);
         }
         #endregion
 
@@ -726,7 +725,7 @@ namespace Android_Silver.Pages
             contactM1Num = contactM1Num > 0 ? contactM1Num - 1 : 0;
             contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
             int[] vals = { contactM1Num };
-            CTcpClientService.SetCommandToServer(354, vals);
+            CTcpClientService.SetCommandToServer(554, vals);
         }
         private void ExecuteContactArrRight(object obj)
         {
@@ -735,7 +734,7 @@ namespace Android_Silver.Pages
             contactM1Num = contactM1Num < 5 ? contactM1Num + 1 : 5;
             contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
             int[] vals = { contactM1Num };
-            CTcpClientService.SetCommandToServer(354, vals);
+            CTcpClientService.SetCommandToServer(554, vals);
         }
 
         private void ExecuteOtherSettingsReturn(object obj)
@@ -768,7 +767,7 @@ namespace Android_Silver.Pages
         private void ExecuteChangeFilter(object obj)
         {
             int[] vals = { 1 };
-            CTcpClientService.SetCommandToServer(363, vals);
+            CTcpClientService.SetCommandToServer(563, vals);
         }
         #endregion
 
@@ -904,7 +903,7 @@ namespace Android_Silver.Pages
         private void ExecuteOkHumidity(object obj)
         {
             int[] vals = { HumiditySP };
-            CTcpClientService.SetCommandToServer(355, vals);
+            CTcpClientService.SetCommandToServer(555, vals);
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
 
@@ -983,7 +982,7 @@ namespace Android_Silver.Pages
         private void ExecuteTimeOk(object obj)
         {
             int[] vals = { _timeBuffer.Year, _timeBuffer.Month, _timeBuffer.Day, _timeBuffer.Hour, _timeBuffer.Minute };
-            CTcpClientService.SetCommandToServer(358, vals);
+            CTcpClientService.SetCommandToServer(558, vals);
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
         #endregion

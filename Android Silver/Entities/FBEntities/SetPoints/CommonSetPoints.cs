@@ -8,14 +8,13 @@ namespace Android_Silver.Entities.FBEntities.SetPoints
 {
     public class CommonSetPoints
     {
-        public int TempAlarmSP;
+        public int SPTempAlarm;
         public int SPTempMaxCh;
         public int SPTempMinCh;
-        public int SPTempAlarmDelay;
-        public int TimeOfYear;
+        public int TControlDelayS;
+        public int SeasonMode;
         public int SPSeason;
         public int HystSeason;
-        public int AutoResetFire;
-        public int AutoRestart;
+  
     }
 }
