@@ -8,13 +8,16 @@ namespace Android_Silver.Entities.FBEntities.SetPoints
 {
     public class FanSetPoints
     {
-        float Speed0v;
-        float Speed10v;
-        float CSpeed;
-        float MinFanPercent;
-        float MaxFanPercent;
-        float MFMax;
-        float FanNominalFlow;
-        float MFKoef;
+       public int SFanNominalFlow;
+       public int EFanNominalFlow;
+       public int Speed0v;
+       public int Speed10v;
+       public int PressureFailureDelay;
+       public int FanFailureDelay;
+       public int DecrFanConfig;
+       public int PDecrFan;
+       public int IDecrFan;
+       public int DDecrFan;
+       public int MinFanPercent;
     }
 }

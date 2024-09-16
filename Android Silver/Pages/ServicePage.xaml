@@ -354,7 +354,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
-                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                                                                                                   IsVisible = "{Binding EntryIsVisible}" />
                                     <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
                                           SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
@@ -407,7 +407,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
-                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                                                                                                         IsVisible = "{Binding EntryIsVisible}" />
                                     <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
                                          SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
@@ -459,7 +459,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
-                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                                                                                                  IsVisible = "{Binding EntryIsVisible}" />
                                     <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
                                       SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
@@ -512,7 +512,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
-                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                                                                                       IsVisible = "{Binding EntryIsVisible}" />
                                     <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
                            SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
@@ -564,7 +564,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
-                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                                                                                                  IsVisible = "{Binding EntryIsVisible}" />
                                     <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
                                    SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
@@ -616,7 +616,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
-                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                                                                                                  IsVisible = "{Binding EntryIsVisible}" />
                                     <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}" SelectedIndexChanged="Picker_SelectedIndexChanged" 
                                             ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}" IsVisible = "{Binding PickerIsVisible}" />
@@ -668,7 +668,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
-                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CFBs.CFans.SupNominalFlow}"
+                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                                                                                                  IsVisible = "{Binding EntryIsVisible}" />
                                     <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
                                    SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>

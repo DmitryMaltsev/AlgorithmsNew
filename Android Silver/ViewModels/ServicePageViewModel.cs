@@ -61,7 +61,6 @@ namespace Android_Silver.ViewModels
         #endregion
 
         private List<string> _sensorPicker = new();
-
         public List<string> SensorPicker
         {
             get { return _sensorPicker; }
@@ -179,7 +178,7 @@ namespace Android_Silver.ViewModels
                 {
                    // CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
-                    CTcpClientService.SendRecieveTask("299,12");
+                    CTcpClientService.SendRecieveTask("299,39");
                     // TcpClientService.SendRecieveTask("137,4");
                 }
             }
