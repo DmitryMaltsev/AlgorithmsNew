@@ -8,15 +8,12 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.FBEntities.SetPoints;
 using Android_Silver.Entities.Modes;
 */
-using Android_Silver.Entities.FBEntities.SetPoints;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
-using System;
 using System.Net.Sockets;
-using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 namespace Android_Silver.Pages
@@ -139,11 +136,11 @@ namespace Android_Silver.Pages
         #endregion
 
         #region Commands
-        public ICommand StartPageConnectCommand { get;private set; }
+        public ICommand StartPageConnectCommand { get; private set; }
         #region MainPageCommands
 
         #region Loading command
-        public ICommand LoadingReturnCommand { get;private set; }   
+        public ICommand LoadingReturnCommand { get; private set; }
         #endregion
 
         public ICommand ConnectCommand { get; private set; }
@@ -256,7 +253,6 @@ namespace Android_Silver.Pages
 
         public PicturesSet CPictureSet { get; set; }
 
-        public SetPoints CSetPoints { get; set; }
 
         public ActivePagesEntities CActivePagesEntities { get; set; }
 
@@ -269,7 +265,6 @@ namespace Android_Silver.Pages
         {
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
-            CSetPoints = DIContainer.Resolve<SetPoints>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
@@ -380,14 +375,14 @@ namespace Android_Silver.Pages
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
-            
+
         }
 
         private void StartPageExecuteConnect()
         {
             EthernetEntities.ConnectIP =
                         $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
-           ExecuteConnect();
+            ExecuteConnect();
         }
 
 
@@ -401,7 +396,7 @@ namespace Android_Silver.Pages
                 {
                     CModesEntities.ShedCountQueues = 0;
                     CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
-                    CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);              
+                    CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     CTcpClientService.SendRecieveTask("103,50");
 
                     // TcpClientService.SendRecieveTask("137,4");
@@ -446,7 +441,7 @@ namespace Android_Silver.Pages
 
         private void ExecuiteSettings(object obj)
         {
-           // CPictureSet.AlarmMainIcon.Current
+            // CPictureSet.AlarmMainIcon.Current
             CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
         }
 
@@ -677,7 +672,7 @@ namespace Android_Silver.Pages
         {
             // CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage, 0);
             // TTitle = "Расписание для отпуска";
-            CTcpClientService.MessageToServer= "167,16\r\n";
+            CTcpClientService.MessageToServer = "167,16\r\n";
             CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 0);
         }
 

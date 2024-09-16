@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Android_Silver.Entities.FBEntities.SetPoints
+namespace Android_Silver.Entities.FBEntities
 {
     public class WHSetPoints
     {

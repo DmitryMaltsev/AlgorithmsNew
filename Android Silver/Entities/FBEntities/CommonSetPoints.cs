@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Android_Silver.Entities.FBEntities.SetPoints
+namespace Android_Silver.Entities.FBEntities
 {
     public class CommonSetPoints
     {
@@ -15,6 +15,6 @@ namespace Android_Silver.Entities.FBEntities.SetPoints
         public int SeasonMode;
         public int SPSeason;
         public int HystSeason;
-  
+
     }
 }

@@ -48,10 +48,8 @@ namespace Android_Silver.Entities.FBEntities
 
     public class Alarms:BindableBase
     {
-		
 
         private List<Alarm> _alarmsList;
-
 
         public ushort Alarms1;
         public ushort Alarms2;

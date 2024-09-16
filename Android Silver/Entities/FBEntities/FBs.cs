@@ -1,4 +1,4 @@
-﻿using Android_Silver.Entities.Sensors;
+﻿using Android_Silver.Entities.Srs;
 
 using System;
 using System.Collections.Generic;
@@ -15,21 +15,36 @@ namespace Android_Silver.Entities.FBEntities
         public FilterVals CFilterVals { get; set; }
         public OtherSettings OtherSettings { get; set; }
         public Time CTime { get; set; }
-
         public Fans CFans { get; set; }
-
-        public TempSensors CTemps { get; set; }
+        public Sensors CSensors { get; set; }
         public Recup CRecup { get; set; }
+
+        public ElementsConfig CElementsConfig { get; set; }
+
+        public CommonSetPoints CCommonSetPoints;
+        public DamperSetPoints CDamperSetPoints;
+        public ElementsConfig CEConfig;
+        public WHSetPoints CWHSetPoints;
+        public EHSetPoints CEHSetPoints;
+        public FreonCoolerSP CFreonCoolerSP;
+
         public FBs()
         {
-            CAlarms=DIContainer.Resolve<Alarms>();
-            CHumiditySPS=DIContainer.Resolve<HumiditySPS>();
-            CFilterVals=DIContainer.Resolve<FilterVals>();
-            OtherSettings = DIContainer.Resolve<OtherSettings>();
-            CTime=DIContainer.Resolve<Time>();
-            CRecup=DIContainer.Resolve<Recup>();
-            CTemps=DIContainer.Resolve<TempSensors>();
-            CFans=DIContainer.Resolve<Fans>();
+            CAlarms = new Alarms();
+            CHumiditySPS = new HumiditySPS();
+            CFilterVals =new FilterVals();
+            OtherSettings = new OtherSettings();
+            CTime = new Time();
+            CRecup = new Recup();
+            CSensors = new Sensors();
+            CFans = new Fans();
+            CCommonSetPoints = new CommonSetPoints();
+            CDamperSetPoints = new DamperSetPoints();
+            CEConfig = new ElementsConfig();
+            CWHSetPoints = new WHSetPoints();
+            CEHSetPoints = new EHSetPoints();
+            CFreonCoolerSP = new FreonCoolerSP();
+            CElementsConfig=new ElementsConfig();
         }
     }
 }

@@ -6,15 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Android_Silver.Entities.Sensors
+namespace Android_Silver.Entities.Srs
 {
-    class TempSensor:BindableBase
+    public class TempSenor:Sensor
     {
-        public TempSensor OutdoorTemp { get; set; }
-        public TempSensor SupplyTemp { get; set; }
-        public TempSensor ExhaustTemp { get; set; }
-        public TempSensor RoomTemp { get; set; }
-        public TempSensor ReturnWaterTemp { get; set; }
+        //0-нет, 1-NTC10k, 2- pt1000
+        public int SensorType;
+        public int Correction;
 
     }
 }

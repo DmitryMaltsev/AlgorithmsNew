@@ -21,6 +21,17 @@ namespace Android_Silver.Entities.FBEntities
 			}
 		}
 
+		public int PReg;
+        public int IReg;
+        public int DReg;
+        public int EffSP;
+        public int EffFailValue;
+        public int EffFailDelay;
+        public int HZMax;
+        public int TempA;
+        public int TempB;
+        public int TempC;
+        public int TempD;
 
-	}
+    }
 }

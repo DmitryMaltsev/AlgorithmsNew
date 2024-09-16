@@ -8,7 +8,6 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.FBEntities.SetPoints;
 using Android_Silver.Entities.Modes;
 */
-using Android_Silver.Entities.FBEntities.SetPoints;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 
@@ -22,7 +21,6 @@ namespace Android_Silver.Services
     {
         private NetworkStream _stream;
         private EthernetEntities _ethernetEntities { get; set; }
-        private SetPoints _setPoints { get; set; }
         private ModesEntities _modesEntities { get; set; }
         private FBs _fbs { get; set; }
         private PicturesSet _pictureSet { get; set; }
@@ -44,7 +42,6 @@ namespace Android_Silver.Services
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
-            _setPoints = DIContainer.Resolve<SetPoints>();
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
             _fbs = DIContainer.Resolve<FBs>();
@@ -178,7 +175,7 @@ namespace Android_Silver.Services
                     StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
-                    byte[] data = new byte[200];
+                    byte[] data = new byte[255];
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
                     {
@@ -280,7 +277,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CTemps.OutDoorTemp = buff;
+                            _fbs.CSensors.OutdoorTemp.Value = buff;
                         }
                     }
                     break;
@@ -288,7 +285,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CTemps.SupplyTemp = buff;
+                            _fbs.CSensors.SupTemp.Value = buff;
                         }
                     }
                     break;
@@ -296,7 +293,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CTemps.ExhaustTemp = buff;
+                            _fbs.CSensors.ExhaustTemp.Value = buff;
                         }
                     }
                     break;
@@ -304,7 +301,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CTemps.RoomTemp = buff;
+                            _fbs.CSensors.RoomTemp.Value = buff;
                         }
                     }
                     break;
@@ -312,7 +309,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CTemps.ReturnWaterTemp = buff;
+                            _fbs.CSensors.ReturnTemp.Value = buff;
                         }
                     }
                     break;
@@ -1893,7 +1890,7 @@ namespace Android_Silver.Services
 
                             if (val < 100)
                             {
-                                _setPoints.CCommonSetPoints.SPTempAlarm = val;
+                                _fbs.CCommonSetPoints.SPTempAlarm = val;
                             }
                         }
                     }
@@ -1905,7 +1902,7 @@ namespace Android_Silver.Services
 
                             if (val < 2)
                             {
-                                _setPoints.CEConfig.TregularCh_R = val;
+                                _fbs.CEConfig.TregularCh_R = val;
                             }
                         }
                     }
@@ -1917,7 +1914,7 @@ namespace Android_Silver.Services
 
                             if (val < 100)
                             {
-                                _setPoints.CCommonSetPoints.SPTempMaxCh = val;
+                                _fbs.CCommonSetPoints.SPTempMaxCh = val;
                             }
 
                         }
@@ -1930,7 +1927,7 @@ namespace Android_Silver.Services
 
                             if (val < 100)
                             {
-                                _setPoints.CCommonSetPoints.SPTempMinCh = val;
+                                _fbs.CCommonSetPoints.SPTempMinCh = val;
                             }
 
                         }
@@ -1944,7 +1941,7 @@ namespace Android_Silver.Services
 
                             if (val < 60000)
                             {
-                                _setPoints.CCommonSetPoints.TControlDelayS = val;
+                                _fbs.CCommonSetPoints.TControlDelayS = val;
                             }
                         }
                     }
@@ -1957,7 +1954,7 @@ namespace Android_Silver.Services
 
                             if (val < 3)
                             {
-                                _setPoints.CCommonSetPoints.SeasonMode = val;
+                                _fbs.CCommonSetPoints.SeasonMode = val;
                             }
                         }
                     }
@@ -1970,7 +1967,7 @@ namespace Android_Silver.Services
 
                             if (val < 1000)
                             {
-                                _setPoints.CCommonSetPoints.SPSeason = val / 10;
+                                _fbs.CCommonSetPoints.SPSeason = val / 10;
                             }
                         }
                     }
@@ -1983,7 +1980,7 @@ namespace Android_Silver.Services
 
                             if (val < 200)
                             {
-                                _setPoints.CCommonSetPoints.HystSeason = val / 10;
+                                _fbs.CCommonSetPoints.HystSeason = val / 10;
                             }
                         }
                     }
@@ -1996,7 +1993,7 @@ namespace Android_Silver.Services
 
                             if (val < 3)
                             {
-                                _setPoints.CEConfig.AutoResetFire = val;
+                                _fbs.CEConfig.AutoResetFire = val;
                             }
 
                         }
@@ -2010,7 +2007,7 @@ namespace Android_Silver.Services
 
                             if (val < 3)
                             {
-                                _setPoints.CEConfig.AutoRestart = val;
+                                _fbs.CEConfig.AutoRestart = val;
                             }
                         }
                     }
@@ -2023,7 +2020,7 @@ namespace Android_Silver.Services
 
                             if (val < 10000)
                             {
-                                _setPoints.CDamperSetPoints.DamperOpenTime = val;
+                                _fbs.CDamperSetPoints.DamperOpenTime = val;
                             }
 
                         }
@@ -2036,7 +2033,7 @@ namespace Android_Silver.Services
 
                             if (val < 10000)
                             {
-                                _setPoints.CDamperSetPoints.DamperHeatingTime = val;
+                                _fbs.CDamperSetPoints.DamperHeatingTime = val;
                             }
 
                         }
@@ -2050,7 +2047,7 @@ namespace Android_Silver.Services
 
                             if (val <= 65000)
                             {
-                                _setPoints.CFansSetPoints.SFanNominalFlow = val;
+                                _fbs.CFans.SFanNominalFlow = val;
                             }
                         }
                     }
@@ -2062,7 +2059,7 @@ namespace Android_Silver.Services
 
                             if (val <= 65000)
                             {
-                                _setPoints.CFansSetPoints.EFanNominalFlow = val;
+                                _fbs.CFans.EFanNominalFlow = val;
                             }
                         }
                     }
@@ -2074,7 +2071,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.CFansSetPoints.Speed0v = val;
+                                _fbs.CFans.Speed0v = val;
                             }
                         }
                     }
@@ -2086,7 +2083,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.CFansSetPoints.Speed10v = val;
+                                _fbs.CFans.Speed10v = val;
                             }
                         }
                     }
@@ -2098,7 +2095,7 @@ namespace Android_Silver.Services
 
                             if (val <= 10000)
                             {
-                                _setPoints.CFansSetPoints.PressureFailureDelay = val;
+                                _fbs.CFans.PressureFailureDelay = val;
                             }
                         }
                     }
@@ -2110,7 +2107,7 @@ namespace Android_Silver.Services
 
                             if (val <= 10000)
                             {
-                                _setPoints.CFansSetPoints.FanFailureDelay = val;
+                                _fbs.CFans.FanFailureDelay = val;
                             }
                         }
                     }
@@ -2122,7 +2119,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1)
                             {
-                                _setPoints.CFansSetPoints.DecrFanConfig = val;
+                                _fbs.CFans.DecrFanConfig = val;
                             }
                         }
                     }
@@ -2134,7 +2131,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _setPoints.CFansSetPoints.PDecrFan = val;
+                                _fbs.CFans.PDecrFan = val;
                             }
                         }
                     }
@@ -2146,7 +2143,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _setPoints.CFansSetPoints.IDecrFan = val;
+                                _fbs.CFans.IDecrFan = val;
                             }
                         }
                     }
@@ -2158,7 +2155,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _setPoints.CFansSetPoints.DDecrFan = val;
+                                _fbs.CFans.DDecrFan = val;
                             }
                         }
                     }
@@ -2170,12 +2167,12 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.CFansSetPoints.MinFanPercent = val;
+                                _fbs.CFans.MinFanPercent = val;
                             }
                         }
                     }
                     break;
-                    //Водяной нагреватель
+                //Водяной нагреватель
                 case 322:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
@@ -2183,7 +2180,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _setPoints.WHSetPoints.PWork = val;
+                                _fbs.CWHSetPoints.PWork = val;
                             }
                         }
                     }
@@ -2195,7 +2192,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _setPoints.WHSetPoints.IWork = val;
+                                _fbs.CWHSetPoints.IWork = val;
                             }
                         }
                     }
@@ -2207,7 +2204,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _setPoints.WHSetPoints.DWork = val;
+                                _fbs.CWHSetPoints.DWork = val;
                             }
                         }
                     }
@@ -2219,7 +2216,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _setPoints.WHSetPoints.PRet = val;
+                                _fbs.CWHSetPoints.PRet = val;
                             }
                         }
                     }
@@ -2231,7 +2228,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _setPoints.WHSetPoints.IRet = val;
+                                _fbs.CWHSetPoints.IRet = val;
                             }
                         }
                     }
@@ -2243,7 +2240,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _setPoints.WHSetPoints.DRet = val;
+                                _fbs.CWHSetPoints.DRet = val;
                             }
                         }
                     }
@@ -2255,7 +2252,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.WHSetPoints.TRetMax = val;
+                                _fbs.CWHSetPoints.TRetMax = val;
                             }
                         }
                     }
@@ -2267,7 +2264,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.WHSetPoints.TRetMin = val;
+                                _fbs.CWHSetPoints.TRetMin = val;
                             }
                         }
                     }
@@ -2279,7 +2276,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.WHSetPoints.TRetStb = val;
+                                _fbs.CWHSetPoints.TRetStb = val;
                             }
                         }
                     }
@@ -2291,7 +2288,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.WHSetPoints.TRetF = val;
+                                _fbs.CWHSetPoints.TRetF = val;
                             }
                         }
                     }
@@ -2303,12 +2300,12 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.WHSetPoints.TRetStart = val;
+                                _fbs.CWHSetPoints.TRetStart = val;
                             }
                         }
                     }
                     break;
-                 //2 раза, потом дополнить
+                //2 раза, потом дополнить
                 case 333:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
@@ -2316,7 +2313,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.WHSetPoints.TRetStart = val;
+                                _fbs.CWHSetPoints.TRetStart = val;
                             }
                         }
                     }
@@ -2328,7 +2325,7 @@ namespace Android_Silver.Services
 
                             if (val <= 10000)
                             {
-                                _setPoints.WHSetPoints.SSMaxIntervalS = val;
+                                _fbs.CWHSetPoints.SSMaxIntervalS = val;
                             }
                         }
                     }
@@ -2340,7 +2337,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.WHSetPoints.MinDamperPerc = val;
+                                _fbs.CWHSetPoints.MinDamperPerc = val;
                             }
                         }
                     }
@@ -2352,7 +2349,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _setPoints.WHSetPoints.SPWinterProcess = val;
+                                _fbs.CWHSetPoints.SPWinterProcess = val;
                             }
                         }
                     }
@@ -2364,33 +2361,516 @@ namespace Android_Silver.Services
 
                             if (val <= 1)
                             {
-                                _setPoints.WHSetPoints.IsSummerTestPump = val;
+                                _fbs.CWHSetPoints.IsSummerTestPump = val;
+                            }
+                        }
+                    }
+                    break;
+                //Электрический нагреватель.   
+                case 338:
+                    {
+                        if (int.TryParse(resp.ValueString, out int val))
+                        {
+
+                            if (val <= 100_000)
+                            {
+                                _fbs.CEHSetPoints.NomPowerVT = val;
+                            }
+                        }
+                    }
+                    break;
+                case 339:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CEHSetPoints.PReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 340:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CEHSetPoints.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 341:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CEHSetPoints.DReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 342:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10000)
+                            {
+                                _fbs.CEHSetPoints.BlowDownTime = val;
+                            }
+                        }
+                    }
+                    break;
+                //Фреоновый охладитель
+                case 343:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFreonCoolerSP.PReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 344:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFreonCoolerSP.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 345:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFreonCoolerSP.DReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 346:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10000)
+                            {
+                                _fbs.CFreonCoolerSP.Stage1OffS = val;
+                            }
+                        }
+                    }
+                    break;
+                case 347:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10000)
+                            {
+                                _fbs.CFreonCoolerSP.Stage1OnS = val;
+                            }
+                        }
+                    }
+                    break;
+                case 348:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFreonCoolerSP.Hyst = val;
+                            }
+                        }
+                    }
+                    break;
+                //Увлажнитель
+                case 349:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CHumiditySPS.PReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 350:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CHumiditySPS.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 351:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CHumiditySPS.DReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 352:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10000)
+                            {
+                                _fbs.CHumiditySPS.Stage1OffS = val;
+                            }
+                        }
+                    }
+                    break;
+                case 353:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10000)
+                            {
+                                _fbs.CHumiditySPS.Stage1OnS = val;
+                            }
+                        }
+                    }
+                    break;
+                case 354:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CHumiditySPS.Hyst = val;
+                            }
+                        }
+                    }
+                    break;
+                case 355:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CRecup.PReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 356:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CRecup.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 357:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CRecup.DReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 358:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.EffSP = val;
+                            }
+                        }
+                    }
+                    break;
+                case 359:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.EffFailValue = val;
+                            }
+                        }
+                    }
+                    break;
+                case 360:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10000)
+                            {
+                                _fbs.CRecup.EffFailDelay = val;
+                            }
+                        }
+                    }
+                    break;
+                case 361:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.HZMax = val;
+                            }
+                        }
+                    }
+                    break;
+                case 362:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.TempA = val;
+                            }
+                        }
+                    }
+                    break;
+                case 363:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.TempB = val;
+                            }
+                        }
+                    }
+                    break;
+                case 364:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.TempC = val;
+                            }
+                        }
+                    }
+                    break;
+                case 365:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.TempD = val;
+                            }
+                        }
+                    }
+                    break;
+                case 366:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 3)
+                            {
+                                _fbs.CEConfig.TOutDoorConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 367:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 3)
+                            {
+                                _fbs.CEConfig.TSupplyFConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 368:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 3)
+                            {
+                                _fbs.CEConfig.TExhaustFConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 369:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 3)
+                            {
+                                _fbs.CEConfig.TRoomConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 370:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 3)
+                            {
+                                _fbs.CEConfig.TReturnWaterConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 371:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CEConfig.AirQualityConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 372:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CEConfig.HumSensorConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                    //Датчики
+                case 373:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val>=-100 && val <= 100)
+                            {
+                                _fbs.CSensors.OutdoorTemp.Correction = val;
+                            }
+                        }
+                    }
+                    break;
+                case 374:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -100 && val <= 100)
+                            {
+                                _fbs.CSensors.SupTemp.Correction = val;
+                            }
+                        }
+                    }
+                    break;
+                case 375:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -100 && val <= 100)
+                            {
+                                _fbs.CSensors.ExhaustTemp.Correction = val;
+                            }
+                        }
+                    }
+                    break;
+                case 376:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -100 && val <= 100)
+                            {
+                                _fbs.CSensors.RoomTemp.Correction = val;
+                            }
+                        }
+                    }
+                    break;
+                case 377:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -100 && val <= 100)
+                            {
+                                _fbs.CSensors.ReturnTemp.Correction = val;
                             }
                         }
                     }
                     break;
 
 
-
                 //Проверка того, что данные записаны
                 case 500:
                     {
-                        //_setPoints.SP1Count += 1;
+                        //_fbs.SP1Count += 1;
                     }
                     break;
                 case 501:
                     {
-                        // _setPoints.SP2Count += 1;
+                        // _fbs.SP2Count += 1;
                     }
                     break;
                 case 502:
                     {
-                        // _setPoints.SP3Count += 1;
+                        // _fbs.SP3Count += 1;
                     }
                     break;
                 case 503:
                     {
-                        //_setPoints.SPFCount += 1;
+                        //_fbs.SPFCount += 1;
                     }
                     break;
                 case 508:

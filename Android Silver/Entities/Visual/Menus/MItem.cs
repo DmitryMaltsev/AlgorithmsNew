@@ -1,4 +1,4 @@
-﻿using Android_Silver.Entities.FBEntities.SetPoints;
+﻿using Android_Silver.Entities.FBEntities;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
@@ -18,7 +18,8 @@ namespace Android_Silver.Entities.Visual.Menus
         public ICommand SetSettingsCommand { get; private set; }
 
         private ServiceActivePagesEntities _sActivePagesentities { get; set; }
-        private SetPoints _setPoints { get; set; }
+
+        private FBs _fbs;
         SActivePageState _activePageState;
 
         #region Rising properties 
@@ -77,7 +78,7 @@ namespace Android_Silver.Entities.Visual.Menus
         public MItem(string name, bool isVisible, PicByStates imgSource, SActivePageState sactivePageState, ushort id, int startAddress)
         {
             StrSetsCollection = new ObservableCollection<StrSet>();
-            _setPoints = DIContainer.Resolve<SetPoints>();
+            _fbs = DIContainer.Resolve<FBs>();
             Name = name;
             MenuIsVisible = isVisible;
             ImgSource = imgSource;
@@ -107,64 +108,107 @@ namespace Android_Silver.Entities.Visual.Menus
                 case SActivePageState.BaseSettingsPage:
                     break;
                 case SActivePageState.DamperSettingsPage:
-                    StrSetsCollection[0].CVal = _setPoints.CDamperSetPoints.DamperOpenTime;
-                    //  StrSetsCollection[1].CVal = _setPoints.CDamperSetPoints.DamperHeatingTime;
+                    StrSetsCollection[0].CVal = _fbs.CDamperSetPoints.DamperOpenTime;
+                    //  StrSetsCollection[1].CVal = _fbs.CDamperSetPoints.DamperHeatingTime;
                     break;
                 case SActivePageState.FanSettingsPage:
-                    StrSetsCollection[0].CVal = _setPoints.CFansSetPoints.SFanNominalFlow;
-                    StrSetsCollection[1].CVal = _setPoints.CFansSetPoints.EFanNominalFlow;
-                    StrSetsCollection[2].CVal = _setPoints.CFansSetPoints.Speed0v;
-                    StrSetsCollection[3].CVal = _setPoints.CFansSetPoints.Speed10v;
-                    StrSetsCollection[4].CVal = _setPoints.CFansSetPoints.PressureFailureDelay;
-                    StrSetsCollection[5].CVal = _setPoints.CFansSetPoints.FanFailureDelay;
-                    StrSetsCollection[6].CPickVal = _setPoints.CFansSetPoints.DecrFanConfig;
-                    StrSetsCollection[7].CVal = _setPoints.CFansSetPoints.PDecrFan;
-                    StrSetsCollection[8].CVal = _setPoints.CFansSetPoints.IDecrFan;
-                    StrSetsCollection[9].CVal = _setPoints.CFansSetPoints.DDecrFan;
-                    StrSetsCollection[10].CVal = _setPoints.CFansSetPoints.MinFanPercent;
+                    StrSetsCollection[0].CVal = _fbs.CFans.SFanNominalFlow;
+                    StrSetsCollection[1].CVal = _fbs.CFans.EFanNominalFlow;
+                    StrSetsCollection[2].CVal = _fbs.CFans.Speed0v;
+                    StrSetsCollection[3].CVal = _fbs.CFans.Speed10v;
+                    StrSetsCollection[4].CVal = _fbs.CFans.PressureFailureDelay;
+                    StrSetsCollection[5].CVal = _fbs.CFans.FanFailureDelay;
+                    StrSetsCollection[6].CPickVal = _fbs.CFans.DecrFanConfig;
+                    StrSetsCollection[7].CVal = _fbs.CFans.PDecrFan;
+                    StrSetsCollection[8].CVal = _fbs.CFans.IDecrFan;
+                    StrSetsCollection[9].CVal = _fbs.CFans.DDecrFan;
+                    StrSetsCollection[10].CVal = _fbs.CFans.MinFanPercent;
                     break;
                 case SActivePageState.WHSettingsPage:
-                    StrSetsCollection[0].CVal = _setPoints.WHSetPoints.PWork;
-                    StrSetsCollection[1].CVal = _setPoints.WHSetPoints.IWork;
-                    StrSetsCollection[2].CVal = _setPoints.WHSetPoints.DWork;
-                    StrSetsCollection[3].CVal = _setPoints.WHSetPoints.PRet;
-                    StrSetsCollection[4].CVal = _setPoints.WHSetPoints.IRet;
-                    StrSetsCollection[5].CVal = _setPoints.WHSetPoints.DRet;
-                    StrSetsCollection[6].CPickVal = _setPoints.WHSetPoints.TRetMax;
-                    StrSetsCollection[7].CVal = _setPoints.WHSetPoints.TRetMin;
-                    StrSetsCollection[8].CVal = _setPoints.WHSetPoints.TRetStb;
-                    StrSetsCollection[9].CVal = _setPoints.WHSetPoints.TRetF;
-                    StrSetsCollection[10].CVal = _setPoints.WHSetPoints.TRetStart;
-                    StrSetsCollection[11].CVal = _setPoints.WHSetPoints.SSMaxIntervalS;
-                    StrSetsCollection[12].CVal = _setPoints.WHSetPoints.MinDamperPerc;
-                    StrSetsCollection[13].CVal = _setPoints.WHSetPoints.SPWinterProcess;
-                    StrSetsCollection[14].CPickVal = _setPoints.WHSetPoints.IsSummerTestPump;
-
+                    StrSetsCollection[0].CVal = _fbs.CWHSetPoints.PWork;
+                    StrSetsCollection[1].CVal = _fbs.CWHSetPoints.IWork;
+                    StrSetsCollection[2].CVal = _fbs.CWHSetPoints.DWork;
+                    StrSetsCollection[3].CVal = _fbs.CWHSetPoints.PRet;
+                    StrSetsCollection[4].CVal = _fbs.CWHSetPoints.IRet;
+                    StrSetsCollection[5].CVal = _fbs.CWHSetPoints.DRet;
+                    StrSetsCollection[6].CVal = _fbs.CWHSetPoints.TRetMax;
+                    StrSetsCollection[7].CVal = _fbs.CWHSetPoints.TRetMin;
+                    StrSetsCollection[8].CVal = _fbs.CWHSetPoints.TRetStb;
+                    StrSetsCollection[9].CVal = _fbs.CWHSetPoints.TRetF;
+                    StrSetsCollection[10].CVal = _fbs.CWHSetPoints.TRetStart;
+                    StrSetsCollection[11].CVal = _fbs.CWHSetPoints.SSMaxIntervalS;
+                    StrSetsCollection[12].CVal = _fbs.CWHSetPoints.MinDamperPerc;
+                    StrSetsCollection[13].CVal = _fbs.CWHSetPoints.SPWinterProcess;
+                    StrSetsCollection[14].CPickVal = _fbs.CWHSetPoints.IsSummerTestPump;
                     break;
                 case SActivePageState.EHSettingsPage:
+                    StrSetsCollection[0].CVal = _fbs.CEHSetPoints.NomPowerVT;
+                    StrSetsCollection[1].CVal = _fbs.CEHSetPoints.PReg;
+                    StrSetsCollection[2].CVal = _fbs.CEHSetPoints.IReg;
+                    StrSetsCollection[3].CVal = _fbs.CEHSetPoints.DReg;
+                    StrSetsCollection[4].CVal = _fbs.CEHSetPoints.BlowDownTime;
                     break;
                 case SActivePageState.FreonSettingsPage:
+                    StrSetsCollection[0].CVal = _fbs.CFreonCoolerSP.PReg;
+                    StrSetsCollection[1].CVal = _fbs.CFreonCoolerSP.IReg;
+                    StrSetsCollection[2].CVal = _fbs.CFreonCoolerSP.DReg;
+                    StrSetsCollection[3].CVal = _fbs.CFreonCoolerSP.Stage1OffS;
+                    StrSetsCollection[4].CVal = _fbs.CFreonCoolerSP.Stage1OnS;
+                    StrSetsCollection[5].CVal = _fbs.CFreonCoolerSP.Hyst;
                     break;
                 case SActivePageState.RecupSettingsPage:
+                    StrSetsCollection[0].CVal = _fbs.CRecup.PReg;
+                    StrSetsCollection[1].CVal = _fbs.CRecup.IReg;
+                    StrSetsCollection[2].CVal = _fbs.CRecup.DReg;
+                    StrSetsCollection[3].CVal = _fbs.CRecup.EffSP;
+                    StrSetsCollection[4].CVal = _fbs.CRecup.EffFailValue;
+                    StrSetsCollection[5].CVal = _fbs.CRecup.EffFailDelay;
+                    StrSetsCollection[6].CVal = _fbs.CRecup.HZMax;
+                    StrSetsCollection[7].CVal = _fbs.CRecup.TempA;
+                    StrSetsCollection[8].CVal = _fbs.CRecup.TempB;
+                    StrSetsCollection[9].CVal = _fbs.CRecup.TempC;
+                    StrSetsCollection[10].CVal = _fbs.CRecup.TempD;
                     break;
                 case SActivePageState.HumSettingsPage:
+                    StrSetsCollection[0].CVal = _fbs.CHumiditySPS.PReg;
+                    StrSetsCollection[1].CVal = _fbs.CHumiditySPS.IReg;
+                    StrSetsCollection[2].CVal = _fbs.CHumiditySPS.DReg;
+                    StrSetsCollection[3].CVal = _fbs.CHumiditySPS.Stage1OffS;
+                    StrSetsCollection[4].CVal = _fbs.CHumiditySPS.Stage1OnS;
+                    StrSetsCollection[5].CVal = _fbs.CHumiditySPS.Hyst;
                     break;
                 case SActivePageState.CommonSettingsPage:
                     {
-                        StrSetsCollection[0].CVal = _setPoints.CCommonSetPoints.SPTempAlarm;
-                        StrSetsCollection[1].CPickVal = _setPoints.CEConfig.TregularCh_R;
-                        StrSetsCollection[2].CVal = _setPoints.CCommonSetPoints.SPTempMaxCh;
-                        StrSetsCollection[3].CVal = _setPoints.CCommonSetPoints.SPTempMinCh;
-                        StrSetsCollection[4].CVal = _setPoints.CCommonSetPoints.TControlDelayS;
-                        StrSetsCollection[5].CPickVal = _setPoints.CCommonSetPoints.SeasonMode;
-                        StrSetsCollection[6].CVal = _setPoints.CCommonSetPoints.SPSeason;
-                        StrSetsCollection[7].CVal = _setPoints.CCommonSetPoints.HystSeason;
-                        StrSetsCollection[8].CPickVal = _setPoints.CEConfig.AutoResetFire;
-                        StrSetsCollection[9].CPickVal = _setPoints.CEConfig.AutoRestart;
+                        StrSetsCollection[0].CVal = _fbs.CCommonSetPoints.SPTempAlarm;
+                        StrSetsCollection[1].CPickVal = _fbs.CEConfig.TregularCh_R;
+                        StrSetsCollection[2].CVal = _fbs.CCommonSetPoints.SPTempMaxCh;
+                        StrSetsCollection[3].CVal = _fbs.CCommonSetPoints.SPTempMinCh;
+                        StrSetsCollection[4].CVal = _fbs.CCommonSetPoints.TControlDelayS;
+                        StrSetsCollection[5].CPickVal = _fbs.CCommonSetPoints.SeasonMode;
+                        StrSetsCollection[6].CVal = _fbs.CCommonSetPoints.SPSeason;
+                        StrSetsCollection[7].CVal = _fbs.CCommonSetPoints.HystSeason;
+                        StrSetsCollection[8].CPickVal = _fbs.CEConfig.AutoResetFire;
+                        StrSetsCollection[9].CPickVal = _fbs.CEConfig.AutoRestart;
                     }
                     break;
                 case SActivePageState.SensorsSettingPage:
+                    StrSetsCollection[0].CPickVal = _fbs.CEConfig.TOutDoorConfig;
+                    StrSetsCollection[1].CPickVal = _fbs.CEConfig.TSupplyFConfig;
+                    StrSetsCollection[2].CPickVal = _fbs.CEConfig.TExhaustFConfig;
+                    StrSetsCollection[3].CPickVal = _fbs.CEConfig.TRoomConfig;
+                    StrSetsCollection[4].CPickVal = _fbs.CEConfig.TReturnWaterConfig;
+                    StrSetsCollection[5].CPickVal = _fbs.CEConfig.AirQualityConfig;
+                    StrSetsCollection[6].CPickVal = _fbs.CEConfig.HumSensorConfig;
+                    StrSetsCollection[7].CVal = _fbs.CSensors.OutdoorTemp.Correction;
+                    StrSetsCollection[8].CVal = _fbs.CSensors.SupTemp.Correction;
+                    StrSetsCollection[9].CVal = _fbs.CSensors.ExhaustTemp.Correction;
+                    StrSetsCollection[10].CVal = _fbs.CSensors.RoomTemp.Correction;
+                    StrSetsCollection[11].CVal = _fbs.CSensors.ReturnTemp.Correction;
+
                     break;
+                            
+
+
                 case SActivePageState.ConfigPage:
                     break;
                 default:

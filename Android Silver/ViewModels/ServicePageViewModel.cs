@@ -178,7 +178,8 @@ namespace Android_Silver.ViewModels
                 {
                    // CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
-                    CTcpClientService.SendRecieveTask("299,39");
+                    //CTcpClientService.SendRecieveTask("299,56");
+                    CTcpClientService.SendRecieveTask("299,79");
                     // TcpClientService.SendRecieveTask("137,4");
                 }
             }

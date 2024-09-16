@@ -431,7 +431,7 @@
             <Label Text="Параметры электрического нагревателя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
                 IsVisible = "{Binding CActivePagesEntities.IsEHSettingsPage}" />
 
-            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[4].StrSetsCollection}" Grid.Row="5" 
+            <ListView ItemsSource="{Binding CMenusEntities.MenusCollection[4].StrSetsCollection}" Grid.Row="5" 
              Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsEHSettingsPage}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -483,8 +483,7 @@
                                                           IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}"/>
             <Label Text="Параметры фреонового охладителя"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
                                                              IsVisible = "{Binding CActivePagesEntities.IsFreonSettingsPage}" />
-
-            <ListView ItemsSource="{Binding   CMenusEntities.MenusCollection[5].StrSetsCollection}" Grid.Row="5" 
+            <ListView ItemsSource="{Binding CMenusEntities.MenusCollection[5].StrSetsCollection}" Grid.Row="5" 
              Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsFreonSettingsPage}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -515,7 +514,7 @@
                                     <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                                                                                       IsVisible = "{Binding EntryIsVisible}" />
                                     <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
-                           SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
+                                       SelectedIndexChanged="Picker_SelectedIndexChanged"     ItemsSource="{Binding PickVals}" SelectedIndex="{Binding CPickVal}"/>
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>
