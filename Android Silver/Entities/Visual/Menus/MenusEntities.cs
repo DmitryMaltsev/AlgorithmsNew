@@ -6,9 +6,10 @@ namespace Android_Silver.Entities.Visual.Menus
 {
     public class MenusEntities : BindableBase
     {
+        //Основная таблица 
+        public List<MItem> StartMenuCollection { get; set; }
 
         private ObservableCollection<MItem> _menusCollection;
-
         public ObservableCollection<MItem> MenusCollection
         {
             get { return _menusCollection; }
@@ -19,33 +20,82 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
-        private PicturesSet _pictureSet { get; set; }
+        private ObservableCollection<StrSet> _interfaceStrCollecton;
 
+        public ObservableCollection<StrSet> InterfaceStrCollection
+        {
+            get { return _interfaceStrCollecton; }
+            set
+            {
+                _interfaceStrCollecton = value;
+                OnPropertyChanged($"{nameof(InterfaceStrCollection)}");
+            }
+        }
+
+        private string _title;
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
+
+
+        public void GenerateBaseTable()
+        {
+            MenusCollection = new ObservableCollection<MItem>();
+            foreach (var stroke in StartMenuCollection)
+            {
+                if (stroke.MenuIsVisible)
+                {
+                    MenusCollection.Add(stroke);
+                }
+            }
+        }
+
+        public void GenerateInterfaceTable(int index)
+        {
+
+            InterfaceStrCollection = new ObservableCollection<StrSet>();
+            foreach (var strSet in StartMenuCollection[index].StrSetsCollection)
+            {
+                if (strSet.IsVisible)
+                {
+                    InterfaceStrCollection.Add(strSet);
+                }
+            }
+        }
+
+        private PicturesSet _pictureSet { get; set; }
 
         public MenusEntities()
         {
+            InterfaceStrCollection = new ObservableCollection<StrSet>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
-
-            MenusCollection = new ObservableCollection<MItem>();
+            StartMenuCollection = new List<MItem>();
             #region Пункты меню 
-            MItem mItem = new MItem("Общие", isVisible: true, _pictureSet.BaseSettings1ButCollection[0], SActivePageState.CommonSettingsPage, 1, startAddress: 150);
-            MenusCollection.Add(mItem);
-            mItem = new MItem("Жалюзи", isVisible: true, _pictureSet.BaseSettings1ButCollection[1], SActivePageState.DamperSettingsPage, 2, startAddress: 150);
-            MenusCollection.Add(mItem);
-            mItem = new MItem("Вентилятор", isVisible: true, _pictureSet.BaseSettings1ButCollection[2], SActivePageState.FanSettingsPage, 3, startAddress: 150);
-            MenusCollection.Add(mItem);
-            mItem = new MItem("Нагреватель водяной", isVisible: true, _pictureSet.BaseSettings1ButCollection[3], SActivePageState.WHSettingsPage, 4, startAddress: 150);
-            MenusCollection.Add(mItem);
-            mItem = new MItem("Нагреватель электрический", isVisible: true, _pictureSet.BaseSettings1ButCollection[4], SActivePageState.EHSettingsPage, 5, startAddress: 150);
-            MenusCollection.Add(mItem);
-            mItem = new MItem("Охладитель фреоновый", isVisible: true, _pictureSet.BaseSettings1ButCollection[6], SActivePageState.FreonSettingsPage, 7, startAddress: 150);
-            MenusCollection.Add(mItem);
-            mItem = new MItem("Рекуператор", isVisible: true, _pictureSet.BaseSettings1ButCollection[5], SActivePageState.RecupSettingsPage, 6, startAddress: 150);
-            MenusCollection.Add(mItem);
-            mItem = new MItem("Увлажнитель", isVisible: true, _pictureSet.BaseSettings1ButCollection[7], SActivePageState.HumSettingsPage, 8, startAddress: 150);
-            MenusCollection.Add(mItem);
-            mItem = new MItem("Конфигурация аналоговых датчиков", isVisible: true, _pictureSet.BaseSettings1ButCollection[8], SActivePageState.SensorsSettingPage, 9, startAddress: 150);
-            MenusCollection.Add(mItem);
+            MItem mItem = new MItem("Общие", isVisible: true, _pictureSet.BaseSettings1ButCollection[0], SActivePageState.CommonSettingsPage, id: 1, startAddress: 699);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Жалюзи", isVisible: true, _pictureSet.BaseSettings1ButCollection[1], SActivePageState.DamperSettingsPage, id: 2, startAddress: 709);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Вентилятор", isVisible: true, _pictureSet.BaseSettings1ButCollection[2], SActivePageState.FanSettingsPage, id: 3, startAddress: 711);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Нагреватель водяной", isVisible: true, _pictureSet.BaseSettings1ButCollection[3], SActivePageState.WHSettingsPage, id: 4, startAddress: 722);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Нагреватель электрический", isVisible: true, _pictureSet.BaseSettings1ButCollection[4], SActivePageState.EHSettingsPage, id: 5, startAddress: 438);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Охладитель фреоновый", isVisible: true, _pictureSet.BaseSettings1ButCollection[5], SActivePageState.FreonSettingsPage, id: 6, startAddress: 743);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Рекуператор", isVisible: true, _pictureSet.BaseSettings1ButCollection[6], SActivePageState.RecupSettingsPage, id: 7, startAddress: 755);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Увлажнитель", isVisible: true, _pictureSet.BaseSettings1ButCollection[7], SActivePageState.HumSettingsPage, id: 8, startAddress: 749);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Конфигурация аналоговых датчиков", isVisible: true, _pictureSet.BaseSettings1ButCollection[8], SActivePageState.SensorsSettingPage, id: 9, startAddress: 766);
+            StartMenuCollection.Add(mItem);
             #endregion
 
             #region Общие
@@ -61,27 +111,27 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 99000, "Задержка аварии по темп, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            pickVals = new List<string>() { "Авто", "Зима","Лето" };
+            pickVals = new List<string>() { "Авто", "Зима", "Лето" };
             sSet = new StrSet(0, 3, "Тип регулиярования времени года", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(5, 30, "Темп. перехода зима/лето, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 20, "Гистерезис темп. перехода,°С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            pickVals = new List<string>() { "Откл","Вкл" };
+            pickVals = new List<string>() { "Откл", "Вкл" };
             sSet = new StrSet(0, 5, "Перезапуск по питанию", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 5, "Автосброс пожара", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strSets.Add(sSet);
-            MenusCollection[0].StrSetsCollection = strSets;
+            StartMenuCollection[0].StrSetsCollection = strSets;
             //Жалюзи
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "", "" };
             sSet = new StrSet(0, 10000, "Время открытия, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-          
-            MenusCollection[1].StrSetsCollection = strSets;
+            StartMenuCollection[1].StrSetsCollection = strSets;
             #endregion
+
             #region Вентилятор
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
@@ -109,7 +159,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Минимальный % вент", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            MenusCollection[2].StrSetsCollection = strSets;
+            StartMenuCollection[2].StrSetsCollection = strSets;
             #endregion
             #region WHHeater
             strSets = new ObservableCollection<StrSet>();
@@ -136,6 +186,9 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Пусковая темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
+            // не отображаем, потом потом удалить
+            sSet = new StrSet(0, 100, "Пусковая темп. обратной воды2, °C", isVisible: false, pickerIsVisible: false, entryIsVisible: false, pickVals);
+            strSets.Add(sSet);
             sSet = new StrSet(0, 10000, "Время мягкого пуска, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Минимальный % КЗР", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
@@ -144,8 +197,8 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 1, "Проба насоса летом", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strSets.Add(sSet);
-            MenusCollection[3].StrSetsCollection = strSets;
-            #endregion
+            StartMenuCollection[3].StrSetsCollection = strSets;
+            #endregion 
             #region EHHeater
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
@@ -159,7 +212,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 10_000, "Время продувки, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            MenusCollection[4].StrSetsCollection = strSets;
+            StartMenuCollection[4].StrSetsCollection = strSets;
             #endregion
             #region FreonCooler
             strSets = new ObservableCollection<StrSet>();
@@ -176,7 +229,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "Гистерезис вкл/выкл фреонового охладителя", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            MenusCollection[5].StrSetsCollection = strSets;
+            StartMenuCollection[5].StrSetsCollection = strSets;
             #endregion
             #region Recup
             strSets = new ObservableCollection<StrSet>();
@@ -203,9 +256,9 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Температура D, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            MenusCollection[6].StrSetsCollection = strSets;
+            StartMenuCollection[6].StrSetsCollection = strSets;
             #endregion
-            #region Hum
+            #region Humidity 
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
             sSet = new StrSet(0, 1000, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
@@ -220,7 +273,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "Гистерезис вкл/выкл увлажнителя", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            MenusCollection[7].StrSetsCollection = strSets;
+            StartMenuCollection[7].StrSetsCollection = strSets;
             #endregion
             #region Sensors
             strSets = new ObservableCollection<StrSet>();
@@ -250,7 +303,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(-100, 100, "Коррекция датчика температуры обратной воды", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            MenusCollection[8].StrSetsCollection = strSets;
+            StartMenuCollection[8].StrSetsCollection = strSets;
             #endregion
         }
 

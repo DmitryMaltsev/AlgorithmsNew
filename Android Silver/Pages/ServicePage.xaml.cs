@@ -79,5 +79,6 @@ public partial class ServicePage : ContentPage
     {
         Picker picker = sender as Picker;
         picker.Unfocus();
+     
     }
 }

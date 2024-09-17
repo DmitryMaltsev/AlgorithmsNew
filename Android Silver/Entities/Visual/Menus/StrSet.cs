@@ -36,14 +36,30 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
+
+        //private string _pickName;
+        //public string PickName
+        //{
+        //    get { return _pickName; }
+        //    set
+        //    {
+        //        _pickName = value;
+        //        OnPropertyChanged(nameof(_pickName));;
+        //    }
+        //}
+
         private int _cPickVal;
         public int CPickVal
         {
             get { return _cPickVal; }
             set
             {
-                _cPickVal = value;
-                OnPropertyChanged(nameof(CPickVal));
+                if (value>-1)
+                {
+                    _cPickVal = value;
+                    OnPropertyChanged(nameof(CPickVal));
+                  //  PickName = PickVals[CPickVal];
+                }
             }
         }
 

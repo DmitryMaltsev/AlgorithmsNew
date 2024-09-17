@@ -1,12 +1,6 @@
 ﻿using Android_Silver.Entities.Visual;
 using Android_Silver.ViewModels;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.Modes
 {
@@ -19,7 +13,8 @@ namespace Android_Silver.Entities.Modes
         public ObservableCollection<TimeModeValues> CTimeModeValues
         {
             get { return _cTimeModeValues; }
-            set { 
+            set
+            {
                 _cTimeModeValues = value;
                 OnPropertyChanged(nameof(CTimeModeValues));
             }
@@ -69,7 +64,7 @@ namespace Android_Silver.Entities.Modes
         public ModesEntities()
         {
             _cPicturesSet = DIContainer.Resolve<PicturesSet>();
-            _cPicturesSet.Init(PicturesSetStates.Base);
+
             Mode1ValuesList = new List<Mode1Values>();
             for (int i = 0; i < 9; i++)
             {
@@ -79,13 +74,13 @@ namespace Android_Silver.Entities.Modes
             CMode1 = Mode1ValuesList[0];
             Mode2ValuesList = new List<Mode2Values>();
             //Стандартный режим, работает всегда
-            Mode2ValuesList.Add(new Mode2Values(0, 1, _cPicturesSet.ActiveMode2Pics[0], Mode1ValuesList[0],0));
+            Mode2ValuesList.Add(new Mode2Values(0, 1, _cPicturesSet.ActiveMode2Pics[0], Mode1ValuesList[0], 0));
             //Режим кухни
-            Mode2ValuesList.Add(new Mode2Values(1, 1, _cPicturesSet.ActiveMode2Pics[1], Mode1ValuesList[0],0));
+            Mode2ValuesList.Add(new Mode2Values(1, 1, _cPicturesSet.ActiveMode2Pics[1], Mode1ValuesList[0], 0));
             //Режим отпуска
             Mode2ValuesList.Add(new Mode2Values(2, 4, _cPicturesSet.ActiveMode2Pics[2], Mode1ValuesList[0], 538));
             //Режим  календаря
-            Mode2ValuesList.Add(new Mode2Values(3, 28, _cPicturesSet.ActiveMode2Pics[3], Mode1ValuesList[0],564));
+            Mode2ValuesList.Add(new Mode2Values(3, 28, _cPicturesSet.ActiveMode2Pics[3], Mode1ValuesList[0], 564));
             //Режим по контакту
             Mode2ValuesList.Add(new Mode2Values(4, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
             //Специальный режим

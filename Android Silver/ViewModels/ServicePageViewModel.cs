@@ -53,11 +53,11 @@ namespace Android_Silver.ViewModels
         public ICommand HumSettingsCommand { get; private set; }
         public ICommand SensorsSettingsCommand { get; private set; }
         public ICommand HomeCommand { get; private set; }
-
         public ICommand FanReturnCommand { get; private set; }
         public ICommand FansAcceptCommand { get; private set; }
-
         public ICommand CommonSettingsCommand { get; private set; }
+        public ICommand ToSettingsCommand { get; private set; }
+        public ICommand SetSettingsCommand { get; private set; }
         #endregion
 
         private List<string> _sensorPicker = new();
@@ -100,6 +100,7 @@ namespace Android_Silver.ViewModels
         public TcpClientService CTcpClientService { get; set; }
         public PicturesSet CPictureSet { get; set; }
         public ServiceActivePagesEntities CActivePagesEntities { get; set; }
+
         public EthernetEntities EthernetEntities { get; set; }
 
         public MenusEntities CMenusEntities { get; set; }
@@ -108,8 +109,9 @@ namespace Android_Silver.ViewModels
 
         public ServicePageViewModel()
         {
-           // SensorPicker=new List<string>();
-           SensorPicker.Add("Нет");
+            
+            // SensorPicker=new List<string>();
+            SensorPicker.Add("Нет");
             SensorPicker.Add("NTC10K");
             SensorPicker.Add("PT1000");
             CString = SensorPicker[0];
@@ -122,23 +124,23 @@ namespace Android_Silver.ViewModels
             EntryPassedCommand = new Command(ExecuteEntryPass);
             StartPageConnectCommand = new Command(ExecuteConnect);
             StartPageDisconnectCommand = new Command(ExecuteDisconnect);
-            DamperSettingsCommand = new Command(ExecuteDamperSettings);
-            FanSettingsCommand = new Command(ExecuteFanSettings);
-            WHSettingsCommand = new Command(ExecuteWHSettings);
             EHSettingsCommand = new Command(ExecuteEHSettings);
             FreonCoolerSettingsCommand = new Command(ExecuteFreonCoolerSettings);
             RecupSettingsCommand = new Command(ExecuteRecupSettings);
             HumSettingsCommand = new Command(ExecuteHumSettings);
             SensorsSettingsCommand = new Command(ExecuteSensorsSettings);
-            FansAcceptCommand = new Command(ExecuteFansAccept);
             FanReturnCommand = new Command(ExecuteFanReturn);
             HomeCommand = new Command(ExecuteHome);
-            CommonSettingsCommand = new Command(ExecuteCommonSettings);
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
             DecreseMenuItemsCommand = new Command(ExecuteDecreaseMenus);
             IncreaseMenuItemsCommand = new Command(ExecuteIncrease);
+            ToSettingsCommand = new Command(ExecuteToSettingsWindow);
+            SetSettingsCommand = new Command(ExecuteSetSettings);
             StartTimer();
+            
         }
+
+   
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
         private void ExecuteIncrease(object obj)
@@ -176,7 +178,7 @@ namespace Android_Silver.ViewModels
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                   // CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
+                    // CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     //CTcpClientService.SendRecieveTask("299,56");
                     CTcpClientService.SendRecieveTask("299,79");
@@ -194,7 +196,7 @@ namespace Android_Silver.ViewModels
         private void ExecuteDisconnect(object obj)
         {
             CTcpClientService.Disconnect();
-         //   CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Default);
+            //   CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Default);
         }
 
 
@@ -229,22 +231,7 @@ namespace Android_Silver.ViewModels
 
         #endregion
         #region Base settings
-        private void ExecuteCommonSettings(object obj)
-        {
-            CActivePagesEntities.SetActivePageState(SActivePageState.CommonSettingsPage);
-        }
-        private void ExecuteDamperSettings(object obj)
-        {
-            CActivePagesEntities.SetActivePageState(SActivePageState.DamperSettingsPage);
-        }
-        private void ExecuteFanSettings(object obj)
-        {
-            CActivePagesEntities.SetActivePageState(SActivePageState.FanSettingsPage);
-        }
-        private void ExecuteWHSettings(object obj)
-        {
-            CActivePagesEntities.SetActivePageState(SActivePageState.WHSettingsPage);
-        }
+
 
         private void ExecuteEHSettings(object obj)
         {
@@ -271,9 +258,66 @@ namespace Android_Silver.ViewModels
         {
             CActivePagesEntities.SetActivePageState(SActivePageState.SensorsSettingPage);
         }
+
+
+        private void ExecuteToSettingsWindow(object obj)
+        {
+            ushort id = (ushort)obj;
+            SActivePageState page = CMenusEntities.StartMenuCollection[id - 1].CactivePageState;
+            CActivePagesEntities.SetActivePageState(page);
+           
+        }
+
+        private void ExecuteSetSettings(object obj)
+        {
+            switch (CActivePagesEntities.LastActivePageState)
+            {
+                case SActivePageState.CommonSettingsPage:
+                    CMenusEntities.StartMenuCollection[0].ExecuteSetSettings(this);
+                    break;
+                case SActivePageState.DamperSettingsPage:
+                    CMenusEntities.StartMenuCollection[1].ExecuteSetSettings(this);
+                    break;
+                case SActivePageState.FanSettingsPage:
+                    CMenusEntities.StartMenuCollection[2].ExecuteSetSettings(this);
+                    break;
+                case SActivePageState.WHSettingsPage:
+                    CMenusEntities.StartMenuCollection[3].ExecuteSetSettings(this);
+                    break;
+                case SActivePageState.EHSettingsPage:
+                    CMenusEntities.StartMenuCollection[4].ExecuteSetSettings(this);
+                    break;
+                case SActivePageState.FreonSettingsPage:
+                    CMenusEntities.StartMenuCollection[5].ExecuteSetSettings(this);
+                    break;
+                case SActivePageState.RecupSettingsPage:
+                    CMenusEntities.StartMenuCollection[6].ExecuteSetSettings(this);
+                    break;
+                case SActivePageState.HumSettingsPage:
+                    CMenusEntities.StartMenuCollection[7].ExecuteSetSettings(this);
+                    break;
+                case SActivePageState.SensorsSettingPage:
+                    CMenusEntities.StartMenuCollection[8].ExecuteSetSettings(this);
+                    break;
+                case SActivePageState.ConfigPage:
+                    CMenusEntities.StartMenuCollection[9].ExecuteSetSettings(this);
+                    break;
+
+            }
+            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+        }
+
+
+
+
+
+
+
+
         #endregion
 
-        #region Fan
+
+
         private void ExecuteHome(object obj)
         {
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -284,13 +328,7 @@ namespace Android_Silver.ViewModels
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
         }
 
-        private void ExecuteFansAccept(object obj)
-        {
-            int[] vals = { CFBs.CFans.SupNominalFlow, CFBs.CFans.ExhaustNominalFlow };
-            CTcpClientService.SetCommandToServer(600, vals);
-            CActivePagesEntities.SetActivePageState(SActivePageState.CommonSettingsPage);
-        }
-        #endregion
+
 
         Timer timer;
 

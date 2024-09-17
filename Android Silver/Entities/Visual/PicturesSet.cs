@@ -664,6 +664,11 @@ namespace Android_Silver.Entities.Visual
         }
         #endregion
 
+        public PicturesSet()
+        {
+            Init(PicturesSetStates.Base);
+        }
+
         public void Init(PicturesSetStates picturesSetStates)
         {
             switch (picturesSetStates)

@@ -1,13 +1,5 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
-
-/* Необъединенное слияние из проекта "Android Silver (net8.0-android)"
-До:
-using Android_Silver.Entities.Modes;
-После:
-using Android_Silver.Entities.FBEntities.SetPoints;
-using Android_Silver.Entities.Modes;
-*/
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 
@@ -2313,7 +2305,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _fbs.CWHSetPoints.TRetStart = val;
+                               // _fbs.CWHSetPoints.TRetStart = val;
                             }
                         }
                     }
