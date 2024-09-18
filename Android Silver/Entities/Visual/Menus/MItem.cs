@@ -3,7 +3,6 @@ using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace Android_Silver.Entities.Visual.Menus
 {
@@ -65,8 +64,7 @@ namespace Android_Silver.Entities.Visual.Menus
         #endregion
 
 
-        private int _address = 0;
-        private TcpClientService _tcpClientService;
+        public int Address { get; private set; } = 0;
 
         public MItem(string name, bool isVisible, PicByStates imgSource, SActivePageState sactivePageState, ushort id, int startAddress)
         {
@@ -77,8 +75,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ImgSource = imgSource;
             CactivePageState = sactivePageState;
             ID = id;
-            _address = startAddress;
-            _tcpClientService = DIContainer.Resolve<TcpClientService>();
+            Address = startAddress;
             // ToSettingsCommand = new Command(ExecuteToSettingsWindow);
             //  SetSettingsCommand = new Command(ExecuteSetSettings);
         }
@@ -87,25 +84,6 @@ namespace Android_Silver.Entities.Visual.Menus
 
 
 
-        public void ExecuteSetSettings(object obj)
-        {
-            if (StrSetsCollection.Count > 0)
-            {
-                int[] values = new int[StrSetsCollection.Count];
-                for (int i = 0; i < StrSetsCollection.Count; i++)
-                {
-                    if (StrSetsCollection[i].EntryIsVisible)
-                    {
-                        values[i] = StrSetsCollection[i].CVal;
-                    }
-                    else
-                      if (StrSetsCollection[i].PickerIsVisible)
-                    {
-                        values[i] = StrSetsCollection[i].CPickVal;
-                    }
-                }
-                _tcpClientService.SetCommandToServer(_address, values);
-            } 
-        }
+
     }
 }

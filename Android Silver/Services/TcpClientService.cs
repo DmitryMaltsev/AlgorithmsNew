@@ -31,6 +31,8 @@ namespace Android_Silver.Services
         public Action<int> SetMode1Action { get; set; }
         private ActivePagesEntities _activePageEntities { get; set; }
 
+        private ServiceActivePagesEntities _servActivePageEntities { get; set; }
+
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -38,6 +40,7 @@ namespace Android_Silver.Services
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
             _fbs = DIContainer.Resolve<FBs>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
+            _servActivePageEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
             _fbs.OtherSettings.MFloorAction += MFloorCallback;
             _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
 
@@ -95,33 +98,34 @@ namespace Android_Silver.Services
              {
                  while (_ethernetEntities.IsConnected)
                  {
-                     string messToClient = val;
-                     if (!String.IsNullOrEmpty(MessageToServer))
-                     {
-                         messToClient = MessageToServer;
-                     }
-                     else
-                     //????????????
-                     if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
-                                                                    _modesEntities.CTimeModeValues[0].Mode2Num == 2)
-                     {
-                         messToClient = "167,16\r\n";
-                     }
-                     else
-                         if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
-                                                                    _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 0)
-                     {
-                         messToClient = "183,56\r\n";
-                         _activePageEntities.QueryStep = 1;
-                     }
-                     else
-                         if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
-                                                                    _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 1)
-                     {
-                         messToClient = "239,56\r\n";
-                         _activePageEntities.QueryStep = 0;
-                     }
-
+                     //string messToClient = val;
+                     //if (!String.IsNullOrEmpty(MessageToServer))
+                     //{
+                     //    messToClient = MessageToServer;
+                     //}
+                     //else
+                     ////????????????
+                     //if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
+                     //                                               _modesEntities.CTimeModeValues[0].Mode2Num == 2)
+                     //{
+                     //    messToClient = "167,16\r\n";
+                     //}
+                     //else
+                     //    if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
+                     //                                               _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 0)
+                     //{
+                     //    messToClient = "183,56\r\n";
+                     //    _activePageEntities.QueryStep = 1;
+                     //}
+                     //else
+                     //    if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
+                     //                                               _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 1)
+                     //{
+                     //    messToClient = "239,56\r\n";
+                     //    _activePageEntities.QueryStep = 0;
+                     //}
+                     GetMessagesState();
+                     string messToClient = GetMessageToServer();
                      if (!IsSending)
                      {
                          SendCommand(messToClient);
@@ -150,6 +154,82 @@ namespace Android_Silver.Services
                      Task.Delay(50);
                  }
              });
+        }
+
+        private void GetMessagesState() 
+        {
+
+            if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
+                                                           _modesEntities.CTimeModeValues[0].Mode2Num == 2)
+            {
+                _ethernetEntities.CMessageState = MessageStates.VacMessage;
+            }
+            else
+                if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
+                                                           _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 0)
+            {
+                _ethernetEntities.CMessageState = MessageStates.ShedMessage1;
+                _activePageEntities.QueryStep = 1;
+            }
+            else
+                if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
+                                                           _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 1)
+            {
+                _ethernetEntities.CMessageState = MessageStates.ShedMessage1;
+                _activePageEntities.QueryStep = 0;
+            }
+            else
+            if(_ethernetEntities.PagesTab==0)
+            {
+                _ethernetEntities.CMessageState = MessageStates.UserMessage;
+            }
+            else
+            if (_ethernetEntities.PagesTab == 1)
+            {
+                _ethernetEntities.CMessageState = MessageStates.ServiceMessage;
+            }
+        }
+
+
+        private string GetMessageToServer()
+        {
+            string messToClient = MessageToServer;
+
+            if (String.IsNullOrEmpty(messToClient))
+            {
+                switch (_ethernetEntities.CMessageState)
+                {
+                    case MessageStates.UserMessage:
+                        {
+                            messToClient = "103,50\r\n";
+                        }
+                        break;
+                    case MessageStates.VacMessage:
+                        {
+                            messToClient = "167,16\r\n";
+                        }
+                        break;
+                    case MessageStates.ShedMessage1:
+                        {
+                            messToClient = "183,56\r\n";
+                        }
+                        break;
+                    case MessageStates.ShedMessage2:
+                        {
+                            messToClient = "239,56\r\n";
+                        }
+                        break;
+                    case MessageStates.ServiceMessage:
+                        {
+                            messToClient = "299,79\r\n";
+                        }
+                        break;
+                }
+            }
+
+
+
+            return messToClient;
         }
 
         private int _trySendcounter = 0;
@@ -2305,7 +2385,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                               // _fbs.CWHSetPoints.TRetStart = val;
+                                // _fbs.CWHSetPoints.TRetStart = val;
                             }
                         }
                     }
@@ -2781,13 +2861,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                    //Датчики
+                //Датчики
                 case 373:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
 
-                            if (val>=-100 && val <= 100)
+                            if (val >= -100 && val <= 100)
                             {
                                 _fbs.CSensors.OutdoorTemp.Correction = val;
                             }
@@ -2839,6 +2919,10 @@ namespace Android_Silver.Services
                             {
                                 _fbs.CSensors.ReturnTemp.Correction = val;
                             }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                         }
                     }
                     break;

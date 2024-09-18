@@ -314,12 +314,15 @@ namespace Android_Silver.Entities.Visual
                         }
                         else
                         {
-                            for (int i = 0; i < _modesEntities.Mode2ValuesList[3].TimeModeValues.Count; i++)
+                            if (pageState == 1)
                             {
-                                _modesEntities.Mode2ValuesList[3].TimeModeValues[i].StrokeImg.Current =
-                               _modesEntities.Mode2ValuesList[3].TimeModeValues[1].StrokeImg.Default;
+                                for (int i = 0; i < _modesEntities.Mode2ValuesList[3].TimeModeValues.Count; i++)
+                                {
+                                    _modesEntities.Mode2ValuesList[3].TimeModeValues[i].StrokeImg.Current =
+                                   _modesEntities.Mode2ValuesList[3].TimeModeValues[1].StrokeImg.Default;
+                                }
+                                _modesEntities.CTimeModeValues = _modesEntities.Mode2ValuesList[3].TimeModeValues;
                             }
-                            _modesEntities.CTimeModeValues = _modesEntities.Mode2ValuesList[3].TimeModeValues;
                         }
                     }
                     break;

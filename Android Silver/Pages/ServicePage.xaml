@@ -158,6 +158,8 @@
             <!--#endregion-->
             
             <!--#region Base settings page -->
+            <Label Text="Окно настроек"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
+                                          IsVisible = "{Binding CActivePagesEntities.IsBaseSettingsPage}"/>
             <ListView ItemsSource="{Binding  CMenusEntities.MenusCollection}"  Grid.Row="7"
                       Style="{StaticResource TableViews}" IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}">
                 <ListView.ItemTemplate>
@@ -263,6 +265,16 @@
             <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding  SetSettingsCommand}"  
             Grid.Row="7" Grid.Column="5" Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
                                         IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}" />
+            <!--#endregion-->
+            <!--#region LOADING PAGE -->
+            <Button ImageSource="{Binding  CPictureSet.HomeButton.Current}" Style="{StaticResource HeaderBut}"
+                 Command="{Binding HomeCommand}" Pressed="HomeButton_Pressed" Released="HomeButton_Released" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"/>
+            <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding LoadingReturnCommand}" 
+             Grid.Row="1" Grid.Column="0" Style="{StaticResource MiniButtons}" 
+                     Pressed="BackButton_Pressed"  Released="BackButton_Released" IsVisible = "{Binding   CActivePagesEntities.IsLoadingPage}"/>
+            <Image Source="{Binding  CPictureSet.LoadingPic}" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}" MaximumWidthRequest="400"
+                                                 Grid.Row="6"  Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="16"/>
+            <Label Text="Загрузка" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="18" FontSize="30" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"/>
             <!--#endregion-->
         </Grid>
     </ScrollView>

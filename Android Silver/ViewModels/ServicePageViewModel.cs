@@ -3,6 +3,8 @@ using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
+
+using System.Net;
 using System.Windows.Input;
 
 namespace Android_Silver.ViewModels
@@ -54,16 +56,6 @@ namespace Android_Silver.ViewModels
         public ICommand SetSettingsCommand { get; private set; }
         #endregion
 
-        private List<string> _sensorPicker = new();
-        public List<string> SensorPicker
-        {
-            get { return _sensorPicker; }
-            set
-            {
-                _sensorPicker = value;
-                OnPropertyChanged(nameof(SensorPicker));
-            }
-        }
 
         private string _cString;
 
@@ -104,11 +96,6 @@ namespace Android_Silver.ViewModels
         public ServicePageViewModel()
         {
 
-            // SensorPicker=new List<string>();
-            SensorPicker.Add("Нет");
-            SensorPicker.Add("NTC10K");
-            SensorPicker.Add("PT1000");
-            CString = SensorPicker[0];
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CActivePagesEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -172,7 +159,7 @@ namespace Android_Silver.ViewModels
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                    // CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
+                     CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     //CTcpClientService.SendRecieveTask("299,56");
                     CTcpClientService.SendRecieveTask("299,79");
@@ -267,41 +254,59 @@ namespace Android_Silver.ViewModels
             switch (CActivePagesEntities.LastActivePageState)
             {
                 case SActivePageState.CommonSettingsPage:
-                    CMenusEntities.StartMenuCollection[0].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[0]);
                     break;
                 case SActivePageState.DamperSettingsPage:
-                    CMenusEntities.StartMenuCollection[1].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[1]);
                     break;
                 case SActivePageState.FanSettingsPage:
-                    CMenusEntities.StartMenuCollection[2].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[2]);
                     break;
                 case SActivePageState.WHSettingsPage:
-                    CMenusEntities.StartMenuCollection[3].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[3]);
                     break;
                 case SActivePageState.EHSettingsPage:
-                    CMenusEntities.StartMenuCollection[4].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[4]);
                     break;
                 case SActivePageState.FreonSettingsPage:
-                    CMenusEntities.StartMenuCollection[5].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[5]);
                     break;
                 case SActivePageState.RecupSettingsPage:
-                    CMenusEntities.StartMenuCollection[6].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[6]);
                     break;
                 case SActivePageState.HumSettingsPage:
-                    CMenusEntities.StartMenuCollection[7].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[7]);
                     break;
                 case SActivePageState.SensorsSettingPage:
-                    CMenusEntities.StartMenuCollection[8].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[8]);
                     break;
                 case SActivePageState.ConfigPage:
-                    CMenusEntities.StartMenuCollection[9].ExecuteSetSettings(this);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[9]);
                     break;
-
             }
-            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+            CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }
 
-
+        public void SendMItemSettings(MItem mItem)
+        {
+            if (mItem.StrSetsCollection.Count > 0)
+            {
+                int[] values = new int[mItem.StrSetsCollection.Count];
+                for (int i = 0; i < mItem.StrSetsCollection.Count; i++)
+                {
+                    if (mItem.StrSetsCollection[i].EntryIsVisible)
+                    {
+                        values[i] = mItem.StrSetsCollection[i].CVal;
+                    }
+                    else
+                      if (mItem.StrSetsCollection[i].PickerIsVisible)
+                    {
+                        values[i] = mItem.StrSetsCollection[i].CPickVal;
+                    }
+                }
+                CTcpClientService.SetCommandToServer(mItem.Address, values);
+            }
+        }
 
 
 

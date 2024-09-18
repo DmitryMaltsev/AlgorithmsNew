@@ -1,4 +1,5 @@
-﻿using Android_Silver.Pages;
+﻿using Android_Silver.Entities;
+using Android_Silver.Pages;
 using Android_Silver.Pages.ModesSettings;
 using Android_Silver.ViewModels;
 
@@ -8,6 +9,7 @@ namespace Android_Silver
 {
     public partial class AppShell : Shell
     {
+        EthernetEntities _ethernetEntities;
         public AppShell()
         {
             InitializeComponent();
@@ -22,7 +24,7 @@ namespace Android_Silver
             #endregion
             Routing.RegisterRoute("settingsPage", typeof(SettingsPage));
             Routing.RegisterRoute("mainPage", typeof(MainPage));
-          
+            _ethernetEntities=DIContainer.Resolve<EthernetEntities>();
         }
 
   
@@ -32,6 +34,7 @@ namespace Android_Silver
             if (mpViewModel!=null)
             {
                 mpViewModel.SetActivePageIfNeed();
+                _ethernetEntities.PagesTab = 0;
             }
         }
 
@@ -41,6 +44,7 @@ namespace Android_Silver
             if (spViewModel != null)
             {
                 spViewModel.SetActivePageIfNeed();
+                _ethernetEntities.PagesTab = 1;
             }
         }
     }

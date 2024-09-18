@@ -7,8 +7,21 @@ using System.Text.RegularExpressions;
 
 namespace Android_Silver.Entities
 {
+
+    public enum MessageStates
+    { 
+        UserMessage,
+        VacMessage,
+        ShedMessage1,
+        ShedMessage2,
+        ServiceMessage
+    }
+
+
     public class EthernetEntities : BindableBase
     {
+        public int  PagesTab;
+        public MessageStates CMessageState;
 
         public TcpClient Client { get; set; }
 
