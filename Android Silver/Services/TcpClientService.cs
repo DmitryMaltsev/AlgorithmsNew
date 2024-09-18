@@ -3385,7 +3385,1011 @@ namespace Android_Silver.Services
                         //}
                     }
                     break;
+                //Общие уставки
+                case 699:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
 
+                            if (val <= 100)
+                            {
+                                _fbs.CCommonSetPoints.SPTempAlarm = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 700:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CEConfig.TregularCh_R = val;
+                            }
+                        }
+                    }
+                    break;
+                case 701:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CCommonSetPoints.SPTempMaxCh = val;
+                            }
+
+                        }
+                    }
+                    break;
+                case 702:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CCommonSetPoints.SPTempMinCh = val;
+                            }
+
+                        }
+                    }
+                    break;
+                //Задержка авари по темп(пока 0)
+                case 703:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 60000)
+                            {
+                                _fbs.CCommonSetPoints.TControlDelayS = val;
+                            }
+                        }
+                    }
+                    break;
+                //Режим времени года
+                case 704:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 2)
+                            {
+                                _fbs.CCommonSetPoints.SeasonMode = val;
+                            }
+                        }
+                    }
+                    break;
+                //Уставка режима года
+                case 705:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CCommonSetPoints.SPSeason = val;
+                            }
+                        }
+                    }
+                    break;
+                //Гистерезис режима года
+                case 706:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CCommonSetPoints.HystSeason = val;
+                            }
+                        }
+                    }
+                    break;
+                //Автосброс пожара
+                case 707:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CEConfig.AutoResetFire = val;
+                            }
+
+                        }
+                    }
+                    break;
+                //Авторестарт
+                case 708:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CEConfig.AutoRestart = val;
+                            }
+                        }
+                    }
+                    break;
+                //Заслонка
+                case 709:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CDamperSetPoints.DamperOpenTime = val;
+                            }
+
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 710:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CDamperSetPoints.DamperHeatingTime = val;
+                            }
+
+                        }
+                    }
+                    break;
+                //Настройки вентилятора
+                case 711:
+                    {
+                        if (int.TryParse(resp.ValueString, out int val))
+                        {
+
+                            if (val <= 100000)
+                            {
+                                _fbs.CFans.SFanNominalFlow = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 712:
+                    {
+                        if (int.TryParse(resp.ValueString, out int val))
+                        {
+
+                            if (val <= 100000)
+                            {
+                                _fbs.CFans.EFanNominalFlow = val;
+                            }
+                        }
+                    }
+                    break;
+                case 713:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CFans.Speed0v = val;
+                            }
+                        }
+                    }
+                    break;
+                case 714:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CFans.Speed10v = val;
+                            }
+                        }
+                    }
+                    break;
+                case 715:
+                    {
+                        if (int.TryParse(resp.ValueString, out int val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CFans.PressureFailureDelay = val;
+                            }
+                        }
+                    }
+                    break;
+                case 716:
+                    {
+                        if (int.TryParse(resp.ValueString, out int val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CFans.FanFailureDelay = val;
+                            }
+                        }
+                    }
+                    break;
+                case 717:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CFans.DecrFanConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 718:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFans.PDecrFan = val;
+                            }
+                        }
+                    }
+                    break;
+                case 719:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFans.IDecrFan = val;
+                            }
+                        }
+                    }
+                    break;
+                case 720:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFans.DDecrFan = val;
+                            }
+                        }
+                    }
+                    break;
+                case 721:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CFans.MinFanPercent = val;
+                            }
+                        }
+                    }
+                    break;
+                //Водяной нагреватель
+                case 722:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CWHSetPoints.PWork = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 723:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CWHSetPoints.IWork = val;
+                            }
+                        }
+                    }
+                    break;
+                case 724:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CWHSetPoints.DWork = val;
+                            }
+                        }
+                    }
+                    break;
+                case 725:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CWHSetPoints.PRet = val;
+                            }
+                        }
+                    }
+                    break;
+                case 726:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CWHSetPoints.IRet = val;
+                            }
+                        }
+                    }
+                    break;
+                case 727:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CWHSetPoints.DRet = val;
+                            }
+                        }
+                    }
+                    break;
+                case 728:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CWHSetPoints.TRetMax = val;
+                            }
+                        }
+                    }
+                    break;
+                case 729:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CWHSetPoints.TRetMin = val;
+                            }
+                        }
+                    }
+                    break;
+                case 730:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CWHSetPoints.TRetStb = val;
+                            }
+                        }
+                    }
+                    break;
+                case 731:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CWHSetPoints.TRetF = val;
+                            }
+                        }
+                    }
+                    break;
+                case 732:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CWHSetPoints.TRetStart = val;
+                            }
+                        }
+                    }
+                    break;
+                //2 раза, потом дополнить
+                case 733:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                // _fbs.CWHSetPoints.TRetStart = val;
+                            }
+                        }
+                    }
+                    break;
+                case 734:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CWHSetPoints.SSMaxIntervalS = val;
+                            }
+                        }
+                    }
+                    break;
+                case 735:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CWHSetPoints.MinDamperPerc = val;
+                            }
+                        }
+                    }
+                    break;
+                case 736:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CWHSetPoints.SPWinterProcess = val;
+                            }
+                        }
+                    }
+                    break;
+                case 737:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CWHSetPoints.IsSummerTestPump = val;
+                            }
+                        }
+                    }
+                    break;
+                //Электрический нагреватель.   
+                case 738:
+                    {
+                        if (int.TryParse(resp.ValueString, out int val))
+                        {
+
+                            if (val <= 100_000)
+                            {
+                                _fbs.CEHSetPoints.NomPowerVT = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 739:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CEHSetPoints.PReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 740:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CEHSetPoints.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 741:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CEHSetPoints.DReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 742:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CEHSetPoints.BlowDownTime = val;
+                            }
+                        }
+                    }
+                    break;
+                //Фреоновый охладитель
+                case 743:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFreonCoolerSP.PReg = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 744:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFreonCoolerSP.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 745:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFreonCoolerSP.DReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 746:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CFreonCoolerSP.Stage1OffS = val;
+                            }
+                        }
+                    }
+                    break;
+                case 747:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CFreonCoolerSP.Stage1OnS = val;
+                            }
+                        }
+                    }
+                    break;
+                case 748:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CFreonCoolerSP.Hyst = val;
+                            }
+                        }
+                    }
+                    break;
+                //Увлажнитель
+                case 749:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CHumiditySPS.PReg = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 750:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CHumiditySPS.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 751:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CHumiditySPS.DReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 752:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CHumiditySPS.Stage1OffS = val;
+                            }
+                        }
+                    }
+                    break;
+                case 753:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CHumiditySPS.Stage1OnS = val;
+                            }
+                        }
+                    }
+                    break;
+                case 754:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CHumiditySPS.Hyst = val;
+                            }
+                        }
+                    }
+                    break;
+                case 755:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CRecup.PReg = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 756:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CRecup.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 757:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.CRecup.DReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 758:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.EffSP = val;
+                            }
+                        }
+                    }
+                    break;
+                case 759:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.EffFailValue = val;
+                            }
+                        }
+                    }
+                    break;
+                case 760:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65000)
+                            {
+                                _fbs.CRecup.EffFailDelay = val;
+                            }
+                        }
+                    }
+                    break;
+                case 761:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.HZMax = val;
+                            }
+                        }
+                    }
+                    break;
+                case 762:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.TempA = val;
+                            }
+                        }
+                    }
+                    break;
+                case 763:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.TempB = val;
+                            }
+                        }
+                    }
+                    break;
+                case 764:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.TempC = val;
+                            }
+                        }
+                    }
+                    break;
+                case 765:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CRecup.TempD = val;
+                            }
+                        }
+                    }
+                    break;
+                case 766:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 2)
+                            {
+                                _fbs.CEConfig.TOutDoorConfig = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 767:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 2)
+                            {
+                                _fbs.CEConfig.TSupplyFConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 768:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 2)
+                            {
+                                _fbs.CEConfig.TExhaustFConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 769:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 2)
+                            {
+                                _fbs.CEConfig.TRoomConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 770:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 2)
+                            {
+                                _fbs.CEConfig.TReturnWaterConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 771:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CEConfig.AirQualityConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                case 772:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CEConfig.HumSensorConfig = val;
+                            }
+                        }
+                    }
+                    break;
+                //Датчики
+                case 773:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -100 && val <= 100)
+                            {
+                                _fbs.CSensors.OutdoorTemp.Correction = val;
+                            }
+                        }
+                    }
+                    break;
+                case 774:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -100 && val <= 100)
+                            {
+                                _fbs.CSensors.SupTemp.Correction = val;
+                            }
+                        }
+                    }
+                    break;
+                case 775:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -100 && val <= 100)
+                            {
+                                _fbs.CSensors.ExhaustTemp.Correction = val;
+                            }
+                        }
+                    }
+                    break;
+                case 776:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -100 && val <= 100)
+                            {
+                                _fbs.CSensors.RoomTemp.Correction = val;
+                            }
+                        }
+                    }
+                    break;
+                case 777:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -100 && val <= 100)
+                            {
+                                _fbs.CSensors.ReturnTemp.Correction = val;
+                            }
+                        }
+                  
+                    }
+                    break;
 
             }
         }
