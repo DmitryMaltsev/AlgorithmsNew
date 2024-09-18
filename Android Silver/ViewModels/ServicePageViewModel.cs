@@ -3,12 +3,6 @@ using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Android_Silver.ViewModels
@@ -109,7 +103,7 @@ namespace Android_Silver.ViewModels
 
         public ServicePageViewModel()
         {
-            
+
             // SensorPicker=new List<string>();
             SensorPicker.Add("Нет");
             SensorPicker.Add("NTC10K");
@@ -137,10 +131,10 @@ namespace Android_Silver.ViewModels
             ToSettingsCommand = new Command(ExecuteToSettingsWindow);
             SetSettingsCommand = new Command(ExecuteSetSettings);
             StartTimer();
-            
+
         }
 
-   
+
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
         private void ExecuteIncrease(object obj)
@@ -265,7 +259,7 @@ namespace Android_Silver.ViewModels
             ushort id = (ushort)obj;
             SActivePageState page = CMenusEntities.StartMenuCollection[id - 1].CactivePageState;
             CActivePagesEntities.SetActivePageState(page);
-           
+
         }
 
         private void ExecuteSetSettings(object obj)

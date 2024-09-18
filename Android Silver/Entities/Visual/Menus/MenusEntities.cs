@@ -86,7 +86,7 @@ namespace Android_Silver.Entities.Visual.Menus
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Нагреватель водяной", isVisible: true, _pictureSet.BaseSettings1ButCollection[3], SActivePageState.WHSettingsPage, id: 4, startAddress: 722);
             StartMenuCollection.Add(mItem);
-            mItem = new MItem("Нагреватель электрический", isVisible: true, _pictureSet.BaseSettings1ButCollection[4], SActivePageState.EHSettingsPage, id: 5, startAddress: 438);
+            mItem = new MItem("Нагреватель электрический", isVisible: true, _pictureSet.BaseSettings1ButCollection[4], SActivePageState.EHSettingsPage, id: 5, startAddress: 738);
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Охладитель фреоновый", isVisible: true, _pictureSet.BaseSettings1ButCollection[5], SActivePageState.FreonSettingsPage, id: 6, startAddress: 743);
             StartMenuCollection.Add(mItem);
@@ -101,7 +101,7 @@ namespace Android_Silver.Entities.Visual.Menus
             #region Общие
             ObservableCollection<StrSet> strSets = new ObservableCollection<StrSet>();
             List<string> pickVals = new List<string>() { "Улица", "Комната" };
-            StrSet sSet = new StrSet(0, 50, "Уставка аварийной темп, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            StrSet sSet = new StrSet(0, 100, "Уставка аварийной темп, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 1, "Регулирование темп. по", isVisible: true, pickerIsVisible: true, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
@@ -109,12 +109,12 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Уставка темп. кан. мин.,°C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 99000, "Задержка аварии по темп, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65000, "Задержка аварии по темп, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Авто", "Зима", "Лето" };
             sSet = new StrSet(0, 3, "Тип регулиярования времени года", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(5, 30, "Темп. перехода зима/лето, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 30, "Темп. перехода зима/лето, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 20, "Гистерезис темп. перехода,°С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
@@ -127,7 +127,7 @@ namespace Android_Silver.Entities.Visual.Menus
             //Жалюзи
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "", "" };
-            sSet = new StrSet(0, 10000, "Время открытия, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65000, "Время открытия, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[1].StrSetsCollection = strSets;
             #endregion
@@ -137,17 +137,17 @@ namespace Android_Silver.Entities.Visual.Menus
             pickVals = new List<string>() { "Откл", "Вкл" };
             //sSet = new StrSet(0, 1, "Вентилятор вытяжки", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             //strStes.Add(sSet);
-            sSet = new StrSet(0, 65000, "Номин.расход вент. прит, м3/ч", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 100000, "Номин.расход вент. прит, м3/ч", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65000, "Номин.расход вент. вытяжки, м3/ч", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 100000, "Номин.расход вент. вытяжки, м3/ч", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Нижняя граница запрета, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Верхняя граница запрета, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10000, "Задержка контроля давления, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65000, "Задержка контроля давления, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10000, "Задержка контроля аварии вентилятора, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65000, "Задержка контроля аварии вентилятора, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 1, "Функция снижения оборотов", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strSets.Add(sSet);
@@ -189,7 +189,7 @@ namespace Android_Silver.Entities.Visual.Menus
             // не отображаем, потом потом удалить
             sSet = new StrSet(0, 100, "Пусковая темп. обратной воды2, °C", isVisible: false, pickerIsVisible: false, entryIsVisible: false, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10000, "Время мягкого пуска, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65_000, "Время мягкого пуска, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Минимальный % КЗР", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
@@ -208,9 +208,9 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 1_000, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 1000, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10_000, "Время продувки, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65_000, "Время продувки, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[4].StrSetsCollection = strSets;
             #endregion
@@ -223,9 +223,9 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10000, "Задержка включения ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65000, "Задержка включения ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10000, "Минимальное время работы ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65000, "Минимальное время работы ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "Гистерезис вкл/выкл фреонового охладителя", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
@@ -244,7 +244,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Аварийный КПД, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10000, "Задержка контроля КПД, мин", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65000, "Задержка контроля КПД, мин", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Максимальная частота, Гц", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
@@ -267,9 +267,9 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10000, "Задержка включения ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65000, "Задержка включения ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10000, "Минимальное. время работы ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            sSet = new StrSet(0, 65000, "Минимальное. время работы ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "Гистерезис вкл/выкл увлажнителя", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);

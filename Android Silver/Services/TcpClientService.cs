@@ -167,7 +167,7 @@ namespace Android_Silver.Services
                     StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
-                    byte[] data = new byte[255];
+                    byte[] data = new byte[350];
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
                     {
@@ -1880,7 +1880,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val < 100)
+                            if (val <= 100)
                             {
                                 _fbs.CCommonSetPoints.SPTempAlarm = val;
                             }
@@ -1892,7 +1892,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val < 2)
+                            if (val <= 1)
                             {
                                 _fbs.CEConfig.TregularCh_R = val;
                             }
@@ -1917,7 +1917,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val < 100)
+                            if (val <= 100)
                             {
                                 _fbs.CCommonSetPoints.SPTempMinCh = val;
                             }
@@ -1944,7 +1944,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val < 3)
+                            if (val <= 2)
                             {
                                 _fbs.CCommonSetPoints.SeasonMode = val;
                             }
@@ -1957,9 +1957,9 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val < 1000)
+                            if (val <= 1000)
                             {
-                                _fbs.CCommonSetPoints.SPSeason = val / 10;
+                                _fbs.CCommonSetPoints.SPSeason = val;
                             }
                         }
                     }
@@ -1972,7 +1972,7 @@ namespace Android_Silver.Services
 
                             if (val <= 100)
                             {
-                                _fbs.CCommonSetPoints.HystSeason = val / 10;
+                                _fbs.CCommonSetPoints.HystSeason = val;
                             }
                         }
                     }
@@ -2010,7 +2010,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CDamperSetPoints.DamperOpenTime = val;
                             }
@@ -2023,7 +2023,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CDamperSetPoints.DamperHeatingTime = val;
                             }
@@ -2085,7 +2085,7 @@ namespace Android_Silver.Services
                         if (int.TryParse(resp.ValueString, out int val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CFans.PressureFailureDelay = val;
                             }
@@ -2097,7 +2097,7 @@ namespace Android_Silver.Services
                         if (int.TryParse(resp.ValueString, out int val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CFans.FanFailureDelay = val;
                             }
@@ -2315,7 +2315,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CWHSetPoints.SSMaxIntervalS = val;
                             }
@@ -2412,7 +2412,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CEHSetPoints.BlowDownTime = val;
                             }
@@ -2461,7 +2461,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CFreonCoolerSP.Stage1OffS = val;
                             }
@@ -2473,7 +2473,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CFreonCoolerSP.Stage1OnS = val;
                             }
@@ -2534,7 +2534,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CHumiditySPS.Stage1OffS = val;
                             }
@@ -2546,7 +2546,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CHumiditySPS.Stage1OnS = val;
                             }
@@ -2630,7 +2630,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 50000)
+                            if (val <= 65000)
                             {
                                 _fbs.CRecup.EffFailDelay = val;
                             }
