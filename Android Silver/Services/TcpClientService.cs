@@ -156,7 +156,7 @@ namespace Android_Silver.Services
              });
         }
 
-        private void GetMessagesState() 
+        private void GetMessagesState()
         {
 
             if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
@@ -179,7 +179,7 @@ namespace Android_Silver.Services
                 _activePageEntities.QueryStep = 0;
             }
             else
-            if(_ethernetEntities.PagesTab==0)
+            if (_ethernetEntities.PagesTab == 0)
             {
                 _ethernetEntities.CMessageState = MessageStates.UserMessage;
             }
@@ -221,7 +221,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage:
                         {
-                            messToClient = "299,79\r\n";
+                            messToClient = "299,80\r\n";
                         }
                         break;
                 }
@@ -2777,92 +2777,8 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 366:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TOutDoorConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 367:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TSupplyFConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 368:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TExhaustFConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 369:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TRoomConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 370:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TReturnWaterConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 371:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CEConfig.AirQualityConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 372:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CEConfig.HumSensorConfig = val;
-                            }
-                        }
-                    }
-                    break;
                 //Датчики
-                case 373:
+                case 366:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2874,7 +2790,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 374:
+                case 367:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2886,7 +2802,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 375:
+                case 368:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2898,7 +2814,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 376:
+                case 369:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2910,7 +2826,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 377:
+                case 370:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2920,13 +2836,110 @@ namespace Android_Silver.Services
                                 _fbs.CSensors.ReturnTemp.Correction = val;
                             }
                         }
+
+                    }
+                    break;
+                //Конфигурация
+                case 371:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= 0 && val <= 20)
+                            {
+                                _fbs.CEConfig.ET1= val;
+                            }
+                        }
+                    }
+                    break;
+                case 372:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= 0 && val <= 20)
+                            {
+                                _fbs.CEConfig.ET2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 373:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= 0 && val <= 20)
+                            {
+                                _fbs.CEConfig.OUT1 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 374:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= 0 && val <= 20)
+                            {
+                                _fbs.CEConfig.OUT2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 375:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= 0 && val <= 20)
+                            {
+                                _fbs.CEConfig.AR1 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 376:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= 0 && val <= 20)
+                            {
+                                _fbs.CEConfig.AR2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 377:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= 0 && val <= 20)
+                            {
+                                _fbs.CEConfig.AR3 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 378:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= 0 && val <= 1)
+                            {
+                                _fbs.CEConfig.Recup = val;
+                            }
+                        }
                         if (_servActivePageEntities.IsLoadingPage)
                         {
                             _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                         }
                     }
                     break;
-
 
                 //Проверка того, что данные записаны
                 case 500:
@@ -4240,96 +4253,8 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                //Коррекция датчиков
                 case 766:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TOutDoorConfig = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                case 767:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TSupplyFConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 768:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TExhaustFConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 769:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TRoomConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 770:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CEConfig.TReturnWaterConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 771:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CEConfig.AirQualityConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 772:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CEConfig.HumSensorConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                //Датчики
-                case 773:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -4341,7 +4266,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 774:
+                case 767:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -4353,7 +4278,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 775:
+                case 768:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -4365,7 +4290,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 776:
+                case 769:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -4377,7 +4302,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 777:
+                case 770:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -4387,10 +4312,114 @@ namespace Android_Silver.Services
                                 _fbs.CSensors.ReturnTemp.Correction = val;
                             }
                         }
-                  
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                //Конфигурация датчиков
+                case 771:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 20)
+                            {
+                                _fbs.CEConfig.ET1 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 772:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 20)
+                            {
+                                _fbs.CEConfig.ET2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 773:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 20)
+                            {
+                                _fbs.CEConfig.OUT1 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 774:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 20)
+                            {
+                                _fbs.CEConfig.OUT2 = val;
+                            }
+                        }
                     }
                     break;
 
+                case 775:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 20)
+                            {
+                                _fbs.CEConfig.AR1 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 776:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 20)
+                            {
+                                _fbs.CEConfig.AR2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 777:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 20)
+                            {
+                                _fbs.CEConfig.AR3 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 778:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1)
+                            {
+                                _fbs.CEConfig.Recup = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
             }
         }
 

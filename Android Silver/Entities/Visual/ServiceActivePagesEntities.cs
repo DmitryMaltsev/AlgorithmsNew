@@ -324,6 +324,37 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                     }
                     break;
+                case SActivePageState.ConfigPage:
+                    {
+
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[0].CPickVal = _fbs.CEConfig.ET1;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[1].CPickVal = _fbs.CEConfig.ET2;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[2].CPickVal = _fbs.CEConfig.OUT1;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[3].CPickVal = _fbs.CEConfig.OUT2;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[4].CPickVal = _fbs.CEConfig.AR1;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[5].CPickVal = _fbs.CEConfig.AR2;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[6].CPickVal = _fbs.CEConfig.AR3;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[7].CPickVal = _fbs.CEConfig.Recup;
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[0].Name;
+                        _menusEntities.GenerateInterfaceTable(0);
+                        IsConfigPage = true;
+                        IsFBSettingsPage = true;
+                        IsSensorsSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsFreonSettingsPage = false;
+                        IsLoadingPage = false;
+                    }
+                    break;
                 case SActivePageState.CommonSettingsPage:
                     {
                         IsCommonSettingsPage = true;
@@ -341,29 +372,28 @@ namespace Android_Silver.Entities.Visual
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
-
                         IsLoadingPage = false;
-                        _menusEntities.Title = _menusEntities.StartMenuCollection[0].Name;
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[1].Name;
                         // _menuEntities.
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[0].CVal = _fbs.CCommonSetPoints.SPTempAlarm;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[1].CPickVal = _fbs.CEConfig.TregularCh_R;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[2].CVal = _fbs.CCommonSetPoints.SPTempMaxCh;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[3].CVal = _fbs.CCommonSetPoints.SPTempMinCh;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[4].CVal = _fbs.CCommonSetPoints.TControlDelayS;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[5].CVal = _fbs.CCommonSetPoints.SeasonMode;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[6].CVal = _fbs.CCommonSetPoints.SPSeason;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[7].CVal = _fbs.CCommonSetPoints.HystSeason;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[8].CPickVal = _fbs.CEConfig.AutoResetFire;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[9].CPickVal = _fbs.CEConfig.AutoRestart;
-                        _menusEntities.GenerateInterfaceTable(0);
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[0].CVal = _fbs.CCommonSetPoints.SPTempAlarm;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[1].CPickVal = _fbs.CEConfig.TregularCh_R;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[2].CVal = _fbs.CCommonSetPoints.SPTempMaxCh;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[3].CVal = _fbs.CCommonSetPoints.SPTempMinCh;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[4].CVal = _fbs.CCommonSetPoints.TControlDelayS;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[5].CVal = _fbs.CCommonSetPoints.SeasonMode;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[6].CVal = _fbs.CCommonSetPoints.SPSeason;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[7].CVal = _fbs.CCommonSetPoints.HystSeason;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[8].CPickVal = _fbs.CEConfig.AutoResetFire;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[9].CPickVal = _fbs.CEConfig.AutoRestart;
+                        _menusEntities.GenerateInterfaceTable(1);
                     }
                     break;
                 case SActivePageState.DamperSettingsPage:
                     {
                         _menusEntities.Title = _menusEntities.StartMenuCollection[1].Name;
-                        _menusEntities.StartMenuCollection[1].StrSetsCollection[0].CVal = _fbs.CDamperSetPoints.DamperOpenTime;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[0].CVal = _fbs.CDamperSetPoints.DamperOpenTime;
                         //   _menusEntities.StartMenuCollection[1].StrSetsCollection[1].CVal = _fbs.CDamperSetPoints.DamperHeatingTime;
-                        _menusEntities.GenerateInterfaceTable(1);
+                        _menusEntities.GenerateInterfaceTable(2);
                         IsDamperSettingsPage = true;
                         IsFBSettingsPage = true;
                         IsCommonSettingsPage = false;
@@ -384,19 +414,19 @@ namespace Android_Silver.Entities.Visual
                     break;
                 case SActivePageState.FanSettingsPage:
                     {
-                        _menusEntities.Title = _menusEntities.StartMenuCollection[2].Name;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[0].CVal = _fbs.CFans.SFanNominalFlow;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[1].CVal = _fbs.CFans.EFanNominalFlow;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[2].CVal = _fbs.CFans.Speed0v;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[3].CVal = _fbs.CFans.Speed10v;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[4].CVal = _fbs.CFans.PressureFailureDelay;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[5].CVal = _fbs.CFans.FanFailureDelay;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[6].CVal = _fbs.CFans.DecrFanConfig;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[7].CVal = _fbs.CFans.PDecrFan;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[8].CVal = _fbs.CFans.IDecrFan;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[9].CVal = _fbs.CFans.DDecrFan;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[10].CVal = _fbs.CFans.MinFanPercent;
-                        _menusEntities.GenerateInterfaceTable(2);
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[3].Name;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[0].CVal = _fbs.CFans.SFanNominalFlow;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[1].CVal = _fbs.CFans.EFanNominalFlow;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[2].CVal = _fbs.CFans.Speed0v;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[3].CVal = _fbs.CFans.Speed10v;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[4].CVal = _fbs.CFans.PressureFailureDelay;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[5].CVal = _fbs.CFans.FanFailureDelay;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[6].CVal = _fbs.CFans.DecrFanConfig;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[7].CVal = _fbs.CFans.PDecrFan;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[8].CVal = _fbs.CFans.IDecrFan;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[9].CVal = _fbs.CFans.DDecrFan;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[10].CVal = _fbs.CFans.MinFanPercent;
+                        _menusEntities.GenerateInterfaceTable(3);
                         IsFanSettingsPage = true;
                         IsFBSettingsPage = true;
                         IsDamperSettingsPage = false;
@@ -417,24 +447,24 @@ namespace Android_Silver.Entities.Visual
                     break;
                 case SActivePageState.WHSettingsPage:
                     {
-                        _menusEntities.Title = _menusEntities.StartMenuCollection[3].Name;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[0].CVal = _fbs.CWHSetPoints.PWork;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[1].CVal = _fbs.CWHSetPoints.IWork;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[2].CVal = _fbs.CWHSetPoints.DWork;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[3].CVal = _fbs.CWHSetPoints.PRet;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[4].CVal = _fbs.CWHSetPoints.IRet;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[5].CVal = _fbs.CWHSetPoints.DRet;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[6].CVal = _fbs.CWHSetPoints.TRetMax;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[7].CVal = _fbs.CWHSetPoints.TRetMin;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[8].CVal = _fbs.CWHSetPoints.TRetStb;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[9].CVal = _fbs.CWHSetPoints.TRetF;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[10].CVal = _fbs.CWHSetPoints.TRetStart;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[11].CVal = _fbs.CWHSetPoints.TRetStart;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[12].CVal = _fbs.CWHSetPoints.SSMaxIntervalS;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[13].CVal = _fbs.CWHSetPoints.MinDamperPerc;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[14].CVal = _fbs.CWHSetPoints.SPWinterProcess;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[15].CPickVal = _fbs.CWHSetPoints.IsSummerTestPump;
-                        _menusEntities.GenerateInterfaceTable(3);
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[4].Name;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[0].CVal = _fbs.CWHSetPoints.PWork;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[1].CVal = _fbs.CWHSetPoints.IWork;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[2].CVal = _fbs.CWHSetPoints.DWork;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[3].CVal = _fbs.CWHSetPoints.PRet;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[4].CVal = _fbs.CWHSetPoints.IRet;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[5].CVal = _fbs.CWHSetPoints.DRet;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[6].CVal = _fbs.CWHSetPoints.TRetMax;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[7].CVal = _fbs.CWHSetPoints.TRetMin;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[8].CVal = _fbs.CWHSetPoints.TRetStb;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[9].CVal = _fbs.CWHSetPoints.TRetF;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[10].CVal = _fbs.CWHSetPoints.TRetStart;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[11].CVal = _fbs.CWHSetPoints.TRetStart;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[12].CVal = _fbs.CWHSetPoints.SSMaxIntervalS;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[13].CVal = _fbs.CWHSetPoints.MinDamperPerc;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[14].CVal = _fbs.CWHSetPoints.SPWinterProcess;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[15].CPickVal = _fbs.CWHSetPoints.IsSummerTestPump;
+                        _menusEntities.GenerateInterfaceTable(4);
                         IsWHSettingsPage = true;
                         IsFBSettingsPage = true;
                         IsFanSettingsPage = false;
@@ -455,13 +485,13 @@ namespace Android_Silver.Entities.Visual
                     break;
                 case SActivePageState.EHSettingsPage:
                     {
-                        _menusEntities.Title = _menusEntities.StartMenuCollection[4].Name;
-                        _menusEntities.StartMenuCollection[4].StrSetsCollection[0].CVal = _fbs.CEHSetPoints.NomPowerVT;
-                        _menusEntities.StartMenuCollection[4].StrSetsCollection[1].CVal = _fbs.CEHSetPoints.PReg;
-                        _menusEntities.StartMenuCollection[4].StrSetsCollection[2].CVal = _fbs.CEHSetPoints.IReg;
-                        _menusEntities.StartMenuCollection[4].StrSetsCollection[3].CVal = _fbs.CEHSetPoints.DReg;
-                        _menusEntities.StartMenuCollection[4].StrSetsCollection[4].CVal = _fbs.CEHSetPoints.BlowDownTime;
-                        _menusEntities.GenerateInterfaceTable(4);
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[5].Name;
+                        _menusEntities.StartMenuCollection[5].StrSetsCollection[0].CVal = _fbs.CEHSetPoints.NomPowerVT;
+                        _menusEntities.StartMenuCollection[5].StrSetsCollection[1].CVal = _fbs.CEHSetPoints.PReg;
+                        _menusEntities.StartMenuCollection[5].StrSetsCollection[2].CVal = _fbs.CEHSetPoints.IReg;
+                        _menusEntities.StartMenuCollection[5].StrSetsCollection[3].CVal = _fbs.CEHSetPoints.DReg;
+                        _menusEntities.StartMenuCollection[5].StrSetsCollection[4].CVal = _fbs.CEHSetPoints.BlowDownTime;
+                        _menusEntities.GenerateInterfaceTable(5);
                         IsEHSettingsPage = true;
                         IsFBSettingsPage = true;
                         IsWHSettingsPage = false;
@@ -482,14 +512,14 @@ namespace Android_Silver.Entities.Visual
                     break;
                 case SActivePageState.FreonSettingsPage:
                     {
-                        _menusEntities.Title = _menusEntities.StartMenuCollection[5].Name;
-                        _menusEntities.StartMenuCollection[5].StrSetsCollection[0].CVal = _fbs.CFreonCoolerSP.PReg;
-                        _menusEntities.StartMenuCollection[5].StrSetsCollection[1].CVal = _fbs.CFreonCoolerSP.IReg;
-                        _menusEntities.StartMenuCollection[5].StrSetsCollection[2].CVal = _fbs.CFreonCoolerSP.DReg;
-                        _menusEntities.StartMenuCollection[5].StrSetsCollection[3].CVal = _fbs.CFreonCoolerSP.Stage1OffS;
-                        _menusEntities.StartMenuCollection[5].StrSetsCollection[4].CVal = _fbs.CFreonCoolerSP.Stage1OnS;
-                        _menusEntities.StartMenuCollection[5].StrSetsCollection[5].CVal = _fbs.CFreonCoolerSP.Hyst;
-                        _menusEntities.GenerateInterfaceTable(5);
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[6].Name;
+                        _menusEntities.StartMenuCollection[6].StrSetsCollection[0].CVal = _fbs.CFreonCoolerSP.PReg;
+                        _menusEntities.StartMenuCollection[6].StrSetsCollection[1].CVal = _fbs.CFreonCoolerSP.IReg;
+                        _menusEntities.StartMenuCollection[6].StrSetsCollection[2].CVal = _fbs.CFreonCoolerSP.DReg;
+                        _menusEntities.StartMenuCollection[6].StrSetsCollection[3].CVal = _fbs.CFreonCoolerSP.Stage1OffS;
+                        _menusEntities.StartMenuCollection[6].StrSetsCollection[4].CVal = _fbs.CFreonCoolerSP.Stage1OnS;
+                        _menusEntities.StartMenuCollection[6].StrSetsCollection[5].CVal = _fbs.CFreonCoolerSP.Hyst;
+                        _menusEntities.GenerateInterfaceTable(6);
                         IsFreonSettingsPage = true;
                         IsFBSettingsPage = true;
                         IsRecupSettingsPage = false;
@@ -510,19 +540,19 @@ namespace Android_Silver.Entities.Visual
                     break;
                 case SActivePageState.RecupSettingsPage:
                     {
-                        _menusEntities.Title = _menusEntities.StartMenuCollection[6].Name;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[0].CVal = _fbs.CRecup.PReg;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[1].CVal = _fbs.CRecup.IReg;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[2].CVal = _fbs.CRecup.DReg;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[3].CVal = _fbs.CRecup.EffSP;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[4].CVal = _fbs.CRecup.EffFailValue;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[5].CVal = _fbs.CRecup.EffFailDelay;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[6].CVal = _fbs.CRecup.HZMax;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[7].CVal = _fbs.CRecup.TempA;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[8].CVal = _fbs.CRecup.TempB;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[9].CVal = _fbs.CRecup.TempC;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[10].CVal = _fbs.CRecup.TempD;
-                        _menusEntities.GenerateInterfaceTable(6);
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[7].Name;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[0].CVal = _fbs.CRecup.PReg;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[1].CVal = _fbs.CRecup.IReg;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[2].CVal = _fbs.CRecup.DReg;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[3].CVal = _fbs.CRecup.EffSP;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[4].CVal = _fbs.CRecup.EffFailValue;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[5].CVal = _fbs.CRecup.EffFailDelay;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[6].CVal = _fbs.CRecup.HZMax;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[7].CVal = _fbs.CRecup.TempA;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[8].CVal = _fbs.CRecup.TempB;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[9].CVal = _fbs.CRecup.TempC;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[10].CVal = _fbs.CRecup.TempD;
+                        _menusEntities.GenerateInterfaceTable(7);
                         IsRecupSettingsPage = true;
                         IsFBSettingsPage = true;
                         IsEHSettingsPage = false;
@@ -543,14 +573,14 @@ namespace Android_Silver.Entities.Visual
                     break;
                 case SActivePageState.HumSettingsPage:
                     {
-                        _menusEntities.Title = _menusEntities.StartMenuCollection[7].Name;
-                        _menusEntities.StartMenuCollection[7].StrSetsCollection[0].CVal = _fbs.CHumiditySPS.PReg;
-                        _menusEntities.StartMenuCollection[7].StrSetsCollection[1].CVal = _fbs.CHumiditySPS.IReg;
-                        _menusEntities.StartMenuCollection[7].StrSetsCollection[2].CVal = _fbs.CHumiditySPS.DReg;
-                        _menusEntities.StartMenuCollection[7].StrSetsCollection[3].CVal = _fbs.CHumiditySPS.Stage1OffS;
-                        _menusEntities.StartMenuCollection[7].StrSetsCollection[4].CVal = _fbs.CHumiditySPS.Stage1OnS;
-                        _menusEntities.StartMenuCollection[7].StrSetsCollection[5].CVal = _fbs.CHumiditySPS.Hyst;
-                        _menusEntities.GenerateInterfaceTable(7);
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[8].Name;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[0].CVal = _fbs.CHumiditySPS.PReg;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[1].CVal = _fbs.CHumiditySPS.IReg;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[2].CVal = _fbs.CHumiditySPS.DReg;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[3].CVal = _fbs.CHumiditySPS.Stage1OffS;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[4].CVal = _fbs.CHumiditySPS.Stage1OnS;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[5].CVal = _fbs.CHumiditySPS.Hyst;
+                        _menusEntities.GenerateInterfaceTable(8);
                         IsHumSettingsPage = true;
                         IsFBSettingsPage = true;
                         IsRecupSettingsPage = false;
@@ -575,20 +605,21 @@ namespace Android_Silver.Entities.Visual
                         {
                             _fbs.CEConfig.TOutDoorConfig = 1;
                         }
-                        _menusEntities.Title = _menusEntities.StartMenuCollection[8].Name;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[0].CPickVal = _fbs.CEConfig.TOutDoorConfig;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[1].CPickVal = _fbs.CEConfig.TSupplyFConfig;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[2].CPickVal = _fbs.CEConfig.TExhaustFConfig;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[3].CPickVal = _fbs.CEConfig.TRoomConfig;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[4].CPickVal = _fbs.CEConfig.TReturnWaterConfig;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[5].CPickVal = _fbs.CEConfig.AirQualityConfig;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[6].CPickVal = _fbs.CEConfig.HumSensorConfig;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[7].CVal = _fbs.CSensors.OutdoorTemp.Correction;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[8].CVal = _fbs.CSensors.SupTemp.Correction;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[9].CVal = _fbs.CSensors.ExhaustTemp.Correction;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[10].CVal = _fbs.CSensors.RoomTemp.Correction;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[11].CVal = _fbs.CSensors.ReturnTemp.Correction;
-                        _menusEntities.GenerateInterfaceTable(8);
+
+                        //_menusEntities.StartMenuCollection[9].StrSetsCollection[0].CPickVal = _fbs.CEConfig.TOutDoorConfig;
+                        //_menusEntities.StartMenuCollection[9].StrSetsCollection[1].CPickVal = _fbs.CEConfig.TSupplyFConfig;
+                        //_menusEntities.StartMenuCollection[9].StrSetsCollection[2].CPickVal = _fbs.CEConfig.TExhaustFConfig;
+                        //_menusEntities.StartMenuCollection[9].StrSetsCollection[3].CPickVal = _fbs.CEConfig.TRoomConfig;
+                        //_menusEntities.StartMenuCollection[9].StrSetsCollection[4].CPickVal = _fbs.CEConfig.TReturnWaterConfig;
+                        //_menusEntities.StartMenuCollection[9].StrSetsCollection[5].CPickVal = _fbs.CEConfig.AirQualityConfig;
+                        //_menusEntities.StartMenuCollection[9].StrSetsCollection[6].CPickVal = _fbs.CEConfig.HumSensorConfig;
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[9].Name;
+                        _menusEntities.StartMenuCollection[9].StrSetsCollection[0].CVal = _fbs.CSensors.OutdoorTemp.Correction;
+                        _menusEntities.StartMenuCollection[9].StrSetsCollection[1].CVal = _fbs.CSensors.SupTemp.Correction;
+                        _menusEntities.StartMenuCollection[9].StrSetsCollection[2].CVal = _fbs.CSensors.ExhaustTemp.Correction;
+                        _menusEntities.StartMenuCollection[9].StrSetsCollection[3].CVal = _fbs.CSensors.RoomTemp.Correction;
+                        _menusEntities.StartMenuCollection[9].StrSetsCollection[4].CVal = _fbs.CSensors.ReturnTemp.Correction;
+                        _menusEntities.GenerateInterfaceTable(9);
                         IsSensorsSettingsPage = true;
                         IsFBSettingsPage = true;
                         IsHumSettingsPage = false;
@@ -607,26 +638,7 @@ namespace Android_Silver.Entities.Visual
                         IsLoadingPage = false;
                     }
                     break;
-                case SActivePageState.ConfigPage:
-                    {
-                        IsConfigPage = true;
-                        IsFBSettingsPage = true;
-                        IsSensorsSettingsPage = false;
-                        IsHumSettingsPage = false;
-                        IsRecupSettingsPage = false;
-                        IsEHSettingsPage = false;
-                        IsWHSettingsPage = false;
-                        IsFanSettingsPage = false;
-                        IsDamperSettingsPage = false;
-                        IsCommonSettingsPage = false;
-                        IsBaseSettingsPage = false;
-                        IsMainMenuPage = false;
-                        IsEntryPage = false;
-                        IsStartPage = false;
-                        IsFreonSettingsPage = false;
-                        IsLoadingPage = false;
-                    }
-                    break;
+
                 case SActivePageState.LoadingPage:
                     {
                         IsLoadingPage = true;

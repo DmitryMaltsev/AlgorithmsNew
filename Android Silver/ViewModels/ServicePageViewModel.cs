@@ -3,8 +3,6 @@ using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
-
-using System.Net;
 using System.Windows.Input;
 
 namespace Android_Silver.ViewModels
@@ -56,7 +54,6 @@ namespace Android_Silver.ViewModels
         public ICommand SetSettingsCommand { get; private set; }
         #endregion
 
-
         private string _cString;
 
         public string CString
@@ -70,7 +67,6 @@ namespace Android_Silver.ViewModels
         }
 
         private int _menuNum;
-
         public int MenuNum
         {
             get { return _menuNum; }
@@ -80,8 +76,6 @@ namespace Android_Silver.ViewModels
                 OnPropertyChanged(nameof(MenuNum));
             }
         }
-
-
 
         public TcpClientService CTcpClientService { get; set; }
         public PicturesSet CPictureSet { get; set; }
@@ -121,8 +115,6 @@ namespace Android_Silver.ViewModels
 
         }
 
-
-
         public ICommand IncreaseMenuItemsCommand { get; private set; }
         private void ExecuteIncrease(object obj)
         {
@@ -159,7 +151,7 @@ namespace Android_Silver.ViewModels
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                     CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
+                   // CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     //CTcpClientService.SendRecieveTask("299,56");
                     CTcpClientService.SendRecieveTask("");
@@ -211,6 +203,7 @@ namespace Android_Silver.ViewModels
 
 
         #endregion
+
         #region Base settings
 
 
@@ -253,36 +246,38 @@ namespace Android_Silver.ViewModels
         {
             switch (CActivePagesEntities.LastActivePageState)
             {
-                case SActivePageState.CommonSettingsPage:
+                case SActivePageState.ConfigPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[0]);
                     break;
-                case SActivePageState.DamperSettingsPage:
+                case SActivePageState.CommonSettingsPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[1]);
                     break;
-                case SActivePageState.FanSettingsPage:
+                case SActivePageState.DamperSettingsPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[2]);
                     break;
-                case SActivePageState.WHSettingsPage:
+                case SActivePageState.FanSettingsPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[3]);
                     break;
-                case SActivePageState.EHSettingsPage:
+                case SActivePageState.WHSettingsPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[4]);
                     break;
-                case SActivePageState.FreonSettingsPage:
+                case SActivePageState.EHSettingsPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[5]);
                     break;
-                case SActivePageState.RecupSettingsPage:
+                case SActivePageState.FreonSettingsPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[6]);
                     break;
-                case SActivePageState.HumSettingsPage:
+                case SActivePageState.RecupSettingsPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[7]);
                     break;
-                case SActivePageState.SensorsSettingPage:
-                    SendMItemSettings(CMenusEntities.StartMenuCollection[8]);
-                    break;
-                case SActivePageState.ConfigPage:
+                case SActivePageState.HumSettingsPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[9]);
                     break;
+                case SActivePageState.SensorsSettingPage:
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[9]);
+                    break;
+
+                 
             }
             CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }
@@ -326,8 +321,6 @@ namespace Android_Silver.ViewModels
         {
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
         }
-
-
 
         Timer timer;
 

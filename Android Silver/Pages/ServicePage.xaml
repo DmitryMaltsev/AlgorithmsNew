@@ -35,7 +35,7 @@
         </Style>
         <Style TargetType="Entry" x:Key="EntryNum" BasedOn="{StaticResource EntryIP}">
             <Setter Property="FontSize" Value="17" />
-            <Setter Property="Grid.ColumnSpan" Value="4"/>
+            <Setter Property="Grid.ColumnSpan" Value="5"/>
             <Setter Property="MaximumWidthRequest" Value="140"/>
             <Setter Property="MaximumHeightRequest" Value="40"/>
             <Setter Property="MaxLength" Value="5"/>
@@ -43,7 +43,7 @@
         <Style TargetType="Picker" x:Key="ConfPicker">
             <Setter Property="FontSize" Value="17" />
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="Grid.ColumnSpan" Value="4"/>
+            <Setter Property="Grid.ColumnSpan" Value="5"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="MaximumWidthRequest" Value="140"/>
@@ -80,7 +80,7 @@
         <Style TargetType="Label" x:Key="FanSettingsLabel" BasedOn="{StaticResource OtherSettingsLabel}">
             <Setter Property="HorizontalOptions" Value="Start" />
             <Setter Property="HorizontalTextAlignment" Value="Start"/>
-            <Setter Property="Grid.ColumnSpan" Value="13"/>
+            <Setter Property="Grid.ColumnSpan" Value="12"/>
         </Style>
     </ContentPage.Resources>
     <ScrollView VerticalScrollBarVisibility="Always">
@@ -251,9 +251,9 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
-                                    <Entry Grid.Row="5"  Grid.Column="13" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
+                                    <Entry Grid.Row="5"  Grid.Column="12" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                       IsVisible = "{Binding EntryIsVisible}" />
-                                    <Picker Grid.Row="5"  Grid.Column="13" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
+                                    <Picker Grid.Row="5"  Grid.Column="12" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
                                                      SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" 
                                             SelectedIndex="{Binding CPickVal}"/>
                                 </Grid>

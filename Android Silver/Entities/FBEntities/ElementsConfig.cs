@@ -8,7 +8,6 @@ namespace Android_Silver.Entities.FBEntities
 {
     public class ElementsConfig
     {
-
         public int TOutDoorConfig;
         public int TSupplyFConfig;
         public int TExhaustFConfig;
@@ -19,5 +18,14 @@ namespace Android_Silver.Entities.FBEntities
         public int TregularCh_R;
         public int AutoResetFire;
         public int AutoRestart;
+
+        public int ET1;
+        public int ET2;
+        public int AR1;
+        public int AR2;
+        public int AR3;
+        public int OUT1;
+        public int OUT2;
+        public int Recup;
     }
 }

@@ -19,7 +19,7 @@ namespace Android_Silver.Entities.FBEntities
         public Sensors CSensors { get; set; }
         public Recup CRecup { get; set; }
 
-        public ElementsConfig CElementsConfig { get; set; }
+
 
         public CommonSetPoints CCommonSetPoints;
         public DamperSetPoints CDamperSetPoints;
@@ -44,7 +44,6 @@ namespace Android_Silver.Entities.FBEntities
             CWHSetPoints = new WHSetPoints();
             CEHSetPoints = new EHSetPoints();
             CFreonCoolerSP = new FreonCoolerSP();
-            CElementsConfig=new ElementsConfig();
         }
     }
 }
