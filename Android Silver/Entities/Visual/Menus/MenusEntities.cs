@@ -117,7 +117,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 20, "Аналоговый вход 0-10В AR3", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strSets.Add(sSet);
-            pickVals = new List<string>() { "Драйвер", "Modbus" };
+            pickVals = new List<string>() { "Нет", "Драйвер", "Modbus" };
             sSet = new StrSet(0, 1, "Рекуператор", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[0].StrSetsCollection = strSets;
