@@ -273,13 +273,11 @@ namespace Android_Silver.ViewModels
                     SendMItemSettings(CMenusEntities.StartMenuCollection[7]);
                     break;
                 case SActivePageState.HumSettingsPage:
-                    SendMItemSettings(CMenusEntities.StartMenuCollection[9]);
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[8]);
                     break;
                 case SActivePageState.SensorsSettingPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[9]);
                     break;
-
-                 
             }
             CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }
