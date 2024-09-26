@@ -20,7 +20,6 @@ namespace Android_Silver.Entities.FBEntities
                     _supNominalFlow = value;
                     OnPropertyChanged(nameof(SupNominalFlow));
                 }
-			
 			}
 		}
 

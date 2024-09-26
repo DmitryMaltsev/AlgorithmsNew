@@ -97,6 +97,8 @@ namespace Android_Silver.Entities.Visual.Menus
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Настройка аналоговых датчиков", isVisible: true, _pictureSet.BaseSettings1ButCollection[9], SActivePageState.SensorsSettingPage, id: 10, startAddress: 766);
             StartMenuCollection.Add(mItem);
+            mItem = new MItem("Настройка термоанемометров", isVisible: true, _pictureSet.BaseSettings1ButCollection[10], SActivePageState.TmhSettingsPage, id: 11, startAddress: 766);
+            StartMenuCollection.Add(mItem);
             #endregion
 
             #region Конфигурация
@@ -330,11 +332,27 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             StartMenuCollection[9].StrSetsCollection = strSets;
             #endregion
-            #region Конфигуратор
 
-
+            #region Термоанемометры
+            strSets = new ObservableCollection<StrSet>();
+            sSet = new StrSet(0, 65535, "Коэффициент термоанимометра притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 65535, "Коэффициент кривой притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 65535, "Коэффициент термоанимометра вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 65535, "Коэффициент кривой вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1000, "P коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1000, "I коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1000, "D коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            StartMenuCollection[10].StrSetsCollection = strSets;
 
             #endregion
+
 
         }
 

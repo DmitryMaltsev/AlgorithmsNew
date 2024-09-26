@@ -25,6 +25,7 @@ namespace Android_Silver.Entities.Visual
         HumSettingsPage,
         CommonSettingsPage,
         SensorsSettingPage,
+        TmhSettingsPage,
         ConfigPage,
         LoadingPage
     }
@@ -221,6 +222,18 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private bool _istmhSettingsPage;
+
+        public bool IsTmhSettingsPage
+        {
+            get { return _istmhSettingsPage; }
+            set {
+                _istmhSettingsPage = value; 
+                OnPropertyChanged(nameof(IsTmhSettingsPage));
+            }
+        }
+
+
         private bool _isConfigPage;
 
         public bool IsConfigPage
@@ -261,6 +274,7 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsFBSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.EntryPage:
@@ -281,6 +295,7 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsFBSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.MainMenuPage:
@@ -301,6 +316,7 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsFBSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.BaseSettingsPage:
@@ -322,6 +338,7 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsFBSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.ConfigPage:
@@ -353,6 +370,7 @@ namespace Android_Silver.Entities.Visual
                         IsStartPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.CommonSettingsPage:
@@ -373,6 +391,7 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[1].Name;
                         // _menuEntities.
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[0].CVal = _fbs.CCommonSetPoints.SPTempAlarm;
@@ -410,6 +429,7 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.FanSettingsPage:
@@ -443,6 +463,7 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.WHSettingsPage:
@@ -481,6 +502,7 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.EHSettingsPage:
@@ -508,6 +530,7 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.FreonSettingsPage:
@@ -536,6 +559,7 @@ namespace Android_Silver.Entities.Visual
                         IsSensorsSettingsPage = false;
                         IsConfigPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.RecupSettingsPage:
@@ -569,6 +593,7 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.HumSettingsPage:
@@ -597,6 +622,7 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
                 case SActivePageState.SensorsSettingPage:
@@ -636,9 +662,39 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
-
+                case SActivePageState.TmhSettingsPage:
+                    {
+                        IsTmhSettingsPage = true;
+                        IsFBSettingsPage = true;
+                        IsSensorsSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsConfigPage = false;
+                        IsFreonSettingsPage = false;
+                        IsLoadingPage = false;
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[10].Name;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[0].CVal = _fbs.ThmSps.SupTHmKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.SupCurveKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.ExhaustTHmKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.ExhaustCurveKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.PReg;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.IReg;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.DReg;
+                        _menusEntities.GenerateInterfaceTable(10);
+                    }
+                    break;
                 case SActivePageState.LoadingPage:
                     {
                         IsLoadingPage = true;
@@ -657,6 +713,7 @@ namespace Android_Silver.Entities.Visual
                         IsEntryPage = false;
                         IsStartPage = false;
                         IsFreonSettingsPage = false;
+                        IsTmhSettingsPage = false;
                     }
                     break;
             }

@@ -221,7 +221,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage:
                         {
-                            messToClient = "299,80\r\n";
+                            messToClient = "299,87\r\n";
                         }
                         break;
                 }
@@ -2937,6 +2937,90 @@ namespace Android_Silver.Services
                         if (_servActivePageEntities.IsLoadingPage)
                         {
                             _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 379:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val < 65535)
+                            {
+                                _fbs.ThmSps.SupTHmKoef = val;
+                            }
+                        }
+                    }
+                    break;
+                case 380:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val < 65535)
+                            {
+                                _fbs.ThmSps.SupCurveKoef = val;
+                            }
+                        }
+                    }
+                    break;
+                case 381:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val < 65535)
+                            {
+                                _fbs.ThmSps.ExhaustTHmKoef = val;
+                            }
+                        }
+                    }
+                    break;
+                case 382:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val < 65535)
+                            {
+                                _fbs.ThmSps.ExhaustCurveKoef = val;
+                            }
+                        }
+                    }
+                    break;
+                case 383:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val < 1000)
+                            {
+                                _fbs.ThmSps.PReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 384:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val < 1000)
+                            {
+                                _fbs.ThmSps.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 385:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val < 1000)
+                            {
+                                _fbs.ThmSps.DReg = val;
+                            }
                         }
                     }
                     break;

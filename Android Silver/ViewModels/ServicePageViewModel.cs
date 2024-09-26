@@ -278,6 +278,9 @@ namespace Android_Silver.ViewModels
                 case SActivePageState.SensorsSettingPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[9]);
                     break;
+                case SActivePageState.TmhSettingsPage:
+                    SendMItemSettings(CMenusEntities.StartMenuCollection[10]);
+                    break;
             }
             CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }
