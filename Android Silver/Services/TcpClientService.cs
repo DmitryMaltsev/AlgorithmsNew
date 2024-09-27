@@ -2847,7 +2847,7 @@ namespace Android_Silver.Services
 
                             if (val >= 0 && val <= 20)
                             {
-                                _fbs.CEConfig.ET1= val;
+                                _fbs.CEConfig.ET1 = val;
                             }
                         }
                     }
@@ -4496,6 +4496,94 @@ namespace Android_Silver.Services
                             if (val <= 1)
                             {
                                 _fbs.CEConfig.Recup = val;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                case 779:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65535)
+                            {
+                                _fbs.ThmSps.SupTHmKoef = val;
+                            }
+                        }
+                    }
+                    break;
+                case 780:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 65535)
+                            {
+                                _fbs.ThmSps.SupCurveKoef = val;
+                            }
+                        }
+                    }
+                    break;
+                case 781:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 65535)
+                            {
+                                _fbs.ThmSps.ExhaustTHmKoef = val;
+                            }
+                        }
+
+                    }
+                    break;
+                case 782:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 65535)
+                            {
+                                _fbs.ThmSps.ExhaustCurveKoef = val;
+                            }
+                        }
+                    }
+                    break;
+                case 783:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.ThmSps.PReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 784:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.ThmSps.IReg = val;
+                            }
+                        }
+
+                    }
+                    break;
+                case 785:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1000)
+                            {
+                                _fbs.ThmSps.DReg = val;
                             }
                         }
                         if (_servActivePageEntities.IsLoadingPage)

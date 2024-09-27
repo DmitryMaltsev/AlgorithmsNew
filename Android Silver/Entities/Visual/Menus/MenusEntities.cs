@@ -97,7 +97,7 @@ namespace Android_Silver.Entities.Visual.Menus
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Настройка аналоговых датчиков", isVisible: true, _pictureSet.BaseSettings1ButCollection[9], SActivePageState.SensorsSettingPage, id: 10, startAddress: 766);
             StartMenuCollection.Add(mItem);
-            mItem = new MItem("Настройка термоанемометров", isVisible: true, _pictureSet.BaseSettings1ButCollection[10], SActivePageState.TmhSettingsPage, id: 11, startAddress: 766);
+            mItem = new MItem("Настройка термоанемометров", isVisible: true, _pictureSet.BaseSettings1ButCollection[10], SActivePageState.TmhSettingsPage, id: 11, startAddress: 779);
             StartMenuCollection.Add(mItem);
             #endregion
 
