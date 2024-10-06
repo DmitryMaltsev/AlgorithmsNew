@@ -7,9 +7,6 @@ namespace Android_Silver.Entities.Visual
 
     #endregion
 
-
-
-
     public enum SActivePageState
     {
         EntryPage,
@@ -26,6 +23,8 @@ namespace Android_Silver.Entities.Visual
         CommonSettingsPage,
         SensorsSettingPage,
         TmhSettingsPage,
+        MBRecupSettingsPage,
+        FiltersSettingsPage,
         ConfigPage,
         LoadingPage
     }
@@ -235,7 +234,6 @@ namespace Android_Silver.Entities.Visual
 
 
         private bool _isConfigPage;
-
         public bool IsConfigPage
         {
             get { return _isConfigPage; }
@@ -245,6 +243,30 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged(nameof(IsConfigPage));
             }
         }
+
+        private bool _isMBRecupSettingsPage;
+
+        public bool IsMBRecupSettingsPage
+        {
+            get { return _isMBRecupSettingsPage; }
+            set { 
+                _isMBRecupSettingsPage = value;
+                OnPropertyChanged(nameof(IsMBRecupSettingsPage));
+            }
+        }
+
+        private bool _isFiltersSettingsPage;
+
+        public bool IsFiltersSettingsPage
+        {
+            get { return _isFiltersSettingsPage; }
+            set { 
+                _isFiltersSettingsPage = value;
+                OnPropertyChanged($"{nameof(IsFiltersSettingsPage)}");
+            }
+        }
+
+
         #endregion
 
         public ServiceActivePagesEntities()
@@ -275,6 +297,8 @@ namespace Android_Silver.Entities.Visual
                         IsFBSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.EntryPage:
@@ -296,6 +320,8 @@ namespace Android_Silver.Entities.Visual
                         IsFBSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.MainMenuPage:
@@ -317,6 +343,8 @@ namespace Android_Silver.Entities.Visual
                         IsFBSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.BaseSettingsPage:
@@ -339,6 +367,8 @@ namespace Android_Silver.Entities.Visual
                         IsFBSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.ConfigPage:
@@ -371,6 +401,8 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.CommonSettingsPage:
@@ -392,6 +424,8 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[1].Name;
                         // _menuEntities.
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[0].CVal = _fbs.CCommonSetPoints.SPTempAlarm;
@@ -430,6 +464,8 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.FanSettingsPage:
@@ -464,6 +500,8 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.WHSettingsPage:
@@ -503,6 +541,8 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.EHSettingsPage:
@@ -531,6 +571,8 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.FreonSettingsPage:
@@ -560,6 +602,8 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.RecupSettingsPage:
@@ -594,6 +638,8 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.HumSettingsPage:
@@ -623,6 +669,8 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.SensorsSettingPage:
@@ -663,6 +711,8 @@ namespace Android_Silver.Entities.Visual
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
                 case SActivePageState.TmhSettingsPage:
@@ -684,6 +734,8 @@ namespace Android_Silver.Entities.Visual
                         IsConfigPage = false;
                         IsFreonSettingsPage = false;
                         IsLoadingPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[10].Name;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[0].CVal = _fbs.ThmSps.SupTHmKoef;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.SupCurveKoef;
@@ -714,8 +766,47 @@ namespace Android_Silver.Entities.Visual
                         IsStartPage = false;
                         IsFreonSettingsPage = false;
                         IsTmhSettingsPage = false;
+                        IsMBRecupSettingsPage = false;
+                        IsFiltersSettingsPage = false;
                     }
                     break;
+                case SActivePageState.MBRecupSettingsPage:
+                {
+                        IsMBRecupSettingsPage = true;
+                        IsFBSettingsPage = true;
+                        IsLoadingPage = false;
+                        IsConfigPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsFreonSettingsPage = false;
+                        IsTmhSettingsPage = false;
+                        IsFiltersSettingsPage = false;
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[11].Name;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[0].CVal = _fbs.MbRecSPs.MBRecMode;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[1].CPickVal = _fbs.MbRecSPs.IsRotTest;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[2].CPickVal = _fbs.MbRecSPs.IsGrindingMode;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[3].CVal = _fbs.MbRecSPs.IsForward;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[4].CVal = _fbs.MbRecSPs.NominalCurrent;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[5].CVal = _fbs.MbRecSPs.ReductKoef;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[6].CVal = _fbs.MbRecSPs.NominalTurns1;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[7].CVal = _fbs.MbRecSPs.NominalTurns2;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[8].CVal = _fbs.MbRecSPs.NominalTemp1;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[9].CVal = _fbs.MbRecSPs.NominalTemp2;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[10].CVal = _fbs.MbRecSPs.GrindingCurrent;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[11].CVal = _fbs.MbRecSPs.GrindingTurns;
+                        _menusEntities.GenerateInterfaceTable(11);
+                    }
+                break;
             }
 
             if (activePageState != SActivePageState.StartPage)

@@ -99,6 +99,10 @@ namespace Android_Silver.Entities.Visual.Menus
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Настройка термоанемометров", isVisible: true, _pictureSet.BaseSettings1ButCollection[10], SActivePageState.TmhSettingsPage, id: 11, startAddress: 779);
             StartMenuCollection.Add(mItem);
+            mItem = new MItem("Настройка Modbus шагового мотора", isVisible: true, _pictureSet.BaseSettings1ButCollection[11], SActivePageState.MBRecupSettingsPage, id: 12, startAddress: 786);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Настройка фильтров", isVisible: true, _pictureSet.BaseSettings1ButCollection[12], SActivePageState.FiltersSettingsPage, id: 13, startAddress: 786);
+            StartMenuCollection.Add(mItem);
             #endregion
 
             #region Конфигурация
@@ -332,7 +336,6 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             StartMenuCollection[9].StrSetsCollection = strSets;
             #endregion
-
             #region Термоанемометры
             strSets = new ObservableCollection<StrSet>();
             sSet = new StrSet(0, 65535, "Коэффициент термоанимометра притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
@@ -343,14 +346,62 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 65535, "Коэффициент кривой вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
+            sSet = new StrSet(-100, +120, "Температура H1 °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-100, +120, "Температура C1 °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-100, +120, "Температура H2 °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-100, +120, "Температура C2 °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "P коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "I коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "D коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
             strSets.Add(sSet);
+            sSet = new StrSet(-99, 99, "Коэф. К грязного фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-99, 99, "Коэф. B грязного фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-99, 99, "Коэф. К чистого фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-99, 99, "Коэф. B чистого фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
             StartMenuCollection[10].StrSetsCollection = strSets;
 
+            #endregion
+
+            #region Modbus рекуператор
+            strSets = new ObservableCollection<StrSet>();
+            pickVals = new List<string>() { "SR_OPEN", "SR_Close", "SR_vFoc" };
+            sSet = new StrSet(0, 2, "Режим работы", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "Нет", "Да" };
+            sSet = new StrSet(0, 1, "Тест вращения", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "По часовой", "Пр часовой" };
+            sSet = new StrSet(0, 1, "Направление вращения", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 10_000, "Номинальный ток, ма", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Номин. обороты 1, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Номин. обороты 2, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-70, 70, "Темп для номинала 1, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-70, 70, "Темп для номинала 2, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 10_000, "Притирочный ток, мА", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Притирочные обороты, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, pickVals);
+            strSets.Add(sSet);
+            StartMenuCollection[11].StrSetsCollection = strSets;
             #endregion
 
 

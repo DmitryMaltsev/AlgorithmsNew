@@ -63,8 +63,8 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
-        private int _cVal;
-        public int CVal
+        private float _cVal;
+        public float CVal
         {
             get { return _cVal; }
             set

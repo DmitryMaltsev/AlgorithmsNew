@@ -3,6 +3,7 @@ using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
+
 using System.Windows.Input;
 
 namespace Android_Silver.ViewModels
@@ -151,12 +152,12 @@ namespace Android_Silver.ViewModels
                 await CTcpClientService.Connect();
                 if (EthernetEntities.IsConnected)
                 {
-                   // CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
+                    // CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     CTcpClientService.MessageToServer = "";
                     //CTcpClientService.SendRecieveTask("299,56");
                     CTcpClientService.SendRecieveTask("");
-                   
+
                     // TcpClientService.SendRecieveTask("137,4");
                 }
             }
@@ -281,6 +282,11 @@ namespace Android_Silver.ViewModels
                 case SActivePageState.TmhSettingsPage:
                     SendMItemSettings(CMenusEntities.StartMenuCollection[10]);
                     break;
+                case SActivePageState.MBRecupSettingsPage:
+                    {
+                        SendMItemSettings(CMenusEntities.StartMenuCollection[11]);
+                    }
+                    break;
             }
             CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }
@@ -294,7 +300,7 @@ namespace Android_Silver.ViewModels
                 {
                     if (mItem.StrSetsCollection[i].EntryIsVisible)
                     {
-                        values[i] = mItem.StrSetsCollection[i].CVal;
+                        values[i] = (int)mItem.StrSetsCollection[i].CVal;
                     }
                     else
                       if (mItem.StrSetsCollection[i].PickerIsVisible)
@@ -305,10 +311,6 @@ namespace Android_Silver.ViewModels
                 CTcpClientService.SetCommandToServer(mItem.Address, values);
             }
         }
-
-
-
-
 
 
         #endregion

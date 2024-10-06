@@ -3,6 +3,7 @@ using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 
+using System;
 using System.Collections;
 using System.Net.Sockets;
 using System.Text;
@@ -3024,6 +3025,149 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                case 386:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 2 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.MBRecMode = val;
+                            }
+                        }
+                    }
+                    break;
+                case 387:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.IsRotTest = (byte)val;
+                            }
+                        }
+                    }
+                    break;
+                case 388:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.IsGrindingMode = (byte)val;
+                            }
+                        }
+                    }
+                    break;
+                case 389:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.IsForward = (byte)val;
+                            }
+                        }
+                    }
+                    break;
+                case 390:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10_000 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.NominalCurrent = val;
+                            }
+                        }
+                    }
+                    break;
+                case 391:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 1000 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.ReductKoef = (float)val / 10;
+                            }
+                        }
+                    }
+                    break;
+                case 392:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.NominalTurns1 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 393:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.NominalTurns2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 394:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val <= 70 && val >= -70)
+                            {
+                                _fbs.MbRecSPs.NominalTemp1 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 395:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val <= 70 && val >= -70)
+                            {
+                                _fbs.MbRecSPs.NominalTemp2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 396:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10_000 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.GrindingCurrent = val;
+                            }
+                        }
+                    }
+                    break;
+                case 397:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.GrindingTurns = val;
+                            }
+                        }
+                    }
+                    break;
 
                 //Проверка того, что данные записаны
                 case 500:
@@ -4592,6 +4736,150 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                case 786:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 2 && val >=0)
+                            {
+                                _fbs.MbRecSPs.MBRecMode = val;
+                            }
+                        }
+                    }
+                    break;
+                case 787:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.IsRotTest = (byte)val;
+                            }
+                        }
+                    }
+                   break;
+                case 788:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.IsGrindingMode = (byte)val;
+                            }
+                        }
+                    }
+                    break;
+                case 789:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 1 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.IsForward = (byte)val;
+                            }
+                        }
+                    }
+                    break;
+                case 790:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10_000 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.NominalCurrent =val;
+                            }
+                        }
+                    }
+                    break;
+                case 791:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 1000 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.ReductKoef = (float)val/10;
+                            }
+                        }
+                    }
+                    break;
+                case 792:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.NominalTurns1 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 793:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.NominalTurns2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 794:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val <= 70 && val >= -70)
+                            {
+                                _fbs.MbRecSPs.NominalTemp1 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 795:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val <= 70 && val >= -70)
+                            {
+                                _fbs.MbRecSPs.NominalTemp2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 796:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 10_000 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.GrindingCurrent = val;
+                            }
+                        }
+                    }
+                    break;
+                case 797:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100 && val >= 0)
+                            {
+                                _fbs.MbRecSPs.GrindingTurns = val;
+                            }
+                        }
+                    }
+                    break;
+
             }
         }
 
