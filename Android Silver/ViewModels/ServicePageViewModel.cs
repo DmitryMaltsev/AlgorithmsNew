@@ -90,7 +90,6 @@ namespace Android_Silver.ViewModels
 
         public ServicePageViewModel()
         {
-
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CActivePagesEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();

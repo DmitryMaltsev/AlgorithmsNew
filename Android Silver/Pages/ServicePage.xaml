@@ -250,9 +250,9 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}"/>
+                                    <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}" />
                                     <Entry Grid.Row="5"  Grid.Column="12" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
-                                      IsVisible = "{Binding EntryIsVisible}" />
+                                      IsVisible = "{Binding EntryIsVisible}" IsEnabled="{Binding IsEnabled}"/>
                                     <Picker Grid.Row="5"  Grid.Column="12" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" 
                                                      SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" 
                                             SelectedIndex="{Binding CPickVal}"/>

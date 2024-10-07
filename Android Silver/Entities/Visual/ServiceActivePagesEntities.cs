@@ -36,6 +36,7 @@ namespace Android_Silver.Entities.Visual
         FBs _fbs;
 
         public SActivePageState LastActivePageState { get; set; } = SActivePageState.EntryPage;
+
         #region Rising properties
         private bool _isLoadingPage;
 
@@ -48,9 +49,6 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged(nameof(IsLoadingPage));
             }
         }
-
-
-
 
         private bool _isFBSettingsPage;
 
@@ -274,6 +272,7 @@ namespace Android_Silver.Entities.Visual
             _menusEntities = DIContainer.Resolve<MenusEntities>();
             _fbs = DIContainer.Resolve<FBs>();
         }
+
         public void SetActivePageState(SActivePageState activePageState, int pageState = 0)
         {
             switch (activePageState)
@@ -741,9 +740,17 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.SupCurveKoef;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.ExhaustTHmKoef;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.ExhaustCurveKoef;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.PReg;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.IReg;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.DReg;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempH1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.TempC1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.TempH2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.TempC2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.PReg;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.IReg;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[10].CVal = _fbs.ThmSps.DReg;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[11].CVal = _fbs.ThmSps.KPolKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[12].CVal = _fbs.ThmSps.BPolKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[13].CVal = _fbs.ThmSps.KClKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[14].CVal = _fbs.ThmSps.BClKoef;
                         _menusEntities.GenerateInterfaceTable(10);
                     }
                     break;

@@ -2,8 +2,8 @@
 using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
+using Android_Silver.Entities.Visual.Menus;
 
-using System;
 using System.Collections;
 using System.Net.Sockets;
 using System.Text;
@@ -32,6 +32,8 @@ namespace Android_Silver.Services
         public Action<int> SetMode1Action { get; set; }
         private ActivePagesEntities _activePageEntities { get; set; }
 
+        MenusEntities _menusEntities { get; set;}
+
         private ServiceActivePagesEntities _servActivePageEntities { get; set; }
 
         public TcpClientService()
@@ -39,6 +41,7 @@ namespace Android_Silver.Services
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
+            _menusEntities= DIContainer.Resolve<MenusEntities>();
             _fbs = DIContainer.Resolve<FBs>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             _servActivePageEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
@@ -191,7 +194,6 @@ namespace Android_Silver.Services
             }
         }
 
-
         private string GetMessageToServer()
         {
             string messToClient = MessageToServer;
@@ -222,7 +224,9 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage:
                         {
-                            messToClient = "299,87\r\n";
+                            //  messToClient = "299,87\r\n";
+                            //Термоанемометры
+                              messToClient = "379,15\r\n";
                         }
                         break;
                 }
@@ -2941,6 +2945,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                 //Термоанемометры
                 case 379:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
@@ -2991,41 +2996,145 @@ namespace Android_Silver.Services
                     break;
                 case 383:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        if (short.TryParse(resp.ValueString, out short val))
                         {
 
-                            if (val >= 0 && val < 1000)
+                            if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.PReg = val;
+                                _fbs.ThmSps.TempH1 = (float)val/10;
                             }
                         }
                     }
                     break;
                 case 384:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        if (short.TryParse(resp.ValueString, out short val))
                         {
 
-                            if (val >= 0 && val < 1000)
+                            if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.IReg = val;
+                                _fbs.ThmSps.TempC1 = (float)val / 10;
                             }
                         }
                     }
                     break;
                 case 385:
                     {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -1000 && val <= 1200)
+                            {
+                                _fbs.ThmSps.TempH2 = (float)val / 10;
+                            }
+                        }
+                    }
+                    break;
+                case 386:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -1000 && val <= 1200)
+                            {
+                                _fbs.ThmSps.TempC2 = (float)val / 10;
+                            }
+                            if (_menusEntities.StartMenuCollection.Count > 8 && _servActivePageEntities.LastActivePageState == SActivePageState.TmhSettingsPage)
+                            {
+                                _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempH1;
+                                _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.TempC1;
+                                _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.TempH2;
+                                _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.TempC2;
+                            }
+                        }
+                    }
+                    break;
+                case 387:
+                    {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val >= 0 && val < 1000)
+                            if (val >= 0 && val <= 1000)
+                            {
+                                _fbs.ThmSps.PReg = val;    
+                            }
+                        }
+                    }
+                    break;
+                case 388:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val <= 1000)
+                            {
+                                _fbs.ThmSps.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 389:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val <= 1000)
                             {
                                 _fbs.ThmSps.DReg = val;
                             }
                         }
                     }
                     break;
-                case 386:
+                case 390:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -9999 && val <= 9999)
+                            {
+                                _fbs.ThmSps.KPolKoef = (float)val / 100;
+                            }
+                        }
+                    }
+                    break;
+                case 391:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -9999 && val <= 9999)
+                            {
+                                _fbs.ThmSps.BPolKoef = (float)val / 100;
+                            }
+                        }
+                    }
+                    break;
+                case 392:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -9999 && val <= 9999)
+                            {
+                                _fbs.ThmSps.KClKoef = (float)val / 100;
+                            }
+                        }
+                    }
+                    break;
+                case 393:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -9999 && val <= 9999)
+                            {
+                                _fbs.ThmSps.BClKoef = (float)val / 100;
+                            }
+                        }
+                    }
+                    break;
+                //Работа рекуператора Modbus
+                case 394:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3037,7 +3146,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 387:
+                case 395:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3049,7 +3158,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 388:
+                case 396:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3061,7 +3170,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 389:
+                case 397:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3073,7 +3182,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 390:
+                case 398:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3085,7 +3194,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 391:
+                case 399:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3096,7 +3205,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 392:
+                case 400:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3108,7 +3217,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 393:
+                case 401:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3120,7 +3229,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 394:
+                case 402:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3132,7 +3241,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 395:
+                case 403:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3144,7 +3253,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 396:
+                case 404:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3156,7 +3265,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 397:
+                case 405:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4648,12 +4757,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                //термоанемометры
                 case 779:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 65535)
+                            if (val >= 0 && val < 65535)
                             {
                                 _fbs.ThmSps.SupTHmKoef = val;
                             }
@@ -4665,7 +4775,7 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 65535)
+                            if (val >= 0 && val < 65535)
                             {
                                 _fbs.ThmSps.SupCurveKoef = val;
                             }
@@ -4676,19 +4786,20 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (val <= 65535)
+
+                            if (val >= 0 && val < 65535)
                             {
                                 _fbs.ThmSps.ExhaustTHmKoef = val;
                             }
                         }
-
                     }
                     break;
                 case 782:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (val <= 65535)
+
+                            if (val >= 0 && val < 65535)
                             {
                                 _fbs.ThmSps.ExhaustCurveKoef = val;
                             }
@@ -4697,58 +4808,150 @@ namespace Android_Silver.Services
                     break;
                 case 783:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        if (short.TryParse(resp.ValueString, out short val))
                         {
 
-                            if (val <= 1000)
+                            if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.PReg = val;
+                                _fbs.ThmSps.TempH1 = val / 100;
                             }
                         }
                     }
                     break;
                 case 784:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        if (short.TryParse(resp.ValueString, out short val))
                         {
 
-                            if (val <= 1000)
+                            if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.IReg = val;
+                                _fbs.ThmSps.TempC1 = val / 10;
                             }
                         }
-
                     }
                     break;
                 case 785:
                     {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        if (short.TryParse(resp.ValueString, out short val))
                         {
 
-                            if (val <= 1000)
+                            if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.DReg = val;
+                                _fbs.ThmSps.TempH2 = val / 10;
                             }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                         }
                     }
                     break;
                 case 786:
                     {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -1000 && val <= 1200)
+                            {
+                                _fbs.ThmSps.TempC2 = val / 10;
+                            }
+                        }
+                    }
+                    break;
+                case 787:
+                    {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 2 && val >=0)
+                            if (val >= 0 && val <= 1000)
+                            {
+                                _fbs.ThmSps.PReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 788:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val <= 1000)
+                            {
+                                _fbs.ThmSps.IReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 789:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val <= 1000)
+                            {
+                                _fbs.ThmSps.DReg = val;
+                            }
+                        }
+                    }
+                    break;
+                case 790:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -9999 && val <= 9999)
+                            {
+                                _fbs.ThmSps.KPolKoef = val / 100;
+                            }
+                        }
+                    }
+                    break;
+                case 791:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -9999 && val <= 9999)
+                            {
+                                _fbs.ThmSps.BPolKoef = val / 100;
+                            }
+                        }
+                    }
+                    break;
+                case 792:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -9999 && val <= 9999)
+                            {
+                                _fbs.ThmSps.KClKoef = val / 100;
+                            }
+                        }
+                    }
+                    break;
+                case 793:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= -9999 && val <= 9999)
+                            {
+                                _fbs.ThmSps.BClKoef = val / 100;
+                            }
+                        }
+                    }
+                    break;;
+                //Работа рекуператора Modbus
+                case 794:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 2 && val >= 0)
                             {
                                 _fbs.MbRecSPs.MBRecMode = val;
                             }
                         }
                     }
                     break;
-                case 787:
+                case 795:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4759,8 +4962,8 @@ namespace Android_Silver.Services
                             }
                         }
                     }
-                   break;
-                case 788:
+                    break;
+                case 796:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4772,7 +4975,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 789:
+                case 797:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4784,30 +4987,30 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 790:
+                case 798:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
                             if (val <= 10_000 && val >= 0)
                             {
-                                _fbs.MbRecSPs.NominalCurrent =val;
+                                _fbs.MbRecSPs.NominalCurrent = val;
                             }
                         }
                     }
                     break;
-                case 791:
+                case 799:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
                             if (val <= 1000 && val >= 0)
                             {
-                                _fbs.MbRecSPs.ReductKoef = (float)val/10;
+                                _fbs.MbRecSPs.ReductKoef = (float)val / 10;
                             }
                         }
                     }
                     break;
-                case 792:
+                case 800:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4819,7 +5022,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 793:
+                case 801:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4831,7 +5034,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 794:
+                case 802:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -4843,7 +5046,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 795:
+                case 803:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -4855,7 +5058,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 796:
+                case 804:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4867,7 +5070,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 797:
+                case 805:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4879,7 +5082,6 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-
             }
         }
 

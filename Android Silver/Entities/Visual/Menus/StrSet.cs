@@ -108,8 +108,20 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
+        private bool _isEnabled;
 
-        public StrSet(float minVal, float maxVal, string name,bool isVisible, bool pickerIsVisible, bool entryIsVisible, List<string> pickVals)
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set { 
+                _isEnabled = value;
+                OnPropertyChanged(nameof(IsEnabled));
+            }
+        }
+
+
+
+        public StrSet(float minVal, float maxVal, string name,bool isVisible, bool pickerIsVisible, bool entryIsVisible,bool isEnabled, List<string> pickVals)
         {
             PickVals = pickVals;
             CPickVal=0;
@@ -119,6 +131,7 @@ namespace Android_Silver.Entities.Visual.Menus
             IsVisible = isVisible;
             PickerIsVisible = pickerIsVisible;
             EntryIsVisible = entryIsVisible;
+            IsEnabled = isEnabled;
         }
 
     }
