@@ -226,7 +226,7 @@ namespace Android_Silver.Services
                         {
                             //  messToClient = "299,87\r\n";
                             //Термоанемометры
-                              messToClient = "379,15\r\n";
+                              messToClient = "379,27\r\n";
                         }
                         break;
                 }
