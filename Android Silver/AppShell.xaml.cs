@@ -3,6 +3,8 @@ using Android_Silver.Pages;
 using Android_Silver.Pages.ModesSettings;
 using Android_Silver.ViewModels;
 
+using Microsoft.Maui.Controls;
+
 using System.ComponentModel;
 
 namespace Android_Silver
@@ -30,21 +32,27 @@ namespace Android_Silver
   
         private void ShellContent_Appearing(object sender, EventArgs e)
         {
-            MainPageViewModel mpViewModel=new MainPageViewModel();
-            if (mpViewModel!=null)
-            {
-                mpViewModel.SetActivePageIfNeed();
+          //  MainPageViewModel mpViewModel=new MainPageViewModel();
+         //       mpViewModel.SetActivePageIfNeed();
                 _ethernetEntities.PagesTab = 0;
+            Element view = Routing.GetOrCreateContent("mainPage");
+            MainPageViewModel mainPageViewModel = view.BindingContext as MainPageViewModel;
+            if (mainPageViewModel != null)
+            {
+                mainPageViewModel.SetActivePageIfNeed();
             }
         }
 
         private void ShellContent_Appearing_1(object sender, EventArgs e)
         {
-            ServicePageViewModel spViewModel= new ServicePageViewModel();
+          //  ServicePageViewModel spViewModel= new ServicePageViewModel();
+           //     spViewModel.SetActivePageIfNeed();
+                _ethernetEntities.PagesTab = 1;
+            Element view = Routing.GetOrCreateContent("servicePage");
+            ServicePageViewModel spViewModel = view.BindingContext as ServicePageViewModel;
             if (spViewModel != null)
             {
                 spViewModel.SetActivePageIfNeed();
-                _ethernetEntities.PagesTab = 1;
             }
         }
     }

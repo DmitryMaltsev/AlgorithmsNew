@@ -34,7 +34,7 @@ namespace Android_Silver.Entities.Visual
     {
         MenusEntities _menusEntities;
         FBs _fbs;
-
+        public bool EntryIsEntered = false;
         public SActivePageState LastActivePageState { get; set; } = SActivePageState.EntryPage;
 
         #region Rising properties
@@ -751,6 +751,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[12].CVal = _fbs.ThmSps.BPolKoef;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[13].CVal = _fbs.ThmSps.KClKoef;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[14].CVal = _fbs.ThmSps.BClKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[15].CVal = _fbs.ThmSps.U;
                         _menusEntities.GenerateInterfaceTable(10);
                     }
                     break;
@@ -799,7 +800,7 @@ namespace Android_Silver.Entities.Visual
                         IsTmhSettingsPage = false;
                         IsFiltersSettingsPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[11].Name;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[0].CVal = _fbs.MbRecSPs.MBRecMode;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[0].CPickVal = _fbs.MbRecSPs.MBRecMode;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[1].CPickVal = _fbs.MbRecSPs.IsRotTest;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[2].CPickVal = _fbs.MbRecSPs.IsGrindingMode;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[3].CVal = _fbs.MbRecSPs.IsForward;

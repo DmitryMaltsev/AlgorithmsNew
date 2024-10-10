@@ -12,7 +12,7 @@ namespace Android_Silver.Entities.FBEntities
         public int SupCurveKoef;
         public int ExhaustTHmKoef;
         public int ExhaustCurveKoef;
-        public int U;
+        public float U;
         public float TempH1;
         public float TempC1;
         public float TempH2;

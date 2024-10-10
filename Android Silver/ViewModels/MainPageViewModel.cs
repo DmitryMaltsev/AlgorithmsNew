@@ -369,7 +369,7 @@ namespace Android_Silver.Pages
             TimeBtnDnCommand4 = new Command(ExecuteTimeBtnDn4);
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
-            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage);
+           
 
             SetTValuesByIndex(0, 0);//?????
             StartTimer();
@@ -411,7 +411,6 @@ namespace Android_Silver.Pages
         }
 
         #region Main page execute methods
-
         public void SetActivePageIfNeed()
         {
             if (!EthernetEntities.IsConnected)
@@ -420,7 +419,7 @@ namespace Android_Silver.Pages
             }
             else
             {
-                CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
+                CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             }
             //CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
         }

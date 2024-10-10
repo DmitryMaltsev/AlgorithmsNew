@@ -5,6 +5,7 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 
 using System.Collections;
+using System.ComponentModel.Design;
 using System.Net.Sockets;
 using System.Text;
 
@@ -32,7 +33,7 @@ namespace Android_Silver.Services
         public Action<int> SetMode1Action { get; set; }
         private ActivePagesEntities _activePageEntities { get; set; }
 
-        MenusEntities _menusEntities { get; set;}
+        MenusEntities _menusEntities { get; set; }
 
         private ServiceActivePagesEntities _servActivePageEntities { get; set; }
 
@@ -41,13 +42,12 @@ namespace Android_Silver.Services
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
-            _menusEntities= DIContainer.Resolve<MenusEntities>();
+            _menusEntities = DIContainer.Resolve<MenusEntities>();
             _fbs = DIContainer.Resolve<FBs>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             _servActivePageEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
             _fbs.OtherSettings.MFloorAction += MFloorCallback;
             _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
-
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
         }
@@ -58,11 +58,15 @@ namespace Android_Silver.Services
             {
                 IsConnecting = true;
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 300;
-                _ethernetEntities.Client.SendTimeout = 300;
+                _ethernetEntities.Client.ReceiveTimeout = 500;
+                _ethernetEntities.Client.SendTimeout = 500;
                 _ethernetEntities.IsConnected = false;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
-                if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
+                if (_ethernetEntities.PagesTab == 1)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.LoadingPage);
+                }
+                    if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
                 {
                     _ethernetEntities.IsConnected = false;
                     IsConnecting = false;
@@ -74,7 +78,6 @@ namespace Android_Silver.Services
                         connectTask.Dispose();
                     }
                     throw new Exception("Не удалось подключиться модулю WI-FI");
-
                 }
                 else
                 {
@@ -155,7 +158,7 @@ namespace Android_Silver.Services
                      {
                          _ethernetEntities.SystemMessage = "Данные уже передаются";
                      }
-                     Task.Delay(50);
+                     Task.Delay(200);
                  }
              });
         }
@@ -190,7 +193,15 @@ namespace Android_Silver.Services
             else
             if (_ethernetEntities.PagesTab == 1)
             {
-                _ethernetEntities.CMessageState = MessageStates.ServiceMessage;
+                if (_ethernetEntities.CMessageState != MessageStates.ServiceMessage1)
+                {
+                    _ethernetEntities.CMessageState = MessageStates.ServiceMessage1;
+                }
+                else
+                if (_ethernetEntities.CMessageState == MessageStates.ServiceMessage1)
+                {
+                    _ethernetEntities.CMessageState = MessageStates.ServiceMessage2;
+                }
             }
         }
 
@@ -204,29 +215,38 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            messToClient = "103,50\r\n";
+                            messToClient = "103,050\r\n";
                         }
                         break;
                     case MessageStates.VacMessage:
                         {
-                            messToClient = "167,16\r\n";
+                            messToClient = "167,016\r\n";
                         }
                         break;
                     case MessageStates.ShedMessage1:
                         {
-                            messToClient = "183,56\r\n";
+                            messToClient = "183,056\r\n";
                         }
                         break;
                     case MessageStates.ShedMessage2:
                         {
-                            messToClient = "239,56\r\n";
+                            messToClient = "239,056\r\n";
                         }
                         break;
-                    case MessageStates.ServiceMessage:
+                    case MessageStates.ServiceMessage1:
                         {
                             //  messToClient = "299,87\r\n";
                             //Термоанемометры
-                              messToClient = "379,27\r\n";
+                            //  messToClient = "379,27\r\n";
+                            messToClient = "299,60\r\n";
+                        }
+                        break;
+                    case MessageStates.ServiceMessage2:
+                        {
+                            //  messToClient = "299,87\r\n";
+                            //Термоанемометры
+                            //  messToClient = "379,27\r\n";
+                            messToClient = "359,48\r\n";
                         }
                         break;
                 }
@@ -252,7 +272,7 @@ namespace Android_Silver.Services
                     StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
-                    byte[] data = new byte[350];
+                    byte[] data = new byte[300];
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
                     {
@@ -2945,7 +2965,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                 //Термоанемометры
+                //Термоанемометры
                 case 379:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
@@ -3001,7 +3021,7 @@ namespace Android_Silver.Services
 
                             if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.TempH1 = (float)val/10;
+                                _fbs.ThmSps.TempH1 = (float)val / 10;
                             }
                         }
                     }
@@ -3056,7 +3076,7 @@ namespace Android_Silver.Services
 
                             if (val >= 0 && val <= 1000)
                             {
-                                _fbs.ThmSps.PReg = val;    
+                                _fbs.ThmSps.PReg = val;
                             }
                         }
                     }
@@ -3133,8 +3153,20 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                //Работа рекуператора Modbus
                 case 394:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val >= 0 && val <= 100)
+                            {
+                                _fbs.ThmSps.U = (float)val / 10;
+                            }
+                        }
+                    }
+                    break;
+                //Работа рекуператора Modbus
+                case 395:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3146,7 +3178,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 395:
+                case 396:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3158,7 +3190,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 396:
+                case 397:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3167,10 +3199,16 @@ namespace Android_Silver.Services
                             {
                                 _fbs.MbRecSPs.IsGrindingMode = (byte)val;
                             }
+                            if (_menusEntities.StartMenuCollection.Count > 3 && _servActivePageEntities.LastActivePageState == SActivePageState.RecupSettingsPage)
+                            {
+                                _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CPickVal = _fbs.MbRecSPs.IsGrindingMode;
+
+
+                            }
                         }
                     }
                     break;
-                case 397:
+                case 398:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3182,7 +3220,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 398:
+                case 399:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3194,25 +3232,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 399:
+                case 400:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
                             if (val <= 1000 && val >= 0)
                             {
                                 _fbs.MbRecSPs.ReductKoef = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 400:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.NominalTurns1 = val;
                             }
                         }
                     }
@@ -3224,19 +3250,19 @@ namespace Android_Silver.Services
 
                             if (val <= 100 && val >= 0)
                             {
-                                _fbs.MbRecSPs.NominalTurns2 = val;
+                                _fbs.MbRecSPs.NominalTurns1 = val;
                             }
                         }
                     }
                     break;
                 case 402:
                     {
-                        if (short.TryParse(resp.ValueString, out short val))
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 70 && val >= -70)
+                            if (val <= 100 && val >= 0)
                             {
-                                _fbs.MbRecSPs.NominalTemp1 = val;
+                                _fbs.MbRecSPs.NominalTurns2 = val;
                             }
                         }
                     }
@@ -3248,12 +3274,24 @@ namespace Android_Silver.Services
 
                             if (val <= 70 && val >= -70)
                             {
-                                _fbs.MbRecSPs.NominalTemp2 = val;
+                                _fbs.MbRecSPs.NominalTemp1 = val;
                             }
                         }
                     }
                     break;
                 case 404:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val <= 70 && val >= -70)
+                            {
+                                _fbs.MbRecSPs.NominalTemp2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 405:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3265,7 +3303,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 405:
+                case 406:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3274,6 +3312,10 @@ namespace Android_Silver.Services
                             {
                                 _fbs.MbRecSPs.GrindingTurns = val;
                             }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                         }
                     }
                     break;
@@ -3735,6 +3777,1085 @@ namespace Android_Silver.Services
                         //}
                     }
                     break;
+                //Данные о режиме отпуска
+                case 567:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[0].DayNum = val;
+                        }
+                    }
+                    break;
+                case 568:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[0].Hour = val;
+                        }
+                    }
+                    break;
+                case 569:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[0].Minute = val;
+                        }
+                    }
+                    break;
+                case 570:
+                    {
+                        GetTModeCMode1(2, 0, resp.ValueString);
+                    }
+                    break;
+                //Строка 2
+                case 571:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].DayNum = val;
+                        }
+                    }
+                    break;
+                case 572:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Hour = val;
+                        }
+                    }
+                    break;
+                case 573:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Minute = val;
+                        }
+                    }
+                    break;
+                case 574:
+                    {
+                        GetTModeCMode1(2, 1, resp.ValueString);
+                    }
+                    break;
+                //Строка 3
+                case 575:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[2].DayNum = val;
+                        }
+                    }
+                    break;
+                case 576:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[2].Hour = val;
+                        }
+                    }
+                    break;
+                case 577:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[2].Minute = val;
+                        }
+                    }
+                    break;
+                case 578:
+                    {
+                        GetTModeCMode1(2, 2, resp.ValueString);
+
+                    }
+                    break;
+                //Строка 4
+                case 579:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[3].DayNum = val;
+                        }
+                    }
+                    break;
+                case 580:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[3].Hour = val;
+                        }
+                    }
+                    break;
+                case 581:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[2].TimeModeValues[3].Minute = val;
+                        }
+                    }
+                    break;
+                case 582:
+                    {
+                        GetTModeCMode1(2, 3, resp.ValueString);
+                        if (_activePageEntities.IsLoadingPage)
+                        {
+                            _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
+                            _modesEntities.TTitle = "Расписание для отпуска";
+                        }
+                    }
+                    break;
+                //Расписание
+                //Строка 1
+                case 583:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[0].DayNum = val;
+                        }
+                    }
+                    break;
+                case 584:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Hour = val;
+                        }
+                    }
+                    break;
+                case 585:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Minute = val;
+                        }
+                    }
+                    break;
+                case 586:
+                    {
+                        GetTModeCMode1(3, 0, resp.ValueString);
+                    }
+                    break;
+                //Строка 2
+                case 587:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[1].DayNum = val;
+                        }
+                    }
+                    break;
+                case 588:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Hour = val;
+                        }
+                    }
+                    break;
+                case 589:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Minute = val;
+                        }
+                    }
+                    break;
+                case 590:
+                    {
+                        GetTModeCMode1(3, 1, resp.ValueString);
+                    }
+                    break;
+                //Строка 3
+                case 591:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[2].DayNum = val;
+                        }
+                    }
+                    break;
+                case 592:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Hour = val;
+                        }
+                    }
+                    break;
+                case 593:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Minute = val;
+                        }
+                    }
+                    break;
+                case 594:
+                    {
+                        GetTModeCMode1(3, 2, resp.ValueString);
+                    }
+                    break;
+                //Строка 4
+                case 595:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[3].DayNum = val;
+                        }
+                    }
+                    break;
+                case 596:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Hour = val;
+                        }
+                    }
+                    break;
+                case 597:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Minute = val;
+                        }
+                    }
+                    break;
+                case 598:
+                    {
+                        GetTModeCMode1(3, 3, resp.ValueString);
+                    }
+                    break;
+                //Строка 5
+                case 599:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[4].DayNum = val;
+                        }
+                    }
+                    break;
+                case 600:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Hour = val;
+                        }
+                    }
+                    break;
+                case 601:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Minute = val;
+                        }
+                    }
+                    break;
+                case 602:
+                    {
+                        GetTModeCMode1(3, 4, resp.ValueString);
+                    }
+                    break;
+                //Строка 6
+                case 603:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[5].DayNum = val;
+                        }
+                    }
+                    break;
+                case 604:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Hour = val;
+                        }
+                    }
+                    break;
+                case 605:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Minute = val;
+                        }
+                    }
+                    break;
+                case 606:
+                    {
+                        GetTModeCMode1(3, 5, resp.ValueString);
+                    }
+                    break;
+                //Строка 7
+                case 607:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[6].DayNum = val;
+                        }
+                    }
+                    break;
+                case 608:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Hour = val;
+                        }
+                    }
+                    break;
+                case 609:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Minute = val;
+                        }
+                    }
+                    break;
+                case 610:
+                    {
+                        GetTModeCMode1(3, 6, resp.ValueString);
+                    }
+                    break;
+                //Строка 8
+                case 611:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[7].DayNum = val;
+                        }
+                    }
+                    break;
+                case 612:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Hour = val;
+                        }
+                    }
+                    break;
+                case 613:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Minute = val;
+                        }
+                    }
+                    break;
+                case 614:
+                    {
+                        GetTModeCMode1(3, 7, resp.ValueString);
+                    }
+                    break;
+                //Строка 9
+                case 615:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[8].DayNum = val;
+                        }
+                    }
+                    break;
+                case 616:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[8].Hour = val;
+                        }
+                    }
+                    break;
+                case 617:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[8].Minute = val;
+                        }
+                    }
+                    break;
+                case 618:
+                    {
+                        GetTModeCMode1(3, 8, resp.ValueString);
+                    }
+                    break;
+                //Строка 10
+                case 619:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[9].DayNum = val;
+                        }
+                    }
+                    break;
+                case 620:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[9].Hour = val;
+                        }
+                    }
+                    break;
+                case 621:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[9].Minute = val;
+                        }
+                    }
+                    break;
+                case 622:
+                    {
+                        GetTModeCMode1(3, 9, resp.ValueString);
+                    }
+                    break;
+                //Строка 11
+                case 623:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[10].DayNum = val;
+                        }
+                    }
+                    break;
+                case 624:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[10].Hour = val;
+                        }
+                    }
+                    break;
+                case 625:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[10].Minute = val;
+                        }
+                    }
+                    break;
+                case 626:
+                    {
+                        GetTModeCMode1(3, 10, resp.ValueString);
+                    }
+                    break;
+                //Строка 12
+                case 627:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[11].DayNum = val;
+                        }
+                    }
+                    break;
+                case 628:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[11].Hour = val;
+                        }
+                    }
+                    break;
+                case 629:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[11].Minute = val;
+                        }
+                    }
+                    break;
+                case 630:
+                    {
+                        GetTModeCMode1(3, 11, resp.ValueString);
+                    }
+                    break;
+                //Строка 13
+                case 631:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[12].DayNum = val;
+                        }
+                    }
+                    break;
+                case 632:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[12].Hour = val;
+                        }
+                    }
+                    break;
+                case 633:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[12].Minute = val;
+                        }
+                    }
+                    break;
+                case 634:
+                    {
+                        GetTModeCMode1(3, 12, resp.ValueString);
+                    }
+                    break;
+                //Строка 14
+                case 635:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[13].DayNum = val;
+                        }
+                    }
+                    break;
+                case 636:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[13].Hour = val;
+                        }
+                    }
+                    break;
+                case 637:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[13].Minute = val;
+                        }
+                    }
+                    break;
+                case 638:
+                    {
+                        GetTModeCMode1(3, 13, resp.ValueString);
+                        if (_activePageEntities.IsLoadingPage)
+                        {
+                            _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
+                            _modesEntities.TTitle = "Расписание";
+                        }
+                    }
+                    break;
+                //Строка 15
+                case 639:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[14].DayNum = val;
+                        }
+                    }
+                    break;
+                case 640:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[14].Hour = val;
+                        }
+                    }
+                    break;
+                case 641:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[14].Minute = val;
+                        }
+                    }
+                    break;
+                case 642:
+                    {
+                        GetTModeCMode1(3, 14, resp.ValueString);
+                    }
+                    break;
+                //Строка 16
+                case 643:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[15].DayNum = val;
+                        }
+                    }
+                    break;
+                case 644:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[15].Hour = val;
+                        }
+                    }
+                    break;
+                case 645:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[15].Minute = val;
+                        }
+                    }
+                    break;
+                case 646:
+                    {
+                        GetTModeCMode1(3, 15, resp.ValueString);
+                    }
+                    break;
+                //Строка 17
+                case 647:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[16].DayNum = val;
+                        }
+                    }
+                    break;
+                case 648:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[16].Hour = val;
+                        }
+                    }
+                    break;
+                case 649:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[16].Minute = val;
+                        }
+                    }
+                    break;
+                case 650:
+                    {
+                        GetTModeCMode1(3, 16, resp.ValueString);
+                    }
+                    break;
+                //Строка 18
+                case 651:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[17].DayNum = val;
+                        }
+                    }
+                    break;
+                case 652:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[17].Hour = val;
+                        }
+                    }
+                    break;
+                case 653:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[17].Minute = val;
+                        }
+                    }
+                    break;
+                case 654:
+                    {
+                        GetTModeCMode1(3, 17, resp.ValueString);
+                    }
+                    break;
+                //Строка 19
+                case 655:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[18].DayNum = val;
+                        }
+                    }
+                    break;
+                case 656:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[18].Hour = val;
+                        }
+                    }
+                    break;
+                case 657:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[18].Minute = val;
+                        }
+                    }
+                    break;
+                case 658:
+                    {
+                        GetTModeCMode1(3, 18, resp.ValueString);
+                    }
+                    break;
+                //Строка 20
+                case 659:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[19].DayNum = val;
+                        }
+                    }
+                    break;
+                case 660:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[19].Hour = val;
+                        }
+                    }
+                    break;
+                case 661:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[19].Minute = val;
+                        }
+                    }
+                    break;
+                case 662:
+                    {
+                        GetTModeCMode1(3, 19, resp.ValueString);
+                    }
+                    break;
+                //Строка 21
+                case 663:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[20].DayNum = val;
+                        }
+                    }
+                    break;
+                case 664:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[20].Hour = val;
+                        }
+                    }
+                    break;
+                case 665:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[20].Minute = val;
+                        }
+                    }
+                    break;
+                case 666:
+                    {
+                        GetTModeCMode1(3, 20, resp.ValueString);
+                    }
+                    break;
+                //Строка 22
+                case 667:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[21].DayNum = val;
+                        }
+                    }
+                    break;
+                case 668:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[21].Hour = val;
+                        }
+                    }
+                    break;
+                case 669:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[21].Minute = val;
+                        }
+                    }
+                    break;
+                case 670:
+                    {
+                        GetTModeCMode1(3, 21, resp.ValueString);
+                    }
+                    break;
+                //Строка 23
+                case 671:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[22].DayNum = val;
+                        }
+                    }
+                    break;
+                case 672:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[22].Hour = val;
+                        }
+                    }
+                    break;
+                case 673:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[22].Minute = val;
+                        }
+                    }
+                    break;
+                case 674:
+                    {
+                        GetTModeCMode1(3, 22, resp.ValueString);
+                    }
+                    break;
+                //Строка 24
+                case 675:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[23].DayNum = val;
+                        }
+                    }
+                    break;
+                case 676:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[23].Hour = val;
+                        }
+                    }
+                    break;
+                case 677:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[23].Minute = val;
+                        }
+                    }
+                    break;
+                case 678:
+                    {
+                        GetTModeCMode1(3, 23, resp.ValueString);
+                    }
+                    break;
+                //Строка 25
+                case 679:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[24].DayNum = val;
+                        }
+                    }
+                    break;
+                case 680:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[24].Hour = val;
+                        }
+                    }
+                    break;
+                case 681:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[24].Minute = val;
+                        }
+                    }
+                    break;
+                case 682:
+                    {
+                        GetTModeCMode1(3, 24, resp.ValueString);
+                    }
+                    break;
+                //Строка 26
+                case 683:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[25].DayNum = val;
+                        }
+                    }
+                    break;
+                case 684:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[25].Hour = val;
+                        }
+                    }
+                    break;
+                case 685:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[25].Minute = val;
+                        }
+                    }
+                    break;
+                case 686:
+                    {
+                        GetTModeCMode1(3, 25, resp.ValueString);
+                    }
+                    break;
+                //Строка 27
+                case 687:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[26].DayNum = val;
+                        }
+                    }
+                    break;
+                case 688:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[26].Hour = val;
+                        }
+                    }
+                    break;
+                case 689:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[26].Minute = val;
+                        }
+                    }
+                    break;
+                case 690:
+                    {
+                        GetTModeCMode1(3, 26, resp.ValueString);
+                    }
+                    break;
+                //Строка 28
+                case 691:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[27].DayNum = val;
+                            if (_activePageEntities.IsLoadingPage)
+                            {
+                                _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
+                                _modesEntities.TTitle = "Расписание";
+                            }
+
+                        }
+                    }
+                    break;
+                case 692:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[27].Hour = val;
+
+                        }
+                    }
+                    break;
+                case 693:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            _modesEntities.Mode2ValuesList[3].TimeModeValues[27].Minute = val;
+                        }
+                    }
+                    break;
+                case 694:
+                    {
+                        GetTModeCMode1(3, 27, resp.ValueString);
+
+                    }
+                    break;
+
+
+
                 //Общие уставки
                 case 699:
                     {
@@ -4918,7 +6039,6 @@ namespace Android_Silver.Services
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
-
                             if (val >= -9999 && val <= 9999)
                             {
                                 _fbs.ThmSps.KClKoef = val / 100;
@@ -4937,9 +6057,25 @@ namespace Android_Silver.Services
                             }
                         }
                     }
-                    break;;
-                //Работа рекуператора Modbus
+                    break;
                 case 794:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val >= 0 && val <= 100)
+                            {
+                                _fbs.ThmSps.U = (float)val / 10;
+                            }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                        }
+                    }
+                    break;
+                //Работа рекуператора Modbus
+                case 795:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4951,7 +6087,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 795:
+                case 796:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4963,7 +6099,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 796:
+                case 797:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4975,7 +6111,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 797:
+                case 798:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4987,7 +6123,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 798:
+                case 799:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4999,25 +6135,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 799:
+                case 800:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
                             if (val <= 1000 && val >= 0)
                             {
                                 _fbs.MbRecSPs.ReductKoef = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 800:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.NominalTurns1 = val;
                             }
                         }
                     }
@@ -5029,19 +6153,19 @@ namespace Android_Silver.Services
 
                             if (val <= 100 && val >= 0)
                             {
-                                _fbs.MbRecSPs.NominalTurns2 = val;
+                                _fbs.MbRecSPs.NominalTurns1 = val;
                             }
                         }
                     }
                     break;
                 case 802:
                     {
-                        if (short.TryParse(resp.ValueString, out short val))
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 70 && val >= -70)
+                            if (val <= 100 && val >= 0)
                             {
-                                _fbs.MbRecSPs.NominalTemp1 = val;
+                                _fbs.MbRecSPs.NominalTurns2 = val;
                             }
                         }
                     }
@@ -5053,12 +6177,24 @@ namespace Android_Silver.Services
 
                             if (val <= 70 && val >= -70)
                             {
-                                _fbs.MbRecSPs.NominalTemp2 = val;
+                                _fbs.MbRecSPs.NominalTemp1 = val;
                             }
                         }
                     }
                     break;
                 case 804:
+                    {
+                        if (short.TryParse(resp.ValueString, out short val))
+                        {
+
+                            if (val <= 70 && val >= -70)
+                            {
+                                _fbs.MbRecSPs.NominalTemp2 = val;
+                            }
+                        }
+                    }
+                    break;
+                case 805:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5070,7 +6206,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 805:
+                case 806:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5079,6 +6215,10 @@ namespace Android_Silver.Services
                             {
                                 _fbs.MbRecSPs.GrindingTurns = val;
                             }
+                        }
+                        if (_servActivePageEntities.IsLoadingPage)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                         }
                     }
                     break;
@@ -5139,9 +6279,28 @@ namespace Android_Silver.Services
             });
         }
 
+        /// <summary>
+        /// Основной метод передачи данных на сервер
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="values"></param>
         public void SetCommandToServer(int address, int[] values)
         {
-            string bufLength = values.Length > 9 ? values.Length.ToString() : "0" + values.Length.ToString();
+            string bufLength = String.Empty;
+            if (values.Length > 0 && values.Length < 10)
+            {
+                bufLength = "00" + values.Length.ToString();
+            }
+            else
+            if (values.Length >= 10 && values.Length < 100)
+            {
+                bufLength = "0" + values.Length.ToString();
+            }
+            else
+            if (values.Length >= 100 && values.Length < 1000)
+            {
+                bufLength = values.Length.ToString();
+            }
             MessageToServer = $"{address},{bufLength},";
             for (int i = 0; i < values.Length; i++)
             {

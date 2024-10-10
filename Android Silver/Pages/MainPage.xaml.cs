@@ -35,17 +35,9 @@ namespace Android_Silver.Pages
             // Add the gestures to your content 
             //  ContentView.GestureRecognizers.Add(swipeLeft);
             //  ContentView.GestureRecognizers.Add(swipeRight)
+  
         }
 
-        private void OnSwipeRight(object sender, SwipedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnSwipeLeft(object sender, SwipedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         #region Settings
         private void Settings_Pressed(object sender, EventArgs e)

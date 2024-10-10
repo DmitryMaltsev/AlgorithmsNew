@@ -88,6 +88,8 @@ namespace Android_Silver.ViewModels
 
         public FBs CFBs { get; set; }
 
+     
+
         public ServicePageViewModel()
         {
             CPictureSet = DIContainer.Resolve<PicturesSet>();
@@ -112,7 +114,6 @@ namespace Android_Silver.ViewModels
             ToSettingsCommand = new Command(ExecuteToSettingsWindow);
             SetSettingsCommand = new Command(ExecuteSetSettings);
             StartTimer();
-
         }
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
@@ -181,7 +182,10 @@ namespace Android_Silver.ViewModels
         {
             if (EntryPass == 4444)
             {
+                CActivePagesEntities.EntryIsEntered = true;
                 EntryMessage = "Пароль введен верно";
+                SetActivePageIfNeed();
+
             }
             else
             {
@@ -191,16 +195,20 @@ namespace Android_Silver.ViewModels
 
         public void SetActivePageIfNeed()
         {
-            //if (!EthernetEntities.IsConnected)
-            //{
-            //    CActivePagesEntities.SetActivePageState(SActivePageState.StartPage);
-            //}
-            //else
-            //{
-            //    CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
-            //}
+            if (!CActivePagesEntities.EntryIsEntered)
+            {
+                CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
+            }
+            else
+            if (!EthernetEntities.IsConnected)
+            { 
+                 CActivePagesEntities.SetActivePageState(SActivePageState.StartPage);
+            }
+            else
+            {
+                CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
 
-            CActivePagesEntities.SetActivePageState(CActivePagesEntities.LastActivePageState);
+            }
         }
 
 
@@ -299,7 +307,7 @@ namespace Android_Silver.ViewModels
                 {
                     if (mItem.StrSetsCollection[i].EntryIsVisible)
                     {
-                        values[i] = (int)mItem.StrSetsCollection[i].CVal;
+                        values[i] = (int)(Math.Round(mItem.StrSetsCollection[i].CVal, mItem.StrSetsCollection[i].ValScale) * Math.Pow(10, mItem.StrSetsCollection[i].ValScale));
                     }
                     else
                       if (mItem.StrSetsCollection[i].PickerIsVisible)
@@ -336,7 +344,7 @@ namespace Android_Silver.ViewModels
                 {
                     MainThread.InvokeOnMainThreadAsync(() =>
                     {
-                        EthernetEntities.SystemMessage = $"Счетчик принятий ={CTcpClientService.ResieveCounter}";
+                        EthernetEntities.PacketsMessage = $"Счетчик принятий ={CTcpClientService.ResieveCounter}";
                     });
                 },
                 null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));

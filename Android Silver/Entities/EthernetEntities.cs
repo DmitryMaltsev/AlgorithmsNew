@@ -7,25 +7,25 @@ using System.Text.RegularExpressions;
 
 namespace Android_Silver.Entities
 {
-
     public enum MessageStates
-    { 
+    {
         UserMessage,
         VacMessage,
         ShedMessage1,
         ShedMessage2,
-        ServiceMessage
+        ServiceMessage1,
+        ServiceMessage2
     }
 
 
     public class EthernetEntities : BindableBase
     {
-        public int  PagesTab;
+        public int PagesTab;
         public MessageStates CMessageState;
 
         public TcpClient Client { get; set; }
 
-        private string _connectIP = "192.168.0.130";
+        private string _connectIP = "192.168.0.134";
         public string ConnectIP
         {
             get { return _connectIP; }
@@ -149,7 +149,16 @@ namespace Android_Silver.Entities
             }
         }
 
-
+        private string _packetsMessage;
+        public string PacketsMessage
+        {
+            get { return _packetsMessage; }
+            set
+            {
+                _packetsMessage = value;
+                OnPropertyChanged(nameof(PacketsMessage));
+            }
+        }
 
         public Response ResponseValue { get; set; }
 
