@@ -677,14 +677,14 @@ namespace Android_Silver.Pages
 
         private void ExecuteShedulerTable(object obj)
         {
-            if (CModesEntities.ShedCountQueues == 0)
-            {
+          //  if (CModesEntities.ShedCountQueues == 0)
+           // {
                 CTcpClientService.MessageToServer = "183,56\r\n";
                 CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 1);
-                CModesEntities.ShedCountQueues += 1;
-            }
-            else
-            {
+               // CModesEntities.ShedCountQueues += 1;
+            //}
+          //  else
+         /*   {
                 for (int i = 0; i < CModesEntities.Mode2ValuesList[3].TimeModeValues.Count; i++)
                 {
                     CModesEntities.Mode2ValuesList[3].TimeModeValues[i].StrokeImg.Current =
@@ -692,7 +692,7 @@ namespace Android_Silver.Pages
                 }
                 CModesEntities.CTimeModeValues = CModesEntities.Mode2ValuesList[3].TimeModeValues;
                 CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
-            }
+            }*/
         }
 
         private void ExecuteOtherSettings(object obj)

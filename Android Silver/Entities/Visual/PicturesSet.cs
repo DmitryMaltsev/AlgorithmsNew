@@ -750,7 +750,7 @@ namespace Android_Silver.Entities.Visual
                         #region Иконки актиыный режимов 2
                         ActiveMode2Pics = new ObservableCollection<string>();
                         ActiveMode2Pics.Add("turnoff_but_on_base.png");
-                        ActiveMode2Pics.Add("mode2_kitchen_base,png");
+                        ActiveMode2Pics.Add("mode2_kitchen_base.png");
                         ActiveMode2Pics.Add("mode2_vac_base.png");
                         ActiveMode2Pics.Add("mode2_shed_base.png");
                         #endregion

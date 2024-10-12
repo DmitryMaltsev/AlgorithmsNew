@@ -58,8 +58,8 @@ namespace Android_Silver.Services
             {
                 IsConnecting = true;
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 500;
-                _ethernetEntities.Client.SendTimeout = 500;
+                _ethernetEntities.Client.ReceiveTimeout = 600;
+                _ethernetEntities.Client.SendTimeout = 600;
                 _ethernetEntities.IsConnected = false;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
                 if (_ethernetEntities.PagesTab == 1)
@@ -105,32 +105,6 @@ namespace Android_Silver.Services
              {
                  while (_ethernetEntities.IsConnected)
                  {
-                     //string messToClient = val;
-                     //if (!String.IsNullOrEmpty(MessageToServer))
-                     //{
-                     //    messToClient = MessageToServer;
-                     //}
-                     //else
-                     ////????????????
-                     //if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
-                     //                                               _modesEntities.CTimeModeValues[0].Mode2Num == 2)
-                     //{
-                     //    messToClient = "167,16\r\n";
-                     //}
-                     //else
-                     //    if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
-                     //                                               _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 0)
-                     //{
-                     //    messToClient = "183,56\r\n";
-                     //    _activePageEntities.QueryStep = 1;
-                     //}
-                     //else
-                     //    if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
-                     //                                               _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 1)
-                     //{
-                     //    messToClient = "239,56\r\n";
-                     //    _activePageEntities.QueryStep = 0;
-                     //}
                      GetMessagesState();
                      string messToClient = GetMessageToServer();
                      if (!IsSending)
@@ -165,6 +139,9 @@ namespace Android_Silver.Services
 
         private void GetMessagesState()
         {
+            //Условие при котором мы определям, что мы находимся на странице календаря или переходим на нее.
+            bool isReadingShedTable = (_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) 
+                && _modesEntities.CTimeModeValues.Count > 0 &&  _modesEntities.CTimeModeValues[0].Mode2Num == 3;
 
             if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
                                                            _modesEntities.CTimeModeValues[0].Mode2Num == 2)
@@ -172,17 +149,14 @@ namespace Android_Silver.Services
                 _ethernetEntities.CMessageState = MessageStates.VacMessage;
             }
             else
-                if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
-                                                           _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 0)
+                if (isReadingShedTable && _ethernetEntities.CMessageState != MessageStates.ShedMessage1)
             {
                 _ethernetEntities.CMessageState = MessageStates.ShedMessage1;
-                _activePageEntities.QueryStep = 1;
             }
             else
-                if ((_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) && _modesEntities.CTimeModeValues.Count > 0 &&
-                                                           _modesEntities.CTimeModeValues[0].Mode2Num == 3 && _activePageEntities.QueryStep == 1)
+                if (isReadingShedTable && _ethernetEntities.CMessageState == MessageStates.ShedMessage1)
             {
-                _ethernetEntities.CMessageState = MessageStates.ShedMessage1;
+                _ethernetEntities.CMessageState = MessageStates.ShedMessage2;
                 _activePageEntities.QueryStep = 0;
             }
             else
