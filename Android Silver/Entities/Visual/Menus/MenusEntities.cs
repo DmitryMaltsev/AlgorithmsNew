@@ -336,11 +336,11 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets = new ObservableCollection<StrSet>();
             sSet = new StrSet(0, 65535, "Коэффициент термоанимометра притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 5000, "Коэффициент кривой притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 5000, "Коэффициент кривой притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 2, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 65535, "Коэффициент термоанимометра вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 5000, "Коэффициент кривой вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 5000, "Коэффициент кривой вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 2, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(-100, +120, "Температура H1 °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:false, valScale: 1, pickVals);
             strSets.Add(sSet);

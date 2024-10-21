@@ -2781,7 +2781,7 @@ namespace Android_Silver.Services
                         if (short.TryParse(resp.ValueString, out short val))
                         {
 
-                            if (val >= -100 && val <= 1000)
+                            if (val >= -1000 && val <= 1000)
                             {
                                 _fbs.CSensors.OutdoorTemp.Correction = (float)val / 10;
                             }
@@ -2946,7 +2946,7 @@ namespace Android_Silver.Services
 
                             if (val >= 0 && val < 65535)
                             {
-                                _fbs.ThmSps.SupTHmKoef = val;
+                                _fbs.ThmSps.SupTHmKoef = (float)val;
                             }
                         }
                     }
@@ -2970,7 +2970,7 @@ namespace Android_Silver.Services
 
                             if (val >= 0 && val < 65535)
                             {
-                                _fbs.ThmSps.ExhaustTHmKoef = val;
+                                _fbs.ThmSps.ExhaustTHmKoef = (float)val;
                             }
                         }
                     }
@@ -5859,7 +5859,7 @@ namespace Android_Silver.Services
 
                             if (val >= 0 && val < 65535)
                             {
-                                _fbs.ThmSps.SupTHmKoef = val;
+                                _fbs.ThmSps.SupTHmKoef = (float)val;
                             }
                         }
                     }
@@ -5871,7 +5871,7 @@ namespace Android_Silver.Services
 
                             if (val >= 0 && val < 65535)
                             {
-                                _fbs.ThmSps.SupCurveKoef = val/100;
+                                _fbs.ThmSps.SupCurveKoef = (float)val/100;
                             }
                         }
                     }
@@ -5883,7 +5883,7 @@ namespace Android_Silver.Services
 
                             if (val >= 0 && val < 65535)
                             {
-                                _fbs.ThmSps.ExhaustTHmKoef = val;
+                                _fbs.ThmSps.ExhaustTHmKoef = (float)val;
                             }
                         }
                     }
@@ -5895,7 +5895,7 @@ namespace Android_Silver.Services
 
                             if (val >= 0 && val < 65535)
                             {
-                                _fbs.ThmSps.ExhaustCurveKoef = val/100;
+                                _fbs.ThmSps.ExhaustCurveKoef = (float)val /100;
                             }
                         }
                     }
@@ -5907,7 +5907,7 @@ namespace Android_Silver.Services
 
                             if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.TempH1 = val / 100;
+                                _fbs.ThmSps.TempH1 = (float)val / 10;
                             }
                         }
                     }
@@ -5919,7 +5919,7 @@ namespace Android_Silver.Services
 
                             if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.TempC1 = val / 10;
+                                _fbs.ThmSps.TempC1 = (float)val / 10;
                             }
                         }
                     }
@@ -5931,7 +5931,7 @@ namespace Android_Silver.Services
 
                             if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.TempH2 = val / 10;
+                                _fbs.ThmSps.TempH2 = (float)val / 10;
                             }
                         }
                     }
@@ -5943,7 +5943,7 @@ namespace Android_Silver.Services
 
                             if (val >= -1000 && val <= 1200)
                             {
-                                _fbs.ThmSps.TempC2 = val / 10;
+                                _fbs.ThmSps.TempC2 = (float)val / 10;
                             }
                         }
                     }
@@ -5991,7 +5991,7 @@ namespace Android_Silver.Services
 
                             if (val >= -9999 && val <= 9999)
                             {
-                                _fbs.ThmSps.KPolKoef = val / 100;
+                                _fbs.ThmSps.KPolKoef = (float)val / 100;
                             }
                         }
                     }
@@ -6003,7 +6003,7 @@ namespace Android_Silver.Services
 
                             if (val >= -9999 && val <= 9999)
                             {
-                                _fbs.ThmSps.BPolKoef = val / 100;
+                                _fbs.ThmSps.BPolKoef = (float)val / 100;
                             }
                         }
                     }
@@ -6014,7 +6014,7 @@ namespace Android_Silver.Services
                         {
                             if (val >= -9999 && val <= 9999)
                             {
-                                _fbs.ThmSps.KClKoef = val / 100;
+                                _fbs.ThmSps.KClKoef = (float)val / 100;
                             }
                         }
                     }
@@ -6026,7 +6026,7 @@ namespace Android_Silver.Services
 
                             if (val >= -9999 && val <= 9999)
                             {
-                                _fbs.ThmSps.BClKoef = val / 100;
+                                _fbs.ThmSps.BClKoef = (float)val / 100;
                             }
                         }
                     }
