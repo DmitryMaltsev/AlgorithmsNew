@@ -88,7 +88,6 @@ namespace Android_Silver.ViewModels
 
         public FBs CFBs { get; set; }
 
-     
 
         public ServicePageViewModel()
         {

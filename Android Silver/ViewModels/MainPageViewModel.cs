@@ -1,13 +1,5 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
-
-/* Необъединенное слияние из проекта "Android Silver (net8.0-android)"
-До:
-using Android_Silver.Entities.Modes;
-После:
-using Android_Silver.Entities.FBEntities.SetPoints;
-using Android_Silver.Entities.Modes;
-*/
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
@@ -369,13 +361,12 @@ namespace Android_Silver.Pages
             TimeBtnDnCommand4 = new Command(ExecuteTimeBtnDn4);
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
-           
+
 
             SetTValuesByIndex(0, 0);//?????
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
-
         }
 
         private void StartPageExecuteConnect()
@@ -677,22 +668,22 @@ namespace Android_Silver.Pages
 
         private void ExecuteShedulerTable(object obj)
         {
-          //  if (CModesEntities.ShedCountQueues == 0)
-           // {
-                CTcpClientService.MessageToServer = "183,56\r\n";
-                CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 1);
-               // CModesEntities.ShedCountQueues += 1;
+            //  if (CModesEntities.ShedCountQueues == 0)
+            // {
+            CTcpClientService.MessageToServer = "183,56\r\n";
+            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 1);
+            // CModesEntities.ShedCountQueues += 1;
             //}
-          //  else
-         /*   {
-                for (int i = 0; i < CModesEntities.Mode2ValuesList[3].TimeModeValues.Count; i++)
-                {
-                    CModesEntities.Mode2ValuesList[3].TimeModeValues[i].StrokeImg.Current =
-                   CModesEntities.Mode2ValuesList[3].TimeModeValues[1].StrokeImg.Default;
-                }
-                CModesEntities.CTimeModeValues = CModesEntities.Mode2ValuesList[3].TimeModeValues;
-                CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
-            }*/
+            //  else
+            /*   {
+                   for (int i = 0; i < CModesEntities.Mode2ValuesList[3].TimeModeValues.Count; i++)
+                   {
+                       CModesEntities.Mode2ValuesList[3].TimeModeValues[i].StrokeImg.Current =
+                      CModesEntities.Mode2ValuesList[3].TimeModeValues[1].StrokeImg.Default;
+                   }
+                   CModesEntities.CTimeModeValues = CModesEntities.Mode2ValuesList[3].TimeModeValues;
+                   CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
+               }*/
         }
 
         private void ExecuteOtherSettings(object obj)

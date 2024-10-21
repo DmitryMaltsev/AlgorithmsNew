@@ -9,12 +9,12 @@ namespace Android_Silver.Entities.FBEntities
     public class WHSetPoints
     {
         public int SSMaxIntervalS;
-        public int TRetStart;
-        public int TRetStb;
-        public int TRetMax;
-        public int TRetMin;
-        public int TRetF;
-        public int SPWinterProcess;
+        public float TRetStart;
+        public float TRetStb;
+        public float TRetMax;
+        public float TRetMin;
+        public float TRetF;
+        public float SPWinterProcess;
         public int MinDamperPerc;
         public int PWork;
         public int IWork;

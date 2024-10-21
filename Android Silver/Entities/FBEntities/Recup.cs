@@ -28,10 +28,10 @@ namespace Android_Silver.Entities.FBEntities
         public int EffFailValue;
         public int EffFailDelay;
         public int HZMax;
-        public int TempA;
-        public int TempB;
-        public int TempC;
-        public int TempD;
+        public float TempA;
+        public float TempB;
+        public float TempC;
+        public float TempD;
 
     }
 }

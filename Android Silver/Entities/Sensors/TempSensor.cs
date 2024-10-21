@@ -12,7 +12,7 @@ namespace Android_Silver.Entities.Srs
     {
         //0-нет, 1-NTC10k, 2- pt1000
         public int SensorType;
-        public int Correction;
+        public float Correction;
 
     }
 }

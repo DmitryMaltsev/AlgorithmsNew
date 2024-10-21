@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,13 +9,13 @@ namespace Android_Silver.Entities.FBEntities
 {
     public class CommonSetPoints
     {
-        public int SPTempAlarm;
-        public int SPTempMaxCh;
-        public int SPTempMinCh;
+        public float  SPTempAlarm;
+        public float SPTempMaxCh;
+        public float SPTempMinCh;
         public int TControlDelayS;
         public int SeasonMode;
-        public int SPSeason;
-        public int HystSeason;
+        public float SPSeason;
+        public float HystSeason;
 
     }
 }
