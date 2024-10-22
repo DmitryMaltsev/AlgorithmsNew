@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Android_Silver.ViewModels;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,11 +24,22 @@ namespace Android_Silver.Entities.FBEntities
         }
     }
 
-    public class ServoDamer
+    public class ServoDamer:BindableBase
     {
         public ushort StartPos;
         public ushort EndPos;
         public ushort CAngle;
-        public ushort CalPos;
+        private ushort _calPos;
+
+        public ushort CalPos
+        {
+            get { return _calPos; }
+            set { 
+                _calPos = value; 
+                OnPropertyChanged(nameof(CalPos));
+            }
+        }
+
+
     }
 }

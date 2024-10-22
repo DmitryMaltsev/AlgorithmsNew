@@ -453,6 +453,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[2].StrSetsCollection[7].CVal = _fbs.CDamperSetPoints.ServoDampers[3].StartPos;
                         _menusEntities.StartMenuCollection[2].StrSetsCollection[8].CVal = _fbs.CDamperSetPoints.ServoDampers[3].EndPos;
                         _menusEntities.StartMenuCollection[2].StrSetsCollection[9].CPickVal = _fbs.CDamperSetPoints.isTest;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[10].CVal = _fbs.CDamperSetPoints.ServoDampers[0].CalPos;
                         //   _menusEntities.StartMenuCollection[1].StrSetsCollection[1].CVal = _fbs.CDamperSetPoints.DamperHeatingTime;
                         _menusEntities.GenerateInterfaceTable(2);
                         IsDamperSettingsPage = true;

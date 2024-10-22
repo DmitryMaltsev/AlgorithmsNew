@@ -5086,19 +5086,6 @@ namespace Android_Silver.Services
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
-                            if (val <= 65000)
-                            {
-                                _fbs.CDamperSetPoints.DamperHeatingTime = val;
-                            }
-
-                        }
-                    }
-                    break;
-                case 711:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
                             if (val <= 100)
                             {
                                 _fbs.CDamperSetPoints.ServoDampers[0].StartPos = val;
@@ -5106,7 +5093,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 712:
+                case 711:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5117,7 +5104,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 713:
+                case 712:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5128,7 +5115,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 714:
+                case 713:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5139,7 +5126,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 715:
+                case 714:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5150,7 +5137,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 716:
+                case 715:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5161,7 +5148,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 717:
+                case 716:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5172,7 +5159,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 718:
+                case 717:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5183,13 +5170,27 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 719:
+                case 718:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
                             if (val <= 1)
                             {
                                 _fbs.CDamperSetPoints.isTest = (byte)val;
+                            }
+                        }
+                    }
+                    break;
+                case 719:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[0].CalPos = val;
+                                _fbs.CDamperSetPoints.ServoDampers[1].CalPos = val;
+                                _fbs.CDamperSetPoints.ServoDampers[2].CalPos = val;
+                                _fbs.CDamperSetPoints.ServoDampers[3].CalPos = val;
                             }
                         }
                     }
