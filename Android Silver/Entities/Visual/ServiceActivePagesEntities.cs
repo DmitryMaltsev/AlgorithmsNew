@@ -444,6 +444,15 @@ namespace Android_Silver.Entities.Visual
                     {
                         _menusEntities.Title = _menusEntities.StartMenuCollection[1].Name;
                         _menusEntities.StartMenuCollection[2].StrSetsCollection[0].CVal = _fbs.CDamperSetPoints.DamperOpenTime;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[1].CVal = _fbs.CDamperSetPoints.ServoDampers[0].StartPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[2].CVal = _fbs.CDamperSetPoints.ServoDampers[0].EndPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[3].CVal = _fbs.CDamperSetPoints.ServoDampers[1].StartPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[4].CVal = _fbs.CDamperSetPoints.ServoDampers[1].EndPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[5].CVal = _fbs.CDamperSetPoints.ServoDampers[2].StartPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[6].CVal = _fbs.CDamperSetPoints.ServoDampers[2].EndPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[7].CVal = _fbs.CDamperSetPoints.ServoDampers[3].StartPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[8].CVal = _fbs.CDamperSetPoints.ServoDampers[3].EndPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[9].CPickVal = _fbs.CDamperSetPoints.isTest;
                         //   _menusEntities.StartMenuCollection[1].StrSetsCollection[1].CVal = _fbs.CDamperSetPoints.DamperHeatingTime;
                         _menusEntities.GenerateInterfaceTable(2);
                         IsDamperSettingsPage = true;

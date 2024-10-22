@@ -66,7 +66,7 @@ namespace Android_Silver.Services
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.LoadingPage);
                 }
-                    if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
+                if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
                 {
                     _ethernetEntities.IsConnected = false;
                     IsConnecting = false;
@@ -140,8 +140,8 @@ namespace Android_Silver.Services
         private void GetMessagesState()
         {
             //Условие при котором мы определям, что мы находимся на странице календаря или переходим на нее.
-            bool isReadingShedTable = (_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage) 
-                && _modesEntities.CTimeModeValues.Count > 0 &&  _modesEntities.CTimeModeValues[0].Mode2Num == 3;
+            bool isReadingShedTable = (_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage)
+                && _modesEntities.CTimeModeValues.Count > 0 && _modesEntities.CTimeModeValues[0].Mode2Num == 3;
 
             if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
                                                            _modesEntities.CTimeModeValues[0].Mode2Num == 2)
@@ -220,7 +220,7 @@ namespace Android_Silver.Services
                             //  messToClient = "299,87\r\n";
                             //Термоанемометры
                             //  messToClient = "379,27\r\n";
-                            messToClient = "359,48\r\n";
+                            messToClient = "359,57\r\n";
                         }
                         break;
                 }
@@ -1961,7 +1961,7 @@ namespace Android_Silver.Services
 
                             if (val <= 1000)
                             {
-                                _fbs.CCommonSetPoints.SPTempAlarm = (float)val/10;
+                                _fbs.CCommonSetPoints.SPTempAlarm = (float)val / 10;
                             }
                         }
                     }
@@ -2037,7 +2037,7 @@ namespace Android_Silver.Services
 
                             if (val <= 300)
                             {
-                                _fbs.CCommonSetPoints.SPSeason = (float)val / 10;;
+                                _fbs.CCommonSetPoints.SPSeason = (float)val / 10; ;
                             }
                         }
                     }
@@ -2109,8 +2109,108 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                //Настройки вентилятора
                 case 311:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[0].StartPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 312:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[0].EndPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 313:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[1].StartPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 314:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[1].EndPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 315:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[2].StartPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 316:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[2].EndPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 317:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[3].StartPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 318:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[3].EndPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 319:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 1)
+                            {
+                                _fbs.CDamperSetPoints.isTest = (byte)val;
+                            }
+                        }
+                    }
+                    break;
+                //Настройки вентилятора
+                case 320:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2122,7 +2222,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 312:
+                case 321:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2134,7 +2234,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 313:
+                case 322:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2146,7 +2246,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 314:
+                case 323:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2158,7 +2258,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 315:
+                case 324:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2170,7 +2270,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 316:
+                case 325:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2182,7 +2282,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 317:
+                case 326:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2194,7 +2294,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 318:
+                case 327:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2206,7 +2306,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 319:
+                case 328:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2218,7 +2318,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 320:
+                case 329:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2230,7 +2330,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 321:
+                case 330:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2243,7 +2343,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Водяной нагреватель
-                case 322:
+                case 331:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2255,7 +2355,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 323:
+                case 332:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2267,7 +2367,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 324:
+                case 333:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2279,7 +2379,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 325:
+                case 334:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2291,7 +2391,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 326:
+                case 335:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2303,7 +2403,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 327:
+                case 336:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2315,7 +2415,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 328:
+                case 337:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2327,19 +2427,19 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 329:
+                case 338:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
                             if (val <= 1000)
                             {
-                                _fbs.CWHSetPoints.TRetMin = (float)val/10;
+                                _fbs.CWHSetPoints.TRetMin = (float)val / 10;
                             }
                         }
                     }
                     break;
-                case 330:
+                case 339:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2351,7 +2451,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 331:
+                case 340:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2363,7 +2463,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 332:
+                case 341:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2376,7 +2476,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //2 раза, потом дополнить
-                case 333:
+                case 342:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2388,7 +2488,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 334:
+                case 343:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2400,7 +2500,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 335:
+                case 344:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2412,19 +2512,19 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 336:
+                case 345:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
                             if (val <= 1000)
                             {
-                                _fbs.CWHSetPoints.SPWinterProcess = (float)val/10;
+                                _fbs.CWHSetPoints.SPWinterProcess = (float)val / 10;
                             }
                         }
                     }
                     break;
-                case 337:
+                case 346:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2437,7 +2537,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Электрический нагреватель.   
-                case 338:
+                case 347:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2449,7 +2549,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 339:
+                case 348:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2461,7 +2561,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 340:
+                case 349:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2473,7 +2573,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 341:
+                case 350:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2485,7 +2585,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 342:
+                case 351:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2498,7 +2598,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Фреоновый охладитель
-                case 343:
+                case 352:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2510,7 +2610,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 344:
+                case 353:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2522,7 +2622,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 345:
+                case 354:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2534,7 +2634,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 346:
+                case 355:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2546,7 +2646,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 347:
+                case 356:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2558,7 +2658,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 348:
+                case 357:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2571,7 +2671,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Увлажнитель
-                case 349:
+                case 358:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2583,7 +2683,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 350:
+                case 359:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2595,7 +2695,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 351:
+                case 360:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2607,7 +2707,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 352:
+                case 361:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2619,7 +2719,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 353:
+                case 362:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2631,7 +2731,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 354:
+                case 363:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2643,7 +2743,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 355:
+                case 364:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2655,7 +2755,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 356:
+                case 365:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2667,7 +2767,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 357:
+                case 366:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2679,7 +2779,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 358:
+                case 367:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2691,7 +2791,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 359:
+                case 368:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2703,7 +2803,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 360:
+                case 369:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2715,7 +2815,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 361:
+                case 370:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2727,7 +2827,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 362:
+                case 371:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2739,7 +2839,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 363:
+                case 372:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2751,7 +2851,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 364:
+                case 373:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2763,7 +2863,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 365:
+                case 374:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2776,7 +2876,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Датчики
-                case 366:
+                case 375:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2788,7 +2888,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 367:
+                case 376:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2800,7 +2900,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 368:
+                case 377:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2812,7 +2912,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 369:
+                case 378:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2824,7 +2924,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 370:
+                case 379:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2838,7 +2938,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Конфигурация
-                case 371:
+                case 380:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2850,7 +2950,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 372:
+                case 381:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2862,7 +2962,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 373:
+                case 382:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2874,7 +2974,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 374:
+                case 383:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2886,7 +2986,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 375:
+                case 384:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2898,7 +2998,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 376:
+                case 385:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2910,7 +3010,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 377:
+                case 386:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2922,7 +3022,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 378:
+                case 387:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2939,7 +3039,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Термоанемометры
-                case 379:
+                case 388:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2951,7 +3051,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 380:
+                case 389:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2963,7 +3063,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 381:
+                case 390:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2975,7 +3075,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 382:
+                case 391:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2987,7 +3087,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 383:
+                case 392:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -2999,7 +3099,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 384:
+                case 393:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3011,7 +3111,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 385:
+                case 394:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3023,7 +3123,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 386:
+                case 395:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3042,7 +3142,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 387:
+                case 396:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3054,7 +3154,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 388:
+                case 397:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3066,7 +3166,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 389:
+                case 398:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3078,7 +3178,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 390:
+                case 399:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3090,7 +3190,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 391:
+                case 400:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3102,7 +3202,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 392:
+                case 401:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3114,7 +3214,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 393:
+                case 402:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3126,7 +3226,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 394:
+                case 403:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -3139,7 +3239,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Работа рекуператора Modbus
-                case 395:
+                case 404:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3151,7 +3251,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 396:
+                case 405:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3163,7 +3263,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 397:
+                case 406:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3181,7 +3281,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 398:
+                case 407:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3193,7 +3293,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 399:
+                case 408:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3205,18 +3305,18 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 400:
+                case 409:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
                             if (val <= 1000 && val >= 0)
                             {
-                                _fbs.MbRecSPs.ReductKoef = (float)val / 10;
+                                _fbs.MbRecSPs.ReductKoef = (float)val / 100;
                             }
                         }
                     }
                     break;
-                case 401:
+                case 410:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3228,7 +3328,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 402:
+                case 411:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3240,31 +3340,31 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 403:
+                case 412:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
 
                             if (val <= 700 && val >= -700)
                             {
-                                _fbs.MbRecSPs.NominalTemp1 = (float)val/10;
+                                _fbs.MbRecSPs.NominalTemp1 = (float)val / 10;
                             }
                         }
                     }
                     break;
-                case 404:
+                case 413:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
 
-                            if (val <= 70 && val >= -70)
+                            if (val <= 700 && val >= -700)
                             {
                                 _fbs.MbRecSPs.NominalTemp2 = (float)val / 10;
                             }
                         }
                     }
                     break;
-                case 405:
+                case 414:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3276,7 +3376,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 406:
+                case 415:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -4994,8 +5094,108 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                //Настройки вентилятора
                 case 711:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[0].StartPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 712:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[0].EndPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 713:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[1].StartPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 714:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[1].EndPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 715:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[2].StartPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 716:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[2].EndPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 717:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[3].StartPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 718:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 100)
+                            {
+                                _fbs.CDamperSetPoints.ServoDampers[3].EndPos = val;
+                            }
+                        }
+                    }
+                    break;
+                case 719:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val <= 1)
+                            {
+                                _fbs.CDamperSetPoints.isTest = (byte)val;
+                            }
+                        }
+                    }
+                    break;
+                //Настройки вентилятора
+                case 720:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -5011,7 +5211,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 712:
+                case 721:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -5023,7 +5223,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 713:
+                case 722:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5035,7 +5235,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 714:
+                case 723:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5047,7 +5247,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 715:
+                case 724:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -5059,7 +5259,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 716:
+                case 725:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -5071,7 +5271,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 717:
+                case 726:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5083,7 +5283,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 718:
+                case 727:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5095,7 +5295,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 719:
+                case 728:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5107,7 +5307,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 720:
+                case 729:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5119,7 +5319,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 721:
+                case 730:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5131,8 +5331,11 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+
+
+
                 //Водяной нагреватель
-                case 722:
+                case 731:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5148,7 +5351,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 723:
+                case 732:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5160,7 +5363,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 724:
+                case 733:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5172,7 +5375,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 725:
+                case 734:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5184,7 +5387,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 726:
+                case 735:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5196,7 +5399,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 727:
+                case 736:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5208,19 +5411,19 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 728:
+                case 737:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
                             if (val <= 1000)
                             {
-                                _fbs.CWHSetPoints.TRetMax = (float)val/10;
+                                _fbs.CWHSetPoints.TRetMax = (float)val / 10;
                             }
                         }
                     }
                     break;
-                case 729:
+                case 738:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5232,7 +5435,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 730:
+                case 739:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5244,7 +5447,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 731:
+                case 740:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5256,7 +5459,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 732:
+                case 741:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5269,7 +5472,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //2 раза, потом дополнить
-                case 733:
+                case 742:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5281,7 +5484,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 734:
+                case 743:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5293,7 +5496,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 735:
+                case 744:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5305,7 +5508,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 736:
+                case 745:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5317,7 +5520,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 737:
+                case 746:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5330,7 +5533,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Электрический нагреватель.   
-                case 738:
+                case 747:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -5346,7 +5549,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 739:
+                case 748:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5358,7 +5561,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 740:
+                case 749:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5370,7 +5573,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 741:
+                case 750:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5382,7 +5585,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 742:
+                case 751:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5395,7 +5598,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Фреоновый охладитель
-                case 743:
+                case 752:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5411,7 +5614,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 744:
+                case 753:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5423,7 +5626,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 745:
+                case 754:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5435,7 +5638,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 746:
+                case 755:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5447,7 +5650,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 747:
+                case 756:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5459,7 +5662,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 748:
+                case 757:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5472,7 +5675,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Увлажнитель
-                case 749:
+                case 758:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5488,7 +5691,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 750:
+                case 759:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5500,7 +5703,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 751:
+                case 760:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5512,7 +5715,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 752:
+                case 761:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5524,7 +5727,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 753:
+                case 762:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5536,7 +5739,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 754:
+                case 763:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5548,7 +5751,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 755:
+                case 764:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5564,7 +5767,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 756:
+                case 765:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5576,7 +5779,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 757:
+                case 766:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5588,7 +5791,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 758:
+                case 767:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5600,7 +5803,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 759:
+                case 768:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5612,7 +5815,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 760:
+                case 769:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5624,7 +5827,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 761:
+                case 770:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5636,7 +5839,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 762:
+                case 771:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5648,7 +5851,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 763:
+                case 772:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5660,7 +5863,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 764:
+                case 773:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5672,7 +5875,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 765:
+                case 774:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5685,19 +5888,19 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Коррекция датчиков
-                case 766:
+                case 775:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
 
                             if (val >= -1000 && val <= 1000)
                             {
-                                _fbs.CSensors.OutdoorTemp.Correction = (float)val/10;
+                                _fbs.CSensors.OutdoorTemp.Correction = (float)val / 10;
                             }
                         }
                     }
                     break;
-                case 767:
+                case 776:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -5709,7 +5912,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 768:
+                case 777:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -5721,7 +5924,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 769:
+                case 778:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -5733,7 +5936,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 770:
+                case 779:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -5750,7 +5953,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Конфигурация датчиков
-                case 771:
+                case 780:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5762,7 +5965,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 772:
+                case 781:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5774,7 +5977,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 773:
+                case 782:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5786,7 +5989,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 774:
+                case 783:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5799,7 +6002,7 @@ namespace Android_Silver.Services
                     }
                     break;
 
-                case 775:
+                case 784:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5811,7 +6014,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 776:
+                case 785:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5823,7 +6026,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 777:
+                case 786:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5835,7 +6038,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 778:
+                case 787:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5852,7 +6055,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //термоанемометры
-                case 779:
+                case 788:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5864,19 +6067,19 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 780:
+                case 789:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
                             if (val >= 0 && val < 65535)
                             {
-                                _fbs.ThmSps.SupCurveKoef = (float)val/100;
+                                _fbs.ThmSps.SupCurveKoef = (float)val / 100;
                             }
                         }
                     }
                     break;
-                case 781:
+                case 790:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5888,19 +6091,19 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 782:
+                case 791:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
 
                             if (val >= 0 && val < 65535)
                             {
-                                _fbs.ThmSps.ExhaustCurveKoef = (float)val /100;
+                                _fbs.ThmSps.ExhaustCurveKoef = (float)val / 100;
                             }
                         }
                     }
                     break;
-                case 783:
+                case 792:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -5912,7 +6115,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 784:
+                case 793:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -5924,7 +6127,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 785:
+                case 794:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -5936,7 +6139,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 786:
+                case 795:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -5948,7 +6151,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 787:
+                case 796:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5960,7 +6163,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 788:
+                case 797:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5972,7 +6175,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 789:
+                case 798:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -5984,7 +6187,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 790:
+                case 799:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -5996,7 +6199,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 791:
+                case 800:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -6008,7 +6211,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 792:
+                case 801:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -6019,7 +6222,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 793:
+                case 802:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -6031,7 +6234,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 794:
+                case 803:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -6048,7 +6251,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Работа рекуператора Modbus
-                case 795:
+                case 804:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -6060,7 +6263,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 796:
+                case 805:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -6072,7 +6275,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 797:
+                case 806:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -6084,7 +6287,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 798:
+                case 807:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -6096,7 +6299,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 799:
+                case 808:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -6108,18 +6311,18 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 800:
+                case 809:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (val <= 1000 && val >= 0)
+                            if (val <= 10000 && val >= 0)
                             {
-                                _fbs.MbRecSPs.ReductKoef = (float)val / 10;
+                                _fbs.MbRecSPs.ReductKoef = (float)val / 100;
                             }
                         }
                     }
                     break;
-                case 801:
+                case 810:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -6131,7 +6334,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 802:
+                case 811:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -6143,19 +6346,19 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 803:
+                case 812:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
 
                             if (val <= 700 && val >= -700)
                             {
-                                _fbs.MbRecSPs.NominalTemp1 = (float)val/10;
+                                _fbs.MbRecSPs.NominalTemp1 = (float)val / 10;
                             }
                         }
                     }
                     break;
-                case 804:
+                case 813:
                     {
                         if (short.TryParse(resp.ValueString, out short val))
                         {
@@ -6167,7 +6370,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 805:
+                case 814:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -6179,7 +6382,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 806:
+                case 815:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {

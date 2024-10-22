@@ -102,7 +102,6 @@ namespace Android_Silver.Entities.Visual.Menus
             mItem = new MItem("Настройка Modbus шагового мотора", isVisible: true, _pictureSet.BaseSettings1ButCollection[11], SActivePageState.MBRecupSettingsPage, id: 12, startAddress: 795);
             StartMenuCollection.Add(mItem);
             #endregion
-
             #region Конфигурация
             ObservableCollection<StrSet> strSets = new ObservableCollection<StrSet>();
             List<string> pickVals = new List<string>() { "Нет", "Вод нагр 1", "Вод нагр 2", "Фр охл 1", "Фр охл 2", "Увл 1", "Увл 2" };
@@ -152,12 +151,34 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 5, "Автосброс пожара", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[1].StrSetsCollection = strSets;
-            //Жалюзи
+            #endregion
+            #region Жалюзи
             strSets = new ObservableCollection<StrSet>();
-            pickVals = new List<string>() { "", "" };
+            pickVals = new List<string>() { "Нет", "Да" };
             sSet = new StrSet(0, 65000, "Время открытия, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Сервопривод 1 начальная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Сервопривод 1 конечная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Сервопривод 2 начальная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Сервопривод 2 конечная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Сервопривод 3 начальная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Сервопривод 3 конечная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Сервопривод 4 начальная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Сервопривод 4 конечная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "Тестовый режим", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
             StartMenuCollection[2].StrSetsCollection = strSets;
+
+
+
             #endregion
             #region Вентилятор
             strSets = new ObservableCollection<StrSet>();
@@ -368,7 +389,6 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             StartMenuCollection[10].StrSetsCollection = strSets;
             #endregion
-
             #region Modbus рекуператор
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "SR_OPEN", "SR_Close", "SR_vFoc" };
@@ -384,7 +404,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 10_000, "Номинальный ток, ма", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 100, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 2, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Номин. обороты 1, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled:true, valScale: 0, pickVals);
             strSets.Add(sSet);
@@ -401,6 +421,5 @@ namespace Android_Silver.Entities.Visual.Menus
             StartMenuCollection[11].StrSetsCollection = strSets;
             #endregion
         }
-
     }
 }
