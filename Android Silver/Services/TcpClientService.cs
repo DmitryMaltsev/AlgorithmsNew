@@ -220,7 +220,7 @@ namespace Android_Silver.Services
                             //  messToClient = "299,87\r\n";
                             //Термоанемометры
                             //  messToClient = "379,27\r\n";
-                            messToClient = "359,57\r\n";
+                            messToClient = "359,59\r\n";
                         }
                         break;
                 }
@@ -3487,1478 +3487,6 @@ namespace Android_Silver.Services
                     }
                     break;
 
-
-
-                //Общие уставки
-                case 699:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CCommonSetPoints.SPTempAlarm = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                case 700:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CEConfig.TregularCh_R = val;
-                            }
-                        }
-                    }
-                    break;
-                case 701:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CCommonSetPoints.SPTempMaxCh = val;
-                            }
-
-                        }
-                    }
-                    break;
-                case 702:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CCommonSetPoints.SPTempMinCh = val;
-                            }
-
-                        }
-                    }
-                    break;
-                //Задержка авари по темп(пока 0)
-                case 703:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 60000)
-                            {
-                                _fbs.CCommonSetPoints.TControlDelayS = val;
-                            }
-                        }
-                    }
-                    break;
-                //Режим времени года
-                case 704:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2)
-                            {
-                                _fbs.CCommonSetPoints.SeasonMode = val;
-                            }
-                        }
-                    }
-                    break;
-                //Уставка режима года
-                case 705:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CCommonSetPoints.SPSeason = val;
-                            }
-                        }
-                    }
-                    break;
-                //Гистерезис режима года
-                case 706:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CCommonSetPoints.HystSeason = val;
-                            }
-                        }
-                    }
-                    break;
-                //Автосброс пожара
-                case 707:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CEConfig.AutoResetFire = val;
-                            }
-
-                        }
-                    }
-                    break;
-                //Авторестарт
-                case 708:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CEConfig.AutoRestart = val;
-                            }
-                        }
-                    }
-                    break;
-                //Заслонка
-                case 709:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 65000)
-                            {
-                                _fbs.CDamperSetPoints.DamperOpenTime = val;
-                            }
-
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                case 710:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CDamperSetPoints.ServoDampers[0].StartPos = val;
-                            }
-                        }
-                    }
-                    break;
-                case 711:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 100)
-                            {
-                                _fbs.CDamperSetPoints.ServoDampers[0].EndPos = val;
-                            }
-                        }
-                    }
-                    break;
-                case 712:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 100)
-                            {
-                                _fbs.CDamperSetPoints.ServoDampers[1].StartPos = val;
-                            }
-                        }
-                    }
-                    break;
-                case 713:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 100)
-                            {
-                                _fbs.CDamperSetPoints.ServoDampers[1].EndPos = val;
-                            }
-                        }
-                    }
-                    break;
-                case 714:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 100)
-                            {
-                                _fbs.CDamperSetPoints.ServoDampers[2].StartPos = val;
-                            }
-                        }
-                    }
-                    break;
-                case 715:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 100)
-                            {
-                                _fbs.CDamperSetPoints.ServoDampers[2].EndPos = val;
-                            }
-                        }
-                    }
-                    break;
-                case 716:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 100)
-                            {
-                                _fbs.CDamperSetPoints.ServoDampers[3].StartPos = val;
-                            }
-                        }
-                    }
-                    break;
-                case 717:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 100)
-                            {
-                                _fbs.CDamperSetPoints.ServoDampers[3].EndPos = val;
-                            }
-                        }
-                    }
-                    break;
-                case 718:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 1)
-                            {
-                                _fbs.CDamperSetPoints.isTest = (byte)val;
-                            }
-                        }
-                    }
-                    break;
-                case 719:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 100)
-                            {
-                                _fbs.CDamperSetPoints.ServoDampers[0].CalPos = val;
-                                _fbs.CDamperSetPoints.ServoDampers[1].CalPos = val;
-                                _fbs.CDamperSetPoints.ServoDampers[2].CalPos = val;
-                                _fbs.CDamperSetPoints.ServoDampers[3].CalPos = val;
-                            }
-                        }
-                    }
-                    break;
-                //Настройки вентилятора
-                case 720:
-                    {
-                        if (int.TryParse(resp.ValueString, out int val))
-                        {
-
-                            if (val <= 100000)
-                            {
-                                _fbs.CFans.SFanNominalFlow = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                case 721:
-                    {
-                        if (int.TryParse(resp.ValueString, out int val))
-                        {
-
-                            if (val <= 100000)
-                            {
-                                _fbs.CFans.EFanNominalFlow = val;
-                            }
-                        }
-                    }
-                    break;
-                case 722:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CFans.Speed0v = val;
-                            }
-                        }
-                    }
-                    break;
-                case 723:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CFans.Speed10v = val;
-                            }
-                        }
-                    }
-                    break;
-                case 724:
-                    {
-                        if (int.TryParse(resp.ValueString, out int val))
-                        {
-
-                            if (val <= 65000)
-                            {
-                                _fbs.CFans.PressureFailureDelay = val;
-                            }
-                        }
-                    }
-                    break;
-                case 725:
-                    {
-                        if (int.TryParse(resp.ValueString, out int val))
-                        {
-
-                            if (val <= 65000)
-                            {
-                                _fbs.CFans.FanFailureDelay = val;
-                            }
-                        }
-                    }
-                    break;
-                case 726:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CFans.DecrFanConfig = val;
-                            }
-                        }
-                    }
-                    break;
-                case 727:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CFans.PDecrFan = val;
-                            }
-                        }
-                    }
-                    break;
-                case 728:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CFans.IDecrFan = val;
-                            }
-                        }
-                    }
-                    break;
-                case 729:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CFans.DDecrFan = val;
-                            }
-                        }
-                    }
-                    break;
-                case 730:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CFans.MinFanPercent = val;
-                            }
-                        }
-                    }
-                    break;
-
-
-
-                //Водяной нагреватель
-                case 731:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.PWork = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                case 732:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.IWork = val;
-                            }
-                        }
-                    }
-                    break;
-                case 733:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.DWork = val;
-                            }
-                        }
-                    }
-                    break;
-                case 734:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.PRet = val;
-                            }
-                        }
-                    }
-                    break;
-                case 735:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.IRet = val;
-                            }
-                        }
-                    }
-                    break;
-                case 736:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.DRet = val;
-                            }
-                        }
-                    }
-                    break;
-                case 737:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.TRetMax = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 738:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.TRetMin = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 739:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.TRetStb = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 740:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.TRetF = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 741:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.TRetStart = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                //2 раза, потом дополнить
-                case 742:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                // _fbs.CWHSetPoints.TRetStart = val;
-                            }
-                        }
-                    }
-                    break;
-                case 743:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 65000)
-                            {
-                                _fbs.CWHSetPoints.SSMaxIntervalS = val;
-                            }
-                        }
-                    }
-                    break;
-                case 744:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CWHSetPoints.MinDamperPerc = val;
-                            }
-                        }
-                    }
-                    break;
-                case 745:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CWHSetPoints.SPWinterProcess = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 746:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CWHSetPoints.IsSummerTestPump = val;
-                            }
-                        }
-                    }
-                    break;
-                //Электрический нагреватель.   
-                case 747:
-                    {
-                        if (int.TryParse(resp.ValueString, out int val))
-                        {
-
-                            if (val <= 100_000)
-                            {
-                                _fbs.CEHSetPoints.NomPowerVT = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                case 748:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CEHSetPoints.PReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 749:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CEHSetPoints.IReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 750:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CEHSetPoints.DReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 751:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 65000)
-                            {
-                                _fbs.CEHSetPoints.BlowDownTime = val;
-                            }
-                        }
-                    }
-                    break;
-                //Фреоновый охладитель
-                case 752:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CFreonCoolerSP.PReg = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                case 753:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CFreonCoolerSP.IReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 754:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CFreonCoolerSP.DReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 755:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 65000)
-                            {
-                                _fbs.CFreonCoolerSP.Stage1OffS = val;
-                            }
-                        }
-                    }
-                    break;
-                case 756:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 65000)
-                            {
-                                _fbs.CFreonCoolerSP.Stage1OnS = val;
-                            }
-                        }
-                    }
-                    break;
-                case 757:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CFreonCoolerSP.Hyst = val;
-                            }
-                        }
-                    }
-                    break;
-                //Увлажнитель
-                case 758:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CHumiditySPS.PReg = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                case 759:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CHumiditySPS.IReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 760:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CHumiditySPS.DReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 761:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 65000)
-                            {
-                                _fbs.CHumiditySPS.Stage1OffS = val;
-                            }
-                        }
-                    }
-                    break;
-                case 762:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 65000)
-                            {
-                                _fbs.CHumiditySPS.Stage1OnS = val;
-                            }
-                        }
-                    }
-                    break;
-                case 763:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CHumiditySPS.Hyst = val;
-                            }
-                        }
-                    }
-                    break;
-                case 764:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CRecup.PReg = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                case 765:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CRecup.IReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 766:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CRecup.DReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 767:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CRecup.EffSP = val;
-                            }
-                        }
-                    }
-                    break;
-                case 768:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CRecup.EffFailValue = val;
-                            }
-                        }
-                    }
-                    break;
-                case 769:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 65535)
-                            {
-                                _fbs.CRecup.EffFailDelay = val;
-                            }
-                        }
-                    }
-                    break;
-                case 770:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100)
-                            {
-                                _fbs.CRecup.HZMax = val;
-                            }
-                        }
-                    }
-                    break;
-                case 771:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CRecup.TempA = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 772:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CRecup.TempB = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 773:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CRecup.TempC = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 774:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1000)
-                            {
-                                _fbs.CRecup.TempD = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                //Коррекция датчиков
-                case 775:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -1000 && val <= 1000)
-                            {
-                                _fbs.CSensors.OutdoorTemp.Correction = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 776:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -1000 && val <= 1000)
-                            {
-                                _fbs.CSensors.SupTemp.Correction = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 777:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -1000 && val <= 1000)
-                            {
-                                _fbs.CSensors.ExhaustTemp.Correction = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 778:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -1000 && val <= 1000)
-                            {
-                                _fbs.CSensors.RoomTemp.Correction = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 779:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -1000 && val <= 1000)
-                            {
-                                _fbs.CSensors.ReturnTemp.Correction = (float)val / 10;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                //Конфигурация датчиков
-                case 780:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 20)
-                            {
-                                _fbs.CEConfig.ET1 = val;
-                            }
-                        }
-                    }
-                    break;
-                case 781:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 20)
-                            {
-                                _fbs.CEConfig.ET2 = val;
-                            }
-                        }
-                    }
-                    break;
-                case 782:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 20)
-                            {
-                                _fbs.CEConfig.OUT1 = val;
-                            }
-                        }
-                    }
-                    break;
-                case 783:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 20)
-                            {
-                                _fbs.CEConfig.OUT2 = val;
-                            }
-                        }
-                    }
-                    break;
-
-                case 784:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 20)
-                            {
-                                _fbs.CEConfig.AR1 = val;
-                            }
-                        }
-                    }
-                    break;
-                case 785:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 20)
-                            {
-                                _fbs.CEConfig.AR2 = val;
-                            }
-                        }
-                    }
-                    break;
-                case 786:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 20)
-                            {
-                                _fbs.CEConfig.AR3 = val;
-                            }
-                        }
-                    }
-                    break;
-                case 787:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1)
-                            {
-                                _fbs.CEConfig.Recup = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                //термоанемометры
-                case 788:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val >= 0 && val < 65535)
-                            {
-                                _fbs.ThmSps.SupTHmKoef = (float)val;
-                            }
-                        }
-                    }
-                    break;
-                case 789:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val >= 0 && val < 65535)
-                            {
-                                _fbs.ThmSps.SupCurveKoef = (float)val / 100;
-                            }
-                        }
-                    }
-                    break;
-                case 790:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val >= 0 && val < 65535)
-                            {
-                                _fbs.ThmSps.ExhaustTHmKoef = (float)val;
-                            }
-                        }
-                    }
-                    break;
-                case 791:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val >= 0 && val < 65535)
-                            {
-                                _fbs.ThmSps.ExhaustCurveKoef = (float)val / 100;
-                            }
-                        }
-                    }
-                    break;
-                case 792:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -1000 && val <= 1200)
-                            {
-                                _fbs.ThmSps.TempH1 = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 793:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -1000 && val <= 1200)
-                            {
-                                _fbs.ThmSps.TempC1 = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 794:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -1000 && val <= 1200)
-                            {
-                                _fbs.ThmSps.TempH2 = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 795:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -1000 && val <= 1200)
-                            {
-                                _fbs.ThmSps.TempC2 = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 796:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val >= 0 && val <= 1000)
-                            {
-                                _fbs.ThmSps.PReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 797:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val >= 0 && val <= 1000)
-                            {
-                                _fbs.ThmSps.IReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 798:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val >= 0 && val <= 1000)
-                            {
-                                _fbs.ThmSps.DReg = val;
-                            }
-                        }
-                    }
-                    break;
-                case 799:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -9999 && val <= 9999)
-                            {
-                                _fbs.ThmSps.KPolKoef = (float)val / 100;
-                            }
-                        }
-                    }
-                    break;
-                case 800:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -9999 && val <= 9999)
-                            {
-                                _fbs.ThmSps.BPolKoef = (float)val / 100;
-                            }
-                        }
-                    }
-                    break;
-                case 801:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-                            if (val >= -9999 && val <= 9999)
-                            {
-                                _fbs.ThmSps.KClKoef = (float)val / 100;
-                            }
-                        }
-                    }
-                    break;
-                case 802:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val >= -9999 && val <= 9999)
-                            {
-                                _fbs.ThmSps.BClKoef = (float)val / 100;
-                            }
-                        }
-                    }
-                    break;
-                case 803:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val >= 0 && val <= 100)
-                            {
-                                _fbs.ThmSps.U = (float)val / 10;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
-                //Работа рекуператора Modbus
-                case 804:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 2 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.MBRecMode = val;
-                            }
-                        }
-                    }
-                    break;
-                case 805:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.IsRotTest = (byte)val;
-                            }
-                        }
-                    }
-                    break;
-                case 806:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.IsGrindingMode = (byte)val;
-                            }
-                        }
-                    }
-                    break;
-                case 807:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 1 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.IsForward = (byte)val;
-                            }
-                        }
-                    }
-                    break;
-                case 808:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 10_000 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.NominalCurrent = val;
-                            }
-                        }
-                    }
-                    break;
-                case 809:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-                            if (val <= 10000 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.ReductKoef = (float)val / 100;
-                            }
-                        }
-                    }
-                    break;
-                case 810:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.NominalTurns1 = val;
-                            }
-                        }
-                    }
-                    break;
-                case 811:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.NominalTurns2 = val;
-                            }
-                        }
-                    }
-                    break;
-                case 812:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val <= 700 && val >= -700)
-                            {
-                                _fbs.MbRecSPs.NominalTemp1 = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 813:
-                    {
-                        if (short.TryParse(resp.ValueString, out short val))
-                        {
-
-                            if (val <= 700 && val >= -700)
-                            {
-                                _fbs.MbRecSPs.NominalTemp2 = (float)val / 10;
-                            }
-                        }
-                    }
-                    break;
-                case 814:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 10_000 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.GrindingCurrent = val;
-                            }
-                        }
-                    }
-                    break;
-                case 815:
-                    {
-                        if (ushort.TryParse(resp.ValueString, out ushort val))
-                        {
-
-                            if (val <= 100 && val >= 0)
-                            {
-                                _fbs.MbRecSPs.GrindingTurns = val;
-                            }
-                        }
-                        if (_servActivePageEntities.IsLoadingPage)
-                        {
-                            _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                        }
-                    }
-                    break;
             }
             //Общие уставки
             if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400)
@@ -5088,6 +3616,10 @@ namespace Android_Silver.Services
                     {
                         _fbs.CEConfig.AutoRestart = val;
                     }
+                }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
                 return;
             }
@@ -5228,6 +3760,10 @@ namespace Android_Silver.Services
                         _fbs.CDamperSetPoints.ServoDampers[3].CalPos = val;
                     }
                 }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
                 return;
             }
             //Настройки вентиляторов
@@ -5355,6 +3891,10 @@ namespace Android_Silver.Services
                     {
                         _fbs.CFans.MinFanPercent = val;
                     }
+                }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
                 return;
             }
@@ -5539,6 +4079,10 @@ namespace Android_Silver.Services
                         _fbs.CWHSetPoints.IsSummerTestPump = val;
                     }
                 }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
                 return;
             }
             //Электрический нагреватель.  
@@ -5599,6 +4143,10 @@ namespace Android_Silver.Services
                     {
                         _fbs.CEHSetPoints.BlowDownTime = val;
                     }
+                }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
                 return;
             }
@@ -5673,6 +4221,10 @@ namespace Android_Silver.Services
                         _fbs.CFreonCoolerSP.Hyst = val;
                     }
                 }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
                 return;
             }
             //Увлажнитель
@@ -5745,6 +4297,10 @@ namespace Android_Silver.Services
                     {
                         _fbs.CHumiditySPS.Hyst = val;
                     }
+                }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
                 return;
             }
@@ -5879,6 +4435,10 @@ namespace Android_Silver.Services
                         _fbs.CRecup.TempD = (float)val / 10;
                     }
                 }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
                 return;
             }
             //Датчики
@@ -5940,10 +4500,14 @@ namespace Android_Silver.Services
                         _fbs.CSensors.ReturnTemp.Correction = (float)val / 10;
                     }
                 }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
                 return;
             }
             //Конфигурация
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -5955,7 +4519,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 1 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -5967,7 +4531,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 2 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -5979,7 +4543,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 3 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -5991,7 +4555,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 4 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -6003,7 +4567,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 5 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -6015,7 +4579,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 6 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -6027,12 +4591,12 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= 0 && val <= 1)
+                    if (val >= 0 && val <= 2)
                     {
                         _fbs.CEConfig.Recup = val;
                     }
@@ -6104,7 +4668,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 5 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -6240,6 +4804,10 @@ namespace Android_Silver.Services
                     {
                         _fbs.ThmSps.U = (float)val / 10;
                     }
+                }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
                 return;
             }
