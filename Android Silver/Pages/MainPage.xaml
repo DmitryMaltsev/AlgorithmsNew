@@ -396,6 +396,22 @@
             <Label Text="{Binding  CFBs.CFilterVals.FilterPolPercent, StringFormat='{0}%'}"  Grid.Row="17"  Grid.Column="12" Style="{StaticResource MiscellText}"
                                                                                                     IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
+            <!--#region Расход притока-->
+            <Image Source="{Binding CPictureSet.SupCons}"    Grid.Row="19"  Grid.Column="0" Style="{StaticResource MiscellaneousImg}" 
+                    IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding  CFBs.CFans.SFlow,StringFormat='{0}м3/час'}"  Grid.Row="19"  Grid.Column="6" Style="{StaticResource MiscellText}"
+                                                                                          IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding CFBs.CFans.SPercent,StringFormat='{0}%'}"  Grid.Row="19"  Grid.Column="12" Style="{StaticResource MiscellText}"
+                                                                                IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
+            <!--#region Расход вытяжки -->
+            <Image Source="{Binding  CPictureSet.ExhaustCons}"    Grid.Row="20"  Grid.Column="0" Style="{StaticResource MiscellaneousImg}"
+                                                                                      IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding  CFBs.CFans.EFlow,StringFormat='{0}м3/час'}"  Grid.Row="20"  Grid.Column="6" Style="{StaticResource MiscellText}"
+                                                                                IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding CFBs.CFans.EPercent,StringFormat='{0}%'}"  Grid.Row="20"  Grid.Column="12" Style="{StaticResource MiscellText}"
+                                                                      IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
+            <!--#endregion-->
+            <!--#endregion-->
             <!--#endregion-->
 
             <!--#region CHOOSE MODE PAGE -->

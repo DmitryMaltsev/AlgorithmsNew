@@ -189,7 +189,7 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            messToClient = "103,050\r\n";
+                            messToClient = "103,054\r\n";
                         }
                         break;
                     case MessageStates.VacMessage:
@@ -867,6 +867,50 @@ namespace Android_Silver.Services
                                 {
                                     _pictureSet.SetPicureSetIfNeed(_pictureSet.AlarmMainIcon, _pictureSet.AlarmMainIcon.Default);
                                 }
+                            }
+                        }
+                    }
+                    break;
+                case 153:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 65535)
+                            {
+                                _fbs.CFans.SFlow =val;
+                            }
+                        }
+                    }
+                    break;
+                case 154:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 65535)
+                            {
+                                _fbs.CFans.EFlow = val;
+                            }
+                        }
+                    }
+                    break;
+                case 155:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 100)
+                            {
+                                _fbs.CFans.SPercent = val;
+                            }
+                        }
+                    }
+                    break;
+                case 156:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 100)
+                            {
+                                _fbs.CFans.EPercent = val;
                             }
                         }
                     }

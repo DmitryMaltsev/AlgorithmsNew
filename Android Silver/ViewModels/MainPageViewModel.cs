@@ -255,6 +255,7 @@ namespace Android_Silver.Pages
         string _cData;
         public MainPageViewModel()
         {
+           
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();

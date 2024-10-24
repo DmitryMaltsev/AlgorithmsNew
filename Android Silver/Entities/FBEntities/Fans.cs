@@ -37,7 +37,54 @@ namespace Android_Silver.Entities.FBEntities
 			}
 		}
 
-        public int SFanNominalFlow;
+		private ushort _sFlow;
+
+		public ushort SFlow
+		{
+			get { return _sFlow; }
+			set { 
+				_sFlow = value; 
+				OnPropertyChanged(nameof(SFlow));
+			}
+		}
+
+		private ushort _eFlow;
+
+		public ushort EFlow
+		{
+			get { return _eFlow; }
+			set { 
+				_eFlow = value; 
+				OnPropertyChanged(nameof(EFlow));
+			}
+		}
+
+		private ushort _sPersent;
+
+		public ushort SPercent
+		{
+			get { return _sPersent; }
+			set { 
+				_sPersent = value; 
+				OnPropertyChanged(nameof(SPercent));
+			}
+		}
+
+		private ushort _ePercent;
+
+		public ushort EPercent
+		{
+			get { return _ePercent; }
+			set {
+				_ePercent = value; 
+				OnPropertyChanged(nameof(EPercent));
+			}
+		}
+
+
+
+
+		public int SFanNominalFlow;
         public int EFanNominalFlow;
         public int Speed0v;
         public int Speed10v;
