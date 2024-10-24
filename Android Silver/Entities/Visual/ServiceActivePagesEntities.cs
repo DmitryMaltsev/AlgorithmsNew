@@ -224,8 +224,9 @@ namespace Android_Silver.Entities.Visual
         public bool IsTmhSettingsPage
         {
             get { return _istmhSettingsPage; }
-            set {
-                _istmhSettingsPage = value; 
+            set
+            {
+                _istmhSettingsPage = value;
                 OnPropertyChanged(nameof(IsTmhSettingsPage));
             }
         }
@@ -247,7 +248,8 @@ namespace Android_Silver.Entities.Visual
         public bool IsMBRecupSettingsPage
         {
             get { return _isMBRecupSettingsPage; }
-            set { 
+            set
+            {
                 _isMBRecupSettingsPage = value;
                 OnPropertyChanged(nameof(IsMBRecupSettingsPage));
             }
@@ -258,7 +260,8 @@ namespace Android_Silver.Entities.Visual
         public bool IsFiltersSettingsPage
         {
             get { return _isFiltersSettingsPage; }
-            set { 
+            set
+            {
                 _isFiltersSettingsPage = value;
                 OnPropertyChanged($"{nameof(IsFiltersSettingsPage)}");
             }
@@ -435,8 +438,8 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[5].CVal = _fbs.CCommonSetPoints.SeasonMode;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[6].CVal = _fbs.CCommonSetPoints.SPSeason;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[7].CVal = _fbs.CCommonSetPoints.HystSeason;
-                        _menusEntities.StartMenuCollection[1].StrSetsCollection[8].CPickVal = _fbs.CEConfig.AutoResetFire;
-                        _menusEntities.StartMenuCollection[1].StrSetsCollection[9].CPickVal = _fbs.CEConfig.AutoRestart;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[8].CPickVal = _fbs.CEConfig.AutoRestart;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[9].CPickVal = _fbs.CEConfig.AutoResetFire;
                         _menusEntities.GenerateInterfaceTable(1);
                     }
                     break;
@@ -453,8 +456,19 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[2].StrSetsCollection[7].CVal = _fbs.CDamperSetPoints.ServoDampers[2].EndPos;
                         _menusEntities.StartMenuCollection[2].StrSetsCollection[8].CVal = _fbs.CDamperSetPoints.ServoDampers[3].StartPos;
                         _menusEntities.StartMenuCollection[2].StrSetsCollection[9].CVal = _fbs.CDamperSetPoints.ServoDampers[3].EndPos;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[10].CPickVal = _fbs.CDamperSetPoints.isTest;
-                        _menusEntities.StartMenuCollection[2].StrSetsCollection[11].CVal = _fbs.CDamperSetPoints.ServoDampers[0].CalPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[10].CVal = _fbs.CDamperSetPoints.ServoDampers[0].CloseAngle;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[11].CVal = _fbs.CDamperSetPoints.ServoDampers[0].OpenAngle;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[12].CVal = _fbs.CDamperSetPoints.ServoDampers[1].CloseAngle;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[13].CVal = _fbs.CDamperSetPoints.ServoDampers[1].OpenAngle;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[14].CVal = _fbs.CDamperSetPoints.ServoDampers[2].CloseAngle;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[15].CVal = _fbs.CDamperSetPoints.ServoDampers[2].OpenAngle;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[16].CVal = _fbs.CDamperSetPoints.ServoDampers[3].CloseAngle;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[17].CVal = _fbs.CDamperSetPoints.ServoDampers[3].OpenAngle;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[18].CPickVal = _fbs.CDamperSetPoints.isTest;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[19].CVal = _fbs.CDamperSetPoints.ServoDampers[0].CalPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[20].CVal = _fbs.CDamperSetPoints.ServoDampers[1].CalPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[21].CVal = _fbs.CDamperSetPoints.ServoDampers[2].CalPos;
+                        _menusEntities.StartMenuCollection[2].StrSetsCollection[22].CVal = _fbs.CDamperSetPoints.ServoDampers[3].CalPos;
                         //   _menusEntities.StartMenuCollection[1].StrSetsCollection[1].CVal = _fbs.CDamperSetPoints.DamperHeatingTime;
                         _menusEntities.GenerateInterfaceTable(2);
                         IsDamperSettingsPage = true;
@@ -790,7 +804,7 @@ namespace Android_Silver.Entities.Visual
                     }
                     break;
                 case SActivePageState.MBRecupSettingsPage:
-                {
+                    {
                         IsMBRecupSettingsPage = true;
                         IsFBSettingsPage = true;
                         IsLoadingPage = false;
@@ -825,7 +839,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[11].CVal = _fbs.MbRecSPs.GrindingTurns;
                         _menusEntities.GenerateInterfaceTable(11);
                     }
-                break;
+                    break;
             }
 
             if (activePageState != SActivePageState.StartPage)

@@ -29,16 +29,9 @@ namespace Android_Silver.Entities.FBEntities
         public ushort StartPos;
         public ushort EndPos;
         public ushort CAngle;
-        private ushort _calPos;
-
-        public ushort CalPos
-        {
-            get { return _calPos; }
-            set { 
-                _calPos = value; 
-                OnPropertyChanged(nameof(CalPos));
-            }
-        }
+        public ushort CalPos;
+        public ushort CloseAngle;
+        public ushort OpenAngle;
 
 
     }

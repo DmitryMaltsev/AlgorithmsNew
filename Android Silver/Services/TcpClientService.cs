@@ -209,18 +209,12 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            //  messToClient = "299,87\r\n";
-                            //Термоанемометры
-                            //  messToClient = "379,27\r\n";
-                            messToClient = "299,60\r\n";
+                            messToClient = "300,65\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            //  messToClient = "299,87\r\n";
-                            //Термоанемометры
-                            //  messToClient = "379,27\r\n";
-                            messToClient = "359,59\r\n";
+                            messToClient = "365,64\r\n";
                         }
                         break;
                 }
@@ -3592,8 +3586,22 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            //Автосброс пожара
+            //Авторестарт
             if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 8)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+
+                    if (val <= 1)
+                    {
+                        _fbs.CEConfig.AutoRestart = val;
+                    }
+                }
+
+                return;
+            }
+            //Автосброс пожара
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 9)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3603,19 +3611,6 @@ namespace Android_Silver.Services
                         _fbs.CEConfig.AutoResetFire = val;
                     }
 
-                }
-                return;
-            }
-            //Авторестарт
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 9)
-            {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
-                {
-
-                    if (val <= 1)
-                    {
-                        _fbs.CEConfig.AutoRestart = val;
-                    }
                 }
                 if (_servActivePageEntities.IsLoadingPage)
                 {
@@ -3741,9 +3736,9 @@ namespace Android_Silver.Services
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
-                    if (val <= 1)
+                    if (val <= 90)
                     {
-                        _fbs.CDamperSetPoints.isTest = (byte)val;
+                        _fbs.CDamperSetPoints.ServoDampers[0].CloseAngle = val;
                     }
                 }
                 return;
@@ -3752,11 +3747,131 @@ namespace Android_Silver.Services
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
+                    if (val <= 90)
+                    {
+                        _fbs.CDamperSetPoints.ServoDampers[0].OpenAngle = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 12)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 90)
+                    {
+                        _fbs.CDamperSetPoints.ServoDampers[1].CloseAngle = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 13)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 90)
+                    {
+                        _fbs.CDamperSetPoints.ServoDampers[1].OpenAngle = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 14)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 90)
+                    {
+                        _fbs.CDamperSetPoints.ServoDampers[2].CloseAngle = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 15)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 90)
+                    {
+                        _fbs.CDamperSetPoints.ServoDampers[2].OpenAngle = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 16 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 16)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 90)
+                    {
+                        _fbs.CDamperSetPoints.ServoDampers[3].CloseAngle = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 17 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 17)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 90)
+                    {
+                        _fbs.CDamperSetPoints.ServoDampers[3].OpenAngle = val;
+                    }
+                }
+                return;
+            }
+
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 18 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 18)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 1)
+                    {
+                        _fbs.CDamperSetPoints.isTest = (byte)val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 19 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 19)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
                     if (val <= 100)
                     {
                         _fbs.CDamperSetPoints.ServoDampers[0].CalPos = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 20 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 20)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 100)
+                    {
                         _fbs.CDamperSetPoints.ServoDampers[1].CalPos = val;
+                    }
+                }
+
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 21 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 21)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 100)
+                    {
                         _fbs.CDamperSetPoints.ServoDampers[2].CalPos = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 22 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 22)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    if (val <= 100)
+                    {
                         _fbs.CDamperSetPoints.ServoDampers[3].CalPos = val;
                     }
                 }
