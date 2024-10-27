@@ -22,12 +22,14 @@ namespace Android_Silver.Entities.FBEntities
 
         public MBRecupSetPoints MbRecSPs { get; set; }
 
+
         public CommonSetPoints CCommonSetPoints;
         public DamperSetPoints CDamperSetPoints;
         public ElementsConfig CEConfig;
         public WHSetPoints CWHSetPoints;
         public EHSetPoints CEHSetPoints;
         public FreonCoolerSP CFreonCoolerSP;
+        public UFLeds UFLeds { get; set; }
 
         public FBs()
         {
@@ -47,6 +49,7 @@ namespace Android_Silver.Entities.FBEntities
             CFreonCoolerSP = new FreonCoolerSP();
             ThmSps = new ThermoanemometersSPS();
             MbRecSPs=new MBRecupSetPoints();
+            UFLeds=new UFLeds();
         }
     }
 }

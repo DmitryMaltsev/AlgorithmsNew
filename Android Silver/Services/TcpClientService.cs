@@ -37,6 +37,8 @@ namespace Android_Silver.Services
 
         private ServiceActivePagesEntities _servActivePageEntities { get; set; }
 
+        public Action ClientDisconnected { get; set;}
+
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -62,10 +64,7 @@ namespace Android_Silver.Services
                 _ethernetEntities.Client.SendTimeout = 600;
                 _ethernetEntities.IsConnected = false;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
-                if (_ethernetEntities.PagesTab == 1)
-                {
-                    _servActivePageEntities.SetActivePageState(SActivePageState.LoadingPage);
-                }
+
                 if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
                 {
                     _ethernetEntities.IsConnected = false;
@@ -81,6 +80,10 @@ namespace Android_Silver.Services
                 }
                 else
                 {
+                    if (_ethernetEntities.PagesTab == 1)
+                    {
+                        _servActivePageEntities.SetActivePageState(SActivePageState.LoadingPage);
+                    }
                     _ethernetEntities.EthernetMessage = "Успешное подключение";
                     _ethernetEntities.SystemMessage = "Успешное подключение";
                     _ethernetEntities.IsConnected = true;
@@ -209,12 +212,12 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "300,65\r\n";
+                            messToClient = "300,66\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "365,64\r\n";
+                            messToClient = "366,64\r\n";
                         }
                         break;
                 }
@@ -267,6 +270,7 @@ namespace Android_Silver.Services
                 {
                     _ethernetEntities.SystemMessage = "Превышено максимальное количество попыток - 10";
                     _ethernetEntities.EthernetMessage = "Превышено максимальное количество попыток передачи данных. Подключитесь повторно";
+                    ClientDisconnected?.Invoke();
                     _activePageEntities.SetActivePageState(ActivePageState.StartPage);
                     _ethernetEntities.IsConnected = false;
                 }
@@ -3653,6 +3657,20 @@ namespace Android_Silver.Services
                     if (val <= 1)
                     {
                         _fbs.CEConfig.AutoResetFire = val;
+                    }
+
+                }
+                return;
+            }
+            //Сила тока уф светодиодов
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 10)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+
+                    if (val <= 70)
+                    {
+                        _fbs.UFLeds.LEDsI = (float)val/100;
                     }
 
                 }

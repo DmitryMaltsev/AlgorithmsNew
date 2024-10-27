@@ -365,6 +365,8 @@ namespace Android_Silver.Pages
 
 
             SetTValuesByIndex(0, 0);//?????
+            CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
+            CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
             StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
@@ -972,6 +974,15 @@ namespace Android_Silver.Pages
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
         #endregion
+
+        private void ClientDisceonnectedCallback()
+        {
+            if (CActivePagesEntities!=null)
+            {
+                CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
+            }
+          
+        }
 
         Timer timer;
         private void StartTimer()

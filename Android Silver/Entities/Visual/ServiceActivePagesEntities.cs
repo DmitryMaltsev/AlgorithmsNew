@@ -440,6 +440,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[7].CVal = _fbs.CCommonSetPoints.HystSeason;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[8].CPickVal = _fbs.CEConfig.AutoRestart;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[9].CPickVal = _fbs.CEConfig.AutoResetFire;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[10].CVal = _fbs.UFLeds.LEDsI;
                         _menusEntities.GenerateInterfaceTable(1);
                     }
                     break;

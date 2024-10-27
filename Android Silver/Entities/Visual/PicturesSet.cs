@@ -171,6 +171,18 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private string _miscellaneous;
+
+        public string Miscellaneous
+        {
+            get { return _miscellaneous; }
+            set { 
+                _miscellaneous = value;
+                OnPropertyChanged(nameof(Miscellaneous));
+            }
+        }
+
+
         #endregion
 
         #region Общие кнопки
@@ -539,6 +551,7 @@ namespace Android_Silver.Entities.Visual
         }
 
         #endregion
+
         private ObservableCollection<PicByStates> _activeModesPics = new ObservableCollection<PicByStates>();
 
         public ObservableCollection<PicByStates> ActiveModesPics
@@ -703,6 +716,7 @@ namespace Android_Silver.Entities.Visual
                         ExhaustCons = "exhaust_cons_base.png";
                         OutDoorTemp = "out_temp_base.png";
                         RoomTemp = "room_temp_base.png";
+                        Miscellaneous = "miscel_base.png";
                         #endregion
                         #region Кухня, счетчики
                         AcceptButton = new PicByStates("accept_but_off_base.png", "accept_but_on_base.png");

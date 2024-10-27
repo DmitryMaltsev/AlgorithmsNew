@@ -75,6 +75,7 @@
 	  <None Remove="Resources\Images\base\Главное меню\filter_100_main_base.png" />
 	  <None Remove="Resources\Images\base\Главное меню\line.png" />
 	  <None Remove="Resources\Images\base\Главное меню\link_header_base.png" />
+	  <None Remove="Resources\Images\base\Главное меню\miscel_base.png" />
 	  <None Remove="Resources\Images\base\Главное меню\recuperator_header_base.png" />
 	  <None Remove="Resources\Images\base\Главное меню\substrate_base.png" />
 	  <None Remove="Resources\Images\base\Главное меню\substrate_off_base.png" />
@@ -205,6 +206,7 @@
 	  <MauiImage Include="Resources\Images\base\Главное меню\filter_100_main_base.png" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\line.png" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\link_header_base.png" />
+	  <MauiImage Include="Resources\Images\base\Главное меню\miscel_base.png" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\recuperator_header_base.png" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\substrate_off_base.png" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\substrate_on_base.png" />

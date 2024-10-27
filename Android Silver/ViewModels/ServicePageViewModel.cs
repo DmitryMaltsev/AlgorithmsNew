@@ -112,6 +112,8 @@ namespace Android_Silver.ViewModels
             IncreaseMenuItemsCommand = new Command(ExecuteIncrease);
             ToSettingsCommand = new Command(ExecuteToSettingsWindow);
             SetSettingsCommand = new Command(ExecuteSetSettings);
+            CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
+            CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
             StartTimer();
         }
 
@@ -331,6 +333,16 @@ namespace Android_Silver.ViewModels
         private void ExecuteFanReturn(object obj)
         {
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+        }
+
+
+        private void ClientDisceonnectedCallback()
+        {
+  
+            if (CActivePagesEntities != null)
+            {
+                CActivePagesEntities.SetActivePageState(SActivePageState.StartPage);
+            }
         }
 
         Timer timer;

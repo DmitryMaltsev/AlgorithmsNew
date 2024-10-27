@@ -109,7 +109,7 @@ namespace Android_Silver.Entities.Visual.Menus
         public MenusEntities()
         {
             ETH_COMMON_SETTINGS_ADDR = 300;
-            ETH_COMMON_SETTINGS_LENGTH = 10;
+            ETH_COMMON_SETTINGS_LENGTH = 11;
             ETH_DAMPER_SETTINGS_ADDR = ETH_COMMON_SETTINGS_ADDR + ETH_COMMON_SETTINGS_LENGTH;
             ETH_DAMPER_SETTINGS_LENGTH = 23;
             ETH_FAN_SETTINGS_ADDR = ETH_DAMPER_SETTINGS_ADDR + ETH_DAMPER_SETTINGS_LENGTH;
@@ -139,7 +139,7 @@ namespace Android_Silver.Entities.Visual.Menus
             #region Пункты меню 
             MItem mItem = new MItem("Конфигурация", isVisible: true, _pictureSet.BaseSettings1ButCollection[0], SActivePageState.ConfigPage, id: 1, startAddress: ETH_CONFIG_SETTINGS_ADDR + 400);
             StartMenuCollection.Add(mItem);
-            mItem = new MItem("Общие", isVisible: true, _pictureSet.BaseSettings1ButCollection[1], SActivePageState.CommonSettingsPage, id: 2, startAddress: ETH_COMMON_SETTINGS_ADDR+400);
+            mItem = new MItem("Общие", isVisible: true, _pictureSet.BaseSettings1ButCollection[1], SActivePageState.CommonSettingsPage, id: 2, startAddress: ETH_COMMON_SETTINGS_ADDR + 400);
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Жалюзи", isVisible: true, _pictureSet.BaseSettings1ButCollection[2], SActivePageState.DamperSettingsPage, id: 3, startAddress: ETH_DAMPER_SETTINGS_ADDR + 400);
             StartMenuCollection.Add(mItem);
@@ -210,6 +210,8 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 5, "Автосброс пожара", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
+            sSet = new StrSet(0, 0.7f, "Сила тока УФ-светодиодов, А", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            strSets.Add(sSet);
             StartMenuCollection[1].StrSetsCollection = strSets;
             #endregion
             #region Жалюзи
@@ -218,7 +220,7 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 65000, "Время открытия, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 65000, "Время прогрева", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
-             strSets.Add(sSet);
+            strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Сервопривод 1 начальная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Сервопривод 1 конечная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
