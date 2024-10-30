@@ -73,6 +73,11 @@
 	  <None Remove="Resources\Images\base\Главное меню\fan_header_base.png" />
 	  <None Remove="Resources\Images\base\Главное меню\filter70_header_base.png" />
 	  <None Remove="Resources\Images\base\Главное меню\filter_100_main_base.png" />
+	  <None Remove="Resources\Images\base\Главное меню\filter_flow0_header_base.jpg" />
+	  <None Remove="Resources\Images\base\Главное меню\filter_flow20_header_base.jpg" />
+	  <None Remove="Resources\Images\base\Главное меню\filter_flow40_header_base.jpg" />
+	  <None Remove="Resources\Images\base\Главное меню\filter_flow60_header_base.jpg" />
+	  <None Remove="Resources\Images\base\Главное меню\filter_flow80_header_base.jpg" />
 	  <None Remove="Resources\Images\base\Главное меню\line.png" />
 	  <None Remove="Resources\Images\base\Главное меню\link_header_base.png" />
 	  <None Remove="Resources\Images\base\Главное меню\miscel_base.png" />
@@ -204,6 +209,11 @@
 	  <MauiImage Include="Resources\Images\base\Главное меню\fan_header_base.png" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\filter70_header_base.png" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\filter_100_main_base.png" />
+	  <MauiImage Include="Resources\Images\base\Главное меню\filter_flow0_header_base.jpg" />
+	  <MauiImage Include="Resources\Images\base\Главное меню\filter_flow20_header_base.jpg" />
+	  <MauiImage Include="Resources\Images\base\Главное меню\filter_flow40_header_base.jpg" />
+	  <MauiImage Include="Resources\Images\base\Главное меню\filter_flow60_header_base.jpg" />
+	  <MauiImage Include="Resources\Images\base\Главное меню\filter_flow80_header_base.jpg" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\line.png" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\link_header_base.png" />
 	  <MauiImage Include="Resources\Images\base\Главное меню\miscel_base.png" />

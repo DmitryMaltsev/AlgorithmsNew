@@ -294,7 +294,7 @@
                                                                         IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <!--Заголовочные статусы-->
             <Image Source="{Binding CPictureSet.LinkHeader.Current}" Grid.Row="1"  Grid.Column="6" Style="{StaticResource MainPageHeader}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
-            <Image Source="{Binding CPictureSet.Filter70Header.Current}" Grid.Row="1"  Grid.Column="11" Style="{StaticResource MainPageHeader}"   IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
+            <Image Source="{Binding CPictureSet.FilterCurrentHeader}" Grid.Row="1"  Grid.Column="11" Style="{StaticResource MainPageHeader}"   IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
             <Image Source="{Binding CPictureSet.RecuperatorHeader.Current}" Grid.Row="1"  Grid.Column="12" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
             <Image Source="{Binding CPictureSet.EHeaterHeader.Current}" Grid.Row="1"  Grid.Column="13" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
             <Image Source="{Binding CPictureSet.FanHeader.Current}" Grid.Row="1"  Grid.Column="14" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
@@ -403,7 +403,7 @@
             <!--#region Загрязненнось фильтра -->
             <Image Source="{Binding  CPictureSet.FilterPol}" Grid.Row="17"  Grid.Column="12" Style="{StaticResource MiscellaneousImg}"
                                                                                                    IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding  CFBs.CFilterVals.FilterPolPercent, StringFormat='{0}%'}"  Grid.Row="17"  Grid.Column="12" Style="{StaticResource MiscellText}"
+            <Label Text="{Binding  CFBs.CFilterVals.FilterClearPercent, StringFormat='{0}%'}"  Grid.Row="17"  Grid.Column="12" Style="{StaticResource MiscellText}"
                                                                                                     IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
             

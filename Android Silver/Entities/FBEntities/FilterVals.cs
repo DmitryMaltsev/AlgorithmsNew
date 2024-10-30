@@ -46,14 +46,14 @@ namespace Android_Silver.Entities.FBEntities
         }
 
 
-        private int _filterPolPercent;
-        public int FilterPolPercent
+        private int _filterClearPercent;
+        public int FilterClearPercent
         {
-            get { return _filterPolPercent; }
+            get { return _filterClearPercent; }
             set
             {
-                _filterPolPercent = value;
-                OnPropertyChanged($"{nameof(FilterPolPercent)}");
+                _filterClearPercent = value;
+                OnPropertyChanged($"{nameof(FilterClearPercent)}");
             }
         }
     }

@@ -13,7 +13,6 @@ namespace Android_Silver.Entities.Visual
 {
     public class PicturesSet : BindableBase
     {
-
         private string _background = String.Empty;
         public string Background
         {
@@ -81,6 +80,7 @@ namespace Android_Silver.Entities.Visual
 
 
         #endregion
+
         #region Главное окно
         private PicByStates _substrate;
         public PicByStates Substrate
@@ -116,18 +116,77 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-        private PicByStates _filter70Header;
+        #region Filters
+        private string _filterCurrentHeader;
 
-        public PicByStates Filter70Header
+        public string FilterCurrentHeader
         {
-            get { return _filter70Header; }
-            set
-            {
-                _filter70Header = value;
-                OnPropertyChanged(nameof(Filter70Header));
+            get { return _filterCurrentHeader; }
+            set { 
+                _filterCurrentHeader = value;
+                OnPropertyChanged(nameof(FilterCurrentHeader));
             }
         }
 
+
+
+        private string _filter0Header;
+
+        public string Filter0Header
+        {
+            get { return _filter0Header; }
+            set
+            {
+                _filter0Header = value;
+                OnPropertyChanged(nameof(Filter0Header));
+            }
+        }
+        private string _filter20Header;
+
+        public string Filter20Header
+        {
+            get { return _filter20Header; }
+            set
+            {
+                _filter20Header = value;
+                OnPropertyChanged(nameof(Filter20Header));
+            }
+        }
+        private string _filter40Header;
+
+        public string Filter40Header
+        {
+            get { return _filter40Header; }
+            set
+            {
+                _filter40Header = value;
+                OnPropertyChanged(nameof(Filter40Header));
+            }
+        }
+        private string _filter60Header;
+
+        public string Filter60Header
+        {
+            get { return _filter60Header; }
+            set
+            {
+                _filter60Header = value;
+                OnPropertyChanged(nameof(Filter60Header));
+            }
+        }
+        private string _filter80Header;
+
+        public string Filter80Header
+        {
+            get { return _filter80Header; }
+            set
+            {
+                _filter80Header = value;
+                OnPropertyChanged(nameof(Filter80Header));
+            }
+        }
+
+        #endregion
         private PicByStates _linkHeader;
 
         public PicByStates LinkHeader
@@ -705,7 +764,12 @@ namespace Android_Silver.Entities.Visual
                         Filter100MainIcon = new PicByStates("", "filter_100_main_base.png");
                         EHeaterHeader = new PicByStates("", "eheater_header_base.png");
                         FanHeader = new PicByStates("", "fan_header_base.png");
-                        Filter70Header = new PicByStates("", "filter70_header_base.png");
+                        FilterCurrentHeader = "";
+                        Filter0Header = "filter_flow0_header_base.jpg";
+                        Filter20Header = "filter_flow20_header_base.jpg";
+                        Filter40Header = "filter_flow40_header_base.jpg";
+                        Filter60Header = "filter_flow60_header_base.jpg";
+                        Filter80Header = "filter_flow80_header_base.jpg";
                         LinkHeader = new PicByStates("", "link_header_base.png");
                         RecuperatorHeader = new PicByStates("", "recuperator_header_base.png");
                         #endregion
