@@ -189,7 +189,7 @@ namespace Android_Silver.Entities.Visual.Menus
             #endregion
             #region Общие
             strSets = new ObservableCollection<StrSet>();
-            pickVals = new List<string>() { "Улица", "Комната" };
+            pickVals = new List<string>() { "Канал", "Комната" };
             sSet = new StrSet(0, 100, "Уставка аварийной темп, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 1, "Регулирование темп. по", isVisible: true, pickerIsVisible: true, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
@@ -487,7 +487,7 @@ namespace Android_Silver.Entities.Visual.Menus
             pickVals = new List<string>() { "Нет", "Да" };
             sSet = new StrSet(0, 1, "Тест вращения", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: false, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Пр часовой", "По часовой" };
             sSet = new StrSet(0, 1, "Направление вращения", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);

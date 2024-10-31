@@ -624,8 +624,7 @@ namespace Android_Silver.Services
                             if (_fbs.CAlarms.Alarms1 != val)
                             {
                                 _fbs.CAlarms.Alarms1 = val;
-                                BitArray bitArrrayBuf = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms1);
-                                _fbs.CAlarms.ConverBitArrayToAlarms(bitArrrayBuf, 0);
+                                _fbs.CAlarms.Alarms1Changed = true;
                             }
                         }
                     }
@@ -637,9 +636,21 @@ namespace Android_Silver.Services
                             if (_fbs.CAlarms.Alarms2 != val)
                             {
                                 _fbs.CAlarms.Alarms2 = val;
-                                BitArray bitArrrayBuf = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms2);
-                                _fbs.CAlarms.ConverBitArrayToAlarms(bitArrrayBuf, 1);
+                                _fbs.CAlarms.Alarms2Changed = true;
                             }
+                        }
+                        if (_fbs.CAlarms.Alarms1Changed || _fbs.CAlarms.Alarms2Changed)
+                        {
+                            MainThread.BeginInvokeOnMainThread(() =>
+                            {
+                                _fbs.CAlarms.AlarmsCollection.Clear();
+                            });
+                            BitArray bitArrrayBuf = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms1);
+                            _fbs.CAlarms.ConverBitArrayToAlarms(bitArrrayBuf, 0);
+                            bitArrrayBuf = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms2);
+                            _fbs.CAlarms.ConverBitArrayToAlarms(bitArrrayBuf, 1);
+                            _fbs.CAlarms.Alarms1Changed = false;
+                            _fbs.CAlarms.Alarms2Changed = false;
                         }
                     }
                     break;
@@ -822,18 +833,21 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (val >= 0 && val <= 100)
+                            if (_fbs.CAlarms.IsRecupLowTurns)
                             {
-                                if (val > 0)
-                                {
-                                    _pictureSet.SetPicureSetIfNeed(_pictureSet.RecuperatorHeader, _pictureSet.RecuperatorHeader.Selected);
-                                }
-                                else
-                                {
-                                    _pictureSet.SetPicureSetIfNeed(_pictureSet.RecuperatorHeader, _pictureSet.RecuperatorHeader.Default);
-                                }
+                                _pictureSet.RecuperatorHeaderCurrent = _pictureSet.RecuperatorHeaderAlarm;
+                            }
+                            else
+                           if (val > 0)
+                            {
+                                _pictureSet.RecuperatorHeaderCurrent = _pictureSet.RecuperatorHeaderWork;
+                            }
+                            else
+                            {
+                                _pictureSet.RecuperatorHeaderCurrent = "";
                             }
                         }
+            
                     }
                     break;
                 //Работа электрокалорифера
@@ -2380,7 +2394,6 @@ namespace Android_Silver.Services
                             {
                                 _fbs.OtherSettings.IsSpecMode = isSpecMode;
                             }
-
                         }
                     }
                     break;
@@ -4047,7 +4060,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CFans.PDecrFan = val;
                     }
@@ -4059,7 +4072,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CFans.IDecrFan = val;
                     }
@@ -4071,7 +4084,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CFans.DDecrFan = val;
                     }
@@ -4099,7 +4112,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CWHSetPoints.PWork = val;
                     }
@@ -4111,7 +4124,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CWHSetPoints.IWork = val;
                     }
@@ -4123,7 +4136,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CWHSetPoints.DWork = val;
                     }
@@ -4135,7 +4148,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CWHSetPoints.PRet = val;
                     }
@@ -4147,7 +4160,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CWHSetPoints.IRet = val;
                     }
@@ -4159,7 +4172,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CWHSetPoints.DRet = val;
                     }
@@ -4298,7 +4311,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CEHSetPoints.PReg = val;
                     }
@@ -4310,7 +4323,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CEHSetPoints.IReg = val;
                     }
@@ -4322,7 +4335,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CEHSetPoints.DReg = val;
                     }
@@ -4351,7 +4364,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CFreonCoolerSP.PReg = val;
                     }
@@ -4363,7 +4376,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CFreonCoolerSP.IReg = val;
                     }
@@ -4375,7 +4388,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CFreonCoolerSP.DReg = val;
                     }
@@ -4411,7 +4424,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CFreonCoolerSP.Hyst = val;
                     }
@@ -4428,7 +4441,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CHumiditySPS.PReg = val;
                     }
@@ -4440,7 +4453,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CHumiditySPS.IReg = val;
                     }
@@ -4452,7 +4465,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CHumiditySPS.DReg = val;
                     }
@@ -4488,7 +4501,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CHumiditySPS.Hyst = val;
                     }
@@ -4505,7 +4518,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CRecup.PReg = val;
                     }
@@ -4517,7 +4530,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CRecup.IReg = val;
                     }
@@ -4529,7 +4542,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 10000)
+                    if (val <= 10_000)
                     {
                         _fbs.CRecup.DReg = val;
                     }
@@ -4911,7 +4924,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= 0 && val <= 10000)
+                    if (val >= 0 && val <= 10_000)
                     {
                         _fbs.ThmSps.PReg = val;
                     }
@@ -4923,7 +4936,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= 0 && val <= 10000)
+                    if (val >= 0 && val <= 10_000)
                     {
                         _fbs.ThmSps.IReg = val;
                     }
@@ -4935,7 +4948,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= 0 && val <= 10000)
+                    if (val >= 0 && val <= 10_000)
                     {
                         _fbs.ThmSps.DReg = val;
                     }

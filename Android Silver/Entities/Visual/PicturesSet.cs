@@ -199,16 +199,36 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-        private PicByStates _recuperatorHeader;
-
-        public PicByStates RecuperatorHeader
+        #region Recuperator header
+        private string _recuperatorHeaderWork;
+        public string RecuperatorHeaderWork
         {
-            get { return _recuperatorHeader; }
-            set { _recuperatorHeader = value; }
+            get { return _recuperatorHeaderWork; }
+            set { _recuperatorHeaderWork = value; }
+        }
+        private string _recuperatorHeaderAlarm;
+        public string RecuperatorHeaderAlarm
+        {
+            get { return _recuperatorHeaderAlarm; }
+            set { _recuperatorHeaderAlarm = value; }
         }
 
-        private PicByStates _filter100MainIcon;
+        private string _recuperatorHeaderCurrent="";
 
+        public string RecuperatorHeaderCurrent
+        {
+            get { return _recuperatorHeaderCurrent; }
+            set { _recuperatorHeaderCurrent = value; 
+                OnPropertyChanged(nameof(RecuperatorHeaderCurrent));
+            }
+        }
+
+        #endregion
+
+
+
+
+        private PicByStates _filter100MainIcon;
         public PicByStates Filter100MainIcon
         {
             get { return _filter100MainIcon; }
@@ -771,7 +791,9 @@ namespace Android_Silver.Entities.Visual
                         Filter60Header = "filter_flow60_header_base.jpg";
                         Filter80Header = "filter_flow80_header_base.jpg";
                         LinkHeader = new PicByStates("", "link_header_base.png");
-                        RecuperatorHeader = new PicByStates("", "recuperator_header_base.png");
+                        RecuperatorHeaderCurrent = "";
+                        RecuperatorHeaderWork = "recup_work_header_base.jpg";//new PicByStates("", "recuperator_header_base.png");.
+                        RecuperatorHeaderAlarm = "recup_fail_header_base.jpg";
                         #endregion
                         #region Разное
                         FilterPol = "filter_pol_base.png";

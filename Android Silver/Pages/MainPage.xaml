@@ -295,7 +295,7 @@
             <!--Заголовочные статусы-->
             <Image Source="{Binding CPictureSet.LinkHeader.Current}" Grid.Row="1"  Grid.Column="6" Style="{StaticResource MainPageHeader}"  IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
             <Image Source="{Binding CPictureSet.FilterCurrentHeader}" Grid.Row="1"  Grid.Column="11" Style="{StaticResource MainPageHeader}"   IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
-            <Image Source="{Binding CPictureSet.RecuperatorHeader.Current}" Grid.Row="1"  Grid.Column="12" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
+            <Image Source="{Binding CPictureSet.RecuperatorHeaderCurrent}" Grid.Row="1"  Grid.Column="12" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
             <Image Source="{Binding CPictureSet.EHeaterHeader.Current}" Grid.Row="1"  Grid.Column="13" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
             <Image Source="{Binding CPictureSet.FanHeader.Current}" Grid.Row="1"  Grid.Column="14" Style="{StaticResource MainPageHeader}" IsVisible="{Binding CActivePagesEntities.IsMainPage}" />
             <!--Кнопка настроек-->
