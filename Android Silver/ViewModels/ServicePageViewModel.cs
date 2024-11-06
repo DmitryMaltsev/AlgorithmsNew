@@ -202,12 +202,12 @@ namespace Android_Silver.ViewModels
             }
             else
             if (!EthernetEntities.IsConnected)
-            { 
-                 CActivePagesEntities.SetActivePageState(SActivePageState.StartPage);
+            {
+                CActivePagesEntities.SetActivePageState(SActivePageState.StartPage);
             }
             else
             {
-                CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
 
             }
         }
@@ -295,6 +295,11 @@ namespace Android_Silver.ViewModels
                         SendMItemSettings(CMenusEntities.StartMenuCollection[11]);
                     }
                     break;
+                case SActivePageState.SpecModeSettingsPage:
+                    {
+                        SendMItemSettings(CMenusEntities.StartMenuCollection[12]);
+                    }
+                    break;
             }
             CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }
@@ -338,7 +343,7 @@ namespace Android_Silver.ViewModels
 
         private void ClientDisceonnectedCallback()
         {
-  
+
             if (CActivePagesEntities != null)
             {
                 CActivePagesEntities.SetActivePageState(SActivePageState.StartPage);

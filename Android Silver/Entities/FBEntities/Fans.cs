@@ -81,13 +81,10 @@ namespace Android_Silver.Entities.FBEntities
 			}
 		}
 
-
-
-
 		public int SFanNominalFlow;
         public int EFanNominalFlow;
-        public int Speed0v;
-        public int Speed10v;
+        public int LowLimitBan;
+        public int HighLimitBan;
         public int PressureFailureDelay;
         public int FanFailureDelay;
         public int DecrFanConfig;

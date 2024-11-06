@@ -306,8 +306,8 @@
             <!--Иконка предупреждения-->
             <Image Source="{Binding CPictureSet.AlarmMainIcon.Current}" Grid.Row="4"  Grid.Column="1" Style="{StaticResource MainPageIcons}" IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <!--Иконка режима 1-->
-            <Button ImageSource="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ActiveModePics.Current}"
-                             Command="{Binding Source={x:Reference mPage},Path=BindingContext.ChooseModeCommand}" Padding="0"
+            <Button ImageSource="{Binding CModesEntities.CMode1.ActiveModePics.Current}"
+                             Command="{Binding ChooseModeCommand}" Padding="0"
                              HeightRequest="120"  WidthRequest="120" BackgroundColor="Transparent"
                              Grid.Row="4"  Grid.RowSpan="1" Grid.Column="7"    Grid.ColumnSpan="4" Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
@@ -331,7 +331,7 @@
                              Value="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP}"  
                              IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP, StringFormat='{0}%'}"   
-                            Grid.Row="6" Grid.Column="15" Style="{StaticResource SliderText}"  
+                            Grid.Row="6" Grid.Column="14" Style="{StaticResource SliderText}"  
                             IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Вытяжной воздух-->
             <Label Text="Выт-ка"   Grid.Row="7" Grid.Column="0" Style="{StaticResource SliderText}" 
@@ -340,7 +340,7 @@
                              Value="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP}"  
                              IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP, StringFormat='{0}%'}"  
-                             Grid.Row="7" Grid.Column="15" Style="{StaticResource SliderText}"  
+                             Grid.Row="7" Grid.Column="14" Style="{StaticResource SliderText}"  
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
 
             <Label Text="t уст"   Grid.Row="8" Grid.Column="0" Style="{StaticResource SliderText}" 
@@ -349,7 +349,7 @@
                              Value="{Binding  Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.TempSP}"  
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.TempSP, StringFormat='{0}°C'}"  
-                             Grid.Row="8" Grid.Column="15" Style="{StaticResource SliderText}" 
+                             Grid.Row="8" Grid.Column="14" Style="{StaticResource SliderText}" 
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             
             <!--Основная панель-->

@@ -633,7 +633,7 @@ namespace Android_Silver.Pages
         }
         private void SetM1ValuesByIndex(int index)
         {
-            index = index > 0 ? index : 1;
+            index = index > 0 && index < 6 ? index : 1;
 
             Mode1Values bufVals = CModesEntities.Mode1ValuesList[index];
             M1Values = new Mode1Values(bufVals.Num, bufVals.ActiveModePics,

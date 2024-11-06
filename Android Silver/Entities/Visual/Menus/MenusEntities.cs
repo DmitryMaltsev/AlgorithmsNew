@@ -41,6 +41,9 @@ namespace Android_Silver.Entities.Visual.Menus
 
         public int ETH_MBRECUP_SETTINGS_ADDR;
         public int ETH_MBRECUP_SETTINGS_LENGTH;
+
+        public int ETH_SPECMODE_SETTINGS_ADDR;
+        public int ETH_SPECMODE_SETTINGS_LENGTH;
         //Основная таблица 
         public List<MItem> StartMenuCollection { get; set; }
 
@@ -134,7 +137,8 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_THM_SETTINGS_LENGTH = 16;
             ETH_MBRECUP_SETTINGS_ADDR = ETH_THM_SETTINGS_ADDR + ETH_THM_SETTINGS_LENGTH;
             ETH_MBRECUP_SETTINGS_LENGTH = 12;
-
+            ETH_SPECMODE_SETTINGS_ADDR = ETH_MBRECUP_SETTINGS_ADDR + ETH_MBRECUP_SETTINGS_LENGTH;
+            ETH_SPECMODE_SETTINGS_LENGTH= 8;
             InterfaceStrCollection = new ObservableCollection<StrSet>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             StartMenuCollection = new List<MItem>();
@@ -162,6 +166,8 @@ namespace Android_Silver.Entities.Visual.Menus
             mItem = new MItem("Настройка термоанемометров", isVisible: true, _pictureSet.BaseSettings1ButCollection[10], SActivePageState.TmhSettingsPage, id: 11, startAddress: ETH_THM_SETTINGS_ADDR + 400);
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Настройка Modbus шагового мотора", isVisible: true, _pictureSet.BaseSettings1ButCollection[11], SActivePageState.MBRecupSettingsPage, id: 12, startAddress: ETH_MBRECUP_SETTINGS_ADDR + 400);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Настройки спец режима", isVisible: true, _pictureSet.BaseSettings1ButCollection[12], SActivePageState.SpecModeSettingsPage, id: 13, startAddress: ETH_SPECMODE_SETTINGS_ADDR + 400);
             StartMenuCollection.Add(mItem);
             #endregion
             #region Конфигурация
@@ -270,6 +276,7 @@ namespace Android_Silver.Entities.Visual.Menus
 
 
             #endregion
+
             #region Вентилятор
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
@@ -299,6 +306,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             StartMenuCollection[3].StrSetsCollection = strSets;
             #endregion
+
             #region WHHeater
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
@@ -509,6 +517,26 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 100, "Притирочные обороты, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[11].StrSetsCollection = strSets;
+            #endregion
+            #region спец режим 
+            strSets = new ObservableCollection<StrSet>();
+            sSet = new StrSet(0, 100, "Минимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Текущая производительность притока", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Максимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Минимальная производительность вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Текущая производительность вытяжки", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Максимальная производительность вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 40, "Уставка температуры", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Ограничение мощности", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            StartMenuCollection[12].StrSetsCollection = strSets;
             #endregion
         }
     }

@@ -149,6 +149,11 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
+        public byte SupMinVal { get; set; }
+        public byte SupMaxVal { get; set; }
+        public byte ExhaustMinVal { get; set; }
+        public byte ExhaustMaxVal { get; set; }
+
         #endregion
 
         /// <summary>

@@ -843,7 +843,7 @@ namespace Android_Silver.Entities.Visual
                         ActiveModesPics.Add(new PicByStates("max_but_on_base.png", "max_but_off_base.png"));
                         ActiveModesPics.Add(new PicByStates("kitchen_but_on_base.png", "kitchen_but_off_base.png"));
                         ActiveModesPics.Add(new PicByStates("vac_but_on_base.png", "vac_but_off_base.png"));
-                        ActiveModesPics.Add(new PicByStates("shed_but_on_base.png", "shed_but_off_base.png"));
+                        ActiveModesPics.Add(new PicByStates("spec_but_on_base.png", "spec_but_off_base.png"));
                         ActiveModesPics.Add(new PicByStates("alarm_but_on_base.png", "alarm_but_off_base.png"));
                         ActiveModesPics.Add(new PicByStates("spec_but_on_base.png", "spec_but_off_base.png"));
                         #endregion
@@ -887,7 +887,7 @@ namespace Android_Silver.Entities.Visual
                         MiniIconsPics.Add("max_icon_off_base.png");
                         MiniIconsPics.Add("kitchen_icon_off_base.png");
                         MiniIconsPics.Add("vac_icon_off_base.png");
-                        MiniIconsPics.Add("shed_icon_off_base");
+                        MiniIconsPics.Add("spec_but_off_base.png");
                         MiniIconsPics.Add("");
                         MiniIconsPics.Add("");
                         #endregion

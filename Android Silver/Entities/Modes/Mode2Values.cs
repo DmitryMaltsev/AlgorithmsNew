@@ -29,6 +29,9 @@ namespace Android_Silver.Entities.Modes
 
         public int StartAddress { get; set; }
 
+
+
+
         public Mode2Values(int cNum, int tModesCount, string mode2Icon, Mode1Values defaultMode1, int startAddress)
         {
             Mode2Icon = mode2Icon;

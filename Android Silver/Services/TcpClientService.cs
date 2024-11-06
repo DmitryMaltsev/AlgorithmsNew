@@ -65,7 +65,7 @@ namespace Android_Silver.Services
                 _ethernetEntities.IsConnected = false;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
 
-                if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
+                if (await Task.WhenAny(connectTask, Task.Delay(1500)) != connectTask)
                 {
                     _ethernetEntities.IsConnected = false;
                     IsConnecting = false;
@@ -217,7 +217,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "366,64\r\n";
+                            messToClient = "366,72\r\n";
                         }
                         break;
                 }
@@ -580,7 +580,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[8].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[6].SypplySP = Val;
                         }
                     }
                     break;
@@ -588,7 +588,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[8].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[6].ExhaustSP = Val;
                         }
                     }
                     break;
@@ -596,7 +596,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[8].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[6].TempSP = Val;
                         }
                     }
                     break;
@@ -604,7 +604,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[8].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[6].PowerLimitSP = Val;
                         }
                     }
                     break;
@@ -785,10 +785,10 @@ namespace Android_Silver.Services
                 //Степень загрзнения фильтра
                 case 148:
                     {
-                       
+
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                           
+
                             if (val >= 0 && val <= 100)
                             {
                                 _fbs.CFilterVals.FilterClearPercent = val;
@@ -847,7 +847,7 @@ namespace Android_Silver.Services
                                 _pictureSet.RecuperatorHeaderCurrent = "";
                             }
                         }
-            
+
                     }
                     break;
                 //Работа электрокалорифера
@@ -4003,7 +4003,7 @@ namespace Android_Silver.Services
                 {
                     if (val <= 100)
                     {
-                        _fbs.CFans.Speed0v = val;
+                        _fbs.CFans.LowLimitBan = val;
                     }
                 }
                 return;
@@ -4014,7 +4014,7 @@ namespace Android_Silver.Services
                 {
                     if (val <= 100)
                     {
-                        _fbs.CFans.Speed10v = val;
+                        _fbs.CFans.HighLimitBan = val;
                     }
                 }
                 return;
@@ -5174,8 +5174,94 @@ namespace Android_Silver.Services
                 return;
             }
 
-
-
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (val >= 0 && val <= 100)
+                    {
+                        _modesEntities.Mode1ValuesList[6].SupMinVal = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (val >= 0 && val <= 100)
+                    {
+                        _modesEntities.Mode1ValuesList[6].SypplySP = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (val >= 0 && val <= 100)
+                    {
+                        _modesEntities.Mode1ValuesList[6].SupMaxVal = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 400 + 3)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (val >= 0 && val <= 100)
+                    {
+                        _modesEntities.Mode1ValuesList[6].ExhaustMinVal = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 4 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (val >= 0 && val <= 100)
+                    {
+                        _modesEntities.Mode1ValuesList[6].ExhaustSP = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 5 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (val >= 0 && val <= 100)
+                    {
+                        _modesEntities.Mode1ValuesList[6].ExhaustMaxVal = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 6 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (val >= 0 && val <= 40)
+                    {
+                        _modesEntities.Mode1ValuesList[6].TempSP = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (val >= 0 && val <= 100)
+                    {
+                        _modesEntities.Mode1ValuesList[6].PowerLimitSP = val;
+                    }
+                }
+                return;
+            }
         }
 
         private bool StringToFloat(string val, int precision, ref float result)
