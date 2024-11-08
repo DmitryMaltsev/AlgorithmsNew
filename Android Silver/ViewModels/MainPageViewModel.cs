@@ -253,9 +253,9 @@ namespace Android_Silver.Pages
         NetworkStream _stream;
         int counter = 0;
         string _cData;
+
         public MainPageViewModel()
         {
-           
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
@@ -981,7 +981,6 @@ namespace Android_Silver.Pages
             {
                 CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
             }
-          
         }
 
         Timer timer;

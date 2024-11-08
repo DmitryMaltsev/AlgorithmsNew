@@ -212,12 +212,12 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "300,66\r\n";
+                            messToClient = "300,69\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "366,72\r\n";
+                            messToClient = "369,69\r\n";
                         }
                         break;
                 }
@@ -794,27 +794,45 @@ namespace Android_Silver.Services
                                 _fbs.CFilterVals.FilterClearPercent = val;
                                 if (_fbs.CFilterVals.FilterClearPercent >= 0 && _fbs.CFilterVals.FilterClearPercent <= 20)
                                 {
-                                    _pictureSet.FilterCurrentHeader = _pictureSet.Filter0Header;
-
+                                    if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter0Header)
+                                    {
+                                        _pictureSet.FilterCurrentHeader = _pictureSet.Filter0Header;
+                                    }
                                 }
                                 else
                                 if (_fbs.CFilterVals.FilterClearPercent >= 21 && _fbs.CFilterVals.FilterClearPercent <= 40)
                                 {
-                                    _pictureSet.FilterCurrentHeader = _pictureSet.Filter20Header;
+                                    if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter20Header)
+                                    {
+                                        _pictureSet.FilterCurrentHeader = _pictureSet.Filter20Header;
+                                    }
+                                   
                                 }
                                 else
                                 if (_fbs.CFilterVals.FilterClearPercent >= 41 && _fbs.CFilterVals.FilterClearPercent <= 60)
                                 {
-                                    _pictureSet.FilterCurrentHeader = _pictureSet.Filter40Header;
+                                    if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter40Header)
+                                    {
+                                        _pictureSet.FilterCurrentHeader = _pictureSet.Filter40Header;
+                                    }
+                                  
                                 }
                                 if (_fbs.CFilterVals.FilterClearPercent >= 61 && _fbs.CFilterVals.FilterClearPercent <= 80)
                                 {
-                                    _pictureSet.FilterCurrentHeader = _pictureSet.Filter60Header;
+                                    if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter60Header)
+                                    {
+                                        _pictureSet.FilterCurrentHeader = _pictureSet.Filter60Header;
+                                    }
+                                 
                                 }
                                 else
                                   if (_fbs.CFilterVals.FilterClearPercent >= 81 && _fbs.CFilterVals.FilterClearPercent <= 100)
                                 {
-                                    _pictureSet.FilterCurrentHeader = _pictureSet.Filter80Header;
+                                    if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter80Header)
+                                    {
+                                        _pictureSet.FilterCurrentHeader = _pictureSet.Filter80Header;
+                                    }
+                                   
                                 }
                                 if (_fbs.CFilterVals.FilterClearPercent >= 0 && _fbs.CFilterVals.FilterClearPercent <= 20)
                                 {
