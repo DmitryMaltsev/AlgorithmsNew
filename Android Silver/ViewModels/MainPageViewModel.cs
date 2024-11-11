@@ -4,7 +4,6 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
-
 using System.Net.Sockets;
 using System.Windows.Input;
 
@@ -245,14 +244,11 @@ namespace Android_Silver.Pages
 
         public PicturesSet CPictureSet { get; set; }
 
-
         public ActivePagesEntities CActivePagesEntities { get; set; }
 
         public FBs CFBs { get; set; }
 
-        NetworkStream _stream;
-        int counter = 0;
-        string _cData;
+ 
 
         public MainPageViewModel()
         {
@@ -429,7 +425,6 @@ namespace Android_Silver.Pages
             CTcpClientService.Disconnect();
             CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Default);
         }
-        private Task sendBufTask;
 
 
         private void ExecuiteSettings(object obj)

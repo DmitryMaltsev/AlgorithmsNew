@@ -3723,10 +3723,6 @@ namespace Android_Silver.Services
                     }
 
                 }
-                if (_servActivePageEntities.IsLoadingPage)
-                {
-                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                }
                 return;
             }
             //Заслонка
@@ -5278,7 +5274,12 @@ namespace Android_Silver.Services
                         _modesEntities.Mode1ValuesList[6].PowerLimitSP = val;
                     }
                 }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
                 return;
+  
             }
         }
 
