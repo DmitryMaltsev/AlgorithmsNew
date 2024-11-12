@@ -455,7 +455,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[2].CVal = _fbs.CCommonSetPoints.SPTempMaxCh;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[3].CVal = _fbs.CCommonSetPoints.SPTempMinCh;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[4].CVal = _fbs.CCommonSetPoints.TControlDelayS;
-                        _menusEntities.StartMenuCollection[1].StrSetsCollection[5].CVal = _fbs.CCommonSetPoints.SeasonMode;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[5].CPickVal = _fbs.CCommonSetPoints.SeasonMode;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[6].CVal = _fbs.CCommonSetPoints.SPSeason;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[7].CVal = _fbs.CCommonSetPoints.HystSeason;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[8].CPickVal = _fbs.CEConfig.AutoRestart;
