@@ -523,7 +523,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[3].StrSetsCollection[3].CVal = _fbs.CFans.HighLimitBan;
                         _menusEntities.StartMenuCollection[3].StrSetsCollection[4].CVal = _fbs.CFans.PressureFailureDelay;
                         _menusEntities.StartMenuCollection[3].StrSetsCollection[5].CVal = _fbs.CFans.FanFailureDelay;
-                        _menusEntities.StartMenuCollection[3].StrSetsCollection[6].CVal = _fbs.CFans.DecrFanConfig;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[6].CPickVal = _fbs.CFans.DecrFanConfig;
                         _menusEntities.StartMenuCollection[3].StrSetsCollection[7].CVal = _fbs.CFans.PDecrFan;
                         _menusEntities.StartMenuCollection[3].StrSetsCollection[8].CVal = _fbs.CFans.IDecrFan;
                         _menusEntities.StartMenuCollection[3].StrSetsCollection[9].CVal = _fbs.CFans.DDecrFan;
@@ -630,8 +630,8 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[6].StrSetsCollection[0].CVal = _fbs.CFreonCoolerSP.PReg;
                         _menusEntities.StartMenuCollection[6].StrSetsCollection[1].CVal = _fbs.CFreonCoolerSP.IReg;
                         _menusEntities.StartMenuCollection[6].StrSetsCollection[2].CVal = _fbs.CFreonCoolerSP.DReg;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[3].CVal = _fbs.CFreonCoolerSP.Stage1OffS;
-                        _menusEntities.StartMenuCollection[6].StrSetsCollection[4].CVal = _fbs.CFreonCoolerSP.Stage1OnS;
+                        _menusEntities.StartMenuCollection[6].StrSetsCollection[3].CVal = _fbs.CFreonCoolerSP.Stage1OnS;
+                        _menusEntities.StartMenuCollection[6].StrSetsCollection[4].CVal = _fbs.CFreonCoolerSP.Stage1OffS;
                         _menusEntities.StartMenuCollection[6].StrSetsCollection[5].CVal = _fbs.CFreonCoolerSP.Hyst;
                         _menusEntities.GenerateInterfaceTable(6);
                         IsFreonSettingsPage = true;
@@ -699,8 +699,8 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[8].StrSetsCollection[0].CVal = _fbs.CHumiditySPS.PReg;
                         _menusEntities.StartMenuCollection[8].StrSetsCollection[1].CVal = _fbs.CHumiditySPS.IReg;
                         _menusEntities.StartMenuCollection[8].StrSetsCollection[2].CVal = _fbs.CHumiditySPS.DReg;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[3].CVal = _fbs.CHumiditySPS.Stage1OffS;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[4].CVal = _fbs.CHumiditySPS.Stage1OnS;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[3].CVal = _fbs.CHumiditySPS.Stage1OnS;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[4].CVal = _fbs.CHumiditySPS.Stage1OffS;
                         _menusEntities.StartMenuCollection[8].StrSetsCollection[5].CVal = _fbs.CHumiditySPS.Hyst;
                         _menusEntities.GenerateInterfaceTable(8);
                         IsHumSettingsPage = true;
@@ -860,7 +860,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[0].CPickVal = _fbs.MbRecSPs.MBRecMode;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[1].CPickVal = _fbs.MbRecSPs.IsRotTest;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[2].CPickVal = _fbs.MbRecSPs.IsGrindingMode;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[3].CVal = _fbs.MbRecSPs.IsForward;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[3].CPickVal = _fbs.MbRecSPs.IsForward;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[4].CVal = _fbs.MbRecSPs.NominalCurrent;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[5].CVal = _fbs.MbRecSPs.ReductKoef;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[6].CVal = _fbs.MbRecSPs.NominalTurns1;

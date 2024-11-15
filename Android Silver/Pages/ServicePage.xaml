@@ -143,9 +143,11 @@
                     IsVisible="{Binding CActivePagesEntities.IsStartPage}"/>
             <Entry  Grid.Row="8" Grid.Column="12" Text="{Binding EthernetEntities.IP4}" Placeholder="50" Style="{StaticResource EntryIP}"
                      IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
-            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding StartPageConnectCommand}"  Grid.Row="11" Grid.Column="5" 
+            <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding StartPageConnectCommand}" 
+                                                      Grid.Row="11" Grid.Column="5" 
                      Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
                                                  IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
+            <!--IsEnabled="{Binding  EthernetEntities.CanTryToConnect}"-->
             <!--#endregion-->
             
             <!--#region Entry page -->
@@ -154,7 +156,7 @@
             <Entry  Grid.Row="7" Grid.Column="7" Placeholder="****" Text="{Binding EntryPass}"  Style="{StaticResource EntryPass}"
                                                                                                 IsVisible="{Binding CActivePagesEntities.IsEntryPage}"/>
             <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding EntryPassedCommand}"  Grid.Row="11" Grid.Column="5" 
-                                           Style="{StaticResource OKCancelBut}"  IsVisible="{Binding CActivePagesEntities.IsEntryPage}"/>
+                                           Style="{StaticResource OKCancelBut}"  IsVisible="{Binding CActivePagesEntities.IsEntryPage}" />
             <!--#endregion-->
             
             <!--#region Base settings page -->

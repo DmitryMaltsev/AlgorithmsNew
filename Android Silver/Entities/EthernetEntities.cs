@@ -17,7 +17,6 @@ namespace Android_Silver.Entities
         ServiceMessage2
     }
 
-
     public class EthernetEntities : BindableBase
     {
         public int PagesTab;
@@ -25,7 +24,7 @@ namespace Android_Silver.Entities
 
         public TcpClient Client { get; set; }
 
-        private string _connectIP = "192.168.0.108";
+        private string _connectIP = "192.168.0.134";
         public string ConnectIP
         {
             get { return _connectIP; }
@@ -68,7 +67,7 @@ namespace Android_Silver.Entities
             }
         }
 
-        private byte _ip4 = 108;
+        private byte _ip4 = 134;
         public byte IP4
         {
             get { return _ip4; }
@@ -78,6 +77,7 @@ namespace Android_Silver.Entities
                 OnPropertyChanged(nameof(IP4));
             }
         }
+
         private string _ethernetMessage = "Введите IP и нажмите подтвердить";
         public string EthernetMessage
         {
@@ -175,6 +175,17 @@ namespace Android_Silver.Entities
                 OnPropertyChanged(nameof(Loaded));
             }
         }
+
+        private bool _canTryToConnect=true;
+        public bool CanTryToConnect
+        {
+            get { return _canTryToConnect; }
+            set { 
+                _canTryToConnect = value;
+                OnPropertyChanged(nameof(CanTryToConnect));
+            }
+        }
+
 
         public bool WriteMessageSended { get; set; }
 

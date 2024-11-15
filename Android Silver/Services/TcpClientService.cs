@@ -58,18 +58,19 @@ namespace Android_Silver.Services
         {
             try
             {
-                IsConnecting = true;
                 _ethernetEntities.Client = new TcpClient();
                 _ethernetEntities.Client.ReceiveTimeout = 600;
                 _ethernetEntities.Client.SendTimeout = 600;
                 _ethernetEntities.IsConnected = false;
+                IsConnecting = true;
+                _ethernetEntities.CanTryToConnect = !IsConnecting;
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
-
-                if (await Task.WhenAny(connectTask, Task.Delay(1500)) != connectTask)
+                if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
                 {
                     _ethernetEntities.IsConnected = false;
-                    IsConnecting = false;
                     _ethernetEntities.Client.Close();
+                    IsConnecting = false;
+                    _ethernetEntities.CanTryToConnect = !IsConnecting;
                     _ethernetEntities.EthernetMessage = "Не удалось подключиться модулю WI-FI";
                     if (connectTask.Status == TaskStatus.RanToCompletion || connectTask.Status == TaskStatus.Faulted
                         || connectTask.Status == TaskStatus.Canceled)
@@ -88,7 +89,13 @@ namespace Android_Silver.Services
                     _ethernetEntities.SystemMessage = "Успешное подключение";
                     _ethernetEntities.IsConnected = true;
                     IsConnecting = false;
+                    _ethernetEntities.CanTryToConnect = !IsConnecting;
                 }
+                //await Task.Run(() =>
+                //{
+                //    Task.Delay(3000);
+                //   _ethernetEntities.CanTryToConnect = true;
+                //});
             }
             catch (Exception ex)
             {
@@ -97,6 +104,7 @@ namespace Android_Silver.Services
                 _ethernetEntities.SystemMessage = ex.Message;
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = false;
+                _ethernetEntities.CanTryToConnect = !IsConnecting;
             }
         }
 
@@ -212,12 +220,12 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "300,69\r\n";
+                            messToClient = "300,069\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "369,69\r\n";
+                            messToClient = "369,069\r\n";
                         }
                         break;
                 }
@@ -806,7 +814,7 @@ namespace Android_Silver.Services
                                     {
                                         _pictureSet.FilterCurrentHeader = _pictureSet.Filter20Header;
                                     }
-                                   
+
                                 }
                                 else
                                 if (_fbs.CFilterVals.FilterClearPercent >= 41 && _fbs.CFilterVals.FilterClearPercent <= 60)
@@ -815,7 +823,7 @@ namespace Android_Silver.Services
                                     {
                                         _pictureSet.FilterCurrentHeader = _pictureSet.Filter40Header;
                                     }
-                                  
+
                                 }
                                 if (_fbs.CFilterVals.FilterClearPercent >= 61 && _fbs.CFilterVals.FilterClearPercent <= 80)
                                 {
@@ -823,7 +831,7 @@ namespace Android_Silver.Services
                                     {
                                         _pictureSet.FilterCurrentHeader = _pictureSet.Filter60Header;
                                     }
-                                 
+
                                 }
                                 else
                                   if (_fbs.CFilterVals.FilterClearPercent >= 81 && _fbs.CFilterVals.FilterClearPercent <= 100)
@@ -832,7 +840,7 @@ namespace Android_Silver.Services
                                     {
                                         _pictureSet.FilterCurrentHeader = _pictureSet.Filter80Header;
                                     }
-                                   
+
                                 }
                                 //if (_fbs.CFilterVals.FilterClearPercent >= 0 && _fbs.CFilterVals.FilterClearPercent <= 20)
                                 //{
@@ -3582,10 +3590,10 @@ namespace Android_Silver.Services
             //Общие уставки
             if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val <= 1000)
+                    if (val>=-100 && val <= 1000)
                     {
                         _fbs.CCommonSetPoints.SPTempAlarm = (float)val / 10;
                     }
@@ -4491,7 +4499,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 1000)
+                    if (val <= 65535)
                     {
                         _fbs.CHumiditySPS.Stage1OnS = val;
                     }
@@ -4503,7 +4511,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val <= 1000)
+                    if (val <= 65535)
                     {
                         _fbs.CHumiditySPS.Stage1OffS = val;
                     }
@@ -5103,7 +5111,7 @@ namespace Android_Silver.Services
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
-                    if (val <= 1000 && val >= 0)
+                    if (val >= 0 && val <= 10_000)
                     {
                         _fbs.MbRecSPs.ReductKoef = (float)val / 100;
                     }
@@ -5279,7 +5287,7 @@ namespace Android_Silver.Services
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
                 return;
-  
+
             }
         }
 

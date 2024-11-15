@@ -10,6 +10,7 @@ namespace Android_Silver.ViewModels
 {
     class ServicePageViewModel : BindableBase
     {
+
         #region Rising properties
         private int _entryPass = 1111;
         public int EntryPass
@@ -91,6 +92,7 @@ namespace Android_Silver.ViewModels
 
         public ServicePageViewModel()
         {
+
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CActivePagesEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -116,6 +118,7 @@ namespace Android_Silver.ViewModels
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
             StartTimer();
         }
+
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
         private void ExecuteIncrease(object obj)
@@ -144,10 +147,12 @@ namespace Android_Silver.ViewModels
 
         public ICommand DecreseMenuItemsCommand { get; private set; }
 
-
         async private void ExecuteConnect()
         {
+            EthernetEntities.ConnectIP =
+                      $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
             EthernetEntities.SystemMessage = "Check";
+            EthernetEntities.CanTryToConnect = false;
             if (!CTcpClientService.IsConnecting)
             {
                 await CTcpClientService.Connect();
@@ -313,7 +318,10 @@ namespace Android_Silver.ViewModels
                 {
                     if (mItem.StrSetsCollection[i].EntryIsVisible)
                     {
-                        values[i] = (int)(Math.Round(mItem.StrSetsCollection[i].CVal, mItem.StrSetsCollection[i].ValScale) * Math.Pow(10, mItem.StrSetsCollection[i].ValScale));
+                        if (mItem.StrSetsCollection[i].CVal>=0)
+                            values[i] = (int)((mItem.StrSetsCollection[i].CVal + 0.5 / Math.Pow(10, mItem.StrSetsCollection[i].ValScale)) * Math.Pow(10, mItem.StrSetsCollection[i].ValScale));
+                        else
+                            values[i] = (int)((mItem.StrSetsCollection[i].CVal - 0.5 / Math.Pow(10, mItem.StrSetsCollection[i].ValScale)) * Math.Pow(10, mItem.StrSetsCollection[i].ValScale));
                     }
                     else
                       if (mItem.StrSetsCollection[i].PickerIsVisible)

@@ -252,6 +252,7 @@ namespace Android_Silver.Pages
 
         public MainPageViewModel()
         {
+            
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
@@ -262,7 +263,7 @@ namespace Android_Silver.Pages
             AndroidEntity.WifiStateChanged -= EthernetEntities.WifiStateChangeCallback;
             AndroidEntity.WifiStateChanged += EthernetEntities.WifiStateChangeCallback;
 #endif
-            StartPageConnectCommand = new Command(StartPageExecuteConnect);
+            StartPageConnectCommand = new Command(ExecuteConnect);
             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
             SPCommand = new Command(ExecuteSetSP);
@@ -368,16 +369,11 @@ namespace Android_Silver.Pages
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
         }
 
-        private void StartPageExecuteConnect()
-        {
-            EthernetEntities.ConnectIP =
-                        $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
-            ExecuteConnect();
-        }
-
 
         async private void ExecuteConnect()
         {
+            EthernetEntities.ConnectIP =
+                       $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
             EthernetEntities.SystemMessage = "Check";
             if (!CTcpClientService.IsConnecting)
             {
