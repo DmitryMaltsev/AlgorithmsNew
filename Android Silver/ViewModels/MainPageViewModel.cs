@@ -523,13 +523,13 @@ namespace Android_Silver.Pages
 
         private void ExecuteUpMinutes(object obj)
         {
-            if (CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute < 600)
+            if (CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute <= 500)
             {
                 CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute += 10;
             }
             else
             {
-                CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = 600;
+                CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = 500;
             }
         }
 
@@ -576,7 +576,7 @@ namespace Android_Silver.Pages
         {
             if (M1Values != null)
             {
-                M1Values.TempSP = M1Values.TempSP + 1 < 35 ? M1Values.TempSP + 1 : 35;
+                M1Values.TempSP = M1Values.TempSP + 1 < 34 ? M1Values.TempSP + 1 : 34;
                 if (M1Values.TempSP < 16) M1Values.TempSP = 16;
 
             }

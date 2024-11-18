@@ -4843,7 +4843,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= 0 && val < 65535)
+                    if (val >= 0 && val <= 65535)
                     {
                         _fbs.ThmSps.SupTHmKoef = (float)val;
                     }
@@ -4855,7 +4855,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= 0 && val < 65535)
+                    if (val >= 0 && val <= 65535)
                     {
                         _fbs.ThmSps.SupCurveKoef = (float)val / 100;
                     }
@@ -4867,7 +4867,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= 0 && val < 65535)
+                    if (val >= 0 && val <= 65535)
                     {
                         _fbs.ThmSps.ExhaustTHmKoef = (float)val;
                     }
@@ -4879,7 +4879,7 @@ namespace Android_Silver.Services
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= 0 && val < 65535)
+                    if (val >= 0 && val <= 65535)
                     {
                         _fbs.ThmSps.ExhaustCurveKoef = (float)val / 100;
                     }
