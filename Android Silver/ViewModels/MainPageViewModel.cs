@@ -383,7 +383,7 @@ namespace Android_Silver.Pages
                     CModesEntities.ShedCountQueues = 0;
                     CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
-                    CTcpClientService.SendRecieveTask("103,50");
+                    CTcpClientService.SendRecieveTask("103,050");
 
                     // TcpClientService.SendRecieveTask("137,4");
                 }
@@ -656,7 +656,6 @@ namespace Android_Silver.Pages
         {
             // CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage, 0);
             // TTitle = "Расписание для отпуска";
-            CTcpClientService.MessageToServer = "167,16\r\n";
             CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 0);
         }
 
@@ -664,7 +663,6 @@ namespace Android_Silver.Pages
         {
             //  if (CModesEntities.ShedCountQueues == 0)
             // {
-            CTcpClientService.MessageToServer = "183,56\r\n";
             CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 1);
             // CModesEntities.ShedCountQueues += 1;
             //}
