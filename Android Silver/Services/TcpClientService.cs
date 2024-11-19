@@ -225,7 +225,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "369,069\r\n";
+                            messToClient = "369,071\r\n";
                         }
                         break;
                 }
@@ -4845,7 +4845,7 @@ namespace Android_Silver.Services
 
                     if (val >= 0 && val <= 65535)
                     {
-                        _fbs.ThmSps.SupTHmKoef = (float)val;
+                        _fbs.ThmSps.SupTHmKoefB = (float)val;
                     }
                 }
                 return;
@@ -4864,12 +4864,12 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= 0 && val <= 65535)
+                    if (val >= -10000 && val <= 10000)
                     {
-                        _fbs.ThmSps.ExhaustTHmKoef = (float)val;
+                        _fbs.ThmSps.SupTHmKoefA = (float)val / 100;
                     }
                 }
                 return;
@@ -4881,19 +4881,19 @@ namespace Android_Silver.Services
 
                     if (val >= 0 && val <= 65535)
                     {
-                        _fbs.ThmSps.ExhaustCurveKoef = (float)val / 100;
+                        _fbs.ThmSps.ExhaustTHmKoefB = (float)val;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 + 400)
             {
-                if (short.TryParse(resp.ValueString, out short val))
+                if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= -1000 && val <= 1200)
+                    if (val >= 0 && val <= 65535)
                     {
-                        _fbs.ThmSps.TempH1 = (float)val / 10;
+                        _fbs.ThmSps.ExhaustCurveKoef = (float)val / 100;
                     }
                 }
                 return;
@@ -4903,9 +4903,9 @@ namespace Android_Silver.Services
                 if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= -1000 && val <= 1200)
+                    if (val >= -10000 && val <= 10000)
                     {
-                        _fbs.ThmSps.TempC1 = (float)val / 10;
+                        _fbs.ThmSps.ETHmKoefA = (float)val / 100;
                     }
                 }
                 return;
@@ -4917,7 +4917,7 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1200)
                     {
-                        _fbs.ThmSps.TempH2 = (float)val / 10;
+                        _fbs.ThmSps.TempH1 = (float)val / 10;
                     }
                 }
                 return;
@@ -4929,38 +4929,38 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1200)
                     {
-                        _fbs.ThmSps.TempC2 = (float)val / 10;
-                    }
-                    if (_menusEntities.StartMenuCollection.Count > 8 && _servActivePageEntities.LastActivePageState == SActivePageState.TmhSettingsPage)
-                    {
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempH1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.TempC1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.TempH2;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.TempC2;
+                        _fbs.ThmSps.TempC1 = (float)val / 10;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= 0 && val <= 10_000)
+                    if (val >= -1000 && val <= 1200)
                     {
-                        _fbs.ThmSps.PReg = val;
+                        _fbs.ThmSps.TempH2 = (float)val / 10;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= 0 && val <= 10_000)
+                    if (val >= -1000 && val <= 1200)
                     {
-                        _fbs.ThmSps.IReg = val;
+                        _fbs.ThmSps.TempC2 = (float)val / 10;
+                    }
+                    if (_menusEntities.StartMenuCollection.Count > 8 && _servActivePageEntities.LastActivePageState == SActivePageState.TmhSettingsPage)
+                    {
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.TempH1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.TempC1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.TempH2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.TempC2;
                     }
                 }
                 return;
@@ -4972,31 +4972,31 @@ namespace Android_Silver.Services
 
                     if (val >= 0 && val <= 10_000)
                     {
-                        _fbs.ThmSps.DReg = val;
+                        _fbs.ThmSps.PReg = val;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 + 400)
             {
-                if (short.TryParse(resp.ValueString, out short val))
+                if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= -9999 && val <= 9999)
+                    if (val >= 0 && val <= 10_000)
                     {
-                        _fbs.ThmSps.KPolKoef = (float)val / 100;
+                        _fbs.ThmSps.IReg = val;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 + 400)
             {
-                if (short.TryParse(resp.ValueString, out short val))
+                if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= -9999 && val <= 9999)
+                    if (val >= 0 && val <= 10_000)
                     {
-                        _fbs.ThmSps.BPolKoef = (float)val / 100;
+                        _fbs.ThmSps.DReg = val;
                     }
                 }
                 return;
@@ -5008,7 +5008,7 @@ namespace Android_Silver.Services
 
                     if (val >= -9999 && val <= 9999)
                     {
-                        _fbs.ThmSps.KClKoef = (float)val / 100;
+                        _fbs.ThmSps.KPolKoef = (float)val / 100;
                     }
                 }
                 return;
@@ -5020,12 +5020,36 @@ namespace Android_Silver.Services
 
                     if (val >= -9999 && val <= 9999)
                     {
-                        _fbs.ThmSps.BClKoef = (float)val / 100;
+                        _fbs.ThmSps.BPolKoef = (float)val / 100;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 15 + 400)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+
+                    if (val >= -9999 && val <= 9999)
+                    {
+                        _fbs.ThmSps.KClKoef = (float)val / 100;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 16 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 16 + 400)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+
+                    if (val >= -9999 && val <= 9999)
+                    {
+                        _fbs.ThmSps.BClKoef = (float)val / 100;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 17 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 17 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {

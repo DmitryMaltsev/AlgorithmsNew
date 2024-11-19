@@ -248,8 +248,6 @@ namespace Android_Silver.Pages
 
         public FBs CFBs { get; set; }
 
- 
-
         public MainPageViewModel()
         {
             
@@ -360,7 +358,6 @@ namespace Android_Silver.Pages
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
 
-
             SetTValuesByIndex(0, 0);//?????
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
@@ -385,7 +382,7 @@ namespace Android_Silver.Pages
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     CTcpClientService.SendRecieveTask("103,050");
 
-                    // TcpClientService.SendRecieveTask("137,4");
+                    // TcpClientService.SendRecieveTask("137,4");ё
                 }
             }
             else

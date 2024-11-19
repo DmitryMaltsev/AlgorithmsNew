@@ -134,7 +134,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_CONFIG_SETTINGS_ADDR = ETH_SENS_SETTINGS_ADDR + ETH_SENS_SETTINGS_LENGTH;
             ETH_CONFIG_SETTINGS_LENGTH = 8;
             ETH_THM_SETTINGS_ADDR = ETH_CONFIG_SETTINGS_ADDR + ETH_CONFIG_SETTINGS_LENGTH;
-            ETH_THM_SETTINGS_LENGTH = 16;
+            ETH_THM_SETTINGS_LENGTH = 18;
             ETH_MBRECUP_SETTINGS_ADDR = ETH_THM_SETTINGS_ADDR + ETH_THM_SETTINGS_LENGTH;
             ETH_MBRECUP_SETTINGS_LENGTH = 12;
             ETH_SPECMODE_SETTINGS_ADDR = ETH_MBRECUP_SETTINGS_ADDR + ETH_MBRECUP_SETTINGS_LENGTH;
@@ -453,13 +453,17 @@ namespace Android_Silver.Entities.Visual.Menus
             #endregion
             #region Термоанемометры
             strSets = new ObservableCollection<StrSet>();
-            sSet = new StrSet(0, 65535, "Коэффициент термоанимометра притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65535, "Коэффициент термоанимометра притока B", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Коэффициент кривой притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Коэффициент термоанимометра вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(-100, 100, "Коэффициент термоанимометра притока A", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 65535, "Коэффициент термоанимометра вытяжки B", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Коэффициент кривой вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-100, 100, "Коэффициент термоанимометра вытяжки A", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(-100, +120, "Температура H1 °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: 1, pickVals);
             strSets.Add(sSet);

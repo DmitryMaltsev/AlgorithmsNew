@@ -8,10 +8,12 @@ namespace Android_Silver.Entities.FBEntities
 {
     public class ThermoanemometersSPS
     {
-        public float SupTHmKoef;
+        public float SupTHmKoefB;
         public float SupCurveKoef;
-        public float ExhaustTHmKoef;
+        public float SupTHmKoefA;
+        public float ExhaustTHmKoefB;
         public float ExhaustCurveKoef;
+        public float ETHmKoefA;
         public float U;
         public float TempH1;
         public float TempC1;
