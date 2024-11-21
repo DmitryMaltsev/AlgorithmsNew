@@ -386,7 +386,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Уставка КПД, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(-50, 50, "Граница темп. авар. КПД, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Аварийный КПД, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
@@ -394,13 +394,13 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Максимальная частота, Гц", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Температура А, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(-50, 50, "Температура А, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Температура В, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(-50, 50, "Температура В, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Температура C, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(-50, 50, "Температура C, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Температура D, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(-50, 50, "Температура D, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[7].StrSetsCollection = strSets;
             #endregion

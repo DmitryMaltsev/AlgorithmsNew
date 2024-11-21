@@ -4573,12 +4573,12 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 3 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val <= 100)
+                    if (val >=-500 &&val <= 500)
                     {
-                        _fbs.CRecup.EffSP = val;
+                        _fbs.CRecup.TEffSP = (float)val/10;
                     }
                 }
                 return;
@@ -4621,10 +4621,10 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 7 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val <= 1000)
+                    if (val >= -500 && val <= 500)
                     {
                         _fbs.CRecup.TempA = (float)val / 10;
                     }
@@ -4633,10 +4633,10 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 8 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val <= 1000)
+                    if (val >= -500 && val <= 500)
                     {
                         _fbs.CRecup.TempB = (float)val / 10;
                     }
@@ -4645,10 +4645,10 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 9 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val <= 1000)
+                    if (val >= -500 && val <= 500)
                     {
                         _fbs.CRecup.TempC = (float)val / 10;
                     }
@@ -4657,10 +4657,10 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 10 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val <= 1000)
+                    if (val >= -500 && val <= 500)
                     {
                         _fbs.CRecup.TempD = (float)val / 10;
                     }

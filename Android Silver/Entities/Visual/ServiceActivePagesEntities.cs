@@ -662,7 +662,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[7].StrSetsCollection[0].CVal = _fbs.CRecup.PReg;
                         _menusEntities.StartMenuCollection[7].StrSetsCollection[1].CVal = _fbs.CRecup.IReg;
                         _menusEntities.StartMenuCollection[7].StrSetsCollection[2].CVal = _fbs.CRecup.DReg;
-                        _menusEntities.StartMenuCollection[7].StrSetsCollection[3].CVal = _fbs.CRecup.EffSP;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[3].CVal = _fbs.CRecup.TEffSP;
                         _menusEntities.StartMenuCollection[7].StrSetsCollection[4].CVal = _fbs.CRecup.EffFailValue;
                         _menusEntities.StartMenuCollection[7].StrSetsCollection[5].CVal = _fbs.CRecup.EffFailDelay;
                         _menusEntities.StartMenuCollection[7].StrSetsCollection[6].CVal = _fbs.CRecup.HZMax;
@@ -794,9 +794,11 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[0].CVal = _fbs.ThmSps.SupTHmKoefB;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.SupCurveKoef;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.SupTHmKoefA;
+
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.ExhaustTHmKoefB;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.ExhaustCurveKoef;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.ETHmKoefA;
+
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.TempH1;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.TempC1;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.TempH2;
