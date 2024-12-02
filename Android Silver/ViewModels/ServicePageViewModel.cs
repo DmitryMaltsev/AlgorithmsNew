@@ -89,7 +89,7 @@ namespace Android_Silver.ViewModels
 
         public FBs CFBs { get; set; }
 
-
+        private FileSystemService _fileSystemService;
         public ServicePageViewModel()
         {
 
@@ -99,6 +99,7 @@ namespace Android_Silver.ViewModels
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CFBs = DIContainer.Resolve<FBs>();
             CMenusEntities = DIContainer.Resolve<MenusEntities>();
+            _fileSystemService=DIContainer.Resolve<FileSystemService>();
             EntryPassedCommand = new Command(ExecuteEntryPass);
             StartPageConnectCommand = new Command(ExecuteConnect);
             StartPageDisconnectCommand = new Command(ExecuteDisconnect);
@@ -116,7 +117,8 @@ namespace Android_Silver.ViewModels
             SetSettingsCommand = new Command(ExecuteSetSettings);
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
-            StartTimer();
+            _fileSystemService.GetIPFromFile();
+            //StartTimer();
         }
 
 
@@ -163,7 +165,7 @@ namespace Android_Silver.ViewModels
                     CTcpClientService.MessageToServer = "";
                     //CTcpClientService.SendRecieveTask("299,56");
                     CTcpClientService.SendRecieveTask("");
-
+                    await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
                     // TcpClientService.SendRecieveTask("137,4");
                 }
             }

@@ -25,6 +25,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<CarouselViewData>();
             _container.RegisterSingleton<ServiceActivePagesEntities>();
             _container.RegisterSingleton<MenusEntities>();
+            _container.RegisterSingleton<FileSystemService>();
         }
 
         public static T Resolve<T>()

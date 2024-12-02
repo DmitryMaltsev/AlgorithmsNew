@@ -4,6 +4,7 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
+
 using System.Net.Sockets;
 using System.Windows.Input;
 
@@ -246,17 +247,20 @@ namespace Android_Silver.Pages
 
         public ActivePagesEntities CActivePagesEntities { get; set; }
 
+        private FileSystemService _fileSystemService { get; set; }
+
         public FBs CFBs { get; set; }
 
         public MainPageViewModel()
         {
-            
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CFBs = DIContainer.Resolve<FBs>();
+            _fileSystemService = DIContainer.Resolve<FileSystemService>();
+
 #if ANDROID
             AndroidEntity.WifiStateChanged -= EthernetEntities.WifiStateChangeCallback;
             AndroidEntity.WifiStateChanged += EthernetEntities.WifiStateChangeCallback;
@@ -358,19 +362,22 @@ namespace Android_Silver.Pages
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
 
+          
+            _fileSystemService.GetIPFromFile();
             SetTValuesByIndex(0, 0);//?????
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
-            StartTimer();
+           // StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
         }
 
 
+
         async private void ExecuteConnect()
         {
-            EthernetEntities.ConnectIP =
-                       $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
+                EthernetEntities.ConnectIP =
+                     $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
             EthernetEntities.SystemMessage = "Check";
             if (!CTcpClientService.IsConnecting)
             {
@@ -380,6 +387,7 @@ namespace Android_Silver.Pages
                     CModesEntities.ShedCountQueues = 0;
                     CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
+                    await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
                     CTcpClientService.SendRecieveTask("103,050");
 
                     // TcpClientService.SendRecieveTask("137,4");ё
@@ -963,7 +971,7 @@ namespace Android_Silver.Pages
 
         private void ClientDisceonnectedCallback()
         {
-            if (CActivePagesEntities!=null)
+            if (CActivePagesEntities != null)
             {
                 CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
             }

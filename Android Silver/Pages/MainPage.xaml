@@ -351,9 +351,8 @@
             <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.TempSP, StringFormat='{0}°C'}"  
                              Grid.Row="8" Grid.Column="14" Style="{StaticResource SliderText}" 
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
-            
             <!--Основная панель-->
-            <HorizontalStackLayout  Grid.Row="12" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" HorizontalOptions="Center"  
+            <!--<HorizontalStackLayout  Grid.Row="12" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" HorizontalOptions="Center"  
                                 IsVisible="{Binding CActivePagesEntities.IsMainPage}">
                 <Button Text="Подключиться" Command="{Binding ConnectCommand}" 
                                         IsEnabled="{Binding EthernetEntities.IsConnected, Converter={StaticResource InvertBoolConverter}}"
@@ -365,7 +364,7 @@
             <HorizontalStackLayout Grid.Row="11" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="4"
                               IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}">
                 <Label Text="{Binding Source={x:Reference mPage},Path=BindingContext.EthernetEntities.SystemMessage}"/>
-            </HorizontalStackLayout>
+            </HorizontalStackLayout>-->
             <!--#endregion-->
 
             <!--#region РАЗНОЕ-->

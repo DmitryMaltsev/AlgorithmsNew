@@ -201,7 +201,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <!--Основная панель-->
-            <HorizontalStackLayout  Grid.Row="12" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" HorizontalOptions="Center"  
+            <!--<HorizontalStackLayout  Grid.Row="12" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="18" HorizontalOptions="Center"  
                                                                                          IsVisible="{Binding IsBaseSettingsPage}">
                 <Button Text="Подключиться" Command="{Binding StartPageConnectCommand}" 
                            IsEnabled="{Binding EthernetEntities.IsConnected, Converter={StaticResource InvertBoolConverter}}"
@@ -214,7 +214,7 @@
             </HorizontalStackLayout>
             <HorizontalStackLayout Grid.Row="11" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="4" IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}">
                 <Label Text="{Binding EthernetEntities.PacketsMessage}"/>
-            </HorizontalStackLayout>
+            </HorizontalStackLayout>-->
             <!--#endregion-->
             <!--#endregion-->
             <!--#region  Settings page -->
