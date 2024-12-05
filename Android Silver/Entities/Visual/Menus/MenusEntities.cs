@@ -1,5 +1,4 @@
 ﻿using Android_Silver.ViewModels;
-
 using System.Collections.ObjectModel;
 
 namespace Android_Silver.Entities.Visual.Menus
@@ -134,9 +133,9 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_CONFIG_SETTINGS_ADDR = ETH_SENS_SETTINGS_ADDR + ETH_SENS_SETTINGS_LENGTH;
             ETH_CONFIG_SETTINGS_LENGTH = 8;
             ETH_THM_SETTINGS_ADDR = ETH_CONFIG_SETTINGS_ADDR + ETH_CONFIG_SETTINGS_LENGTH;
-            ETH_THM_SETTINGS_LENGTH = 18;
+            ETH_THM_SETTINGS_LENGTH = 20;
             ETH_MBRECUP_SETTINGS_ADDR = ETH_THM_SETTINGS_ADDR + ETH_THM_SETTINGS_LENGTH;
-            ETH_MBRECUP_SETTINGS_LENGTH = 12;
+            ETH_MBRECUP_SETTINGS_LENGTH = 14;
             ETH_SPECMODE_SETTINGS_ADDR = ETH_MBRECUP_SETTINGS_ADDR + ETH_MBRECUP_SETTINGS_LENGTH;
             ETH_SPECMODE_SETTINGS_LENGTH= 8;
             InterfaceStrCollection = new ObservableCollection<StrSet>();
@@ -189,8 +188,8 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 20, "Аналоговый вход 0-10В AR3", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            pickVals = new List<string>() { "Нет", "Драйвер", "Modbus" };
-            sSet = new StrSet(0, 1, "Рекуператор", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            pickVals = new List<string>() { "Нет", "Драйвер", "Modbus","MB1+MB2" };
+            sSet = new StrSet(0, 4, "Рекуператор", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[0].StrSetsCollection = strSets;
             #endregion
@@ -452,17 +451,21 @@ namespace Android_Silver.Entities.Visual.Menus
             #endregion
             #region Термоанемометры
             strSets = new ObservableCollection<StrSet>();
-            sSet = new StrSet(0, 65535, "Коэффициент термоанимометра притока B", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(-100, 100, "Коэффициент термоанемометра притока A", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(-10, 10, "Коэффициент термоанемометра притока B", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100000, "Коэффициент термоанемометра притока K", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Коэффициент кривой притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(-100, 100, "Коэффициент термоанимометра притока A", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            sSet = new StrSet(-100, 100, "Коэффициент термоанемометра вытяжки A", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Коэффициент термоанимометра вытяжки B", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(-100, 100, "Коэффициент термоанемометра вытяжки B", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100000, "Коэффициент термоанемометра вытяжки K", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Коэффициент кривой вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
-            strSets.Add(sSet);
-            sSet = new StrSet(-100, 100, "Коэффициент термоанимометра вытяжки A", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(-100, +120, "Температура H1 °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: 1, pickVals);
             strSets.Add(sSet);
@@ -496,13 +499,20 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 2, "Режим работы", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Да" };
-            sSet = new StrSet(0, 1, "Тест вращения", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Тест вращения 1", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            pickVals = new List<string>() { "Нет", "Да" };
+            sSet = new StrSet(0, 1, "Тест вращения 2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Пр часовой", "По часовой" };
-            sSet = new StrSet(0, 1, "Направление вращения", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Направление вращения 1", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
+            pickVals = new List<string>() { "Пр часовой", "По часовой" };
+            sSet = new StrSet(0, 1, "Направление вращения 2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "Нет", "Да" };
+            sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);      
             sSet = new StrSet(0, 10_000, "Номинальный ток, ма", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);

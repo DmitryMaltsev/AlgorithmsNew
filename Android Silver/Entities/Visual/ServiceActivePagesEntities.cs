@@ -791,26 +791,28 @@ namespace Android_Silver.Entities.Visual
                         IsFiltersSettingsPage = false;
                         IsSpecModeSettingsPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[10].Name;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[0].CVal = _fbs.ThmSps.SupTHmKoefB;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.SupCurveKoef;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.SupTHmKoefA;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[0].CVal = _fbs.ThmSps.SupTHmKoefA;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.SupTHmKoefB;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.SupTHmKoefK;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.SupCurveKoef;
 
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.ExhaustTHmKoefB;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.ExhaustCurveKoef;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.ETHmKoefA;
-
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.TempH1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.TempC1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.TempH2;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.TempC2;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[10].CVal = _fbs.ThmSps.PReg;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[11].CVal = _fbs.ThmSps.IReg;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[12].CVal = _fbs.ThmSps.DReg;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[13].CVal = _fbs.ThmSps.KPolKoef;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[14].CVal = _fbs.ThmSps.BPolKoef;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[15].CVal = _fbs.ThmSps.KClKoef;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[16].CVal = _fbs.ThmSps.BClKoef;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[17].CVal = _fbs.ThmSps.U;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.ExhaustTHmKoefA;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.ExhaustTHmKoefB;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.ExhaustTHmKoefK;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.ExhaustCurveKoef;
+                      
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.TempH1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.TempC1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[10].CVal = _fbs.ThmSps.TempH2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[11].CVal = _fbs.ThmSps.TempC2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[12].CVal = _fbs.ThmSps.PReg;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[13].CVal = _fbs.ThmSps.IReg;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[14].CVal = _fbs.ThmSps.DReg;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[15].CVal = _fbs.ThmSps.KPolKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[16].CVal = _fbs.ThmSps.BPolKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[17].CVal = _fbs.ThmSps.KClKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[18].CVal = _fbs.ThmSps.BClKoef;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[19].CVal = _fbs.ThmSps.U;
                         _menusEntities.GenerateInterfaceTable(10);
                     }
                     break;
@@ -862,17 +864,19 @@ namespace Android_Silver.Entities.Visual
                         IsSpecModeSettingsPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[11].Name;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[0].CPickVal = _fbs.MbRecSPs.MBRecMode;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[1].CPickVal = _fbs.MbRecSPs.IsRotTest;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[2].CPickVal = _fbs.MbRecSPs.IsGrindingMode;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[3].CPickVal = _fbs.MbRecSPs.IsForward;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[4].CVal = _fbs.MbRecSPs.NominalCurrent;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[5].CVal = _fbs.MbRecSPs.ReductKoef;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[6].CVal = _fbs.MbRecSPs.NominalTurns1;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[7].CVal = _fbs.MbRecSPs.NominalTurns2;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[8].CVal = _fbs.MbRecSPs.NominalTemp1;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[9].CVal = _fbs.MbRecSPs.NominalTemp2;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[10].CVal = _fbs.MbRecSPs.GrindingCurrent;
-                        _menusEntities.StartMenuCollection[11].StrSetsCollection[11].CVal = _fbs.MbRecSPs.GrindingTurns;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[1].CPickVal = _fbs.MbRecSPs.IsRotTest1;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[2].CPickVal = _fbs.MbRecSPs.IsRotTest2;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[3].CPickVal = _fbs.MbRecSPs.IsForward1;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[4].CPickVal = _fbs.MbRecSPs.IsForward2;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[5].CPickVal = _fbs.MbRecSPs.IsGrindingMode;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[6].CVal = _fbs.MbRecSPs.NominalCurrent;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[7].CVal = _fbs.MbRecSPs.ReductKoef;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[8].CVal = _fbs.MbRecSPs.NominalTurns1;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[9].CVal = _fbs.MbRecSPs.NominalTurns2;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[10].CVal = _fbs.MbRecSPs.NominalTemp1;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[11].CVal = _fbs.MbRecSPs.NominalTemp2;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[12].CVal = _fbs.MbRecSPs.GrindingCurrent;
+                        _menusEntities.StartMenuCollection[11].StrSetsCollection[13].CVal = _fbs.MbRecSPs.GrindingTurns;
                         _menusEntities.GenerateInterfaceTable(11);
                     }
                     break;

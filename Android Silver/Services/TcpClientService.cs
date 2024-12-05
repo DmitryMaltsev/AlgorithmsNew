@@ -225,7 +225,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "369,071\r\n";
+                            messToClient = "369,075\r\n";
                         }
                         break;
                 }
@@ -4826,7 +4826,7 @@ namespace Android_Silver.Services
                 if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= 0 && val <= 2)
+                    if (val >= 0 && val <= 3)
                     {
                         _fbs.CEConfig.Recup = val;
                     }
@@ -4840,60 +4840,59 @@ namespace Android_Silver.Services
             //Термоанемометры
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= 0 && val <= 65535)
+                    if (val >= -1000 && val <= 1000)
                     {
-                        _fbs.ThmSps.SupTHmKoefB = (float)val;
+                        _fbs.ThmSps.SupTHmKoefA = (float)val/10;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= 0 && val <= 65535)
+                    if (val >= -100 && val <= 100)
                     {
-                        _fbs.ThmSps.SupCurveKoef = (float)val / 100;
+                        _fbs.ThmSps.SupTHmKoefB = (float)val / 10;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 + 400)
             {
-                if (short.TryParse(resp.ValueString, out short val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
-
-                    if (val >= -10000 && val <= 10000)
+                    if (val >= 0 && val <= 100000)
                     {
-                        _fbs.ThmSps.SupTHmKoefA = (float)val / 100;
+                        _fbs.ThmSps.SupTHmKoefK = val;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 3 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= 0 && val <= 65535)
+                    if (val >= 0 && val <= 10000)
                     {
-                        _fbs.ThmSps.ExhaustTHmKoefB = (float)val;
+                        _fbs.ThmSps.SupCurveKoef = (float)val / 100;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 + 400)
             {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
+                if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= 0 && val <= 65535)
+                    if (val >= -1000 && val <= 1000)
                     {
-                        _fbs.ThmSps.ExhaustCurveKoef = (float)val / 100;
+                        _fbs.ThmSps.ExhaustTHmKoefA = (float)val/10;
                     }
                 }
                 return;
@@ -4903,14 +4902,40 @@ namespace Android_Silver.Services
                 if (short.TryParse(resp.ValueString, out short val))
                 {
 
-                    if (val >= -10000 && val <= 10000)
+                    if (val >= -100 && val <= 100)
                     {
-                        _fbs.ThmSps.ETHmKoefA = (float)val / 100;
+                        _fbs.ThmSps.ExhaustTHmKoefB = (float)val / 10;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 6 + 400)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+
+                    if (val >= 0 && val <= 100000)
+                    {
+                        _fbs.ThmSps.ExhaustTHmKoefK = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 + 400)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+
+                    if (val >= 0 && val <= 10000)
+                    {
+                        _fbs.ThmSps.ExhaustCurveKoef = (float)val/100;
+                    }
+                }
+                return;
+            }
+
+
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4922,7 +4947,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4934,7 +4959,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4946,7 +4971,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4957,34 +4982,10 @@ namespace Android_Silver.Services
                     }
                     if (_menusEntities.StartMenuCollection.Count > 8 && _servActivePageEntities.LastActivePageState == SActivePageState.TmhSettingsPage)
                     {
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.TempH1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.TempC1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.TempH2;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.TempC2;
-                    }
-                }
-                return;
-            }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 + 400)
-            {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
-                {
-
-                    if (val >= 0 && val <= 10_000)
-                    {
-                        _fbs.ThmSps.PReg = val;
-                    }
-                }
-                return;
-            }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 + 400)
-            {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
-                {
-
-                    if (val >= 0 && val <= 10_000)
-                    {
-                        _fbs.ThmSps.IReg = val;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.TempH1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.TempC1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[10].CVal = _fbs.ThmSps.TempH2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[11].CVal = _fbs.ThmSps.TempC2;
                     }
                 }
                 return;
@@ -4996,31 +4997,31 @@ namespace Android_Silver.Services
 
                     if (val >= 0 && val <= 10_000)
                     {
-                        _fbs.ThmSps.DReg = val;
+                        _fbs.ThmSps.PReg = val;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 13 + 400)
             {
-                if (short.TryParse(resp.ValueString, out short val))
+                if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= -9999 && val <= 9999)
+                    if (val >= 0 && val <= 10_000)
                     {
-                        _fbs.ThmSps.KPolKoef = (float)val / 100;
+                        _fbs.ThmSps.IReg = val;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 14 + 400)
             {
-                if (short.TryParse(resp.ValueString, out short val))
+                if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
 
-                    if (val >= -9999 && val <= 9999)
+                    if (val >= 0 && val <= 10_000)
                     {
-                        _fbs.ThmSps.BPolKoef = (float)val / 100;
+                        _fbs.ThmSps.DReg = val;
                     }
                 }
                 return;
@@ -5032,7 +5033,7 @@ namespace Android_Silver.Services
 
                     if (val >= -9999 && val <= 9999)
                     {
-                        _fbs.ThmSps.KClKoef = (float)val / 100;
+                        _fbs.ThmSps.KPolKoef = (float)val / 100;
                     }
                 }
                 return;
@@ -5044,12 +5045,36 @@ namespace Android_Silver.Services
 
                     if (val >= -9999 && val <= 9999)
                     {
-                        _fbs.ThmSps.BClKoef = (float)val / 100;
+                        _fbs.ThmSps.BPolKoef = (float)val / 100;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 17 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 17 + 400)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+
+                    if (val >= -9999 && val <= 9999)
+                    {
+                        _fbs.ThmSps.KClKoef = (float)val / 100;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 18 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 18 + 400)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+
+                    if (val >= -9999 && val <= 9999)
+                    {
+                        _fbs.ThmSps.BClKoef = (float)val / 100;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 19 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 19 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -5085,12 +5110,48 @@ namespace Android_Silver.Services
 
                     if (val <= 1 && val >= 0)
                     {
-                        _fbs.MbRecSPs.IsRotTest = (byte)val;
+                        _fbs.MbRecSPs.IsRotTest1 = (byte)val;
                     }
                 }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 2 + 400)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+
+                    if (val <= 1 && val >= 0)
+                    {
+                        _fbs.MbRecSPs.IsRotTest2 = (byte)val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 3 + 400)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+
+                    if (val <= 1 && val >= 0)
+                    {
+                        _fbs.MbRecSPs.IsForward1 = (byte)val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 4 + 400)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+
+                    if (val <= 1 && val >= 0)
+                    {
+                        _fbs.MbRecSPs.IsForward2 = (byte)val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 5 + 400)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5107,19 +5168,8 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 3 + 400)
-            {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
-                {
 
-                    if (val <= 1 && val >= 0)
-                    {
-                        _fbs.MbRecSPs.IsForward = (byte)val;
-                    }
-                }
-                return;
-            }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 6 + 400)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5131,7 +5181,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7 + 400)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5142,7 +5192,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 8 + 400)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5154,7 +5204,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 9 + 400)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5166,7 +5216,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 8 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 10 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -5178,7 +5228,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 9 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 11 + 400)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -5190,7 +5240,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 10 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 12 + 400)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5203,7 +5253,7 @@ namespace Android_Silver.Services
                 return;
             }
 
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 11 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 1 + 400)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {

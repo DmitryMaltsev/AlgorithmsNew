@@ -38,7 +38,7 @@
             <Setter Property="Grid.ColumnSpan" Value="5"/>
             <Setter Property="MaximumWidthRequest" Value="140"/>
             <Setter Property="MaximumHeightRequest" Value="40"/>
-            <Setter Property="MaxLength" Value="5"/>
+            <Setter Property="MaxLength" Value="6"/>
         </Style>
         <Style TargetType="Picker" x:Key="ConfPicker">
             <Setter Property="FontSize" Value="17" />
@@ -131,7 +131,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <!--#region StartPage -->
             <Label Text="{Binding EthernetEntities.EthernetMessage}" Grid.Row="5" FontSize="15" Grid.ColumnSpan="18"  HorizontalTextAlignment="Center" 
                    IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
@@ -149,7 +149,7 @@
                                                  IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
             <!--IsEnabled="{Binding  EthernetEntities.CanTryToConnect}"-->
             <!--#endregion-->
-            
+
             <!--#region Entry page -->
             <Label Text="{Binding EntryMessage}" Grid.Row="6" FontSize="15" Grid.ColumnSpan="18"  HorizontalTextAlignment="Center"  
                                                                                                 IsVisible="{Binding CActivePagesEntities.IsEntryPage}"/>
@@ -158,7 +158,7 @@
             <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding EntryPassedCommand}"  Grid.Row="11" Grid.Column="5" 
                                            Style="{StaticResource OKCancelBut}"  IsVisible="{Binding CActivePagesEntities.IsEntryPage}" />
             <!--#endregion-->
-            
+
             <!--#region Base settings page -->
             <Label Text="Окно настроек"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
                                           IsVisible = "{Binding CActivePagesEntities.IsBaseSettingsPage}"/>
@@ -191,8 +191,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Button  Grid.Column="2" Style="{StaticResource BaseSettingsBut}" ImageSource="{Binding ImgSource.Current}" 
                                              Command="{Binding Source={x:Reference SPage}, Path=BindingContext.ToSettingsCommand}"
-                                             CommandParameter="{Binding ID}"
-                                                                                Pressed="BaseSettings1Pressed" Released="BaseSettings1Released"  IsVisible="{Binding MenuIsVisible}" />
+                                             CommandParameter="{Binding ID}" Pressed="BaseSettings1Pressed" Released="BaseSettings1Released"  IsVisible="{Binding MenuIsVisible}" />
                                     <Label Text="{Binding Name}"  Grid.Column="2" Style="{StaticResource OtherSettingsLabel}" IsVisible="{Binding MenuIsVisible}"/>
                                 </Grid>
                             </ViewCell.View>
@@ -218,16 +217,16 @@
             <!--#endregion-->
             <!--#endregion-->
             <!--#region  Settings page -->
-                <!--#region Header -->
-                <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
+            <!--#region Header -->
+            <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
                 Style="{StaticResource HeaderBut}"  Pressed="HomeButton_Pressed" Released="HomeButton_Released"  
                                                  IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}"/>
-                 <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
+            <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" 
                  Style="{StaticResource MiniButtons}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" 
                                                 IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}"/>
             <Label Text="{Binding CMenusEntities.Title}"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
                                                     IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}"/>
-                <!--#endregion-->
+            <!--#endregion-->
             <ListView ItemsSource="{Binding  CMenusEntities.InterfaceStrCollection}" Grid.Row="5" 
                 Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsFBSettingsPage}">
                 <ListView.ItemTemplate>
