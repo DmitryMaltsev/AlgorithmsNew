@@ -5253,7 +5253,7 @@ namespace Android_Silver.Services
                 return;
             }
 
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 13 + 400)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
