@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Android_Silver.Entities.ValuesEntities;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,25 +10,25 @@ namespace Android_Silver.Entities.FBEntities
 {
     public class ThermoanemometersSPS
     {
-        public float SupTHmKoefA;
-        public float SupTHmKoefB;
-        public float SupTHmKoefK;
-        public float SupCurveKoef;
-        public float ExhaustTHmKoefA;
-        public float ExhaustTHmKoefB;
-        public float ExhaustTHmKoefK;
-        public float ExhaustCurveKoef;
-        public float U;
+        public FloatValue SupTHmKoefA;
+        public FloatValue SupTHmKoefB;
+        public FloatValue SupTHmKoefK;
+        public FloatValue SupCurveKoef;
+        public FloatValue ExhaustTHmKoefA;
+        public FloatValue ExhaustTHmKoefB;
+        public FloatValue ExhaustTHmKoefK;
+        public FloatValue ExhaustCurveKoef;
+        public FloatValue U;
         public float TempH1;
         public float TempC1;
         public float TempH2;
         public float TempC2;
-        public int PReg;
-        public int IReg;
-        public int DReg;
-        public float KClKoef;
-        public float BClKoef;
-        public float KPolKoef;
-        public float BPolKoef;
+        public IntValue PReg;
+        public IntValue IReg;
+        public IntValue DReg;
+        public FloatValue KClKoef;
+        public FloatValue BClKoef;
+        public FloatValue KPolKoef;
+        public FloatValue BPolKoef;
     }
 }

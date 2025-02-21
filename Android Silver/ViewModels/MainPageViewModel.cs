@@ -362,12 +362,12 @@ namespace Android_Silver.Pages
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
 
-          
+
             _fileSystemService.GetIPFromFile();
             SetTValuesByIndex(0, 0);//?????
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
-           // StartTimer();
+            // StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
         }
@@ -376,8 +376,8 @@ namespace Android_Silver.Pages
 
         async private void ExecuteConnect()
         {
-                EthernetEntities.ConnectIP =
-                     $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
+            EthernetEntities.ConnectIP =
+                 $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
             EthernetEntities.SystemMessage = "Check";
             if (!CTcpClientService.IsConnecting)
             {
