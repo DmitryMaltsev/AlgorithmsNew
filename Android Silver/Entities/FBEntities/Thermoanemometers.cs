@@ -30,5 +30,28 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue BClKoef;
         public FloatValue KPolKoef;
         public FloatValue BPolKoef;
+
+        public ThermoanemometersSPS()
+        {
+            SupTHmKoefA = new FloatValue(-100_000, 100_000, 2);
+            SupTHmKoefB = new FloatValue(-100_000, 100_000, 2);
+            SupTHmKoefK = new FloatValue(-100_000, 100_000, 2);
+            SupCurveKoef = new FloatValue(-100_000, 100_000, 2);
+
+            ExhaustTHmKoefA = new FloatValue(-100_000, 100_000, 2);
+            ExhaustTHmKoefB = new FloatValue(-100_000, 100_000, 2);
+            ExhaustTHmKoefK = new FloatValue(-100_000, 100_000, 2);
+            ExhaustCurveKoef = new FloatValue(-100_000, 100_000, 2);
+
+            U = new FloatValue(0, 10, 1);
+            PReg =  new IntValue(0, 10_000);
+            IReg = new IntValue(0, 10_000);
+            DReg = new IntValue(0, 10_000);
+
+            KClKoef = new FloatValue(-99, 99, 2);
+            BClKoef = new FloatValue(-99, 99, 2);
+            KPolKoef = new FloatValue(-99, 99, 2);
+            BPolKoef = new FloatValue(-99, 99, 2);
+        }
     }
 }

@@ -20,9 +20,9 @@ namespace Android_Silver.Entities.ValuesEntities
             }
         }
 
-        public IntValue(int min, int max, int numChr)
+        public IntValue(int min, int max)
         {
-            Min = min; Max = max; NumChr = numChr;
+            Min = min; Max = max;
         }
     }
 }

@@ -5456,8 +5456,9 @@ namespace Android_Silver.Services
 
         private void GetFloatValueResult(int inputVal, Entities.ValuesEntities.FloatValue floatVal)
         {
-            int min = floatVal.Min * floatVal.NumChr;
-            int max = floatVal.Max * floatVal.NumChr;
+           
+            var min = floatVal.Min * Math.Pow(10,floatVal.NumChr);
+            var max = floatVal.Max * Math.Pow(10, floatVal.NumChr);
             if (inputVal >= min && inputVal <= max)
             {
                 floatVal.Value = (float)inputVal / (float)Math.Pow(10, floatVal.NumChr);
@@ -5467,11 +5468,11 @@ namespace Android_Silver.Services
 
         private void GetIntValueResult(int inputVal, IntValue intVal)
         {
-            int min = intVal.Min * intVal.NumChr;
-            int max = intVal.Max * intVal.NumChr;
+            int min = intVal.Min; //* intVal.NumChr;
+            int max = intVal.Max; //* intVal.NumChr;
             if (inputVal >= min && inputVal <= max)
             {
-                intVal.Value = (float)inputVal / (float)Math.Pow(10, intVal.NumChr);
+                intVal.Value = (float)inputVal;
             }
         }
     }
