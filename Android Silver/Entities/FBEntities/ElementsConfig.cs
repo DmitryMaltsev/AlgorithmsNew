@@ -18,7 +18,7 @@ namespace Android_Silver.Entities.FBEntities
         public int TregularCh_R;
         public int AutoResetFire;
         public int AutoRestart;
-
+        public int IsDemoConfig;
         public int ET1;
         public int ET2;
         public int AR1;

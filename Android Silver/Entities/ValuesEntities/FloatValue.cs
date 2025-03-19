@@ -19,7 +19,7 @@ namespace Android_Silver.Entities.ValuesEntities
 			}
 		}
 
-        public FloatValue(int min, int max, int numChr)
+        public FloatValue(int min, int max, byte numChr)
         {
             Min = min; Max = max; NumChr = numChr;
         }

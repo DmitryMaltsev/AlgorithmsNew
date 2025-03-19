@@ -222,12 +222,12 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "300,069\r\n";
+                            messToClient = "300,070\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "369,075\r\n";
+                            messToClient = "370,075\r\n";
                         }
                         break;
                 }
@@ -3735,6 +3735,22 @@ namespace Android_Silver.Services
                 }
                 return;
             }
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 11 + 400)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+
+                    if (val >= 0 && val <= 1)
+                    {
+                        _fbs.CEConfig.IsDemoConfig = val;
+                    }
+                }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
+                return;
+            }
             //Заслонка
             if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400)
             {
@@ -4839,6 +4855,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
+
             //Термоанемометры
             if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 400)
             {

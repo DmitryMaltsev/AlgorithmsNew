@@ -31,7 +31,6 @@ namespace Android_Silver.Entities.Visual
         LoadingPage
     }
 
-
     public class ServiceActivePagesEntities : BindableBase
     {
         MenusEntities _menusEntities;
@@ -393,7 +392,6 @@ namespace Android_Silver.Entities.Visual
                     break;
                 case SActivePageState.ConfigPage:
                     {
-
                         _menusEntities.StartMenuCollection[0].StrSetsCollection[0].CPickVal = _fbs.CEConfig.ET1;
                         _menusEntities.StartMenuCollection[0].StrSetsCollection[1].CPickVal = _fbs.CEConfig.ET2;
                         _menusEntities.StartMenuCollection[0].StrSetsCollection[2].CPickVal = _fbs.CEConfig.OUT1;
@@ -461,6 +459,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[8].CPickVal = _fbs.CEConfig.AutoRestart;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[9].CPickVal = _fbs.CEConfig.AutoResetFire;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[10].CVal = _fbs.UFLeds.LEDsI;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[11].CPickVal = _fbs.CEConfig.IsDemoConfig;
                         _menusEntities.GenerateInterfaceTable(1);
                     }
                     break;

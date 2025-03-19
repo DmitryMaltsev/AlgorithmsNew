@@ -1,4 +1,6 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.FBEntities;
+using Android_Silver.ViewModels;
+
 using System.Collections.ObjectModel;
 
 namespace Android_Silver.Entities.Visual.Menus
@@ -106,14 +108,17 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
-        private int PidMaxVal=10_000;
+        private int PidMaxVal = 10_000;
 
         private PicturesSet _pictureSet { get; set; }
 
+        FBs _fbEntities;
+
         public MenusEntities()
         {
+            _fbEntities = DIContainer.Resolve<FBs>();  
             ETH_COMMON_SETTINGS_ADDR = 300;
-            ETH_COMMON_SETTINGS_LENGTH = 11;
+            ETH_COMMON_SETTINGS_LENGTH = 12;
             ETH_DAMPER_SETTINGS_ADDR = ETH_COMMON_SETTINGS_ADDR + ETH_COMMON_SETTINGS_LENGTH;
             ETH_DAMPER_SETTINGS_LENGTH = 23;
             ETH_FAN_SETTINGS_ADDR = ETH_DAMPER_SETTINGS_ADDR + ETH_DAMPER_SETTINGS_LENGTH;
@@ -137,7 +142,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_MBRECUP_SETTINGS_ADDR = ETH_THM_SETTINGS_ADDR + ETH_THM_SETTINGS_LENGTH;
             ETH_MBRECUP_SETTINGS_LENGTH = 14;
             ETH_SPECMODE_SETTINGS_ADDR = ETH_MBRECUP_SETTINGS_ADDR + ETH_MBRECUP_SETTINGS_LENGTH;
-            ETH_SPECMODE_SETTINGS_LENGTH= 8;
+            ETH_SPECMODE_SETTINGS_LENGTH = 8;
             InterfaceStrCollection = new ObservableCollection<StrSet>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             StartMenuCollection = new List<MItem>();
@@ -188,7 +193,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 20, "Аналоговый вход 0-10В AR3", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            pickVals = new List<string>() { "Нет", "Драйвер", "Modbus","MB1+MB2" };
+            pickVals = new List<string>() { "Нет", "Драйвер", "Modbus", "MB1+MB2" };
             sSet = new StrSet(0, 4, "Рекуператор", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[0].StrSetsCollection = strSets;
@@ -219,6 +224,9 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 5, "Автосброс пожара", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 0.7f, "Сила тока УФ-светодиодов, А", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "Неактивен", "Активен" };
+            sSet = new StrSet(0, 1, "Демо режим", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[1].StrSetsCollection = strSets;
             #endregion
@@ -451,21 +459,30 @@ namespace Android_Silver.Entities.Visual.Menus
             #endregion
             #region Термоанемометры
             strSets = new ObservableCollection<StrSet>();
-            sSet = new StrSet(-100, 100, "Коэффициент термоанемометра притока A", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            
+            sSet = new StrSet(_fbEntities.ThmSps.SupTHmKoefA.Min, _fbEntities.ThmSps.SupTHmKoefA.Max, "Коэффициент термоанемометра притока A", 
+            isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.SupTHmKoefA.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(-10, 10, "Коэффициент термоанемометра притока B", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.SupTHmKoefB.Min, _fbEntities.ThmSps.SupTHmKoefB.Max, "Коэффициент термоанемометра притока B", isVisible: true, 
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.SupTHmKoefB.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100000, "Коэффициент термоанемометра притока K", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.SupTHmKoefK.Min, _fbEntities.ThmSps.SupTHmKoefK.Max, "Коэффициент термоанемометра притока K", isVisible: true, 
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.SupTHmKoefK.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Коэффициент кривой притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.SupCurveKoef.Min, _fbEntities.ThmSps.SupCurveKoef.Max, "Коэффициент кривой притока", isVisible: true, 
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.SupCurveKoef.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(-100, 100, "Коэффициент термоанемометра вытяжки A", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.ExhaustTHmKoefA.Min, _fbEntities.ThmSps.ExhaustTHmKoefA.Max, "Коэффициент термоанемометра вытяжки A", isVisible: true, 
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.ExhaustTHmKoefA.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(-100, 100, "Коэффициент термоанемометра вытяжки B", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.ExhaustTHmKoefB.Min, _fbEntities.ThmSps.ExhaustTHmKoefB.Max, "Коэффициент термоанемометра вытяжки B", isVisible: true,
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.ExhaustTHmKoefB.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100000, "Коэффициент термоанемометра вытяжки K", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.ExhaustTHmKoefK.Min, _fbEntities.ThmSps.ExhaustTHmKoefK.Max, "Коэффициент термоанемометра вытяжки K", isVisible: true,
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.ExhaustTHmKoefK.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Коэффициент кривой вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.ExhaustCurveKoef.Min, _fbEntities.ThmSps.ExhaustCurveKoef.Max, "Коэффициент кривой вытяжки", isVisible: true,
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.ExhaustCurveKoef.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(-100, +120, "Температура H1 °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: 1, pickVals);
             strSets.Add(sSet);
@@ -475,21 +492,29 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(-100, +120, "Температура C2 °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: 1, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "P коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.PReg.Min, _fbEntities.ThmSps.PReg.Max, "P коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+                isEnabled: true, valScale: _fbEntities.ThmSps.PReg.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "I коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.IReg.Min, _fbEntities.ThmSps.IReg.Max, "I коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, 
+                isEnabled: true, valScale: _fbEntities.ThmSps.IReg.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "D коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.DReg.Min, _fbEntities.ThmSps.DReg.Max, "D коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, 
+                isEnabled: true, valScale: _fbEntities.ThmSps.DReg.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(-99, 99, "Коэф. К грязного фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.KPolKoef.Min, _fbEntities.ThmSps.KPolKoef.Max, "Коэф. К грязного фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+                isEnabled: true, valScale: _fbEntities.ThmSps.KPolKoef.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(-99, 99, "Коэф. B грязного фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.BPolKoef.Min, _fbEntities.ThmSps.BPolKoef.Max, "Коэф. B грязного фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+                isEnabled: true, valScale: _fbEntities.ThmSps.BPolKoef.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(-99, 99, "Коэф. К чистого фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.KClKoef.Min, _fbEntities.ThmSps.KClKoef.Max, "Коэф. К чистого фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+                isEnabled: true, valScale: _fbEntities.ThmSps.KClKoef.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(-99, 99, "Коэф. B чистого фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.BClKoef.Min, _fbEntities.ThmSps.BClKoef.Max, "Коэф. B чистого фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, 
+                isEnabled: true, valScale: _fbEntities.ThmSps.BClKoef.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10, "Напряжение термоанeмометра", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.U.Min, _fbEntities.ThmSps.U.Max, "Напряжение термоанeмометра", isVisible: true, pickerIsVisible: false, 
+                entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.U.NumChr, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[10].StrSetsCollection = strSets;
             #endregion
@@ -512,7 +537,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Да" };
             sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);      
+            strSets.Add(sSet);
             sSet = new StrSet(0, 10_000, "Номинальный ток, ма", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 2, pickVals);

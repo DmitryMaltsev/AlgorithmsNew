@@ -30,9 +30,9 @@ namespace Android_Silver.Entities.ValuesEntities
             }
         }
 
-        private int _numChr;
+        private byte _numChr;
 
-        public int NumChr
+        public byte NumChr
         {
             get { return _numChr; }
             set { 
