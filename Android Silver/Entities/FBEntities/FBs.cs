@@ -19,8 +19,12 @@ namespace Android_Silver.Entities.FBEntities
         public Sensors CSensors { get; set; }
         public Recup CRecup { get; set; }
         public ThermoanemometersSPS ThmSps { get; set; }
+        public SPCalibrateThm SupCalibrateThm { get; set; }
+
+        public SPCalibrateThm ExhaustCalibrateThm { get; set; }
 
         public MBRecupSetPoints MbRecSPs { get; set; }
+
 
 
         public CommonSetPoints CCommonSetPoints;
@@ -50,6 +54,8 @@ namespace Android_Silver.Entities.FBEntities
             ThmSps = new ThermoanemometersSPS();
             MbRecSPs=new MBRecupSetPoints();
             UFLeds=new UFLeds();
+            SupCalibrateThm =new SPCalibrateThm();
+            ExhaustCalibrateThm = new SPCalibrateThm();
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Android_Silver.Entities.ValuesEntities
 {
     public class IntValue:ValueEntity 
     {
-        private float _value;
+        private int _value;
 
-        public float Value
+        public int Value
         {
             get { return _value; }
             set

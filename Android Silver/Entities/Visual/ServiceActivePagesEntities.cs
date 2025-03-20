@@ -24,6 +24,7 @@ namespace Android_Silver.Entities.Visual
         CommonSettingsPage,
         SensorsSettingPage,
         TmhSettingsPage,
+        ThmCalibratePage,
         MBRecupSettingsPage,
         FiltersSettingsPage,
         SpecModeSettingsPage,
@@ -274,9 +275,22 @@ namespace Android_Silver.Entities.Visual
         public bool IsSpecModeSettingsPage
         {
             get { return _isSpecModesSettingsPage; }
-            set {
+            set
+            {
                 _isSpecModesSettingsPage = value;
                 OnPropertyChanged(nameof(IsSpecModeSettingsPage));
+            }
+        }
+
+        private bool _isThmCalibratePage;
+
+        public bool IsThmCalibratePage
+        {
+            get { return _isThmCalibratePage; }
+            set
+            {
+                _isThmCalibratePage = value;
+                OnPropertyChanged(nameof(IsThmCalibratePage));
             }
         }
 
@@ -286,7 +300,7 @@ namespace Android_Silver.Entities.Visual
         {
             _menusEntities = DIContainer.Resolve<MenusEntities>();
             _fbs = DIContainer.Resolve<FBs>();
-            _modesEntities=DIContainer.Resolve<ModesEntities>();
+            _modesEntities = DIContainer.Resolve<ModesEntities>();
         }
 
         public void SetActivePageState(SActivePageState activePageState, int pageState = 0)
@@ -790,28 +804,19 @@ namespace Android_Silver.Entities.Visual
                         IsFiltersSettingsPage = false;
                         IsSpecModeSettingsPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[10].Name;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[0].CVal = _fbs.ThmSps.SupTHmKoefA.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.SupTHmKoefB.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.SupTHmKoefK.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.SupCurveKoef.Value;
-
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.ExhaustTHmKoefA.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.ExhaustTHmKoefB.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.ExhaustTHmKoefK.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.ExhaustCurveKoef.Value;
-                      
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.TempH1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.TempC1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[10].CVal = _fbs.ThmSps.TempH2;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[11].CVal = _fbs.ThmSps.TempC2;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[12].CVal = _fbs.ThmSps.PReg.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[13].CVal = _fbs.ThmSps.IReg.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[14].CVal = _fbs.ThmSps.DReg.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[15].CVal = _fbs.ThmSps.KPolKoef.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[16].CVal = _fbs.ThmSps.BPolKoef.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[17].CVal = _fbs.ThmSps.KClKoef.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[18].CVal = _fbs.ThmSps.BClKoef.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[19].CVal = _fbs.ThmSps.U.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[0].CPickVal = _fbs.SupCalibrateThm.FanControlType.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.TempH1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.TempC1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.TempH2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempC2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.PReg.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.IReg.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.DReg.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.KPolKoef.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.BPolKoef.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[10].CVal = _fbs.ThmSps.KClKoef.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[11].CVal = _fbs.ThmSps.BClKoef.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[12].CVal = _fbs.ThmSps.U.Value;
                         _menusEntities.GenerateInterfaceTable(10);
                     }
                     break;
@@ -909,6 +914,78 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[12].StrSetsCollection[6].CVal = _modesEntities.Mode1ValuesList[6].TempSP;
                         _menusEntities.StartMenuCollection[12].StrSetsCollection[7].CVal = _modesEntities.Mode1ValuesList[6].PowerLimitSP;
                         _menusEntities.GenerateInterfaceTable(12);
+                    }
+                    break;
+                case (SActivePageState.ThmCalibratePage):
+                    {
+                        IsThmCalibratePage = true;
+                        IsSpecModeSettingsPage = false;
+                        IsFBSettingsPage = true;
+                        IsMBRecupSettingsPage = false;
+                        IsLoadingPage = false;
+                        IsConfigPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsFreonSettingsPage = false;
+                        IsTmhSettingsPage = false;
+                        IsFiltersSettingsPage = false;
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[13].Name;
+
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[0].CPickVal = _fbs.SupCalibrateThm.CalibrateMode.Value;
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[1].CVal = _fbs.SupCalibrateThm.DeltaThm.Value;
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[2].CVal = _fbs.ExhaustCalibrateThm.DeltaThm.Value;
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[3].CVal = _fbs.SupCalibrateThm.CalibrateTimeS.Value;
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[4].CVal = _fbs.SupCalibrateThm.TestTimeS.Value;
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[5].CVal = _fbs.SupCalibrateThm.LeakFlow.Value;
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[6].CVal = _fbs.ExhaustCalibrateThm.LeakFlow.Value;
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[7].CVal = _fbs.SupCalibrateThm.CalibrateStepPercs[1];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[8].CVal = _fbs.SupCalibrateThm.CalibrateStepPercs[2];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[9].CVal = _fbs.SupCalibrateThm.CalibrateStepPercs[3];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[10].CVal = _fbs.SupCalibrateThm.CalibrateStepPercs[4];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[11].CVal = _fbs.SupCalibrateThm.CalibrateStepPercs[5];
+
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[12].CVal = _fbs.SupCalibrateThm.DeltaTCalibrates[0];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[13].CVal = _fbs.SupCalibrateThm.DeltaTCalibrates[1];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[14].CVal = _fbs.SupCalibrateThm.DeltaTCalibrates[2];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[15].CVal = _fbs.SupCalibrateThm.DeltaTCalibrates[3];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[16].CVal = _fbs.SupCalibrateThm.DeltaTCalibrates[4];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[17].CVal = _fbs.SupCalibrateThm.DeltaTCalibrates[5];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[18].CVal = _fbs.SupCalibrateThm.DeltaTCalibrates[6];
+
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[19].CVal = _fbs.SupCalibrateThm.FlowCalibrates[0];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[20].CVal = _fbs.SupCalibrateThm.FlowCalibrates[1];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[21].CVal = _fbs.SupCalibrateThm.FlowCalibrates[2];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[22].CVal = _fbs.SupCalibrateThm.FlowCalibrates[3];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[23].CVal = _fbs.SupCalibrateThm.FlowCalibrates[4];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[24].CVal = _fbs.SupCalibrateThm.FlowCalibrates[5];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[25].CVal = _fbs.SupCalibrateThm.FlowCalibrates[6];
+
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[26].CVal = _fbs.ExhaustCalibrateThm.DeltaTCalibrates[0];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[27].CVal = _fbs.ExhaustCalibrateThm.DeltaTCalibrates[1];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[28].CVal = _fbs.ExhaustCalibrateThm.DeltaTCalibrates[2];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[29].CVal = _fbs.ExhaustCalibrateThm.DeltaTCalibrates[3];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[30].CVal = _fbs.ExhaustCalibrateThm.DeltaTCalibrates[4];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[31].CVal = _fbs.ExhaustCalibrateThm.DeltaTCalibrates[5];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[32].CVal = _fbs.ExhaustCalibrateThm.DeltaTCalibrates[6];
+
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[33].CVal = _fbs.ExhaustCalibrateThm.FlowCalibrates[0];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[34].CVal = _fbs.ExhaustCalibrateThm.FlowCalibrates[1];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[35].CVal = _fbs.ExhaustCalibrateThm.FlowCalibrates[2];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[36].CVal = _fbs.ExhaustCalibrateThm.FlowCalibrates[3];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[37].CVal = _fbs.ExhaustCalibrateThm.FlowCalibrates[4];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[38].CVal = _fbs.ExhaustCalibrateThm.FlowCalibrates[5];
+                        _menusEntities.StartMenuCollection[13].StrSetsCollection[39].CVal = _fbs.ExhaustCalibrateThm.FlowCalibrates[6];
+                        _menusEntities.GenerateInterfaceTable(13);
                     }
                     break;
             }
