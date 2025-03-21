@@ -582,7 +582,6 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(_fbEntities.SupCalibrateThm.TestTimeS.Min, _fbEntities.SupCalibrateThm.TestTimeS.Max, "Время ступени прогона, с", isVisible: true,
                 pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.SupCalibrateThm.CalibrateTimeS.NumChr, pickVals);
             strSets.Add(sSet);
-
             sSet = new StrSet(_fbEntities.SupCalibrateThm.LeakFlow.Min, _fbEntities.SupCalibrateThm.LeakFlow.Max, "Расход утечки П, м3/ч", isVisible: true,
                 pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.SupCalibrateThm.LeakFlow.NumChr, pickVals);
             strSets.Add(sSet);
@@ -592,6 +591,7 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(_fbEntities.SupCalibrateThm.CalibrateStepsLimits.Min, _fbEntities.SupCalibrateThm.CalibrateStepsLimits.Max,
                 "Cтупень калибровки 1,%", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                                                     valScale: _fbEntities.SupCalibrateThm.CalibrateStepsLimits.NumChr, pickVals);
+            strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.CalibrateStepsLimits.Min, _fbEntities.SupCalibrateThm.CalibrateStepsLimits.Max,
                 "Cтупень калибровки 2,%", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                                           valScale: _fbEntities.SupCalibrateThm.CalibrateStepsLimits.NumChr, pickVals);

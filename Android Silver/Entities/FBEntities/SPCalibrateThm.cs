@@ -32,6 +32,7 @@ namespace Android_Silver.Entities.FBEntities
         {
             CalibrateMode = new IntValue(0, 4);
             FanControlType = new IntValue(0, 1);
+            DeltaThm = new FloatValue(-150, 150, 2);
             CalibrateTimeS = new IntValue(0, 65000);
             TestTimeS = new IntValue(0, 65000);
             CalibrateStepsLimits = new IntValue(0, 100);

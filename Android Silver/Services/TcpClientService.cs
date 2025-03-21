@@ -227,7 +227,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "370,075\r\n";
+                            messToClient = "370,90\r\n";
                         }
                         break;
                 }
@@ -4866,11 +4866,10 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 400 + 1)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
-
                     if (val >= -1000 && val <= 1200)
                     {
                         _fbs.ThmSps.TempH1 = (float)val / 10;
@@ -4913,10 +4912,10 @@ namespace Android_Silver.Services
                     }
                     if (_menusEntities.StartMenuCollection.Count > 8 && _servActivePageEntities.LastActivePageState == SActivePageState.TmhSettingsPage)
                     {
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.TempH1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.TempC1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[10].CVal = _fbs.ThmSps.TempH2;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[11].CVal = _fbs.ThmSps.TempC2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.TempH1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.TempC1;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.TempH2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempC2;
                     }
                 }
                 return;
@@ -5260,7 +5259,441 @@ namespace Android_Silver.Services
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
                 return;
-
+            }
+            //Калибровка термоанемометров.
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    //val >= 0 && val <= 100
+                    GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateMode);
+                    GetIntValueResult(val, _fbs.ExhaustCalibrateThm.CalibrateMode);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    //val >= 0 && val <= 100
+                    GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaThm);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    //val >= 0 && val <= 100
+                    GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaThm);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    //val >= 0 && val <= 100
+                    GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateTimeS);
+                    GetIntValueResult(val, _fbs.ExhaustCalibrateThm.CalibrateTimeS);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    //val >= 0 && val <= 100
+                    GetIntValueResult(val, _fbs.SupCalibrateThm.TestTimeS);
+                    GetIntValueResult(val, _fbs.ExhaustCalibrateThm.TestTimeS);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    GetFloatValueResult(val, _fbs.SupCalibrateThm.LeakFlow);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.LeakFlow);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                    {
+                        _fbs.SupCalibrateThm.CalibrateStepPercs[1] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                        _fbs.ExhaustCalibrateThm.CalibrateStepPercs[1] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                    {
+                        _fbs.SupCalibrateThm.CalibrateStepPercs[2] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                        _fbs.ExhaustCalibrateThm.CalibrateStepPercs[2] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                    {
+                        _fbs.SupCalibrateThm.CalibrateStepPercs[3] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                        _fbs.ExhaustCalibrateThm.CalibrateStepPercs[3] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                    {
+                        _fbs.SupCalibrateThm.CalibrateStepPercs[4] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                        _fbs.ExhaustCalibrateThm.CalibrateStepPercs[4] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                    {
+                        _fbs.SupCalibrateThm.CalibrateStepPercs[5] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                        _fbs.ExhaustCalibrateThm.CalibrateStepPercs[5] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaTCalibrates[0] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaTCalibrates[1] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaTCalibrates[2] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaTCalibrates[3] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaTCalibrates[4] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaTCalibrates[5] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaTCalibrates[6] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.FlowCalibrates[0] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.FlowCalibrates[1] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.FlowCalibrates[2] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.FlowCalibrates[3] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.FlowCalibrates[4] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.FlowCalibrates[5] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.FlowCalibrates[6] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            //***************************************************************************************************************************
+            //Калибровка вытяжек.
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[0] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[1] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[2] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[3] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[4] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[5] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[6] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.FlowCalibrates[0] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.FlowCalibrates[1] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.FlowCalibrates[2] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.FlowCalibrates[3] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 37 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 37 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.FlowCalibrates[4] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 38 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 38 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.FlowCalibrates[5] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 39 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 39 + 400)
+            {
+                if (byte.TryParse(resp.ValueString, out byte val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.FlowCalibrates[6] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
+                    }
+                }
+                return;
             }
         }
 
@@ -5415,26 +5848,30 @@ namespace Android_Silver.Services
         }
         #endregion
 
-        private void GetFloatValueResult(int inputVal, Entities.ValuesEntities.FloatValue floatVal)
+        private bool GetFloatValueResult(int inputVal, Entities.ValuesEntities.FloatValue floatVal)
         {
-           
-            var min = floatVal.Min * Math.Pow(10,floatVal.NumChr);
+
+            var min = floatVal.Min * Math.Pow(10, floatVal.NumChr);
             var max = floatVal.Max * Math.Pow(10, floatVal.NumChr);
             if (inputVal >= min && inputVal <= max)
             {
                 floatVal.Value = (float)inputVal / (float)Math.Pow(10, floatVal.NumChr);
+                return true;
             }
+            return false;
         }
 
 
-        private void GetIntValueResult(int inputVal, IntValue intVal)
+        private bool GetIntValueResult(int inputVal, IntValue intVal)
         {
             int min = intVal.Min; //* intVal.NumChr;
             int max = intVal.Max; //* intVal.NumChr;
             if (inputVal >= min && inputVal <= max)
             {
                 intVal.Value = inputVal;
+                return true;
             }
+            return false;
         }
     }
 }
