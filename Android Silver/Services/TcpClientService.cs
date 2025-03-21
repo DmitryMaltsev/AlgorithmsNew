@@ -227,7 +227,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "370,90\r\n";
+                            messToClient = "370,75\r\n";
                         }
                         break;
                 }
@@ -5692,6 +5692,10 @@ namespace Android_Silver.Services
                     {
                         _fbs.ExhaustCalibrateThm.FlowCalibrates[6] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
                     }
+                }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
                 return;
             }
