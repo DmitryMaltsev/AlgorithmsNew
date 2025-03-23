@@ -40,10 +40,10 @@ namespace Android_Silver.Entities.FBEntities
             TWorkingFilter = new FloatValue(0, 9, 2);
             TCalibrateFilter = new FloatValue(0, 9, 2);
             TCalibrateFilter = new FloatValue(-150,150, 2);
-            LeakFlow = new FloatValue(0,100000,0);
+            LeakFlow = new FloatValue(0,100_000,0);
             DeltaTCalibratesLimits = new FloatValue(0, 100, 2);
             DeltaTCalibrates = new float[7];
-            FlowCalibratesLimits = new FloatValue(0, 100000, 0);
+            FlowCalibratesLimits = new FloatValue(0, 100_000, 0);
             FlowCalibrates = new float[7];
         }
     }

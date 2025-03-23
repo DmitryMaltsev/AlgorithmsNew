@@ -307,6 +307,11 @@ namespace Android_Silver.ViewModels
                         SendMItemSettings(CMenusEntities.StartMenuCollection[12]);
                     }
                     break;
+                case SActivePageState.ThmCalibratePage:
+                    {
+                        SendMItemSettings(CMenusEntities.StartMenuCollection[13]);
+                    }
+                    break;
             }
             CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }
@@ -337,8 +342,6 @@ namespace Android_Silver.ViewModels
 
 
         #endregion
-
-
 
         private void ExecuteHome(object obj)
         {

@@ -571,10 +571,10 @@ namespace Android_Silver.Entities.Visual.Menus
             isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: _fbEntities.SupCalibrateThm.CalibrateMode.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.DeltaThm.Min, _fbEntities.SupCalibrateThm.DeltaThm.Max, "Дельта термоанемометра П,°C", isVisible: true,
-                pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.SupCalibrateThm.DeltaThm.NumChr, pickVals);
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: _fbEntities.SupCalibrateThm.DeltaThm.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ExhaustCalibrateThm.DeltaThm.Min, _fbEntities.ExhaustCalibrateThm.DeltaThm.Max, "Дельта термоанемометра В,°C", isVisible: true,
-                pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ExhaustCalibrateThm.DeltaThm.NumChr, pickVals);
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: _fbEntities.ExhaustCalibrateThm.DeltaThm.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.CalibrateTimeS.Min, _fbEntities.SupCalibrateThm.CalibrateTimeS.Max, "Время ступени калибровки,с", isVisible: true,
             pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.SupCalibrateThm.CalibrateTimeS.NumChr, pickVals);

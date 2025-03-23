@@ -222,12 +222,16 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "300,070\r\n";
+                            messToClient = "438,40\r\n";
+                            //messToClient = "397,70\r\n";
+                            //messToClient = "400,60\r\n";
+                            // messToClient = "300,070\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "370,75\r\n";
+                            messToClient = "438,40\r\n";
+                            //messToClient = "397,70\r\n";
                         }
                         break;
                 }
@@ -253,7 +257,7 @@ namespace Android_Silver.Services
                     StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
-                    byte[] data = new byte[300];
+                    byte[] data = new byte[500];
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
                     {
@@ -5263,7 +5267,7 @@ namespace Android_Silver.Services
             //Калибровка термоанемометров.
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     //val >= 0 && val <= 100
                     GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateMode);
@@ -5273,7 +5277,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     //val >= 0 && val <= 100
                     GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaThm);
@@ -5282,7 +5286,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     //val >= 0 && val <= 100
                     GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaThm);
@@ -5291,7 +5295,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     //val >= 0 && val <= 100
                     GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateTimeS);
@@ -5301,7 +5305,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     //val >= 0 && val <= 100
                     GetIntValueResult(val, _fbs.SupCalibrateThm.TestTimeS);
@@ -5311,7 +5315,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     GetFloatValueResult(val, _fbs.SupCalibrateThm.LeakFlow);
                 }
@@ -5319,7 +5323,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.LeakFlow);
                 }
@@ -5327,7 +5331,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
                     {
@@ -5339,7 +5343,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
                     {
@@ -5351,7 +5355,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
                     {
@@ -5363,7 +5367,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
                     {
@@ -5375,7 +5379,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetIntValueResult(val, _fbs.SupCalibrateThm.CalibrateStepsLimits))
                     {
@@ -5387,7 +5391,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5398,7 +5402,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5409,7 +5413,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5420,7 +5424,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5431,7 +5435,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5442,7 +5446,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5453,7 +5457,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5464,7 +5468,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5475,7 +5479,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5486,7 +5490,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5497,7 +5501,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5508,7 +5512,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5519,7 +5523,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5530,7 +5534,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.SupCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5543,7 +5547,7 @@ namespace Android_Silver.Services
             //Калибровка вытяжек.
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5554,7 +5558,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5565,7 +5569,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5576,7 +5580,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5587,7 +5591,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5598,7 +5602,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5609,7 +5613,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
                     {
@@ -5620,7 +5624,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5631,7 +5635,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5642,7 +5646,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5653,7 +5657,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5664,7 +5668,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 37 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 37 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5675,7 +5679,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 38 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 38 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5686,7 +5690,7 @@ namespace Android_Silver.Services
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 39 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 39 + 400)
             {
-                if (byte.TryParse(resp.ValueString, out byte val))
+                if (int.TryParse(resp.ValueString, out int val))
                 {
                     if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
                     {
@@ -5716,44 +5720,7 @@ namespace Android_Silver.Services
             }
         }
 
-        public void SendData(string val)
-        {
-            Task.Run(() =>
-            {
-                string messToClient = val;
-                if (!String.IsNullOrEmpty(MessageToServer))
-                {
-                    messToClient = MessageToServer;
-                }
-                if (!IsSending)
-                {
-                    SendCommand(messToClient);
-                    if (sbResult != null && sbResult.Length > 0)
-                    {
-                        List<Response> responseList = new();
-                        if (GetResponseData(sbResult, responseList))
-                        {
-                            foreach (var response in responseList)
-                            {
-                                GetValueByTag(response);
-                            }
-                            if (String.Compare(messToClient, MessageToServer, true) == 0)
-                                MessageToServer = String.Empty;
-                        }
-                        else
-                        {
-                            _ethernetEntities.SystemMessage = $"Данные не получены";
-                        }
-                    }
-                }
-                else
-                {
-                    _ethernetEntities.SystemMessage = "Данные уже передаются";
-                }
-                //   Task.Delay(10);
-
-            });
-        }
+  
 
         /// <summary>
         /// Основной метод передачи данных на сервер
