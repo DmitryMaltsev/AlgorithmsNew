@@ -222,16 +222,15 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "438,40\r\n";
-                            //messToClient = "397,70\r\n";
-                            //messToClient = "400,60\r\n";
-                            // messToClient = "300,070\r\n";
+                            messToClient = "300,090\r\n";
+                            //messToClient = "300,050\r\n";
+  
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "438,40\r\n";
-                            //messToClient = "397,70\r\n";
+                            messToClient = "390,088\r\n";
+                            //messToClient = "300,050\r\n";
                         }
                         break;
                 }
@@ -257,7 +256,7 @@ namespace Android_Silver.Services
                     StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
-                    byte[] data = new byte[500];
+                    byte[] data = new byte[450];
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
                     {
@@ -5291,6 +5290,11 @@ namespace Android_Silver.Services
                     //val >= 0 && val <= 100
                     GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaThm);
                 }
+                if (_menusEntities.StartMenuCollection.Count > 13 && _servActivePageEntities.LastActivePageState == SActivePageState.ThmCalibratePage)
+                {
+                    _menusEntities.StartMenuCollection[13].StrSetsCollection[1].CVal = _fbs.SupCalibrateThm.DeltaThm.Value;
+                    _menusEntities.StartMenuCollection[13].StrSetsCollection[2].CVal = _fbs.ExhaustCalibrateThm.DeltaThm.Value;
+                }
                 return;
             }
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 + 400)
@@ -5720,7 +5724,7 @@ namespace Android_Silver.Services
             }
         }
 
-  
+
 
         /// <summary>
         /// Основной метод передачи данных на сервер

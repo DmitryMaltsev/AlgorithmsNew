@@ -27,7 +27,6 @@ namespace Android_Silver.Entities.FBEntities
        public float[] FlowCalibrates;
        public FloatValue FlowCalibratesLimits;
 
-
         public SPCalibrateThm()
         {
             CalibrateMode = new IntValue(0, 4);

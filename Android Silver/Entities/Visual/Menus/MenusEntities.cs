@@ -566,7 +566,7 @@ namespace Android_Silver.Entities.Visual.Menus
 
             #region Калибровка
             strSets = new ObservableCollection<StrSet>();
-            pickVals = new List<string>() { "Нет", "ПВ", "П", "В" };
+            pickVals = new List<string>() { "Нет", "ПВ", "П", "В","Тест" };
             sSet = new StrSet(_fbEntities.SupCalibrateThm.CalibrateMode.Min, _fbEntities.SupCalibrateThm.CalibrateMode.Max, "Режим калибровки",
             isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: _fbEntities.SupCalibrateThm.CalibrateMode.NumChr, pickVals);
             strSets.Add(sSet);
