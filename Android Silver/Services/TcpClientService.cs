@@ -41,6 +41,8 @@ namespace Android_Silver.Services
 
         public Action ClientDisconnected { get; set; }
 
+
+
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -202,34 +204,34 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            messToClient = "103,054\r\n";
+                            messToClient = "0103,054\r\n";
                         }
                         break;
                     case MessageStates.VacMessage:
                         {
-                            messToClient = "167,016\r\n";
+                            messToClient = "0167,016\r\n";
                         }
                         break;
                     case MessageStates.ShedMessage1:
                         {
-                            messToClient = "183,056\r\n";
+                            messToClient = "0183,056\r\n";
                         }
                         break;
                     case MessageStates.ShedMessage2:
                         {
-                            messToClient = "239,056\r\n";
+                            messToClient = "0239,056\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "300,090\r\n";
+                            messToClient = "0300,090\r\n";
                             //messToClient = "300,050\r\n";
-  
+
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "390,088\r\n";
+                            messToClient = "0390,088\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
@@ -2059,27 +2061,27 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Проверка того, что данные записаны
-                case 500:
+                case 5000:
                     {
                         //_fbs.SP1Count += 1;
                     }
                     break;
-                case 501:
+                case 5001:
                     {
                         // _fbs.SP2Count += 1;
                     }
                     break;
-                case 502:
+                case 5002:
                     {
                         // _fbs.SP3Count += 1;
                     }
                     break;
-                case 503:
+                case 5003:
                     {
                         //_fbs.SPFCount += 1;
                     }
                     break;
-                case 508:
+                case 5008:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2088,7 +2090,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 509:
+                case 5009:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2098,7 +2100,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 #region Минимальный режим
-                case 510:
+                case 5010:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2106,7 +2108,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 511:
+                case 5011:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2114,7 +2116,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 512:
+                case 5012:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2122,7 +2124,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 513:
+                case 5013:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2132,7 +2134,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Нормальный режим
-                case 514:
+                case 5014:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2140,7 +2142,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 515:
+                case 5015:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2148,7 +2150,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 516:
+                case 5016:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2156,7 +2158,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 517:
+                case 5017:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2166,7 +2168,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Максимальный режим
-                case 518:
+                case 5018:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2174,7 +2176,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 519:
+                case 5019:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2182,7 +2184,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 520:
+                case 5020:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2190,7 +2192,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 521:
+                case 5021:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2200,7 +2202,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Режим кухни
-                case 522:
+                case 5022:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2208,7 +2210,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 523:
+                case 5023:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2216,7 +2218,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 524:
+                case 5024:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2224,7 +2226,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 525:
+                case 5025:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2234,7 +2236,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Режим отпуска
-                case 526:
+                case 5026:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2242,7 +2244,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 527:
+                case 5027:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2250,7 +2252,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 528:
+                case 5028:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2258,7 +2260,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 529:
+                case 5029:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2268,7 +2270,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Специальный режим
-                case 530:
+                case 5030:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2276,7 +2278,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 531:
+                case 5031:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2284,7 +2286,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 532:
+                case 5032:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2292,7 +2294,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 533:
+                case 5033:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2302,7 +2304,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 //Режим кухни.
-                case 534:
+                case 5034:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2311,7 +2313,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 537:
+                case 5037:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2320,95 +2322,95 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Получение режима 1
-                case 538:
+                case 5038:
                     {
                         GetTModeDay(2, 0, resp.ValueString);
                     }
                     break;
-                case 539:
+                case 5039:
                     {
                         GetTModeHours(2, 0, resp.ValueString);
                     }
                     break;
-                case 540:
+                case 5040:
                     {
                         GetTModeMinutes(2, 0, resp.ValueString);
                     }
                     break;
-                case 541:
+                case 5041:
                     {
                         GetTModeCMode1(2, 0, resp.ValueString);
                     }
                     break;
                 //Получение режима 2
-                case 542:
+                case 5042:
                     {
                         GetTModeDay(2, 1, resp.ValueString);
                     }
                     break;
-                case 543:
+                case 5043:
                     {
                         GetTModeHours(2, 1, resp.ValueString);
                     }
                     break;
-                case 544:
+                case 5044:
                     {
                         GetTModeMinutes(2, 1, resp.ValueString);
                     }
                     break;
-                case 545:
+                case 5045:
                     {
                         GetTModeCMode1(2, 1, resp.ValueString);
                     }
                     break;
                 //Получение режима 3
-                case 546:
+                case 5046:
                     {
                         GetTModeDay(2, 2, resp.ValueString);
                     }
                     break;
-                case 547:
+                case 5047:
                     {
                         GetTModeHours(2, 2, resp.ValueString);
                     }
                     break;
-                case 548:
+                case 5048:
                     {
                         GetTModeMinutes(2, 2, resp.ValueString);
                     }
                     break;
-                case 549:
+                case 5049:
                     {
                         GetTModeCMode1(2, 2, resp.ValueString);
                     }
                     break;
                 //Получение режима 4
-                case 550:
+                case 5050:
                     {
                         GetTModeDay(2, 3, resp.ValueString);
                     }
                     break;
-                case 551:
+                case 5051:
                     {
                         GetTModeHours(2, 3, resp.ValueString);
                     }
                     break;
-                case 552:
+                case 5052:
                     {
                         GetTModeMinutes(2, 3, resp.ValueString);
                     }
                     break;
-                case 553:
+                case 5053:
                     {
                         GetTModeCMode1(2, 3, resp.ValueString);
                     }
                     break;
-                case 554:
+                case 5054:
                     {
                         GetTModeCMode1(4, 0, resp.ValueString);
                     }
                     break;
-                case 555:
+                case 5055:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2416,7 +2418,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 556:
+                case 5056:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2428,7 +2430,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 557:
+                case 5057:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2441,7 +2443,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий год
-                case 558:
+                case 5058:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2453,7 +2455,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий месяц
-                case 559:
+                case 5059:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2465,7 +2467,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий день
-                case 560:
+                case 5060:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2477,7 +2479,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий час
-                case 561:
+                case 5061:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2489,7 +2491,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущая минута
-                case 562:
+                case 5062:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2502,7 +2504,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //День недели
-                case 563:
+                case 5063:
                     {
                         //День недели77777
                         //if (ushort.TryParse(resp.ValueString, out ushort val))
@@ -2515,7 +2517,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Данные о режиме отпуска
-                case 567:
+                case 5067:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2524,7 +2526,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 568:
+                case 5068:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2533,7 +2535,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 569:
+                case 5069:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2542,13 +2544,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 570:
+                case 5070:
                     {
                         GetTModeCMode1(2, 0, resp.ValueString);
                     }
                     break;
                 //Строка 2
-                case 571:
+                case 5071:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2557,7 +2559,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 572:
+                case 5072:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2566,7 +2568,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 573:
+                case 5073:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2575,13 +2577,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 574:
+                case 5074:
                     {
                         GetTModeCMode1(2, 1, resp.ValueString);
                     }
                     break;
                 //Строка 3
-                case 575:
+                case 5075:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2590,7 +2592,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 576:
+                case 5076:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2599,7 +2601,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 577:
+                case 5077:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2608,14 +2610,14 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 578:
+                case 5078:
                     {
                         GetTModeCMode1(2, 2, resp.ValueString);
 
                     }
                     break;
                 //Строка 4
-                case 579:
+                case 5079:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2624,7 +2626,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 580:
+                case 5080:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2633,7 +2635,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 581:
+                case 5081:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2642,7 +2644,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 582:
+                case 5082:
                     {
                         GetTModeCMode1(2, 3, resp.ValueString);
                         if (_activePageEntities.IsLoadingPage)
@@ -2654,7 +2656,7 @@ namespace Android_Silver.Services
                     break;
                 //Расписание
                 //Строка 1
-                case 583:
+                case 5083:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2663,7 +2665,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 584:
+                case 5084:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2672,7 +2674,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 585:
+                case 5085:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2681,13 +2683,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 586:
+                case 5086:
                     {
                         GetTModeCMode1(3, 0, resp.ValueString);
                     }
                     break;
                 //Строка 2
-                case 587:
+                case 5087:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2696,7 +2698,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 588:
+                case 5088:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2705,7 +2707,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 589:
+                case 5089:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2714,13 +2716,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 590:
+                case 5090:
                     {
                         GetTModeCMode1(3, 1, resp.ValueString);
                     }
                     break;
                 //Строка 3
-                case 591:
+                case 5091:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2729,7 +2731,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 592:
+                case 5092:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2738,7 +2740,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 593:
+                case 5093:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2747,13 +2749,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 594:
+                case 5094:
                     {
                         GetTModeCMode1(3, 2, resp.ValueString);
                     }
                     break;
                 //Строка 4
-                case 595:
+                case 5095:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2762,7 +2764,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 596:
+                case 5096:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2771,7 +2773,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 597:
+                case 5097:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2780,13 +2782,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 598:
+                case 5098:
                     {
                         GetTModeCMode1(3, 3, resp.ValueString);
                     }
                     break;
                 //Строка 5
-                case 599:
+                case 5099:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2795,7 +2797,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 600:
+                case 5100:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2804,7 +2806,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 601:
+                case 5101:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2813,13 +2815,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 602:
+                case 5102:
                     {
                         GetTModeCMode1(3, 4, resp.ValueString);
                     }
                     break;
                 //Строка 6
-                case 603:
+                case 5103:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2828,7 +2830,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 604:
+                case 5104:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2837,7 +2839,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 605:
+                case 5105:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2846,13 +2848,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 606:
+                case 5106:
                     {
                         GetTModeCMode1(3, 5, resp.ValueString);
                     }
                     break;
                 //Строка 7
-                case 607:
+                case 5107:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2861,7 +2863,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 608:
+                case 5108:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2870,7 +2872,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 609:
+                case 5109:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2879,13 +2881,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 610:
+                case 5110:
                     {
                         GetTModeCMode1(3, 6, resp.ValueString);
                     }
                     break;
                 //Строка 8
-                case 611:
+                case 5111:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2894,7 +2896,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 612:
+                case 5112:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2903,7 +2905,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 613:
+                case 5113:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2912,13 +2914,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 614:
+                case 5114:
                     {
                         GetTModeCMode1(3, 7, resp.ValueString);
                     }
                     break;
                 //Строка 9
-                case 615:
+                case 5115:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2927,7 +2929,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 616:
+                case 5116:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2936,7 +2938,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 617:
+                case 5117:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2945,13 +2947,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 618:
+                case 5118:
                     {
                         GetTModeCMode1(3, 8, resp.ValueString);
                     }
                     break;
                 //Строка 10
-                case 619:
+                case 5119:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2960,7 +2962,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 620:
+                case 5120:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2969,7 +2971,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 621:
+                case 5121:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2978,13 +2980,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 622:
+                case 5122:
                     {
                         GetTModeCMode1(3, 9, resp.ValueString);
                     }
                     break;
                 //Строка 11
-                case 623:
+                case 5123:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2993,7 +2995,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 624:
+                case 5124:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3002,7 +3004,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 625:
+                case 5125:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3011,13 +3013,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 626:
+                case 5126:
                     {
                         GetTModeCMode1(3, 10, resp.ValueString);
                     }
                     break;
                 //Строка 12
-                case 627:
+                case 5127:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3026,7 +3028,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 628:
+                case 5128:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3035,7 +3037,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 629:
+                case 5129:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3044,13 +3046,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 630:
+                case 5130:
                     {
                         GetTModeCMode1(3, 11, resp.ValueString);
                     }
                     break;
                 //Строка 13
-                case 631:
+                case 5131:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3059,7 +3061,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 632:
+                case 5132:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3068,7 +3070,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 633:
+                case 5133:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3077,13 +3079,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 634:
+                case 5134:
                     {
                         GetTModeCMode1(3, 12, resp.ValueString);
                     }
                     break;
                 //Строка 14
-                case 635:
+                case 5135:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3092,7 +3094,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 636:
+                case 5136:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3101,7 +3103,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 637:
+                case 5137:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3110,7 +3112,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 638:
+                case 5138:
                     {
                         GetTModeCMode1(3, 13, resp.ValueString);
                         if (_activePageEntities.IsLoadingPage)
@@ -3121,7 +3123,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Строка 15
-                case 639:
+                case 5139:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3130,7 +3132,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 640:
+                case 5140:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3139,7 +3141,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 641:
+                case 5141:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3148,13 +3150,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 642:
+                case 5142:
                     {
                         GetTModeCMode1(3, 14, resp.ValueString);
                     }
                     break;
                 //Строка 16
-                case 643:
+                case 5143:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3163,7 +3165,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 644:
+                case 5144:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3172,7 +3174,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 645:
+                case 5145:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3181,13 +3183,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 646:
+                case 5146:
                     {
                         GetTModeCMode1(3, 15, resp.ValueString);
                     }
                     break;
                 //Строка 17
-                case 647:
+                case 5147:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3196,7 +3198,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 648:
+                case 5148:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3205,7 +3207,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 649:
+                case 5149:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3214,13 +3216,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 650:
+                case 5150:
                     {
                         GetTModeCMode1(3, 16, resp.ValueString);
                     }
                     break;
                 //Строка 18
-                case 651:
+                case 5151:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3229,7 +3231,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 652:
+                case 5152:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3238,7 +3240,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 653:
+                case 5153:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3247,13 +3249,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 654:
+                case 5154:
                     {
                         GetTModeCMode1(3, 17, resp.ValueString);
                     }
                     break;
                 //Строка 19
-                case 655:
+                case 5155:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3262,7 +3264,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 656:
+                case 5156:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3271,7 +3273,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 657:
+                case 5157:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3280,13 +3282,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 658:
+                case 5158:
                     {
                         GetTModeCMode1(3, 18, resp.ValueString);
                     }
                     break;
                 //Строка 20
-                case 659:
+                case 5159:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3295,7 +3297,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 660:
+                case 5160:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3304,7 +3306,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 661:
+                case 5161:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3313,13 +3315,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 662:
+                case 5162:
                     {
                         GetTModeCMode1(3, 19, resp.ValueString);
                     }
                     break;
                 //Строка 21
-                case 663:
+                case 5163:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3328,7 +3330,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 664:
+                case 5164:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3337,7 +3339,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 665:
+                case 5165:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3346,13 +3348,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 666:
+                case 5166:
                     {
                         GetTModeCMode1(3, 20, resp.ValueString);
                     }
                     break;
                 //Строка 22
-                case 667:
+                case 5167:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3361,7 +3363,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 668:
+                case 5168:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3370,7 +3372,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 669:
+                case 5169:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3379,13 +3381,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 670:
+                case 5170:
                     {
                         GetTModeCMode1(3, 21, resp.ValueString);
                     }
                     break;
                 //Строка 23
-                case 671:
+                case 5171:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3394,7 +3396,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 672:
+                case 5172:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3403,7 +3405,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 673:
+                case 5173:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3412,13 +3414,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 674:
+                case 5174:
                     {
                         GetTModeCMode1(3, 22, resp.ValueString);
                     }
                     break;
                 //Строка 24
-                case 675:
+                case 5175:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3427,7 +3429,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 676:
+                case 5176:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3436,7 +3438,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 677:
+                case 5177:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3445,13 +3447,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 678:
+                case 5178:
                     {
                         GetTModeCMode1(3, 23, resp.ValueString);
                     }
                     break;
                 //Строка 25
-                case 679:
+                case 5179:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3460,7 +3462,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 680:
+                case 5180:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3469,7 +3471,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 681:
+                case 5181:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3478,13 +3480,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 682:
+                case 5182:
                     {
                         GetTModeCMode1(3, 24, resp.ValueString);
                     }
                     break;
                 //Строка 26
-                case 683:
+                case 5183:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3493,7 +3495,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 684:
+                case 5184:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3502,7 +3504,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 685:
+                case 5185:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3511,13 +3513,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 686:
+                case 5186:
                     {
                         GetTModeCMode1(3, 25, resp.ValueString);
                     }
                     break;
                 //Строка 27
-                case 687:
+                case 5187:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3526,7 +3528,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 688:
+                case 5188:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3535,7 +3537,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 689:
+                case 5189:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3544,13 +3546,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 690:
+                case 5190:
                     {
                         GetTModeCMode1(3, 26, resp.ValueString);
                     }
                     break;
                 //Строка 28
-                case 691:
+                case 5191:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3565,7 +3567,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 692:
+                case 5192:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3575,7 +3577,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 693:
+                case 5193:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3584,7 +3586,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 694:
+                case 5194:
                     {
                         GetTModeCMode1(3, 27, resp.ValueString);
 
@@ -3593,7 +3595,7 @@ namespace Android_Silver.Services
 
             }
             //Общие уставки
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -3606,7 +3608,7 @@ namespace Android_Silver.Services
                 return;
             }
 
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 1)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 1)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3618,7 +3620,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 2)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 2)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3632,7 +3634,7 @@ namespace Android_Silver.Services
                 return;
             }
 
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 3)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 3)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3645,7 +3647,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Задержка авари по темп(пока 0)
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 4)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 4)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3658,7 +3660,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Режим времени года
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 5)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 5)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3671,7 +3673,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Уставка режима года
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 6)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 6)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3684,7 +3686,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Гистерезис режима года
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 7)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 7)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3697,7 +3699,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Авторестарт
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 8)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 8)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3711,7 +3713,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Автосброс пожара
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 9)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 9)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3725,7 +3727,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Сила тока уф светодиодов
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 400 + 10)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + _menusEntities.WriteOffset + 10)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3738,7 +3740,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 11 + 400)
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -3755,7 +3757,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Заслонка
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3766,7 +3768,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 1)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 1)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3779,7 +3781,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 2)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 2)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3791,7 +3793,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 3)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 3)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3802,7 +3804,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 4)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 4)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3813,7 +3815,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 5)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 5)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3824,7 +3826,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 6)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 6)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3835,7 +3837,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 7)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 7)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3846,7 +3848,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 8)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 8)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3857,7 +3859,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 9)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 9)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3868,7 +3870,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 10)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 10)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3879,7 +3881,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 11)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 11)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3890,7 +3892,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 12)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 12)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3901,7 +3903,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 13)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 13)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3912,7 +3914,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 14)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 14)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3923,7 +3925,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 15)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 15)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3934,7 +3936,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 16 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 16)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 16 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 16)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3945,7 +3947,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 17 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 17)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 17 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 17)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3957,7 +3959,7 @@ namespace Android_Silver.Services
                 return;
             }
 
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 18 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 18)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 18 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 18)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3968,7 +3970,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 19 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 19)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 19 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 19)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3979,7 +3981,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 20 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 20)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 20 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 20)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -3991,7 +3993,7 @@ namespace Android_Silver.Services
 
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 21 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 21)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 21 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 21)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4002,7 +4004,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 22 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 400 + 22)
+            if (resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 22 || resp.Tag == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 22)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4018,7 +4020,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Настройки вентиляторов
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4029,7 +4031,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4040,7 +4042,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4051,7 +4053,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4062,7 +4064,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4074,7 +4076,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4086,7 +4088,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4098,7 +4100,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4110,7 +4112,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 8 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4122,7 +4124,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 9 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4134,7 +4136,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 10 + 400)
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4150,7 +4152,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Водяной нагреватель
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4162,7 +4164,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4174,7 +4176,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4186,7 +4188,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4198,7 +4200,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4210,7 +4212,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4222,7 +4224,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4234,7 +4236,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4245,7 +4247,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 8 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4256,7 +4258,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 9 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4268,7 +4270,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 10 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4281,11 +4283,11 @@ namespace Android_Silver.Services
                 return;
             }
             //2 раза, потом дополнить
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 11 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
             {
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 12 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4297,7 +4299,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 13 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4308,7 +4310,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 14 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4320,7 +4322,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 15 + 400)
+            if (resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_WH_SETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4337,7 +4339,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Электрический нагреватель.  
-            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4349,7 +4351,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4361,7 +4363,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4373,7 +4375,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4385,7 +4387,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_EH_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4402,7 +4404,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Фреоновый охладитель
-            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4414,7 +4416,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4426,7 +4428,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4438,7 +4440,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4450,7 +4452,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4462,7 +4464,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_FREON_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4479,7 +4481,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Увлажнитель
-            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4491,7 +4493,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4503,7 +4505,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4515,7 +4517,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4527,7 +4529,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4539,7 +4541,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_HUM_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4556,7 +4558,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Рекуператор
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4568,7 +4570,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4580,7 +4582,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4592,7 +4594,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4604,7 +4606,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4616,7 +4618,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4628,7 +4630,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4640,7 +4642,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4652,7 +4654,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 8 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4664,7 +4666,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 9 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4676,7 +4678,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 10 + 400)
+            if (resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4693,7 +4695,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Датчики
-            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4705,7 +4707,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4717,7 +4719,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4729,7 +4731,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4741,7 +4743,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_SENS_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4758,7 +4760,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Конфигурация
-            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4770,7 +4772,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4782,7 +4784,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4794,7 +4796,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4806,7 +4808,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4818,7 +4820,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4830,7 +4832,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4842,7 +4844,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4860,7 +4862,7 @@ namespace Android_Silver.Services
             }
 
             //Термоанемометры
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4869,7 +4871,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 400 + 1)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + _menusEntities.WriteOffset + 1)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4880,7 +4882,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4892,7 +4894,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4904,7 +4906,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -4923,7 +4925,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4931,7 +4933,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4939,7 +4941,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -4947,7 +4949,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4955,7 +4957,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4963,7 +4965,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4971,7 +4973,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4979,7 +4981,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 + 400)
+            if (resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -4992,7 +4994,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Работа рекуператора Modbus
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5004,7 +5006,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5016,7 +5018,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5028,7 +5030,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5040,7 +5042,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5052,7 +5054,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5070,7 +5072,7 @@ namespace Android_Silver.Services
                 return;
             }
 
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5082,7 +5084,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5093,7 +5095,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 8 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5105,7 +5107,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 9 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5117,7 +5119,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 10 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -5129,7 +5131,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 11 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
@@ -5141,7 +5143,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 12 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5154,7 +5156,7 @@ namespace Android_Silver.Services
                 return;
             }
 
-            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 13 + 400)
+            if (resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
@@ -5171,7 +5173,7 @@ namespace Android_Silver.Services
                 return;
             }
 
-            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (byte.TryParse(resp.ValueString, out byte val))
                 {
@@ -5182,7 +5184,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (byte.TryParse(resp.ValueString, out byte val))
                 {
@@ -5193,7 +5195,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (byte.TryParse(resp.ValueString, out byte val))
                 {
@@ -5204,7 +5206,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 400 + 3)
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + _menusEntities.WriteOffset + 3)
             {
                 if (byte.TryParse(resp.ValueString, out byte val))
                 {
@@ -5215,7 +5217,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (byte.TryParse(resp.ValueString, out byte val))
                 {
@@ -5226,7 +5228,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (byte.TryParse(resp.ValueString, out byte val))
                 {
@@ -5237,7 +5239,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (byte.TryParse(resp.ValueString, out byte val))
                 {
@@ -5248,7 +5250,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 if (byte.TryParse(resp.ValueString, out byte val))
                 {
@@ -5264,7 +5266,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Калибровка термоанемометров.
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5274,7 +5276,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5283,7 +5285,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5297,7 +5299,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5307,7 +5309,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5317,7 +5319,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5325,7 +5327,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5333,7 +5335,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5345,7 +5347,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5357,7 +5359,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5369,7 +5371,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5381,7 +5383,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5393,7 +5395,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5404,7 +5406,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5415,7 +5417,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5426,7 +5428,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5437,7 +5439,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5448,7 +5450,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5459,7 +5461,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5470,7 +5472,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5481,7 +5483,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5492,7 +5494,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5503,7 +5505,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5514,7 +5516,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5525,7 +5527,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5536,7 +5538,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5549,7 +5551,7 @@ namespace Android_Silver.Services
             }
             //***************************************************************************************************************************
             //Калибровка вытяжек.
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5560,7 +5562,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5571,7 +5573,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5582,7 +5584,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5593,7 +5595,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5604,7 +5606,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5615,7 +5617,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5626,7 +5628,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5637,7 +5639,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5648,7 +5650,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5659,7 +5661,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5670,7 +5672,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 37 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 37 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 37 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 37 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5681,7 +5683,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 38 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 38 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 38 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 38 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5692,7 +5694,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 39 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 39 + 400)
+            if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 39 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 39 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -5812,14 +5814,14 @@ namespace Android_Silver.Services
         {
             int specActive = val ? 1 : 0;
             int[] vals = { specActive };
-            SetCommandToServer(556, vals);
+            SetCommandToServer(156 + _menusEntities.WriteOffset, vals);
         }
 
         private void MFloorCallback(bool val)
         {
             int mfActive = val ? 1 : 0;
             int[] vals = { mfActive };
-            SetCommandToServer(557, vals);
+            SetCommandToServer(157 + _menusEntities.WriteOffset, vals);
         }
         #endregion
 
@@ -5835,7 +5837,6 @@ namespace Android_Silver.Services
             }
             return false;
         }
-
 
         private bool GetIntValueResult(int inputVal, IntValue intVal)
         {

@@ -57,7 +57,6 @@ namespace Android_Silver.ViewModels
         #endregion
 
         private string _cString;
-
         public string CString
         {
             get { return _cString; }
@@ -92,7 +91,6 @@ namespace Android_Silver.ViewModels
         private FileSystemService _fileSystemService;
         public ServicePageViewModel()
         {
-
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CActivePagesEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();

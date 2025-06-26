@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace Android_Silver.Entities.FBEntities
 {
     public class FBs
-    { 
+    {
         public Alarms CAlarms { get; set; }
-        public HumiditySPS CHumiditySPS {get;set;}
+        public HumiditySPS CHumiditySPS { get; set; }
         public FilterVals CFilterVals { get; set; }
         public OtherSettings OtherSettings { get; set; }
         public Time CTime { get; set; }
@@ -39,10 +39,29 @@ namespace Android_Silver.Entities.FBEntities
         {
             CAlarms = new Alarms();
             CHumiditySPS = new HumiditySPS();
-            CFilterVals =new FilterVals();
+            CFilterVals = new FilterVals();
             OtherSettings = new OtherSettings();
             CTime = new Time();
             CRecup = new Recup();
+            CRecup.RecProfiles = new List<RecPrfofile>
+            {
+                new RecPrfofile(0, 2, 1, 4, 0.03f),
+                new RecPrfofile(1, 2, 1, 4, 0.03f),
+                new RecPrfofile(2, 2, 1, 4, 0.03f),
+                new RecPrfofile(3, 2, 1, 4, 0.03f),
+                new RecPrfofile(4, 2, 1, 4, 0.03f),
+                new RecPrfofile(5, 2, 1, 4, 0.03f),
+                new RecPrfofile(6, 2, 1.2f, 4, 0.03f),
+                new RecPrfofile(7, 2, 1.3f, 4, 0.03f),
+                new RecPrfofile(8, 2, 1.4f, 4, 0.03f),
+                new RecPrfofile(9, 2, 1.6f, 4, 0.03f),
+            };
+
+
+
+
+
+
             CSensors = new Sensors();
             CFans = new Fans();
             CCommonSetPoints = new CommonSetPoints();
@@ -52,9 +71,9 @@ namespace Android_Silver.Entities.FBEntities
             CEHSetPoints = new EHSetPoints();
             CFreonCoolerSP = new FreonCoolerSP();
             ThmSps = new ThermoanemometersSPS();
-            MbRecSPs=new MBRecupSetPoints();
-            UFLeds=new UFLeds();
-            SupCalibrateThm =new SPCalibrateThm();
+            MbRecSPs = new MBRecupSetPoints();
+            UFLeds = new UFLeds();
+            SupCalibrateThm = new SPCalibrateThm();
             ExhaustCalibrateThm = new SPCalibrateThm();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
+using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 
 using System;
@@ -16,7 +17,7 @@ namespace Android_Silver.ViewModels
     public class KitchenTimerViewModel : BindableBase
     {
         public PicturesSet CPictureSet { get; set; }
-
+        MenusEntities _menuesEntities { get; set; }
 
 
         private int _minutes;
@@ -53,6 +54,7 @@ namespace Android_Silver.ViewModels
             _tcpClientService = DIContainer.Resolve<TcpClientService>();
             _modesEntities=DIContainer.Resolve<ModesEntities>();
             Minutes = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute;
+            _menuesEntities=DIContainer.Resolve<MenusEntities>();
         }
 
         async void ExecuteHomeCommand(object obj)
@@ -92,7 +94,7 @@ namespace Android_Silver.ViewModels
         async void ExecuteOk(object obj)
         {
             int[] values = { Minutes };
-            _tcpClientService.SetCommandToServer(534, values);
+            _tcpClientService.SetCommandToServer(134+ _menuesEntities.WriteOffset, values);
             await Shell.Current.GoToAsync("mainPage");
         }
     }
