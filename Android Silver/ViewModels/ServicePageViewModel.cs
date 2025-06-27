@@ -310,6 +310,11 @@ namespace Android_Silver.ViewModels
                         SendMItemSettings(CMenusEntities.StartMenuCollection[13]);
                     }
                     break;
+                case SActivePageState.RecupCurrentPage:
+                    {
+                        SendMItemSettings(CMenusEntities.StartMenuCollection[14]);
+                    }
+                    break;
             }
             CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }

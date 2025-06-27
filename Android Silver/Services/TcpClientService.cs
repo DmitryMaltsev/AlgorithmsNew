@@ -224,14 +224,14 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "0300,090\r\n";
+                            messToClient = "0300,110\r\n";
                             //messToClient = "300,050\r\n";
 
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "0390,088\r\n";
+                            messToClient = "410,118\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
@@ -5709,6 +5709,333 @@ namespace Android_Silver.Services
                 }
                 return;
             }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].Ki);
+                }
+                return;
+            }
+
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+4 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].Ki);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].Ki);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].Ki);
+                }
+                return;
+            }
+
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 16 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 16 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 17 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 17 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 18 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 18 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 19 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 19 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].Ki);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 20 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 20 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 21 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 21 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 22 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 22 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 23 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 23 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].Ki);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 24 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 24 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 25 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 25 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 26 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 26 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 27 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 27 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].Ki);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 28 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 28 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 29 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 29 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 30 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 30 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 31 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 31 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].Ki);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 32 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 32 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 33 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 33 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 34 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 34 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 35 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 35 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].Ki);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 36 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 36 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].I_Start);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 37 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 37 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].I_Cont);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 38 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 38 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].Kp);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 39 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 39 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].Ki);
+                }
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
+                return;
+            }
+
         }
 
         private bool StringToFloat(string val, int precision, ref float result)

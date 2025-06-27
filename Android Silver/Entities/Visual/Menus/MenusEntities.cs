@@ -187,7 +187,8 @@ namespace Android_Silver.Entities.Visual.Menus
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Калибровка термоанемоетров", isVisible: true, _pictureSet.BaseSettings1ButCollection[13], SActivePageState.ThmCalibratePage, id: 14, startAddress: ETH_CALIBRATE_THM_ADDR + WriteOffset);
             StartMenuCollection.Add(mItem);
-            mItem = new MItem("Настройка профилей шаг мотора", isVisible: true, _pictureSet.BaseSettings1ButCollection[14], SActivePageState.ThmCalibratePage, id: 15, startAddress: ETH_RECUP_CURRENTSETTINGS_ADDR + WriteOffset);
+            mItem = new MItem("Настройка профилей шаг мотора", isVisible: true, _pictureSet.BaseSettings1ButCollection[14], SActivePageState.RecupCurrentPage, id: 15, startAddress: ETH_RECUP_CURRENTSETTINGS_ADDR + WriteOffset);
+            StartMenuCollection.Add(mItem);
             #endregion
 
             #region Конфигурация
@@ -732,7 +733,6 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             StartMenuCollection[13].StrSetsCollection = strSets;
             #endregion
-
             #region Профили шагового мотора
             strSets = new ObservableCollection<StrSet>();
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[0].I_Start.Min, _fbEntities.CRecup.RecProfiles[0].I_Start.Max,
@@ -753,158 +753,157 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[1].I_Start.Min, _fbEntities.CRecup.RecProfiles[1].I_Start.Max,
-            "Сила тока запуска профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока запуска профиль 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
              valScale: _fbEntities.CRecup.RecProfiles[1].I_Start.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[1].I_Cont.Min, _fbEntities.CRecup.RecProfiles[1].I_Cont.Max,
-            "Сила тока работы профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока работы профиль 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                  valScale: _fbEntities.CRecup.RecProfiles[1].I_Cont.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[1].Kp.Min, _fbEntities.CRecup.RecProfiles[1].Kp.Max,
-            "P коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "P коэф профиль 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[1].Kp.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[1].Ki.Min, _fbEntities.CRecup.RecProfiles[1].Ki.Max,
-            "I коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "I коэф профиль 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[1].Ki.NumChr, pickVals);
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[2].I_Start.Min, _fbEntities.CRecup.RecProfiles[2].I_Start.Max,
-            "Сила тока запуска профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока запуска профиль 3", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: _fbEntities.CRecup.RecProfiles[2].I_Start.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[2].I_Cont.Min, _fbEntities.CRecup.RecProfiles[2].I_Cont.Max,
-            "Сила тока работы профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока работы профиль 3", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                  valScale: _fbEntities.CRecup.RecProfiles[2].I_Cont.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[2].Kp.Min, _fbEntities.CRecup.RecProfiles[2].Kp.Max,
-            "P коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "P коэф профиль 3", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[2].Kp.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[2].Ki.Min, _fbEntities.CRecup.RecProfiles[2].Ki.Max,
-            "I коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "I коэф профиль 3", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[2].Ki.NumChr, pickVals);
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[3].I_Start.Min, _fbEntities.CRecup.RecProfiles[3].I_Start.Max,
-            "Сила тока запуска профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока запуска профиль 4", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: _fbEntities.CRecup.RecProfiles[3].I_Start.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[3].I_Cont.Min, _fbEntities.CRecup.RecProfiles[3].I_Cont.Max,
-            "Сила тока работы профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока работы профиль 4", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                  valScale: _fbEntities.CRecup.RecProfiles[3].I_Cont.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[3].Kp.Min, _fbEntities.CRecup.RecProfiles[3].Kp.Max,
-            "P коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "P коэф профиль 4", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[3].Kp.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[3].Ki.Min, _fbEntities.CRecup.RecProfiles[3].Ki.Max,
-            "I коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "I коэф профиль 4", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[3].Ki.NumChr, pickVals);
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[4].I_Start.Min, _fbEntities.CRecup.RecProfiles[4].I_Start.Max,
-            "Сила тока запуска профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока запуска профиль 5", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: _fbEntities.CRecup.RecProfiles[4].I_Start.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[4].I_Cont.Min, _fbEntities.CRecup.RecProfiles[4].I_Cont.Max,
-            "Сила тока работы профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока работы профиль 5", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                  valScale: _fbEntities.CRecup.RecProfiles[4].I_Cont.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[4].Kp.Min, _fbEntities.CRecup.RecProfiles[4].Kp.Max,
-            "P коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "P коэф профиль 5", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[4].Kp.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[4].Ki.Min, _fbEntities.CRecup.RecProfiles[4].Ki.Max,
-            "I коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "I коэф профиль 5", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[4].Ki.NumChr, pickVals);
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[5].I_Start.Min, _fbEntities.CRecup.RecProfiles[5].I_Start.Max,
-            "Сила тока запуска профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока запуска профиль 6", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: _fbEntities.CRecup.RecProfiles[5].I_Start.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[5].I_Cont.Min, _fbEntities.CRecup.RecProfiles[5].I_Cont.Max,
-            "Сила тока работы профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока работы профиль 6", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                  valScale: _fbEntities.CRecup.RecProfiles[5].I_Cont.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[5].Kp.Min, _fbEntities.CRecup.RecProfiles[5].Kp.Max,
-            "P коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "P коэф профиль 6", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[5].Kp.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[5].Ki.Min, _fbEntities.CRecup.RecProfiles[5].Ki.Max,
-            "I коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "I коэф профиль 6", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[5].Ki.NumChr, pickVals);
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[6].I_Start.Min, _fbEntities.CRecup.RecProfiles[6].I_Start.Max,
-            "Сила тока запуска профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока запуска профиль 7", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: _fbEntities.CRecup.RecProfiles[6].I_Start.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[6].I_Cont.Min, _fbEntities.CRecup.RecProfiles[6].I_Cont.Max,
-            "Сила тока работы профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока работы профиль 7", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                  valScale: _fbEntities.CRecup.RecProfiles[6].I_Cont.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[6].Kp.Min, _fbEntities.CRecup.RecProfiles[6].Kp.Max,
-            "P коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "P коэф профиль 7", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[6].Kp.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[6].Ki.Min, _fbEntities.CRecup.RecProfiles[6].Ki.Max,
-            "I коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "I коэф профиль 7", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[6].Ki.NumChr, pickVals);
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[7].I_Start.Min, _fbEntities.CRecup.RecProfiles[7].I_Start.Max,
-            "Сила тока запуска профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока запуска профиль 8", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: _fbEntities.CRecup.RecProfiles[7].I_Start.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[7].I_Cont.Min, _fbEntities.CRecup.RecProfiles[7].I_Cont.Max,
-            "Сила тока работы профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока работы профиль 8", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                  valScale: _fbEntities.CRecup.RecProfiles[7].I_Cont.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[7].Kp.Min, _fbEntities.CRecup.RecProfiles[7].Kp.Max,
-            "P коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "P коэф профиль 8", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[7].Kp.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[7].Ki.Min, _fbEntities.CRecup.RecProfiles[7].Ki.Max,
-            "I коэф профиль 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "I коэф профиль 8", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[7].Ki.NumChr, pickVals);
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[8].I_Start.Min, _fbEntities.CRecup.RecProfiles[8].I_Start.Max,
-            "Сила тока запуска профиль 8", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока запуска профиль 9", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: _fbEntities.CRecup.RecProfiles[8].I_Start.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[8].I_Cont.Min, _fbEntities.CRecup.RecProfiles[8].I_Cont.Max,
-            "Сила тока работы профиль 8", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока работы профиль 9", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                  valScale: _fbEntities.CRecup.RecProfiles[8].I_Cont.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[8].Kp.Min, _fbEntities.CRecup.RecProfiles[8].Kp.Max,
-            "P коэф профиль 8", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "P коэф профиль 9", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[8].Kp.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[8].Ki.Min, _fbEntities.CRecup.RecProfiles[8].Ki.Max,
-            "I коэф профиль 8", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "I коэф профиль 9", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[8].Ki.NumChr, pickVals);
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[9].I_Start.Min, _fbEntities.CRecup.RecProfiles[9].I_Start.Max,
-               "Сила тока запуска профиль 9", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+               "Сила тока запуска профиль 10", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
              valScale: _fbEntities.CRecup.RecProfiles[9].I_Start.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[9].I_Cont.Min, _fbEntities.CRecup.RecProfiles[9].I_Cont.Max,
-            "Сила тока работы профиль 9", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "Сила тока работы профиль 10", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                  valScale: _fbEntities.CRecup.RecProfiles[9].I_Cont.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[9].Kp.Min, _fbEntities.CRecup.RecProfiles[9].Kp.Max,
-            "P коэф профиль 9", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "P коэф профиль 10", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[9].Kp.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.RecProfiles[9].Ki.Min, _fbEntities.CRecup.RecProfiles[9].Ki.Max,
-            "I коэф профиль 9", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            "I коэф профиль 10", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                 valScale: _fbEntities.CRecup.RecProfiles[9].Ki.NumChr, pickVals);
             strSets.Add(sSet);
-
             StartMenuCollection[14].StrSetsCollection = strSets;
 
             #endregion

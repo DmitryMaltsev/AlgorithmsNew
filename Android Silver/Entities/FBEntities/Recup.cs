@@ -11,20 +11,21 @@ using Unity.Injection;
 
 namespace Android_Silver.Entities.FBEntities
 {
-    public class Recup:BindableBase
+    public class Recup : BindableBase
     {
-		private int _efficiency;
+        private int _efficiency;
 
-		public int Efficiency
-		{
-			get { return _efficiency; }
-			set {
-				_efficiency = value;
-				OnPropertyChanged(nameof(Efficiency));
-			}
-		}
+        public int Efficiency
+        {
+            get { return _efficiency; }
+            set
+            {
+                _efficiency = value;
+                OnPropertyChanged(nameof(Efficiency));
+            }
+        }
 
-		public int PReg;
+        public int PReg;
         public int IReg;
         public int DReg;
         public float TEffSP;
@@ -35,7 +36,7 @@ namespace Android_Silver.Entities.FBEntities
         public float TempB;
         public float TempC;
         public float TempD;
-        public List<RecPrfofile> RecProfiles=new List<RecPrfofile>();
+        public List<RecPrfofile> RecProfiles = new List<RecPrfofile>();
     }
 
     public class RecPrfofile
@@ -49,25 +50,17 @@ namespace Android_Silver.Entities.FBEntities
         public IntValue IB0;
         public IntValue SkipTakts;
 
-        public RecPrfofile(byte profNum,float iStart, float iCount, float kp, float ki)
+        public RecPrfofile(byte profNum, float iStart, float iCount, float kp, float ki)
         {
             ProfNum = profNum;
-            I_Start.Min = 0;
+            I_Start = new FloatValue(0, 3, 1);
             I_Start.Value = iStart;
-            I_Start.Max = 3;
-            I_Start.NumChr = 1;
-            I_Cont.Min = 0;
+            I_Cont = new FloatValue(0, 3, 1);
             I_Cont.Value = iCount;
-            I_Cont.Max = 3;
-            I_Cont.NumChr =1;
-            Kp.Min = 0;
+            Kp = new FloatValue(0, 1000, 2);
             Kp.Value = kp;
-            Kp.Max = 1000;
-            Kp.NumChr = 2;
-            Ki.Min  = 0;
+            Ki = new FloatValue(0, 1000, 2);
             Ki.Value = ki;
-            Ki.Max = 1000;
-            Ki.NumChr = 2;
         }
     }
 }
