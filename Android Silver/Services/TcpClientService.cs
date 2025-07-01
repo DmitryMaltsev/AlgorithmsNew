@@ -2061,27 +2061,27 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Проверка того, что данные записаны
-                case 5000:
+                case 5100:
                     {
                         //_fbs.SP1Count += 1;
                     }
                     break;
-                case 5001:
+                case 5101:
                     {
                         // _fbs.SP2Count += 1;
                     }
                     break;
-                case 5002:
+                case 5102:
                     {
                         // _fbs.SP3Count += 1;
                     }
                     break;
-                case 5003:
+                case 5103:
                     {
                         //_fbs.SPFCount += 1;
                     }
                     break;
-                case 5008:
+                case 5108:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2090,7 +2090,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5009:
+                case 5109:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2100,7 +2100,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 #region Минимальный режим
-                case 5010:
+                case 5110:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2108,7 +2108,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5011:
+                case 5111:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2116,7 +2116,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5012:
+                case 5112:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2124,7 +2124,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5013:
+                case 5113:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2134,7 +2134,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Нормальный режим
-                case 5014:
+                case 5114:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2142,7 +2142,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5015:
+                case 5115:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2150,7 +2150,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5016:
+                case 5116:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2158,7 +2158,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5017:
+                case 5117:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2168,7 +2168,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Максимальный режим
-                case 5018:
+                case 5118:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2176,7 +2176,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5019:
+                case 5119:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2184,7 +2184,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5020:
+                case 5120:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2192,7 +2192,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5021:
+                case 5121:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2202,7 +2202,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Режим кухни
-                case 5022:
+                case 5122:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2210,7 +2210,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5023:
+                case 5123:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2218,7 +2218,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5024:
+                case 5124:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2226,7 +2226,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5025:
+                case 5125:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2236,7 +2236,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Режим отпуска
-                case 5026:
+                case 5126:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2244,7 +2244,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5027:
+                case 5127:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2252,7 +2252,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5028:
+                case 5128:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2260,7 +2260,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5029:
+                case 5129:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2270,7 +2270,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 #region Специальный режим
-                case 5030:
+                case 5130:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2278,7 +2278,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5031:
+                case 5131:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2286,7 +2286,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5032:
+                case 5132:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2294,7 +2294,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5033:
+                case 5133:
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
@@ -2304,7 +2304,7 @@ namespace Android_Silver.Services
                     break;
                 #endregion
                 //Режим кухни.
-                case 5034:
+                case 5134:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2313,7 +2313,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5037:
+                case 5137:
                     {
                         if (int.TryParse(resp.ValueString, out int val))
                         {
@@ -2322,95 +2322,95 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Получение режима 1
-                case 5038:
+                case 5138:
                     {
                         GetTModeDay(2, 0, resp.ValueString);
                     }
                     break;
-                case 5039:
+                case 5139:
                     {
                         GetTModeHours(2, 0, resp.ValueString);
                     }
                     break;
-                case 5040:
+                case 5140:
                     {
                         GetTModeMinutes(2, 0, resp.ValueString);
                     }
                     break;
-                case 5041:
+                case 5141:
                     {
                         GetTModeCMode1(2, 0, resp.ValueString);
                     }
                     break;
                 //Получение режима 2
-                case 5042:
+                case 5142:
                     {
                         GetTModeDay(2, 1, resp.ValueString);
                     }
                     break;
-                case 5043:
+                case 5143:
                     {
                         GetTModeHours(2, 1, resp.ValueString);
                     }
                     break;
-                case 5044:
+                case 5144:
                     {
                         GetTModeMinutes(2, 1, resp.ValueString);
                     }
                     break;
-                case 5045:
+                case 5145:
                     {
                         GetTModeCMode1(2, 1, resp.ValueString);
                     }
                     break;
                 //Получение режима 3
-                case 5046:
+                case 5146:
                     {
                         GetTModeDay(2, 2, resp.ValueString);
                     }
                     break;
-                case 5047:
+                case 5147:
                     {
                         GetTModeHours(2, 2, resp.ValueString);
                     }
                     break;
-                case 5048:
+                case 5148:
                     {
                         GetTModeMinutes(2, 2, resp.ValueString);
                     }
                     break;
-                case 5049:
+                case 5149:
                     {
                         GetTModeCMode1(2, 2, resp.ValueString);
                     }
                     break;
                 //Получение режима 4
-                case 5050:
+                case 5150:
                     {
                         GetTModeDay(2, 3, resp.ValueString);
                     }
                     break;
-                case 5051:
+                case 5151:
                     {
                         GetTModeHours(2, 3, resp.ValueString);
                     }
                     break;
-                case 5052:
+                case 5152:
                     {
                         GetTModeMinutes(2, 3, resp.ValueString);
                     }
                     break;
-                case 5053:
+                case 5153:
                     {
                         GetTModeCMode1(2, 3, resp.ValueString);
                     }
                     break;
-                case 5054:
+                case 5154:
                     {
                         GetTModeCMode1(4, 0, resp.ValueString);
                     }
                     break;
-                case 5055:
+                case 5155:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2418,7 +2418,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5056:
+                case 5156:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2430,7 +2430,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5057:
+                case 5157:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2443,7 +2443,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий год
-                case 5058:
+                case 5158:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2455,7 +2455,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий месяц
-                case 5059:
+                case 5159:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2467,7 +2467,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий день
-                case 5060:
+                case 5160:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2479,7 +2479,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущий час
-                case 5061:
+                case 5161:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2491,7 +2491,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Текущая минута
-                case 5062:
+                case 5162:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2504,7 +2504,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //День недели
-                case 5063:
+                case 5163:
                     {
                         //День недели77777
                         //if (ushort.TryParse(resp.ValueString, out ushort val))
@@ -2517,7 +2517,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Данные о режиме отпуска
-                case 5067:
+                case 5167:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2526,7 +2526,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5068:
+                case 5168:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2535,7 +2535,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5069:
+                case 5169:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2544,13 +2544,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5070:
+                case 5170:
                     {
                         GetTModeCMode1(2, 0, resp.ValueString);
                     }
                     break;
                 //Строка 2
-                case 5071:
+                case 5171:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2559,7 +2559,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5072:
+                case 5172:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2568,7 +2568,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5073:
+                case 5173:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2577,13 +2577,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5074:
+                case 5174:
                     {
                         GetTModeCMode1(2, 1, resp.ValueString);
                     }
                     break;
                 //Строка 3
-                case 5075:
+                case 5175:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2592,7 +2592,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5076:
+                case 5176:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2601,7 +2601,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5077:
+                case 5177:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2610,14 +2610,14 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5078:
+                case 5178:
                     {
                         GetTModeCMode1(2, 2, resp.ValueString);
 
                     }
                     break;
                 //Строка 4
-                case 5079:
+                case 5179:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2626,7 +2626,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5080:
+                case 5180:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2635,7 +2635,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5081:
+                case 5181:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2644,7 +2644,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5082:
+                case 5182:
                     {
                         GetTModeCMode1(2, 3, resp.ValueString);
                         if (_activePageEntities.IsLoadingPage)
@@ -2656,7 +2656,7 @@ namespace Android_Silver.Services
                     break;
                 //Расписание
                 //Строка 1
-                case 5083:
+                case 5183:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2665,7 +2665,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5084:
+                case 5184:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2674,7 +2674,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5085:
+                case 5185:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2683,13 +2683,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5086:
+                case 5186:
                     {
                         GetTModeCMode1(3, 0, resp.ValueString);
                     }
                     break;
                 //Строка 2
-                case 5087:
+                case 5187:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2698,7 +2698,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5088:
+                case 5188:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2707,7 +2707,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5089:
+                case 5189:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2716,13 +2716,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5090:
+                case 5190:
                     {
                         GetTModeCMode1(3, 1, resp.ValueString);
                     }
                     break;
                 //Строка 3
-                case 5091:
+                case 5191:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2731,7 +2731,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5092:
+                case 5192:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2740,7 +2740,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5093:
+                case 5193:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2749,13 +2749,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5094:
+                case 5194:
                     {
                         GetTModeCMode1(3, 2, resp.ValueString);
                     }
                     break;
                 //Строка 4
-                case 5095:
+                case 5195:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2764,7 +2764,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5096:
+                case 5196:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2773,7 +2773,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5097:
+                case 5197:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2782,13 +2782,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5098:
+                case 5198:
                     {
                         GetTModeCMode1(3, 3, resp.ValueString);
                     }
                     break;
                 //Строка 5
-                case 5099:
+                case 5199:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2797,7 +2797,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5100:
+                case 5200:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2806,7 +2806,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5101:
+                case 5201:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2815,13 +2815,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5102:
+                case 5202:
                     {
                         GetTModeCMode1(3, 4, resp.ValueString);
                     }
                     break;
                 //Строка 6
-                case 5103:
+                case 5203:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2830,7 +2830,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5104:
+                case 5204:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2839,7 +2839,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5105:
+                case 5205:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2848,13 +2848,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5106:
+                case 5206:
                     {
                         GetTModeCMode1(3, 5, resp.ValueString);
                     }
                     break;
                 //Строка 7
-                case 5107:
+                case 5207:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2863,7 +2863,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5108:
+                case 5208:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2872,7 +2872,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5109:
+                case 5209:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2881,13 +2881,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5110:
+                case 5210:
                     {
                         GetTModeCMode1(3, 6, resp.ValueString);
                     }
                     break;
                 //Строка 8
-                case 5111:
+                case 5211:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2896,7 +2896,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5112:
+                case 5212:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2905,7 +2905,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5113:
+                case 5213:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2914,13 +2914,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5114:
+                case 5214:
                     {
                         GetTModeCMode1(3, 7, resp.ValueString);
                     }
                     break;
                 //Строка 9
-                case 5115:
+                case 5215:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2929,7 +2929,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5116:
+                case 5216:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2938,7 +2938,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5117:
+                case 5217:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2947,13 +2947,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5118:
+                case 5218:
                     {
                         GetTModeCMode1(3, 8, resp.ValueString);
                     }
                     break;
                 //Строка 10
-                case 5119:
+                case 5219:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2962,7 +2962,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5120:
+                case 5220:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2971,7 +2971,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5121:
+                case 5221:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2980,13 +2980,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5122:
+                case 5222:
                     {
                         GetTModeCMode1(3, 9, resp.ValueString);
                     }
                     break;
                 //Строка 11
-                case 5123:
+                case 5223:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -2995,7 +2995,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5124:
+                case 5224:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3004,7 +3004,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5125:
+                case 5225:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3013,13 +3013,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5126:
+                case 5226:
                     {
                         GetTModeCMode1(3, 10, resp.ValueString);
                     }
                     break;
                 //Строка 12
-                case 5127:
+                case 5227:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3028,7 +3028,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5128:
+                case 5228:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3037,7 +3037,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5129:
+                case 5229:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3046,13 +3046,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5130:
+                case 5230:
                     {
                         GetTModeCMode1(3, 11, resp.ValueString);
                     }
                     break;
                 //Строка 13
-                case 5131:
+                case 5231:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3061,7 +3061,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5132:
+                case 5232:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3070,7 +3070,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5133:
+                case 5233:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3079,13 +3079,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5134:
+                case 5234:
                     {
                         GetTModeCMode1(3, 12, resp.ValueString);
                     }
                     break;
                 //Строка 14
-                case 5135:
+                case 5235:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3094,7 +3094,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5136:
+                case 5236:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3103,7 +3103,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5137:
+                case 5237:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3112,7 +3112,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5138:
+                case 5238:
                     {
                         GetTModeCMode1(3, 13, resp.ValueString);
                         if (_activePageEntities.IsLoadingPage)
@@ -3123,7 +3123,7 @@ namespace Android_Silver.Services
                     }
                     break;
                 //Строка 15
-                case 5139:
+                case 5239:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3132,7 +3132,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5140:
+                case 5240:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3141,7 +3141,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5141:
+                case 5241:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3150,13 +3150,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5142:
+                case 5242:
                     {
                         GetTModeCMode1(3, 14, resp.ValueString);
                     }
                     break;
                 //Строка 16
-                case 5143:
+                case 5243:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3165,7 +3165,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5144:
+                case 5244:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3174,7 +3174,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5145:
+                case 5245:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3183,13 +3183,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5146:
+                case 5246:
                     {
                         GetTModeCMode1(3, 15, resp.ValueString);
                     }
                     break;
                 //Строка 17
-                case 5147:
+                case 5247:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3198,7 +3198,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5148:
+                case 5248:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3207,7 +3207,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5149:
+                case 5249:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3216,13 +3216,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5150:
+                case 5250:
                     {
                         GetTModeCMode1(3, 16, resp.ValueString);
                     }
                     break;
                 //Строка 18
-                case 5151:
+                case 5251:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3231,7 +3231,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5152:
+                case 5252:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3240,7 +3240,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5153:
+                case 5253:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3249,13 +3249,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5154:
+                case 5254:
                     {
                         GetTModeCMode1(3, 17, resp.ValueString);
                     }
                     break;
                 //Строка 19
-                case 5155:
+                case 5255:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3264,7 +3264,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5156:
+                case 5256:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3273,7 +3273,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5157:
+                case 5257:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3282,13 +3282,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5158:
+                case 5258:
                     {
                         GetTModeCMode1(3, 18, resp.ValueString);
                     }
                     break;
                 //Строка 20
-                case 5159:
+                case 5259:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3297,7 +3297,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5160:
+                case 5260:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3306,7 +3306,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5161:
+                case 5261:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3315,13 +3315,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5162:
+                case 5262:
                     {
                         GetTModeCMode1(3, 19, resp.ValueString);
                     }
                     break;
                 //Строка 21
-                case 5163:
+                case 5263:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3330,7 +3330,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5164:
+                case 5264:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3339,7 +3339,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5165:
+                case 5265:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3348,13 +3348,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5166:
+                case 5266:
                     {
                         GetTModeCMode1(3, 20, resp.ValueString);
                     }
                     break;
                 //Строка 22
-                case 5167:
+                case 5267:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3363,7 +3363,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5168:
+                case 5268:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3372,7 +3372,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5169:
+                case 5269:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3381,13 +3381,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5170:
+                case 5270:
                     {
                         GetTModeCMode1(3, 21, resp.ValueString);
                     }
                     break;
                 //Строка 23
-                case 5171:
+                case 5271:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3396,7 +3396,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5172:
+                case 5272:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3405,7 +3405,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5173:
+                case 5273:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3414,13 +3414,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5174:
+                case 5274:
                     {
                         GetTModeCMode1(3, 22, resp.ValueString);
                     }
                     break;
                 //Строка 24
-                case 5175:
+                case 5275:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3429,7 +3429,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5176:
+                case 5276:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3438,7 +3438,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5177:
+                case 5277:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3447,13 +3447,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5178:
+                case 5278:
                     {
                         GetTModeCMode1(3, 23, resp.ValueString);
                     }
                     break;
                 //Строка 25
-                case 5179:
+                case 5279:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3462,7 +3462,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5180:
+                case 5280:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3471,7 +3471,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5181:
+                case 5281:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3480,13 +3480,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5182:
+                case 5282:
                     {
                         GetTModeCMode1(3, 24, resp.ValueString);
                     }
                     break;
                 //Строка 26
-                case 5183:
+                case 5283:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3495,7 +3495,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5184:
+                case 5284:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3504,7 +3504,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5185:
+                case 5285:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3513,13 +3513,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5186:
+                case 5286:
                     {
                         GetTModeCMode1(3, 25, resp.ValueString);
                     }
                     break;
                 //Строка 27
-                case 5187:
+                case 5287:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3528,7 +3528,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5188:
+                case 5288:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3537,7 +3537,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5189:
+                case 5289:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3546,13 +3546,13 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5190:
+                case 5290:
                     {
                         GetTModeCMode1(3, 26, resp.ValueString);
                     }
                     break;
                 //Строка 28
-                case 5191:
+                case 5291:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3567,7 +3567,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5192:
+                case 5292:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3577,7 +3577,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5193:
+                case 5293:
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
@@ -3586,7 +3586,7 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
-                case 5194:
+                case 5294:
                     {
                         GetTModeCMode1(3, 27, resp.ValueString);
 

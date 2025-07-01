@@ -162,7 +162,7 @@ namespace Android_Silver.ViewModels
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     CTcpClientService.MessageToServer = "";
                     //CTcpClientService.SendRecieveTask("299,56");
-                    CTcpClientService.SendRecieveTask("");
+                    CTcpClientService.SendRecieveTask("0300,110");
                     await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
                     // TcpClientService.SendRecieveTask("137,4");
                 }
