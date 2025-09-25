@@ -208,12 +208,13 @@
                 <Button Text="Отключиться" Command="{Binding StartPageDisconnectCommand}"  IsEnabled="{Binding EthernetEntities.IsConnected}"
                                                                        IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}" />
             </HorizontalStackLayout>
+            -->
             <HorizontalStackLayout Grid.Row="10" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="4" IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}">
                          <Label Text="{Binding EthernetEntities.SystemMessage}"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout Grid.Row="11" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="4" IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}">
                 <Label Text="{Binding EthernetEntities.PacketsMessage}"/>
-            </HorizontalStackLayout>-->
+            </HorizontalStackLayout>
             <!--#endregion-->
             <!--#endregion-->
             <!--#region  Settings page -->
