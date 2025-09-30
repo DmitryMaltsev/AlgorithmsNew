@@ -385,6 +385,8 @@
              IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding  CFBs.CRecup.Efficiency, StringFormat='{0}%'}"  Grid.Row="16"  Grid.Column="12" Style="{StaticResource MiscellText}"
                                                                                                 IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding  CFBs.CRecup.FreqHZ, StringFormat='Ч={0}Гц'}"  Grid.Row="16"  Grid.Column="12" Style="{StaticResource MiscellText}"
+                                                                                      IsVisible = "{Binding CActivePagesEntities.IsMainPage}" Margin="0,70,0,-20"/>
             <!--#endregion-->
             <!--#region Температура комнаты -->
             <Image Source="{Binding  CPictureSet.RoomTemp}"    Grid.Row="17" Grid.Column="0" Style="{StaticResource MiscellaneousImg}"
@@ -405,32 +407,41 @@
             <Label Text="{Binding  CFBs.CFilterVals.FilterClearPercent, StringFormat='{0}%'}"  Grid.Row="17"  Grid.Column="12" Style="{StaticResource MiscellText}"
                                                                                                     IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
-            
-            <Image Source="{Binding  CPictureSet.Miscellaneous}"    Grid.Row="19"  Grid.Column="0" Grid.ColumnSpan="18"  
+
+            <!--#region работа ЭК + уставка -->
+            <Image Source="{Binding  CPictureSet.FilterPol}" Grid.Row="19"  Grid.Column="6" Style="{StaticResource MiscellaneousImg}"
+                                                                                          IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding  CFBs.CEHSetPoints.CPower, StringFormat='мощность={0}%'}"  Grid.Row="19"  Grid.Column="6" Style="{StaticResource MiscellText}"
+                                                                                           IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding CFBs.CCommonSetPoints.SPTempR, StringFormat='уставка={0}°С'}"  Grid.Row="19"  Grid.Column="6" Style="{StaticResource MiscellText}"
+                                                                               IsVisible = "{Binding CActivePagesEntities.IsMainPage}" Margin="0,70,0,-20" />
+            <!--#endregion-->
+
+            <Image Source="{Binding  CPictureSet.Miscellaneous}"    Grid.Row="22"  Grid.Column="0" Grid.ColumnSpan="18"  
                    Grid.RowSpan="4"   MaximumHeightRequest="750" Background="Transparent"  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#region Расход притока-->
-            <Image Source="{Binding CPictureSet.SupCons}"    Grid.Row="20"  Grid.Column="1" Style="{StaticResource MiscellaneousImg}" 
+            <Image Source="{Binding CPictureSet.SupCons}"    Grid.Row="22"  Grid.Column="1" Style="{StaticResource MiscellaneousImg}" 
                     IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="Расход притока"  Grid.Row="20"  Grid.Column="6" Style="{StaticResource MiscellText3}"
+            <Label Text="Расход притока"  Grid.Row="22"  Grid.Column="6" Style="{StaticResource MiscellText3}"
                                                                                IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding  CFBs.CFans.SFlow,StringFormat='{0}м3/час'}"  Grid.Row="20"  Grid.Column="6" Style="{StaticResource MiscellText2}"
+            <Label Text="{Binding  CFBs.CFans.SFlow,StringFormat='{0}м3/час'}"  Grid.Row="22"  Grid.Column="6" Style="{StaticResource MiscellText2}"
                                                                                           IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="Произв притока %"  Grid.Row="20"  Grid.Column="12" Style="{StaticResource MiscellText3}"
+            <Label Text="Произв притока %"  Grid.Row="22"  Grid.Column="12" Style="{StaticResource MiscellText3}"
                                                                    IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding CFBs.CFans.SPercent,StringFormat='{0}%'}"  Grid.Row="20"  Grid.Column="12" Style="{StaticResource MiscellText2}"
+            <Label Text="{Binding CFBs.CFans.SPercent,StringFormat='{0}%'}"  Grid.Row="22"  Grid.Column="12" Style="{StaticResource MiscellText2}"
                                                                                 IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
             <!--#region Расход вытяжки -->
           
-            <Image Source="{Binding  CPictureSet.ExhaustCons}"    Grid.Row="21"  Grid.Column="1" Style="{StaticResource MiscellaneousImg}"
+            <Image Source="{Binding  CPictureSet.ExhaustCons}"    Grid.Row="23"  Grid.Column="1" Style="{StaticResource MiscellaneousImg}"
                                                                                       IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="Расход вытяжки"  Grid.Row="21"  Grid.Column="6" Style="{StaticResource MiscellText3}"
+            <Label Text="Расход вытяжки"  Grid.Row="23"  Grid.Column="6" Style="{StaticResource MiscellText3}"
                                                         IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding  CFBs.CFans.EFlow,StringFormat='{0}м3/час'}"  Grid.Row="21"  Grid.Column="6" Style="{StaticResource MiscellText2}"
+            <Label Text="{Binding  CFBs.CFans.EFlow,StringFormat='{0}м3/час'}"  Grid.Row="23"  Grid.Column="6" Style="{StaticResource MiscellText2}"
                                                                                 IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="Произв выт %"  Grid.Row="21"  Grid.Column="12" Style="{StaticResource MiscellText3}"
+            <Label Text="Произв выт %"  Grid.Row="23"  Grid.Column="12" Style="{StaticResource MiscellText3}"
                                                         IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding CFBs.CFans.EPercent,StringFormat='{0}%'}"  Grid.Row="21"  Grid.Column="12" Style="{StaticResource MiscellText2}"
+            <Label Text="{Binding CFBs.CFans.EPercent,StringFormat='{0}%'}"  Grid.Row="23"  Grid.Column="12" Style="{StaticResource MiscellText2}"
                                                                       IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
             <!--#endregion-->
@@ -491,7 +502,6 @@
                 Pressed="CancelButton_Pressed" Released="CancelButton_Released"  IsVisible="{Binding CActivePagesEntities.IsKitchenTimerPage}"/>
             </VerticalStackLayout>
             <!--#endregion-->
-
             <!--#region SETPOINTS PAGE -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
                      Style="{StaticResource HeaderBut}"  Pressed="HomeButton_SPPressed" Released="HomeButton_SPReleased"  

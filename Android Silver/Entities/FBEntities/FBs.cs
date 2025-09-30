@@ -1,4 +1,5 @@
 ﻿using Android_Silver.Entities.Srs;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.FBEntities
 {
-    public class FBs
+    public class FBs:BindableBase
     {
         public Alarms CAlarms { get; set; }
         public HumiditySPS CHumiditySPS { get; set; }
@@ -27,11 +28,11 @@ namespace Android_Silver.Entities.FBEntities
 
 
 
-        public CommonSetPoints CCommonSetPoints;
+        public CommonSetPoints CCommonSetPoints { get; set; }
         public DamperSetPoints CDamperSetPoints;
         public ElementsConfig CEConfig;
         public WHSetPoints CWHSetPoints;
-        public EHSetPoints CEHSetPoints;
+        public EHSetPoints CEHSetPoints { get; set; }
         public FreonCoolerSP CFreonCoolerSP;
         public UFLeds UFLeds { get; set; }
 

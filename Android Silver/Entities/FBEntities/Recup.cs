@@ -25,6 +25,17 @@ namespace Android_Silver.Entities.FBEntities
             }
         }
 
+        private int _freqHZ;
+        public int FreqHZ
+        {
+            get { return _freqHZ; }
+            set {
+                OnPropertyChanged(nameof(FreqHZ));
+                _freqHZ = value;
+            }
+        }
+
+
         public int PReg;
         public int IReg;
         public int DReg;

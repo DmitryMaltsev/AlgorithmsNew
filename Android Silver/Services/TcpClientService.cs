@@ -204,7 +204,7 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            messToClient = "0103,054\r\n";
+                            messToClient = "0100,057\r\n";
                         }
                         break;
                     case MessageStates.VacMessage:
@@ -226,7 +226,6 @@ namespace Android_Silver.Services
                         {
                             messToClient = "0300,110\r\n";
                             //messToClient = "300,050\r\n";
-
                         }
                         break;
                     case MessageStates.ServiceMessage2:
@@ -237,9 +236,6 @@ namespace Android_Silver.Services
                         break;
                 }
             }
-
-
-
             return messToClient;
         }
 
@@ -278,7 +274,7 @@ namespace Android_Silver.Services
             }
             while (IsSending && _trySendcounter < 10 && MessageToServer == String.Empty);
             IsSending = false;
-            if (_trySendcounter == 10)
+            if (_trySendcounter == 30)
             {
                 _pictureSet.SetPicureSetIfNeed(_pictureSet.LinkHeader, _pictureSet.LinkHeader.Default);
                 if (_ethernetEntities.IsConnected == true)
@@ -344,17 +340,26 @@ namespace Android_Silver.Services
             {
                 case 100:
                     {
-                        //_ethernetEntities.IP = resp.ValueString;
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            _fbs.CRecup.FreqHZ = val;
+                        }
                     }
                     break;
                 case 101:
                     {
-                        //  _ethernetEntities.Subnet = resp.ValueString;
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            _fbs.CEHSetPoints.CPower = val;
+                        }
                     }
                     break;
                 case 102:
                     {
-                        // _ethernetEntities.GateWay = resp.ValueString;
+                        if (StringToFloat(resp.ValueString, floatPrec, ref buff))
+                        {
+                            _fbs.CCommonSetPoints.SPTempR = buff;
+                        }
                     }
                     break;
                 case 103:
@@ -5754,7 +5759,7 @@ namespace Android_Silver.Services
                 return;
             }
 
-            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+4 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {

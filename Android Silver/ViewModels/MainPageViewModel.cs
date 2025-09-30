@@ -264,7 +264,6 @@ namespace Android_Silver.Pages
             CFBs = DIContainer.Resolve<FBs>();
             _fileSystemService = DIContainer.Resolve<FileSystemService>();
             _menuesEntities = DIContainer.Resolve<MenusEntities>();
-
 #if ANDROID
             AndroidEntity.WifiStateChanged -= EthernetEntities.WifiStateChangeCallback;
             AndroidEntity.WifiStateChanged += EthernetEntities.WifiStateChangeCallback;
@@ -392,7 +391,7 @@ namespace Android_Silver.Pages
                     CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
-                    CTcpClientService.SendRecieveTask("0103,050");
+                    CTcpClientService.SendRecieveTask("0100,057");
 
                     // TcpClientService.SendRecieveTask("137,4");ё
                 }
