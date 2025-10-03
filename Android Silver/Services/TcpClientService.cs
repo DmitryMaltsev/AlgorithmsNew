@@ -224,13 +224,13 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "0300,110\r\n";
+                            messToClient = "0300,113\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "0410,118\r\n";
+                            messToClient = "0413,118\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
@@ -3753,6 +3753,42 @@ namespace Android_Silver.Services
                     if (val >= 0 && val <= 1)
                     {
                         _fbs.CEConfig.IsDemoConfig = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+
+                    if (val >= _fbs.CCommonSetPoints.RoomSPPReg.Min && val <= _fbs.CCommonSetPoints.RoomSPPReg.Max)
+                    {
+                        _fbs.CCommonSetPoints.RoomSPPReg.Value = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+
+                    if (val >= _fbs.CCommonSetPoints.RoomSPIReg.Min && val <= _fbs.CCommonSetPoints.RoomSPIReg.Max)
+                    {
+                        _fbs.CCommonSetPoints.RoomSPIReg.Value = val;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+
+                    if (val >= _fbs.CCommonSetPoints.RoomSPDReg.Min && val <= _fbs.CCommonSetPoints.RoomSPDReg.Max)
+                    {
+                        _fbs.CCommonSetPoints.RoomSPDReg.Value = val;
                     }
                 }
                 if (_servActivePageEntities.IsLoadingPage)

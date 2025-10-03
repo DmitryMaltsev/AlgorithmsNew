@@ -1,4 +1,5 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.ValuesEntities;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -29,5 +30,14 @@ namespace Android_Silver.Entities.FBEntities
         public int SeasonMode;
         public float SPSeason;
         public float HystSeason;
+        public IntValue RoomSPPReg;
+        public IntValue RoomSPIReg;
+        public IntValue RoomSPDReg;
+        public CommonSetPoints()
+        {
+            RoomSPPReg=new IntValue(0, 10_000);
+            RoomSPIReg=new IntValue(0, 10_000);
+            RoomSPDReg=new IntValue(0, 10_000);
+        }
     }
 }

@@ -493,6 +493,9 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[9].CPickVal = _fbs.CEConfig.AutoResetFire;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[10].CVal = _fbs.UFLeds.LEDsI;
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[11].CPickVal = _fbs.CEConfig.IsDemoConfig;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[12].CVal = _fbs.CCommonSetPoints.RoomSPPReg.Value;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[13].CVal = _fbs.CCommonSetPoints.RoomSPIReg.Value;
+                        _menusEntities.StartMenuCollection[1].StrSetsCollection[14].CVal = _fbs.CCommonSetPoints.RoomSPDReg.Value;
                         _menusEntities.GenerateInterfaceTable(1);
                     }
                     break;

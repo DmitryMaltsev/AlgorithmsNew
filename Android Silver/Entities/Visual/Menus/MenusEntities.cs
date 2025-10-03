@@ -126,7 +126,7 @@ namespace Android_Silver.Entities.Visual.Menus
         {
             _fbEntities = DIContainer.Resolve<FBs>();
             ETH_COMMON_SETTINGS_ADDR = 300;
-            ETH_COMMON_SETTINGS_LENGTH = 12;
+            ETH_COMMON_SETTINGS_LENGTH = 15;
             ETH_DAMPER_SETTINGS_ADDR = ETH_COMMON_SETTINGS_ADDR + ETH_COMMON_SETTINGS_LENGTH;
             ETH_DAMPER_SETTINGS_LENGTH = 23;
             ETH_FAN_SETTINGS_ADDR = ETH_DAMPER_SETTINGS_ADDR + ETH_DAMPER_SETTINGS_LENGTH;
@@ -243,6 +243,15 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             pickVals = new List<string>() { "Неактивен", "Активен" };
             sSet = new StrSet(0, 1, "Демо режим", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CCommonSetPoints.RoomSPPReg.Min, _fbEntities.CCommonSetPoints.RoomSPPReg.Max, "P коэф. комн температуры", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+            isEnabled: true, valScale: _fbEntities.CCommonSetPoints.RoomSPPReg.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CCommonSetPoints.RoomSPIReg.Min, _fbEntities.CCommonSetPoints.RoomSPIReg.Max, "I коэф. комн температуры", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+            isEnabled: true, valScale: _fbEntities.CCommonSetPoints.RoomSPIReg.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CCommonSetPoints.RoomSPDReg.Min, _fbEntities.CCommonSetPoints.RoomSPDReg.Max, "D коэф. комн температуры", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+            isEnabled: true, valScale: _fbEntities.CCommonSetPoints.RoomSPDReg.NumChr, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[1].StrSetsCollection = strSets;
             #endregion
