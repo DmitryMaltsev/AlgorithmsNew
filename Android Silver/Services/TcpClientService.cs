@@ -4,9 +4,7 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
-
 using System.Collections;
-using System.ComponentModel.Design;
 using System.Net.Sockets;
 using System.Text;
 
