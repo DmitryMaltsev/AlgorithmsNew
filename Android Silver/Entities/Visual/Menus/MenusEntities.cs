@@ -152,7 +152,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_SPECMODE_SETTINGS_ADDR = ETH_MBRECUP_SETTINGS_ADDR + ETH_MBRECUP_SETTINGS_LENGTH;
             ETH_SPECMODE_SETTINGS_LENGTH = 8;
             ETH_CALIBRATE_THM_ADDR = ETH_SPECMODE_SETTINGS_ADDR + ETH_SPECMODE_SETTINGS_LENGTH;
-            ETH_CALIBRATE_THM_LENGTH = 40;
+            ETH_CALIBRATE_THM_LENGTH = 42;
             ETH_RECUP_CURRENTSETTINGS_ADDR = ETH_CALIBRATE_THM_ADDR + ETH_CALIBRATE_THM_LENGTH;
             ETH_RECUP_CURRENTSETTINGS_LENGTH = 40;
             InterfaceStrCollection = new ObservableCollection<StrSet>();
@@ -190,7 +190,6 @@ namespace Android_Silver.Entities.Visual.Menus
             mItem = new MItem("Настройка профилей шаг мотора", isVisible: true, _pictureSet.BaseSettings1ButCollection[14], SActivePageState.RecupCurrentPage, id: 15, startAddress: ETH_RECUP_CURRENTSETTINGS_ADDR + WriteOffset);
             StartMenuCollection.Add(mItem);
             #endregion
-
             #region Конфигурация
             ObservableCollection<StrSet> strSets = new ObservableCollection<StrSet>();
             List<string> pickVals = new List<string>() { "Нет", "Вод нагр 1", "Вод нагр 2", "Фр охл 1", "Фр охл 2", "Увл 1", "Увл 2" };
@@ -517,8 +516,8 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(_fbEntities.ThmSps.BClKoef.Min, _fbEntities.ThmSps.BClKoef.Max, "Коэф. B чистого фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
                 isEnabled: true, valScale: _fbEntities.ThmSps.BClKoef.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.ThmSps.U.Min, _fbEntities.ThmSps.U.Max, "Напряжение термоанeмометра", isVisible: true, pickerIsVisible: false,
-                entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.U.NumChr, pickVals);
+            sSet = new StrSet(_fbEntities.ThmSps.USup.Min, _fbEntities.ThmSps.USup.Max, "Напряжение термоанeмометра", isVisible: true, pickerIsVisible: false,
+                entryIsVisible: true, isEnabled: true, valScale: _fbEntities.ThmSps.USup.NumChr, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[10].StrSetsCollection = strSets;
             #endregion
@@ -591,6 +590,12 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ExhaustCalibrateThm.DeltaThm.Min, _fbEntities.ExhaustCalibrateThm.DeltaThm.Max, "Дельта термоанемометра В,°C", isVisible: true,
                 pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: _fbEntities.ExhaustCalibrateThm.DeltaThm.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.ThmSps.USup.Min, _fbEntities.ThmSps.USup.Max, "U термоанемометра притока, В", isVisible: true,
+               pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: _fbEntities.ThmSps.USup.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.ThmSps.UExhaust.Min, _fbEntities.ThmSps.UExhaust.Max, "U термоанемометра вытяжки, В", isVisible: true,
+                pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: _fbEntities.ThmSps.UExhaust.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.CalibrateTimeS.Min, _fbEntities.SupCalibrateThm.CalibrateTimeS.Max, "Время ступени калибровки,с", isVisible: true,
             pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.SupCalibrateThm.CalibrateTimeS.NumChr, pickVals);

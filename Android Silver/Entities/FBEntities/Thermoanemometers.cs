@@ -18,7 +18,8 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue ExhaustTHmKoefB;
         public FloatValue ExhaustTHmKoefK;
         public FloatValue ExhaustCurveKoef;
-        public FloatValue U;
+        public FloatValue USup;
+        public FloatValue UExhaust;
         public float TempH1;
         public float TempC1;
         public float TempH2;
@@ -43,8 +44,9 @@ namespace Android_Silver.Entities.FBEntities
             ExhaustTHmKoefK = new FloatValue(-100_000, 100_000, 2);
             ExhaustCurveKoef = new FloatValue(-100_000, 100_000, 2);
 
-            U = new FloatValue(0, 10, 1);
-            PReg =  new IntValue(0, 10_000);
+            USup = new FloatValue(0, 10, 1);
+            UExhaust = new FloatValue(0, 10, 1);
+            PReg = new IntValue(0, 10_000);
             IReg = new IntValue(0, 10_000);
             DReg = new IntValue(0, 10_000);
 
@@ -53,5 +55,7 @@ namespace Android_Silver.Entities.FBEntities
             KPolKoef = new FloatValue(-99, 99, 2);
             BPolKoef = new FloatValue(-99, 99, 2);
         }
+
     }
+
 }

@@ -392,13 +392,11 @@ namespace Android_Silver.Pages
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
                     CTcpClientService.SendRecieveTask("0100,057");
-
                     // TcpClientService.SendRecieveTask("137,4");ё
                 }
             }
             else
             {
-
                 CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Default);
                 EthernetEntities.SystemMessage = "В данный момент подключаемся";
             }
