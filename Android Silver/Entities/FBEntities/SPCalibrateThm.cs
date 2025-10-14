@@ -8,24 +8,28 @@ using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.FBEntities
 {
+
     public class SPCalibrateThm
     {
-       public bool isSup;
-       public bool NeedToCalibrate;
-       public IntValue CalibrateMode;
-       public IntValue FanControlType;
-       public FloatValue TWorkingFilter;
-       public FloatValue TCalibrateFilter;
-       public FloatValue DeltaThm;
-       public FloatValue LeakFlow;
-       public IntValue CalibrateTimeS;
-       public IntValue TestTimeS;
-       public int[] CalibrateStepPercs;
-       public IntValue CalibrateStepsLimits;
-       public float[] DeltaTCalibrates;
-       public FloatValue DeltaTCalibratesLimits;
-       public float[] FlowCalibrates;
-       public FloatValue FlowCalibratesLimits;
+        public bool isSup;
+        public bool NeedToCalibrate;
+        public IntValue CalibrateMode;
+        public IntValue FanControlType;
+        public FloatValue TWorkingFilter;
+        public FloatValue TCalibrateFilter;
+        public FloatValue DeltaThm;
+        public FloatValue LeakFlow;
+        public IntValue CalibrateTimeS;
+        public IntValue TestTimeS;
+        public int[] CalibrateStepPercs;
+        public IntValue CalibrateStepsLimits;
+        public float[] DeltaTCalibrates;
+        public FloatValue DeltaTCalibratesLimits;
+        public float[] FlowCalibrates;
+        public FloatValue FlowCalibratesLimits;
+        public IntValue CavType;
+        public FloatValue CalibrateDeltaT;
+
 
         public SPCalibrateThm()
         {
@@ -38,12 +42,14 @@ namespace Android_Silver.Entities.FBEntities
             CalibrateStepPercs = new int[7];
             TWorkingFilter = new FloatValue(0, 9, 2);
             TCalibrateFilter = new FloatValue(0, 9, 2);
-            TCalibrateFilter = new FloatValue(-150,150, 2);
-            LeakFlow = new FloatValue(0,100_000,0);
-            DeltaTCalibratesLimits = new FloatValue(0, 100, 2);
+            TCalibrateFilter = new FloatValue(-150, 150, 2);
+            LeakFlow = new FloatValue(0, 100_000, 0);
+            DeltaTCalibratesLimits = new FloatValue(0, 100, 1);
             DeltaTCalibrates = new float[7];
             FlowCalibratesLimits = new FloatValue(0, 100_000, 0);
             FlowCalibrates = new float[7];
+            CavType = new IntValue(0, 1);
+            CalibrateDeltaT = new FloatValue(20, 50, 0);
         }
     }
 }
