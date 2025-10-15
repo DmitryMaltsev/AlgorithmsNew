@@ -48,7 +48,7 @@ namespace Android_Silver.Entities.FBEntities
             LeakFlow = new FloatValue(0, 100_000, 0);
             DeltaTCalibratesLimits = new FloatValue(-150, 150, 2);
             DeltaTCalibrates = new float[7];
-            PCalibratesLimits = new FloatValue(0, 100, 0);
+            PCalibratesLimits = new FloatValue(0, 100, 2);
             PCalibrates = new float[7];
             FlowCalibratesLimits = new FloatValue(0, 100_000, 0);
             FlowCalibrates = new float[7];
