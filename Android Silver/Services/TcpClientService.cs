@@ -4,6 +4,8 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
+
+using System;
 using System.Collections;
 using System.Net.Sockets;
 using System.Text;
@@ -5371,7 +5373,7 @@ namespace Android_Silver.Services
             if (resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 || resp.Tag == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
-                { 
+                {
                     GetFloatValueResult(val, _fbs.SupCalibrateThm.CalibrateDeltaT);
                     GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.CalibrateDeltaT);
                 }
@@ -5478,10 +5480,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.SupCalibrateThm.DeltaTCalibrates[0] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.SupCalibrateThm, 0);
                 }
                 return;
             }
@@ -5489,10 +5488,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.SupCalibrateThm.DeltaTCalibrates[1] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.SupCalibrateThm, 1);
                 }
                 return;
             }
@@ -5500,10 +5496,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.SupCalibrateThm.DeltaTCalibrates[2] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.SupCalibrateThm, 2);
                 }
                 return;
             }
@@ -5511,10 +5504,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.SupCalibrateThm.DeltaTCalibrates[3] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.SupCalibrateThm, 3);
                 }
                 return;
             }
@@ -5522,10 +5512,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.SupCalibrateThm.DeltaTCalibrates[4] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.SupCalibrateThm, 4);
                 }
                 return;
             }
@@ -5533,10 +5520,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.SupCalibrateThm.DeltaTCalibrates[5] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.SupCalibrateThm, 5);
                 }
                 return;
             }
@@ -5544,10 +5528,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.SupCalibrateThm.DeltaTCalibrates[6] = _fbs.SupCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.SupCalibrateThm, 6);
                 }
                 return;
             }
@@ -5634,10 +5615,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[0] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.ExhaustCalibrateThm, 0);
                 }
                 return;
             }
@@ -5645,10 +5623,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[1] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.ExhaustCalibrateThm, 1);
                 }
                 return;
             }
@@ -5656,10 +5631,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[2] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.ExhaustCalibrateThm, 2);
                 }
                 return;
             }
@@ -5667,10 +5639,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[3] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.ExhaustCalibrateThm, 3);
                 }
                 return;
             }
@@ -5678,10 +5647,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[4] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.ExhaustCalibrateThm, 4);
                 }
                 return;
             }
@@ -5689,10 +5655,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[5] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.ExhaustCalibrateThm, 5);
                 }
                 return;
             }
@@ -5700,10 +5663,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits))
-                    {
-                        _fbs.ExhaustCalibrateThm.DeltaTCalibrates[6] = _fbs.ExhaustCalibrateThm.DeltaTCalibratesLimits.Value;
-                    }
+                    GetCalibrateData(val, _fbs.ExhaustCalibrateThm, 6);
                 }
                 return;
             }
@@ -6351,7 +6311,7 @@ namespace Android_Silver.Services
         }
         #endregion
 
-        private bool GetFloatValueResult(int inputVal, Entities.ValuesEntities.FloatValue floatVal)
+        private bool GetFloatValueResult(int inputVal, FloatValue floatVal)
         {
 
             var min = floatVal.Min * Math.Pow(10, floatVal.NumChr);
@@ -6362,6 +6322,25 @@ namespace Android_Silver.Services
                 return true;
             }
             return false;
+        }
+
+        void GetCalibrateData(int val, SPCalibrateThm spCalibrateThm, int index)
+        {
+            if (spCalibrateThm.CavType.Value == 0)
+            {
+                if (GetFloatValueResult(val, spCalibrateThm.PCalibratesLimits))
+                {
+                    spCalibrateThm.PCalibrates[index] = spCalibrateThm.PCalibratesLimits.Value;
+                }
+            }
+            else
+            if (spCalibrateThm.CavType.Value == 1)
+            {
+                if (GetFloatValueResult(val, spCalibrateThm.DeltaTCalibratesLimits))
+                {
+                    spCalibrateThm.DeltaTCalibrates[index] = spCalibrateThm.DeltaTCalibratesLimits.Value;
+                }
+            }
         }
 
         private bool GetIntValueResult(int inputVal, IntValue intVal)

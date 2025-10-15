@@ -23,6 +23,8 @@ namespace Android_Silver.Entities.FBEntities
         public IntValue TestTimeS;
         public int[] CalibrateStepPercs;
         public IntValue CalibrateStepsLimits;
+        public float[] PCalibrates;
+        public FloatValue PCalibratesLimits;
         public float[] DeltaTCalibrates;
         public FloatValue DeltaTCalibratesLimits;
         public float[] FlowCalibrates;
@@ -44,8 +46,10 @@ namespace Android_Silver.Entities.FBEntities
             TCalibrateFilter = new FloatValue(0, 9, 2);
             TCalibrateFilter = new FloatValue(-150, 150, 2);
             LeakFlow = new FloatValue(0, 100_000, 0);
-            DeltaTCalibratesLimits = new FloatValue(0, 100, 1);
+            DeltaTCalibratesLimits = new FloatValue(-150, 150, 2);
             DeltaTCalibrates = new float[7];
+            PCalibratesLimits = new FloatValue(0, 100, 0);
+            PCalibrates = new float[7];
             FlowCalibratesLimits = new FloatValue(0, 100_000, 0);
             FlowCalibrates = new float[7];
             CavType = new IntValue(0, 1);
