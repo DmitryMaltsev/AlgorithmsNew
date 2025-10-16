@@ -32,7 +32,6 @@ namespace Android_Silver.Entities.FBEntities
         public IntValue CavType;
         public FloatValue CalibrateDeltaT;
 
-
         public SPCalibrateThm()
         {
             CalibrateMode = new IntValue(0, 4);
