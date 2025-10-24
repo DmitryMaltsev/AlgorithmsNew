@@ -31,6 +31,9 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue FlowCalibratesLimits;
         public IntValue CavType;
         public FloatValue CalibrateDeltaT;
+        public IntValue PUReg;
+        public IntValue IUReg;
+        public IntValue DUReg;
 
         public SPCalibrateThm()
         {
@@ -52,7 +55,10 @@ namespace Android_Silver.Entities.FBEntities
             FlowCalibratesLimits = new FloatValue(0, 100_000, 0);
             FlowCalibrates = new float[7];
             CavType = new IntValue(0, 1);
-            CalibrateDeltaT = new FloatValue(20, 50, 0);
+            CalibrateDeltaT = new FloatValue(10, 50, 0);
+            PUReg = new IntValue(0, 10_000);
+            IUReg = new IntValue(0, 10_000);
+            DUReg = new IntValue(0, 10_000);
         }
     }
 }

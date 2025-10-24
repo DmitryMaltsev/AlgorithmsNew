@@ -26,8 +26,6 @@ namespace Android_Silver.Entities.FBEntities
 
         public MBRecupSetPoints MbRecSPs { get; set; }
 
-
-
         public CommonSetPoints CCommonSetPoints { get; set; }
         public DamperSetPoints CDamperSetPoints;
         public ElementsConfig CEConfig;
