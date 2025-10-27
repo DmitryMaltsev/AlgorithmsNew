@@ -83,6 +83,7 @@
                 <Button Width="100" Height="30"  HorizontalAlignment="Left"  Margin="5"
                 Command="{Binding DisconnectCommand}" IsEnabled="{Binding Connected}">Отключиться</Button>
             </StackPanel>
+            <TextBlock Text="{Binding SRecieveCounter, StringFormat='Количестов данных={0}'}"/>
         </StackPanel>
 
     </Grid>

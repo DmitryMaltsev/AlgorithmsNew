@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+
 using TCPTest.Entities;
 
 
@@ -16,7 +17,7 @@ namespace TCPTest
     public class TCPTestViewModel : INotifyPropertyChanged
     {
         #region Rising properties
-        private string _serverIP = "192.168.0.15";
+        private string _serverIP = "192.168.0.225";
         public string ServerIP
         {
             get
@@ -112,6 +113,29 @@ namespace TCPTest
             }
         }
 
+        private int _recieveCounter;
+
+        public int RecieveCounter
+        {
+            get { return _recieveCounter; }
+            set
+            {
+                _recieveCounter = value;
+                OnPropertyChanged(nameof(RecieveCounter));
+            }
+        }
+        private string _sRecieveCounter;
+
+        public string SRecieveCounter
+        {
+            get { return _sRecieveCounter; }
+            set { 
+                _sRecieveCounter = value;
+                OnPropertyChanged(nameof(SRecieveCounter));
+            }
+        }
+
+
         public IEthernetEntities EthernetEntities { get; set; }
         #endregion
 
@@ -183,6 +207,7 @@ namespace TCPTest
 
             //   Task.Run(() => ExecuteSendData());
             DispatcherTimer t = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(200) };
+            //SendRecieveTask("");
             t.Tick += T_Tick;
             t.Start();
         }
@@ -191,7 +216,7 @@ namespace TCPTest
 
         private void T_Tick(object? sender, EventArgs e)
         {
-
+            SRecieveCounter = RecieveCounter.ToString();
         }
 
 
@@ -212,6 +237,7 @@ namespace TCPTest
                 SystemMessage = "Подключение прошло успешно";
                 SendIsActive = true;
                 Connected = true;
+                SendRecieveTask("");
             }
             catch (Exception ex)
             {
@@ -235,14 +261,83 @@ namespace TCPTest
             _tcpClient.Close();
             _tcpClient.Dispose();
         }
-        private Task sendBufTask;
 
+        private Task sendBufTask;
         void ExecuteSendData()
         {
             SendMessageToClient = "103,05";
             sendBufTask = new Task(() => SendBuffer(SendMessageToClient));
             sendBufTask.Start();
         }
+
+        StringBuilder sbResult = new StringBuilder();
+        public void SendRecieveTask(string val)
+        {
+            string mess = String.Empty;
+            for (int i = 0; i < 256; i++)
+            {
+                mess += 6;
+            }
+            Task.Run(() =>
+            {
+                while (Connected)
+                {
+                    sbResult = CyclicSendCommand(mess);
+             
+                    Task.Delay(10);
+                }
+
+            });
+        }
+        private StringBuilder CyclicSendCommand(string command)
+        {
+
+            bool IsSending = true;
+            StringBuilder sbResult = new StringBuilder();
+            int _trySendcounter = 0;
+            do
+            {
+                try
+                {
+                    _stream = _tcpClient.GetStream();
+                    StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
+                    writer.WriteLine(command);
+                    writer.Flush();
+                    byte[] data = new byte[700];
+                    int bytes = _stream.Read(data, 0, data.Length);
+                    do
+                    {
+                        sbResult.Append(Encoding.ASCII.GetString(data, 0, bytes));
+                    }
+                    while (_stream.DataAvailable);
+                    IsSending = false;
+                    RecieveCounter += 1;
+                }
+                catch (Exception ex)
+                {
+                    _trySendcounter += 1;
+                    Task.Delay(5);
+                    SystemMessage = $"количество попыток {_trySendcounter}";
+                }
+                // && _ethernetEntities.MessageToServer==String.Empty
+            }
+            while (IsSending && _trySendcounter < 10 && MessageToServer == String.Empty);
+            IsSending = false;
+            if (_trySendcounter == 10)
+            {
+                if (Connected == true)
+                {
+                    SystemMessage = "Превышено максимальное количество попыток - 10";
+                    Connected = false;
+                }
+                else
+                {
+                    Connected = false;
+                }
+            }
+            return sbResult;
+        }
+
         private void SendBuffer(string command)
         {
             SendIsActive = false;
@@ -256,7 +351,7 @@ namespace TCPTest
                     writer.WriteLine(command);
                     writer.Flush();
                     _cData = command.ToString();
-                    byte[] data = new byte[100];
+                    byte[] data = new byte[250];
                     StringBuilder responseData = new StringBuilder();
                     int bytes = _stream.Read(data, 0, data.Length);
                     do

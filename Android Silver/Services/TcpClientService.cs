@@ -42,7 +42,6 @@ namespace Android_Silver.Services
         public Action ClientDisconnected { get; set; }
 
 
-
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
