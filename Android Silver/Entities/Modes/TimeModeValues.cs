@@ -27,7 +27,7 @@ namespace Android_Silver.Entities.Modes
 
         public int TCodeNum
         {
-            get { return _CodeNum; }
+            get { return _CodeNum; } 
             set {
                 _CodeNum = value;
                 OnPropertyChanged(nameof(TCodeNum));

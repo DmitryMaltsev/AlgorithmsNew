@@ -203,7 +203,7 @@ namespace Android_Silver.Pages
         public ICommand ContactArrRightCommand { get; private set; }
         public ICommand HumidityCommand { get; private set; }
         public ICommand SetTimeCommand { get; private set; }
-
+        public ICommand UpdateCommand { get; private set; }
         public ICommand ChangeFilterCommand { get; private set; }
         #endregion
         #region Humidity commands
@@ -293,6 +293,7 @@ namespace Android_Silver.Pages
             HumidityCommand = new Command(ExecuteHumidity);
             TimeReturnCommand = new Command(ExecuteTimeReturn);
             ChangeFilterCommand = new Command(ExecuteChangeFilter);
+            UpdateCommand = new Command(ExecuteUpdate);
             TimeBuffer = new();
             Value = 15;
 
@@ -374,8 +375,6 @@ namespace Android_Silver.Pages
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
         }
-
-
 
         async private void ExecuteConnect()
         {
@@ -734,6 +733,11 @@ namespace Android_Silver.Pages
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.HumidityPage);
             HumiditySP = CFBs.CHumiditySPS.HumiditySP;
+        }
+
+        private void ExecuteUpdate(object obj)
+        {
+           
         }
 
         private void ExecuteSetTime(object obj)

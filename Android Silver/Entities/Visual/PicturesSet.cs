@@ -509,6 +509,18 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private PicByStates _updaterBut;
+
+        public PicByStates UpdaterBut
+        {
+            get { return _updaterBut; }
+            set {
+                _updaterBut = value; 
+                OnPropertyChanged(nameof(UpdaterBut));
+            }
+        }
+
+
         private PicByStates _arrowButLeft;
         public PicByStates ArrowButLeft
         {
@@ -902,6 +914,7 @@ namespace Android_Silver.Entities.Visual
                         FilterChangedBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
                         TimeBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
                         HumidityBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
+                        UpdaterBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
                         ArrowButLeft = new PicByStates("but_left_off_base.png", "but_left_on_base.png");
                         ArrowButRight = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
                         ContactBackGround = "other_set_but_off_base.png";

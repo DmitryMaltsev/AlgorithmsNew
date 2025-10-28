@@ -4,6 +4,7 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
+
 using System;
 using System.Collections;
 using System.Net.Sockets;
@@ -62,8 +63,8 @@ namespace Android_Silver.Services
             try
             {
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 600;
-                _ethernetEntities.Client.SendTimeout = 600;
+                _ethernetEntities.Client.ReceiveTimeout = 1000;
+                _ethernetEntities.Client.SendTimeout = 1000;
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = true;
                 _ethernetEntities.CanTryToConnect = !IsConnecting;
@@ -273,7 +274,7 @@ namespace Android_Silver.Services
             }
             while (IsSending && _trySendcounter < 10 && MessageToServer == String.Empty);
             IsSending = false;
-            if (_trySendcounter == 30)
+            if (_trySendcounter == 10)
             {
                 _pictureSet.SetPicureSetIfNeed(_pictureSet.LinkHeader, _pictureSet.LinkHeader.Default);
                 if (_ethernetEntities.IsConnected == true)
@@ -308,9 +309,8 @@ namespace Android_Silver.Services
             string[] resultVals = rSB.ToString().Split(",");
             if (resultVals.Length >= 2)
             {
-                if (int.TryParse(resultVals[1], out int valsCount))
+                if (int.TryParse(resultVals[1], out int valsCount) && int.TryParse(resultVals[0], out int startTag))
                 {
-                    ushort startTag = ushort.Parse(resultVals[0]);
                     for (ushort i = 0; i < valsCount; i++)
                     {
                         string valBuf = (i + 2) < resultVals.Length ? resultVals[i + 2] : String.Empty;

@@ -484,6 +484,15 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.HumidityBut.Current = ViewModel.CPictureSet.HumidityBut.Default;
         }
 
+        private void Updater_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.UpdaterBut.Current = ViewModel.CPictureSet.UpdaterBut.Selected;
+        }
+
+        private void Updater_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.UpdaterBut.Current = ViewModel.CPictureSet.UpdaterBut.Default;
+        }
         private void ArrowButLeft_Pressed(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.ArrowButLeft.Current = ViewModel.CPictureSet.ArrowButLeft.Selected;
@@ -510,6 +519,8 @@ namespace Android_Silver.Pages
         {
             base.OnAppearing();
         }
+
+
     }
 
 }
