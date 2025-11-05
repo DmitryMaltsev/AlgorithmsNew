@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.FBEntities
 {
-    public class FBs:BindableBase
+    public class FBs : BindableBase
     {
         public Alarms CAlarms { get; set; }
         public HumiditySPS CHumiditySPS { get; set; }
@@ -25,7 +25,6 @@ namespace Android_Silver.Entities.FBEntities
         public SPCalibrateThm ExhaustCalibrateThm { get; set; }
 
         public MBRecupSetPoints MbRecSPs { get; set; }
-
         public CommonSetPoints CCommonSetPoints { get; set; }
         public DamperSetPoints CDamperSetPoints;
         public ElementsConfig CEConfig;
@@ -33,6 +32,8 @@ namespace Android_Silver.Entities.FBEntities
         public EHSetPoints CEHSetPoints { get; set; }
         public FreonCoolerSP CFreonCoolerSP;
         public UFLeds UFLeds { get; set; }
+
+        public Updater CUpdater {get; set;}
 
         public FBs()
         {
@@ -57,10 +58,6 @@ namespace Android_Silver.Entities.FBEntities
             };
 
 
-
-
-
-
             CSensors = new Sensors();
             CFans = new Fans();
             CCommonSetPoints = new CommonSetPoints();
@@ -74,6 +71,7 @@ namespace Android_Silver.Entities.FBEntities
             UFLeds = new UFLeds();
             SupCalibrateThm = new SPCalibrateThm();
             ExhaustCalibrateThm = new SPCalibrateThm();
+            CUpdater = new Updater();
         }
     }
 }

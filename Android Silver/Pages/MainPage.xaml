@@ -821,7 +821,7 @@
                                                                                                     IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <Button Grid.Row="15" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.UpdaterBut.Current}" Command="{Binding UpdateCommand}"
              Pressed="Updater_Pressed" Released="Updater_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
-            <Label Text="0/200" Grid.Row="16" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
+            <Label Text="{Binding  CFBs.CUpdater.ResultPackets}" Grid.Row="16" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
                                                                                                         IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <!--#endregion-->
 

@@ -5,10 +5,8 @@ using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 
-using System;
 using System.Collections;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Text;
 
 
@@ -52,7 +50,6 @@ namespace Android_Silver.Services
             _fbs = DIContainer.Resolve<FBs>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             _servActivePageEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
-            _fbs.OtherSettings.MFloorAction += MFloorCallback;
             _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
@@ -127,27 +124,69 @@ namespace Android_Silver.Services
                          SendCommand(messToClient);
                          if (sbResult != null && sbResult.Length > 0)
                          {
-                             List<Response> responseList = new();
-                             if (GetResponseData(sbResult, responseList))
+                             if (_ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
                              {
-                                 foreach (var response in responseList)
+                                 string result = sbResult.ToString();
+                                 var result2 = result.Split(",");
+                                 bool isRightPacket = false;
+                                 bool isAllDataSender = false;
+                                 if (result2.Length == 2 && int.TryParse(result2[0], out int id))
                                  {
-                                     GetValueByTag(response);
+                                     if (_fbs.CUpdater.CurrentPacket == id && result2[1] == "OK")
+                                     {
+                                         if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketLength.Value - 1)
+                                         {
+                                             isRightPacket = true;
+                                         }
+                                         else
+                                         {
+                                             isAllDataSender = true;
+                                         }
+                                     }
                                  }
-                                 if (String.Compare(messToClient, MessageToServer, true) == 0)
-                                     MessageToServer = String.Empty;
+                                 if (isAllDataSender)
+                                 {
+                                    // _fbs.CUpdater.PacketLength.Value = 0;
+                                     _fbs.CUpdater.IsUpdate = 0;
+                                     //_fbs.CUpdater.CurrentPacket = 0;
+                                     return;
+                                 }
+                                 else
+                                 if (isRightPacket)
+                                 {
+                                     _fbs.CUpdater.CurrentPacket += 1;
+                                     _fbs.CUpdater.ResendCounter = 0;
+                                 }
+                                 else
+                                 {
+                                     _fbs.CUpdater.ResendCounter += 1;
+                                 }
+                                 _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketLength;
                              }
                              else
                              {
-                                 _ethernetEntities.SystemMessage = $"Данные не получены";
+                                 List<Response> responseList = new();
+                                 if (GetResponseData(sbResult, responseList))
+                                 {
+                                     foreach (var response in responseList)
+                                     {
+                                         GetValueByTag(response);
+                                     }
+                                     if (String.Compare(messToClient, MessageToServer, true) == 0)
+                                         MessageToServer = String.Empty;
+                                 }
+                                 else
+                                 {
+                                     _ethernetEntities.SystemMessage = $"Данные не получены";
+                                 }
                              }
                          }
+                         else
+                         {
+                             _ethernetEntities.SystemMessage = "Данные уже передаются";
+                         }
+                         Task.Delay(200);
                      }
-                     else
-                     {
-                         _ethernetEntities.SystemMessage = "Данные уже передаются";
-                     }
-                     Task.Delay(200);
                  }
              });
         }
@@ -157,22 +196,20 @@ namespace Android_Silver.Services
             //Условие при котором мы определям, что мы находимся на странице календаря или переходим на нее.
             bool isReadingShedTable = (_activePageEntities.IsLoadingPage || _activePageEntities.IsTSettingsPage)
                 && _modesEntities.CTimeModeValues.Count > 0 && _modesEntities.CTimeModeValues[0].Mode2Num == 3;
-
+            if (_fbs.CUpdater.IsUpdate == 1)
+            {
+                _ethernetEntities.CMessageState = MessageStates.UpdaterMessage;
+            }
+            else
             if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
                                                            _modesEntities.CTimeModeValues[0].Mode2Num == 2)
             {
                 _ethernetEntities.CMessageState = MessageStates.VacMessage;
             }
             else
-                if (isReadingShedTable && _ethernetEntities.CMessageState != MessageStates.ShedMessage1)
+                if (isReadingShedTable && _ethernetEntities.CMessageState != MessageStates.ShedMessage)
             {
-                _ethernetEntities.CMessageState = MessageStates.ShedMessage1;
-            }
-            else
-                if (isReadingShedTable && _ethernetEntities.CMessageState == MessageStates.ShedMessage1)
-            {
-                _ethernetEntities.CMessageState = MessageStates.ShedMessage2;
-                _activePageEntities.QueryStep = 0;
+                _ethernetEntities.CMessageState = MessageStates.ShedMessage;
             }
             else
             if (_ethernetEntities.PagesTab == 0)
@@ -204,7 +241,7 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            messToClient = "0100,057\r\n";
+                            messToClient = "0100,058\r\n";
                         }
                         break;
                     case MessageStates.VacMessage:
@@ -212,14 +249,9 @@ namespace Android_Silver.Services
                             messToClient = "0167,016\r\n";
                         }
                         break;
-                    case MessageStates.ShedMessage1:
+                    case MessageStates.ShedMessage:
                         {
-                            messToClient = "0183,056\r\n";
-                        }
-                        break;
-                    case MessageStates.ShedMessage2:
-                        {
-                            messToClient = "0239,056\r\n";
+                            messToClient = "0183,112\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage1:
@@ -232,6 +264,38 @@ namespace Android_Silver.Services
                         {
                             messToClient = "0421,121\r\n";
                             //messToClient = "300,050\r\n";
+                        }
+                        break;
+                    case MessageStates.UpdaterMessage:
+                        {
+                            int[] buffer = new int[256];
+                            byte counter = 0;
+                            string bufLength = String.Empty;
+                            int cPacket = _fbs.CUpdater.CurrentPacket;
+
+                            if (cPacket > 0 && cPacket < 10)
+                            {
+                                bufLength = "00" + cPacket.ToString();
+                            }
+                            else
+                            if (cPacket >= 10 && cPacket < 100)
+                            {
+                                bufLength = "0" + cPacket.ToString();
+                            }
+                            else
+                            if (cPacket >= 100 && cPacket < 1000)
+                            {
+                                bufLength = cPacket.ToString();
+                            }
+                            messToClient += bufLength + ",";
+                            for (int i = 0; i < buffer.Length; i++)
+                            {
+                                buffer[i] = counter;
+                                counter += 1;
+                                if (counter > 9) counter = 0;
+                                messToClient += buffer[i];
+                            }
+                            messToClient+="\r\n";
                         }
                         break;
                 }
@@ -988,6 +1052,17 @@ namespace Android_Silver.Services
                         }
                     }
                     break;
+                case 157:
+                    {
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
+                        {
+                            if (val >= 0 && val <= 1)
+                            {
+                                _fbs.CUpdater.IsUpdate = (byte)val;
+                            }
+                        }
+                    }
+                    break;
                 //Данные о режиме отпуска
                 case 167:
                     {
@@ -1587,11 +1662,7 @@ namespace Android_Silver.Services
                 case 238:
                     {
                         GetTModeCMode1(3, 13, resp.ValueString);
-                        if (_activePageEntities.IsLoadingPage)
-                        {
-                            _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
-                            _modesEntities.TTitle = "Расписание";
-                        }
+
                     }
                     break;
                 //Строка 15
@@ -2030,11 +2101,6 @@ namespace Android_Silver.Services
                         {
 
                             _modesEntities.Mode2ValuesList[3].TimeModeValues[27].DayNum = val;
-                            if (_activePageEntities.IsLoadingPage)
-                            {
-                                _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
-                                _modesEntities.TTitle = "Расписание";
-                            }
 
                         }
                     }
@@ -2055,13 +2121,17 @@ namespace Android_Silver.Services
                         {
 
                             _modesEntities.Mode2ValuesList[3].TimeModeValues[27].Minute = val;
+                            if (_activePageEntities.IsLoadingPage)
+                            {
+                                _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
+                                _modesEntities.TTitle = "Расписание";
+                            }
                         }
                     }
                     break;
                 case 294:
                     {
                         GetTModeCMode1(3, 27, resp.ValueString);
-
                     }
                     break;
                 //Проверка того, что данные записаны
@@ -2438,10 +2508,10 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            bool isMF = val > 0 ? true : false;
-                            if (_fbs.OtherSettings.IsMF != isMF)
+                            if (val == _fbs.CUpdater.PacketLength.Value)
                             {
-                                _fbs.OtherSettings.IsMF = isMF;
+                                _fbs.CUpdater.IsUpdate = 1;
+                                _fbs.CUpdater.CurrentPacket = 0;
                             }
                         }
                     }
@@ -6530,8 +6600,9 @@ namespace Android_Silver.Services
 
         private void MFloorCallback(bool val)
         {
-            int mfActive = val ? 1 : 0;
-            int[] vals = { mfActive };
+            _fbs.CUpdater.PacketLength.Value = 100;
+
+            int[] vals = { _fbs.CUpdater.PacketLength.Value };
             SetCommandToServer(157 + _menusEntities.WriteOffset, vals);
         }
         #endregion

@@ -253,7 +253,7 @@ namespace Android_Silver.Pages
         public FBs CFBs { get; set; }
 
         private MenusEntities _menuesEntities { get; set; }
-       
+
         public MainPageViewModel()
         {
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -460,7 +460,7 @@ namespace Android_Silver.Pages
         private void ExecuteTurnOffMode(object obj)
         {
             int[] index = { 0 };
-            CTcpClientService.SetCommandToServer(108+ _menuesEntities.WriteOffset, index);
+            CTcpClientService.SetCommandToServer(108 + _menuesEntities.WriteOffset, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
         private void ExecuteMinMode(object obj)
@@ -737,7 +737,9 @@ namespace Android_Silver.Pages
 
         private void ExecuteUpdate(object obj)
         {
-           
+            CFBs.CUpdater.PacketLength.Value = 100;
+            int[] vals = { CFBs.CUpdater.PacketLength.Value };
+            CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
         }
 
         private void ExecuteSetTime(object obj)

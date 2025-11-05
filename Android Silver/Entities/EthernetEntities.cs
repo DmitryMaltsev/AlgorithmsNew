@@ -11,10 +11,10 @@ namespace Android_Silver.Entities
     {
         UserMessage,
         VacMessage,
-        ShedMessage1,
-        ShedMessage2,
+        ShedMessage,
         ServiceMessage1,
-        ServiceMessage2
+        ServiceMessage2,
+        UpdaterMessage
     }
 
     public class EthernetEntities : BindableBase
