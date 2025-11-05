@@ -132,7 +132,7 @@ namespace Android_Silver.Services
                                  bool isAllDataSender = false;
                                  if (result2.Length == 2 && int.TryParse(result2[0], out int id))
                                  {
-                                     if (_fbs.CUpdater.CurrentPacket == id && result2[1] == "OK")
+                                     if (_fbs.CUpdater.CurrentPacket == id && result2[1].Contains("OK"))
                                      {
                                          if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketLength.Value - 1)
                                          {
@@ -161,7 +161,7 @@ namespace Android_Silver.Services
                                  {
                                      _fbs.CUpdater.ResendCounter += 1;
                                  }
-                                 _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketLength;
+                                 _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketLength.Value;
                              }
                              else
                              {
@@ -273,19 +273,19 @@ namespace Android_Silver.Services
                             string bufLength = String.Empty;
                             int cPacket = _fbs.CUpdater.CurrentPacket;
 
-                            if (cPacket > 0 && cPacket < 10)
+                            if (cPacket >= 0 && cPacket < 10)
                             {
-                                bufLength = "00" + cPacket.ToString();
+                                bufLength = "000" + cPacket.ToString();
                             }
                             else
                             if (cPacket >= 10 && cPacket < 100)
                             {
-                                bufLength = "0" + cPacket.ToString();
+                                bufLength = "00" + cPacket.ToString();
                             }
                             else
                             if (cPacket >= 100 && cPacket < 1000)
                             {
-                                bufLength = cPacket.ToString();
+                                bufLength ="0" + cPacket.ToString();
                             }
                             messToClient += bufLength + ",";
                             for (int i = 0; i < buffer.Length; i++)
@@ -2511,7 +2511,7 @@ namespace Android_Silver.Services
                             if (val == _fbs.CUpdater.PacketLength.Value)
                             {
                                 _fbs.CUpdater.IsUpdate = 1;
-                                _fbs.CUpdater.CurrentPacket = 0;
+                                _fbs.CUpdater.CurrentPacket = 1;
                             }
                         }
                     }

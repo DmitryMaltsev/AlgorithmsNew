@@ -71,6 +71,7 @@ namespace Android_Silver.Entities.FBEntities
 		public Updater()
         {
 			PacketLength = new IntValue(0, 1000);
+			CurrentPacket = 1;
         }
 
     }
