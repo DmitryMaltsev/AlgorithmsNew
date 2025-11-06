@@ -374,6 +374,7 @@ namespace Android_Silver.Pages
             // StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
+            _fileSystemService.GetUpdaterFromFile();
         }
 
         async private void ExecuteConnect()
@@ -737,7 +738,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteUpdate(object obj)
         {
-            CFBs.CUpdater.PacketLength.Value = 100;
+            CFBs.CUpdater.PacketLength.Value = 200;
             int[] vals = { CFBs.CUpdater.PacketLength.Value };
             CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
         }

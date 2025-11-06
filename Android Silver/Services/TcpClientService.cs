@@ -4,7 +4,6 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
-
 using System.Collections;
 using System.Net.Sockets;
 using System.Text;
@@ -31,7 +30,9 @@ namespace Android_Silver.Services
             set { _messageToServer = value; }
         }
         public int ResieveCounter { get; set; }
+
         public Action<int> SetMode1Action { get; set; }
+
         private ActivePagesEntities _activePageEntities { get; set; }
 
         MenusEntities _menusEntities { get; set; }
@@ -39,7 +40,6 @@ namespace Android_Silver.Services
         private ServiceActivePagesEntities _servActivePageEntities { get; set; }
 
         public Action ClientDisconnected { get; set; }
-
 
         public TcpClientService()
         {
@@ -134,7 +134,7 @@ namespace Android_Silver.Services
                                  {
                                      if (_fbs.CUpdater.CurrentPacket == id && result2[1].Contains("OK"))
                                      {
-                                         if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketLength.Value - 1)
+                                         if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketLength.Value)
                                          {
                                              isRightPacket = true;
                                          }
@@ -146,20 +146,28 @@ namespace Android_Silver.Services
                                  }
                                  if (isAllDataSender)
                                  {
-                                    // _fbs.CUpdater.PacketLength.Value = 0;
+                                    _fbs.CUpdater.PacketLength.Value = 0;
                                      _fbs.CUpdater.IsUpdate = 0;
-                                     //_fbs.CUpdater.CurrentPacket = 0;
-                                     return;
+                                    _fbs.CUpdater.CurrentPacket = 0;
                                  }
                                  else
                                  if (isRightPacket)
                                  {
-                                     _fbs.CUpdater.CurrentPacket += 1;
-                                     _fbs.CUpdater.ResendCounter = 0;
+                                     if (_fbs.CUpdater.CurrentPacket<_fbs.CUpdater.PacketLength.Value)
+                                     {
+                                         _fbs.CUpdater.CurrentPacket += 1;
+                                         _fbs.CUpdater.ResendCounter = 0;
+                                     }
                                  }
                                  else
                                  {
                                      _fbs.CUpdater.ResendCounter += 1;
+                                     if (_fbs.CUpdater.ResendCounter>10)
+                                     {
+                                         _fbs.CUpdater.PacketLength.Value = 0;
+                                         _fbs.CUpdater.IsUpdate = 0;
+                                         _fbs.CUpdater.CurrentPacket = 0;
+                                     }
                                  }
                                  _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketLength.Value;
                              }
@@ -268,7 +276,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.UpdaterMessage:
                         {
-                            int[] buffer = new int[256];
+                            int[] buffer = new int[1000];
                             byte counter = 0;
                             string bufLength = String.Empty;
                             int cPacket = _fbs.CUpdater.CurrentPacket;
@@ -6516,31 +6524,34 @@ namespace Android_Silver.Services
         /// <param name="values"></param>
         public void SetCommandToServer(int address, int[] values)
         {
-            string bufLength = String.Empty;
-            if (values.Length > 0 && values.Length < 10)
+            if (_ethernetEntities.CMessageState != MessageStates.UpdaterMessage)
             {
-                bufLength = "00" + values.Length.ToString();
-            }
-            else
-            if (values.Length >= 10 && values.Length < 100)
-            {
-                bufLength = "0" + values.Length.ToString();
-            }
-            else
-            if (values.Length >= 100 && values.Length < 1000)
-            {
-                bufLength = values.Length.ToString();
-            }
-            MessageToServer = $"{address},{bufLength},";
-            for (int i = 0; i < values.Length; i++)
-            {
-                MessageToServer += values[i];
-                if (i < values.Length - 1)
+                string bufLength = String.Empty;
+                if (values.Length > 0 && values.Length < 10)
                 {
-                    MessageToServer += ",";
+                    bufLength = "00" + values.Length.ToString();
                 }
+                else
+                if (values.Length >= 10 && values.Length < 100)
+                {
+                    bufLength = "0" + values.Length.ToString();
+                }
+                else
+                if (values.Length >= 100 && values.Length < 1000)
+                {
+                    bufLength = values.Length.ToString();
+                }
+                MessageToServer = $"{address},{bufLength},";
+                for (int i = 0; i < values.Length; i++)
+                {
+                    MessageToServer += values[i];
+                    if (i < values.Length - 1)
+                    {
+                        MessageToServer += ",";
+                    }
+                }
+                MessageToServer += "\r\n";
             }
-            MessageToServer += "\r\n";
         }
 
         #region Получение временнных режимов

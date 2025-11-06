@@ -1,5 +1,7 @@
 ﻿using Android_Silver.Entities;
 
+using Microsoft.UI.Xaml.Documents;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace Android_Silver.Services
         EthernetEntities _ethernetEntities;
         public FileSystemService()
         {
-                _ethernetEntities =DIContainer.Resolve<EthernetEntities>();
+            _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
         }
         public async Task SaveToFileAsync(string fileName, string content)
         {
@@ -28,9 +30,9 @@ namespace Android_Silver.Services
             catch (Exception)
             {
 
-               
+
             }
-            
+
         }
 
         public string ReadFromFile(string fileName)
@@ -43,13 +45,41 @@ namespace Android_Silver.Services
                     return reader.ReadToEnd();
                 }
             }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string ReadFromCurrentDirectory(string fileName)
+        {
+            try
+            {
+                string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+                byte[] fileBytes = File.ReadAllBytes(path);
+
+                // Предполагаем, что файл содержит последовательность int (по 4 байта каждый)
+                for (int i = 0; i < fileBytes.Length; i += 4)
+                {
+
+                    int value = BitConverter.ToInt32(fileBytes, i);
+
+                }
+                return String.Empty;
+            }
             catch (Exception)
             {
                 return String.Empty;
             }
-       
-
         }
+
+
+        public void GetUpdaterFromFile()
+        {
+            var result = ReadFromCurrentDirectory("gold.bin");
+        }
+
+
         public void GetIPFromFile()
         {
             string ip = ReadFromFile("ConnectIP");
