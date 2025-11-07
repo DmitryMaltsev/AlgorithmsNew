@@ -6,7 +6,6 @@ using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
-using System.Net.Sockets;
 using System.Windows.Input;
 
 namespace Android_Silver.Pages
@@ -374,7 +373,18 @@ namespace Android_Silver.Pages
             // StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
-            _fileSystemService.GetUpdaterFromFile();
+            var fileString = _fileSystemService.GetUpdaterFromFile();
+            var splitedStrokes2 = fileString.Split("\r\n");
+            for (int i = 0; i < splitedStrokes2.Length; i++)
+            {
+                splitedStrokes2[i] += "\r\n";
+            }
+            CFBs.CUpdater.SplitedStrokes = splitedStrokes2;
+
+
+           
+            // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
+            // var result = _fileSystemService.CalculateChecksum(values);
         }
 
         async private void ExecuteConnect()

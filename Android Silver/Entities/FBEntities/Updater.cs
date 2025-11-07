@@ -66,12 +66,15 @@ namespace Android_Silver.Entities.FBEntities
 			}
 		}
 
-
+		public string[] SplitedStrokes;
+		public int CStroke = 0;
+		public List<char> CharData;
 
 		public Updater()
         {
 			PacketLength = new IntValue(0, 1000);
 			CurrentPacket = 1;
+			CharData = new List<char>();
         }
 
     }

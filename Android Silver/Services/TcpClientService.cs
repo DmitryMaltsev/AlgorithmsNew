@@ -276,34 +276,24 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.UpdaterMessage:
                         {
-                            int[] buffer = new int[1000];
-                            byte counter = 0;
-                            string bufLength = String.Empty;
-                            int cPacket = _fbs.CUpdater.CurrentPacket;
+                            int charsCounter = 0;
+                            _fbs.CUpdater.CharData.Clear();
+                            for (int i =_fbs.CUpdater.CStroke; i < _fbs.CUpdater.SplitedStrokes.Length; i++)
+                            {
 
-                            if (cPacket >= 0 && cPacket < 10)
-                            {
-                                bufLength = "000" + cPacket.ToString();
+                                int bufcounter = _fbs.CUpdater.SplitedStrokes[i].Length;
+                                if (charsCounter + bufcounter < 1000)
+                                {
+                                    _fbs.CUpdater.CharData.AddRange(_fbs.CUpdater.SplitedStrokes[i].ToCharArray());
+                                    charsCounter += bufcounter;
+                                }
+                                else
+                                {
+                                    _fbs.CUpdater.CStroke = i;
+                                    break;
+                                }
                             }
-                            else
-                            if (cPacket >= 10 && cPacket < 100)
-                            {
-                                bufLength = "00" + cPacket.ToString();
-                            }
-                            else
-                            if (cPacket >= 100 && cPacket < 1000)
-                            {
-                                bufLength ="0" + cPacket.ToString();
-                            }
-                            messToClient += bufLength + ",";
-                            for (int i = 0; i < buffer.Length; i++)
-                            {
-                                buffer[i] = counter;
-                                counter += 1;
-                                if (counter > 9) counter = 0;
-                                messToClient += buffer[i];
-                            }
-                            messToClient+="\r\n";
+                            messToClient += _fbs.CUpdater.CharData.ToString();
                         }
                         break;
                 }

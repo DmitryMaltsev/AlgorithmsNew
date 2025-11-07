@@ -1,13 +1,5 @@
 ﻿using Android_Silver.Entities;
 
-using Microsoft.UI.Xaml.Documents;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Android_Silver.Services
 {
     public class FileSystemService
@@ -51,34 +43,41 @@ namespace Android_Silver.Services
             }
         }
 
-        public string ReadFromCurrentDirectory(string fileName)
+        public List<char> ReadFromCurrentDirectory(string fileName)
         {
+            List<char> charData = new List<char>();
             try
             {
                 string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
                 byte[] fileBytes = File.ReadAllBytes(path);
-
-                // Предполагаем, что файл содержит последовательность int (по 4 байта каждый)
-                for (int i = 0; i < fileBytes.Length; i += 4)
+                for (int i = 0; i < fileBytes.Length; i++)
                 {
 
-                    int value = BitConverter.ToInt32(fileBytes, i);
-
                 }
-                return String.Empty;
             }
             catch (Exception)
             {
-                return String.Empty;
+
             }
+
+            return charData;
+
         }
 
-
-        public void GetUpdaterFromFile()
+        public string GetUpdaterFromFile()
         {
-            var result = ReadFromCurrentDirectory("gold.bin");
+           return ReadFromFile("gold.hex");
         }
 
+        public  byte CalculateChecksum(byte[] data)
+        {
+            byte checksum = 0;
+            foreach (byte b in data)
+            {
+                checksum += b;
+            }
+            return (byte)((0x100 - checksum) & 0xFF);
+        }
 
         public void GetIPFromFile()
         {
