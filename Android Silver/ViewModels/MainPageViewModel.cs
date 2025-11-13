@@ -373,16 +373,8 @@ namespace Android_Silver.Pages
             // StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
-            var fileString = _fileSystemService.GetUpdaterFromFile();
-            var splitedStrokes2 = fileString.Split("\r\n");
-            for (int i = 0; i < splitedStrokes2.Length; i++)
-            {
-                splitedStrokes2[i] += "\r\n";
-            }
-            CFBs.CUpdater.SplitedStrokes = splitedStrokes2;
-
-
            
+
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
         }
@@ -748,9 +740,33 @@ namespace Android_Silver.Pages
 
         private void ExecuteUpdate(object obj)
         {
-            CFBs.CUpdater.PacketLength.Value = 200;
-            int[] vals = { CFBs.CUpdater.PacketLength.Value };
-            CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+            if (CFBs.CUpdater.IsUpdate == 0)
+            {
+                var fileString = _fileSystemService.GetUpdaterFromFile();
+                var splitedStrokes2 = fileString.Split("\r\n");
+                for (int i = 0; i < splitedStrokes2.Length; i++)
+                {
+                    splitedStrokes2[i] += "\r\n";
+                }
+                CFBs.CUpdater.SplitedStrokes = splitedStrokes2;
+                CFBs.CUpdater.CharData.Clear();
+                int charsCounter = 0;
+                for (int i = CFBs.CUpdater.CStroke; i < CFBs.CUpdater.SplitedStrokes.Length - 1; i++)
+                {
+                    int splittedStrokeCounter = CFBs.CUpdater.SplitedStrokes[i].Length;
+                    if (charsCounter + splittedStrokeCounter < 1000)
+                    {
+                        charsCounter += splittedStrokeCounter;
+                    }
+                    else
+                    {
+                        CFBs.CUpdater.PacketLength.Value += 1;
+                        charsCounter = splittedStrokeCounter;
+                    }
+                }
+                int[] vals = { CFBs.CUpdater.PacketLength.Value };
+                CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+            }
         }
 
         private void ExecuteSetTime(object obj)

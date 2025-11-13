@@ -4,6 +4,7 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
+
 using System.Collections;
 using System.Net.Sockets;
 using System.Text;
@@ -130,30 +131,28 @@ namespace Android_Silver.Services
                                  var result2 = result.Split(",");
                                  bool isRightPacket = false;
                                  bool isAllDataSender = false;
-                                 if (result2.Length == 2 && int.TryParse(result2[0], out int id))
+                                 if (result2[1].Contains("OK"))
                                  {
-                                     if (_fbs.CUpdater.CurrentPacket == id && result2[1].Contains("OK"))
+                                     if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketLength.Value)
                                      {
-                                         if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketLength.Value)
-                                         {
-                                             isRightPacket = true;
-                                         }
-                                         else
-                                         {
-                                             isAllDataSender = true;
-                                         }
+                                         isRightPacket = true;
+                                     }
+                                     else
+                                     {
+                                         isAllDataSender = true;
                                      }
                                  }
                                  if (isAllDataSender)
                                  {
-                                    _fbs.CUpdater.PacketLength.Value = 0;
+                                     _fbs.CUpdater.PacketLength.Value = 0;
                                      _fbs.CUpdater.IsUpdate = 0;
-                                    _fbs.CUpdater.CurrentPacket = 0;
+                                     _fbs.CUpdater.CurrentPacket = 0;
+                                     _fbs.CUpdater.CStroke = 0;
                                  }
                                  else
                                  if (isRightPacket)
                                  {
-                                     if (_fbs.CUpdater.CurrentPacket<_fbs.CUpdater.PacketLength.Value)
+                                     if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketLength.Value)
                                      {
                                          _fbs.CUpdater.CurrentPacket += 1;
                                          _fbs.CUpdater.ResendCounter = 0;
@@ -162,7 +161,7 @@ namespace Android_Silver.Services
                                  else
                                  {
                                      _fbs.CUpdater.ResendCounter += 1;
-                                     if (_fbs.CUpdater.ResendCounter>10)
+                                     if (_fbs.CUpdater.ResendCounter > 10)
                                      {
                                          _fbs.CUpdater.PacketLength.Value = 0;
                                          _fbs.CUpdater.IsUpdate = 0;
@@ -278,14 +277,13 @@ namespace Android_Silver.Services
                         {
                             int charsCounter = 0;
                             _fbs.CUpdater.CharData.Clear();
-                            for (int i =_fbs.CUpdater.CStroke; i < _fbs.CUpdater.SplitedStrokes.Length; i++)
+                            for (int i = _fbs.CUpdater.CStroke; i < _fbs.CUpdater.SplitedStrokes.Length - 1; i++)
                             {
-
-                                int bufcounter = _fbs.CUpdater.SplitedStrokes[i].Length;
-                                if (charsCounter + bufcounter < 1000)
+                                int splittedStrokeCounter = _fbs.CUpdater.SplitedStrokes[i].Length;
+                                if (charsCounter + splittedStrokeCounter < 1000)
                                 {
                                     _fbs.CUpdater.CharData.AddRange(_fbs.CUpdater.SplitedStrokes[i].ToCharArray());
-                                    charsCounter += bufcounter;
+                                    charsCounter += splittedStrokeCounter;
                                 }
                                 else
                                 {
@@ -293,7 +291,7 @@ namespace Android_Silver.Services
                                     break;
                                 }
                             }
-                            messToClient += _fbs.CUpdater.CharData.ToString();
+                            messToClient =new string(_fbs.CUpdater.CharData.ToArray());
                         }
                         break;
                 }
@@ -6601,9 +6599,7 @@ namespace Android_Silver.Services
 
         private void MFloorCallback(bool val)
         {
-            _fbs.CUpdater.PacketLength.Value = 100;
-
-            int[] vals = { _fbs.CUpdater.PacketLength.Value };
+            int[] vals = { 0 };
             SetCommandToServer(157 + _menusEntities.WriteOffset, vals);
         }
         #endregion
