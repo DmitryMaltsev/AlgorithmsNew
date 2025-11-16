@@ -277,20 +277,20 @@ namespace Android_Silver.Services
                         {
                             messToClient = "";
                             _fbs.CUpdater.BinaryData.Clear();
-                            int startIndex = _fbs.CUpdater.CPacket * _fbs.CUpdater.DataSize;
-                            if (startIndex > 0 && startIndex < 10)
+                            int startID = _fbs.CUpdater.CurrentPacket * _fbs.CUpdater.DataSize;
+                            if (startID > 0 && startID < 10)
                             {
-                                messToClient = "00" + startIndex;
+                                messToClient = "00" + startID;
                             }
-                            else if (startIndex >= 10 && startIndex < 100)
+                            else if (startID >= 10 && startID < 100)
                             {
-                                messToClient = "0" + startIndex;
+                                messToClient = "0" + startID;
                             }
-                            else if (startIndex >= 100 && startIndex < 1000)
+                            else if (startID >= 100 && startID < 1000)
                             {
-                                messToClient = startIndex.ToString();
+                                messToClient = startID.ToString();
                             }
-
+                            int startIndex = startID - 1;
                             for (int i = 0; i < _fbs.CUpdater.DataSize; i += 4)
                             {
                                 uint bufVal = (uint)(_fbs.CUpdater.FileContent[startIndex + i] << 24 | _fbs.CUpdater.FileContent[startIndex + i + 1] << 16
@@ -298,7 +298,7 @@ namespace Android_Silver.Services
                                 // _fbs.CUpdater.BinaryData.Add(bufVal);//_fbs.CUpdater.FileContent[i] = 'w';
                                 messToClient += bufVal;
                             }
-                            _fbs.CUpdater.CPacket += 1;
+                            _fbs.CUpdater.CurrentPacket += 1;
                             messToClient += "\r\n";
                         }
                         break;

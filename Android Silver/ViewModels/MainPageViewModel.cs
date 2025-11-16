@@ -746,7 +746,7 @@ namespace Android_Silver.Pages
                 CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
                 int charsCounter = 0;
                 CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContent.Length / CFBs.CUpdater.DataSize;
-   
+                CFBs.CUpdater.CurrentPacket = 1;
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
                 CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
