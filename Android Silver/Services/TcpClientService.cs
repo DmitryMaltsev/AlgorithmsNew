@@ -129,11 +129,12 @@ namespace Android_Silver.Services
                              {
                                  string result = sbResult.ToString();
                                  var result2 = result.Split(",");
+                                 int id =int.Parse(result2[0]);
                                  bool isRightPacket = false;
                                  bool isAllDataSender = false;
-                                 if (result2[1].Contains("OK"))
+                                 if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket-1)
                                  {
-                                     if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketLength.Value)
+                                     if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
                                      {
                                          isRightPacket = true;
                                      }
@@ -144,15 +145,14 @@ namespace Android_Silver.Services
                                  }
                                  if (isAllDataSender)
                                  {
-                                     _fbs.CUpdater.PacketLength.Value = 0;
+                                     _fbs.CUpdater.PacketsCount.Value = 0;
                                      _fbs.CUpdater.IsUpdate = 0;
                                      _fbs.CUpdater.CurrentPacket = 0;
-                                     _fbs.CUpdater.CStroke = 0;
                                  }
                                  else
                                  if (isRightPacket)
                                  {
-                                     if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketLength.Value)
+                                     if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
                                      {
                                          _fbs.CUpdater.CurrentPacket += 1;
                                          _fbs.CUpdater.ResendCounter = 0;
@@ -163,12 +163,12 @@ namespace Android_Silver.Services
                                      _fbs.CUpdater.ResendCounter += 1;
                                      if (_fbs.CUpdater.ResendCounter > 10)
                                      {
-                                         _fbs.CUpdater.PacketLength.Value = 0;
+                                         _fbs.CUpdater.PacketsCount.Value = 0;
                                          _fbs.CUpdater.IsUpdate = 0;
                                          _fbs.CUpdater.CurrentPacket = 0;
                                      }
                                  }
-                                 _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketLength.Value;
+                                 _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketsCount.Value;
                              }
                              else
                              {
@@ -275,23 +275,31 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.UpdaterMessage:
                         {
-                            int charsCounter = 0;
-                            _fbs.CUpdater.CharData.Clear();
-                            for (int i = _fbs.CUpdater.CStroke; i < _fbs.CUpdater.SplitedStrokes.Length - 1; i++)
+                            messToClient = "";
+                            _fbs.CUpdater.BinaryData.Clear();
+                            int startIndex = _fbs.CUpdater.CPacket * _fbs.CUpdater.DataSize;
+                            if (startIndex > 0 && startIndex < 10)
                             {
-                                int splittedStrokeCounter = _fbs.CUpdater.SplitedStrokes[i].Length;
-                                if (charsCounter + splittedStrokeCounter < 1000)
-                                {
-                                    _fbs.CUpdater.CharData.AddRange(_fbs.CUpdater.SplitedStrokes[i].ToCharArray());
-                                    charsCounter += splittedStrokeCounter;
-                                }
-                                else
-                                {
-                                    _fbs.CUpdater.CStroke = i;
-                                    break;
-                                }
+                                messToClient = "00" + startIndex;
                             }
-                            messToClient =new string(_fbs.CUpdater.CharData.ToArray());
+                            else if (startIndex >= 10 && startIndex < 100)
+                            {
+                                messToClient = "0" + startIndex;
+                            }
+                            else if (startIndex >= 100 && startIndex < 1000)
+                            {
+                                messToClient = startIndex.ToString();
+                            }
+
+                            for (int i = 0; i < _fbs.CUpdater.DataSize; i += 4)
+                            {
+                                uint bufVal = (uint)(_fbs.CUpdater.FileContent[startIndex + i] << 24 | _fbs.CUpdater.FileContent[startIndex + i + 1] << 16
+                                            | _fbs.CUpdater.FileContent[startIndex + i + 2] << 8 | _fbs.CUpdater.FileContent[startIndex + i + 3]);
+                                // _fbs.CUpdater.BinaryData.Add(bufVal);//_fbs.CUpdater.FileContent[i] = 'w';
+                                messToClient += bufVal;
+                            }
+                            _fbs.CUpdater.CPacket += 1;
+                            messToClient += "\r\n";
                         }
                         break;
                 }
@@ -2504,7 +2512,7 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
-                            if (val == _fbs.CUpdater.PacketLength.Value)
+                            if (val == _fbs.CUpdater.PacketsCount.Value)
                             {
                                 _fbs.CUpdater.IsUpdate = 1;
                                 _fbs.CUpdater.CurrentPacket = 1;

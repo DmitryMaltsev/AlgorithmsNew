@@ -66,7 +66,7 @@ namespace Android_Silver.Services
 
         public string GetUpdaterFromFile()
         {
-           return ReadFromFile("gold.hex");
+           return ReadFromFile("gold.bin");
         }
 
         public  byte CalculateChecksum(byte[] data)

@@ -6,6 +6,7 @@ using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
+using System.Text;
 using System.Windows.Input;
 
 namespace Android_Silver.Pages
@@ -742,29 +743,11 @@ namespace Android_Silver.Pages
         {
             if (CFBs.CUpdater.IsUpdate == 0)
             {
-                var fileString = _fileSystemService.GetUpdaterFromFile();
-                var splitedStrokes2 = fileString.Split("\r\n");
-                for (int i = 0; i < splitedStrokes2.Length; i++)
-                {
-                    splitedStrokes2[i] += "\r\n";
-                }
-                CFBs.CUpdater.SplitedStrokes = splitedStrokes2;
-                CFBs.CUpdater.CharData.Clear();
+                CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
                 int charsCounter = 0;
-                for (int i = CFBs.CUpdater.CStroke; i < CFBs.CUpdater.SplitedStrokes.Length - 1; i++)
-                {
-                    int splittedStrokeCounter = CFBs.CUpdater.SplitedStrokes[i].Length;
-                    if (charsCounter + splittedStrokeCounter < 1000)
-                    {
-                        charsCounter += splittedStrokeCounter;
-                    }
-                    else
-                    {
-                        CFBs.CUpdater.PacketLength.Value += 1;
-                        charsCounter = splittedStrokeCounter;
-                    }
-                }
-                int[] vals = { CFBs.CUpdater.PacketLength.Value };
+                CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContent.Length / CFBs.CUpdater.DataSize;
+   
+                int[] vals = { CFBs.CUpdater.PacketsCount.Value };
                 CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
         }

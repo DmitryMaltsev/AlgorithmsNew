@@ -22,14 +22,14 @@ namespace Android_Silver.Entities.FBEntities
 			}
 		}
 
-		private IntValue _packetLength;
+		private IntValue _packetsCount;
 
-		public IntValue PacketLength
+		public IntValue PacketsCount
 		{
-			get { return _packetLength; }
+			get { return _packetsCount; }
 			set { 
-				_packetLength = value;
-				OnPropertyChanged(nameof(PacketLength));
+				_packetsCount = value;
+				OnPropertyChanged(nameof(PacketsCount));
 			}
 		}
 
@@ -66,15 +66,17 @@ namespace Android_Silver.Entities.FBEntities
 			}
 		}
 
-		public string[] SplitedStrokes;
-		public int CStroke = 0;
-		public List<char> CharData;
+		public string[] SplittedPacket;
+		public int CPacket = 0;
+		public List<uint> BinaryData;
+		public StringBuilder FileContent;
 
-		public Updater()
+        public int DataSize = 2048;
+        public Updater()
         {
-			PacketLength = new IntValue(0, 100000);
-			CurrentPacket = 1;
-			CharData = new List<char>();
+			PacketsCount = new IntValue(0, 100000);
+            CurrentPacket = 1;
+			BinaryData = new List<uint>();
         }
 
     }
