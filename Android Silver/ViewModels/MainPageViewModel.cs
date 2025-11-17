@@ -747,9 +747,6 @@ namespace Android_Silver.Pages
                 string content = _fileSystemService.GetUpdaterFromFile();
                 byte[] bytes = Encoding.UTF8.GetBytes(content);
                 CFBs.CUpdater.BinaryData=_fileSystemService.ReadBytes("gold.bin");
-
-
-
                 int charsCounter = 0;
                 CFBs.CUpdater.PacketsCount.Value =  CFBs.CUpdater.FileContent.Length / CFBs.CUpdater.DataSize;
                 CFBs.CUpdater.CurrentPacket = 1;
