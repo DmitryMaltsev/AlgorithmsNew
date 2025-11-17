@@ -743,9 +743,15 @@ namespace Android_Silver.Pages
         {
             if (CFBs.CUpdater.IsUpdate == 0)
             {
-                CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
+                //CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
+                string content = _fileSystemService.GetUpdaterFromFile();
+                byte[] bytes = Encoding.UTF8.GetBytes(content);
+                CFBs.CUpdater.BinaryData=_fileSystemService.ReadBytes("gold.bin");
+
+
+
                 int charsCounter = 0;
-                CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContent.Length / CFBs.CUpdater.DataSize;
+                CFBs.CUpdater.PacketsCount.Value =  CFBs.CUpdater.FileContent.Length / CFBs.CUpdater.DataSize;
                 CFBs.CUpdater.CurrentPacket = 1;
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
                 CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);

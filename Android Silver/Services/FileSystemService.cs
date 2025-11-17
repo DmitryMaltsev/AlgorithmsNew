@@ -34,13 +34,22 @@ namespace Android_Silver.Services
                 string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
                 using (StreamReader reader = new StreamReader(path))
                 {
-                    return reader.ReadToEnd();
+                    string result = reader.ReadToEnd();
+                    return result;
                 }
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
+        }
+
+        public byte[] ReadBytes(string fileName)
+        {
+                 string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+                byte[] fileBytes = File.ReadAllBytes(path);
+
+            return fileBytes;
         }
 
         public List<char> ReadFromCurrentDirectory(string fileName)

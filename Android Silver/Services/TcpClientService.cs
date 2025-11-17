@@ -129,10 +129,10 @@ namespace Android_Silver.Services
                              {
                                  string result = sbResult.ToString();
                                  var result2 = result.Split(",");
-                                 int id =int.Parse(result2[0]);
+                                 int id = int.Parse(result2[0]);
                                  bool isRightPacket = false;
                                  bool isAllDataSender = false;
-                                 if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket-1)
+                                 if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket)
                                  {
                                      if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
                                      {
@@ -276,9 +276,8 @@ namespace Android_Silver.Services
                     case MessageStates.UpdaterMessage:
                         {
                             messToClient = "";
-                            _fbs.CUpdater.BinaryData.Clear();
-                            int startID = _fbs.CUpdater.CurrentPacket * _fbs.CUpdater.DataSize;
-                            if (startID > 0 && startID < 10)
+                            int startID = _fbs.CUpdater.CurrentPacket;
+                            if (startID >= 0 && startID < 10)
                             {
                                 messToClient = "00" + startID;
                             }
@@ -290,15 +289,14 @@ namespace Android_Silver.Services
                             {
                                 messToClient = startID.ToString();
                             }
-                            int startIndex = startID - 1;
-                            for (int i = 0; i < _fbs.CUpdater.DataSize; i += 4)
+                            messToClient += ",";
+                            int startIndex = (_fbs.CUpdater.CurrentPacket - 1) * _fbs.CUpdater.DataSize;
+                            for (int i = startIndex; i < startIndex+_fbs.CUpdater.DataSize; i += 1)
                             {
-                                uint bufVal = (uint)(_fbs.CUpdater.FileContent[startIndex + i] << 24 | _fbs.CUpdater.FileContent[startIndex + i + 1] << 16
-                                            | _fbs.CUpdater.FileContent[startIndex + i + 2] << 8 | _fbs.CUpdater.FileContent[startIndex + i + 3]);
+                                byte bufVal = (byte)(_fbs.CUpdater.FileContent[i]);
                                 // _fbs.CUpdater.BinaryData.Add(bufVal);//_fbs.CUpdater.FileContent[i] = 'w';
                                 messToClient += bufVal;
                             }
-                            _fbs.CUpdater.CurrentPacket += 1;
                             messToClient += "\r\n";
                         }
                         break;
@@ -322,7 +320,7 @@ namespace Android_Silver.Services
                     StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
-                    byte[] data = new byte[700];
+                    byte[] data = new byte[2100];
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
                     {
@@ -6522,22 +6520,22 @@ namespace Android_Silver.Services
         {
             if (_ethernetEntities.CMessageState != MessageStates.UpdaterMessage)
             {
-                string bufLength = String.Empty;
+                string tagsCount = String.Empty;
                 if (values.Length > 0 && values.Length < 10)
                 {
-                    bufLength = "00" + values.Length.ToString();
+                    tagsCount = "00" + values.Length.ToString();
                 }
                 else
                 if (values.Length >= 10 && values.Length < 100)
                 {
-                    bufLength = "0" + values.Length.ToString();
+                    tagsCount = "0" + values.Length.ToString();
                 }
                 else
                 if (values.Length >= 100 && values.Length < 1000)
                 {
-                    bufLength = values.Length.ToString();
+                    tagsCount = values.Length.ToString();
                 }
-                MessageToServer = $"{address},{bufLength},";
+                MessageToServer = $"{address},{tagsCount},";
                 for (int i = 0; i < values.Length; i++)
                 {
                     MessageToServer += values[i];
