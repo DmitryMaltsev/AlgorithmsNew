@@ -1,5 +1,7 @@
 ﻿using Android_Silver.Entities;
 
+using System.Text;
+
 namespace Android_Silver.Services
 {
     public class FileSystemService
@@ -32,7 +34,7 @@ namespace Android_Silver.Services
             try
             {
                 string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
-                using (StreamReader reader = new StreamReader(path))
+                using (StreamReader reader = new StreamReader(path, Encoding.ASCII))
                 {
                     string result = reader.ReadToEnd();
                     return result;

@@ -68,13 +68,15 @@ namespace Android_Silver.Entities.FBEntities
 
 		public string[] SplittedPacket;
 		public byte[] BinaryData;
+		public char[] CharData;
 		public StringBuilder FileContent;
 
-        public int DataSize = 500;
+        public int DataSize = 2048;
         public Updater()
         {
 			PacketsCount = new IntValue(0, 100000);
             CurrentPacket = 1;
+			FileContent= new StringBuilder();
         }
 
     }

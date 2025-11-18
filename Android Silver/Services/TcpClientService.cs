@@ -6,6 +6,7 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 
 using System.Collections;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 
@@ -169,6 +170,7 @@ namespace Android_Silver.Services
                                      }
                                  }
                                  _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketsCount.Value;
+                                 _ethernetEntities.SystemMessage = result;
                              }
                              else
                              {
@@ -291,11 +293,19 @@ namespace Android_Silver.Services
                             }
                             messToClient += ",";
                             int startIndex = (_fbs.CUpdater.CurrentPacket - 1) * _fbs.CUpdater.DataSize;
-                            for (int i = startIndex; i < startIndex+_fbs.CUpdater.DataSize; i += 1)
+                            for (int i = startIndex; i < startIndex + _fbs.CUpdater.DataSize; i += 1)
                             {
-                                byte bufVal = (byte)(_fbs.CUpdater.FileContent[i]);
+                                if (i < _fbs.CUpdater.FileContent.Length)
+                                {
+                                    messToClient += _fbs.CUpdater.FileContent[i];
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                                // byte bufVal = (byte)(_fbs.CUpdater.FileContent[i]);
                                 // _fbs.CUpdater.BinaryData.Add(bufVal);//_fbs.CUpdater.FileContent[i] = 'w';
-                                messToClient += bufVal;
+                            
                             }
                             messToClient += "\r\n";
                         }
@@ -320,7 +330,7 @@ namespace Android_Silver.Services
                     StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
-                    byte[] data = new byte[2100];
+                    byte[] data = new byte[1024];
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
                     {
@@ -338,9 +348,9 @@ namespace Android_Silver.Services
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
             }
-            while (IsSending && _trySendcounter < 10 && MessageToServer == String.Empty);
+            while (IsSending && _trySendcounter < 20 && MessageToServer == String.Empty);
             IsSending = false;
-            if (_trySendcounter == 10)
+            if (_trySendcounter == 20)
             {
                 _pictureSet.SetPicureSetIfNeed(_pictureSet.LinkHeader, _pictureSet.LinkHeader.Default);
                 if (_ethernetEntities.IsConnected == true)

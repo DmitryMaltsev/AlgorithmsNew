@@ -6,6 +6,7 @@ using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
@@ -374,10 +375,12 @@ namespace Android_Silver.Pages
             // StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
-           
+
 
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
+            // object obj = 0;
+            // ExecuteUpdate(obj);
         }
 
         async private void ExecuteConnect()
@@ -744,13 +747,31 @@ namespace Android_Silver.Pages
             if (CFBs.CUpdater.IsUpdate == 0)
             {
                 //CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
-                string content = _fileSystemService.GetUpdaterFromFile();
-                byte[] bytes = Encoding.UTF8.GetBytes(content);
-                CFBs.CUpdater.BinaryData=_fileSystemService.ReadBytes("gold.bin");
-                int charsCounter = 0;
-                CFBs.CUpdater.PacketsCount.Value =  CFBs.CUpdater.FileContent.Length / CFBs.CUpdater.DataSize;
-                CFBs.CUpdater.CurrentPacket = 1;
+                //char[] chars = mess.ToCharArray();
+                //CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
+                CFBs.CUpdater.BinaryData = _fileSystemService.ReadBytes("gold.bin");
+                CFBs.CUpdater.FileContent.Clear();
+                for (int i = 0; i < CFBs.CUpdater.BinaryData.Length; i++)
+                {
+                    char[] hexChars = new char[2];
+                    int highVal = (char)(CFBs.CUpdater.BinaryData[i] >> 4);
+                    int lowVal = (char)(CFBs.CUpdater.BinaryData[i] & 0x0F);
+                    hexChars[0] = (char)(highVal < 10 ? highVal + '0' : highVal - 10 + 'A');
+                    hexChars[1] = (char)(lowVal < 10 ? lowVal + '0' : lowVal - 10 + 'A');
+                    CFBs.CUpdater.FileContent.Append(hexChars[0]);
+                    CFBs.CUpdater.FileContent.Append(hexChars[1]);
+                }
+                CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContent.Length / CFBs.CUpdater.DataSize;
+                var div = CFBs.CUpdater.FileContent.Length % CFBs.CUpdater.DataSize;
+                if (div > 0) CFBs.CUpdater.PacketsCount.Value += 1;
+                // Encoding win1251 = Encoding.GetEncoding("ISO-8859-1");
+                // CFBs.CUpdater.CharData = win1251.GetChars(CFBs.CUpdater.BinaryData);
+                // int charsCounter = 0;
+
+                // CFBs.CUpdater.CurrentPacket = 1;
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
+                // byte b = CFBs.CUpdater.BinaryData[1];
+                // char c = (char)b;
                 CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
         }
