@@ -70,13 +70,14 @@ namespace Android_Silver.Entities.FBEntities
 		public byte[] BinaryData;
 		public char[] CharData;
 		public StringBuilder FileContent;
-
+		public List<StringBuilder> FileContentList;
         public int DataSize = 2048;
         public Updater()
         {
 			PacketsCount = new IntValue(0, 100000);
             CurrentPacket = 1;
 			FileContent= new StringBuilder();
+			FileContentList = new List<StringBuilder>();
         }
 
     }

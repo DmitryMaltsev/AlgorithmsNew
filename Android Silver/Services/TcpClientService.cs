@@ -21,6 +21,8 @@ namespace Android_Silver.Services
         private FBs _fbs { get; set; }
         private PicturesSet _pictureSet { get; set; }
 
+        private FileSystemService _fileSystemService { get; set; }
+
         public bool IsConnecting { get; private set; } = false;
         public bool IsSending { get; private set; } = false;
         public bool IsRecieving { get; private set; } = false;
@@ -39,6 +41,8 @@ namespace Android_Silver.Services
 
         MenusEntities _menusEntities { get; set; }
 
+        MathService _mathService { get; set; }
+
         private ServiceActivePagesEntities _servActivePageEntities { get; set; }
 
         public Action ClientDisconnected { get; set; }
@@ -50,8 +54,10 @@ namespace Android_Silver.Services
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
             _menusEntities = DIContainer.Resolve<MenusEntities>();
             _fbs = DIContainer.Resolve<FBs>();
+            _fileSystemService = DIContainer.Resolve<FileSystemService>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             _servActivePageEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
+            _mathService= DIContainer.Resolve<MathService>();
             _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
@@ -130,7 +136,12 @@ namespace Android_Silver.Services
                              {
                                  string result = sbResult.ToString();
                                  var result2 = result.Split(",");
-                                 int id = int.Parse(result2[0]);
+                                 byte id = 0;
+                                 if (result2[0].Length == 2)
+                                 {
+                                     id = _mathService.GetByteFromHexChar(result2[0][0], result2[0][1]);
+                                 }
+                               
                                  bool isRightPacket = false;
                                  bool isAllDataSender = false;
                                  if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket)
@@ -162,7 +173,7 @@ namespace Android_Silver.Services
                                  else
                                  {
                                      _fbs.CUpdater.ResendCounter += 1;
-                                     if (_fbs.CUpdater.ResendCounter > 10)
+                                     if (_fbs.CUpdater.ResendCounter > 100)
                                      {
                                          _fbs.CUpdater.PacketsCount.Value = 0;
                                          _fbs.CUpdater.IsUpdate = 0;
@@ -277,36 +288,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.UpdaterMessage:
                         {
-                            messToClient = "";
-                            int startID = _fbs.CUpdater.CurrentPacket;
-                            if (startID >= 0 && startID < 10)
-                            {
-                                messToClient = "00" + startID;
-                            }
-                            else if (startID >= 10 && startID < 100)
-                            {
-                                messToClient = "0" + startID;
-                            }
-                            else if (startID >= 100 && startID < 1000)
-                            {
-                                messToClient = startID.ToString();
-                            }
-                            messToClient += ",";
-                            int startIndex = (_fbs.CUpdater.CurrentPacket - 1) * _fbs.CUpdater.DataSize;
-                            for (int i = startIndex; i < startIndex + _fbs.CUpdater.DataSize; i += 1)
-                            {
-                                if (i < _fbs.CUpdater.FileContent.Length)
-                                {
-                                    messToClient += _fbs.CUpdater.FileContent[i];
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                                // byte bufVal = (byte)(_fbs.CUpdater.FileContent[i]);
-                                // _fbs.CUpdater.BinaryData.Add(bufVal);//_fbs.CUpdater.FileContent[i] = 'w';
-                            
-                            }
+                            messToClient = _fbs.CUpdater.FileContentList[_fbs.CUpdater.CurrentPacket-1].ToString();
                             messToClient += "\r\n";
                         }
                         break;

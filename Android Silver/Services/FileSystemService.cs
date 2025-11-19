@@ -80,15 +80,7 @@ namespace Android_Silver.Services
            return ReadFromFile("gold.bin");
         }
 
-        public  byte CalculateChecksum(byte[] data)
-        {
-            byte checksum = 0;
-            foreach (byte b in data)
-            {
-                checksum += b;
-            }
-            return (byte)((0x100 - checksum) & 0xFF);
-        }
+
 
         public void GetIPFromFile()
         {
