@@ -5,8 +5,6 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
-
-using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
