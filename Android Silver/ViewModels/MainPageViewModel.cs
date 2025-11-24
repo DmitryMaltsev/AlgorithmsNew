@@ -5,6 +5,7 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
+
 using System.Text;
 using System.Windows.Input;
 
@@ -288,7 +289,7 @@ namespace Android_Silver.Pages
             ShedulerTableCommand = new Command(ExecuteShedulerTable);
             HomeCommand = new Command(ExecuteHomeCommand);
             ResetJournalCommand = new Command(ExecuteResetJournal);
-            NextOtherSettingsCommand = new Command(ExecuteNextOtherSetiings);
+            NextOtherSettingsCommand = new Command(ExecuteNextOtherSettings);
             JournalReturnCommand = new Command(ExecuteJournalReturn);
             ContactArrLeftCommand = new Command(ExecuteContactArrLeft);
             ContactArrRightCommand = new Command(ExecuteContactArrRight);
@@ -380,8 +381,8 @@ namespace Android_Silver.Pages
 
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
-            //object obj = 0;
-            //ExecuteUpdate(obj);
+            object obj = 0;
+            ExecuteUpdate(obj);
         }
 
         async private void ExecuteConnect()
@@ -695,7 +696,6 @@ namespace Android_Silver.Pages
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
-
         #endregion
 
         #region Alarms execute methods
@@ -732,7 +732,7 @@ namespace Android_Silver.Pages
             CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
         }
 
-        private void ExecuteNextOtherSetiings(object obj)
+        private void ExecuteNextOtherSettings(object obj)
         {
             throw new NotImplementedException();
         }
@@ -744,6 +744,48 @@ namespace Android_Silver.Pages
         }
 
         private void ExecuteUpdate(object obj)
+        {
+            if (CFBs.CUpdater.IsUpdate == 0)
+            {
+                string result = _fileSystemService.GetUpdaterFromFile();
+                string[] strokes = result.Split(':');
+                int offset = 0;
+                int start = 0;
+                for (int i = 1; i < strokes.Length; i++)
+                {
+                    string command = strokes[i][6].ToString() + strokes[i][7];
+                    int intCommant = int.Parse(command);
+                    if (intCommant == 0)
+                    {
+                        string strAddr= strokes[i][2].ToString() + strokes[i][3].ToString() + strokes[i][4].ToString() + strokes[i][5].ToString();
+                        start = int.Parse(strAddr, System.Globalization.NumberStyles.HexNumber);
+                        break;
+                    }
+                }
+
+
+                for (int i = strokes.Length - 1; i > 0; i--)
+                {
+                    string command =  strokes[i][6].ToString() + strokes[i][7];
+                    int intCommant = int.Parse(command);
+                    if (intCommant == 0)
+                    {
+                        string strOffset = strokes[i][2].ToString() + strokes[i][3].ToString() + strokes[i][4].ToString() + strokes[i][5].ToString();
+                        offset=int.Parse(strOffset,System.Globalization.NumberStyles.HexNumber);
+                        string strLn=strokes[i][0].ToString()+strokes[i][1];
+                        offset += int.Parse(strLn, System.Globalization.NumberStyles.HexNumber);
+                        break;
+                    }
+                    // CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                }
+                offset -= start;
+                CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContentList.Count;
+                int[] vals = { CFBs.CUpdater.PacketsCount.Value };
+            }
+        }
+
+
+        private void ExecuteUpdateBin(object obj)
         {
             if (CFBs.CUpdater.IsUpdate == 0)
             {

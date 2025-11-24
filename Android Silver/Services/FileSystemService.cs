@@ -77,7 +77,7 @@ namespace Android_Silver.Services
 
         public string GetUpdaterFromFile()
         {
-           return ReadFromFile("gold.bin");
+           return ReadFromFile("gold.hex");
         }
 
 
