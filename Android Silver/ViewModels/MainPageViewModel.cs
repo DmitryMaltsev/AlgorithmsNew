@@ -752,7 +752,7 @@ namespace Android_Silver.Pages
                 string[] strokes = result.Split(':');
                 int offset = 0;
                 int startAddress = 0;
-                int lastAddress=0;
+                int lastAddress = 0;
                 bool startAddrWrited = false;
                 bool isRightData = true;
                 List<HexStroke> hexList = new List<HexStroke>();
@@ -771,7 +771,7 @@ namespace Android_Silver.Pages
                         byteCounter += 1;
                     }
                     byte length = strokeBytes[0];
-                    ushort addr =(ushort)(strokeBytes[1] << 8 | strokeBytes[2]);
+                    ushort addr = (ushort)(strokeBytes[1] << 8 | strokeBytes[2]);
                     int command = strokeBytes[3];
                     byte[] useData = new byte[length];
                     for (int j = 0; j < useData.Length; j++)
@@ -799,11 +799,10 @@ namespace Android_Silver.Pages
                             startAddrWrited = true;
                         }
                         lastAddress = addr + length;
-                        hexList.Add(new HexStroke() { Length=length,Address=addr,UseData=useData,CRC=crc});
+                        hexList.Add(new HexStroke() { Length = length, Address = addr, UseData = useData, CRC = crc });
                     }
-                  
-                }
 
+                }
                 for (int i = 0; i < offset * 2; i++)
                 {
                     //updaterSBList.Append('F');
@@ -814,9 +813,26 @@ namespace Android_Silver.Pages
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
                 if (isRightData)
                 {
-                    byte[] data =new byte[lastAddress - startAddress];
+                    int dif = (lastAddress - startAddress) % 2048;
+                    int useDataLength = (lastAddress - startAddress) / 2048;
+                    if (dif != 0) useDataLength += 1;
+                    useDataLength *= 2048;
+                    byte[] useData = new byte[useDataLength];
+                    int useDataIndex;
+                    for (int i = 0; i < useData.Length; i++)
+                    {
+                        useData[i] = 255;
+                    }
+                    foreach (HexStroke hex in hexList)
+                    {
+                        for (int i = 0; i < hex.UseData.Length; i++)
+                        {
+                            useData[hex.Address+i-startAddress] = hex.UseData[i];
+                        }
+                    }
 
-                    // CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+
+                    //CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
                 }
 
             }
