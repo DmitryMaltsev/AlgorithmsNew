@@ -6,6 +6,7 @@ using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
+using System.Globalization;
 using System.Text;
 using System.Windows.Input;
 
@@ -750,37 +751,74 @@ namespace Android_Silver.Pages
                 string result = _fileSystemService.GetUpdaterFromFile();
                 string[] strokes = result.Split(':');
                 int offset = 0;
-                int start = 0;
+                int startAddress = 0;
+                int lastAddress=0;
+                bool startAddrWrited = false;
+                bool isRightData = true;
+                List<HexStroke> hexList = new List<HexStroke>();
                 for (int i = 1; i < strokes.Length; i++)
                 {
-                    string command = strokes[i][6].ToString() + strokes[i][7];
-                    int intCommant = int.Parse(command);
-                    if (intCommant == 0)
+                    byte[] strokeBytes = new byte[strokes[i].Length / 2 - 1];
+                    byte val = 0;
+                    int byteCounter = 0;
+                    for (int j = 0; j < strokes[i].Length - 3; j += 2)
                     {
-                        string strAddr= strokes[i][2].ToString() + strokes[i][3].ToString() + strokes[i][4].ToString() + strokes[i][5].ToString();
-                        start = int.Parse(strAddr, System.Globalization.NumberStyles.HexNumber);
+                        string byteStr = strokes[i][j].ToString() + strokes[i][j + 1];
+                        if (byte.TryParse(byteStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte value))
+                        {
+                            strokeBytes[byteCounter] = value;
+                        }
+                        byteCounter += 1;
+                    }
+                    byte length = strokeBytes[0];
+                    ushort addr =(ushort)(strokeBytes[1] << 8 | strokeBytes[2]);
+                    int command = strokeBytes[3];
+                    byte[] useData = new byte[length];
+                    for (int j = 0; j < useData.Length; j++)
+                    {
+                        useData[j] = strokeBytes[j + 4];
+                    }
+                    byte[] crcData = new byte[strokeBytes.Length - 1];
+                    for (int j = 0; j < crcData.Length; j++)
+                    {
+                        crcData[j] = strokeBytes[j];
+                    }
+
+                    byte crc = strokeBytes[4 + length];
+                    byte countedCRC = _mathService.CalculateChecksum(crcData);
+                    if (crc != countedCRC)
+                    {
+                        isRightData = false;
                         break;
                     }
+                    if (command == 0)
+                    {
+                        if (!startAddrWrited)
+                        {
+                            startAddress = addr;
+                            startAddrWrited = true;
+                        }
+                        lastAddress = addr + length;
+                        hexList.Add(new HexStroke() { Length=length,Address=addr,UseData=useData,CRC=crc});
+                    }
+                  
                 }
 
-
-                for (int i = strokes.Length - 1; i > 0; i--)
+                for (int i = 0; i < offset * 2; i++)
                 {
-                    string command =  strokes[i][6].ToString() + strokes[i][7];
-                    int intCommant = int.Parse(command);
-                    if (intCommant == 0)
-                    {
-                        string strOffset = strokes[i][2].ToString() + strokes[i][3].ToString() + strokes[i][4].ToString() + strokes[i][5].ToString();
-                        offset=int.Parse(strOffset,System.Globalization.NumberStyles.HexNumber);
-                        string strLn=strokes[i][0].ToString()+strokes[i][1];
-                        offset += int.Parse(strLn, System.Globalization.NumberStyles.HexNumber);
-                        break;
-                    }
-                    // CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                    //updaterSBList.Append('F');
                 }
-                offset -= start;
+
+
                 CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContentList.Count;
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
+                if (isRightData)
+                {
+                    byte[] data =new byte[lastAddress - startAddress];
+
+                    // CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                }
+
             }
         }
 
@@ -1105,6 +1143,7 @@ namespace Android_Silver.Pages
         }
 
         Timer timer;
+
         private void StartTimer()
         {
             MainThread.BeginInvokeOnMainThread(() =>
