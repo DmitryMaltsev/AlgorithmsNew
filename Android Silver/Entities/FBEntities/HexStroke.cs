@@ -8,8 +8,8 @@ namespace Android_Silver.Entities.FBEntities
 {
     public class HexStroke
     {
-        public byte Length { get; set; }
-        public int Address { get; set; }
+        public int CharLength { get; set; }
+        public int CharAddress { get; set; }
         public byte Command { get; set; }
         public byte CRC { get; set; }
         public byte[] UseData { get; set; }

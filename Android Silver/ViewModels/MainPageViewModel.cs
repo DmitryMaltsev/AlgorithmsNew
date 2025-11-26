@@ -7,7 +7,6 @@ using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
 using System.Globalization;
-using System.Text;
 using System.Windows.Input;
 
 namespace Android_Silver.Pages
@@ -744,106 +743,10 @@ namespace Android_Silver.Pages
             HumiditySP = CFBs.CHumiditySPS.HumiditySP;
         }
 
+
+
+
         private void ExecuteUpdate(object obj)
-        {
-            if (CFBs.CUpdater.IsUpdate == 0)
-            {
-                string result = _fileSystemService.GetUpdaterFromFile();
-                string[] strokes = result.Split(':');
-                int offset = 0;
-                int startAddress = 0;
-                int lastAddress = 0;
-                bool startAddrWrited = false;
-                bool isRightData = true;
-                List<HexStroke> hexList = new List<HexStroke>();
-                for (int i = 1; i < strokes.Length; i++)
-                {
-                    byte[] strokeBytes = new byte[strokes[i].Length / 2 - 1];
-                    byte val = 0;
-                    int byteCounter = 0;
-                    for (int j = 0; j < strokes[i].Length - 3; j += 2)
-                    {
-                        string byteStr = strokes[i][j].ToString() + strokes[i][j + 1];
-                        if (byte.TryParse(byteStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte value))
-                        {
-                            strokeBytes[byteCounter] = value;
-                        }
-                        byteCounter += 1;
-                    }
-                    byte length = strokeBytes[0];
-                    ushort addr = (ushort)(strokeBytes[1] << 8 | strokeBytes[2]);
-                    int command = strokeBytes[3];
-                    //байты данных для CRC
-                    byte[] useData = new byte[length];
-                    for (int j = 0; j < useData.Length; j++)
-                    {
-                        useData[j] = strokeBytes[j + 4];
-                    }
-                    //Байты данных для передачи
-                    char[] charUseData = new char[length*2];
-                    for (int j = 0; j < length * 2; j++)
-                    {
-                        charUseData[j] = strokes[i][j+8];
-                    }
-
-                    byte[] crcData = new byte[strokeBytes.Length - 1];
-                    for (int j = 0; j < crcData.Length; j++)
-                    {
-                        crcData[j] = strokeBytes[j];
-                    }
-                    byte crc = strokeBytes[4 + length];
-                    byte countedCRC = _mathService.CalculateChecksum(crcData);
-                    if (crc != countedCRC)
-                    {
-                        isRightData = false;
-                        break;
-                    }
-                    if (command == 0)
-                    {
-                        if (!startAddrWrited)
-                        {
-                            startAddress = addr;
-                            startAddrWrited = true;
-                        }
-                        lastAddress = addr + length;
-                        hexList.Add(new HexStroke() { Length = length, Address = addr, UseData = useData,CharUseData=charUseData, CRC = crc });
-                    }
-                }
-                for (int i = 0; i < offset * 2; i++)
-                {
-                    //updaterSBList.Append('F');
-                }
-
-
-                CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContentList.Count;
-                int[] vals = { CFBs.CUpdater.PacketsCount.Value };
-                if (isRightData)
-                {
-                    int dif = (lastAddress - startAddress) % 2048;
-                    int charDataLength = (lastAddress - startAddress) / 2048;
-                    if (dif != 0) charDataLength += 1;
-                    charDataLength *= 2048*2;
-                    char[] hexUseData = new char[charDataLength];
-                    for (int i = 0; i < charDataLength; i++)
-                    {
-                        hexUseData[i] = 'F';
-                    }
-                    foreach (HexStroke hex in hexList)
-                    {
-                        for (int i = 0; i < hex.CharUseData.Length; i++)
-                        {
-
-                            hexUseData[hex.Address*2 + i - startAddress] = hex.CharUseData[i];
-                        }
-                    }
-                    //CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
-                }
-
-            }
-        }
-
-
-        private void ExecuteUpdateBin(object obj)
         {
             if (CFBs.CUpdater.IsUpdate == 0)
             {
@@ -852,47 +755,57 @@ namespace Android_Silver.Pages
                 //CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
                 CFBs.CUpdater.BinaryData = _fileSystemService.ReadBytes("gold.bin");
                 int packBufIndex = 0;
-                int packSize = CFBs.CUpdater.DataSize / 2;
-                byte fContentIndex = 0;
-                byte[] bufPack = new byte[packSize + 1];
-                bufPack[0] = 1;
-                char[] hexChars = _mathService.GetHexCharsFromByte(1);
-                CFBs.CUpdater.FileContentList.Clear();
-                CFBs.CUpdater.FileContentList.Add(new StringBuilder());
-                CFBs.CUpdater.FileContentList[0].Append(hexChars);
-                var length = 2048;
-                //CFBs.CUpdater.BinaryData.Length
-                for (int i = 0; i < CFBs.CUpdater.BinaryData.Length; i++)
+                int size1 = CFBs.CUpdater.BinaryData.Length / CFBs.CUpdater.DataSize;
+                int devider1 = CFBs.CUpdater.BinaryData.Length % CFBs.CUpdater.DataSize;
+                if (devider1 > 0) size1 += 1;
+                //Увеличиваем index1, чтобы уменьшить index2
+                size1 *= 2;
+                //2 байта под ID, 1 байт под CRC
+                byte[,] buffer = new byte[size1, CFBs.CUpdater.DataSize / 2 + 3];
+                byte[,] crcBuffer = new byte[size1, CFBs.CUpdater.DataSize / 2];
+                int index1 = 0, index2 = 0;
+                int crcBuffersize = size1 * CFBs.CUpdater.DataSize / 2;
+                for (int i = 0; i < crcBuffersize; i++)
                 {
-                    hexChars = _mathService.GetHexCharsFromByte(CFBs.CUpdater.BinaryData[i]);
-                    CFBs.CUpdater.FileContentList[fContentIndex].Append(hexChars);
-                    bufPack[packBufIndex] = CFBs.CUpdater.BinaryData[i];
-                    packBufIndex++;
-                    if (packBufIndex % packSize == 0)
+                    if (index2 >= CFBs.CUpdater.DataSize / 2)
                     {
-                        byte crc = _mathService.CalculateChecksum(bufPack);
-                        char[] charCRC = _mathService.GetHexCharsFromByte(crc);
-                        CFBs.CUpdater.FileContentList[fContentIndex].Append(charCRC);
-                        if (CFBs.CUpdater.BinaryData.Length - (i + 1) >= CFBs.CUpdater.DataSize / 2)
-                        {
-                            packSize = CFBs.CUpdater.DataSize / 2;
-                        }
-                        else
-                        {
-                            packSize = CFBs.CUpdater.BinaryData.Length - (i + 1);
-                        }
-                        packBufIndex = 0;
-                        if (i + 1 < CFBs.CUpdater.BinaryData.Length)
-                        {
-                            bufPack = new byte[packSize + 1];
-                            CFBs.CUpdater.FileContentList.Add(new StringBuilder());
-                            fContentIndex += 1;
-                            byte byteID = (byte)(fContentIndex + 1);
-                            char[] id = _mathService.GetHexCharsFromByte(byteID);
-                            CFBs.CUpdater.FileContentList[fContentIndex].Append(id);
-                            bufPack[0] = fContentIndex;
-                        }
+                        index2 = 0;
+                        index1 += 1;
                     }
+                    if (i < CFBs.CUpdater.BinaryData.Length)
+                    {
+                        crcBuffer[index1, index2] = CFBs.CUpdater.BinaryData[i];
+                    }
+                    else
+                    {
+                        crcBuffer[index1, index2] = 255;
+                    }
+                    index2 += 1;
+                }
+                byte[,] useData = new byte[size1, CFBs.CUpdater.DataSize / 2 + 3];
+                index1 = 0; index2 = 0;
+                ushort id = 1;
+                for (int i = 0; i < crcBuffer.GetLength(0); i++)
+                {
+                    //Назначаем ID
+                    useData[i, index2] = (byte)(id >> 8);
+                    index2 += 1;
+                    useData[i, index2] = (byte)id; ;
+                    index2 += 1;
+                    id += 1;
+                    for (int j = 0; j < crcBuffer.GetLength(1); j++)
+                    {
+                        useData[i, index2] = crcBuffer[i, j];
+                        index2 += 1;
+                    }
+                    byte[] crc = new byte[CFBs.CUpdater.DataSize / 2];
+                    for (int k = 0; k < crc.Length; k++)
+                    {
+                        crc[k] = crcBuffer[i, k];
+                    }
+                    byte crcResult = _mathService.CalculateChecksum(crc);
+                    useData[i, CFBs.CUpdater.DataSize / 2 + 2] = crcResult;
+                    index2 = 0;
                 }
                 CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContentList.Count;
                 // Encoding win1251 = Encoding.GetEncoding("ISO-8859-1");
@@ -902,7 +815,7 @@ namespace Android_Silver.Pages
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
                 // byte b = CFBs.CUpdater.BinaryData[1];
                 // char c = (char)b;
-                CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                // CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
         }
 
@@ -919,6 +832,97 @@ namespace Android_Silver.Pages
         //{
         //    messToClient = startID.ToString();
         //}
+
+
+        private void ExecuteUpdateHex(object obj)
+        {
+            if (CFBs.CUpdater.IsUpdate == 0)
+            {
+                string result = _fileSystemService.GetUpdaterFromFile();
+                string[] strokes = result.Split(':');
+                int startAddress = 0;
+                int lastAddress = 0;
+                bool isRightData = true;
+                List<HexStroke> hexList = new List<HexStroke>();
+                for (int i = 1; i < strokes.Length; i++)
+                {
+                    byte[] strokeBytes = new byte[strokes[i].Length / 2 - 1];
+                    int byteCounter = 0;
+                    //Формируем байты из char
+                    for (int j = 0; j < strokes[i].Length - 3; j += 2)
+                    {
+                        string byteStr = strokes[i][j].ToString() + strokes[i][j + 1];
+                        if (byte.TryParse(byteStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte value))
+                        {
+                            strokeBytes[byteCounter] = value;
+                        }
+                        byteCounter += 1;
+                    }
+                    int length = strokeBytes[0];
+                    int addr = strokeBytes[1] << 8 | strokeBytes[2];
+                    int command = strokeBytes[3];
+                    //байты данных для CRC
+                    byte[] useData = new byte[length];
+                    for (int j = 0; j < useData.Length; j++)
+                    {
+                        useData[j] = strokeBytes[j + 4];
+                    }
+                    //Символьные данные для передачи
+                    char[] charUseData = new char[length * 2];
+                    for (int j = 0; j < length * 2; j++)
+                    {
+                        charUseData[j] = strokes[i][j + 8];
+                    }
+                    //Формирование и сравнение CRC
+                    byte[] crcData = new byte[strokeBytes.Length - 1];
+                    for (int j = 0; j < crcData.Length; j++)
+                    {
+                        crcData[j] = strokeBytes[j];
+                    }
+                    byte crc = strokeBytes[4 + length];
+                    byte countedCRC = _mathService.CalculateChecksum(crcData);
+                    if (crc != countedCRC)
+                    {
+                        isRightData = false;
+                        break;
+                    }
+                    if (command == 0)
+                    {
+                        //Умножаем, так как передаем char
+                        int charAddr = addr * 2;
+                        int charLength = length * 2;
+                        startAddress = startAddress < charAddr ? startAddress : charAddr;
+                        lastAddress = lastAddress > charAddr + charLength ? lastAddress : charAddr + charLength;
+                        hexList.Add(new HexStroke() { CharLength = charLength, CharAddress = charAddr, UseData = useData, CharUseData = charUseData, CRC = crc });
+                    }
+                }
+                if (isRightData)
+                {
+                    int dif = (lastAddress - startAddress) % 4096;
+                    int charDataLength = (lastAddress - startAddress) / 4096;
+                    if (dif != 0) charDataLength += 1;
+                    charDataLength *= 4096;
+                    char[] hexUseData = new char[charDataLength];
+                    for (int i = 0; i < charDataLength; i++)
+                    {
+                        hexUseData[i] = 'F';
+                    }
+                    for (int j = 0; j < hexList.Count; j++)
+                    {
+                        for (int i = 0; i < hexList[j].CharUseData.Length; i++)
+                        {
+                            hexUseData[hexList[j].CharAddress + i - startAddress] = hexList[j].CharUseData[i];
+                        }
+                    }
+
+
+
+                    int[] vals = { CFBs.CUpdater.PacketsCount.Value };
+                    CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContentList.Count;
+                    //CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                }
+            }
+        }
 
         private void ExecuteSetTime(object obj)
         {
