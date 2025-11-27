@@ -68,7 +68,7 @@ namespace Android_Silver.Entities.FBEntities
 
 		public string[] SplittedPacket;
 		public byte[] BinaryData;
-		public char[] CharData;
+		public char[,] UseCharData;
 		public StringBuilder FileContent;
 		public List<StringBuilder> FileContentList;
         public int DataSize = 2048;

@@ -136,10 +136,14 @@ namespace Android_Silver.Services
                              {
                                  string result = sbResult.ToString();
                                  var result2 = result.Split(",");
-                                 byte id = 0;
-                                 if (result2[0].Length == 2)
+                                 byte id0 = 0;
+                                 byte id1 = 0;
+                                 ushort id = 0;
+                                 if (result2.Length == 2)
                                  {
-                                     id = _mathService.GetByteFromHexChar(result2[0][0], result2[0][1]);
+                                     id0 = _mathService.GetByteFromHexChar(result2[0][0], result2[0][1]);
+                                     id1= _mathService.GetByteFromHexChar(result2[0][2], result2[0][3]);
+                                     id=(ushort)((id0 << 8) | id1);
                                  }
                                
                                  bool isRightPacket = false;
@@ -288,7 +292,11 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.UpdaterMessage:
                         {
-                            messToClient = _fbs.CUpdater.FileContentList[_fbs.CUpdater.CurrentPacket-1].ToString();
+                            messToClient = "";
+                            for (int i = 0; i < _fbs.CUpdater.UseCharData.GetLength(1); i++)
+                            {
+                                messToClient += _fbs.CUpdater.UseCharData[_fbs.CUpdater.CurrentPacket - 1, i];
+                            }
                             messToClient += "\r\n";
                         }
                         break;

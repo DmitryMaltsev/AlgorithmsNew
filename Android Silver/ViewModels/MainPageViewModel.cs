@@ -1,4 +1,5 @@
-﻿using Android_Silver.Entities;
+﻿
+using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
@@ -381,8 +382,8 @@ namespace Android_Silver.Pages
 
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
-            object obj = 0;
-            ExecuteUpdate(obj);
+           // object obj = 0;
+           // ExecuteUpdate(obj);
         }
 
         async private void ExecuteConnect()
@@ -785,12 +786,13 @@ namespace Android_Silver.Pages
                 byte[,] useData = new byte[size1, CFBs.CUpdater.DataSize / 2 + 3];
                 index1 = 0; index2 = 0;
                 ushort id = 1;
+                //Формируем пакет с ID и CRC
                 for (int i = 0; i < crcBuffer.GetLength(0); i++)
                 {
                     //Назначаем ID
                     useData[i, index2] = (byte)(id >> 8);
                     index2 += 1;
-                    useData[i, index2] = (byte)id; ;
+                    useData[i, index2] = (byte)id;
                     index2 += 1;
                     id += 1;
                     for (int j = 0; j < crcBuffer.GetLength(1); j++)
@@ -807,32 +809,37 @@ namespace Android_Silver.Pages
                     useData[i, CFBs.CUpdater.DataSize / 2 + 2] = crcResult;
                     index2 = 0;
                 }
-                CFBs.CUpdater.PacketsCount.Value = CFBs.CUpdater.FileContentList.Count;
-                // Encoding win1251 = Encoding.GetEncoding("ISO-8859-1");
-                // CFBs.CUpdater.CharData = win1251.GetChars(CFBs.CUpdater.BinaryData);
-                // int charsCounter = 0;
-                // CFBs.CUpdater.CurrentPacket = 1;
+                char[,] hexResult = new char[useData.GetLength(0), useData.GetLength(1) * 2];
+
+                for (int i = 0; i < useData.GetLength(0); i++)
+                {
+                    for (int j = 0; j < useData.GetLength(1); j++)
+                    {
+                        char[] charResult = _mathService.GetHexCharsFromByte(useData[i, j]);
+                        hexResult[i, j * 2] = charResult[0];
+                        hexResult[i, j * 2 + 1] = charResult[1];
+                    }
+                }
+                CFBs.CUpdater.PacketsCount.Value = hexResult.GetLength(0);
+                CFBs.CUpdater.UseCharData = hexResult;
+
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
-                // byte b = CFBs.CUpdater.BinaryData[1];
-                // char c = (char)b;
-                // CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                int ramCounter = 4;
+                CFBs.CUpdater.FileContent.Clear();
+                for (int i = 180; i < 182; i++)
+                {
+                    for(int j = 4;j< hexResult.GetLength(1)-2; j++)
+                    {
+                        CFBs.CUpdater.FileContent.Append(hexResult[i, j]);
+
+                    }
+                }
+                Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
+                // Task.Run(() => _fileSystemService.SaveToFileAsync("BinData", CFBs.CUpdater.FileContent.ToString()));
+
+                CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
         }
-
-        //        int startID = _fbs.CUpdater.CurrentPacket;
-        //                            if (startID >= 0 && startID< 10)
-        //                            {
-        //                                messToClient = "00" + startID;
-        //                            }
-        //                            else if (startID >= 10 && startID< 100)
-        //                            {
-        //                                messToClient = "0" + startID;
-        //                            }
-        //                            else if (startID >= 100 && startID < 1000)
-        //{
-        //    messToClient = startID.ToString();
-        //}
-
 
         private void ExecuteUpdateHex(object obj)
         {
