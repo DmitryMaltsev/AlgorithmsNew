@@ -2,6 +2,8 @@
 
 using System.Text;
 
+using static System.Net.Mime.MediaTypeNames;
+
 namespace Android_Silver.Services
 {
     public class FileSystemService
@@ -46,12 +48,13 @@ namespace Android_Silver.Services
             }
         }
 
-        public byte[] ReadBytes(string fileName)
+        public async Task<byte[]> ReadBytes(string fileName)
         {
-                 string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
-                byte[] fileBytes = File.ReadAllBytes(path);
-
-            return fileBytes;
+            using var stream = await FileSystem.OpenAppPackageFileAsync(fileName);
+            using var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            byte[] fileBytes = memoryStream.ToArray();
+            return memoryStream.ToArray();
         }
 
         public List<char> ReadFromCurrentDirectory(string fileName)
@@ -77,7 +80,7 @@ namespace Android_Silver.Services
 
         public string GetUpdaterFromFile()
         {
-           return ReadFromFile("gold.hex");
+            return ReadFromFile("gold.hex");
         }
 
 

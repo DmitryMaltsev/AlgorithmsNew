@@ -382,8 +382,8 @@ namespace Android_Silver.Pages
 
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
-           // object obj = 0;
-           // ExecuteUpdate(obj);
+            //object obj = 0;
+            //ExecuteUpdate(obj);
         }
 
         async private void ExecuteConnect()
@@ -754,7 +754,7 @@ namespace Android_Silver.Pages
                 //CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
                 //char[] chars = mess.ToCharArray();
                 //CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
-                CFBs.CUpdater.BinaryData = _fileSystemService.ReadBytes("gold.bin");
+                CFBs.CUpdater.BinaryData = Task.Run(() => _fileSystemService.ReadBytes("gold.bin")).Result;
                 int packBufIndex = 0;
                 int size1 = CFBs.CUpdater.BinaryData.Length / CFBs.CUpdater.DataSize;
                 int devider1 = CFBs.CUpdater.BinaryData.Length % CFBs.CUpdater.DataSize;
@@ -826,18 +826,17 @@ namespace Android_Silver.Pages
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
                 int ramCounter = 4;
                 CFBs.CUpdater.FileContent.Clear();
-                for (int i = 180; i < 182; i++)
+                for (int i = 100; i < 102; i++)
                 {
-                    for(int j = 4;j< hexResult.GetLength(1)-2; j++)
+                    for (int j = 4; j < hexResult.GetLength(1) - 2; j++)
                     {
                         CFBs.CUpdater.FileContent.Append(hexResult[i, j]);
 
                     }
                 }
-                Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
+                // Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
                 // Task.Run(() => _fileSystemService.SaveToFileAsync("BinData", CFBs.CUpdater.FileContent.ToString()));
-
-                CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                 CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
         }
 

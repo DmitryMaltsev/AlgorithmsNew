@@ -333,7 +333,7 @@ namespace Android_Silver.Services
                 catch (Exception ex)
                 {
                     _trySendcounter += 1;
-                    Task.Delay(50);
+                    Thread.Sleep(200);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
@@ -345,15 +345,15 @@ namespace Android_Silver.Services
                 _pictureSet.SetPicureSetIfNeed(_pictureSet.LinkHeader, _pictureSet.LinkHeader.Default);
                 if (_ethernetEntities.IsConnected == true)
                 {
-                    _ethernetEntities.SystemMessage = "Превышено максимальное количество попыток - 10";
+                    _ethernetEntities.SystemMessage = "Превышено максимальное количество попыток - 20";
                     _ethernetEntities.EthernetMessage = "Превышено максимальное количество попыток передачи данных. Подключитесь повторно";
                     ClientDisconnected?.Invoke();
                     _activePageEntities.SetActivePageState(ActivePageState.StartPage);
-                    _ethernetEntities.IsConnected = false;
+                    Disconnect();
                 }
                 else
                 {
-                    _ethernetEntities.IsConnected = false;
+                    Disconnect();
                 }
             }
             return sbResult;
@@ -361,6 +361,9 @@ namespace Android_Silver.Services
 
         public void Disconnect()
         {
+            _fbs.CUpdater.IsUpdate = 0;
+            _fbs.CUpdater.CurrentPacket = 0;
+            _fbs.CUpdater.PacketsCount.Value = 0;
             _ethernetEntities.IsConnected = false;
             //SystemMessage = "Соединение разорвано";
             _ethernetEntities.Client.Close();
@@ -2514,6 +2517,7 @@ namespace Android_Silver.Services
                             {
                                 _fbs.CUpdater.IsUpdate = 1;
                                 _fbs.CUpdater.CurrentPacket = 1;
+                              
                             }
                         }
                     }

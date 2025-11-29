@@ -71,7 +71,7 @@ namespace Android_Silver.Entities.FBEntities
 		public char[,] UseCharData;
 		public StringBuilder FileContent;
 		public List<StringBuilder> FileContentList;
-        public int DataSize = 2048;
+        public int DataSize = 1024;
         public Updater()
         {
 			PacketsCount = new IntValue(0, 100000);
