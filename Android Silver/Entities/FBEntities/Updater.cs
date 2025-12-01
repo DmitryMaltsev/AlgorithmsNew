@@ -71,13 +71,15 @@ namespace Android_Silver.Entities.FBEntities
 		public char[,] UseCharData;
 		public StringBuilder FileContent;
 		public List<StringBuilder> FileContentList;
-        public int DataSize = 1024;
+        public int HexSize = 1024;
+		public int BinSize;
         public Updater()
         {
 			PacketsCount = new IntValue(0, 100000);
             CurrentPacket = 1;
 			FileContent= new StringBuilder();
 			FileContentList = new List<StringBuilder>();
+			BinSize = HexSize / 2;
         }
 
     }

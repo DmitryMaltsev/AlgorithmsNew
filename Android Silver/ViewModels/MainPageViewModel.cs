@@ -7,6 +7,7 @@ using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
+using System.ComponentModel.Design;
 using System.Globalization;
 using System.Windows.Input;
 
@@ -382,8 +383,8 @@ namespace Android_Silver.Pages
 
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
-            //object obj = 0;
-            //ExecuteUpdate(obj);
+            object obj = 0;
+            ExecuteUpdate(obj);
         }
 
         async private void ExecuteConnect()
@@ -751,24 +752,19 @@ namespace Android_Silver.Pages
         {
             if (CFBs.CUpdater.IsUpdate == 0)
             {
-                //CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
-                //char[] chars = mess.ToCharArray();
-                //CFBs.CUpdater.FileContent = new StringBuilder(_fileSystemService.GetUpdaterFromFile());
                 CFBs.CUpdater.BinaryData = Task.Run(() => _fileSystemService.ReadBytes("gold.bin")).Result;
-                int packBufIndex = 0;
-                int size1 = CFBs.CUpdater.BinaryData.Length / CFBs.CUpdater.DataSize;
-                int devider1 = CFBs.CUpdater.BinaryData.Length % CFBs.CUpdater.DataSize;
-                if (devider1 > 0) size1 += 1;
-                //Увеличиваем index1, чтобы уменьшить index2
-                size1 *= 2;
+                //Определяем 2-мерный массив бинарных данных, с учетом что 1 байт==2 хекса.
+                int dimention0 = CFBs.CUpdater.BinaryData.Length / CFBs.CUpdater.BinSize;
+                int remainder = CFBs.CUpdater.BinaryData.Length % CFBs.CUpdater.HexSize;
+                if (remainder > 0) dimention0 += 1;
                 //2 байта под ID, 1 байт под CRC
-                byte[,] buffer = new byte[size1, CFBs.CUpdater.DataSize / 2 + 3];
-                byte[,] crcBuffer = new byte[size1, CFBs.CUpdater.DataSize / 2];
+                byte[,] buffer = new byte[dimention0, CFBs.CUpdater.BinSize + 3];
+                byte[,] crcBuffer = new byte[dimention0, CFBs.CUpdater.BinSize];
                 int index1 = 0, index2 = 0;
-                int crcBuffersize = size1 * CFBs.CUpdater.DataSize / 2;
+                int crcBuffersize = dimention0 * CFBs.CUpdater.BinSize;
                 for (int i = 0; i < crcBuffersize; i++)
                 {
-                    if (index2 >= CFBs.CUpdater.DataSize / 2)
+                    if (index2 >= CFBs.CUpdater.BinSize)
                     {
                         index2 = 0;
                         index1 += 1;
@@ -783,7 +779,7 @@ namespace Android_Silver.Pages
                     }
                     index2 += 1;
                 }
-                byte[,] useData = new byte[size1, CFBs.CUpdater.DataSize / 2 + 3];
+                byte[,] useData = new byte[dimention0, CFBs.CUpdater.BinSize + 3];
                 index1 = 0; index2 = 0;
                 ushort id = 1;
                 //Формируем пакет с ID и CRC
@@ -800,16 +796,16 @@ namespace Android_Silver.Pages
                         useData[i, index2] = crcBuffer[i, j];
                         index2 += 1;
                     }
-                    byte[] crc = new byte[CFBs.CUpdater.DataSize / 2];
+                    byte[] crc = new byte[CFBs.CUpdater.BinSize];
                     for (int k = 0; k < crc.Length; k++)
                     {
                         crc[k] = crcBuffer[i, k];
                     }
                     byte crcResult = _mathService.CalculateChecksum(crc);
-                    useData[i, CFBs.CUpdater.DataSize / 2 + 2] = crcResult;
+                    useData[i, CFBs.CUpdater.BinSize + 2] = crcResult;
                     index2 = 0;
                 }
-                char[,] hexResult = new char[useData.GetLength(0), useData.GetLength(1) * 2];
+                char[,] hexResult = new char[useData.GetLength(0), useData.GetLength(1)*2];
 
                 for (int i = 0; i < useData.GetLength(0); i++)
                 {
@@ -820,23 +816,32 @@ namespace Android_Silver.Pages
                         hexResult[i, j * 2 + 1] = charResult[1];
                     }
                 }
-                CFBs.CUpdater.PacketsCount.Value = hexResult.GetLength(0);
+                CFBs.CUpdater.PacketsCount.Value =  hexResult.GetLength(0);//3;
                 CFBs.CUpdater.UseCharData = hexResult;
-
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
-                int ramCounter = 4;
                 CFBs.CUpdater.FileContent.Clear();
-                for (int i = 100; i < 102; i++)
+                for (int i = 160; i < 164; i++)
                 {
-                    for (int j = 4; j < hexResult.GetLength(1) - 2; j++)
+                    if (i < 362)
                     {
-                        CFBs.CUpdater.FileContent.Append(hexResult[i, j]);
+                        for (int j = 4; j < hexResult.GetLength(1) - 2; j++)
+                        {
+                            CFBs.CUpdater.FileContent.Append(hexResult[i, j]);
+                        }
 
                     }
+                    else
+                    {
+                        for (int j = 0; j < 1024; j++)
+                        {
+                            CFBs.CUpdater.FileContent.Append("F");
+                        }
+                    }
+
                 }
-                // Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
+                 Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
                 // Task.Run(() => _fileSystemService.SaveToFileAsync("BinData", CFBs.CUpdater.FileContent.ToString()));
-                 CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+             //   CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
         }
 

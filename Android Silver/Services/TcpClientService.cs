@@ -209,7 +209,7 @@ namespace Android_Silver.Services
                          {
                              _ethernetEntities.SystemMessage = "Данные уже передаются";
                          }
-                         Task.Delay(200);
+                         Thread.Sleep(100);
                      }
                  }
              });
@@ -320,7 +320,7 @@ namespace Android_Silver.Services
                     StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
                     writer.WriteLine(command);
                     writer.Flush();
-                    byte[] data = new byte[1024];
+                    byte[] data = new byte[2200];
                     int bytes = _stream.Read(data, 0, data.Length);
                     do
                     {
