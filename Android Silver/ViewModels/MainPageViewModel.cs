@@ -805,7 +805,7 @@ namespace Android_Silver.Pages
                     useData[i, CFBs.CUpdater.BinSize + 2] = crcResult;
                     index2 = 0;
                 }
-                char[,] hexResult = new char[useData.GetLength(0), useData.GetLength(1)*2];
+                char[,] hexResult = new char[useData.GetLength(0), useData.GetLength(1) * 2];
 
                 for (int i = 0; i < useData.GetLength(0); i++)
                 {
@@ -816,7 +816,7 @@ namespace Android_Silver.Pages
                         hexResult[i, j * 2 + 1] = charResult[1];
                     }
                 }
-                CFBs.CUpdater.PacketsCount.Value =  hexResult.GetLength(0);//3;
+                CFBs.CUpdater.PacketsCount.Value = hexResult.GetLength(0);//3;
                 CFBs.CUpdater.UseCharData = hexResult;
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
                 CFBs.CUpdater.FileContent.Clear();
@@ -839,9 +839,9 @@ namespace Android_Silver.Pages
                     }
 
                 }
-                 Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
+                // Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
                 // Task.Run(() => _fileSystemService.SaveToFileAsync("BinData", CFBs.CUpdater.FileContent.ToString()));
-             //   CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+               // CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
         }
 
