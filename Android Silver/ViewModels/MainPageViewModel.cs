@@ -383,8 +383,8 @@ namespace Android_Silver.Pages
 
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
-            object obj = 0;
-            ExecuteUpdate(obj);
+           // object obj = 0;
+           // ExecuteUpdate(obj);
         }
 
         async private void ExecuteConnect()
@@ -841,7 +841,7 @@ namespace Android_Silver.Pages
                 }
                 // Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
                 // Task.Run(() => _fileSystemService.SaveToFileAsync("BinData", CFBs.CUpdater.FileContent.ToString()));
-               // CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
         }
 

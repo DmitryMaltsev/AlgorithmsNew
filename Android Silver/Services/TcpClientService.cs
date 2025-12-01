@@ -259,7 +259,7 @@ namespace Android_Silver.Services
         {
             string messToClient = MessageToServer;
 
-            if (String.IsNullOrEmpty(messToClient))
+            if (String.IsNullOrEmpty(messToClient) || _ethernetEntities.CMessageState==MessageStates.UpdaterMessage)
             {
                 switch (_ethernetEntities.CMessageState)
                 {
