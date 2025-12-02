@@ -7,6 +7,8 @@ using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
+using CommunityToolkit.Maui.Storage;
+
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.Windows.Input;
@@ -207,6 +209,7 @@ namespace Android_Silver.Pages
         public ICommand SetTimeCommand { get; private set; }
         public ICommand UpdateCommand { get; private set; }
         public ICommand ChangeFilterCommand { get; private set; }
+        public ICommand DownloadCommand { get; private set; }
         #endregion
         #region Humidity commands
         public ICommand HumidityReturnCommand { get; private set; }
@@ -299,6 +302,7 @@ namespace Android_Silver.Pages
             TimeReturnCommand = new Command(ExecuteTimeReturn);
             ChangeFilterCommand = new Command(ExecuteChangeFilter);
             UpdateCommand = new Command(ExecuteUpdate);
+            DownloadCommand = new Command(ExecuteDownload);
             TimeBuffer = new();
             Value = 15;
 
@@ -380,12 +384,14 @@ namespace Android_Silver.Pages
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
 
+            EthernetEntities.EthernetMessage = Path.Combine(FileSystem.AppDataDirectory, "gold.bin");
 
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
-           // object obj = 0;
-           // ExecuteUpdate(obj);
+            // object obj = 0;
+            // ExecuteUpdate(obj);
         }
+
 
         async private void ExecuteConnect()
         {
@@ -933,6 +939,65 @@ namespace Android_Silver.Pages
                     //CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
                 }
             }
+        }
+
+
+        private void ExecuteDownload(object obj)
+        {
+            //var result = PickFolder(new CancellationToken());
+            FileResult result = Task.Run(() => PickAndShow()).Result;
+        }
+
+        public async Task<FolderPickerResult> PickFolder(CancellationToken cancellationToken)
+        {
+            FolderPickerResult result = await FolderPicker.Default.PickAsync(cancellationToken);
+            if (result.IsSuccessful)
+            {
+            }
+            return result;
+        }
+
+        private async Task<FileResult> PickAndShow()
+        {
+            // Register the FolderPicker as a singleton
+            IFolderPicker folderPicker = FolderPicker.Default;
+            Task<FolderPickerResult> folder = folderPicker.PickAsync();
+            var status = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
+            switch (status)
+            {
+                case PermissionStatus.Unknown:
+                    break;
+                case PermissionStatus.Denied:
+                    break;
+                case PermissionStatus.Disabled:
+                    break;
+                case PermissionStatus.Granted:
+                    break;
+                case PermissionStatus.Restricted:
+                    break;
+                case PermissionStatus.Limited:
+                    break;
+                default:
+                    break;
+            }
+            var pickOptions = new PickOptions
+            {
+                PickerTitle = "Выберите bin файл прошивки",
+                FileTypes = new FilePickerFileType(
+                new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                            { DevicePlatform.Android, new[] { ".bin" } },
+                            { DevicePlatform.WinUI, new[] { ".bin" } }
+                })
+            };
+#if ANDROID
+    CustomFilePickerService service = new CustomFilePickerService();
+     var result=await  service.PickAsync(pickOptions);
+      return result;
+#elif WINDOWS           
+            var result = await FilePicker.Default.PickAsync(pickOptions);
+            return result;
+#endif
         }
 
         private void ExecuteSetTime(object obj)

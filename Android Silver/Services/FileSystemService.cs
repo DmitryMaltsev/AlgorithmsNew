@@ -51,6 +51,7 @@ namespace Android_Silver.Services
         public async Task<byte[]> ReadBytes(string fileName)
         {
 #if WINDOWS
+        
             string result = string.Empty;
             string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
             byte[] fileData = File.ReadAllBytes(path);
@@ -61,6 +62,7 @@ namespace Android_Silver.Services
             await stream.CopyToAsync(memoryStream);
             byte[] fileBytes = memoryStream.ToArray();
             return memoryStream.ToArray();
+
 #endif
         }
 
