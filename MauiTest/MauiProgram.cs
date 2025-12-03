@@ -1,9 +1,6 @@
-﻿using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Storage;
+﻿using Microsoft.Extensions.Logging;
 
-using Microsoft.Extensions.Logging;
-
-namespace Android_Silver
+namespace MauiTest
 {
     public static class MauiProgram
     {
@@ -12,17 +9,14 @@ namespace Android_Silver
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-#if ANDROID
-            builder.Services.AddSingleton<IFilePicker, CustomFilePickerService>();
-#endif
+
 #if DEBUG
-            builder.Logging.AddDebug();
+    		builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

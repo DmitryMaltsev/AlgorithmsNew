@@ -24,7 +24,9 @@ namespace Android_Silver.Services
         private FileSystemService _fileSystemService { get; set; }
 
         public bool IsConnecting { get; private set; } = false;
-        public bool IsSending { get; private set; } = false;
+        public bool IsSending { get; set; } = false;
+
+        public bool NeedToSend { get; set; } = true;
         public bool IsRecieving { get; private set; } = false;
 
         private string _messageToServer = String.Empty;
@@ -338,9 +340,9 @@ namespace Android_Silver.Services
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
             }
-            while (IsSending && _trySendcounter < 20 && MessageToServer == String.Empty);
+            while (IsSending && _trySendcounter < 20 && MessageToServer == String.Empty && NeedToSend);
             IsSending = false;
-            if (_trySendcounter == 20)
+            if (_trySendcounter == 20 && NeedToSend)
             {
                 _pictureSet.SetPicureSetIfNeed(_pictureSet.LinkHeader, _pictureSet.LinkHeader.Default);
                 if (_ethernetEntities.IsConnected == true)

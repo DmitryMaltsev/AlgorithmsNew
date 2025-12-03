@@ -1,5 +1,4 @@
-﻿
-using Android_Silver.Entities;
+﻿using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
@@ -260,7 +259,6 @@ namespace Android_Silver.Pages
         private MenusEntities _menuesEntities { get; set; }
 
         private MathService _mathService { get; set; }
-
         public MainPageViewModel()
         {
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -272,9 +270,10 @@ namespace Android_Silver.Pages
             _fileSystemService = DIContainer.Resolve<FileSystemService>();
             _menuesEntities = DIContainer.Resolve<MenusEntities>();
             _mathService = DIContainer.Resolve<MathService>();
+
 #if ANDROID
-            AndroidEntity.WifiStateChanged -= EthernetEntities.WifiStateChangeCallback;
-            AndroidEntity.WifiStateChanged += EthernetEntities.WifiStateChangeCallback;
+            //  AndroidEntity.WifiStateChanged -= EthernetEntities.WifiStateChangeCallback;
+            //  AndroidEntity.WifiStateChanged += EthernetEntities.WifiStateChangeCallback;
 #endif
             StartPageConnectCommand = new Command(ExecuteConnect);
             ConnectCommand = new Command(ExecuteConnect);
@@ -395,6 +394,7 @@ namespace Android_Silver.Pages
 
         async private void ExecuteConnect()
         {
+
             EthernetEntities.ConnectIP =
                  $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
             EthernetEntities.SystemMessage = "Check";
@@ -941,63 +941,28 @@ namespace Android_Silver.Pages
             }
         }
 
-
         private void ExecuteDownload(object obj)
         {
-            //var result = PickFolder(new CancellationToken());
-            FileResult result = Task.Run(() => PickAndShow()).Result;
+            ExecuteDownloadAsync(obj);
         }
-
-        public async Task<FolderPickerResult> PickFolder(CancellationToken cancellationToken)
+        private async Task<FileResult> ExecuteDownloadAsync(object obj)
         {
-            FolderPickerResult result = await FolderPicker.Default.PickAsync(cancellationToken);
-            if (result.IsSuccessful)
-            {
-            }
-            return result;
-        }
-
-        private async Task<FileResult> PickAndShow()
-        {
-            // Register the FolderPicker as a singleton
-            IFolderPicker folderPicker = FolderPicker.Default;
-            Task<FolderPickerResult> folder = folderPicker.PickAsync();
-            var status = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
-            switch (status)
-            {
-                case PermissionStatus.Unknown:
-                    break;
-                case PermissionStatus.Denied:
-                    break;
-                case PermissionStatus.Disabled:
-                    break;
-                case PermissionStatus.Granted:
-                    break;
-                case PermissionStatus.Restricted:
-                    break;
-                case PermissionStatus.Limited:
-                    break;
-                default:
-                    break;
-            }
+            CTcpClientService.NeedToSend = false;
             var pickOptions = new PickOptions
             {
                 PickerTitle = "Выберите bin файл прошивки",
-                FileTypes = new FilePickerFileType(
-                new Dictionary<DevicePlatform, IEnumerable<string>>
-                {
-                            { DevicePlatform.Android, new[] { ".bin" } },
-                            { DevicePlatform.WinUI, new[] { ".bin" } }
-                })
             };
-#if ANDROID
-    CustomFilePickerService service = new CustomFilePickerService();
-     var result=await  service.PickAsync(pickOptions);
-      return result;
-#elif WINDOWS           
-            var result = await FilePicker.Default.PickAsync(pickOptions);
-            return result;
-#endif
+            Task<FileResult> result = FilePicker.Default.PickAsync(pickOptions);
+            if (result != null)
+            {
+                if (result.IsCompleted)
+                {
+                    using var stream = await result.Result.OpenReadAsync();
+                    CTcpClientService.NeedToSend = true;
+                }
+
+            }
+            return result.Result;
         }
 
         private void ExecuteSetTime(object obj)

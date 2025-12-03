@@ -826,7 +826,7 @@
             <Label Text="Загрузить .bin" Grid.Row="17" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
                                                                                         IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <Button Grid.Row="17" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.DownloadBut.Current}" Command="{Binding DownloadCommand}"
-                                            Pressed="Download_Pressed" Released="Download_Released" IsVisible = "{Binding  CActivePagesEntities.IsOtherSettingsPage}"/>
+                                            Pressed="Download_Pressed" Released="Download_Released" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
             <!--#endregion-->
 
             <!--#endregion-->
