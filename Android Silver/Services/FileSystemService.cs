@@ -48,22 +48,10 @@ namespace Android_Silver.Services
             }
         }
 
-        public async Task<byte[]> ReadBytes(string fileName)
+        public byte[] ReadBytes(string path)
         {
-#if WINDOWS
-        
-            string result = string.Empty;
-            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
             byte[] fileData = File.ReadAllBytes(path);
             return fileData;
-#elif ANDROID
-            using var stream = await FileSystem.OpenAppPackageFileAsync(fileName);
-            using var memoryStream = new MemoryStream();
-            await stream.CopyToAsync(memoryStream);
-            byte[] fileBytes = memoryStream.ToArray();
-            return memoryStream.ToArray();
-
-#endif
         }
 
         public List<char> ReadFromCurrentDirectory(string fileName)

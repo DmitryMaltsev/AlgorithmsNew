@@ -259,6 +259,10 @@ namespace Android_Silver.Pages
         private MenusEntities _menuesEntities { get; set; }
 
         private MathService _mathService { get; set; }
+
+        public FilesEntities CFilesEntities { get; set; }
+
+        private IDispatcherTimer _fileResultTimer { get; set; }
         public MainPageViewModel()
         {
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -267,6 +271,7 @@ namespace Android_Silver.Pages
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             CFBs = DIContainer.Resolve<FBs>();
+            CFilesEntities = DIContainer.Resolve<FilesEntities>();
             _fileSystemService = DIContainer.Resolve<FileSystemService>();
             _menuesEntities = DIContainer.Resolve<MenusEntities>();
             _mathService = DIContainer.Resolve<MathService>();
@@ -382,9 +387,6 @@ namespace Android_Silver.Pages
             // StartTimer();
             // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
-
-            EthernetEntities.EthernetMessage = Path.Combine(FileSystem.AppDataDirectory, "gold.bin");
-
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
             // object obj = 0;
@@ -758,7 +760,12 @@ namespace Android_Silver.Pages
         {
             if (CFBs.CUpdater.IsUpdate == 0)
             {
-                CFBs.CUpdater.BinaryData = Task.Run(() => _fileSystemService.ReadBytes("gold.bin")).Result;
+                if (CFBs.CUpdater.BinaryData==null || CFBs.CUpdater.BinaryData.Length == 0)
+                {
+                    CFilesEntities.SystemMessage = ".bin файл не загружен!";
+                    return;
+                }
+                //   CFBs.CUpdater.BinaryData = Task.Run(() => _fileSystemService.ReadBytes("gold.bin")).Result;
                 //Определяем 2-мерный массив бинарных данных, с учетом что 1 байт==2 хекса.
                 int dimention0 = CFBs.CUpdater.BinaryData.Length / CFBs.CUpdater.BinSize;
                 int remainder = CFBs.CUpdater.BinaryData.Length % CFBs.CUpdater.HexSize;
@@ -941,28 +948,31 @@ namespace Android_Silver.Pages
             }
         }
 
+
         private void ExecuteDownload(object obj)
         {
-            ExecuteDownloadAsync(obj);
-        }
-        private async Task<FileResult> ExecuteDownloadAsync(object obj)
-        {
-            CTcpClientService.NeedToSend = false;
             var pickOptions = new PickOptions
             {
                 PickerTitle = "Выберите bin файл прошивки",
             };
-            Task<FileResult> result = FilePicker.Default.PickAsync(pickOptions);
-            if (result != null)
-            {
-                if (result.IsCompleted)
-                {
-                    using var stream = await result.Result.OpenReadAsync();
-                    CTcpClientService.NeedToSend = true;
-                }
+            CFilesEntities.CFileResult = FilePicker.Default.PickAsync(pickOptions);
+            // Создаем таймер
+            _fileResultTimer = Dispatcher.GetForCurrentThread().CreateTimer();
+            _fileResultTimer.Interval = TimeSpan.FromSeconds(1);
+            _fileResultTimer.Tick -= OnTimerTick;
+            _fileResultTimer.Tick += OnTimerTick;
+            _fileResultTimer.Start();
+        }
 
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            if (CFilesEntities.CFileResult != null && CFilesEntities.CFileResult.IsCompleted)
+            {
+                string path = CFilesEntities.CFileResult.Result.FullPath;
+                CFBs.CUpdater.BinaryData = _fileSystemService.ReadBytes(path);
+                CFilesEntities.SystemMessage = "Файл " + CFilesEntities.CFileResult.Result.FileName + " загружен";
+                _fileResultTimer.Stop();
             }
-            return result.Result;
         }
 
         private void ExecuteSetTime(object obj)

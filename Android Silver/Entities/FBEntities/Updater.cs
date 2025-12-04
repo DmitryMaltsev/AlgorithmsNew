@@ -66,7 +66,7 @@ namespace Android_Silver.Entities.FBEntities
 			}
 		}
 
-		public string[] SplittedPacket;
+        public string[] SplittedPacket;
 		public byte[] BinaryData;
 		public char[,] UseCharData;
 		public StringBuilder FileContent;

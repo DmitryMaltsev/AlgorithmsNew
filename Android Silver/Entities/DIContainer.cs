@@ -27,6 +27,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<MenusEntities>();
             _container.RegisterSingleton<FileSystemService>();
             _container.RegisterSingleton<MathService>();
+            _container.RegisterSingleton<FilesEntities>();
         }
 
         public static T Resolve<T>()

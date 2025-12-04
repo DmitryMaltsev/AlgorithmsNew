@@ -806,7 +806,6 @@
                     IsToggled="{Binding  CFBs.OtherSettings.IsSpecMode, Mode=TwoWay}"/>
             <!--#endregion-->
 
-
             <!--#region Настройка влажности -->
             <Label Text="Уставка влажности" Grid.Row="13" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
             <Label Text="{Binding CFBs.CHumiditySPS.HumiditySP,StringFormat='{0}%'}" Grid.Row="13" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
@@ -827,6 +826,8 @@
                                                                                         IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <Button Grid.Row="17" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.DownloadBut.Current}" Command="{Binding DownloadCommand}"
                                             Pressed="Download_Pressed" Released="Download_Released" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
+            <Label Text="{Binding CFilesEntities.SystemMessage}" Grid.Row="18" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
+                                                                              IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <!--#endregion-->
 
             <!--#endregion-->
