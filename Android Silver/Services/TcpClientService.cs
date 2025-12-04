@@ -47,6 +47,8 @@ namespace Android_Silver.Services
 
         public Action ClientDisconnected { get; set; }
 
+        private FilesEntities _filesEntities;
+
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -58,6 +60,7 @@ namespace Android_Silver.Services
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             _servActivePageEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
             _mathService= DIContainer.Resolve<MathService>();
+            _filesEntities = DIContainer.Resolve<FilesEntities>();
             _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
@@ -164,6 +167,7 @@ namespace Android_Silver.Services
                                      _fbs.CUpdater.PacketsCount.Value = 0;
                                      _fbs.CUpdater.IsUpdate = 0;
                                      _fbs.CUpdater.CurrentPacket = 0;
+                                     _fbs.CUpdater.ResultPackets = "Успешно скопровано";
                                  }
                                  else
                                  if (isRightPacket)
@@ -172,6 +176,7 @@ namespace Android_Silver.Services
                                      {
                                          _fbs.CUpdater.CurrentPacket += 1;
                                          _fbs.CUpdater.ResendCounter = 0;
+                                         _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketsCount.Value;
                                      }
                                  }
                                  else
@@ -184,7 +189,6 @@ namespace Android_Silver.Services
                                          _fbs.CUpdater.CurrentPacket = 0;
                                      }
                                  }
-                                 _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketsCount.Value;
                                  _ethernetEntities.SystemMessage = result;
                              }
                              else
@@ -338,7 +342,7 @@ namespace Android_Silver.Services
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
             }
-            while (IsSending && _trySendcounter < 20 && MessageToServer == String.Empty);
+            while (IsSending && _trySendcounter < 20 && MessageToServer == String.Empty && !_filesEntities.FileIsReading);
             IsSending = false;
             if (_trySendcounter == 20)
             {

@@ -412,6 +412,10 @@ namespace Android_Silver.Pages
                     CTcpClientService.SendRecieveTask("0100,057");
                     // TcpClientService.SendRecieveTask("137,4");ё
                 }
+                else
+                {
+                    CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
+                }
             }
             else
             {
@@ -758,9 +762,10 @@ namespace Android_Silver.Pages
 
         private void ExecuteUpdate(object obj)
         {
-            if (CFBs.CUpdater.IsUpdate == 0)
+            bool isRequiredState = CModesEntities.CMode1.Num == 0 || CModesEntities.CMode1.Num == 7 || CModesEntities.CMode1.Num == 8;
+            if (CFBs.CUpdater.IsUpdate == 0 && isRequiredState)
             {
-                if (CFBs.CUpdater.BinaryData==null || CFBs.CUpdater.BinaryData.Length == 0)
+                if (CFBs.CUpdater.BinaryData == null || CFBs.CUpdater.BinaryData.Length == 0)
                 {
                     CFilesEntities.SystemMessage = ".bin файл не загружен!";
                     return;
@@ -855,6 +860,10 @@ namespace Android_Silver.Pages
                 // Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
                 // Task.Run(() => _fileSystemService.SaveToFileAsync("BinData", CFBs.CUpdater.FileContent.ToString()));
                 CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+            }
+            else
+            {
+                
             }
         }
 
@@ -951,6 +960,8 @@ namespace Android_Silver.Pages
 
         private void ExecuteDownload(object obj)
         {
+            
+            CTcpClientService.Disconnect();
             var pickOptions = new PickOptions
             {
                 PickerTitle = "Выберите bin файл прошивки",
@@ -961,6 +972,7 @@ namespace Android_Silver.Pages
             _fileResultTimer.Interval = TimeSpan.FromSeconds(1);
             _fileResultTimer.Tick -= OnTimerTick;
             _fileResultTimer.Tick += OnTimerTick;
+            CFilesEntities.FileIsReading = true;
             _fileResultTimer.Start();
         }
 
@@ -968,10 +980,60 @@ namespace Android_Silver.Pages
         {
             if (CFilesEntities.CFileResult != null && CFilesEntities.CFileResult.IsCompleted)
             {
-                string path = CFilesEntities.CFileResult.Result.FullPath;
-                CFBs.CUpdater.BinaryData = _fileSystemService.ReadBytes(path);
-                CFilesEntities.SystemMessage = "Файл " + CFilesEntities.CFileResult.Result.FileName + " загружен";
+                try
+                {
+                    string path = CFilesEntities.CFileResult.Result.FullPath;
+                    if (path.EndsWith(".bin"))
+                    {
+                        CFBs.CUpdater.BinaryData = _fileSystemService.ReadBytes(path);
+                        CFilesEntities.SystemMessage = "Файл " + CFilesEntities.CFileResult.Result.FileName + " загружен";
+                    }
+                    else
+                    {
+                        CFilesEntities.SystemMessage = "Неверный формат файла";
+                    }
+                    CFilesEntities.SystemMessage = "Файл " + CFilesEntities.CFileResult.Result.FileName + " загружен";
+                }
+                catch
+                {
+                    CFilesEntities.SystemMessage = "Отмена загрузки";
+                }
+                CFilesEntities.FileIsReading = false;
+                //
+                ExecuteFileConnect();
+               // CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
                 _fileResultTimer.Stop();
+            }
+        }
+
+
+        async private void ExecuteFileConnect()
+        {
+
+            EthernetEntities.ConnectIP =
+                 $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
+            EthernetEntities.SystemMessage = "Check";
+            if (!CTcpClientService.IsConnecting)
+            {
+                await CTcpClientService.Connect();
+                if (EthernetEntities.IsConnected)
+                {
+                    CModesEntities.ShedCountQueues = 0;
+                    CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+                    CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
+                    await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
+                    CTcpClientService.SendRecieveTask("0100,057");
+                    // TcpClientService.SendRecieveTask("137,4");ё
+                }
+                else
+                {
+                    CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
+                }
+            }
+            else
+            {
+                CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Default);
+                EthernetEntities.SystemMessage = "В данный момент подключаемся";
             }
         }
 

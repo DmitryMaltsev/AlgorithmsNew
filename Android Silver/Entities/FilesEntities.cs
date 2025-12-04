@@ -21,5 +21,7 @@ namespace Android_Silver.Entities
 		}
 
         public Task<FileResult> CFileResult { get; set; }
+
+		public bool FileIsReading { get; set; } = false;
     }
 }
