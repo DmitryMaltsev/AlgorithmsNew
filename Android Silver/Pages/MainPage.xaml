@@ -15,7 +15,6 @@
             <Setter Property="Margin" Value="10,4"/>
             <Setter Property="TextColor" Value="White"/>
         </Style>
-
         <!--#endregion-->
         <Style TargetType="Label" x:Key="Title">
             <Setter Property="TextColor" Value="White" />
@@ -118,7 +117,6 @@
             <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="Margin" Value="0,0,0,0" />
         </Style>
-
         <Style TargetType="Button" x:Key="SPBtn">
             <Setter Property="Grid.ColumnSpan" Value="4"/>
             <Setter Property="MaximumWidthRequest" Value="50"/>
@@ -143,7 +141,6 @@
             <Setter Property="MaximumHeightRequest" Value="40"/>
             <Setter Property="MaximumHeightRequest" Value="40"/>
         </Style>
-
         <!--#endregion-->
         <!--#region SettingsStyle -->
         <Style TargetType="Button" x:Key="SettingsButtons">
@@ -177,6 +174,22 @@
             <Setter Property="Grid.ColumnSpan" Value="9" />
             <Setter Property="Grid.RowSpan" Value="1"  />
             <Setter Property="BorderWidth" Value="0"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup Name="CommonStates">
+                        <VisualState Name="Normal">
+                            <!-- Состояние по умолчанию -->
+                        </VisualState>
+                        <VisualState Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.8" />
+                                <!-- Здесь можно изменить ImageSource: -->
+                                <!-- <Setter Property="ImageSource" Value="disabled_icon.png" /> -->
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
         </Style>
         <Style TargetType="Image" x:Key="OtherSettingsImg">
             <Setter Property="VerticalOptions" Value="Center" />
@@ -432,7 +445,7 @@
                                                                                 IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
             <!--#region Расход вытяжки -->
-          
+
             <Image Source="{Binding  CPictureSet.ExhaustCons}"    Grid.Row="23"  Grid.Column="1" Style="{StaticResource MiscellaneousImg}"
                                                                                       IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <Label Text="Расход вытяжки"  Grid.Row="23"  Grid.Column="6" Style="{StaticResource MiscellText3}"
@@ -502,7 +515,7 @@
                 Pressed="CancelButton_Pressed" Released="CancelButton_Released"  IsVisible="{Binding CActivePagesEntities.IsKitchenTimerPage}"/>
             </VerticalStackLayout>
             <!--#endregion-->
-     
+
             <!--#region SETPOINTS PAGE -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
                      Style="{StaticResource HeaderBut}"  Pressed="HomeButton_SPPressed" Released="HomeButton_SPReleased"  
@@ -590,18 +603,18 @@
          Command="{Binding JournalCommand}"  Pressed="Journal_Pressed" Released="Journal_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
             <Button  ImageSource="{Binding  CPictureSet.SettingsOtherBut.Current}" Grid.Row="4" Grid.Column="9" Style="{StaticResource SettingsButtons}"
          Command="{Binding OtherSettingsCommand}"  Pressed="OtherSettings_Pressed" Released="OtherSettings_Released" 
-                                                                                           IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
+                                                                                    IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
             <!--#endregion-->
             <!--#region Середина -->
-            <Button  Grid.Row="7"  Grid.RowSpan="2" Grid.ColumnSpan="12" Grid.Column="3"
+            <Button  Grid.Row="7"  Grid.RowSpan="3" Grid.ColumnSpan="18" Grid.Column="0"
             Command="{Binding SPCommand}" Pressed="SPSettings_Pressed"  Style="{StaticResource SettingsButtons}"
                        ImageSource="{Binding  CPictureSet.ModesSetBut.Current}"  Released="SPSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
             <!--#endregion-->
             <!--#region Нижний уровень -->
-            <Button ImageSource="{Binding  CPictureSet.VacSetBut.Current}" Grid.Row="9"  Grid.Column="0"  Grid.ColumnSpan="9"
+            <Button ImageSource="{Binding  CPictureSet.VacSetBut.Current}" Grid.Row="11"  Grid.Column="0"  Grid.ColumnSpan="9"
                 Style="{StaticResource SettingsButtons}"   Command="{Binding VacationTableCommand}"  
                 Pressed="VacSettings_Pressed" Released="VacSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
-            <Button ImageSource="{Binding  CPictureSet.ShedSetBut.Current}"    Grid.Row="9" Grid.Column="9" Style="{StaticResource SettingsButtons}" 
+            <Button ImageSource="{Binding  CPictureSet.ShedSetBut.Current}"    Grid.Row="11" Grid.Column="9" Style="{StaticResource SettingsButtons}" 
                Command="{Binding ShedulerTableCommand}"  Pressed="ShedSettings_Pressed" Released="ShedSettings_Released" IsVisible="{Binding CActivePagesEntities.IsSettingsPage}"/>
             <!--#endregion-->
             <!--#endregion-->
@@ -820,8 +833,10 @@
             <Label Text="Загрузить .bin" Grid.Row="15" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
                                                                               IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <Button Grid.Row="15" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.DownloadBut.Current}" Command="{Binding DownloadCommand}"
-                                  Pressed="Download_Pressed" Released="Download_Released" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" 
-                            IsEnabled="{Binding CFBs.CUpdater.NotIsUpdate}"/>
+                                  Pressed="Download_Pressed" Released="Download_Released"  IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" 
+                            IsEnabled="{Binding CFBs.CUpdater.NotIsUpdate}">
+    
+            </Button>
             <Label Text="Копирование прошивки на контроллер" Grid.Row="17" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
             <Label Text="Копировать" Grid.Row="17" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
                                                                                                     IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
@@ -829,7 +844,6 @@
              Pressed="Updater_Pressed" Released="Updater_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <Label Text="{Binding  CFBs.CUpdater.ResultPackets}" Grid.Row="18" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
                                                                                                         IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
-          
             <!--#endregion-->
 
             <!--#endregion-->

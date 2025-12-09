@@ -5,10 +5,6 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
-
-using CommunityToolkit.Maui.Storage;
-
-using System.ComponentModel.Design;
 using System.Globalization;
 using System.Windows.Input;
 
@@ -277,8 +273,8 @@ namespace Android_Silver.Pages
             _mathService = DIContainer.Resolve<MathService>();
 
 #if ANDROID
-            //  AndroidEntity.WifiStateChanged -= EthernetEntities.WifiStateChangeCallback;
-            //  AndroidEntity.WifiStateChanged += EthernetEntities.WifiStateChangeCallback;
+            AndroidEntity.WifiStateChanged -= EthernetEntities.WifiStateChangeCallback;
+            AndroidEntity.WifiStateChanged += EthernetEntities.WifiStateChangeCallback;
 #endif
             StartPageConnectCommand = new Command(ExecuteConnect);
             ConnectCommand = new Command(ExecuteConnect);
@@ -389,8 +385,8 @@ namespace Android_Silver.Pages
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
-            // object obj = 0;
-            // ExecuteUpdate(obj);
+             //object obj = 0;
+             //ExecuteUpdate(obj);
         }
 
 
@@ -762,7 +758,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteUpdate(object obj)
         {
-            bool isRequiredState = CModesEntities.CMode1.Num == 0 || CModesEntities.CMode1.Num == 7 || CModesEntities.CMode1.Num == 8;
+            bool isRequiredState = CModesEntities.CMode1.Num == 0 || CModesEntities.CMode1.Num == 7;
             if (CFBs.CUpdater.IsUpdate == 0 && isRequiredState)
             {
                 if (CFBs.CUpdater.BinaryData == null || CFBs.CUpdater.BinaryData.Length == 0)
@@ -838,7 +834,7 @@ namespace Android_Silver.Pages
                 CFBs.CUpdater.UseCharData = hexResult;
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
                 CFBs.CUpdater.FileContent.Clear();
-                for (int i = 160; i < 164; i++)
+                for (int i = 360; i < 364; i++)
                 {
                     if (i < 362)
                     {
@@ -857,13 +853,13 @@ namespace Android_Silver.Pages
                     }
 
                 }
-                // Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
+                 Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
                 // Task.Run(() => _fileSystemService.SaveToFileAsync("BinData", CFBs.CUpdater.FileContent.ToString()));
                 CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
             else
             {
-                
+
             }
         }
 
@@ -960,7 +956,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteDownload(object obj)
         {
-            
+
             CTcpClientService.Disconnect();
             var pickOptions = new PickOptions
             {
@@ -1001,7 +997,7 @@ namespace Android_Silver.Pages
                 CFilesEntities.FileIsReading = false;
                 //
                 ExecuteFileConnect();
-               // CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+                // CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
                 _fileResultTimer.Stop();
             }
         }

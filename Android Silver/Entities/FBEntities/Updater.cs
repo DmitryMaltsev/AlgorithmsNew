@@ -1,11 +1,8 @@
 ﻿using Android_Silver.Entities.ValuesEntities;
+using Android_Silver.Entities.Visual;
 using Android_Silver.ViewModels;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.FBEntities
 {
@@ -26,13 +23,14 @@ namespace Android_Silver.Entities.FBEntities
 
         private bool _notIsUpdate = true;
 
-        public bool NotIsUpdate 
+        public bool NotIsUpdate
         {
             get { return _notIsUpdate; }
             set
             {
-                _notIsUpdate = value;
-                OnPropertyChanged(nameof(NotIsUpdate));
+
+                    _notIsUpdate = value;
+                    OnPropertyChanged(nameof(NotIsUpdate));
             }
         }
 
@@ -91,6 +89,7 @@ namespace Android_Silver.Entities.FBEntities
         public List<StringBuilder> FileContentList;
         public int HexSize = 1024;
         public int BinSize;
+        PicturesSet _pictureSet;
         public Updater()
         {
             PacketsCount = new IntValue(0, 100000);
@@ -98,6 +97,7 @@ namespace Android_Silver.Entities.FBEntities
             FileContent = new StringBuilder();
             FileContentList = new List<StringBuilder>();
             BinSize = HexSize / 2;
+            _pictureSet = DIContainer.Resolve<PicturesSet>();
         }
 
     }
