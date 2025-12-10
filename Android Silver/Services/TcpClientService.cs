@@ -59,7 +59,7 @@ namespace Android_Silver.Services
             _fileSystemService = DIContainer.Resolve<FileSystemService>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             _servActivePageEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
-            _mathService= DIContainer.Resolve<MathService>();
+            _mathService = DIContainer.Resolve<MathService>();
             _filesEntities = DIContainer.Resolve<FilesEntities>();
             _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
@@ -145,10 +145,10 @@ namespace Android_Silver.Services
                                  if (result2.Length == 2)
                                  {
                                      id0 = _mathService.GetByteFromHexChar(result2[0][0], result2[0][1]);
-                                     id1= _mathService.GetByteFromHexChar(result2[0][2], result2[0][3]);
-                                     id=(ushort)((id0 << 8) | id1);
+                                     id1 = _mathService.GetByteFromHexChar(result2[0][2], result2[0][3]);
+                                     id = (ushort)((id0 << 8) | id1);
                                  }
-                               
+
                                  bool isRightPacket = false;
                                  bool isAllDataSender = false;
                                  if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket)
@@ -263,7 +263,7 @@ namespace Android_Silver.Services
         {
             string messToClient = MessageToServer;
 
-            if (String.IsNullOrEmpty(messToClient) || _ethernetEntities.CMessageState==MessageStates.UpdaterMessage)
+            if (String.IsNullOrEmpty(messToClient) || _ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
             {
                 switch (_ethernetEntities.CMessageState)
                 {
@@ -943,21 +943,24 @@ namespace Android_Silver.Services
                     {
                         if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
+
                             if (_fbs.CAlarms.IsRecupLowTurns)
                             {
-                                _pictureSet.RecuperatorHeaderCurrent = _pictureSet.RecuperatorHeaderAlarm;
+                                if (_pictureSet.RecuperatorHeaderCurrent != _pictureSet.RecuperatorHeaderAlarm)
+                                    _pictureSet.RecuperatorHeaderCurrent = _pictureSet.RecuperatorHeaderAlarm;
                             }
                             else
-                           if (val > 0)
+                            if (val > 0)
                             {
-                                _pictureSet.RecuperatorHeaderCurrent = _pictureSet.RecuperatorHeaderWork;
+                                if (_pictureSet.RecuperatorHeaderCurrent != _pictureSet.RecuperatorHeaderWork)
+                                    _pictureSet.RecuperatorHeaderCurrent = _pictureSet.RecuperatorHeaderWork;
                             }
                             else
                             {
-                                _pictureSet.RecuperatorHeaderCurrent = "";
+                                if (_pictureSet.RecuperatorHeaderCurrent != "")
+                                    _pictureSet.RecuperatorHeaderCurrent = "";
                             }
                         }
-
                     }
                     break;
                 //Работа электрокалорифера
@@ -2521,7 +2524,7 @@ namespace Android_Silver.Services
                             {
                                 _fbs.CUpdater.IsUpdate = 1;
                                 _fbs.CUpdater.CurrentPacket = 1;
-                              
+
                             }
                         }
                     }

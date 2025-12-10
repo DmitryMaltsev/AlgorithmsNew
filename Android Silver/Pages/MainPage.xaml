@@ -299,6 +299,7 @@
                      Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
                                                  IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
             <!--#endregion-->
+      
             <!--#region MAIN PAGE -->
             <!--Текущее время-->
             <!--Binding Source={x:Reference mPage}, Path=BindingContext.CFBs.CTime.TimeInterface Margin="20,0,0,0" -->
@@ -835,7 +836,7 @@
             <Button Grid.Row="15" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.DownloadBut.Current}" Command="{Binding DownloadCommand}"
                                   Pressed="Download_Pressed" Released="Download_Released"  IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" 
                             IsEnabled="{Binding CFBs.CUpdater.NotIsUpdate}">
-    
+
             </Button>
             <Label Text="Копирование прошивки на контроллер" Grid.Row="17" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
             <Label Text="Копировать" Grid.Row="17" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
