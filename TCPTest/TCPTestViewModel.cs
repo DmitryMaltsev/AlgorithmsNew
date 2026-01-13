@@ -219,8 +219,6 @@ namespace TCPTest
             SRecieveCounter = RecieveCounter.ToString();
         }
 
-
-
         #region Execute methods
         public void ExecuteConnect()
         {
