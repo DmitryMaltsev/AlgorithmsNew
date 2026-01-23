@@ -1,4 +1,5 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.ValuesEntities;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -8,80 +9,86 @@ using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.FBEntities
 {
-    public class Fans:BindableBase
+    public class Fans : BindableBase
     {
-		private int _supNominalFlow;
-		public int SupNominalFlow
-		{
-			get { return _supNominalFlow; }
-			set {
-				if (value >= 0 && value<=99999)
-				{
+        private int _supNominalFlow;
+        public int SupNominalFlow
+        {
+            get { return _supNominalFlow; }
+            set
+            {
+                if (value >= 0 && value <= 99999)
+                {
                     _supNominalFlow = value;
                     OnPropertyChanged(nameof(SupNominalFlow));
                 }
-			}
-		}
+            }
+        }
 
-		private int _exhaustNominalFlow;
+        private int _exhaustNominalFlow;
 
-		public int ExhaustNominalFlow
-		{
-			get { return _exhaustNominalFlow; }
-			set {
-				if (value >= 0 && value <= 99999)
-				{
-					_exhaustNominalFlow = value;
-					OnPropertyChanged(nameof(ExhaustNominalFlow));
-				}
-			}
-		}
+        public int ExhaustNominalFlow
+        {
+            get { return _exhaustNominalFlow; }
+            set
+            {
+                if (value >= 0 && value <= 99999)
+                {
+                    _exhaustNominalFlow = value;
+                    OnPropertyChanged(nameof(ExhaustNominalFlow));
+                }
+            }
+        }
 
-		private ushort _sFlow;
+        private ushort _sFlow;
 
-		public ushort SFlow
-		{
-			get { return _sFlow; }
-			set { 
-				_sFlow = value; 
-				OnPropertyChanged(nameof(SFlow));
-			}
-		}
+        public ushort SFlow
+        {
+            get { return _sFlow; }
+            set
+            {
+                _sFlow = value;
+                OnPropertyChanged(nameof(SFlow));
+            }
+        }
 
-		private ushort _eFlow;
+        private ushort _eFlow;
 
-		public ushort EFlow
-		{
-			get { return _eFlow; }
-			set { 
-				_eFlow = value; 
-				OnPropertyChanged(nameof(EFlow));
-			}
-		}
+        public ushort EFlow
+        {
+            get { return _eFlow; }
+            set
+            {
+                _eFlow = value;
+                OnPropertyChanged(nameof(EFlow));
+            }
+        }
 
-		private ushort _sPersent;
+        private ushort _sPersent;
 
-		public ushort SPercent
-		{
-			get { return _sPersent; }
-			set { 
-				_sPersent = value; 
-				OnPropertyChanged(nameof(SPercent));
-			}
-		}
+        public ushort SPercent
+        {
+            get { return _sPersent; }
+            set
+            {
+                _sPersent = value;
+                OnPropertyChanged(nameof(SPercent));
+            }
+        }
 
-		private ushort _ePercent;
+        private ushort _ePercent;
 
-		public ushort EPercent
-		{
-			get { return _ePercent; }
-			set {
-				_ePercent = value; 
-				OnPropertyChanged(nameof(EPercent));
-			}
-		}
+        public ushort EPercent
+        {
+            get { return _ePercent; }
+            set
+            {
+                _ePercent = value;
+                OnPropertyChanged(nameof(EPercent));
+            }
+        }
 
-		public int SFanNominalFlow;
+        public int SFanNominalFlow;
         public int EFanNominalFlow;
         public int LowLimitBan;
         public int HighLimitBan;
@@ -92,5 +99,17 @@ namespace Android_Silver.Entities.FBEntities
         public int IDecrFan;
         public int DDecrFan;
         public int MinFanPercent;
+        public FloatValue EffFanTempSP;
+        public IntValue PEffFan;
+        public IntValue IEffFan;
+        public IntValue DEffFan;
+
+        public Fans()
+        {
+            EffFanTempSP = new FloatValue(-100, 100, 1);
+            PEffFan = new IntValue(0, 10_000);
+            IEffFan = new IntValue(0, 10_000);
+            DEffFan = new IntValue(0, 10_000);
+        }
     }
 }

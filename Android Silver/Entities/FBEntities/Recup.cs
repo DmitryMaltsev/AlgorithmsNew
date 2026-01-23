@@ -29,13 +29,15 @@ namespace Android_Silver.Entities.FBEntities
         public int FreqHZ
         {
             get { return _freqHZ; }
-            set {
+            set
+            {
                 OnPropertyChanged(nameof(FreqHZ));
                 _freqHZ = value;
             }
         }
 
-
+        public IntValue EffRecSPPerc;
+        public FloatValue BPolKoef;
         public int PReg;
         public int IReg;
         public int DReg;
@@ -48,6 +50,11 @@ namespace Android_Silver.Entities.FBEntities
         public float TempC;
         public float TempD;
         public List<RecPrfofile> RecProfiles = new List<RecPrfofile>();
+        public Recup()
+        {
+            EffRecSPPerc = new IntValue(0, 100);
+        }
+
     }
 
     public class RecPrfofile

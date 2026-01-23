@@ -385,8 +385,8 @@ namespace Android_Silver.Pages
             //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
             // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
             // var result = _fileSystemService.CalculateChecksum(values);
-             //object obj = 0;
-             //ExecuteUpdate(obj);
+            // object obj = 0;
+            // ExecuteUpdate(obj);
         }
 
 
@@ -834,28 +834,27 @@ namespace Android_Silver.Pages
                 CFBs.CUpdater.UseCharData = hexResult;
                 int[] vals = { CFBs.CUpdater.PacketsCount.Value };
                 CFBs.CUpdater.FileContent.Clear();
-                for (int i = 360; i < 364; i++)
+                for (int i = 0; i < hexResult.GetLength(0); i++)
                 {
-                    if (i < 362)
-                    {
+                   // if (i < 362)
+                   // {
                         for (int j = 4; j < hexResult.GetLength(1) - 2; j++)
                         {
                             CFBs.CUpdater.FileContent.Append(hexResult[i, j]);
                         }
 
-                    }
-                    else
-                    {
-                        for (int j = 0; j < 1024; j++)
-                        {
-                            CFBs.CUpdater.FileContent.Append("F");
-                        }
-                    }
+                    //}
+                    //else
+                    //{
+                    //    for (int j = 0; j < 1024; j++)
+                    //    {
+                    //        CFBs.CUpdater.FileContent.Append("F");
+                    //    }
+                    //}
 
                 }
                  Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
-                // Task.Run(() => _fileSystemService.SaveToFileAsync("BinData", CFBs.CUpdater.FileContent.ToString()));
-                CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                    CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
             }
             else
             {

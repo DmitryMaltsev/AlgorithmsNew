@@ -587,6 +587,11 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[3].StrSetsCollection[8].CVal = _fbs.CFans.IDecrFan;
                         _menusEntities.StartMenuCollection[3].StrSetsCollection[9].CVal = _fbs.CFans.DDecrFan;
                         _menusEntities.StartMenuCollection[3].StrSetsCollection[10].CVal = _fbs.CFans.MinFanPercent;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[11].CVal = _fbs.CFans.EffFanTempSP.Value;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[12].CVal = _fbs.CRecup.EffRecSPPerc.Value;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[13].CVal = _fbs.CFans.PEffFan.Value;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[14].CVal = _fbs.CFans.IEffFan.Value;
+                        _menusEntities.StartMenuCollection[3].StrSetsCollection[15].CVal = _fbs.CFans.DEffFan.Value;
                         _menusEntities.GenerateInterfaceTable(3);
                         IsFanSettingsPage = true;
                         IsFBSettingsPage = true;

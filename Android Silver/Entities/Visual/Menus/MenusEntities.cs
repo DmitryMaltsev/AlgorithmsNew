@@ -134,7 +134,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_DAMPER_SETTINGS_ADDR = ETH_COMMON_SETTINGS_ADDR + ETH_COMMON_SETTINGS_LENGTH;
             ETH_DAMPER_SETTINGS_LENGTH = 23;
             ETH_FAN_SETTINGS_ADDR = ETH_DAMPER_SETTINGS_ADDR + ETH_DAMPER_SETTINGS_LENGTH;
-            ETH_FAN_SETTINGS_LENGTH = 11;
+            ETH_FAN_SETTINGS_LENGTH = 16;
             ETH_WH_SETTINGS_ADDR = ETH_FAN_SETTINGS_ADDR + ETH_FAN_SETTINGS_LENGTH;
             ETH_WH_SETTINGS_LENGTH = 16;
             ETH_EH_SETTINGS_ADDR = ETH_WH_SETTINGS_ADDR + ETH_WH_SETTINGS_LENGTH;
@@ -342,6 +342,18 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 1000, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Минимальный % вент", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CFans.EffFanTempSP.Min, _fbEntities.CFans.EffFanTempSP.Max, "Уставка темп регулирования по КПД", isVisible: true, pickerIsVisible: false,
+                            entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CFans.EffFanTempSP.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CRecup.EffRecSPPerc.Min, _fbEntities.CRecup.EffRecSPPerc.Max, "Уставка % КПД рекуператора для вент",
+                                                            isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CFans.PEffFan.Min, _fbEntities.CFans.PEffFan.Max, "P коэф. регулятора по КПД", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CFans.IEffFan.Min, _fbEntities.CFans.IEffFan.Max, "I коэф. регулятора по КПД", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CFans.DEffFan.Min, _fbEntities.CFans.DEffFan.Max, "D коэф. регулятора по КПД", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[3].StrSetsCollection = strSets;
             #endregion

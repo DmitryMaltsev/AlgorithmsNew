@@ -284,13 +284,13 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
-                            messToClient = "0300,121\r\n";
+                            messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "0421,121\r\n";
+                            messToClient = "0426,121\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
@@ -4267,6 +4267,46 @@ namespace Android_Silver.Services
                     {
                         _fbs.CFans.MinFanPercent = val;
                     }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
+            {
+                if (short.TryParse(resp.ValueString, out short val))
+                {
+                    GetFloatValueResult(val,_fbs.CFans.EffFanTempSP);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    GetIntValueResult(val, _fbs.CRecup.EffRecSPPerc);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    GetIntValueResult(val, _fbs.CFans.PEffFan);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    GetIntValueResult(val, _fbs.CFans.IEffFan);
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
+            {
+                if (ushort.TryParse(resp.ValueString, out ushort val))
+                {
+                    GetIntValueResult(val, _fbs.CFans.DEffFan);
                 }
                 if (_servActivePageEntities.IsLoadingPage)
                 {
