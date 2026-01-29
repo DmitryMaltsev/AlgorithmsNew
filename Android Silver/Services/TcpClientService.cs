@@ -290,7 +290,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "0426,121\r\n";
+                            messToClient = "0426,139\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
@@ -4274,7 +4274,7 @@ namespace Android_Silver.Services
             {
                 if (short.TryParse(resp.ValueString, out short val))
                 {
-                    GetFloatValueResult(val,_fbs.CFans.EffFanTempSP);
+                    GetFloatValueResult(val, _fbs.CFans.EffFanTempSP);
                 }
                 return;
             }
@@ -6539,6 +6539,206 @@ namespace Android_Silver.Services
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
+                return;
+            }
+            //Параметры работы термоанемометров по горячему датчику температуры
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaHCalibrates[0] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaHCalibrates[1] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaHCalibrates[2] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaHCalibrates[3] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaHCalibrates[4] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaHCalibrates[5] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaHCalibrates[6] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.SupCalibrateThm.DeltaHCalibrates[7] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            //Вытяжка
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaHCalibrates[0] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaHCalibrates[1] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaHCalibrates[2] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaHCalibrates[3] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaHCalibrates[4] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaHCalibrates[5] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaHCalibrates[6] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                    {
+                        _fbs.ExhaustCalibrateThm.DeltaHCalibrates[7] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 16 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 16 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.HotTHmdelay))
+                    {
+                        _fbs.ExhaustCalibrateThm.HotTHmdelay.Value = _fbs.SupCalibrateThm.HotTHmdelay.Value;
+                    }
+                }
+                return;
+            }
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 17 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 17 + _menusEntities.WriteOffset)
+            {
+                if (int.TryParse(resp.ValueString, out int val))
+                {
+                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.ColdThmDelay))
+                    {
+                        _fbs.ExhaustCalibrateThm.ColdThmDelay.Value = _fbs.SupCalibrateThm.ColdThmDelay.Value;
+                    }
                 }
                 return;
             }

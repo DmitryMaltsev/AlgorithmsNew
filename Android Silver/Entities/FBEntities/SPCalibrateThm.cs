@@ -34,7 +34,10 @@ namespace Android_Silver.Entities.FBEntities
         public IntValue PUReg;
         public IntValue IUReg;
         public IntValue DUReg;
-
+        public float[] DeltaHCalibrates;
+        public FloatValue DeltaHCalibratesLimits;
+        public IntValue HotTHmdelay;
+        public IntValue ColdThmDelay;
         public SPCalibrateThm()
         {
             CalibrateMode = new IntValue(0, 4);
@@ -59,6 +62,10 @@ namespace Android_Silver.Entities.FBEntities
             PUReg = new IntValue(0, 10_000);
             IUReg = new IntValue(0, 10_000);
             DUReg = new IntValue(0, 10_000);
+            DeltaHCalibratesLimits = new FloatValue(-150, 150, 2);
+            DeltaHCalibrates = new float[7];
+            HotTHmdelay = new IntValue(0, 255);
+            ColdThmDelay = new IntValue(0, 255);
         }
     }
 }

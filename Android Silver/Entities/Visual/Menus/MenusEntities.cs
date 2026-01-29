@@ -53,9 +53,11 @@ namespace Android_Silver.Entities.Visual.Menus
         public int ETH_TCONST_THM_ADDR;
         public int ETH_TCONST_LENGTH;
 
-
         public int ETH_RECUP_CURRENTSETTINGS_ADDR;
         public int ETH_RECUP_CURRENTSETTINGS_LENGTH;
+
+        public int ETH_THMH_SETTINGS_ADDR;
+        public int ETH_THMH_SETTINGS_LENGTH;
 
         //Основная таблица 
         public List<MItem> StartMenuCollection { get; set; }
@@ -161,6 +163,8 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_TCONST_LENGTH = 18;
             ETH_RECUP_CURRENTSETTINGS_ADDR = ETH_TCONST_THM_ADDR + ETH_TCONST_LENGTH;
             ETH_RECUP_CURRENTSETTINGS_LENGTH = 40;
+            ETH_THMH_SETTINGS_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
+            ETH_THMH_SETTINGS_LENGTH = 18;
             InterfaceStrCollection = new ObservableCollection<StrSet>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             StartMenuCollection = new List<MItem>();
@@ -196,6 +200,8 @@ namespace Android_Silver.Entities.Visual.Menus
             mItem = new MItem("Термоанемометры с пост. дельта Т", isVisible: true, _pictureSet.BaseSettings1ButCollection[13], SActivePageState.TConstThmPage, id: 15, startAddress: ETH_TCONST_THM_ADDR + WriteOffset);
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Настройка профилей шаг мотора", isVisible: true, _pictureSet.BaseSettings1ButCollection[14], SActivePageState.RecupCurrentPage, id: 16, startAddress: ETH_RECUP_CURRENTSETTINGS_ADDR + WriteOffset);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Работа по горячим датчикам", isVisible: true, _pictureSet.BaseSettings1ButCollection[15], SActivePageState.ThmHSettingsPage, id: 17, startAddress: ETH_THMH_SETTINGS_ADDR + WriteOffset);
             StartMenuCollection.Add(mItem);
             #endregion
             #region Конфигурация
@@ -1015,6 +1021,10 @@ namespace Android_Silver.Entities.Visual.Menus
                 valScale: _fbEntities.CRecup.RecProfiles[9].KiLimits.NumChr, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[15].StrSetsCollection = strSets;
+            #endregion
+            #region Горячие термоанемометры
+
+
             #endregion
         }
     }

@@ -32,6 +32,7 @@ namespace Android_Silver.Entities.Visual
         SpecModeSettingsPage,
         ConfigPage,
         RecupCurrentPage,
+        ThmHSettingsPage,
         LoadingPage
     }
 
