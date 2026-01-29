@@ -36,11 +36,11 @@ namespace Android_Silver.Entities.FBEntities
         public IntValue DUReg;
         public float[] DeltaHCalibrates;
         public FloatValue DeltaHCalibratesLimits;
-        public IntValue HotTHmdelay;
-        public IntValue ColdThmDelay;
+        public IntValue HotTHmdelayS;
+        public IntValue ColdThmDelayS;
         public SPCalibrateThm()
         {
-            CalibrateMode = new IntValue(0, 4);
+            CalibrateMode = new IntValue(0, 5);
             FanControlType = new IntValue(0, 1);
             DeltaThm = new FloatValue(-150, 150, 2);
             CalibrateTimeS = new IntValue(0, 65000);
@@ -64,8 +64,8 @@ namespace Android_Silver.Entities.FBEntities
             DUReg = new IntValue(0, 10_000);
             DeltaHCalibratesLimits = new FloatValue(-150, 150, 2);
             DeltaHCalibrates = new float[7];
-            HotTHmdelay = new IntValue(0, 255);
-            ColdThmDelay = new IntValue(0, 255);
+            HotTHmdelayS = new IntValue(0, 1000);
+            ColdThmDelayS = new IntValue(0, 1000);
         }
     }
 }

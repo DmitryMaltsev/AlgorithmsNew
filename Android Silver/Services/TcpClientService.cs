@@ -290,7 +290,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            messToClient = "0426,139\r\n";
+                            messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
@@ -6543,7 +6543,7 @@ namespace Android_Silver.Services
                 return;
             }
             //Параметры работы термоанемометров по горячему датчику температуры
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6554,7 +6554,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 1 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6565,7 +6565,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 2 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6576,7 +6576,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 3 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6587,7 +6587,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 4 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6598,7 +6598,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 5 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6609,7 +6609,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 6 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6620,19 +6620,8 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
-            {
-                if (int.TryParse(resp.ValueString, out int val))
-                {
-                    if (GetFloatValueResult(val, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
-                    {
-                        _fbs.SupCalibrateThm.DeltaHCalibrates[7] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
-                    }
-                }
-                return;
-            }
             //Вытяжка
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 7 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6643,7 +6632,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 8 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6654,7 +6643,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 9 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6665,7 +6654,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 10 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6676,7 +6665,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 11 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6687,7 +6676,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6698,7 +6687,7 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
@@ -6709,36 +6698,30 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.HotTHmdelayS))
                     {
-                        _fbs.ExhaustCalibrateThm.DeltaHCalibrates[7] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
+                        _fbs.ExhaustCalibrateThm.HotTHmdelayS.Value = _fbs.SupCalibrateThm.HotTHmdelayS.Value;
                     }
                 }
                 return;
             }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 16 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 16 + _menusEntities.WriteOffset)
+            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.HotTHmdelay))
+                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.ColdThmDelayS))
                     {
-                        _fbs.ExhaustCalibrateThm.HotTHmdelay.Value = _fbs.SupCalibrateThm.HotTHmdelay.Value;
+                        _fbs.ExhaustCalibrateThm.ColdThmDelayS.Value = _fbs.SupCalibrateThm.ColdThmDelayS.Value;
                     }
                 }
-                return;
-            }
-            if (resp.Tag == _menusEntities.ETH_THMH_SETTINGS_ADDR + 17 || resp.Tag == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 17 + _menusEntities.WriteOffset)
-            {
-                if (int.TryParse(resp.ValueString, out int val))
+
+                if (_servActivePageEntities.IsLoadingPage)
                 {
-                    if (GetIntValueResult(val, _fbs.SupCalibrateThm.ColdThmDelay))
-                    {
-                        _fbs.ExhaustCalibrateThm.ColdThmDelay.Value = _fbs.SupCalibrateThm.ColdThmDelay.Value;
-                    }
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
                 return;
             }
