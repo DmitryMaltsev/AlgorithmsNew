@@ -6,7 +6,6 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 
 using System.Collections;
-using System.IO;
 using System.Net.Sockets;
 using System.Text;
 
@@ -71,8 +70,8 @@ namespace Android_Silver.Services
             try
             {
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 2000;
-                _ethernetEntities.Client.SendTimeout = 2000;
+                _ethernetEntities.Client.ReceiveTimeout = 2200;
+                _ethernetEntities.Client.SendTimeout = 2200;
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = true;
                 _ethernetEntities.CanTryToConnect = !IsConnecting;
@@ -6725,7 +6724,6 @@ namespace Android_Silver.Services
                 }
                 return;
             }
-
         }
 
         private bool StringToFloat(string val, int precision, ref float result)
