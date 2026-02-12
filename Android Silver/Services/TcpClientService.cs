@@ -4,7 +4,6 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
-
 using System.Collections;
 using System.Net.Sockets;
 using System.Text;
@@ -70,8 +69,8 @@ namespace Android_Silver.Services
             try
             {
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 2200;
-                _ethernetEntities.Client.SendTimeout = 2200;
+                _ethernetEntities.Client.ReceiveTimeout = 3000;
+                _ethernetEntities.Client.SendTimeout = 3000;
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = true;
                 _ethernetEntities.CanTryToConnect = !IsConnecting;
