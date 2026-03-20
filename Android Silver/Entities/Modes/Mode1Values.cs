@@ -1,4 +1,5 @@
-﻿using Android_Silver.Entities.Visual;
+﻿using Android_Silver.Entities.ValuesEntities;
+using Android_Silver.Entities.Visual;
 using Android_Silver.ViewModels;
 
 using Microsoft.Maui.Controls.PlatformConfiguration;
@@ -50,8 +51,8 @@ namespace Android_Silver.Entities.Modes
 
 
         #region Уставки
-        private int _supplySP;
-        public int SypplySP
+        private IntValue _supplySP;
+        public IntValue SypplySP
         {
             get { return _supplySP; }
             set
@@ -61,8 +62,8 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
-        private int _exhaustSP;
-        public int ExhaustSP
+        private IntValue _exhaustSP;
+        public IntValue ExhaustSP
         {
             get { return _exhaustSP; }
             set
@@ -72,8 +73,8 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
-        private int _tempSP;
-        public int TempSP
+        private FloatValue _tempSP;
+        public FloatValue TempSP
         {
             get { return _tempSP; }
             set
@@ -82,8 +83,8 @@ namespace Android_Silver.Entities.Modes
                 OnPropertyChanged(nameof(TempSP));
             }
         }
-        private int _powerLimitSP;
-        public int PowerLimitSP
+        private IntValue _powerLimitSP;
+        public IntValue PowerLimitSP
         {
             get { return _powerLimitSP; }
             set
@@ -216,6 +217,10 @@ namespace Android_Silver.Entities.Modes
                     break;
             }
             StartAddress = startAddress;
+            SypplySP = new IntValue(0, 100);
+            ExhaustSP = new IntValue(0, 100);
+            TempSP = new FloatValue(0, 100,1);
+            PowerLimitSP = new IntValue(0, 100);
         }
     }
 }

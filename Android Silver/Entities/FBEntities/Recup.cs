@@ -41,7 +41,7 @@ namespace Android_Silver.Entities.FBEntities
         public int PReg;
         public int IReg;
         public int DReg;
-        public float TEffSP;
+        public FloatValue TEffSP;
         public int EffFailValue;
         public int EffFailDelay;
         public int HZMax;
@@ -53,6 +53,7 @@ namespace Android_Silver.Entities.FBEntities
         public Recup()
         {
             EffRecSPPerc = new IntValue(0, 100);
+            TEffSP = new FloatValue(-100, 100, 1);
         }
 
     }

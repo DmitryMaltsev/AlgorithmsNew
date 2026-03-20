@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Android_Silver.Entities.ValuesEntities;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,11 @@ namespace Android_Silver.Entities.FBEntities
 {
     public class UFLeds
     {
-        public float LEDsI;
+        public FloatValue LEDsI;
+
+        public UFLeds()
+        {
+            LEDsI = new FloatValue(0,1,1);
+        }
     }
 }

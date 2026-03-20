@@ -299,7 +299,7 @@
                      Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
                                                  IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
             <!--#endregion-->
-      
+
             <!--#region MAIN PAGE -->
             <!--Текущее время-->
             <!--Binding Source={x:Reference mPage}, Path=BindingContext.CFBs.CTime.TimeInterface Margin="20,0,0,0" -->
@@ -344,7 +344,7 @@
             <Slider   Grid.Row="6" Style="{StaticResource MainPageSlider}" 
                              Value="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP}"  
                              IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP, StringFormat='{0}%'}"   
+            <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP.Value, StringFormat='{0}%'}"   
                             Grid.Row="6" Grid.Column="14" Style="{StaticResource SliderText}"  
                             IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Вытяжной воздух-->
@@ -353,16 +353,16 @@
             <Slider  Grid.Row="7"   Style="{StaticResource MainPageSlider}"
                              Value="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP}"  
                              IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP, StringFormat='{0}%'}"  
+            <Label Text="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP.Value, StringFormat='{0}%'}"  
                              Grid.Row="7" Grid.Column="14" Style="{StaticResource SliderText}"  
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
 
             <Label Text="t уст"   Grid.Row="8" Grid.Column="0" Style="{StaticResource SliderText}" 
-                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage.Value}"/>
             <Slider  Grid.Row="8" Style="{StaticResource MainPageSlider}" 
                              Value="{Binding  Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.TempSP}"  
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.TempSP, StringFormat='{0}°C'}"  
+            <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.TempSP.Value, StringFormat='{0}°C'}"  
                              Grid.Row="8" Grid.Column="14" Style="{StaticResource SliderText}" 
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <!--Основная панель-->
@@ -385,13 +385,13 @@
             <!--#region Температура притока -->
             <Image Source="{Binding CPictureSet.SupCons}"    Grid.Row="16"  Grid.Column="0" Style="{StaticResource MiscellaneousImg}" 
             IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding CFBs.CSensors.SupTemp.Value,StringFormat='{0}°C'}"  Grid.Row="16"  Grid.Column="0" Style="{StaticResource MiscellText}"
+            <Label Text="{Binding CFBs.CSensors.SupTemp.Value.Value,StringFormat='{0}°C'}"  Grid.Row="16"  Grid.Column="0" Style="{StaticResource MiscellText}"
                                                                                                IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
             <!--#region Температура вытяжки -->
             <Image Source="{Binding  CPictureSet.ExhaustCons}"    Grid.Row="16"  Grid.Column="6" Style="{StaticResource MiscellaneousImg}"
                                                                                                  IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding CFBs.CSensors.ExhaustTemp.Value, StringFormat='{0}°C'}"  Grid.Row="16"  Grid.Column="6" Style="{StaticResource MiscellText}"
+            <Label Text="{Binding CFBs.CSensors.ExhaustTemp.Value.Value, StringFormat='{0}°C'}"  Grid.Row="16"  Grid.Column="6" Style="{StaticResource MiscellText}"
                                                                                                IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
             <!--#region КПД -->
@@ -405,13 +405,13 @@
             <!--#region Температура комнаты -->
             <Image Source="{Binding  CPictureSet.RoomTemp}"    Grid.Row="17" Grid.Column="0" Style="{StaticResource MiscellaneousImg}"
                                                                                                 IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding CFBs.CSensors.RoomTemp.Value, StringFormat='{0}°C'}"  Grid.Row="17"  Grid.Column="0" Style="{StaticResource MiscellText}"
+            <Label Text="{Binding CFBs.CSensors.RoomTemp.Value.Value, StringFormat='{0}°C'}"  Grid.Row="17"  Grid.Column="0" Style="{StaticResource MiscellText}"
                                                                                                 IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
             <!--#region Температура улица -->
             <Image Source="{Binding  CPictureSet.OutDoorTemp}"    Grid.Row="17" Grid.Column="6" Style="{StaticResource MiscellaneousImg}"
                                                                                         IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding CFBs.CSensors.OutdoorTemp.Value, StringFormat='{0}°C'}"  Grid.Row="17"  Grid.Column="6" Style="{StaticResource MiscellText}"
+            <Label Text="{Binding CFBs.CSensors.OutdoorTemp.Value.Value, StringFormat='{0}°C'}"  Grid.Row="17"  Grid.Column="6" Style="{StaticResource MiscellText}"
                                                                                        IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <!--#endregion-->
 
@@ -427,7 +427,7 @@
                                                                                           IsVisible="{Binding CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding  CFBs.CEHSetPoints.CPower, StringFormat='мощность={0}%'}"  Grid.Row="19"  Grid.Column="6" Style="{StaticResource MiscellText}"
                                                                                            IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
-            <Label Text="{Binding CFBs.CCommonSetPoints.SPTempR, StringFormat='уставка={0}°С'}"  Grid.Row="19"  Grid.Column="6" Style="{StaticResource MiscellText}"
+            <Label Text="{Binding CFBs.CCommonSetPoints.SPTempR.Value, StringFormat='уставка={0}°С'}"  Grid.Row="19"  Grid.Column="6" Style="{StaticResource MiscellText}"
                                                                                IsVisible = "{Binding CActivePagesEntities.IsMainPage}" Margin="0,70,0,-20" />
             <!--#endregion-->
 

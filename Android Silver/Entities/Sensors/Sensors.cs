@@ -18,15 +18,16 @@ namespace Android_Silver.Entities.Srs
         Sensor HumiditySensor { get; set; }
         Sensor AirQualitySensor { get; set; }
 
+
         public Sensors()
         {
-            OutdoorTemp = new TempSenor();
-            SupTemp = new TempSenor();  
-            ExhaustTemp = new TempSenor();
-            RoomTemp = new TempSenor();
-            ReturnTemp = new TempSenor();
-            HumiditySensor = new Sensor();   
-            AirQualitySensor = new Sensor();
+            OutdoorTemp = new TempSenor(-150,150,1);
+            SupTemp = new TempSenor(-150,150,1);  
+            ExhaustTemp = new TempSenor(-150, 150, 1);
+            RoomTemp = new TempSenor(-150, 150, 1);
+            ReturnTemp = new TempSenor(-150, 150, 1);
+            HumiditySensor = new Sensor(0,100,1);   
+            AirQualitySensor = new Sensor(0,100,1);
         }
 
     }

@@ -24,5 +24,10 @@ namespace Android_Silver.Entities.ValuesEntities
         {
             Min = min; Max = max;
         }
+
+        public static implicit operator IntValue(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

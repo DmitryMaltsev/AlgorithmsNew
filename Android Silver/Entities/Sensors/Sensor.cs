@@ -1,4 +1,5 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.ValuesEntities;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,9 @@ namespace Android_Silver.Entities.Srs
 {
     public class Sensor:BindableBase
     {
-        private float _value;
-        public float Value
+
+        private FloatValue _value;
+        public FloatValue Value
         {
             get
             {
@@ -22,6 +24,10 @@ namespace Android_Silver.Entities.Srs
                 _value = value;
                 OnPropertyChanged(nameof(Value));
             }
+        }
+
+        public Sensor(int min, int max, byte numChr){
+            Value = new FloatValue(min, max, numChr);
         }
     }
 }

@@ -577,56 +577,56 @@ namespace Android_Silver.Pages
         private void ExecuteBtnUP0(object obj)
         {
             if (M1Values != null)
-                M1Values.SypplySP = M1Values.SypplySP + 5 < 100 ? M1Values.SypplySP + 5 : 100;
+                M1Values.SypplySP.Value = M1Values.SypplySP.Value + 5 < 100 ? M1Values.SypplySP.Value + 5 : 100;
         }
         private void ExecuteBtnDn0(object obj)
         {
             if (M1Values != null)
-                M1Values.SypplySP = M1Values.SypplySP - 5 > 0 ? M1Values.SypplySP - 5 : 0;
+                M1Values.SypplySP.Value = M1Values.SypplySP.Value - 5 > 0 ? M1Values.SypplySP.Value - 5 : 0;
         }
 
         private void ExecuteBtnUP1(object obj)
         {
             if (M1Values != null)
-                M1Values.ExhaustSP = M1Values.ExhaustSP + 5 < 100 ? M1Values.ExhaustSP + 5 : 100;
+                M1Values.ExhaustSP.Value = M1Values.ExhaustSP.Value + 5 < 100 ? M1Values.ExhaustSP.Value + 5 : 100;
         }
         private void ExecuteBtnDn1(object obj)
         {
             if (M1Values != null)
-                M1Values.ExhaustSP = M1Values.ExhaustSP - 5 > 0 ? M1Values.ExhaustSP - 5 : 0;
+                M1Values.ExhaustSP = M1Values.ExhaustSP.Value - 5 > 0 ? M1Values.ExhaustSP.Value - 5 : 0;
         }
 
         private void ExecuteBtnUP2(object obj)
         {
             if (M1Values != null)
             {
-                M1Values.TempSP = M1Values.TempSP + 1 < 34 ? M1Values.TempSP + 1 : 34;
-                if (M1Values.TempSP < 16) M1Values.TempSP = 16;
+                M1Values.TempSP.Value = M1Values.TempSP.Value + 1 < 34 ? M1Values.TempSP.Value + 1 : 34;
+                if (M1Values.TempSP.Value < 16) M1Values.TempSP.Value = 16;
 
             }
         }
         private void ExecuteBtnDn2(object obj)
         {
             if (M1Values != null)
-                M1Values.TempSP = M1Values.TempSP - 1 > 16 ? M1Values.TempSP - 1 : 16;
+                M1Values.TempSP.Value = M1Values.TempSP.Value - 1 > 16 ? M1Values.TempSP.Value - 1 : 16;
         }
 
         private void ExecuteBtnUP3(object obj)
         {
             if (M1Values != null)
-                M1Values.PowerLimitSP = M1Values.PowerLimitSP + 5 < 100 ? M1Values.PowerLimitSP + 5 : 100;
+                M1Values.PowerLimitSP = M1Values.PowerLimitSP.Value + 5 < 100 ? M1Values.PowerLimitSP.Value + 5 : 100;
         }
         private void ExecuteBtnDn3(object obj)
         {
             if (M1Values != null)
-                M1Values.PowerLimitSP = M1Values.PowerLimitSP - 5 > 0 ? M1Values.PowerLimitSP - 5 : 0;
+                M1Values.PowerLimitSP = M1Values.PowerLimitSP.Value - 5 > 0 ? M1Values.PowerLimitSP.Value - 5 : 0;
         }
 
         private void ExecuteSPSOK(object obj)
         {
             if (M1Values != null)
             {
-                int[] values = { M1Values.SypplySP, M1Values.ExhaustSP, M1Values.TempSP, M1Values.PowerLimitSP };
+                int[] values = { M1Values.SypplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, M1Values.PowerLimitSP.Value };
                 CTcpClientService.SetCommandToServer(M1Values.StartAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             }

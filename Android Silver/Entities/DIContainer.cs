@@ -28,6 +28,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<FileSystemService>();
             _container.RegisterSingleton<MathService>();
             _container.RegisterSingleton<FilesEntities>();
+            _container.RegisterSingleton<ReadWriteService>();
         }
 
         public static T Resolve<T>()

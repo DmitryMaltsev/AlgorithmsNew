@@ -1,4 +1,5 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.ValuesEntities;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,11 @@ namespace Android_Silver.Entities.Srs
     {
         //0-нет, 1-NTC10k, 2- pt1000
         public int SensorType;
-        public float Correction;
-
+        public FloatValue Correction;
+        public TempSenor(int min, int max, byte numChr):base(min,max,numChr)
+        {
+            Value.Min = min; Value.Max = max; Value.NumChr = numChr;
+            Correction = new FloatValue(-100, 100, 1);
+        }
     }
 }

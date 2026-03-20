@@ -13,8 +13,8 @@ namespace Android_Silver.Entities.FBEntities
     public class CommonSetPoints:BindableBase
     {
 
-        private float _spTemp;
-        public float SPTempR
+        private FloatValue _spTemp;
+        public FloatValue SPTempR
         {
             get { return _spTemp; }
             set
@@ -23,21 +23,29 @@ namespace Android_Silver.Entities.FBEntities
                 OnPropertyChanged(nameof(SPTempR));
             }
         }
-        public float  SPTempAlarm;
-        public float SPTempMaxCh;
-        public float SPTempMinCh;
-        public int TControlDelayS;
-        public int SeasonMode;
-        public float SPSeason;
-        public float HystSeason;
+        public FloatValue SPTempAlarm;
+        public FloatValue SPTempMaxCh;
+        public FloatValue SPTempMinCh;
+        public IntValue TControlDelayS;
+        public IntValue SeasonMode;
+        public FloatValue SPSeason;
+        public FloatValue HystSeason;
         public IntValue RoomSPPReg;
         public IntValue RoomSPIReg;
         public IntValue RoomSPDReg;
         public CommonSetPoints()
         {
-            RoomSPPReg=new IntValue(0, 10_000);
-            RoomSPIReg=new IntValue(0, 10_000);
-            RoomSPDReg=new IntValue(0, 10_000);
+            SPTempMaxCh = new FloatValue(0,100,1);
+            SPTempMinCh = new FloatValue(0, 100, 1);
+            SPTempAlarm = new FloatValue(0, 100, 1);
+            TControlDelayS = new IntValue(0, 65535);
+            SPSeason = new FloatValue(0, 30, 1);
+            HystSeason = new FloatValue(0, 20, 1);
+            SeasonMode = new IntValue(0, 4);
+            RoomSPPReg = new IntValue(0, 10_000);
+            RoomSPIReg = new IntValue(0, 10_000);
+            RoomSPDReg = new IntValue(0, 10_000);
+            SPTempR = new FloatValue(0, 100, 1);
         }
     }
 }

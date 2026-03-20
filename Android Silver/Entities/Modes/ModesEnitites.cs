@@ -89,7 +89,7 @@ namespace Android_Silver.Entities.Modes
             CMode2 = Mode2ValuesList[0];
         }
 
-        public void SetMode1ValuesByIndex(int index)
+        public void SetMode1ValuesByIndex(ushort index)
         {
             if (index < Mode1ValuesList.Count)
             {

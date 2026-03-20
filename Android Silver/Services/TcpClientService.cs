@@ -4,6 +4,8 @@ using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
+
+using System;
 using System.Collections;
 using System.Net.Sockets;
 using System.Text;
@@ -47,6 +49,11 @@ namespace Android_Silver.Services
 
         private FilesEntities _filesEntities;
 
+        private ReadWriteService _readWriteService;
+
+        public List<ushort> WriteValuesList = new List<ushort>();
+        private byte[] _readValuesArr;
+
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -60,6 +67,7 @@ namespace Android_Silver.Services
             _mathService = DIContainer.Resolve<MathService>();
             _filesEntities = DIContainer.Resolve<FilesEntities>();
             _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
+            _readWriteService = DIContainer.Resolve<ReadWriteService>();
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
         }
@@ -69,8 +77,8 @@ namespace Android_Silver.Services
             try
             {
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 3000;
-                _ethernetEntities.Client.SendTimeout = 3000;
+                _ethernetEntities.Client.ReceiveTimeout = 1000;
+                _ethernetEntities.Client.SendTimeout = 1000;
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = true;
                 _ethernetEntities.CanTryToConnect = !IsConnecting;
@@ -130,8 +138,16 @@ namespace Android_Silver.Services
                      string messToClient = GetMessageToServer();
                      if (!IsSending)
                      {
-                         SendCommand(messToClient);
-                         if (sbResult != null && sbResult.Length > 0)
+                         //Процесс отправки/получения байт
+                         if (SendCommand(messToClient))
+                         {
+                             _ethernetEntities.SystemMessage = "Успешная передача данных";
+                         }
+                         else
+                         {
+                             _ethernetEntities.SystemMessage = "Данные уже передаются";
+                         }
+                         /*if (sbResult != null && sbResult.Length > 0)
                          {
                              if (_ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
                              {
@@ -210,12 +226,43 @@ namespace Android_Silver.Services
                          else
                          {
                              _ethernetEntities.SystemMessage = "Данные уже передаются";
-                         }
+                         }*/
                          Thread.Sleep(100);
                      }
                  }
              });
         }
+
+        bool IsModbusDataRight(byte[] data, int length)
+        {
+            if (length < 3)
+                return false;
+            ushort crc = GetCRC(data, (ushort)(length - 2));
+            byte lb = (byte)(crc & 0xff);
+            byte hb = (byte)(crc >> 8);
+            if (lb != data[length - 2] || hb != data[length - 1])
+                return false;
+            return true;
+        }
+
+        ushort GetCRC(byte[] data, ushort length)
+        {
+            ushort crc = 0XFFFF;
+            for (ushort i = 0; i < length; i++)
+            {
+                crc ^= (ushort)data[i];
+                for (ushort j = 0; j < 8; j++)
+                {
+                    bool lbSet = (crc & 0x0001) != 0;
+                    crc >>= 1;
+                    if (lbSet)
+                        crc ^= 0xA001;
+                }
+            }
+            return crc;
+        }
+
+
 
         private void GetMessagesState()
         {
@@ -267,27 +314,32 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
+                            _readValuesArr =new byte[] {1,3,0,100,0,58};
                             messToClient = "0100,058\r\n";
                         }
                         break;
                     case MessageStates.VacMessage:
                         {
+                            _readValuesArr = new byte[] { 1, 3, 0, 167, 0, 16 };
                             messToClient = "0167,016\r\n";
                         }
                         break;
                     case MessageStates.ShedMessage:
                         {
+                            _readValuesArr = new byte[] { 1, 3, 0, 183, 0, 112 };
                             messToClient = "0183,112\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage1:
                         {
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 126 };
                             messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage2:
                         {
+                            _readValuesArr = new byte[] { 1, 3, 1, 170, 0, 137 };
                             messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -308,7 +360,7 @@ namespace Android_Silver.Services
         }
 
         private int _trySendcounter = 0;
-        private StringBuilder SendCommand(string command)
+        private bool SendCommand(string command)
         {
 
             IsSending = true;
@@ -318,25 +370,94 @@ namespace Android_Silver.Services
             {
                 try
                 {
+
                     _stream = _ethernetEntities.Client.GetStream();
-                    StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
-                    writer.WriteLine(command);
-                    writer.Flush();
+                    ushort startAddress = 300;
+                    //Команда на запись
+                    if (WriteValuesList.Count > 0)
+                    { 
+                        byte[] buffer = new byte[8 + (WriteValuesList.Count - 1) * 2];
+
+                        buffer[0] = 1;
+                        buffer[1] = 16;
+                        //Начальный регистр
+                        buffer[2] = (byte)(WriteValuesList[0] >> 8);
+                        buffer[3] = (byte)(WriteValuesList[0]);
+                        //Количество регистров
+                        buffer[4] = (byte)((WriteValuesList.Count-1) >> 8);
+                        buffer[5] = (byte)(WriteValuesList.Count-1);
+                        byte addressIndex = 6;
+                        for (int i = 1; i < WriteValuesList.Count; i++)
+                        {
+                            buffer[addressIndex++] = (byte)(WriteValuesList[i] >> 8);
+                            buffer[addressIndex++] = (byte)(WriteValuesList[i]);
+                        }
+                        ushort crc = GetCRC(buffer, (ushort)(buffer.Length-2));
+                        buffer[buffer.Length - 2] = (byte)(crc & 0xff);
+                        buffer[buffer.Length - 1] = (byte)(crc >> 8);
+                        _stream.Write(buffer, 0, buffer.Length);
+                    }
+                    else
+                    {
+                        //команда на чтение
+                        ushort crc = GetCRC(_readValuesArr, (ushort)_readValuesArr.Length);
+                        byte[] sendData = new byte[_readValuesArr.Length + 2];
+                        for (int i = 0; i < _readValuesArr.Length; i++)
+                        {
+                            sendData[i] = _readValuesArr[i];
+                        }
+                        sendData[sendData.Length - 2] = (byte)(crc & 0xff);
+                        sendData[sendData.Length - 1] = (byte)(crc >> 8);
+                        _stream.Write(sendData, 0, sendData.Length);
+                    }
+                    //Принятие после отправленного пакета
                     byte[] data = new byte[2200];
                     int bytes = _stream.Read(data, 0, data.Length);
-                    do
+                    while (_stream.DataAvailable) { }
+                    ;
+                    if (IsModbusDataRight(data, (ushort)(bytes)))
                     {
-                        sbResult.Append(Encoding.ASCII.GetString(data, 0, bytes));
+                        byte func = data[1];
+                        ushort addr1 = (ushort)(data[2] << 8);
+                        ushort addr2 = data[3];
+                        startAddress = (ushort)(data[2] << 8 | data[3]); //(ushort)(addr1 | addr2);//(ushort)(data[2] << 8) | (ushort)(data[3]);
+                        ushort regsCount = (ushort)(data[4] << 8 | data[5]);
+                        if (func == 3)
+                        {
+                            ushort bufferLength = 6;
+                            for (ushort i = startAddress; i < startAddress + regsCount; i++)
+                            {
+                                bufferLength = _readWriteService.EthernetData_Read(data, i, bufferLength);
+                            }
+                        }
+                        else if (func == 16)
+                        {
+                            data = new byte[WriteValuesList.Count*2];
+                            int index = 0;
+                            for (int j = 0; j < WriteValuesList.Count; j++)
+                            {
+                                data[index++] = (byte)(WriteValuesList[j] >> 8);
+                                data[index++] = (byte)WriteValuesList[j];
+                            }
+                            for (ushort i = startAddress; i < startAddress + regsCount; i++)
+                            {
+                                ushort bufferLength = 6;
+                                bufferLength = _readWriteService.EthernetData_Read(data, i, bufferLength);
+                            }
+                            WriteValuesList.Clear();
+                        }
                     }
-                    while (_stream.DataAvailable);
                     IsSending = false;
                     ResieveCounter += 1;
+                    return true;
                 }
                 catch (Exception ex)
                 {
+                    // _stream?.Close();
                     _trySendcounter += 1;
-                    Thread.Sleep(200);
+                    //Thread.Sleep(200);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
+
                 }
                 // && _ethernetEntities.MessageToServer==String.Empty
             }
@@ -358,8 +479,11 @@ namespace Android_Silver.Services
                     Disconnect();
                 }
             }
-            return sbResult;
+            return false;
         }
+
+
+
 
         public void Disconnect()
         {
@@ -370,6 +494,8 @@ namespace Android_Silver.Services
             //SystemMessage = "Соединение разорвано";
             _ethernetEntities.Client.Close();
             _ethernetEntities.Client.Dispose();
+            _stream.Close();
+            _stream.Dispose();
         }
 
         private bool GetResponseData(StringBuilder rSB, List<Response> response)
@@ -428,7 +554,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CCommonSetPoints.SPTempR = buff;
+                            _fbs.CCommonSetPoints.SPTempR.Value = buff;
                         }
                     }
                     break;
@@ -436,7 +562,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CSensors.OutdoorTemp.Value = buff;
+                            _fbs.CSensors.OutdoorTemp.Value.Value = buff;
                         }
                     }
                     break;
@@ -444,7 +570,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CSensors.SupTemp.Value = buff;
+                            _fbs.CSensors.SupTemp.Value.Value = buff;
                         }
                     }
                     break;
@@ -452,7 +578,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CSensors.ExhaustTemp.Value = buff;
+                            _fbs.CSensors.ExhaustTemp.Value.Value = buff;
                         }
                     }
                     break;
@@ -460,7 +586,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CSensors.RoomTemp.Value = buff;
+                            _fbs.CSensors.RoomTemp.Value.Value = buff;
                         }
                     }
                     break;
@@ -468,7 +594,7 @@ namespace Android_Silver.Services
                     {
                         if (StringToFloat(resp.ValueString, floatPrec, ref buff))
                         {
-                            _fbs.CSensors.ReturnTemp.Value = buff;
+                            _fbs.CSensors.ReturnTemp.Value.Value = buff;
                         }
                     }
                     break;
@@ -476,7 +602,7 @@ namespace Android_Silver.Services
                 case 108:
                     {
 
-                        if (int.TryParse(resp.ValueString, out int val))
+                        if (ushort.TryParse(resp.ValueString, out ushort val))
                         {
                             if (val != _modesEntities.CMode1.Num)
                             {
@@ -500,7 +626,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[1].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[1].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -508,7 +634,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[1].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[1].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -516,7 +642,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[1].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[1].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -524,7 +650,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[1].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[1].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -534,7 +660,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[2].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[2].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -542,7 +668,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[2].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[2].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -550,7 +676,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[2].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[2].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -558,7 +684,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[2].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[2].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -568,7 +694,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[3].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[3].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -576,7 +702,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[3].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[3].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -584,7 +710,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[3].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[3].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -592,7 +718,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[3].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[3].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -602,7 +728,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[4].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[4].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -610,7 +736,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[4].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[4].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -618,7 +744,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[4].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[4].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -626,7 +752,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[4].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[4].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -636,7 +762,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[5].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[5].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -644,7 +770,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[5].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[5].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -652,7 +778,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[5].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[5].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -660,7 +786,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[5].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[5].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -670,7 +796,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[6].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[6].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -678,7 +804,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[6].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[6].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -686,7 +812,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[6].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[6].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -694,7 +820,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[6].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[6].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -2167,9 +2293,9 @@ namespace Android_Silver.Services
                     break;
                 case 5108:
                     {
-                        if (int.TryParse(resp.ValueString, out int Val))
+                       // if (int.TryParse(resp.ValueString, out ushort Val))
                         {
-                            _modesEntities.SetMode1ValuesByIndex(Val);
+                           // _modesEntities.SetMode1ValuesByIndex(Val);
                             _activePageEntities.SetActivePageState(ActivePageState.MainPage);
                         }
                     }
@@ -2188,7 +2314,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[1].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[1].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -2196,7 +2322,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[1].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[1].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -2204,7 +2330,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[1].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[1].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -2212,7 +2338,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[1].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[1].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -2222,7 +2348,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[2].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[2].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -2230,7 +2356,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[2].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[2].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -2238,7 +2364,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[2].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[2].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -2246,7 +2372,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[2].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[2].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -2256,7 +2382,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[3].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[3].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -2264,7 +2390,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[3].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[3].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -2272,7 +2398,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[3].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[3].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -2280,7 +2406,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[3].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[3].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -2290,7 +2416,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[4].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[4].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -2298,7 +2424,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[4].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[4].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -2306,7 +2432,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[4].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[4].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -2314,7 +2440,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[4].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[4].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -2324,7 +2450,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[5].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[5].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -2332,7 +2458,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[5].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[5].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -2340,7 +2466,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[5].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[5].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -2348,7 +2474,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[5].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[5].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -2358,7 +2484,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[8].SypplySP = Val;
+                            _modesEntities.Mode1ValuesList[8].SypplySP.Value = Val;
                         }
                     }
                     break;
@@ -2366,7 +2492,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[8].ExhaustSP = Val;
+                            _modesEntities.Mode1ValuesList[8].ExhaustSP.Value = Val;
                         }
                     }
                     break;
@@ -2374,7 +2500,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[8].TempSP = Val;
+                            _modesEntities.Mode1ValuesList[8].TempSP.Value = Val;
                         }
                     }
                     break;
@@ -2382,7 +2508,7 @@ namespace Android_Silver.Services
                     {
                         if (int.TryParse(resp.ValueString, out int Val))
                         {
-                            _modesEntities.Mode1ValuesList[8].PowerLimitSP = Val;
+                            _modesEntities.Mode1ValuesList[8].PowerLimitSP.Value = Val;
                         }
                     }
                     break;
@@ -3687,7 +3813,7 @@ namespace Android_Silver.Services
 
                     if (val >= -100 && val <= 1000)
                     {
-                        _fbs.CCommonSetPoints.SPTempAlarm = (float)val / 10;
+                        _fbs.CCommonSetPoints.SPTempAlarm.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -3712,7 +3838,7 @@ namespace Android_Silver.Services
 
                     if (val <= 1000)
                     {
-                        _fbs.CCommonSetPoints.SPTempMaxCh = (float)val / 10;
+                        _fbs.CCommonSetPoints.SPTempMaxCh.Value = (float)val / 10;
                     }
 
                 }
@@ -3726,7 +3852,7 @@ namespace Android_Silver.Services
 
                     if (val <= 1000)
                     {
-                        _fbs.CCommonSetPoints.SPTempMinCh = (float)val / 10;
+                        _fbs.CCommonSetPoints.SPTempMinCh.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -3739,7 +3865,7 @@ namespace Android_Silver.Services
 
                     if (val <= 65535)
                     {
-                        _fbs.CCommonSetPoints.TControlDelayS = val;
+                        _fbs.CCommonSetPoints.TControlDelayS.Value = val;
                     }
                 }
                 return;
@@ -3752,7 +3878,7 @@ namespace Android_Silver.Services
 
                     if (val <= 2)
                     {
-                        _fbs.CCommonSetPoints.SeasonMode = val;
+                        _fbs.CCommonSetPoints.SeasonMode.Value = val;
                     }
                 }
                 return;
@@ -3765,7 +3891,7 @@ namespace Android_Silver.Services
 
                     if (val <= 300)
                     {
-                        _fbs.CCommonSetPoints.SPSeason = (float)val / 10; ;
+                        _fbs.CCommonSetPoints.SPSeason.Value = (float)val / 10; ;
                     }
                 }
                 return;
@@ -3778,7 +3904,7 @@ namespace Android_Silver.Services
 
                     if (val <= 200)
                     {
-                        _fbs.CCommonSetPoints.HystSeason = (float)val / 10;
+                        _fbs.CCommonSetPoints.HystSeason.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -3819,7 +3945,7 @@ namespace Android_Silver.Services
 
                     if (val <= 70)
                     {
-                        _fbs.UFLeds.LEDsI = (float)val / 100;
+                        _fbs.UFLeds.LEDsI.Value = (float)val / 100;
                     }
 
                 }
@@ -4392,7 +4518,7 @@ namespace Android_Silver.Services
 
                     if (val <= 1000)
                     {
-                        _fbs.CWHSetPoints.TRetMax = (float)val / 10;
+                        _fbs.CWHSetPoints.TRetMax.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4403,7 +4529,7 @@ namespace Android_Silver.Services
                 {
                     if (val <= 1000)
                     {
-                        _fbs.CWHSetPoints.TRetMin = (float)val / 10;
+                        _fbs.CWHSetPoints.TRetMin.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4414,7 +4540,7 @@ namespace Android_Silver.Services
                 {
                     if (val <= 1000)
                     {
-                        _fbs.CWHSetPoints.TRetStb = (float)val / 10;
+                        _fbs.CWHSetPoints.TRetStb.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4426,7 +4552,7 @@ namespace Android_Silver.Services
 
                     if (val <= 1000)
                     {
-                        _fbs.CWHSetPoints.TRetF = (float)val / 10;
+                        _fbs.CWHSetPoints.TRetF.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4438,7 +4564,7 @@ namespace Android_Silver.Services
 
                     if (val <= 1000)
                     {
-                        _fbs.CWHSetPoints.TRetStart = (float)val / 10;
+                        _fbs.CWHSetPoints.TRetStart.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4478,7 +4604,7 @@ namespace Android_Silver.Services
 
                     if (val <= 1000)
                     {
-                        _fbs.CWHSetPoints.SPWinterProcess = (float)val / 10;
+                        _fbs.CWHSetPoints.SPWinterProcess.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4762,7 +4888,7 @@ namespace Android_Silver.Services
 
                     if (val >= -500 && val <= 500)
                     {
-                        _fbs.CRecup.TEffSP = (float)val / 10;
+                        _fbs.CRecup.TEffSP.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4863,7 +4989,7 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1000)
                     {
-                        _fbs.CSensors.OutdoorTemp.Correction = (float)val / 10;
+                        _fbs.CSensors.OutdoorTemp.Correction.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4875,7 +5001,7 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1000)
                     {
-                        _fbs.CSensors.SupTemp.Correction = (float)val / 10;
+                        _fbs.CSensors.SupTemp.Correction.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4887,7 +5013,7 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1000)
                     {
-                        _fbs.CSensors.ExhaustTemp.Correction = (float)val / 10;
+                        _fbs.CSensors.ExhaustTemp.Correction.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4899,7 +5025,7 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1000)
                     {
-                        _fbs.CSensors.RoomTemp.Correction = (float)val / 10;
+                        _fbs.CSensors.RoomTemp.Correction.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -4911,7 +5037,7 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1000)
                     {
-                        _fbs.CSensors.ReturnTemp.Correction = (float)val / 10;
+                        _fbs.CSensors.ReturnTemp.Correction.Value = (float)val / 10;
                     }
                 }
                 if (_servActivePageEntities.IsLoadingPage)
@@ -5038,7 +5164,7 @@ namespace Android_Silver.Services
                 {
                     if (val >= -1000 && val <= 1200)
                     {
-                        _fbs.ThmSps.TempH1 = (float)val / 10;
+                        _fbs.ThmSps.TempH1.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -5050,7 +5176,7 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1200)
                     {
-                        _fbs.ThmSps.TempC1 = (float)val / 10;
+                        _fbs.ThmSps.TempC1.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -5062,7 +5188,7 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1200)
                     {
-                        _fbs.ThmSps.TempH2 = (float)val / 10;
+                        _fbs.ThmSps.TempH2.Value = (float)val / 10;
                     }
                 }
                 return;
@@ -5074,14 +5200,14 @@ namespace Android_Silver.Services
 
                     if (val >= -1000 && val <= 1200)
                     {
-                        _fbs.ThmSps.TempC2 = (float)val / 10;
+                        _fbs.ThmSps.TempC2.Value = (float)val / 10;
                     }
                     if (_menusEntities.StartMenuCollection.Count > 8 && _servActivePageEntities.LastActivePageState == SActivePageState.TmhSettingsPage)
                     {
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.TempH1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.TempC1;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.TempH2;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempC2;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.TempH1.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.TempC1.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.TempH2.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempC2.Value;
                     }
                 }
                 return;
@@ -5351,7 +5477,7 @@ namespace Android_Silver.Services
                 {
                     if (val >= 0 && val <= 100)
                     {
-                        _modesEntities.Mode1ValuesList[6].SypplySP = val;
+                        _modesEntities.Mode1ValuesList[6].SypplySP.Value = val;
                     }
                 }
                 return;
@@ -5384,7 +5510,7 @@ namespace Android_Silver.Services
                 {
                     if (val >= 0 && val <= 100)
                     {
-                        _modesEntities.Mode1ValuesList[6].ExhaustSP = val;
+                        _modesEntities.Mode1ValuesList[6].ExhaustSP.Value = val;
                     }
                 }
                 return;
@@ -5406,7 +5532,7 @@ namespace Android_Silver.Services
                 {
                     if (val >= 0 && val <= 40)
                     {
-                        _modesEntities.Mode1ValuesList[6].TempSP = val;
+                        _modesEntities.Mode1ValuesList[6].TempSP.Value = val;
                     }
                 }
                 return;
@@ -5417,7 +5543,7 @@ namespace Android_Silver.Services
                 {
                     if (val >= 0 && val <= 100)
                     {
-                        _modesEntities.Mode1ValuesList[6].PowerLimitSP = val;
+                        _modesEntities.Mode1ValuesList[6].PowerLimitSP.Value = val;
                     }
                 }
                 if (_servActivePageEntities.IsLoadingPage)
@@ -6740,8 +6866,6 @@ namespace Android_Silver.Services
             }
         }
 
-
-
         /// <summary>
         /// Основной метод передачи данных на сервер
         /// </summary>
@@ -6751,31 +6875,38 @@ namespace Android_Silver.Services
         {
             if (_ethernetEntities.CMessageState != MessageStates.UpdaterMessage)
             {
-                string tagsCount = String.Empty;
-                if (values.Length > 0 && values.Length < 10)
-                {
-                    tagsCount = "00" + values.Length.ToString();
-                }
-                else
-                if (values.Length >= 10 && values.Length < 100)
-                {
-                    tagsCount = "0" + values.Length.ToString();
-                }
-                else
-                if (values.Length >= 100 && values.Length < 1000)
-                {
-                    tagsCount = values.Length.ToString();
-                }
-                MessageToServer = $"{address},{tagsCount},";
+                WriteValuesList.Clear();
+                WriteValuesList.Add((ushort)address);
                 for (int i = 0; i < values.Length; i++)
                 {
-                    MessageToServer += values[i];
-                    if (i < values.Length - 1)
-                    {
-                        MessageToServer += ",";
-                    }
+                    WriteValuesList.Add((ushort)values[i]);
                 }
-                MessageToServer += "\r\n";
+
+                //string tagsCount = String.Empty;
+                //if (values.Length > 0 && values.Length < 10)
+                //{
+                //    tagsCount = "00" + values.Length.ToString();
+                //}
+                //else
+                //if (values.Length >= 10 && values.Length < 100)
+                //{
+                //    tagsCount = "0" + values.Length.ToString();
+                //}
+                //else
+                //if (values.Length >= 100 && values.Length < 1000)
+                //{
+                //    tagsCount = values.Length.ToString();
+                //}
+                //MessageToServer = $"{address},{tagsCount},";
+                //for (int i = 0; i < values.Length; i++)
+                //{
+                //    MessageToServer += values[i];
+                //    if (i < values.Length - 1)
+                //    {
+                //        MessageToServer += ",";
+                //    }
+                //}
+                //MessageToServer += "\r\n";
             }
         }
 
@@ -6831,13 +6962,13 @@ namespace Android_Silver.Services
         {
             int specActive = val ? 1 : 0;
             int[] vals = { specActive };
-            SetCommandToServer(156 + _menusEntities.WriteOffset, vals);
+            SetCommandToServer((ushort)(156 + _menusEntities.WriteOffset), vals);
         }
 
         private void MFloorCallback(bool val)
         {
             int[] vals = { 0 };
-            SetCommandToServer(157 + _menusEntities.WriteOffset, vals);
+            SetCommandToServer((ushort)(157 + _menusEntities.WriteOffset), vals);
         }
         #endregion
 
