@@ -45,15 +45,19 @@ namespace Android_Silver.Entities.FBEntities
         public int EffFailValue;
         public int EffFailDelay;
         public int HZMax;
-        public float TempA;
-        public float TempB;
-        public float TempC;
-        public float TempD;
+        public FloatValue TempA;
+        public FloatValue TempB;
+        public FloatValue TempC;
+        public FloatValue TempD;
         public List<RecPrfofile> RecProfiles = new List<RecPrfofile>();
         public Recup()
         {
             EffRecSPPerc = new IntValue(0, 100);
             TEffSP = new FloatValue(-100, 100, 1);
+            TempA = new FloatValue(-50, 50, 1);
+            TempB = new FloatValue(-50, 50, 1);
+            TempC = new FloatValue(-50, 50, 1);
+            TempD = new FloatValue(-50, 50, 1);
         }
 
     }
@@ -62,13 +66,13 @@ namespace Android_Silver.Entities.FBEntities
     {
         public byte ProfNum;
         public FloatValue I_StartLimits;
-        public float I_Start;
+        public FloatValue I_Start;
         public FloatValue I_ContLimits;
-        public float I_Cont;
+        public FloatValue I_Cont;
         public FloatValue KpLimits;
-        public float Kp;
+        public FloatValue Kp;
         public FloatValue KiLimits;
-        public float Ki;
+        public FloatValue Ki;
         public IntValue IA0Limits;
         public int IA0;
         public IntValue IB0Limits;
@@ -83,10 +87,15 @@ namespace Android_Silver.Entities.FBEntities
             I_StartLimits.Value = iStart;
             I_ContLimits = new FloatValue(0, 3, 1);
             I_ContLimits.Value = iCount;
-            KpLimits = new FloatValue(0, 1000, 2);
+            KpLimits = new FloatValue(0, 1000, 1);
             KpLimits.Value = kp;
-            KiLimits = new FloatValue(0, 1000, 2);
+            KiLimits = new FloatValue(0, 1000, 1);
             KiLimits.Value = ki;
+            I_Start = new FloatValue(0, 3, 1);
+            I_Cont = new FloatValue(0, 3, 1);
+            Kp = new FloatValue(0, 1000, 2);
+            Ki = new FloatValue(0, 1000, 2);
+         
         }
     }
 }

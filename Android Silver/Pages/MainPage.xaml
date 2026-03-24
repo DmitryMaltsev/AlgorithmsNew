@@ -358,7 +358,7 @@
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
 
             <Label Text="t уст"   Grid.Row="8" Grid.Column="0" Style="{StaticResource SliderText}" 
-                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage.Value}"/>
+                             IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Slider  Grid.Row="8" Style="{StaticResource MainPageSlider}" 
                              Value="{Binding  Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.TempSP}"  
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>

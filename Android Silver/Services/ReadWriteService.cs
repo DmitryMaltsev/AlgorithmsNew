@@ -56,38 +56,32 @@ namespace Android_Silver.Services
             }
             if (startAddr == 102)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CCommonSetPoints.SPTempR);
+                GetFloatValueResult(_fbs.CCommonSetPoints.SPTempR, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 103)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.OutdoorTemp.Value);
+                GetFloatValueResult(_fbs.CSensors.OutdoorTemp.Value, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 104)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.SupTemp.Value);
+                GetFloatValueResult(_fbs.CSensors.SupTemp.Value, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 105)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.ExhaustTemp.Value);
+                GetFloatValueResult(_fbs.CSensors.ExhaustTemp.Value, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 106)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.RoomTemp.Value);
+                GetFloatValueResult(_fbs.CSensors.RoomTemp.Value, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 107)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.ReturnTemp.Value);
+                GetFloatValueResult(_fbs.CSensors.ReturnTemp.Value, value, ref startIndex);
                 return startIndex;
             }
             //Режим 1
@@ -120,8 +114,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 112)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _modesEntities.Mode1ValuesList[1].TempSP);
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[1].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 113)
@@ -146,8 +139,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 116)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _modesEntities.Mode1ValuesList[2].TempSP);
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[2].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 117)
@@ -172,8 +164,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 120)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _modesEntities.Mode1ValuesList[3].TempSP);
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[1].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 121)
@@ -198,8 +189,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 124)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _modesEntities.Mode1ValuesList[4].TempSP);
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[4].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 125)
@@ -224,8 +214,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 128)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _modesEntities.Mode1ValuesList[5].TempSP);
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[5].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 129)
@@ -250,8 +239,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 132)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _modesEntities.Mode1ValuesList[6].TempSP);
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[6].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 133)
@@ -834,8 +822,8 @@ namespace Android_Silver.Services
             #region Общие настройки
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CCommonSetPoints.SPTempAlarm);
+                GetFloatValueResult(_fbs.CCommonSetPoints.SPTempAlarm, value, ref startIndex);
+                return startIndex;
             }
 
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 1)
@@ -847,15 +835,13 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 2)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CCommonSetPoints.SPTempMaxCh);
+                GetFloatValueResult(_fbs.CCommonSetPoints.SPTempMaxCh, value, ref startIndex);
                 return startIndex;
             }
 
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 3)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CCommonSetPoints.SPTempMinCh);
+                GetFloatValueResult(_fbs.CCommonSetPoints.SPTempMinCh, value, ref startIndex);
                 return startIndex;
             }
             ////Задержка авари по темп(пока 0)
@@ -875,15 +861,13 @@ namespace Android_Silver.Services
             ////Уставка режима года
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 6)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CCommonSetPoints.SPSeason);
+                GetFloatValueResult(_fbs.CCommonSetPoints.SPSeason, value, ref startIndex);
                 return startIndex;
             }
             ////Гистерезис режима года
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 7)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CCommonSetPoints.HystSeason);
+                GetFloatValueResult(_fbs.CCommonSetPoints.HystSeason, value, ref startIndex);
                 return startIndex;
             }
             ////Авторестарт
@@ -905,8 +889,7 @@ namespace Android_Silver.Services
             ////Сила тока уф светодиодов
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 10)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.UFLeds.LEDsI);
+                GetFloatValueResult(_fbs.UFLeds.LEDsI, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 11)
@@ -1185,8 +1168,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 11)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CFans.EffFanTempSP);
+                GetFloatValueResult(_fbs.CFans.EffFanTempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 12)
@@ -1258,32 +1240,28 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 6)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CWHSetPoints.TRetMax);
+                GetFloatValueResult(_fbs.CWHSetPoints.TRetMax, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 7)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CWHSetPoints.TRetMin);
+                GetFloatValueResult(_fbs.CWHSetPoints.TRetMin, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 8)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CWHSetPoints.TRetStb);
+
+                GetFloatValueResult(_fbs.CWHSetPoints.TRetStb, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 9)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CWHSetPoints.TRetF);
+                GetFloatValueResult(_fbs.CWHSetPoints.TRetF, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 10)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CWHSetPoints.TRetStart);
+                GetFloatValueResult(_fbs.CWHSetPoints.TRetStart, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 11)
@@ -1306,8 +1284,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 14)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CWHSetPoints.SPWinterProcess);
+                GetFloatValueResult(_fbs.CWHSetPoints.SPWinterProcess, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 15)
@@ -1467,8 +1444,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 3)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CRecup.TEffSP);
+                GetFloatValueResult(_fbs.CRecup.TEffSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 4)
@@ -1491,30 +1467,27 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 7)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CRecup.TempA = buffer;
+                GetFloatValueResult(_fbs.CRecup.TempA, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 8)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CRecup.TempB = buffer;
+                GetFloatValueResult(_fbs.CRecup.TempB, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 9)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CRecup.TempC = buffer;
+                GetFloatValueResult(_fbs.CRecup.TempC, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 10)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CRecup.TempD = buffer;
+                GetFloatValueResult(_fbs.CRecup.TempD, value, ref startIndex);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
+
                 return startIndex;
             }
             #endregion
@@ -1522,36 +1495,31 @@ namespace Android_Silver.Services
             #region Корректировка датчиков
             if (startAddr == _menusEntities.ETH_SENS_SETTINGS_ADDR)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.OutdoorTemp.Correction);
+                GetFloatValueResult(_fbs.CSensors.OutdoorTemp.Correction, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_SENS_SETTINGS_ADDR + 1)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.SupTemp.Correction);
+                GetFloatValueResult(_fbs.CSensors.SupTemp.Correction, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_SENS_SETTINGS_ADDR + 2)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.ExhaustTemp.Correction);
+                GetFloatValueResult(_fbs.CSensors.ExhaustTemp.Correction, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_SENS_SETTINGS_ADDR + 3)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.RoomTemp.Correction);
+                GetFloatValueResult(_fbs.CSensors.RoomTemp.Correction, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_SENS_SETTINGS_ADDR + 4)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.CSensors.ReturnTemp.Correction);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
+                GetFloatValueResult(_fbs.CSensors.ReturnTemp.Correction, value, ref startIndex);
                 return startIndex;
             }
             #endregion
@@ -1640,32 +1608,26 @@ namespace Android_Silver.Services
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetIntValueResult(buffer, _fbs.SupCalibrateThm.FanControlType);
-                GetIntValueResult(buffer, _fbs.ExhaustCalibrateThm.FanControlType);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 1)
             {
-
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.ThmSps.TempH1);
+                GetFloatValueResult(_fbs.ThmSps.TempH1, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 2)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.ThmSps.TempC1);
+                GetFloatValueResult(_fbs.ThmSps.TempC1, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 3)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.ThmSps.TempH2);
+                GetFloatValueResult(_fbs.ThmSps.TempH2, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 4)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.ThmSps.TempC2);
+                GetFloatValueResult(_fbs.ThmSps.TempC2, value, ref startIndex);
                 if (_menusEntities.StartMenuCollection.Count > 8 && _servActivePageEntities.LastActivePageState == SActivePageState.TmhSettingsPage)
                 {
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.TempH1.Value;
@@ -1673,6 +1635,7 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.TempH2.Value;
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempC2.Value;
                 }
+
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 5)
@@ -1695,33 +1658,27 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 8)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.ThmSps.KPolKoef);
+                GetFloatValueResult(_fbs.ThmSps.KPolKoef, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 9)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.ThmSps.BPolKoef);
+                GetFloatValueResult(_fbs.ThmSps.BPolKoef, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 10)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.ThmSps.KClKoef);
+                GetFloatValueResult(_fbs.ThmSps.KClKoef, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 11)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.ThmSps.BClKoef);
+                GetFloatValueResult(_fbs.ThmSps.BClKoef, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 12)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _fbs.ThmSps.PThmSup);
-
+                GetFloatValueResult(_fbs.ThmSps.PThmSup, value, ref startIndex);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -1730,6 +1687,136 @@ namespace Android_Silver.Services
             }
             #endregion
 
+            #region Работа рекуператора
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 2 && buffer >= 0)
+                    _fbs.MbRecSPs.MBRecMode = buffer;
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 1)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 1 && buffer >= 0)
+                {
+                    _fbs.MbRecSPs.IsRotTest1 = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 2)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 1 && buffer >= 0)
+                {
+                    _fbs.MbRecSPs.IsRotTest2 = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 3)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 1 && buffer >= 0)
+                {
+                    _fbs.MbRecSPs.IsForward1 = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 4)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 1 && buffer >= 0)
+                {
+                    _fbs.MbRecSPs.IsForward2 = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 5)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 1 && buffer >= 0)
+                {
+                    _fbs.MbRecSPs.IsGrindingMode = (byte)buffer;
+                }
+                if (_menusEntities.StartMenuCollection.Count > 3 && _servActivePageEntities.LastActivePageState == SActivePageState.RecupSettingsPage)
+                {
+                    _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CPickVal = _fbs.MbRecSPs.IsGrindingMode;
+
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 6)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+
+                if (buffer <= 10_000 && buffer >= 0)
+                {
+                    _fbs.MbRecSPs.NominalCurrent = buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 10_000)
+                {
+                    _fbs.MbRecSPs.ReductKoef = (float)buffer / 10;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 8)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.MbRecSPs.NominalTurns1 = buffer;
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 9)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 100 && buffer >= 0)
+                {
+                    _fbs.MbRecSPs.NominalTurns2 = buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 10)
+            {
+                short buffer = (short)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 700 && buffer >= -700)
+                {
+                    _fbs.MbRecSPs.NominalTemp1 = (float)buffer / 10;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 11)
+            {
+                short buffer = (short)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 700 && buffer >= -700)
+                {
+                    _fbs.MbRecSPs.NominalTemp2 = (float)buffer / 10;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 12)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 10_000 && buffer >= 0)
+                {
+                    _fbs.MbRecSPs.GrindingCurrent = buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 13)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 100 && buffer >= 0)
+                {
+                    _fbs.MbRecSPs.GrindingTurns = buffer;
+                }
+                return startIndex;
+            }
+
+            #endregion
             #region Спецрежим
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR)
             {
@@ -1781,8 +1868,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 6)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetFloatValueResult(buffer, _modesEntities.Mode1ValuesList[6].TempSP);
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[6].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7)
@@ -1811,26 +1897,54 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1)
             {
+                GetFloatValueResult(_fbs.SupCalibrateThm.DeltaThm, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2)
+            {
+                GetFloatValueResult(_fbs.ExhaustCalibrateThm.DeltaThm, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3)
+            {
+                GetFloatValueResult(_fbs.ThmSps.PThmSupValue, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4)
+            {
+                GetFloatValueResult(_fbs.ThmSps.PThmExhaustValue, value, ref startIndex);
+                if (_menusEntities.StartMenuCollection.Count > 13 && _servActivePageEntities.LastActivePageState == SActivePageState.ThmCalibratePage)
+                {
+                    _menusEntities.StartMenuCollection[13].StrSetsCollection[1].CVal = _fbs.SupCalibrateThm.DeltaThm.Value;
+                    _menusEntities.StartMenuCollection[13].StrSetsCollection[2].CVal = _fbs.ExhaustCalibrateThm.DeltaThm.Value;
+                    _menusEntities.StartMenuCollection[13].StrSetsCollection[3].CVal = _fbs.ThmSps.PThmSupValue.Value;
+                    _menusEntities.StartMenuCollection[13].StrSetsCollection[4].CVal = _fbs.ThmSps.PThmExhaustValue.Value;
+
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5)
+            {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetIntValueResult(buffer, _fbs.SupCalibrateThm.CavType);
                 GetIntValueResult(buffer, _fbs.ExhaustCalibrateThm.CavType);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 2)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateTimeS);
                 GetIntValueResult(buffer, _fbs.ExhaustCalibrateThm.CalibrateTimeS);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 3)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetIntValueResult(buffer, _fbs.SupCalibrateThm.TestTimeS);
                 GetIntValueResult(buffer, _fbs.ExhaustCalibrateThm.TestTimeS);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 4)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
@@ -1840,7 +1954,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
@@ -1850,7 +1964,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
@@ -1860,7 +1974,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
@@ -1870,7 +1984,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
@@ -1880,254 +1994,226 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.DeltaHCalibrates[0] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.DeltaHCalibrates[1] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.DeltaHCalibrates[2] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.DeltaHCalibrates[3] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 13)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.DeltaHCalibrates[4] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 14)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.DeltaHCalibrates[5] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 15)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.DeltaHCalibrates[6] = _fbs.SupCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 16)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.FlowCalibrates[0] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 17)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.FlowCalibrates[1] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 18)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.FlowCalibrates[2] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 19)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.FlowCalibrates[3] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 20)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.FlowCalibrates[4] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 21)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.FlowCalibrates[5] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 22)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.SupCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.SupCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.FlowCalibrates[6] = _fbs.SupCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
             //Вытяжка
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 23)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.DeltaHCalibrates[0] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 24)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.DeltaHCalibrates[1] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 25)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.DeltaHCalibrates[2] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 26)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.DeltaHCalibrates[3] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 27)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.DeltaHCalibrates[4] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 28)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.DeltaHCalibrates[5] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 29)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.DeltaHCalibrates[6] = _fbs.ExhaustCalibrateThm.DeltaHCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 30)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.FlowCalibrates[0] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 31)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.FlowCalibrates[1] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 32)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.FlowCalibrates[2] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 33)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 37)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.FlowCalibrates[3] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 34)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 38)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.FlowCalibrates[4] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 35)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 39)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.FlowCalibrates[5] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 36)
+            if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 40)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.ExhaustCalibrateThm.FlowCalibratesLimits))
+                if (GetFloatValueResult(_fbs.ExhaustCalibrateThm.FlowCalibratesLimits, value, ref startIndex))
                 {
                     _fbs.ExhaustCalibrateThm.FlowCalibrates[6] = _fbs.ExhaustCalibrateThm.FlowCalibratesLimits.Value;
                 }
@@ -2138,362 +2224,203 @@ namespace Android_Silver.Services
             #region Профили рекуператора
             if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[0].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[0].I_Start = _fbs.CRecup.RecProfiles[0].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[0].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+1)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 1)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[0].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[0].I_Cont = _fbs.CRecup.RecProfiles[0].I_ContLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[0].I_Cont, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+2)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 2)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[0].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[0].Kp = _fbs.CRecup.RecProfiles[0].KpLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[0].Kp, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+3)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 3)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[0].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[0].Ki = _fbs.CRecup.RecProfiles[0].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[0].Ki, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+4)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 4)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[1].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[1].I_Start = _fbs.CRecup.RecProfiles[1].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[1].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+5)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 5)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[1].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[1].I_Cont = _fbs.CRecup.RecProfiles[1].I_ContLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[1].I_Cont, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+6)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 6)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[1].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[1].Kp = _fbs.CRecup.RecProfiles[1].KpLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[1].Kp, value, ref startIndex);
+                return startIndex;
+
+            }
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 7)
+            {
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[1].Ki, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+7)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 8)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[1].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[1].Ki = _fbs.CRecup.RecProfiles[1].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[2].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+8)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 9)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[2].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[2].I_Start = _fbs.CRecup.RecProfiles[2].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[2].I_Cont, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+9)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 10)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[2].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[2].I_Cont = _fbs.CRecup.RecProfiles[2].I_ContLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[2].Kp, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+10)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 11)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[2].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[2].Kp = _fbs.CRecup.RecProfiles[2].KpLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[2].Ki, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+11)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 12)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[2].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[2].Ki = _fbs.CRecup.RecProfiles[2].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[3].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+12)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 13)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[3].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[3].I_Start = _fbs.CRecup.RecProfiles[3].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[3].I_Cont, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+13)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 14)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[3].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[3].I_Cont = _fbs.CRecup.RecProfiles[3].I_ContLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[3].Kp, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+14)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 15)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[3].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[3].Kp = _fbs.CRecup.RecProfiles[3].KpLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[3].Ki, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+15)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 16)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[3].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[3].Ki = _fbs.CRecup.RecProfiles[3].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[4].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+16)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 17)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[4].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[4].I_Start = _fbs.CRecup.RecProfiles[4].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[4].I_Cont, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+17)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 18)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[4].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[4].I_Cont = _fbs.CRecup.RecProfiles[4].I_ContLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[4].Kp, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+18)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 19)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[4].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[4].Kp = _fbs.CRecup.RecProfiles[4].KpLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[4].Ki, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+19)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 20)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[4].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[4].Ki = _fbs.CRecup.RecProfiles[4].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[5].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+20)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 21)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[5].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[5].I_Start = _fbs.CRecup.RecProfiles[5].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[5].I_Cont, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+21)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 22)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[5].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[5].I_Cont = _fbs.CRecup.RecProfiles[5].I_ContLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[5].Kp, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+22)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 23)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[5].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[5].Kp = _fbs.CRecup.RecProfiles[5].KpLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[5].Ki, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+23)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 24)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[5].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[5].Ki = _fbs.CRecup.RecProfiles[5].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[6].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+24)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 25)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[6].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[6].I_Start = _fbs.CRecup.RecProfiles[6].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[6].I_Cont, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+25)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 26)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[6].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[6].I_Cont = _fbs.CRecup.RecProfiles[6].I_ContLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[6].Kp, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+26)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 27)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[6].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[6].Kp = _fbs.CRecup.RecProfiles[6].KpLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[6].Ki, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+27)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 28)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[6].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[6].Ki = _fbs.CRecup.RecProfiles[6].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[7].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+28)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 29)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[7].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[7].I_Start = _fbs.CRecup.RecProfiles[7].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[7].I_Cont, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+29)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 30)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[7].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[7].I_Cont = _fbs.CRecup.RecProfiles[7].I_ContLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[7].Kp, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+30)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 31)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[7].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[7].Kp = _fbs.CRecup.RecProfiles[7].KpLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[7].Ki, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+31)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 32)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[7].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[7].Ki = _fbs.CRecup.RecProfiles[7].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[8].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+32)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 33)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[8].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[8].I_Start = _fbs.CRecup.RecProfiles[8].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[8].I_Cont, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+33)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 34)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[8].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[8].I_Cont = _fbs.CRecup.RecProfiles[8].I_ContLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[8].Kp, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+34)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 35)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[8].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[8].Kp = _fbs.CRecup.RecProfiles[8].KpLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[8].Ki, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+35)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 36)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[8].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[8].Ki = _fbs.CRecup.RecProfiles[8].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[9].I_Start, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+36)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 37)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[9].I_StartLimits))
-                {
-                    _fbs.CRecup.RecProfiles[9].I_Start = _fbs.CRecup.RecProfiles[9].I_StartLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[9].I_Cont, value, ref startIndex);
+                return startAddr;
+            }
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 38)
+            {
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[9].Kp, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+37)
+            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 39)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[9].I_ContLimits))
-                {
-                    _fbs.CRecup.RecProfiles[9].I_Cont = _fbs.CRecup.RecProfiles[9].I_ContLimits.Value;
-                }
-                return startIndex;
-            }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+38)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[9].KpLimits))
-                {
-                    _fbs.CRecup.RecProfiles[9].Kp = _fbs.CRecup.RecProfiles[9].KpLimits.Value;
-                }
-                return startIndex;
-            }
-            if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR+39)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetFloatValueResult(buffer, _fbs.CRecup.RecProfiles[9].KiLimits))
-                {
-                    _fbs.CRecup.RecProfiles[9].Ki = _fbs.CRecup.RecProfiles[9].KiLimits.Value;
-                }
+                GetFloatValueResult(_fbs.CRecup.RecProfiles[9].Ki, value, ref startIndex);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -2518,9 +2445,11 @@ namespace Android_Silver.Services
             return false;
         }
 
-        private bool GetFloatValueResult(int inputVal, FloatValue floatVal)
+        private bool GetFloatValueResult(FloatValue floatVal, byte[] array, ref ushort startIndex)
         {
-
+            short buffer1 = (short)(array[startIndex++] << 8);
+            short buffer2 = array[startIndex++];
+            short inputVal = (short)(buffer1 | buffer2);
             var min = floatVal.Min * Math.Pow(10, floatVal.NumChr);
             var max = floatVal.Max * Math.Pow(10, floatVal.NumChr);
             if (inputVal >= min && inputVal <= max)

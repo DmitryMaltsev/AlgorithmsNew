@@ -310,19 +310,9 @@ namespace Android_Silver.ViewModels
                         SendMItemSettings(CMenusEntities.StartMenuCollection[13]);
                     }
                     break;
-                case SActivePageState.TConstThmPage:
-                    {
-                        SendMItemSettings(CMenusEntities.StartMenuCollection[14]);
-                    }
-                    break;
                 case SActivePageState.RecupCurrentPage:
                     {
-                        SendMItemSettings(CMenusEntities.StartMenuCollection[15]);
-                    }
-                    break;
-                case SActivePageState.ThmHSettingsPage:
-                    {
-                        SendMItemSettings(CMenusEntities.StartMenuCollection[16]);
+                        SendMItemSettings(CMenusEntities.StartMenuCollection[14]);
                     }
                     break;
             }

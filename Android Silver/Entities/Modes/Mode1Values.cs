@@ -219,7 +219,7 @@ namespace Android_Silver.Entities.Modes
             StartAddress = startAddress;
             SypplySP = new IntValue(0, 100);
             ExhaustSP = new IntValue(0, 100);
-            TempSP = new FloatValue(0, 100,1);
+            TempSP = new FloatValue(0, 100,0);
             PowerLimitSP = new IntValue(0, 100);
         }
     }

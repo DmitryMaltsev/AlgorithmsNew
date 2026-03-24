@@ -46,8 +46,8 @@ namespace Android_Silver.Entities.FBEntities
             ExhaustTHmKoefK = new FloatValue(-100_000, 100_000, 2);
             ExhaustCurveKoef = new FloatValue(-100_000, 100_000, 2);
 
-            PThmSup = new FloatValue(0, 100, 2);
-            PThmExhaust = new FloatValue(0, 100, 2);
+            PThmSup = new FloatValue(0, 100, 1);
+            PThmExhaust = new FloatValue(0, 100, 1);
             PThmSupValue = new FloatValue(0, 100, 2);
             PThmExhaustValue = new FloatValue(0, 100, 2);
             PReg = new IntValue(0, 10_000);
