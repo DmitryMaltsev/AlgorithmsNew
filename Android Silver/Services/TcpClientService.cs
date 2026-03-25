@@ -147,86 +147,91 @@ namespace Android_Silver.Services
                          {
                              _ethernetEntities.SystemMessage = "Данные уже передаются";
                          }
-                         /*if (sbResult != null && sbResult.Length > 0)
-                         {
-                             if (_ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
-                             {
-                                 string result = sbResult.ToString();
-                                 var result2 = result.Split(",");
-                                 byte id0 = 0;
-                                 byte id1 = 0;
-                                 ushort id = 0;
-                                 if (result2.Length == 2)
-                                 {
-                                     id0 = _mathService.GetByteFromHexChar(result2[0][0], result2[0][1]);
-                                     id1 = _mathService.GetByteFromHexChar(result2[0][2], result2[0][3]);
-                                     id = (ushort)((id0 << 8) | id1);
-                                 }
 
-                                 bool isRightPacket = false;
-                                 bool isAllDataSender = false;
-                                 if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket)
+                         if (_ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
+                         {
+                             if (sbResult != null && sbResult.Length > 0)
+                             {
+                                 if (_ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
                                  {
-                                     if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
+                                     string result = sbResult.ToString();
+                                     var result2 = result.Split(",");
+                                     byte id0 = 0;
+                                     byte id1 = 0;
+                                     ushort id = 0;
+                                     if (result2.Length == 2)
                                      {
-                                         isRightPacket = true;
+                                         id0 = _mathService.GetByteFromHexChar(result2[0][0], result2[0][1]);
+                                         id1 = _mathService.GetByteFromHexChar(result2[0][2], result2[0][3]);
+                                         id = (ushort)((id0 << 8) | id1);
                                      }
-                                     else
+
+                                     bool isRightPacket = false;
+                                     bool isAllDataSender = false;
+                                     if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket)
                                      {
-                                         isAllDataSender = true;
+                                         if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
+                                         {
+                                             isRightPacket = true;
+                                         }
+                                         else
+                                         {
+                                             isAllDataSender = true;
+                                         }
                                      }
-                                 }
-                                 if (isAllDataSender)
-                                 {
-                                     _fbs.CUpdater.PacketsCount.Value = 0;
-                                     _fbs.CUpdater.IsUpdate = 0;
-                                     _fbs.CUpdater.CurrentPacket = 0;
-                                     _fbs.CUpdater.ResultPackets = "Успешно скопровано";
-                                 }
-                                 else
-                                 if (isRightPacket)
-                                 {
-                                     if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
-                                     {
-                                         _fbs.CUpdater.CurrentPacket += 1;
-                                         _fbs.CUpdater.ResendCounter = 0;
-                                         _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketsCount.Value;
-                                     }
-                                 }
-                                 else
-                                 {
-                                     _fbs.CUpdater.ResendCounter += 1;
-                                     if (_fbs.CUpdater.ResendCounter > 100)
+                                     if (isAllDataSender)
                                      {
                                          _fbs.CUpdater.PacketsCount.Value = 0;
                                          _fbs.CUpdater.IsUpdate = 0;
                                          _fbs.CUpdater.CurrentPacket = 0;
+                                         _fbs.CUpdater.ResultPackets = "Успешно скопровано";
                                      }
-                                 }
-                                 _ethernetEntities.SystemMessage = result;
-                             }
-                             else
-                             {
-                                 List<Response> responseList = new();
-                                 if (GetResponseData(sbResult, responseList))
-                                 {
-                                     foreach (var response in responseList)
+                                     else
+                                     if (isRightPacket)
                                      {
-                                         GetValueByTag(response);
+                                         if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
+                                         {
+                                             _fbs.CUpdater.CurrentPacket += 1;
+                                             _fbs.CUpdater.ResendCounter = 0;
+                                             _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketsCount.Value;
+                                         }
                                      }
-                                     if (String.Compare(messToClient, MessageToServer, true) == 0)
-                                         MessageToServer = String.Empty;
+                                     else
+                                     {
+                                         _fbs.CUpdater.ResendCounter += 1;
+                                         if (_fbs.CUpdater.ResendCounter > 100)
+                                         {
+                                             _fbs.CUpdater.PacketsCount.Value = 0;
+                                             _fbs.CUpdater.IsUpdate = 0;
+                                             _fbs.CUpdater.CurrentPacket = 0;
+                                         }
+                                     }
+                                     _ethernetEntities.SystemMessage = result;
                                  }
                                  else
                                  {
-                                     _ethernetEntities.SystemMessage = $"Данные не получены";
+                                     List<Response> responseList = new();
+                                     if (GetResponseData(sbResult, responseList))
+                                     {
+                                         foreach (var response in responseList)
+                                         {
+                                             GetValueByTag(response);
+                                         }
+                                         if (String.Compare(messToClient, MessageToServer, true) == 0)
+                                             MessageToServer = String.Empty;
+                                     }
+                                     else
+                                     {
+                                         _ethernetEntities.SystemMessage = $"Данные не получены";
+                                     }
                                  }
                              }
+                             else
+                             {
+                                 _ethernetEntities.SystemMessage = "Данные уже передаются";
+                             }
                          }
-                         else
-                         {
-                             _ethernetEntities.SystemMessage = "Данные уже передаются";
-                         }*/
+
                          Thread.Sleep(100);
                      }
                  }
@@ -314,7 +319,7 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            _readValuesArr =new byte[] {1,3,0,100,0,58};
+                            _readValuesArr = new byte[] { 1, 3, 0, 100, 0, 58 };
                             messToClient = "0100,058\r\n";
                         }
                         break;
@@ -332,6 +337,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage1:
                         {
+                            //1 44 126
                             _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 126 };
                             messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
@@ -339,7 +345,8 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ServiceMessage2:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 1, 170, 0, 137 };
+                            //1 170 121
+                            _readValuesArr = new byte[] { 1, 3, 1, 170, 0, 121 };
                             messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -362,7 +369,6 @@ namespace Android_Silver.Services
         private int _trySendcounter = 0;
         private bool SendCommand(string command)
         {
-
             IsSending = true;
             sbResult = new StringBuilder();
             _trySendcounter = 0;
@@ -370,12 +376,16 @@ namespace Android_Silver.Services
             {
                 try
                 {
-
                     _stream = _ethernetEntities.Client.GetStream();
                     ushort startAddress = 300;
                     //Команда на запись
-                    if (WriteValuesList.Count > 0)
+                    if (command.Length > 0 && _ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
                     { 
+
+                    }
+                    else 
+                    if (WriteValuesList.Count > 0)
+                    {
                         byte[] buffer = new byte[8 + (WriteValuesList.Count - 1) * 2];
 
                         buffer[0] = 1;
@@ -384,15 +394,15 @@ namespace Android_Silver.Services
                         buffer[2] = (byte)(WriteValuesList[0] >> 8);
                         buffer[3] = (byte)(WriteValuesList[0]);
                         //Количество регистров
-                        buffer[4] = (byte)((WriteValuesList.Count-1) >> 8);
-                        buffer[5] = (byte)(WriteValuesList.Count-1);
+                        buffer[4] = (byte)((WriteValuesList.Count - 1) >> 8);
+                        buffer[5] = (byte)(WriteValuesList.Count - 1);
                         byte addressIndex = 6;
                         for (int i = 1; i < WriteValuesList.Count; i++)
                         {
                             buffer[addressIndex++] = (byte)(WriteValuesList[i] >> 8);
                             buffer[addressIndex++] = (byte)(WriteValuesList[i]);
                         }
-                        ushort crc = GetCRC(buffer, (ushort)(buffer.Length-2));
+                        ushort crc = GetCRC(buffer, (ushort)(buffer.Length - 2));
                         buffer[buffer.Length - 2] = (byte)(crc & 0xff);
                         buffer[buffer.Length - 1] = (byte)(crc >> 8);
                         _stream.Write(buffer, 0, buffer.Length);
@@ -410,11 +420,11 @@ namespace Android_Silver.Services
                         sendData[sendData.Length - 1] = (byte)(crc >> 8);
                         _stream.Write(sendData, 0, sendData.Length);
                     }
+
                     //Принятие после отправленного пакета
                     byte[] data = new byte[2200];
                     int bytes = _stream.Read(data, 0, data.Length);
-                    while (_stream.DataAvailable) { }
-                    ;
+                    while (_stream.DataAvailable) { } ;
                     if (IsModbusDataRight(data, (ushort)(bytes)))
                     {
                         byte func = data[1];
@@ -2294,9 +2304,9 @@ namespace Android_Silver.Services
                     break;
                 case 5108:
                     {
-                       // if (int.TryParse(resp.ValueString, out ushort Val))
+                        // if (int.TryParse(resp.ValueString, out ushort Val))
                         {
-                           // _modesEntities.SetMode1ValuesByIndex(Val);
+                            // _modesEntities.SetMode1ValuesByIndex(Val);
                             _activePageEntities.SetActivePageState(ActivePageState.MainPage);
                         }
                     }
@@ -6225,9 +6235,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[0].I_Start.Value = _fbs.CRecup.RecProfiles[0].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[0].I_Start.Value = _fbs.CRecup.RecProfiles[0].I_Start.Value;
                     }
                 }
                 return;
@@ -6236,9 +6246,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[0].I_Cont.Value = _fbs.CRecup.RecProfiles[0].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[0].I_Cont.Value = _fbs.CRecup.RecProfiles[0].I_Cont.Value;
                     }
                 }
                 return;
@@ -6247,9 +6257,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[0].Kp.Value = _fbs.CRecup.RecProfiles[0].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[0].Kp.Value = _fbs.CRecup.RecProfiles[0].Kp.Value;
                     }
                 }
                 return;
@@ -6258,9 +6268,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[0].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[0].Ki.Value = _fbs.CRecup.RecProfiles[0].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[0].Ki.Value = _fbs.CRecup.RecProfiles[0].Ki.Value;
                     }
                 }
                 return;
@@ -6270,9 +6280,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[1].I_Start.Value = _fbs.CRecup.RecProfiles[1].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[1].I_Start.Value = _fbs.CRecup.RecProfiles[1].I_Start.Value;
                     }
                 }
                 return;
@@ -6281,9 +6291,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[1].I_Cont.Value = _fbs.CRecup.RecProfiles[1].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[1].I_Cont.Value = _fbs.CRecup.RecProfiles[1].I_Cont.Value;
                     }
                 }
                 return;
@@ -6292,9 +6302,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[1].Kp.Value = _fbs.CRecup.RecProfiles[1].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[1].Kp.Value = _fbs.CRecup.RecProfiles[1].Kp.Value;
                     }
                 }
                 return;
@@ -6303,9 +6313,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[1].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[1].Ki.Value = _fbs.CRecup.RecProfiles[1].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[1].Ki.Value = _fbs.CRecup.RecProfiles[1].Ki.Value;
                     }
                 }
                 return;
@@ -6314,9 +6324,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[2].I_Start.Value = _fbs.CRecup.RecProfiles[2].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[2].I_Start.Value = _fbs.CRecup.RecProfiles[2].I_Start.Value;
                     }
                 }
                 return;
@@ -6325,9 +6335,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[2].I_Cont.Value = _fbs.CRecup.RecProfiles[2].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[2].I_Cont.Value = _fbs.CRecup.RecProfiles[2].I_Cont.Value;
                     }
                 }
                 return;
@@ -6336,9 +6346,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[2].Kp.Value = _fbs.CRecup.RecProfiles[2].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[2].Kp.Value = _fbs.CRecup.RecProfiles[2].Kp.Value;
                     }
                 }
                 return;
@@ -6347,9 +6357,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[2].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[2].Ki.Value = _fbs.CRecup.RecProfiles[2].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[2].Ki.Value = _fbs.CRecup.RecProfiles[2].Ki.Value;
                     }
                 }
                 return;
@@ -6358,9 +6368,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[3].I_Start.Value = _fbs.CRecup.RecProfiles[3].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[3].I_Start.Value = _fbs.CRecup.RecProfiles[3].I_Start.Value;
                     }
                 }
                 return;
@@ -6369,9 +6379,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[3].I_Cont.Value = _fbs.CRecup.RecProfiles[3].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[3].I_Cont.Value = _fbs.CRecup.RecProfiles[3].I_Cont.Value;
                     }
                 }
                 return;
@@ -6380,9 +6390,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[3].Kp.Value = _fbs.CRecup.RecProfiles[3].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[3].Kp.Value = _fbs.CRecup.RecProfiles[3].Kp.Value;
                     }
                 }
                 return;
@@ -6391,9 +6401,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[3].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[3].Ki.Value = _fbs.CRecup.RecProfiles[3].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[3].Ki.Value = _fbs.CRecup.RecProfiles[3].Ki.Value;
                     }
                 }
                 return;
@@ -6403,9 +6413,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[4].I_Start.Value = _fbs.CRecup.RecProfiles[4].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[4].I_Start.Value = _fbs.CRecup.RecProfiles[4].I_Start.Value;
                     }
                 }
                 return;
@@ -6414,9 +6424,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[4].I_Cont.Value = _fbs.CRecup.RecProfiles[4].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[4].I_Cont.Value = _fbs.CRecup.RecProfiles[4].I_Cont.Value;
                     }
                 }
                 return;
@@ -6425,9 +6435,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[4].Kp.Value = _fbs.CRecup.RecProfiles[4].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[4].Kp.Value = _fbs.CRecup.RecProfiles[4].Kp.Value;
                     }
                 }
                 return;
@@ -6436,9 +6446,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[4].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[4].Ki.Value = _fbs.CRecup.RecProfiles[4].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[4].Ki.Value = _fbs.CRecup.RecProfiles[4].Ki.Value;
                     }
                 }
                 return;
@@ -6447,9 +6457,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[5].I_Start.Value = _fbs.CRecup.RecProfiles[5].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[5].I_Start.Value = _fbs.CRecup.RecProfiles[5].I_Start.Value;
                     }
                 }
                 return;
@@ -6458,9 +6468,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[5].I_Cont.Value = _fbs.CRecup.RecProfiles[5].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[5].I_Cont.Value = _fbs.CRecup.RecProfiles[5].I_Cont.Value;
                     }
                 }
                 return;
@@ -6469,9 +6479,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[5].Kp.Value = _fbs.CRecup.RecProfiles[5].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[5].Kp.Value = _fbs.CRecup.RecProfiles[5].Kp.Value;
                     }
                 }
                 return;
@@ -6480,9 +6490,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[5].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[5].Ki.Value = _fbs.CRecup.RecProfiles[5].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[5].Ki.Value = _fbs.CRecup.RecProfiles[5].Ki.Value;
                     }
                 }
                 return;
@@ -6491,9 +6501,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[6].I_Start.Value = _fbs.CRecup.RecProfiles[6].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[6].I_Start.Value = _fbs.CRecup.RecProfiles[6].I_Start.Value;
                     }
                 }
                 return;
@@ -6502,9 +6512,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[6].I_Cont.Value = _fbs.CRecup.RecProfiles[6].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[6].I_Cont.Value = _fbs.CRecup.RecProfiles[6].I_Cont.Value;
                     }
                 }
                 return;
@@ -6513,9 +6523,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[6].Kp.Value = _fbs.CRecup.RecProfiles[6].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[6].Kp.Value = _fbs.CRecup.RecProfiles[6].Kp.Value;
                     }
                 }
                 return;
@@ -6524,9 +6534,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[6].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[6].Ki.Value = _fbs.CRecup.RecProfiles[6].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[6].Ki.Value = _fbs.CRecup.RecProfiles[6].Ki.Value;
                     }
                 }
                 return;
@@ -6535,9 +6545,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[7].I_Start.Value = _fbs.CRecup.RecProfiles[7].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[7].I_Start.Value = _fbs.CRecup.RecProfiles[7].I_Start.Value;
                     }
                 }
                 return;
@@ -6546,9 +6556,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[7].I_Cont.Value = _fbs.CRecup.RecProfiles[7].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[7].I_Cont.Value = _fbs.CRecup.RecProfiles[7].I_Cont.Value;
                     }
                 }
                 return;
@@ -6557,9 +6567,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[7].Kp.Value = _fbs.CRecup.RecProfiles[7].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[7].Kp.Value = _fbs.CRecup.RecProfiles[7].Kp.Value;
                     }
                 }
                 return;
@@ -6568,9 +6578,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[7].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[7].Ki.Value = _fbs.CRecup.RecProfiles[7].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[7].Ki.Value = _fbs.CRecup.RecProfiles[7].Ki.Value;
                     }
                 }
                 return;
@@ -6579,9 +6589,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[8].I_Start.Value = _fbs.CRecup.RecProfiles[8].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[8].I_Start.Value = _fbs.CRecup.RecProfiles[8].I_Start.Value;
                     }
                 }
                 return;
@@ -6590,9 +6600,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[8].I_Cont.Value = _fbs.CRecup.RecProfiles[8].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[8].I_Cont.Value = _fbs.CRecup.RecProfiles[8].I_Cont.Value;
                     }
                 }
                 return;
@@ -6601,9 +6611,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[8].Kp.Value = _fbs.CRecup.RecProfiles[8].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[8].Kp.Value = _fbs.CRecup.RecProfiles[8].Kp.Value;
                     }
                 }
                 return;
@@ -6612,9 +6622,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[8].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[8].Ki.Value = _fbs.CRecup.RecProfiles[8].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[8].Ki.Value = _fbs.CRecup.RecProfiles[8].Ki.Value;
                     }
                 }
                 return;
@@ -6623,9 +6633,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].I_StartLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].I_Start))
                     {
-                        _fbs.CRecup.RecProfiles[9].I_Start.Value  = _fbs.CRecup.RecProfiles[9].I_StartLimits.Value;
+                        _fbs.CRecup.RecProfiles[9].I_Start.Value = _fbs.CRecup.RecProfiles[9].I_Start.Value;
                     }
                 }
                 return;
@@ -6634,9 +6644,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].I_ContLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].I_Cont))
                     {
-                        _fbs.CRecup.RecProfiles[9].I_Cont.Value = _fbs.CRecup.RecProfiles[9].I_ContLimits.Value;
+                        _fbs.CRecup.RecProfiles[9].I_Cont.Value = _fbs.CRecup.RecProfiles[9].I_Cont.Value;
                     }
                 }
                 return;
@@ -6645,9 +6655,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].KpLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].Kp))
                     {
-                        _fbs.CRecup.RecProfiles[9].Kp.Value = _fbs.CRecup.RecProfiles[9].KpLimits.Value;
+                        _fbs.CRecup.RecProfiles[9].Kp.Value = _fbs.CRecup.RecProfiles[9].Kp.Value;
                     }
                 }
                 return;
@@ -6656,9 +6666,9 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].KiLimits))
+                    if (GetFloatValueResult(val, _fbs.CRecup.RecProfiles[9].Ki))
                     {
-                        _fbs.CRecup.RecProfiles[9].Ki.Value = _fbs.CRecup.RecProfiles[9].KiLimits.Value;
+                        _fbs.CRecup.RecProfiles[9].Ki.Value = _fbs.CRecup.RecProfiles[9].Ki.Value;
                     }
                 }
                 if (_servActivePageEntities.IsLoadingPage)

@@ -1687,7 +1687,7 @@ namespace Android_Silver.Services
             }
             #endregion
 
-            #region Работа рекуператора
+            #region Работа модбас рекуператора
             if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
@@ -1758,7 +1758,7 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_MBRECUP_SETTINGS_ADDR + 7)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 10_000)
+                if (buffer >= 0 && buffer <= 1000)
                 {
                     _fbs.MbRecSPs.ReductKoef = (float)buffer / 10;
                 }
@@ -1817,6 +1817,7 @@ namespace Android_Silver.Services
             }
 
             #endregion
+
             #region Спецрежим
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR)
             {
@@ -2411,7 +2412,7 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 37)
             {
                 GetFloatValueResult(_fbs.CRecup.RecProfiles[9].I_Cont, value, ref startIndex);
-                return startAddr;
+                return startIndex;
             }
             if (startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + 38)
             {

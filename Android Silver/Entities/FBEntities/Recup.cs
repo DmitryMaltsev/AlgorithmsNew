@@ -65,13 +65,9 @@ namespace Android_Silver.Entities.FBEntities
     public class RecPrfofile
     {
         public byte ProfNum;
-        public FloatValue I_StartLimits;
         public FloatValue I_Start;
-        public FloatValue I_ContLimits;
         public FloatValue I_Cont;
-        public FloatValue KpLimits;
         public FloatValue Kp;
-        public FloatValue KiLimits;
         public FloatValue Ki;
         public IntValue IA0Limits;
         public int IA0;
@@ -83,18 +79,10 @@ namespace Android_Silver.Entities.FBEntities
         public RecPrfofile(byte profNum, float iStart, float iCount, float kp, float ki)
         {
             ProfNum = profNum;
-            I_StartLimits = new FloatValue(0, 3, 1);
-            I_StartLimits.Value = iStart;
-            I_ContLimits = new FloatValue(0, 3, 1);
-            I_ContLimits.Value = iCount;
-            KpLimits = new FloatValue(0, 1000, 1);
-            KpLimits.Value = kp;
-            KiLimits = new FloatValue(0, 1000, 1);
-            KiLimits.Value = ki;
-            I_Start = new FloatValue(0, 3, 1);
-            I_Cont = new FloatValue(0, 3, 1);
-            Kp = new FloatValue(0, 1000, 2);
-            Ki = new FloatValue(0, 1000, 2);
+            I_Start = new FloatValue(0, 4, 1);
+            I_Cont = new FloatValue(0, 4, 1);
+            Kp = new FloatValue(0, 100, 2);
+            Ki = new FloatValue(0, 100, 2);
          
         }
     }

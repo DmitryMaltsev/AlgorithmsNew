@@ -854,7 +854,7 @@ namespace Android_Silver.Pages
 
                 }
                  Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
-                    CTcpClientService.SetCommandToServer(157 + _menuesEntities.WriteOffset, vals);
+                    CTcpClientService.SetCommandToServer(157, vals);
             }
             else
             {
