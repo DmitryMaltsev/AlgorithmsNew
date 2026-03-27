@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Android_Silver.Entities.ValuesEntities
+﻿namespace Android_Silver.Entities.ValuesEntities
 {
-    public class IntValue:ValueEntity 
+    public class IntValue : ValueEntity
     {
         private int _value;
 
@@ -25,9 +19,9 @@ namespace Android_Silver.Entities.ValuesEntities
             Min = min; Max = max;
         }
 
-        public static implicit operator IntValue(int v)
-        {
-            throw new NotImplementedException();
-        }
+        //public static implicit operator IntValue(int v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

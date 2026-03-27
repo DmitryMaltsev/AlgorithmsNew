@@ -5,8 +5,10 @@ using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 
+
 using System;
 using System.Collections;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 
@@ -147,91 +149,6 @@ namespace Android_Silver.Services
                          {
                              _ethernetEntities.SystemMessage = "Данные уже передаются";
                          }
-
-                         if (_ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
-                         {
-                             if (sbResult != null && sbResult.Length > 0)
-                             {
-                                 if (_ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
-                                 {
-                                     string result = sbResult.ToString();
-                                     var result2 = result.Split(",");
-                                     byte id0 = 0;
-                                     byte id1 = 0;
-                                     ushort id = 0;
-                                     if (result2.Length == 2)
-                                     {
-                                         id0 = _mathService.GetByteFromHexChar(result2[0][0], result2[0][1]);
-                                         id1 = _mathService.GetByteFromHexChar(result2[0][2], result2[0][3]);
-                                         id = (ushort)((id0 << 8) | id1);
-                                     }
-
-                                     bool isRightPacket = false;
-                                     bool isAllDataSender = false;
-                                     if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket)
-                                     {
-                                         if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
-                                         {
-                                             isRightPacket = true;
-                                         }
-                                         else
-                                         {
-                                             isAllDataSender = true;
-                                         }
-                                     }
-                                     if (isAllDataSender)
-                                     {
-                                         _fbs.CUpdater.PacketsCount.Value = 0;
-                                         _fbs.CUpdater.IsUpdate = 0;
-                                         _fbs.CUpdater.CurrentPacket = 0;
-                                         _fbs.CUpdater.ResultPackets = "Успешно скопровано";
-                                     }
-                                     else
-                                     if (isRightPacket)
-                                     {
-                                         if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
-                                         {
-                                             _fbs.CUpdater.CurrentPacket += 1;
-                                             _fbs.CUpdater.ResendCounter = 0;
-                                             _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketsCount.Value;
-                                         }
-                                     }
-                                     else
-                                     {
-                                         _fbs.CUpdater.ResendCounter += 1;
-                                         if (_fbs.CUpdater.ResendCounter > 100)
-                                         {
-                                             _fbs.CUpdater.PacketsCount.Value = 0;
-                                             _fbs.CUpdater.IsUpdate = 0;
-                                             _fbs.CUpdater.CurrentPacket = 0;
-                                         }
-                                     }
-                                     _ethernetEntities.SystemMessage = result;
-                                 }
-                                 else
-                                 {
-                                     List<Response> responseList = new();
-                                     if (GetResponseData(sbResult, responseList))
-                                     {
-                                         foreach (var response in responseList)
-                                         {
-                                             GetValueByTag(response);
-                                         }
-                                         if (String.Compare(messToClient, MessageToServer, true) == 0)
-                                             MessageToServer = String.Empty;
-                                     }
-                                     else
-                                     {
-                                         _ethernetEntities.SystemMessage = $"Данные не получены";
-                                     }
-                                 }
-                             }
-                             else
-                             {
-                                 _ethernetEntities.SystemMessage = "Данные уже передаются";
-                             }
-                         }
-
                          Thread.Sleep(100);
                      }
                  }
@@ -320,26 +237,26 @@ namespace Android_Silver.Services
                     case MessageStates.UserMessage:
                         {
                             _readValuesArr = new byte[] { 1, 3, 0, 100, 0, 58 };
-                            messToClient = "0100,058\r\n";
+                            // messToClient = "0100,058\r\n";
                         }
                         break;
                     case MessageStates.VacMessage:
                         {
                             _readValuesArr = new byte[] { 1, 3, 0, 167, 0, 16 };
-                            messToClient = "0167,016\r\n";
+                            //messToClient = "0167,016\r\n";
                         }
                         break;
                     case MessageStates.ShedMessage:
                         {
                             _readValuesArr = new byte[] { 1, 3, 0, 183, 0, 112 };
-                            messToClient = "0183,112\r\n";
+                            // messToClient = "0183,112\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage1:
                         {
                             //1 44 126
                             _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 126 };
-                            messToClient = "0300,126\r\n";
+                            //messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
@@ -347,7 +264,7 @@ namespace Android_Silver.Services
                         {
                             //1 170 121
                             _readValuesArr = new byte[] { 1, 3, 1, 170, 0, 121 };
-                            messToClient = "0426,137\r\n";
+                            //messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
@@ -378,84 +295,154 @@ namespace Android_Silver.Services
                 {
                     _stream = _ethernetEntities.Client.GetStream();
                     ushort startAddress = 300;
-                    //Команда на запись
+                    //Работа прошивки
                     if (command.Length > 0 && _ethernetEntities.CMessageState == MessageStates.UpdaterMessage)
-                    { 
-
-                    }
-                    else 
-                    if (WriteValuesList.Count > 0)
                     {
-                        byte[] buffer = new byte[8 + (WriteValuesList.Count - 1) * 2];
+                        byte[] buffer = new byte[2200];
+                        StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
+                        writer.WriteLine(command);
+                        writer.Flush();
+                        byte[] respData = new byte[2200];
 
-                        buffer[0] = 1;
-                        buffer[1] = 16;
-                        //Начальный регистр
-                        buffer[2] = (byte)(WriteValuesList[0] >> 8);
-                        buffer[3] = (byte)(WriteValuesList[0]);
-                        //Количество регистров
-                        buffer[4] = (byte)((WriteValuesList.Count - 1) >> 8);
-                        buffer[5] = (byte)(WriteValuesList.Count - 1);
-                        byte addressIndex = 6;
-                        for (int i = 1; i < WriteValuesList.Count; i++)
+                        int sBytes = _stream.Read(respData, 0, respData.Length);
+
+                        string result = string.Empty;
+                        do
                         {
-                            buffer[addressIndex++] = (byte)(WriteValuesList[i] >> 8);
-                            buffer[addressIndex++] = (byte)(WriteValuesList[i]);
+                            result += (Encoding.ASCII.GetString(respData, 0, sBytes));
                         }
-                        ushort crc = GetCRC(buffer, (ushort)(buffer.Length - 2));
-                        buffer[buffer.Length - 2] = (byte)(crc & 0xff);
-                        buffer[buffer.Length - 1] = (byte)(crc >> 8);
-                        _stream.Write(buffer, 0, buffer.Length);
+                        while (_stream.DataAvailable);
+
+                        //Парсинг ответа
+                        var result2 = result.Split(",");
+                        byte id0 = 0;
+                        byte id1 = 0;
+                        ushort id = 0;
+                        if (result2.Length == 2)
+                        {
+                            id0 = _mathService.GetByteFromHexChar(result2[0][0], result2[0][1]);
+                            id1 = _mathService.GetByteFromHexChar(result2[0][2], result2[0][3]);
+                            id = (ushort)((id0 << 8) | id1);
+                        }
+
+                        bool isRightPacket = false;
+                        bool isAllDataSender = false;
+                        if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket)
+                        {
+                            if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
+                            {
+                                isRightPacket = true;
+                            }
+                            else
+                            {
+                                isAllDataSender = true;
+                            }
+                        }
+                        if (isAllDataSender)
+                        {
+                            _fbs.CUpdater.PacketsCount.Value = 0;
+                            _fbs.CUpdater.IsUpdate = 0;
+                            _fbs.CUpdater.CurrentPacket = 0;
+                            _fbs.CUpdater.ResultPackets = "Успешно скопровано";
+                        }
+                        else
+                        if (isRightPacket)
+                        {
+                            if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
+                            {
+                                _fbs.CUpdater.CurrentPacket += 1;
+                                _fbs.CUpdater.ResendCounter = 0;
+                                _fbs.CUpdater.ResultPackets = _fbs.CUpdater.CurrentPacket + "/" + _fbs.CUpdater.PacketsCount.Value;
+                            }
+                        }
+                        else
+                        {
+                            _fbs.CUpdater.ResendCounter += 1;
+                            if (_fbs.CUpdater.ResendCounter > 100)
+                            {
+                                _fbs.CUpdater.PacketsCount.Value = 0;
+                                _fbs.CUpdater.IsUpdate = 0;
+                                _fbs.CUpdater.CurrentPacket = 0;
+                            }
+                        }
+                        _ethernetEntities.SystemMessage = result;
                     }
                     else
                     {
-                        //команда на чтение
-                        ushort crc = GetCRC(_readValuesArr, (ushort)_readValuesArr.Length);
-                        byte[] sendData = new byte[_readValuesArr.Length + 2];
-                        for (int i = 0; i < _readValuesArr.Length; i++)
+                        //Запись в контроллер
+                        if (WriteValuesList.Count > 0)
                         {
-                            sendData[i] = _readValuesArr[i];
-                        }
-                        sendData[sendData.Length - 2] = (byte)(crc & 0xff);
-                        sendData[sendData.Length - 1] = (byte)(crc >> 8);
-                        _stream.Write(sendData, 0, sendData.Length);
-                    }
+                            byte[] buffer = new byte[8 + (WriteValuesList.Count - 1) * 2];
 
-                    //Принятие после отправленного пакета
-                    byte[] data = new byte[2200];
-                    int bytes = _stream.Read(data, 0, data.Length);
-                    while (_stream.DataAvailable) { } ;
-                    if (IsModbusDataRight(data, (ushort)(bytes)))
-                    {
-                        byte func = data[1];
-                        ushort addr1 = (ushort)(data[2] << 8);
-                        ushort addr2 = data[3];
-                        startAddress = (ushort)(data[2] << 8 | data[3]); //(ushort)(addr1 | addr2);//(ushort)(data[2] << 8) | (ushort)(data[3]);
-                        ushort regsCount = (ushort)(data[4] << 8 | data[5]);
-                        if (func == 3)
-                        {
-                            ushort bufferLength = 6;
-                            for (ushort i = startAddress; i < startAddress + regsCount; i++)
+                            buffer[0] = 1;
+                            buffer[1] = 16;
+                            //Начальный регистр
+                            buffer[2] = (byte)(WriteValuesList[0] >> 8);
+                            buffer[3] = (byte)(WriteValuesList[0]);
+                            //Количество регистров
+                            buffer[4] = (byte)((WriteValuesList.Count - 1) >> 8);
+                            buffer[5] = (byte)(WriteValuesList.Count - 1);
+                            byte addressIndex = 6;
+                            for (int i = 1; i < WriteValuesList.Count; i++)
                             {
-                                bufferLength = _readWriteService.EthernetData_Read(data, i, bufferLength);
+                                buffer[addressIndex++] = (byte)(WriteValuesList[i] >> 8);
+                                buffer[addressIndex++] = (byte)(WriteValuesList[i]);
                             }
+                            ushort crc = GetCRC(buffer, (ushort)(buffer.Length - 2));
+                            buffer[buffer.Length - 2] = (byte)(crc & 0xff);
+                            buffer[buffer.Length - 1] = (byte)(crc >> 8);
+                            _stream.Write(buffer, 0, buffer.Length);
                         }
-                        else if (func == 16)
+                        else
                         {
-                            int addrCount = WriteValuesList.Count - 1;
-                            data = new byte[addrCount * 2];
-                            int index = 0;
-                            for (int j = 1; j < WriteValuesList.Count; j++)
+                            //Чтение из контроллера
+                            ushort crc = GetCRC(_readValuesArr, (ushort)_readValuesArr.Length);
+                            byte[] sendData = new byte[_readValuesArr.Length + 2];
+                            for (int i = 0; i < _readValuesArr.Length; i++)
                             {
-                                data[index++] = (byte)(WriteValuesList[j] >> 8);
-                                data[index++] = (byte)WriteValuesList[j];
+                                sendData[i] = _readValuesArr[i];
                             }
-                            ushort startIndex = 0;
-                            for (ushort i = startAddress; i < startAddress + addrCount; i++)
+                            sendData[sendData.Length - 2] = (byte)(crc & 0xff);
+                            sendData[sendData.Length - 1] = (byte)(crc >> 8);
+                            _stream.Write(sendData, 0, sendData.Length);
+                        }
+                        //Принятие после отправленного пакета
+                        byte[] data = new byte[2200];
+                        int bytes = _stream.Read(data, 0, data.Length);
+                        while (_stream.DataAvailable) { }
+                    ;
+                        if (IsModbusDataRight(data, (ushort)(bytes)))
+                        {
+                            byte func = data[1];
+                            ushort addr1 = (ushort)(data[2] << 8);
+                            ushort addr2 = data[3];
+                            startAddress = (ushort)(data[2] << 8 | data[3]); //(ushort)(addr1 | addr2);//(ushort)(data[2] << 8) | (ushort)(data[3]);
+                            ushort regsCount = (ushort)(data[4] << 8 | data[5]);
+                            if (func == 3)
                             {
-                                startIndex = _readWriteService.EthernetData_Read(data, i, startIndex);
+                                ushort bufferLength = 6;
+                                for (ushort i = startAddress; i < startAddress + regsCount; i++)
+                                {
+                                    bufferLength = _readWriteService.EthernetData_Read(data, i, bufferLength, func);
+                                }
                             }
-                            WriteValuesList.Clear();
+                            else if (func == 16)
+                            {
+                                int addrCount = WriteValuesList.Count - 1;
+                                data = new byte[addrCount * 2];
+                                int index = 0;
+                                for (int j = 1; j < WriteValuesList.Count; j++)
+                                {
+                                    data[index++] = (byte)(WriteValuesList[j] >> 8);
+                                    data[index++] = (byte)WriteValuesList[j];
+                                }
+                                ushort startIndex = 0;
+                                for (ushort i = startAddress; i < startAddress + addrCount; i++)
+                                {
+                                    startIndex = _readWriteService.EthernetData_Read(data, i+_menusEntities.WriteOffset, startIndex, func);
+                                }
+                                WriteValuesList.Clear();
+                            }
                         }
                     }
                     IsSending = false;
@@ -6892,32 +6879,6 @@ namespace Android_Silver.Services
                 {
                     WriteValuesList.Add((ushort)values[i]);
                 }
-
-                //string tagsCount = String.Empty;
-                //if (values.Length > 0 && values.Length < 10)
-                //{
-                //    tagsCount = "00" + values.Length.ToString();
-                //}
-                //else
-                //if (values.Length >= 10 && values.Length < 100)
-                //{
-                //    tagsCount = "0" + values.Length.ToString();
-                //}
-                //else
-                //if (values.Length >= 100 && values.Length < 1000)
-                //{
-                //    tagsCount = values.Length.ToString();
-                //}
-                //MessageToServer = $"{address},{tagsCount},";
-                //for (int i = 0; i < values.Length; i++)
-                //{
-                //    MessageToServer += values[i];
-                //    if (i < values.Length - 1)
-                //    {
-                //        MessageToServer += ",";
-                //    }
-                //}
-                //MessageToServer += "\r\n";
             }
         }
 
@@ -6973,13 +6934,13 @@ namespace Android_Silver.Services
         {
             int specActive = val ? 1 : 0;
             int[] vals = { specActive };
-            SetCommandToServer((ushort)(156 + _menusEntities.WriteOffset), vals);
+            SetCommandToServer(156, vals);
         }
 
         private void MFloorCallback(bool val)
         {
             int[] vals = { 0 };
-            SetCommandToServer((ushort)(157 + _menusEntities.WriteOffset), vals);
+            SetCommandToServer(157, vals);
         }
         #endregion
 

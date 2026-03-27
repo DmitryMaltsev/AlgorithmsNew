@@ -59,7 +59,7 @@ namespace Android_Silver.ViewModels
         async private void ExecuteTurnOffMode(object obj)
         {
             int[] index = { 0 };
-            _tcpClientService.SetCommandToServer(108 + _menuesEntities.WriteOffset, index);
+            _tcpClientService.SetCommandToServer(108, index);
 
             await Shell.Current.GoToAsync("//mainPage", false);
             await Shell.Current.Navigation.PopToRootAsync(false);
@@ -67,7 +67,7 @@ namespace Android_Silver.ViewModels
         async private void ExecuteMinMode(object obj)
         {
             int[] index = { 1, 0 };
-            _tcpClientService.SetCommandToServer(108 + _menuesEntities.WriteOffset, index);
+            _tcpClientService.SetCommandToServer(108, index);
             await Shell.Current.GoToAsync("//mainPage", false);
 
         }
@@ -75,7 +75,7 @@ namespace Android_Silver.ViewModels
         async private void ExecuteNormal(object obj)
         {
             int[] index = { 2, 0 };
-            _tcpClientService.SetCommandToServer(108 + _menuesEntities.WriteOffset, index);
+            _tcpClientService.SetCommandToServer(108, index);
             //    _ethernetEntities.WriteMessageSended = true;
             //    _tcpClientService.SendData("108,02");
             await Shell.Current.GoToAsync("//mainPage", false);
@@ -84,7 +84,7 @@ namespace Android_Silver.ViewModels
         async private void ExecuteMaxMode(object obj)
         {
             int[] index = { 3, 0 };
-            _tcpClientService.SetCommandToServer(108 + _menuesEntities.WriteOffset, index);
+            _tcpClientService.SetCommandToServer(108, index);
             //   _tcpClientService.SendData("108,02");
             await Shell.Current.GoToAsync("//mainPage", false);
         }
@@ -100,7 +100,7 @@ namespace Android_Silver.ViewModels
         async private void ExecuteVacationMode(object obj)
         {
             int[] index = { 2 };
-            _tcpClientService.SetCommandToServer(109+_menuesEntities.WriteOffset, index);
+            _tcpClientService.SetCommandToServer(109, index);
             await Shell.Current.GoToAsync("//mainPage", false);
 
         }
@@ -108,7 +108,7 @@ namespace Android_Silver.ViewModels
         async private void ExecuteSheduler(object obj)
         {
             int[] index = { 3 };
-            _tcpClientService.SetCommandToServer(109 +  _menuesEntities.WriteOffset, index);
+            _tcpClientService.SetCommandToServer(109, index);
             await Shell.Current.GoToAsync("//mainPage", false);
         }
 

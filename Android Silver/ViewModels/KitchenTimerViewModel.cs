@@ -94,7 +94,7 @@ namespace Android_Silver.ViewModels
         async void ExecuteOk(object obj)
         {
             int[] values = { Minutes };
-            _tcpClientService.SetCommandToServer(134+ _menuesEntities.WriteOffset, values);
+            _tcpClientService.SetCommandToServer(134, values);
             await Shell.Current.GoToAsync("mainPage");
         }
     }

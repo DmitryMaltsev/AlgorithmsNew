@@ -23,7 +23,6 @@ namespace Android_Silver.Entities.Modes
             set
             {
                 _title = value;
-                OnPropertyChanged(nameof(Title));
             }
         }
 
@@ -44,7 +43,6 @@ namespace Android_Silver.Entities.Modes
             set
             {
                 _modeSettingsRoute = value;
-                OnPropertyChanged(nameof(ModeSettingsRoute));
             }
         }
 
@@ -58,9 +56,9 @@ namespace Android_Silver.Entities.Modes
             set
             {
                 _supplySP = value;
-                OnPropertyChanged(nameof(SypplySP));
             }
         }
+
 
         private IntValue _exhaustSP;
         public IntValue ExhaustSP
@@ -69,7 +67,6 @@ namespace Android_Silver.Entities.Modes
             set
             {
                 _exhaustSP = value;
-                OnPropertyChanged(nameof(ExhaustSP));
             }
         }
 
@@ -80,9 +77,9 @@ namespace Android_Silver.Entities.Modes
             set
             {
                 _tempSP = value;
-                OnPropertyChanged(nameof(TempSP));
             }
         }
+
         private IntValue _powerLimitSP;
         public IntValue PowerLimitSP
         {
@@ -90,7 +87,6 @@ namespace Android_Silver.Entities.Modes
             set
             {
                 _powerLimitSP = value;
-                OnPropertyChanged(nameof(PowerLimitSP));
             }
         }
         #endregion
@@ -219,7 +215,7 @@ namespace Android_Silver.Entities.Modes
             StartAddress = startAddress;
             SypplySP = new IntValue(0, 100);
             ExhaustSP = new IntValue(0, 100);
-            TempSP = new FloatValue(0, 100,0);
+            TempSP = new FloatValue(0, 100, 0);
             PowerLimitSP = new IntValue(0, 100);
         }
     }

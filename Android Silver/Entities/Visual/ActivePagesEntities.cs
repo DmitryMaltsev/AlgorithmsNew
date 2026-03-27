@@ -363,6 +363,11 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        //_modesEntities.Mode1ValuesList[1].SupplySPUI = _modesEntities.Mode1ValuesList[1].SypplySP.Value;
+                        //_modesEntities.Mode1ValuesList[1].ExhaustSPUI = _modesEntities.Mode1ValuesList[1].ExhaustSP.Value;
+                        //_modesEntities.Mode1ValuesList[1].TempSPUI = _modesEntities.Mode1ValuesList[1].TempSP.Value;
+                        //_modesEntities.Mode1ValuesList[1].PowerLimitSPUI = _modesEntities.Mode1ValuesList[1].PowerLimitSP.Value;
+
                     }
                     break;
                 case ActivePageState.SettingsPage:

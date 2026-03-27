@@ -543,7 +543,7 @@
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsUp[0].Current}"  Command="{Binding BtnUpCommand0}"  Grid.Column="1"  Grid.Row="5" 
                      Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed0" Released="UpDigit_Released0" IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
             <VerticalStackLayout Grid.Row="6" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="4">
-                <Label Text="{Binding M1Values.SypplySP}"   Style="{StaticResource SPsText}" IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
+                <Label Text="{Binding M1Values.SypplySP.Value}"   Style="{StaticResource SPsText}" IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
                 <Label Text="%"  Style="{StaticResource SPsText}"  IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
             </VerticalStackLayout>
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[0].Current}" Command="{Binding BtnDnCommand0}"  Grid.Row="7" Grid.Column="1" 
@@ -557,7 +557,7 @@
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsUp[1].Current}" Command="{Binding BtnUpCommand1}"  Grid.Row="5"  Grid.Column="5"  
                       Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed1" Released="UpDigit_Released1" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             <VerticalStackLayout Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="4">
-                <Label Text="{Binding  M1Values.ExhaustSP}"  Style="{StaticResource SPsText}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+                <Label Text="{Binding  M1Values.ExhaustSP.Value}"  Style="{StaticResource SPsText}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
                 <Label Text="%" Style="{StaticResource SPsText}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             </VerticalStackLayout>
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[1].Current}" Command="{Binding BtnDnCommand1}" Grid.Row="7" Grid.Column="5"  
@@ -568,14 +568,15 @@
                                                                               Margin="0,0,0,0"   IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
             <Image Source="{Binding CPictureSet.DigitalImage}" Grid.Row="5" Grid.Column="9" Style="{StaticResource SPImg}"
                                                                                         IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-            <Button ImageSource="{Binding  CPictureSet.DigitalButtonsUp[2].Current}" Command="{Binding BtnUpCommand2}" Grid.Row="5"  Grid.Column="9"  
+            <Button ImageSource="{Binding  CPictureSet.DigitalButtonsUp[2].Current}" Command="{Binding BtnUpCommand2}" Grid.Row="5"  Grid.Column="10" Grid.ColumnSpan="2"  
                       Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed2" Released="UpDigit_Released2" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
+            <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[2].Current}" Command="{Binding BtnDnCommand2}" Grid.Row="7"  Grid.Column="9"
+         Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed2" Released="DnDigit_Released2"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             <VerticalStackLayout Grid.Row="6" Grid.Column="9" Grid.ColumnSpan="4">
-                <Label Text="{Binding M1Values.TempSP}" Style="{StaticResource SPsText}"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+                <Label Text="{Binding M1Values.TempSP.Value}" Style="{StaticResource SPsText}"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
                 <Label Text="°С"  Style="{StaticResource SPsText}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             </VerticalStackLayout>
-            <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[2].Current}" Command="{Binding BtnDnCommand2}" Grid.Row="7" Grid.Column="9"  
-         Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed2" Released="DnDigit_Released2"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+
             <!--#endregion-->
             <!--#region 4 колонка -->
             <Label Text="Нагр-ль"  Grid.Row="4" Grid.Column="13" Style="{StaticResource SPsText}" FontSize="16" 
@@ -585,7 +586,7 @@
             <Button  ImageSource="{Binding CPictureSet.DigitalButtonsUp[3].Current}" Command="{Binding BtnUpCommand3}" Grid.Row="5"  Grid.Column="13"  
                      Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed3" Released="UpDigit_Released3" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
             <VerticalStackLayout Grid.Row="6" Grid.Column="13" Grid.ColumnSpan="4">
-                <Label Text="{Binding M1Values.PowerLimitSP}" Style="{StaticResource SPsText}"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+                <Label Text="{Binding M1Values.PowerLimitSP.Value}" Style="{StaticResource SPsText}"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
                 <Label Text="%" Style="{StaticResource SPsText}"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             </VerticalStackLayout>
             <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[3].Current}"  Command="{Binding BtnDnCommand3}" Grid.Row="7" Grid.Column="13"  
