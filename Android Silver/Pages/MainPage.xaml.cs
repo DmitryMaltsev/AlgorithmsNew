@@ -10,7 +10,6 @@ namespace Android_Silver.Pages
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
         MainPage _mp;
         public MainPageViewModel ViewModel { get; set; }
         public MainPage()

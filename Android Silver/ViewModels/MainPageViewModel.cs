@@ -24,8 +24,6 @@ namespace Android_Silver.Pages
             }
         }
 
-        private string _messageToServer = "Test";
-
         private string _messageToClient;
         public string MessageToClient
         {
@@ -515,6 +513,7 @@ namespace Android_Silver.Pages
             int[] index = { 2 };
             CTcpClientService.SetCommandToServer(109, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+            CModesEntities.TTitle = "Расписание для отпуска";
         }
 
         private void ExecuteSheduler(object obj)
@@ -522,6 +521,7 @@ namespace Android_Silver.Pages
             int[] index = { 3 };
             CTcpClientService.SetCommandToServer(109, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+            CModesEntities.TTitle = "Расписание";
         }
 
         void ExecuteHomeCommand(object obj)
@@ -577,56 +577,56 @@ namespace Android_Silver.Pages
         private void ExecuteBtnUP0(object obj)
         {
             if (M1Values != null)
-                M1Values.SypplySP = M1Values.SypplySP + 5 < 100 ? M1Values.SypplySP + 5 : 100;
+                M1Values.SypplySP.Value = M1Values.SypplySP.Value + 5 < 100 ? M1Values.SypplySP.Value + 5 : 100;
         }
         private void ExecuteBtnDn0(object obj)
         {
             if (M1Values != null)
-                M1Values.SypplySP = M1Values.SypplySP - 5 > 0 ? M1Values.SypplySP - 5 : 0;
+                M1Values.SypplySP.Value = M1Values.SypplySP.Value - 5 > 0 ? M1Values.SypplySP.Value - 5 : 0;
         }
 
         private void ExecuteBtnUP1(object obj)
         {
             if (M1Values != null)
-                M1Values.ExhaustSP = M1Values.ExhaustSP + 5 < 100 ? M1Values.ExhaustSP + 5 : 100;
+                M1Values.ExhaustSP.Value = M1Values.ExhaustSP.Value + 5 < 100 ? M1Values.ExhaustSP.Value + 5 : 100;
         }
         private void ExecuteBtnDn1(object obj)
         {
             if (M1Values != null)
-                M1Values.ExhaustSP = M1Values.ExhaustSP - 5 > 0 ? M1Values.ExhaustSP - 5 : 0;
+                M1Values.ExhaustSP.Value = M1Values.ExhaustSP.Value - 5 > 0 ? M1Values.ExhaustSP.Value - 5 : 0;
         }
 
         private void ExecuteBtnUP2(object obj)
         {
             if (M1Values != null)
             {
-                M1Values.TempSP = M1Values.TempSP + 1 < 34 ? M1Values.TempSP + 1 : 34;
-                if (M1Values.TempSP < 16) M1Values.TempSP = 16;
+                M1Values.TempSP.Value = M1Values.TempSP.Value + 1 < 34 ? M1Values.TempSP.Value + 1 : 34;
+                if (M1Values.TempSP.Value < 16) M1Values.TempSP.Value = 16;
 
             }
         }
         private void ExecuteBtnDn2(object obj)
         {
             if (M1Values != null)
-                M1Values.TempSP = M1Values.TempSP - 1 > 16 ? M1Values.TempSP - 1 : 16;
+                M1Values.TempSP.Value = M1Values.TempSP.Value - 1 > 16 ? M1Values.TempSP.Value - 1 : 16;
         }
 
         private void ExecuteBtnUP3(object obj)
         {
             if (M1Values != null)
-                M1Values.PowerLimitSP = M1Values.PowerLimitSP + 5 < 100 ? M1Values.PowerLimitSP + 5 : 100;
+                M1Values.PowerLimitSP.Value = M1Values.PowerLimitSP.Value + 5 < 100 ? M1Values.PowerLimitSP.Value + 5 : 100;
         }
         private void ExecuteBtnDn3(object obj)
         {
             if (M1Values != null)
-                M1Values.PowerLimitSP = M1Values.PowerLimitSP - 5 > 0 ? M1Values.PowerLimitSP - 5 : 0;
+                M1Values.PowerLimitSP.Value = M1Values.PowerLimitSP.Value - 5 > 0 ? M1Values.PowerLimitSP.Value - 5 : 0;
         }
 
         private void ExecuteSPSOK(object obj)
         {
             if (M1Values != null)
             {
-                int[] values = { M1Values.SypplySP, M1Values.ExhaustSP, (int)M1Values.TempSP, M1Values.PowerLimitSP };
+                int[] values = { M1Values.SypplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, M1Values.PowerLimitSP.Value };
                 CTcpClientService.SetCommandToServer(M1Values.StartAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             }
@@ -656,10 +656,10 @@ namespace Android_Silver.Pages
                       bufVals.ModeIcons,
                       bufVals.ModeSettingsRoute,
                       bufVals.StartAddress, bufVals.MiniIcon);
-            M1Values.SypplySP = bufVals.SypplySP;
-            M1Values.ExhaustSP = bufVals.ExhaustSP;
-            M1Values.TempSP = bufVals.TempSP;
-            M1Values.PowerLimitSP = bufVals.PowerLimitSP;
+            M1Values.SypplySP.Value = bufVals.SypplySP.Value;
+            M1Values.ExhaustSP.Value = bufVals.ExhaustSP.Value;
+            M1Values.TempSP.Value = bufVals.TempSP.Value;
+            M1Values.PowerLimitSP.Value = bufVals.PowerLimitSP.Value;
         }
 
         private void ExecuteSPReturn(object obj)
@@ -678,28 +678,14 @@ namespace Android_Silver.Pages
 
         private void ExecuteVacationTable(object obj)
         {
-            // CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage, 0);
-            // TTitle = "Расписание для отпуска";
+            CModesEntities.TTitle = "Отпуск";
             CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 0);
         }
 
         private void ExecuteShedulerTable(object obj)
         {
-            //  if (CModesEntities.ShedCountQueues == 0)
-            // {
+            CModesEntities.TTitle = "Расписание";
             CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 1);
-            // CModesEntities.ShedCountQueues += 1;
-            //}
-            //  else
-            /*   {
-                   for (int i = 0; i < CModesEntities.Mode2ValuesList[3].TimeModeValues.Count; i++)
-                   {
-                       CModesEntities.Mode2ValuesList[3].TimeModeValues[i].StrokeImg.Current =
-                      CModesEntities.Mode2ValuesList[3].TimeModeValues[1].StrokeImg.Default;
-                   }
-                   CModesEntities.CTimeModeValues = CModesEntities.Mode2ValuesList[3].TimeModeValues;
-                   CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage);
-               }*/
         }
 
         private void ExecuteOtherSettings(object obj)

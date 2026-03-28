@@ -123,9 +123,9 @@
             <Setter Property="MaximumHeightRequest" Value="120"/>
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
-            <Setter Property="Grid.RowSpan" Value="1"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
             <Setter Property="Padding" Value="0"/>
+            <Setter Property="ZIndex" Value="2"/>
         </Style>
         <Style TargetType="Image" x:Key="SPImg">
             <Setter Property="HorizontalOptions" Value="Center"/>
@@ -167,6 +167,7 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="ZIndex" Value="2"/>
             <!--<Setter Property="MinimumHeightRequest" Value="60" />
             <Setter Property="MinimumWidthRequest" Value="200"/>-->
             <Setter Property="HeightRequest" Value="70"/>
@@ -342,7 +343,7 @@
             <Label Text="Приток"   Grid.Row="6" Grid.Column="0" Style="{StaticResource SliderText}"  
                              IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Slider   Grid.Row="6" Style="{StaticResource MainPageSlider}" 
-                             Value="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP}"  
+                             Value="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP.Value}"  
                              IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.SypplySP.Value, StringFormat='{0}%'}"   
                             Grid.Row="6" Grid.Column="14" Style="{StaticResource SliderText}"  
@@ -351,7 +352,7 @@
             <Label Text="Выт-ка"   Grid.Row="7" Grid.Column="0" Style="{StaticResource SliderText}" 
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Slider  Grid.Row="7"   Style="{StaticResource MainPageSlider}"
-                             Value="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP}"  
+                             Value="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP.Value}"  
                              IsVisible="{Binding Source={x:Reference mPage},Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.ExhaustSP.Value, StringFormat='{0}%'}"  
                              Grid.Row="7" Grid.Column="14" Style="{StaticResource SliderText}"  
@@ -360,7 +361,7 @@
             <Label Text="t уст"   Grid.Row="8" Grid.Column="0" Style="{StaticResource SliderText}" 
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Slider  Grid.Row="8" Style="{StaticResource MainPageSlider}" 
-                             Value="{Binding  Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.TempSP}"  
+                             Value="{Binding  Source={x:Reference mPage},Path=BindingContext.CModesEntities.CMode1.TempSP.Value}"  
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding Source={x:Reference mPage}, Path=BindingContext.CModesEntities.CMode1.TempSP.Value, StringFormat='{0}°C'}"  
                              Grid.Row="8" Grid.Column="14" Style="{StaticResource SliderText}" 
@@ -568,15 +569,14 @@
                                                                               Margin="0,0,0,0"   IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
             <Image Source="{Binding CPictureSet.DigitalImage}" Grid.Row="5" Grid.Column="9" Style="{StaticResource SPImg}"
                                                                                         IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
-            <Button ImageSource="{Binding  CPictureSet.DigitalButtonsUp[2].Current}" Command="{Binding BtnUpCommand2}" Grid.Row="5"  Grid.Column="10" Grid.ColumnSpan="2"  
-                      Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed2" Released="UpDigit_Released2" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
-            <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[2].Current}" Command="{Binding BtnDnCommand2}" Grid.Row="7"  Grid.Column="9"
-         Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed2" Released="DnDigit_Released2"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+            <Button ImageSource="{Binding  CPictureSet.DigitalButtonsUp[2].Current}" Command="{Binding BtnUpCommand2}" Grid.Row="5"  Grid.Column="9"  
+                      Style="{StaticResource SPBtn}" Pressed="UpDigit_Pressed2" Released="UpDigit_Released2" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}" />
             <VerticalStackLayout Grid.Row="6" Grid.Column="9" Grid.ColumnSpan="4">
                 <Label Text="{Binding M1Values.TempSP.Value}" Style="{StaticResource SPsText}"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
                 <Label Text="°С"  Style="{StaticResource SPsText}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             </VerticalStackLayout>
-
+            <Button  ImageSource="{Binding  CPictureSet.DigitalButtonsDn[2].Current}" Command="{Binding BtnDnCommand2}" Grid.Row="7"  Grid.Column="9" 
+            Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed2" Released="DnDigit_Released2"  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             <!--#endregion-->
             <!--#region 4 колонка -->
             <Label Text="Нагр-ль"  Grid.Row="4" Grid.Column="13" Style="{StaticResource SPsText}" FontSize="16" 
@@ -593,7 +593,7 @@
              Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed3" Released="DnDigit_Released3"
                                                                        IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
             <!--#endregion-->
-            <Button  ImageSource="{Binding CPictureSet.OkButton.Current}" Command="{Binding SPOkCommand}" Grid.Row="10" Grid.Column="5" 
+            <Button  ImageSource="{Binding CPictureSet.OkButton.Current}" Command="{Binding SPOkCommand}" Grid.Row="9" Grid.Column="5" 
                        Style="{StaticResource OKCancelBut}"  Pressed="OK_SPPressed" Released="Ok_SPReleased" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
             <!--#endregion-->
 

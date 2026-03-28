@@ -196,17 +196,6 @@ namespace Android_Silver.Services
                 _ethernetEntities.CMessageState = MessageStates.UpdaterMessage;
             }
             else
-            if (_activePageEntities.IsLoadingPage && _modesEntities.CTimeModeValues.Count > 0 &&
-                                                           _modesEntities.CTimeModeValues[0].Mode2Num == 2)
-            {
-                _ethernetEntities.CMessageState = MessageStates.VacMessage;
-            }
-            else
-                if (isReadingShedTable && _ethernetEntities.CMessageState != MessageStates.ShedMessage)
-            {
-                _ethernetEntities.CMessageState = MessageStates.ShedMessage;
-            }
-            else
             if (_ethernetEntities.PagesTab == 0)
             {
                 _ethernetEntities.CMessageState = MessageStates.UserMessage;
@@ -236,20 +225,8 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 0, 100, 0, 58 };
+                            _readValuesArr = new byte[] { 1, 3, 0, 100, 0, 106 };
                             // messToClient = "0100,058\r\n";
-                        }
-                        break;
-                    case MessageStates.VacMessage:
-                        {
-                            _readValuesArr = new byte[] { 1, 3, 0, 167, 0, 16 };
-                            //messToClient = "0167,016\r\n";
-                        }
-                        break;
-                    case MessageStates.ShedMessage:
-                        {
-                            _readValuesArr = new byte[] { 1, 3, 0, 183, 0, 112 };
-                            // messToClient = "0183,112\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage1:
@@ -449,7 +426,7 @@ namespace Android_Silver.Services
                     ResieveCounter += 1;
                     return true;
                 }
-                catch (Exception ex)
+                catch
                 {
                     // _stream?.Close();
                     _trySendcounter += 1;
@@ -2613,6 +2590,7 @@ namespace Android_Silver.Services
                         GetTModeCMode1(2, 3, resp.ValueString);
                     }
                     break;
+                    //По контакту
                 case 5154:
                     {
                         GetTModeCMode1(4, 0, resp.ValueString);

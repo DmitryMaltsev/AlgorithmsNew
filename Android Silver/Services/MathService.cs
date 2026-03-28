@@ -30,7 +30,6 @@
 
         public byte GetByteFromHexChar(char char1, char char2)
         {
-            byte result = 0;
             int highByte = char1 >= 'A' ? char1 - 'A' + 10 : char1 - '0';
             int lowByte = char2 >= 'A' ? char2 - 'A' + 10 : char2 - '0';
             return (byte)(highByte << 4 | lowByte);

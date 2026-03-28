@@ -1,13 +1,10 @@
-﻿using Android.Media.TV;
-
+﻿
 using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
-
-using Java.Nio;
 
 using System;
 using System.Collections;
@@ -111,14 +108,12 @@ namespace Android_Silver.Services
             #region Минимальный
             if (startAddr == 110)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 111)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[1].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 112)
@@ -128,22 +123,20 @@ namespace Android_Silver.Services
             }
             if (startAddr == 113)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[1].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
+
             #region Номинальный
             if (startAddr == 114)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[2].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 115)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[2].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 116)
@@ -153,22 +146,20 @@ namespace Android_Silver.Services
             }
             if (startAddr == 117)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[2].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
+
             #region Максимальный
             if (startAddr == 118)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[3].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 119)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[3].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 120)
@@ -178,22 +169,20 @@ namespace Android_Silver.Services
             }
             if (startAddr == 121)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[3].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
+
             #region Режим кухни
             if (startAddr == 122)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[4].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 123)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[4].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 124)
@@ -203,22 +192,20 @@ namespace Android_Silver.Services
             }
             if (startAddr == 125)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[4].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
-            #region Отпуск
+
+            #region Режим отпуска
             if (startAddr == 126)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[5].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[5].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 127)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[5].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[5].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 128)
@@ -228,33 +215,30 @@ namespace Android_Silver.Services
             }
             if (startAddr == 129)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[5].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[5].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
-            #region Специальный режим
+
+            #region Настройка спец режима
             if (startAddr == 130)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[6].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[8].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 131)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[6].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[8].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 132)
             {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[6].TempSP, value, ref startIndex);
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[8].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 133)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[6].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[8].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
@@ -555,274 +539,300 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 167)
+            #region Отпуск
+            if (startAddr == 158)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[0].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 168)
+            if (startAddr == 159)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[0].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 169)
+            if (startAddr == 160)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[0].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 170)
+            if (startAddr == 161)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(2, 0, buffer);
                 return startIndex;
             }
-            if (startAddr == 171)
+            if (startAddr == 162)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[1].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 172)
+            if (startAddr == 163)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 173)
+            if (startAddr == 164)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 174)
+            if (startAddr == 165)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(2, 1, buffer);
                 return startIndex;
             }
-            if (startAddr == 175)
+            if (startAddr == 166)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[2].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 176)
+            if (startAddr == 167)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[2].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 177)
+            if (startAddr == 168)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[2].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 178)
+            if (startAddr == 169)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(2, 2, buffer);
                 return startIndex;
             }
-            if (startAddr == 179)
+            if (startAddr == 170)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[3].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 180)
+            if (startAddr == 171)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[3].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 181)
+            if (startAddr == 172)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[2].TimeModeValues[3].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 182)
+            if (startAddr == 173)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(2, 3, buffer);
-                if (_activePageEntities.IsLoadingPage)
-                {
-                    _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
-                    _modesEntities.TTitle = "Расписание для отпуска";
-                }
                 return startIndex;
             }
+            #endregion
+
             #region Расписание
-            if (startAddr == 183)
+            if (startAddr == 174)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[0].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 184)
+            if (startAddr == 175)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 185)
+            if (startAddr == 176)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 186)
+            if (startAddr == 177)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(3, 0, buffer);
                 return startIndex;
             }
-            if (startAddr == 187)
+            if (startAddr == 178)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[1].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 188)
+            if (startAddr == 179)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 189)
+            if (startAddr == 180)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 190)
+            if (startAddr == 181)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(3, 1, buffer);
                 return startIndex;
             }
-            if (startAddr == 191)
+            if (startAddr == 182)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[2].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 192)
+            if (startAddr == 183)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 193)
+            if (startAddr == 184)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 194)
+            if (startAddr == 185)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(3, 2, buffer);
                 return startIndex;
             }
-            if (startAddr == 195)
+            if (startAddr == 186)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[3].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 196)
+            if (startAddr == 187)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 197)
+            if (startAddr == 188)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 198)
+            if (startAddr == 189)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(3, 3, buffer);
                 return startIndex;
             }
-            if (startAddr == 199)
+            if (startAddr == 190)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[4].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 200)
+            if (startAddr == 191)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 201)
+            if (startAddr == 192)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 202)
+            if (startAddr == 193)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(3, 4, buffer);
                 return startIndex;
             }
-            if (startAddr == 203)
+            if (startAddr == 194)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[5].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 204)
+            if (startAddr == 195)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 205)
+            if (startAddr == 196)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 206)
+            if (startAddr == 197)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(3, 5, buffer);
                 return startIndex;
             }
-            if (startAddr == 207)
+            if (startAddr == 198)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[6].DayNum = buffer;
                 return startIndex;
             }
-            if (startAddr == 208)
+            if (startAddr == 199)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 209)
+            if (startAddr == 200)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Minute = buffer;
                 return startIndex;
             }
-            if (startAddr == 210)
+            if (startAddr == 201)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 GetTModeCMode1(3, 6, buffer);
+                return startIndex;
+            }
+            if (startAddr == 202)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _modesEntities.Mode2ValuesList[3].TimeModeValues[7].DayNum = buffer;
+                return startIndex;
+            }
+            if (startAddr == 203)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Hour = buffer;
+                return startIndex;
+            }
+            if (startAddr == 204)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Minute = buffer;
+                return startIndex;
+            }
+            if (startAddr == 205)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                GetTModeCMode1(3, 7, buffer);
+                if (_activePageEntities.IsLoadingPage)
+                {
+                    _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
+                }
                 return startIndex;
             }
             #endregion
@@ -890,31 +900,22 @@ namespace Android_Silver.Services
             #region Минимальный
             if (startAddr == 110 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer <= 100)
-                    _modesEntities.Mode1ValuesList[1].SypplySP = buffer;
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 111 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer <= 100)
-                    _modesEntities.Mode1ValuesList[1].ExhaustSP = buffer;
-                GetIntValueResult(buffer,);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 112 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer <= 40 && buffer >= 15)
-                    _modesEntities.Mode1ValuesList[1].TempSP = buffer;
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[1].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 113 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer <= 100)
-                    _modesEntities.Mode1ValuesList[1].PowerLimitSP = buffer;
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
@@ -922,16 +923,12 @@ namespace Android_Silver.Services
             #region Номинальный
             if (startAddr == 114 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer <= 100)
-                    GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[2].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 115 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer <= 100)
-                    GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[2].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 116 + _menusEntities.WriteOffset)
@@ -941,8 +938,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 117 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[2].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
@@ -950,14 +946,12 @@ namespace Android_Silver.Services
             #region Максимальный
             if (startAddr == 118 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[3].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 119 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[3].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 120 + _menusEntities.WriteOffset)
@@ -967,8 +961,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 121 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[3].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
@@ -976,14 +969,12 @@ namespace Android_Silver.Services
             #region Режим кухни
             if (startAddr == 122 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[4].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 123 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[4].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 124 + _menusEntities.WriteOffset)
@@ -993,8 +984,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 125 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[4].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
@@ -1002,25 +992,22 @@ namespace Android_Silver.Services
             #region Режим отпуска
             if (startAddr == 126 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[4].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[5].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 127 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[4].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[5].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 128 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[4].TempSP, value, ref startIndex);
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[5].TempSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 129 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[4].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[5].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
@@ -1028,14 +1015,12 @@ namespace Android_Silver.Services
             #region Настройка спец режима
             if (startAddr == 130 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[8].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[8].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 131 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[8].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[8].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == 132 + _menusEntities.WriteOffset)
@@ -1045,8 +1030,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 133 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[8].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[8].PowerLimitSP, value, ref startIndex);
                 return startIndex;
             }
             #endregion
@@ -1525,15 +1509,13 @@ namespace Android_Silver.Services
             ////Задержка авари по темп(пока 0)
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 4 || startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.CCommonSetPoints.TControlDelayS);
+                GetIntValueResult(_fbs.CCommonSetPoints.TControlDelayS, value, ref startIndex);
                 return startIndex;
             }
             ////Режим времени года
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 5 || startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.CCommonSetPoints.SeasonMode);
+                GetIntValueResult(_fbs.CCommonSetPoints.SeasonMode, value, ref startIndex);
                 return startIndex;
             }
             ////Уставка режима года
@@ -1579,21 +1561,18 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 12 || startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.CCommonSetPoints.RoomSPPReg);
+                GetIntValueResult(_fbs.CCommonSetPoints.RoomSPPReg, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 13 || startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.CCommonSetPoints.RoomSPIReg);
+                GetIntValueResult(_fbs.CCommonSetPoints.RoomSPIReg, value, ref startIndex);
                 return startIndex;
             }
 
             if (startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 14 || startAddr == _menusEntities.ETH_COMMON_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
             {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.CCommonSetPoints.RoomSPDReg);
+                GetIntValueResult(_fbs.CCommonSetPoints.RoomSPDReg, value, ref startIndex);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -1851,26 +1830,22 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 12 || startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.CRecup.EffRecSPPerc);
+                GetIntValueResult(_fbs.CRecup.EffRecSPPerc, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 13 || startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.CFans.PEffFan);
+                GetIntValueResult(_fbs.CFans.PEffFan, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 14 || startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.CFans.IEffFan);
+                GetIntValueResult(_fbs.CFans.IEffFan, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 15 || startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.CFans.DEffFan);
+                GetIntValueResult(_fbs.CFans.DEffFan, value, ref startIndex);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -2284,8 +2259,7 @@ namespace Android_Silver.Services
             #region Термоанемометры
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.SupCalibrateThm.FanControlType);
+                GetIntValueResult(_fbs.SupCalibrateThm.FanControlType, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
@@ -2318,20 +2292,17 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 5 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.ThmSps.PReg);
+                GetIntValueResult(_fbs.ThmSps.PReg, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 6 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.ThmSps.IReg);
+                GetIntValueResult(_fbs.ThmSps.IReg, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.ThmSps.DReg);
+                GetIntValueResult(_fbs.ThmSps.DReg, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
@@ -2508,8 +2479,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 || startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[6].SypplySP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[6].SypplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 || startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
@@ -2532,8 +2502,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 4 || startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[6].ExhaustSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[6].ExhaustSP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 5 || startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
@@ -2552,8 +2521,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 || startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _modesEntities.Mode1ValuesList[6].PowerLimitSP);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[6].PowerLimitSP, value, ref startIndex);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -2569,9 +2537,8 @@ namespace Android_Silver.Services
             #region Калибровка термоанемометров
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateMode);
-                GetIntValueResult(buffer, _fbs.ExhaustCalibrateThm.CalibrateMode);
+                GetIntValueResult(_fbs.SupCalibrateThm.CalibrateMode, value, ref startIndex);
+                _fbs.ExhaustCalibrateThm.CalibrateMode = _fbs.SupCalibrateThm.CalibrateMode;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 1 + _menusEntities.WriteOffset)
@@ -2604,29 +2571,25 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 5 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.SupCalibrateThm.CavType);
-                GetIntValueResult(buffer, _fbs.ExhaustCalibrateThm.CavType);
+                GetIntValueResult(_fbs.SupCalibrateThm.CavType, value, ref startIndex);
+                _fbs.ExhaustCalibrateThm.CavType = _fbs.SupCalibrateThm.CavType;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 6 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateTimeS);
-                GetIntValueResult(buffer, _fbs.ExhaustCalibrateThm.CalibrateTimeS);
+                GetIntValueResult(_fbs.SupCalibrateThm.CalibrateTimeS, value, ref startIndex);
+                _fbs.ExhaustCalibrateThm.CalibrateTimeS = _fbs.SupCalibrateThm.CalibrateTimeS;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 7 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetIntValueResult(buffer, _fbs.SupCalibrateThm.TestTimeS);
-                GetIntValueResult(buffer, _fbs.ExhaustCalibrateThm.TestTimeS);
+                GetIntValueResult(_fbs.SupCalibrateThm.TestTimeS, value, ref startIndex);
+                _fbs.ExhaustCalibrateThm.TestTimeS = _fbs.SupCalibrateThm.TestTimeS;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 8 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                if (GetIntValueResult(_fbs.SupCalibrateThm.CalibrateStepsLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.CalibrateStepPercs[1] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
                     _fbs.ExhaustCalibrateThm.CalibrateStepPercs[1] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
@@ -2635,8 +2598,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 9 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                if (GetIntValueResult(_fbs.SupCalibrateThm.CalibrateStepsLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.CalibrateStepPercs[2] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
                     _fbs.ExhaustCalibrateThm.CalibrateStepPercs[2] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
@@ -2645,8 +2607,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 10 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                if (GetIntValueResult(_fbs.SupCalibrateThm.CalibrateStepsLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.CalibrateStepPercs[3] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
                     _fbs.ExhaustCalibrateThm.CalibrateStepPercs[3] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
@@ -2655,8 +2616,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 11 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                if (GetIntValueResult(_fbs.SupCalibrateThm.CalibrateStepsLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.CalibrateStepPercs[4] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
                     _fbs.ExhaustCalibrateThm.CalibrateStepPercs[4] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
@@ -2665,8 +2625,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 || startAddr == _menusEntities.ETH_CALIBRATE_THM_ADDR + 12 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (GetIntValueResult(buffer, _fbs.SupCalibrateThm.CalibrateStepsLimits))
+                if (GetIntValueResult(_fbs.SupCalibrateThm.CalibrateStepsLimits, value, ref startIndex))
                 {
                     _fbs.SupCalibrateThm.CalibrateStepPercs[5] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;
                     _fbs.ExhaustCalibrateThm.CalibrateStepPercs[5] = _fbs.SupCalibrateThm.CalibrateStepsLimits.Value;

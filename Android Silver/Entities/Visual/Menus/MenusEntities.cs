@@ -651,31 +651,31 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             //Калибровочные дельты темп притока
             sSet = new StrSet(_fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Max,
-                "Дельта t притока 0, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                "Дельта t притока 0, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Max,
-                 "Дельта t притока 1, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                 "Дельта t притока 1, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Max,
-                "Дельта t притока 2, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                "Дельта t притока 2, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Max,
-                 "Дельта t притока 3, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                 "Дельта t притока 3, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Max,
-                "Дельта t притока 4, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                "Дельта t притока 4, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Max,
-                "Дельта t притока 5, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                "Дельта t притока 5, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.Max,
-                "Дельта t притока Max, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                "Дельта t притока Max, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                     valScale: _fbEntities.SupCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             //Калибровочные расходы притока
@@ -713,27 +713,27 @@ namespace Android_Silver.Entities.Visual.Menus
                                                 valScale: _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Max,
-                 "Дельта t вытяжки 1, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                 "Дельта t вытяжки 1, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Max,
-                "Дельта t вытяжки 2, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                "Дельта t вытяжки 2, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Max,
-                 "Дельта t вытяжки 3, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                 "Дельта t вытяжки 3, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Max,
-                "Дельта t вытяжки 4, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                "Дельта t вытяжки 4, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Max,
-                "Дельта t вытяжки 5, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                "Дельта t вытяжки 5, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                                 valScale: _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Min, _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.Max,
-                "Дельта t вытяжки Max, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                "Дельта t вытяжки Max, С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
                                     valScale: _fbEntities.ExhaustCalibrateThm.DeltaTCalibratesLimits.NumChr, pickVals);
             strSets.Add(sSet);
             //Калибровочные расходы вытяжки
