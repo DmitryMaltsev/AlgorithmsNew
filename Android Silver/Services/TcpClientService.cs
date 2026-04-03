@@ -225,14 +225,14 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 0, 100, 0, 106 };
+                            _readValuesArr = new byte[] { 1, 3, 0, 100, 0, 116 };
                             // messToClient = "0100,058\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage1:
                         {
                             //1 44 126
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 126 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 239 };
                             //messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -240,7 +240,7 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage2:
                         {
                             //1 170 121
-                            _readValuesArr = new byte[] { 1, 3, 1, 170, 0, 121 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 239 };
                             //messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -5192,7 +5192,7 @@ namespace Android_Silver.Services
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
-                    GetIntValueResult(val, _fbs.ThmSps.PReg);
+                    GetIntValueResult(val, _fbs.ThmSps.PTaReg);
                 }
                 return;
             }
@@ -5200,7 +5200,7 @@ namespace Android_Silver.Services
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
-                    GetIntValueResult(val, _fbs.ThmSps.IReg);
+                    GetIntValueResult(val, _fbs.ThmSps.ITaReg);
                 }
                 return;
             }
@@ -5208,7 +5208,7 @@ namespace Android_Silver.Services
             {
                 if (ushort.TryParse(resp.ValueString, out ushort val))
                 {
-                    GetIntValueResult(val, _fbs.ThmSps.DReg);
+                    GetIntValueResult(val, _fbs.ThmSps.DTaReg);
                 }
                 return;
             }
@@ -5248,7 +5248,7 @@ namespace Android_Silver.Services
             {
                 if (int.TryParse(resp.ValueString, out int val))
                 {
-                    GetFloatValueResult(val, _fbs.ThmSps.PThmSup);
+                    GetFloatValueResult(val, _fbs.ThmSps.SupPTa);
                 }
                 if (_servActivePageEntities.IsLoadingPage)
                 {
@@ -5562,7 +5562,7 @@ namespace Android_Silver.Services
                 if (int.TryParse(resp.ValueString, out int val))
                 {
                     //val >= 0 && val <= 100
-                    GetFloatValueResult(val, _fbs.ThmSps.PThmSupValue);
+                 //   GetFloatValueResult(val, _fbs.ThmSps.PThmSupValue);
                 }
                 return;
             }
@@ -5571,14 +5571,14 @@ namespace Android_Silver.Services
                 if (int.TryParse(resp.ValueString, out int val))
                 {
                     //val >= 0 && val <= 100
-                    GetFloatValueResult(val, _fbs.ThmSps.PThmExhaustValue);
+                 //   GetFloatValueResult(val, _fbs.ThmSps.PThmExhaustValue);
                 }
                 if (_menusEntities.StartMenuCollection.Count > 13 && _servActivePageEntities.LastActivePageState == SActivePageState.ThmCalibratePage)
                 {
                     _menusEntities.StartMenuCollection[13].StrSetsCollection[1].CVal = _fbs.SupCalibrateThm.DeltaThm.Value;
                     _menusEntities.StartMenuCollection[13].StrSetsCollection[2].CVal = _fbs.ExhaustCalibrateThm.DeltaThm.Value;
-                    _menusEntities.StartMenuCollection[13].StrSetsCollection[3].CVal = _fbs.ThmSps.PThmSupValue.Value;
-                    _menusEntities.StartMenuCollection[13].StrSetsCollection[4].CVal = _fbs.ThmSps.PThmExhaustValue.Value;
+                  //  _menusEntities.StartMenuCollection[13].StrSetsCollection[3].CVal = _fbs.ThmSps.PThmSupValue.Value;
+                  //  _menusEntities.StartMenuCollection[13].StrSetsCollection[4].CVal = _fbs.ThmSps.PThmExhaustValue.Value;
                 }
                 return;
             }
@@ -6924,7 +6924,7 @@ namespace Android_Silver.Services
 
         private bool GetFloatValueResult(int inputVal, FloatValue floatVal)
         {
-
+            
             var min = floatVal.Min * Math.Pow(10, floatVal.NumChr);
             var max = floatVal.Max * Math.Pow(10, floatVal.NumChr);
             if (inputVal >= min && inputVal <= max)

@@ -89,6 +89,24 @@ namespace Android_Silver.Entities.Modes
                 _powerLimitSP = value;
             }
         }
+
+        private IntValue _sFanCorr;
+
+        public IntValue SFanCorr
+        {
+            get { return _sFanCorr; }
+            set { _sFanCorr = value; }
+        }
+
+        private IntValue _eFanCorr;
+
+        public IntValue EFanCorr
+        {
+            get { return _eFanCorr; }
+            set { _eFanCorr = value; }
+        }
+
+
         #endregion
 
 
@@ -217,6 +235,8 @@ namespace Android_Silver.Entities.Modes
             ExhaustSP = new IntValue(0, 100);
             TempSP = new FloatValue(0, 100, 0);
             PowerLimitSP = new IntValue(0, 100);
+            SFanCorr = new IntValue(-100,100);
+            EFanCorr = new IntValue(-100,100);
         }
     }
 }

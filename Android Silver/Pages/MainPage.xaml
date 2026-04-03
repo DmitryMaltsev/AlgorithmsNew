@@ -551,7 +551,7 @@
          Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed0" Released="DnDigit_Released0" IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
             <!--#endregion-->
             <!--#region 2 колонка-->
-            <Label Text="Вытяж" Grid.Row="4" Grid.Column="5"  Style="{StaticResource SPsText}" FontSize="16"
+            <Label Text="Дисб выт" Grid.Row="4" Grid.Column="5"  Style="{StaticResource SPsText}" FontSize="16"
                                                                                  Margin="0,0,0,0"  IsVisible="{Binding CActivePagesEntities.IsSetPointsPage}"/>
             <Image Source="{Binding CPictureSet.DigitalImage}" Grid.Row="5" Grid.Column="5"   Style="{StaticResource SPImg}"
                                                                                         IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
@@ -593,7 +593,36 @@
              Style="{StaticResource SPBtn}" Pressed="DnDigit_Pressed3" Released="DnDigit_Released3"
                                                                        IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
             <!--#endregion-->
-            <Button  ImageSource="{Binding CPictureSet.OkButton.Current}" Command="{Binding SPOkCommand}" Grid.Row="9" Grid.Column="5" 
+            <!--#region Корректировка притока -->
+            <Label Text="Корректировка притока" Grid.Row="11" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+            <Image Grid.Row="11" Grid.Column="8"  Style="{StaticResource OtherSettingsImg}"  Source="{Binding CPictureSet.ContactBackGround}"  
+                                                                     IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}" />
+            <Label Text='{Binding  M1Values.SFanCorr.Value}' Grid.Row="11" Grid.RowSpan="1" Grid.Column="11"  Grid.ColumnSpan="3" Style="{StaticResource OterSettingsLabel}" 
+                                                                            IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+            <Button Grid.Row="11" Grid.Column="9" Style="{StaticResource OtherSettingsArrBut}" 
+               Command="{Binding SFanLeftCommand}" ImageSource="{Binding CPictureSet.SFanCorrLeftBut.Current}"
+                  Pressed="SFanCorrLeft_Pressed" Released="SFanCorrLeft_Released" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+            <Button Grid.Row="11" Grid.Column="13"  Style="{StaticResource OtherSettingsArrBut}" ImageSource="{Binding CPictureSet.SFanCorrRightBut.Current}" 
+               Command="{Binding SFanRightCommand}"
+               Pressed="SFanCorrRight_Pressed" Released="SFanCorrRight_Released" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+            <!--#endregion-->
+            <!--#region Корректировка вытяжки -->
+            <Label Text="Корректировка вытяжки" Grid.Row="13" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+            <Image Grid.Row="13" Grid.Column="8"  Style="{StaticResource OtherSettingsImg}"  Source="{Binding CPictureSet.ContactBackGround}"  
+                                                            IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}" />
+
+            <Label Text='{Binding  M1Values.EFanCorr.Value}' Grid.Row="13" Grid.RowSpan="1" Grid.Column="11"  Grid.ColumnSpan="3" Style="{StaticResource OterSettingsLabel}" 
+                                                                 IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+
+            <Button Grid.Row="13" Grid.Column="9" Style="{StaticResource OtherSettingsArrBut}" 
+                   Command="{Binding EFanLeftCommand}" ImageSource="{Binding CPictureSet.EFanCorrLeftBut.Current}"
+                    Pressed="EFanCorrLeft_Pressed" Released="EFanCorrLeft_Released" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+
+            <Button Grid.Row="13" Grid.Column="13"  Style="{StaticResource OtherSettingsArrBut}" ImageSource="{Binding CPictureSet.EFanCorrRightBut.Current}" 
+                 Command="{Binding EFanRightCommand}"
+                    Pressed="EFanCorrRight_Pressed" Released="EFanCorrRight_Released" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+            <!--#endregion-->
+            <Button  ImageSource="{Binding CPictureSet.OkButton.Current}" Command="{Binding SPOkCommand}" Grid.Row="15" Grid.Column="5" 
                        Style="{StaticResource OKCancelBut}"  Pressed="OK_SPPressed" Released="Ok_SPReleased" IsVisible = "{Binding CActivePagesEntities.IsSetPointsPage}"/>
             <!--#endregion-->
 

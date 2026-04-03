@@ -18,17 +18,20 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue ExhaustTHmKoefB;
         public FloatValue ExhaustTHmKoefK;
         public FloatValue ExhaustCurveKoef;
-        public FloatValue PThmSup;
-        public FloatValue PThmExhaust;
-        public FloatValue PThmSupValue;
-        public FloatValue PThmExhaustValue;
+        public FloatValue SupPTa;
+        public FloatValue EPTa;
         public FloatValue TempH1;
         public FloatValue TempC1;
         public FloatValue TempH2;
         public FloatValue TempC2;
-        public IntValue PReg;
-        public IntValue IReg;
-        public IntValue DReg;
+        public IntValue PTaReg;
+        public IntValue ITaReg;
+        public IntValue DTaReg;
+        public FloatValue SupDeltaTime;
+        public FloatValue EDeltaTime;
+
+
+
         public FloatValue KClKoef;
         public FloatValue BClKoef;
         public FloatValue KPolKoef;
@@ -46,13 +49,13 @@ namespace Android_Silver.Entities.FBEntities
             ExhaustTHmKoefK = new FloatValue(-100_000, 100_000, 2);
             ExhaustCurveKoef = new FloatValue(-100_000, 100_000, 2);
 
-            PThmSup = new FloatValue(0, 100, 1);
-            PThmExhaust = new FloatValue(0, 100, 1);
-            PThmSupValue = new FloatValue(0, 100, 2);
-            PThmExhaustValue = new FloatValue(0, 100, 2);
-            PReg = new IntValue(0, 10_000);
-            IReg = new IntValue(0, 10_000);
-            DReg = new IntValue(0, 10_000);
+            SupPTa = new FloatValue(0, 100, 2);
+            EPTa = new FloatValue(0, 100, 2);
+           // PThmSupValue = new FloatValue(0, 100, 2);
+           // PThmExhaustValue = new FloatValue(0, 100, 2);
+            PTaReg = new IntValue(0, 10_000);
+            ITaReg = new IntValue(0, 10_000);
+            DTaReg = new IntValue(0, 10_000);
 
             KClKoef = new FloatValue(-99, 99, 2);
             BClKoef = new FloatValue(-99, 99, 2);
@@ -63,6 +66,9 @@ namespace Android_Silver.Entities.FBEntities
             TempC1 = new FloatValue(-100, 120, 1);
             TempH2 = new FloatValue(-100, 120, 1);
             TempC2 = new FloatValue(-100, 120, 1);
+            SupDeltaTime = new FloatValue(0, 100, 1);
+            EDeltaTime = new FloatValue(0, 100, 1);
+
         }
 
     }

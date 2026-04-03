@@ -423,6 +423,46 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private PicByStates _sFanCorrLeftBut;
+        public PicByStates SFanCorrLeftBut
+        {
+            get { return _sFanCorrLeftBut; }
+            set {
+                _sFanCorrLeftBut = value;
+                OnPropertyChanged(nameof(SFanCorrLeftBut));
+            }
+        }
+        private PicByStates _sFanCorrRightBut;
+        public PicByStates SFanCorrRightBut
+        {
+            get { return _sFanCorrRightBut; }
+            set
+            {
+                _sFanCorrRightBut = value;
+                OnPropertyChanged(nameof(SFanCorrRightBut));
+            }
+        }
+        private PicByStates _eFanCorrLeftBut;
+        public PicByStates EFanCorrLeftBut
+        {
+            get { return _eFanCorrLeftBut; }
+            set
+            {
+                _eFanCorrLeftBut = value;
+                OnPropertyChanged(nameof(EFanCorrLeftBut));
+            }
+        }
+        private PicByStates _eFanCorrRightBut;
+        public PicByStates EFanCorrRightBut
+        {
+            get { return _eFanCorrRightBut; }
+            set
+            {
+                _eFanCorrRightBut = value;
+                OnPropertyChanged(nameof(EFanCorrRightBut));
+            }
+        }
+        
         private string _digitalImage;
 
         public string DigitalImage
@@ -846,6 +886,11 @@ namespace Android_Silver.Entities.Visual
                         DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
                         DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
                         DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
+
+                        SFanCorrLeftBut = new PicByStates("but_left_off_base.png", "but_left_on_base.png");
+                        SFanCorrRightBut = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
+                        EFanCorrLeftBut = new PicByStates("but_left_off_base.png", "but_left_on_base.png");
+                        EFanCorrRightBut = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
 
                         KitchenButtonUp = new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png");
                         KitchenButtonDn = new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png");

@@ -5,6 +5,7 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
+
 using System.Globalization;
 using System.Windows.Input;
 
@@ -171,6 +172,13 @@ namespace Android_Silver.Pages
         public ICommand BtnDnCommand2 { get; private set; }
         public ICommand BtnUpCommand3 { get; private set; }
         public ICommand BtnDnCommand3 { get; private set; }
+
+        public ICommand SFanLeftCommand { get; private set; }
+        public ICommand SFanRightCommand { get; private set; }
+        public ICommand EFanLeftCommand { get; private set; }
+        public ICommand EFanRightCommand { get; private set; }
+
+
         #endregion
         #region Settings commands
         public ICommand OtherSettingsCommand { get; private set; }
@@ -326,6 +334,10 @@ namespace Android_Silver.Pages
             BtnUpCommand3 = new Command(ExecuteBtnUP3);
             BtnDnCommand3 = new Command(ExecuteBtnDn3);
             SPReturnCommand = new Command(ExecuteSPReturn);
+            SFanLeftCommand = new Command(ExecuteSFanLeft);
+            SFanRightCommand = new Command(ExecuteSFanRight);
+            EFanLeftCommand = new Command(ExecuteEFanLeft);
+            EFanRightCommand = new Command(ExecuteEFanRight);
             #endregion
             #region Vac commands
             SetTDataCommand = new Command(ExecuteSetTData);
@@ -621,12 +633,33 @@ namespace Android_Silver.Pages
             if (M1Values != null)
                 M1Values.PowerLimitSP.Value = M1Values.PowerLimitSP.Value - 5 > 0 ? M1Values.PowerLimitSP.Value - 5 : 0;
         }
+        private void ExecuteSFanLeft(object obj)
+        {
+            if (M1Values != null)
+                M1Values.SFanCorr.Value = M1Values.SFanCorr.Value - 1 > M1Values.SFanCorr.Min ? M1Values.SFanCorr.Value - 1 : M1Values.SFanCorr.Min;
+        }
+        private void ExecuteSFanRight(object obj)
+        {
+            if (M1Values != null)
+                M1Values.SFanCorr.Value = M1Values.SFanCorr.Value + 1 < M1Values.SFanCorr.Max ? M1Values.SFanCorr.Value + 1 : M1Values.SFanCorr.Max;
+        }
+        private void ExecuteEFanLeft(object obj)
+        {
+            if (M1Values != null)
+                M1Values.EFanCorr.Value = M1Values.EFanCorr.Value - 1 > M1Values.EFanCorr.Min ? M1Values.EFanCorr.Value - 1 : M1Values.EFanCorr.Min;
+        }
+        private void ExecuteEFanRight(object obj)
+        {
+            if (M1Values != null)
+                M1Values.EFanCorr.Value = M1Values.EFanCorr.Value + 1 < M1Values.EFanCorr.Max ? M1Values.EFanCorr.Value + 1 : M1Values.EFanCorr.Max;
+        }
+
 
         private void ExecuteSPSOK(object obj)
         {
             if (M1Values != null)
             {
-                int[] values = { M1Values.SypplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, M1Values.PowerLimitSP.Value };
+                int[] values = { M1Values.SypplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, M1Values.PowerLimitSP.Value, M1Values.SFanCorr.Value, M1Values.EFanCorr.Value };
                 CTcpClientService.SetCommandToServer(M1Values.StartAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             }
@@ -660,6 +693,8 @@ namespace Android_Silver.Pages
             M1Values.ExhaustSP.Value = bufVals.ExhaustSP.Value;
             M1Values.TempSP.Value = bufVals.TempSP.Value;
             M1Values.PowerLimitSP.Value = bufVals.PowerLimitSP.Value;
+            M1Values.SFanCorr.Value = bufVals.SFanCorr.Value;
+            M1Values.EFanCorr.Value = bufVals.EFanCorr.Value;
         }
 
         private void ExecuteSPReturn(object obj)
@@ -822,12 +857,12 @@ namespace Android_Silver.Pages
                 CFBs.CUpdater.FileContent.Clear();
                 for (int i = 0; i < hexResult.GetLength(0); i++)
                 {
-                   // if (i < 362)
-                   // {
-                        for (int j = 4; j < hexResult.GetLength(1) - 2; j++)
-                        {
-                            CFBs.CUpdater.FileContent.Append(hexResult[i, j]);
-                        }
+                    // if (i < 362)
+                    // {
+                    for (int j = 4; j < hexResult.GetLength(1) - 2; j++)
+                    {
+                        CFBs.CUpdater.FileContent.Append(hexResult[i, j]);
+                    }
 
                     //}
                     //else
@@ -839,8 +874,8 @@ namespace Android_Silver.Pages
                     //}
 
                 }
-                 Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
-                    CTcpClientService.SetCommandToServer(157, vals);
+                Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
+                CTcpClientService.SetCommandToServer(157, vals);
             }
             else
             {

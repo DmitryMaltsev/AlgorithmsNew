@@ -339,6 +339,45 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.DigitalButtonsDn[4].Current = ViewModel.CPictureSet.DigitalButtonsDn[3].Default;
         }
 
+        private void SFanCorrLeft_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SFanCorrLeftBut.Current = ViewModel.CPictureSet.SFanCorrLeftBut.Selected;
+        }
+
+        private void SFanCorrLeft_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SFanCorrLeftBut.Current = ViewModel.CPictureSet.SFanCorrLeftBut.Default;
+        }
+
+        private void SFanCorrRight_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SFanCorrRightBut.Current = ViewModel.CPictureSet.SFanCorrRightBut.Selected;
+        }
+
+        private void SFanCorrRight_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SFanCorrRightBut.Current = ViewModel.CPictureSet.SFanCorrRightBut.Default;
+        }
+
+        private void EFanCorrLeft_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.EFanCorrLeftBut.Current = ViewModel.CPictureSet.EFanCorrLeftBut.Selected;
+        }
+
+        private void EFanCorrLeft_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.EFanCorrLeftBut.Current = ViewModel.CPictureSet.EFanCorrLeftBut.Default;
+        }
+        private void EFanCorrRight_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.EFanCorrRightBut.Current = ViewModel.CPictureSet.EFanCorrRightBut.Selected;
+        }
+
+        private void EFanCorrRight_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.EFanCorrRightBut.Current = ViewModel.CPictureSet.EFanCorrRightBut.Default;
+        }
+
         private void Next_SPPressed(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.NextButton.Current = ViewModel.CPictureSet.NextButton.Selected;
