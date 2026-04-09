@@ -1,6 +1,5 @@
 ﻿using Android_Silver.Entities.FBEntities;
 using Android_Silver.ViewModels;
-
 using System.Collections.ObjectModel;
 
 namespace Android_Silver.Entities.Visual.Menus
@@ -136,7 +135,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_DAMPER_SETTINGS_ADDR = ETH_COMMON_SETTINGS_ADDR + ETH_COMMON_SETTINGS_LENGTH;
             ETH_DAMPER_SETTINGS_LENGTH = 23;
             ETH_FAN_SETTINGS_ADDR = ETH_DAMPER_SETTINGS_ADDR + ETH_DAMPER_SETTINGS_LENGTH;
-            ETH_FAN_SETTINGS_LENGTH = 16;
+            ETH_FAN_SETTINGS_LENGTH = 12;
             ETH_WH_SETTINGS_ADDR = ETH_FAN_SETTINGS_ADDR + ETH_FAN_SETTINGS_LENGTH;
             ETH_WH_SETTINGS_LENGTH = 16;
             ETH_EH_SETTINGS_ADDR = ETH_WH_SETTINGS_ADDR + ETH_WH_SETTINGS_LENGTH;
@@ -152,7 +151,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_CONFIG_SETTINGS_ADDR = ETH_SENS_SETTINGS_ADDR + ETH_SENS_SETTINGS_LENGTH;
             ETH_CONFIG_SETTINGS_LENGTH = 8;
             ETH_THM_SETTINGS_ADDR = ETH_CONFIG_SETTINGS_ADDR + ETH_CONFIG_SETTINGS_LENGTH;
-            ETH_THM_SETTINGS_LENGTH = 14;
+            ETH_THM_SETTINGS_LENGTH = 18;
             ETH_MBRECUP_SETTINGS_ADDR = ETH_THM_SETTINGS_ADDR + ETH_THM_SETTINGS_LENGTH;
             ETH_MBRECUP_SETTINGS_LENGTH = 14;
             ETH_SPECMODE_SETTINGS_ADDR = ETH_MBRECUP_SETTINGS_ADDR + ETH_MBRECUP_SETTINGS_LENGTH;
@@ -348,15 +347,6 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(_fbEntities.CFans.EffFanTempSP.Min, _fbEntities.CFans.EffFanTempSP.Max, "Уставка темп регулирования по КПД", isVisible: true, pickerIsVisible: false,
                             entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CFans.EffFanTempSP.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CRecup.EffRecSPPerc.Min, _fbEntities.CRecup.EffRecSPPerc.Max, "Уставка % КПД рекуператора для вент",
-                                                            isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CFans.PEffFan.Min, _fbEntities.CFans.PEffFan.Max, "P коэф. регулятора по КПД", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CFans.IEffFan.Min, _fbEntities.CFans.IEffFan.Max, "I коэф. регулятора по КПД", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CFans.DEffFan.Min, _fbEntities.CFans.DEffFan.Max, "D коэф. регулятора по КПД", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);
             StartMenuCollection[3].StrSetsCollection = strSets;
             #endregion
             #region WHHeater
@@ -543,6 +533,18 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ThmSps.BClKoef.Min, _fbEntities.ThmSps.BClKoef.Max, "Коэф. B чистого фильтра", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
                 isEnabled: true, valScale: _fbEntities.ThmSps.BClKoef.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.ThmSps.SupKCold.Min, _fbEntities.ThmSps.SupKCold.Max, "Коэф. K холодного Та притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+              isEnabled: true, valScale: _fbEntities.ThmSps.SupKCold.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.ThmSps.SupBCold.Min, _fbEntities.ThmSps.SupBCold.Max, "Коэф. B холодного Та притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+                isEnabled: true, valScale: _fbEntities.ThmSps.SupBCold.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.ThmSps.EKCold.Min, _fbEntities.ThmSps.EKCold.Max, "Коэф. K холодного Та вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+                isEnabled: true, valScale: _fbEntities.ThmSps.EKCold.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.ThmSps.EBCold.Min, _fbEntities.ThmSps.EBCold.Max, "Коэф. B холодного Та вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+                isEnabled: true, valScale: _fbEntities.ThmSps.EBCold.NumChr, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[10].StrSetsCollection = strSets;
             #endregion

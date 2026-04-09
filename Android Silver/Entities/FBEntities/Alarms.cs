@@ -109,7 +109,7 @@ namespace Android_Silver.Entities.FBEntities
             _alarmsList.Add(new Alarm("Пустой", _pictureSet.JournalStroke, 31));
             _alarmsList.Add(new Alarm("Пустой", _pictureSet.JournalStroke, 32));
             _alarmsList.Add(new Alarm("Пустой", _pictureSet.JournalStroke, 33));
-            AlarmsCollection.Add(_alarmsList[5]);
+           // AlarmsCollection.Add(_alarmsList[5]);
         }
 
         public BitArray GetAlarmsByBits(ushort alarm)

@@ -1,5 +1,4 @@
 ﻿using Android_Silver.Entities.ValuesEntities;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +36,12 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue KPolKoef;
         public FloatValue BPolKoef;
 
+        public FloatValue SupKCold;
+        public FloatValue SupBCold;
+        public FloatValue EKCold;
+        public FloatValue EBCold;
+
+
         public ThermoanemometersSPS()
         {
             SupTHmKoefA = new FloatValue(-100_000, 100_000, 2);
@@ -68,7 +73,10 @@ namespace Android_Silver.Entities.FBEntities
             TempC2 = new FloatValue(-100, 120, 1);
             SupDeltaTime = new FloatValue(0, 100, 1);
             EDeltaTime = new FloatValue(0, 100, 1);
-
+            SupKCold = new FloatValue(-322, 322, 2);
+            SupBCold = new FloatValue(-322, 322, 2);
+            EKCold = new FloatValue(-322, 322, 2);
+            EBCold = new FloatValue(-322, 322, 2);
         }
 
     }

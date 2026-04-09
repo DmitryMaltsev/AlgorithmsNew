@@ -572,14 +572,14 @@ namespace Android_Silver.Pages
         private void ExecuteKitchenCancel(object obj)
         {
             int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute, 0, 1 };
-            CTcpClientService.SetCommandToServer(134, values);
+            CTcpClientService.SetCommandToServer(144, values);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage); ;
         }
 
         private void ExecuteKitchenOk(object obj)
         {
             int[] values = { CModesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute, 1, 0 };
-            CTcpClientService.SetCommandToServer(134, values);
+            CTcpClientService.SetCommandToServer(144, values);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
         #endregion
@@ -734,7 +734,7 @@ namespace Android_Silver.Pages
         {
 
             int[] arr = { 1 };
-            CTcpClientService.SetCommandToServer(137, arr);
+            CTcpClientService.SetCommandToServer(147, arr);
         }
         #endregion
 
@@ -746,7 +746,7 @@ namespace Android_Silver.Pages
             contactM1Num = contactM1Num > 0 ? contactM1Num - 1 : 0;
             contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
             int[] vals = { contactM1Num };
-            CTcpClientService.SetCommandToServer(154, vals);
+            CTcpClientService.SetCommandToServer(164, vals);
         }
         private void ExecuteContactArrRight(object obj)
         {
@@ -755,7 +755,7 @@ namespace Android_Silver.Pages
             contactM1Num = contactM1Num < 5 ? contactM1Num + 1 : 5;
             contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
             int[] vals = { contactM1Num };
-            CTcpClientService.SetCommandToServer(154, vals);
+            CTcpClientService.SetCommandToServer(164, vals);
         }
 
         private void ExecuteOtherSettingsReturn(object obj)
@@ -875,7 +875,7 @@ namespace Android_Silver.Pages
 
                 }
                 Task.Run(() => _fileSystemService.SaveToFileAsync("updater", CFBs.CUpdater.FileContent.ToString()));
-                CTcpClientService.SetCommandToServer(157, vals);
+                CTcpClientService.SetCommandToServer(167, vals);
             }
             else
             {
@@ -1203,7 +1203,7 @@ namespace Android_Silver.Pages
         private void ExecuteOkHumidity(object obj)
         {
             int[] vals = { HumiditySP };
-            CTcpClientService.SetCommandToServer(155, vals);
+            CTcpClientService.SetCommandToServer(165, vals);
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
 
@@ -1278,11 +1278,11 @@ namespace Android_Silver.Pages
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
-
+        
         private void ExecuteTimeOk(object obj)
         {
             int[] vals = { _timeBuffer.Year, _timeBuffer.Month, _timeBuffer.Day, _timeBuffer.Hour, _timeBuffer.Minute };
-            CTcpClientService.SetCommandToServer(158, vals);
+            CTcpClientService.SetCommandToServer(168, vals);
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
         #endregion

@@ -36,7 +36,6 @@ namespace Android_Silver.Entities.FBEntities
             }
         }
 
-        public IntValue EffRecSPPerc;
         public FloatValue BPolKoef;
         public int PReg;
         public int IReg;
@@ -52,7 +51,6 @@ namespace Android_Silver.Entities.FBEntities
         public List<RecPrfofile> RecProfiles = new List<RecPrfofile>();
         public Recup()
         {
-            EffRecSPPerc = new IntValue(0, 100);
             TEffSP = new FloatValue(-100, 100, 1);
             TempA = new FloatValue(-50, 50, 1);
             TempB = new FloatValue(-50, 50, 1);

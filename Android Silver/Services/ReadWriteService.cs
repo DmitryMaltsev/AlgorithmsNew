@@ -1924,26 +1924,6 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 11 || startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
             {
                 GetFloatValueResult(_fbs.CFans.EffFanTempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 12 || startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_fbs.CRecup.EffRecSPPerc, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 13 || startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_fbs.CFans.PEffFan, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 14 || startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_fbs.CFans.IEffFan, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 15 || startAddr == _menusEntities.ETH_FAN_SETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_fbs.CFans.DEffFan, value, ref startIndex);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -2441,6 +2421,26 @@ namespace Android_Silver.Services
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
                 }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 14 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
+            {
+                GetFloatValueResult(_fbs.ThmSps.SupKCold, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 15 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
+            {
+                GetFloatValueResult(_fbs.ThmSps.SupBCold, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 16 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 16 + _menusEntities.WriteOffset)
+            {
+                GetFloatValueResult(_fbs.ThmSps.EKCold, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 17 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 17 + _menusEntities.WriteOffset)
+            {
+                GetFloatValueResult(_fbs.ThmSps.EBCold, value, ref startIndex);
                 return startIndex;
             }
             #endregion

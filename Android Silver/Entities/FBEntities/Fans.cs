@@ -100,16 +100,11 @@ namespace Android_Silver.Entities.FBEntities
         public int DDecrFan;
         public int MinFanPercent;
         public FloatValue EffFanTempSP;
-        public IntValue PEffFan;
-        public IntValue IEffFan;
-        public IntValue DEffFan;
+
 
         public Fans()
         {
             EffFanTempSP = new FloatValue(-100, 100, 1);
-            PEffFan = new IntValue(0, 10_000);
-            IEffFan = new IntValue(0, 10_000);
-            DEffFan = new IntValue(0, 10_000);
         }
     }
 }

@@ -4376,38 +4376,6 @@ namespace Android_Silver.Services
                 {
                     GetFloatValueResult(val, _fbs.CFans.EffFanTempSP);
                 }
-                return;
-            }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 12 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
-            {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
-                {
-                    GetIntValueResult(val, _fbs.CRecup.EffRecSPPerc);
-                }
-                return;
-            }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 13 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
-            {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
-                {
-                    GetIntValueResult(val, _fbs.CFans.PEffFan);
-                }
-                return;
-            }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 14 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
-            {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
-                {
-                    GetIntValueResult(val, _fbs.CFans.IEffFan);
-                }
-                return;
-            }
-            if (resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 15 || resp.Tag == _menusEntities.ETH_FAN_SETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
-            {
-                if (ushort.TryParse(resp.ValueString, out ushort val))
-                {
-                    GetIntValueResult(val, _fbs.CFans.DEffFan);
-                }
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -6912,7 +6880,7 @@ namespace Android_Silver.Services
         {
             int specActive = val ? 1 : 0;
             int[] vals = { specActive };
-            SetCommandToServer(156, vals);
+            SetCommandToServer(166, vals);
         }
 
         private void MFloorCallback(bool val)
