@@ -33,6 +33,7 @@ namespace Android_Silver.Entities.Visual
         ConfigPage,
         RecupCurrentPage,
         ThmHSettingsPage,
+        ControllerCheckPage,
         LoadingPage
     }
 
@@ -330,7 +331,20 @@ namespace Android_Silver.Entities.Visual
             set
             {
                 _isThmHSettingsPage = value;
-                OnPropertyChanged(nameof(_isThmHSettingsPage));
+                OnPropertyChanged(nameof(IsThmHSettingsPage));
+            }
+        }
+
+
+        private bool _isControllerCheckPage;
+
+        public bool IsControllerCheckPage
+        {
+            get { return _isControllerCheckPage; }
+            set
+            {
+                _isControllerCheckPage = value;
+                OnPropertyChanged(nameof(IsControllerCheckPage));
             }
         }
 
@@ -373,6 +387,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.EntryPage:
@@ -400,6 +415,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.MainMenuPage:
@@ -427,6 +443,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.BaseSettingsPage:
@@ -455,6 +472,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.ConfigPage:
@@ -492,6 +510,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.CommonSettingsPage:
@@ -519,6 +538,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[1].Name;
                         // _menuEntities.
                         _menusEntities.StartMenuCollection[1].StrSetsCollection[0].CVal = _fbs.CCommonSetPoints.SPTempAlarm.Value;
@@ -590,6 +610,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.FanSettingsPage:
@@ -631,6 +652,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.WHSettingsPage:
@@ -676,6 +698,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.EHSettingsPage:
@@ -710,6 +733,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.FreonSettingsPage:
@@ -745,6 +769,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.RecupSettingsPage:
@@ -785,6 +810,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.HumSettingsPage:
@@ -820,6 +846,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.SensorsSettingPage:
@@ -866,6 +893,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.TmhSettingsPage:
@@ -893,12 +921,13 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[10].Name;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[0].CPickVal = _fbs.SupCalibrateThm.FanControlType.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.TempH1.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.TempC1.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.TempH2.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempC2.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.CSensors.TempH1.Value.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.CSensors.TempC1.Value.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.CSensors.TempH2.Value.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.CSensors.TempC2.Value.Value;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.SupDeltaTime.Value;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.EDeltaTime.Value;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.SupPTa.Value;
@@ -940,6 +969,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                     }
                     break;
                 case SActivePageState.MBRecupSettingsPage:
@@ -967,6 +997,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[11].Name;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[0].CPickVal = _fbs.MbRecSPs.MBRecMode;
                         _menusEntities.StartMenuCollection[11].StrSetsCollection[1].CPickVal = _fbs.MbRecSPs.IsRotTest1;
@@ -1010,6 +1041,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[12].Name;
                         _menusEntities.StartMenuCollection[12].StrSetsCollection[0].CVal = _modesEntities.Mode1ValuesList[6].SupMinVal;
                         _menusEntities.StartMenuCollection[12].StrSetsCollection[2].CVal = _modesEntities.Mode1ValuesList[6].SupMaxVal;
@@ -1046,6 +1078,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = false;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[13].Name;
 
                         _menusEntities.StartMenuCollection[13].StrSetsCollection[0].CPickVal = _fbs.SupCalibrateThm.CalibrateMode.Value;
@@ -1115,6 +1148,7 @@ namespace Android_Silver.Entities.Visual
                         IsRecupCurrentPage = true;
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
+                        IsControllerCheckPage = false;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[14].Name;
                         _menusEntities.StartMenuCollection[14].StrSetsCollection[0].CVal = _fbs.CRecup.RecProfiles[0].I_Start.Value;
                         _menusEntities.StartMenuCollection[14].StrSetsCollection[1].CVal = _fbs.CRecup.RecProfiles[0].I_Cont.Value;
@@ -1157,6 +1191,45 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[14].StrSetsCollection[38].CVal = _fbs.CRecup.RecProfiles[9].Kp.Value;
                         _menusEntities.StartMenuCollection[14].StrSetsCollection[39].CVal = _fbs.CRecup.RecProfiles[9].Ki.Value;
                         _menusEntities.GenerateInterfaceTable(14);
+                    }
+                    break;
+                case SActivePageState.ControllerCheckPage:
+                    {
+                        IsThmCalibratePage = false;
+                        IsSpecModeSettingsPage = false;
+                        IsFBSettingsPage = true;
+                        IsMBRecupSettingsPage = false;
+                        IsLoadingPage = false;
+                        IsConfigPage = false;
+                        IsSensorsSettingsPage = false;
+                        IsHumSettingsPage = false;
+                        IsRecupSettingsPage = false;
+                        IsEHSettingsPage = false;
+                        IsWHSettingsPage = false;
+                        IsFanSettingsPage = false;
+                        IsDamperSettingsPage = false;
+                        IsCommonSettingsPage = false;
+                        IsBaseSettingsPage = false;
+                        IsMainMenuPage = false;
+                        IsEntryPage = false;
+                        IsStartPage = false;
+                        IsFreonSettingsPage = false;
+                        IsTmhSettingsPage = false;
+                        IsFiltersSettingsPage = false;
+                        IsRecupCurrentPage = true;
+                        IsTConstThmPage = false;
+                        IsThmHSettingsPage = false;
+                        IsControllerCheckPage = true;
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[15].Name;
+                        _menusEntities.StartMenuCollection[15].StrSetsCollection[0].CVal = _fbs.CSensors.OutdoorTemp.Value.Value;
+                        _menusEntities.StartMenuCollection[15].StrSetsCollection[1].CVal = _fbs.CSensors.SupTemp.Value.Value;
+                        _menusEntities.StartMenuCollection[15].StrSetsCollection[2].CVal = _fbs.CSensors.RoomTemp.Value.Value;
+                        _menusEntities.StartMenuCollection[15].StrSetsCollection[3].CVal = _fbs.CSensors.TempH1.Value.Value;
+                        _menusEntities.StartMenuCollection[15].StrSetsCollection[4].CVal = _fbs.CSensors.TempC1.Value.Value;
+                        _menusEntities.StartMenuCollection[15].StrSetsCollection[5].CVal = _fbs.CSensors.TempH2.Value.Value;
+                        _menusEntities.StartMenuCollection[15].StrSetsCollection[6].CVal = _fbs.CSensors.TempC2.Value.Value;
+                        _menusEntities.StartMenuCollection[15].StrSetsCollection[7].CVal = _fbs.CSensors.ReturnTemp.Value.Value;
+                        _menusEntities.GenerateInterfaceTable(15);
                     }
                     break;
             }

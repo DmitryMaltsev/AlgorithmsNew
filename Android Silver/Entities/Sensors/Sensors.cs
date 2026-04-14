@@ -1,4 +1,5 @@
-﻿using Android_Silver.ViewModels;
+﻿using Android_Silver.Entities.ValuesEntities;
+using Android_Silver.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,10 @@ namespace Android_Silver.Entities.Srs
         Sensor HumiditySensor { get; set; }
         Sensor AirQualitySensor { get; set; }
 
+        public TempSenor TempH1;
+        public TempSenor TempC1;
+        public TempSenor TempH2;
+        public TempSenor TempC2;
 
         public Sensors()
         {
@@ -28,6 +33,11 @@ namespace Android_Silver.Entities.Srs
             ReturnTemp = new TempSenor(-150, 150, 1);
             HumiditySensor = new Sensor(0,100,1);   
             AirQualitySensor = new Sensor(0,100,1);
+
+            TempH1 = new TempSenor(-100, 120, 1);
+            TempC1 = new TempSenor(-100, 120, 1);
+            TempH2 = new TempSenor(-100, 120, 1);
+            TempC2 = new TempSenor(-100, 120, 1);
         }
 
     }

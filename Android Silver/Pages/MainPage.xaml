@@ -215,7 +215,7 @@
             <Setter Property="Grid.RowSpan" Value="1"/>
             <Setter Property="BorderWidth" Value="0"/>
         </Style>
-        <Style TargetType="Label" x:Key="OterSettingsLabel">
+        <Style TargetType="Label" x:Key="OtherSettingsLabel">
             <Setter Property="TextColor" Value="White" />
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalOptions" Value="Center" />
@@ -594,10 +594,10 @@
                                                                        IsVisible = "{Binding  CActivePagesEntities.IsSetPointsPage}"/>
             <!--#endregion-->
             <!--#region Корректировка притока -->
-            <Label Text="Корректировка притока" Grid.Row="11" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+            <Label Text="Корректировка притока" Grid.Row="11" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             <Image Grid.Row="11" Grid.Column="8"  Style="{StaticResource OtherSettingsImg}"  Source="{Binding CPictureSet.ContactBackGround}"  
                                                                      IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}" />
-            <Label Text='{Binding  M1Values.SFanCorr.Value}' Grid.Row="11" Grid.RowSpan="1" Grid.Column="11"  Grid.ColumnSpan="3" Style="{StaticResource OterSettingsLabel}" 
+            <Label Text='{Binding  M1Values.SFanCorr.Value}' Grid.Row="11" Grid.RowSpan="1" Grid.Column="11"  Grid.ColumnSpan="3" Style="{StaticResource OtherSettingsLabel}" 
                                                                             IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             <Button Grid.Row="11" Grid.Column="9" Style="{StaticResource OtherSettingsArrBut}" 
                Command="{Binding SFanLeftCommand}" ImageSource="{Binding CPictureSet.SFanCorrLeftBut.Current}"
@@ -607,11 +607,11 @@
                Pressed="SFanCorrRight_Pressed" Released="SFanCorrRight_Released" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             <!--#endregion-->
             <!--#region Корректировка вытяжки -->
-            <Label Text="Корректировка вытяжки" Grid.Row="13" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
+            <Label Text="Корректировка вытяжки" Grid.Row="13" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
             <Image Grid.Row="13" Grid.Column="8"  Style="{StaticResource OtherSettingsImg}"  Source="{Binding CPictureSet.ContactBackGround}"  
                                                             IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}" />
 
-            <Label Text='{Binding  M1Values.EFanCorr.Value}' Grid.Row="13" Grid.RowSpan="1" Grid.Column="11"  Grid.ColumnSpan="3" Style="{StaticResource OterSettingsLabel}" 
+            <Label Text='{Binding  M1Values.EFanCorr.Value}' Grid.Row="13" Grid.RowSpan="1" Grid.Column="11"  Grid.ColumnSpan="3" Style="{StaticResource OtherSettingsLabel}" 
                                                                  IsVisible = "{Binding   CActivePagesEntities.IsSetPointsPage}"/>
 
             <Button Grid.Row="13" Grid.Column="9" Style="{StaticResource OtherSettingsArrBut}" 
@@ -812,16 +812,16 @@
                                                                                         IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}" />
             <!--#endregion-->
             <!--#region Замена -->
-            <!--<Label Text="Замена фильтра" Grid.Row="5" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
+            <!--<Label Text="Замена фильтра" Grid.Row="5" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <Label Text="Заменить" Grid.Row="5" Grid.Column="8"
-                   Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
+                   Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <Button  Grid.Row="5" Grid.Column="8" Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.FilterChangedBut.Current}"  
              Command="{Binding ChangeFilterCommand}" Pressed="FilterChanged_Pressed" Released="FilterChanged_Released" 
                                                                                                         IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>-->
             <!--#endregion-->
 
             <!--#region По контакту -->
-            <Label Text="Режим по контакту" Grid.Row="5" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
+            <Label Text="Режим по контакту" Grid.Row="5" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <Image Grid.Row="5" Grid.Column="8"  Style="{StaticResource OtherSettingsImg}"  Source="{Binding CPictureSet.ContactBackGround}"  
                                                                              IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}" />
 
@@ -838,42 +838,42 @@
             <!--#endregion-->
 
             <!--#region Настройка времени -->
-            <Label Text="Настроить время" Grid.Row="7" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
-            <Label Text="Настроить" Grid.Row="7" Grid.Column="8" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
+            <Label Text="Настроить время" Grid.Row="7" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
+            <Label Text="Настроить" Grid.Row="7" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <Button Grid.Row="7" Grid.Column="8" Command="{Binding SetTimeCommand}" Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.TimeBut.Current}" 
              Pressed="Time_Pressed" Released="Time_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <!--#endregion-->
 
             <!--#region Спецрежим -->
-            <Label Text="Спецрежим работы установки" Grid.Row="9" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
+            <Label Text="Спецрежим работы установки" Grid.Row="9" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <Switch Grid.Row="9" Grid.Column="12"    Grid.ColumnSpan="2"  IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"
                     IsToggled="{Binding  CFBs.OtherSettings.IsSpecMode, Mode=TwoWay}"/>
             <!--#endregion-->
 
             <!--#region Настройка влажности -->
-            <Label Text="Уставка влажности" Grid.Row="13" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
-            <Label Text="{Binding CFBs.CHumiditySPS.HumiditySP,StringFormat='{0}%'}" Grid.Row="13" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
+            <Label Text="Уставка влажности" Grid.Row="13" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
+            <Label Text="{Binding CFBs.CHumiditySPS.HumiditySP,StringFormat='{0}%'}" Grid.Row="13" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
                                                                                                     IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <Button Grid.Row="13" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.HumidityBut.Current}" Command="{Binding HumidityCommand}"
              Pressed="Humidity_Pressed" Released="Humidity_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <!--#endregion-->
 
             <!--#region Обновление прошивки контроллера -->
-            <Label Text="{Binding CFilesEntities.SystemMessage}" Grid.Row="15"  Style="{StaticResource OterSettingsLabel}"
+            <Label Text="{Binding CFilesEntities.SystemMessage}" Grid.Row="15"  Style="{StaticResource OtherSettingsLabel}"
                                                                     IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
-            <Label Text="Загрузить .bin" Grid.Row="15" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
+            <Label Text="Загрузить .bin" Grid.Row="15" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
                                                                               IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <Button Grid.Row="15" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.DownloadBut.Current}" Command="{Binding DownloadCommand}"
                                   Pressed="Download_Pressed" Released="Download_Released"  IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" 
                             IsEnabled="{Binding CFBs.CUpdater.NotIsUpdate}">
 
             </Button>
-            <Label Text="Копирование прошивки на контроллер" Grid.Row="17" Style="{StaticResource OterSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
-            <Label Text="Копировать" Grid.Row="17" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
+            <Label Text="Копирование прошивки на контроллер" Grid.Row="17" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
+            <Label Text="Копировать" Grid.Row="17" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
                                                                                                     IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <Button Grid.Row="17" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.UpdaterBut.Current}" Command="{Binding UpdateCommand}"
              Pressed="Updater_Pressed" Released="Updater_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
-            <Label Text="{Binding  CFBs.CUpdater.ResultPackets}" Grid.Row="18" Grid.Column="8" Style="{StaticResource OterSettingsLabel}"
+            <Label Text="{Binding  CFBs.CUpdater.ResultPackets}" Grid.Row="18" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
                                                                                                         IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <!--#endregion-->
 

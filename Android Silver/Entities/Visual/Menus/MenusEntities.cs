@@ -1,5 +1,6 @@
 ﻿using Android_Silver.Entities.FBEntities;
 using Android_Silver.ViewModels;
+
 using System.Collections.ObjectModel;
 
 namespace Android_Silver.Entities.Visual.Menus
@@ -55,8 +56,8 @@ namespace Android_Silver.Entities.Visual.Menus
         public int ETH_RECUP_CURRENTSETTINGS_ADDR;
         public int ETH_RECUP_CURRENTSETTINGS_LENGTH;
 
-        public int ETH_THMH_SETTINGS_ADDR;
-        public int ETH_THMH_SETTINGS_LENGTH;
+        public int ETH_CONTROLLER_CHECK_ADDR;
+        public int ETH_CONTROLLER_CHECK_LENGTH;
 
         //Основная таблица 
         public List<MItem> StartMenuCollection { get; set; }
@@ -162,8 +163,8 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_TCONST_LENGTH = 18;
             ETH_RECUP_CURRENTSETTINGS_ADDR = ETH_TCONST_THM_ADDR + ETH_TCONST_LENGTH;
             ETH_RECUP_CURRENTSETTINGS_LENGTH = 40;
-            ETH_THMH_SETTINGS_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
-            ETH_THMH_SETTINGS_LENGTH = 16;
+            ETH_CONTROLLER_CHECK_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
+            ETH_CONTROLLER_CHECK_LENGTH = 10;
             InterfaceStrCollection = new ObservableCollection<StrSet>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             StartMenuCollection = new List<MItem>();
@@ -197,6 +198,8 @@ namespace Android_Silver.Entities.Visual.Menus
             mItem = new MItem("Калибровка термоанемоетров", isVisible: true, _pictureSet.BaseSettings1ButCollection[13], SActivePageState.ThmCalibratePage, id: 14, startAddress: ETH_CALIBRATE_THM_ADDR);
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Настройка профилей шаг мотора", isVisible: true, _pictureSet.BaseSettings1ButCollection[14], SActivePageState.RecupCurrentPage, id: 15, startAddress: ETH_RECUP_CURRENTSETTINGS_ADDR);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Проверка работы контроллера", isVisible: true, _pictureSet.BaseSettings1ButCollection[15], SActivePageState.ControllerCheckPage, id: 16, startAddress: ETH_CONTROLLER_CHECK_ADDR);
             StartMenuCollection.Add(mItem);
             #endregion
             #region Конфигурация
@@ -922,6 +925,42 @@ namespace Android_Silver.Entities.Visual.Menus
                 valScale: _fbEntities.CRecup.RecProfiles[9].Ki.NumChr, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[14].StrSetsCollection = strSets;
+            #endregion
+            #region Проверка контроллера
+            strSets = new ObservableCollection<StrSet>();
+            sSet = new StrSet(_fbEntities.CSensors.OutdoorTemp.Value.Min, _fbEntities.CSensors.OutdoorTemp.Value.Max,
+            "Темп. улицы", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+                 valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.SupTemp.Value.Min, _fbEntities.CSensors.SupTemp.Value.Max,
+            "Темп. канала", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+                valScale: _fbEntities.CSensors.SupTemp.Value.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.RoomTemp.Value.Min, _fbEntities.CSensors.RoomTemp.Value.Max,
+            "Темп. комнаты", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+             valScale: _fbEntities.CSensors.RoomTemp.Value.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.TempH1.Value.Min, _fbEntities.CSensors.TempH1.Value.Max,
+            "Темп. гор. датчика притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+             valScale: _fbEntities.CSensors.TempH1.Value.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.TempC1.Value.Min, _fbEntities.CSensors.TempC1.Value.Max,
+            "Темп. хол. датчика притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: _fbEntities.CSensors.TempC1.Value.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.TempH2.Value.Min, _fbEntities.CSensors.TempH2.Value.Max,
+            "Темп. гор. датчика вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: _fbEntities.CSensors.TempH2.Value.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.TempC2.Value.Min, _fbEntities.CSensors.TempC2.Value.Max,
+            "Темп. хол. датчика вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: _fbEntities.CSensors.TempC2.Value.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.ReturnTemp.Value.Min, _fbEntities.CSensors.ReturnTemp.Value.Max,
+            "Темп. обр. воды", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+           valScale: _fbEntities.CSensors.ReturnTemp.Value.NumChr, pickVals);
+            strSets.Add(sSet);
+            StartMenuCollection[15].StrSetsCollection = strSets;
             #endregion
         }
     }

@@ -19,10 +19,7 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue ExhaustCurveKoef;
         public FloatValue SupPTa;
         public FloatValue EPTa;
-        public FloatValue TempH1;
-        public FloatValue TempC1;
-        public FloatValue TempH2;
-        public FloatValue TempC2;
+       
         public IntValue PTaReg;
         public IntValue ITaReg;
         public IntValue DTaReg;
@@ -67,10 +64,7 @@ namespace Android_Silver.Entities.FBEntities
             KPolKoef = new FloatValue(-99, 99, 2);
             BPolKoef = new FloatValue(-99, 99, 2);
 
-            TempH1 = new FloatValue(-100, 120, 1);
-            TempC1 = new FloatValue(-100, 120, 1);
-            TempH2 = new FloatValue(-100, 120, 1);
-            TempC2 = new FloatValue(-100, 120, 1);
+         
             SupDeltaTime = new FloatValue(0, 100, 1);
             EDeltaTime = new FloatValue(0, 100, 1);
             SupKCold = new FloatValue(-322, 322, 2);

@@ -2342,22 +2342,22 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.ThmSps.TempH1, value, ref startIndex);
+                GetFloatValueResult(_fbs.CSensors.TempH1.Value, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.ThmSps.TempC1, value, ref startIndex);
+                GetFloatValueResult(_fbs.CSensors.TempC1.Value, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 3 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.ThmSps.TempH2, value, ref startIndex);
+                GetFloatValueResult(_fbs.CSensors.TempH2.Value, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.ThmSps.TempC2, value, ref startIndex);
+                GetFloatValueResult(_fbs.CSensors.TempC2.Value, value, ref startIndex);
 
 
                 return startIndex;
@@ -2382,10 +2382,10 @@ namespace Android_Silver.Services
                 GetFloatValueResult(_fbs.ThmSps.EPTa, value, ref startIndex);
                 if (_menusEntities.StartMenuCollection.Count > 8 && _servActivePageEntities.LastActivePageState == SActivePageState.TmhSettingsPage)
                 {
-                    _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.ThmSps.TempH1.Value;
-                    _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.ThmSps.TempC1.Value;
-                    _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.ThmSps.TempH2.Value;
-                    _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.ThmSps.TempC2.Value;
+                    _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.CSensors.TempH1.Value.Value;
+                    _menusEntities.StartMenuCollection[10].StrSetsCollection[2].CVal = _fbs.CSensors.TempC1.Value.Value;
+                    _menusEntities.StartMenuCollection[10].StrSetsCollection[3].CVal = _fbs.CSensors.TempH2.Value.Value;
+                    _menusEntities.StartMenuCollection[10].StrSetsCollection[4].CVal = _fbs.CSensors.TempC2.Value.Value;
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[5].CVal = _fbs.ThmSps.SupDeltaTime.Value;
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.EDeltaTime.Value;
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.SupPTa.Value;

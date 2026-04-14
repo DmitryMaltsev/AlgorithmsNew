@@ -774,9 +774,6 @@ namespace Android_Silver.Pages
             HumiditySP = CFBs.CHumiditySPS.HumiditySP;
         }
 
-
-
-
         private void ExecuteUpdate(object obj)
         {
             bool isRequiredState = CModesEntities.CMode1.Num == 0 || CModesEntities.CMode1.Num == 7;
