@@ -61,6 +61,9 @@ namespace Android_Silver.Entities.Visual.Menus
                 OnPropertyChanged(nameof(ImgSource));
             }
         }
+
+
+
         #endregion
 
 

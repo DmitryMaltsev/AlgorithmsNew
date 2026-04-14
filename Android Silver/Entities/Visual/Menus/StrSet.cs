@@ -133,8 +133,20 @@ namespace Android_Silver.Entities.Visual.Menus
         }
 
 
+        private bool _switchIsActive;
 
-        public StrSet(float minVal, float maxVal, string name, bool isVisible, bool pickerIsVisible, bool entryIsVisible, bool isEnabled, byte valScale, List<string> pickVals)
+        public bool SwitchIsActive
+        {
+            get { return _switchIsActive; }
+            set
+            {
+                _switchIsActive = value;
+                OnPropertyChanged(nameof(SwitchIsActive));
+            }
+        }
+
+
+        public StrSet(float minVal, float maxVal, string name, bool isVisible, bool pickerIsVisible, bool entryIsVisible, bool isEnabled, byte valScale, List<string> pickVals, bool switchIsActive=false)
         {
             PickVals = pickVals;
             CPickVal = 0;
@@ -146,6 +158,7 @@ namespace Android_Silver.Entities.Visual.Menus
             EntryIsVisible = entryIsVisible;
             IsEnabled = isEnabled;
             ValScale = valScale;
+            SwitchIsActive= switchIsActive;
         }
 
     }

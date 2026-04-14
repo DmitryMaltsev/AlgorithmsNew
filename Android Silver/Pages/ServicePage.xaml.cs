@@ -8,7 +8,7 @@ public partial class ServicePage : ContentPage
     ServicePageViewModel _servicePageViewModel;
 	public ServicePage()
 	{
-		InitializeComponent();
+        InitializeComponent();
         _servicePageViewModel = new ServicePageViewModel();
         BindingContext = _servicePageViewModel;
     }

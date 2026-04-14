@@ -230,13 +230,13 @@ namespace Android_Silver.Entities.Visual.Menus
             pickVals = new List<string>() { "Канал", "Комната" };
             sSet = new StrSet(_fbEntities.CCommonSetPoints.SPTempAlarm.Min, _fbEntities.CCommonSetPoints.SPTempAlarm.Max, "Уставка аварийной темп, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CCommonSetPoints.SPTempAlarm.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1, "Регулирование темп. по", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Регулирование темп. по", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CCommonSetPoints.SPTempMaxCh.Min, _fbEntities.CCommonSetPoints.SPTempMaxCh.Max, "Уставка темп.кан.макс.,°C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CCommonSetPoints.SPTempMaxCh.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CCommonSetPoints.SPTempMinCh.Min, _fbEntities.CCommonSetPoints.SPTempMinCh.Max, "Уставка темп. кан. мин.,°C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CCommonSetPoints.SPTempMinCh.NumChr, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Задержка аварии по темп, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65535, "Задержка аварии по темп, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Авто", "Зима", "Лето" };
             sSet = new StrSet(_fbEntities.CCommonSetPoints.SeasonMode.Min, _fbEntities.CCommonSetPoints.SeasonMode.Max, "Тип регулирования времени года", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: _fbEntities.CCommonSetPoints.SeasonMode.NumChr, pickVals);
@@ -325,27 +325,27 @@ namespace Android_Silver.Entities.Visual.Menus
             pickVals = new List<string>() { "Откл", "Вкл" };
             //sSet = new StrSet(0, 1, "Вентилятор вытяжки", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             //strStes.Add(sSet);
-            sSet = new StrSet(0, 100000, "Номин.расход вент. прит, м3/ч", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100000, "Номин.расход вент. прит, м3/ч", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100000, "Номин.расход вент. вытяжки, м3/ч", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100000, "Номин.расход вент. вытяжки, м3/ч", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Нижняя граница запрета, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Нижняя граница запрета, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Верхняя граница запрета, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Верхняя граница запрета, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65000, "Задержка контроля давления, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65000, "Задержка контроля давления, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65000, "Задержка контроля аварии вентилятора, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65000, "Задержка контроля аварии вентилятора, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1, "Функция снижения оборотов", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Функция снижения оборотов", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1000, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1000, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1000, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1000, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1000, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1000, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals,false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Минимальный % вент", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Минимальный % вент", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CFans.EffFanTempSP.Min, _fbEntities.CFans.EffFanTempSP.Max, "Уставка темп регулирования по КПД", isVisible: true, pickerIsVisible: false,
                             entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CFans.EffFanTempSP.NumChr, pickVals);
@@ -355,114 +355,114 @@ namespace Android_Silver.Entities.Visual.Menus
             #region WHHeater
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
-            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора (работа)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора (работа)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора (работа)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора (работа)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора (работа)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора (работа)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора (огран)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора (огран)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора (огран)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора (огран)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора (огран)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора (огран)", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Max. темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 100, "Max. темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Min. темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 100, "Min. темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Дежурная темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 100, "Дежурная темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Авар. темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 100, "Авар. темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Пусковая темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 100, "Пусковая темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
             // не отображаем, потом потом удалить
-            sSet = new StrSet(0, 100, "Пусковая темп. обратной воды2, °C", isVisible: false, pickerIsVisible: false, entryIsVisible: false, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 100, "Пусковая темп. обратной воды2, °C", isVisible: false, pickerIsVisible: false, entryIsVisible: false, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65_000, "Время мягкого пуска, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65_000, "Время мягкого пуска, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Минимальный % КЗР", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Минимальный % КЗР", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Температура 'зимних процедур'", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 100, "Температура 'зимних процедур'", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals,false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1, "Проба насоса летом", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Проба насоса летом", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             StartMenuCollection[4].StrSetsCollection = strSets;
             #endregion 
             #region EHHeater
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
-            sSet = new StrSet(0, 65535, "Мощность нагревателя, Вт", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65535, "Мощность нагревателя, Вт", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals,false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Время продувки, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65535, "Время продувки, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             StartMenuCollection[5].StrSetsCollection = strSets;
             #endregion
             #region FreonCooler
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
-            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Задержка включения ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65535, "Задержка включения ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Минимальное время работы ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65535, "Минимальное время работы ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "Гистерезис вкл/выкл фреонового охладителя", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "Гистерезис вкл/выкл фреонового охладителя", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             StartMenuCollection[6].StrSetsCollection = strSets;
             #endregion
             #region Recup
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
-            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CRecup.TEffSP.Min, _fbEntities.CRecup.TEffSP.Max, "Граница темп. авар. КПД, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TEffSP.NumChr, pickVals);
+            sSet = new StrSet(_fbEntities.CRecup.TEffSP.Min, _fbEntities.CRecup.TEffSP.Max, "Граница темп. авар. КПД, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TEffSP.NumChr, pickVals,false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Аварийный КПД, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Аварийный КПД, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Задержка контроля КПД, мин", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65535, "Задержка контроля КПД, мин", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Максимальная частота, Гц", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Максимальная частота, Гц", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CRecup.TempA.Min, _fbEntities.CRecup.TempA.Max, "Температура А, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempA.NumChr, pickVals);
+            sSet = new StrSet(_fbEntities.CRecup.TempA.Min, _fbEntities.CRecup.TempA.Max, "Температура А, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempA.NumChr, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CRecup.TempB.Min, _fbEntities.CRecup.TempB.Max, "Температура В, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempB.NumChr, pickVals);
+            sSet = new StrSet(_fbEntities.CRecup.TempB.Min, _fbEntities.CRecup.TempB.Max, "Температура В, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempB.NumChr, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CRecup.TempC.Min, _fbEntities.CRecup.TempC.Max, "Температура C, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempC.NumChr, pickVals);
+            sSet = new StrSet(_fbEntities.CRecup.TempC.Min, _fbEntities.CRecup.TempC.Max, "Температура C, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempC.NumChr, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CRecup.TempD.Min, _fbEntities.CRecup.TempD.Max, "Температура D, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempD.NumChr, pickVals);
+            sSet = new StrSet(_fbEntities.CRecup.TempD.Min, _fbEntities.CRecup.TempD.Max, "Температура D, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempD.NumChr, pickVals, false);
             strSets.Add(sSet);
             StartMenuCollection[7].StrSetsCollection = strSets;
             #endregion
             #region Humidity 
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
-            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Задержка включения ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65535, "Задержка включения ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Минимальное. время работы ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65535, "Минимальное. время работы ступени, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "Гистерезис вкл/выкл увлажнителя", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, PidMaxVal, "Гистерезис вкл/выкл увлажнителя", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             StartMenuCollection[8].StrSetsCollection = strSets;
             #endregion
@@ -544,68 +544,68 @@ namespace Android_Silver.Entities.Visual.Menus
                 isEnabled: true, valScale: _fbEntities.ThmSps.SupBCold.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ThmSps.EKCold.Min, _fbEntities.ThmSps.EKCold.Max, "Коэф. K холодного Та вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
-                isEnabled: true, valScale: _fbEntities.ThmSps.EKCold.NumChr, pickVals);
+                isEnabled: true, valScale: _fbEntities.ThmSps.EKCold.NumChr, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ThmSps.EBCold.Min, _fbEntities.ThmSps.EBCold.Max, "Коэф. B холодного Та вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
-                isEnabled: true, valScale: _fbEntities.ThmSps.EBCold.NumChr, pickVals);
+                isEnabled: true, valScale: _fbEntities.ThmSps.EBCold.NumChr, pickVals,false);
             strSets.Add(sSet);
             StartMenuCollection[10].StrSetsCollection = strSets;
             #endregion
             #region Modbus рекуператор
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "SR_OPEN", "SR_Close", "SR_vFoc" };
-            sSet = new StrSet(0, 2, "Режим работы", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 2, "Режим работы", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals,false);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Да" };
-            sSet = new StrSet(0, 1, "Тест вращения 1", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Тест вращения 1", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals,false);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Да" };
-            sSet = new StrSet(0, 1, "Тест вращения 2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Тест вращения 2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Пр часовой", "По часовой" };
-            sSet = new StrSet(0, 1, "Направление вращения 1", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Направление вращения 1", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Пр часовой", "По часовой" };
-            sSet = new StrSet(0, 1, "Направление вращения 2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Направление вращения 2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Да" };
-            sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals,false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10_000, "Номинальный ток, ма", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 10_000, "Номинальный ток, ма", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(0, 100, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Номин. обороты 1, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Номин. обороты 1, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Номин. обороты 2, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Номин. обороты 2, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(-70, 70, "Темп для номинала 1, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(-70, 70, "Темп для номинала 1, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(-70, 70, "Темп для номинала 2, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals);
+            sSet = new StrSet(-70, 70, "Темп для номинала 2, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 10_000, "Притирочный ток, мА", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 10_000, "Притирочный ток, мА", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Притирочные обороты, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Притирочные обороты, об в мин.", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             StartMenuCollection[11].StrSetsCollection = strSets;
             #endregion
             #region Спец режим 
             strSets = new ObservableCollection<StrSet>();
-            sSet = new StrSet(0, 100, "Минимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Минимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Текущая производительность притока", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Текущая производительность притока", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: false, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Максимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Максимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals,false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Минимальная производительность вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Минимальная производительность вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Текущая производительность вытяжки", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Текущая производительность вытяжки", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals,false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Максимальная производительность вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Максимальная производительность вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 40, "Уставка температуры", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 40, "Уставка температуры", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Ограничение мощности", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 100, "Ограничение мощности", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             StartMenuCollection[12].StrSetsCollection = strSets;
             #endregion
@@ -930,35 +930,35 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets = new ObservableCollection<StrSet>();
             sSet = new StrSet(_fbEntities.CSensors.OutdoorTemp.Value.Min, _fbEntities.CSensors.OutdoorTemp.Value.Max,
             "Темп. улицы", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-                 valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals);
+                 valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals,true);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.SupTemp.Value.Min, _fbEntities.CSensors.SupTemp.Value.Max,
             "Темп. канала", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-                valScale: _fbEntities.CSensors.SupTemp.Value.NumChr, pickVals);
+                valScale: _fbEntities.CSensors.SupTemp.Value.NumChr, pickVals, true);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.RoomTemp.Value.Min, _fbEntities.CSensors.RoomTemp.Value.Max,
             "Темп. комнаты", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-             valScale: _fbEntities.CSensors.RoomTemp.Value.NumChr, pickVals);
+             valScale: _fbEntities.CSensors.RoomTemp.Value.NumChr, pickVals, true);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.TempH1.Value.Min, _fbEntities.CSensors.TempH1.Value.Max,
             "Темп. гор. датчика притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-             valScale: _fbEntities.CSensors.TempH1.Value.NumChr, pickVals);
+             valScale: _fbEntities.CSensors.TempH1.Value.NumChr, pickVals, true);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.TempC1.Value.Min, _fbEntities.CSensors.TempC1.Value.Max,
             "Темп. хол. датчика притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.TempC1.Value.NumChr, pickVals);
+            valScale: _fbEntities.CSensors.TempC1.Value.NumChr, pickVals, true);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.TempH2.Value.Min, _fbEntities.CSensors.TempH2.Value.Max,
             "Темп. гор. датчика вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.TempH2.Value.NumChr, pickVals);
+            valScale: _fbEntities.CSensors.TempH2.Value.NumChr, pickVals, true);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.TempC2.Value.Min, _fbEntities.CSensors.TempC2.Value.Max,
             "Темп. хол. датчика вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.TempC2.Value.NumChr, pickVals);
+            valScale: _fbEntities.CSensors.TempC2.Value.NumChr, pickVals, true);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.ReturnTemp.Value.Min, _fbEntities.CSensors.ReturnTemp.Value.Max,
             "Темп. обр. воды", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-           valScale: _fbEntities.CSensors.ReturnTemp.Value.NumChr, pickVals);
+           valScale: _fbEntities.CSensors.ReturnTemp.Value.NumChr, pickVals, true);
             strSets.Add(sSet);
             StartMenuCollection[15].StrSetsCollection = strSets;
             #endregion
