@@ -786,6 +786,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[7].StrSetsCollection[8].CVal = _fbs.CRecup.TempB.Value;
                         _menusEntities.StartMenuCollection[7].StrSetsCollection[9].CVal = _fbs.CRecup.TempC.Value;
                         _menusEntities.StartMenuCollection[7].StrSetsCollection[10].CVal = _fbs.CRecup.TempD.Value;
+                        _menusEntities.StartMenuCollection[7].StrSetsCollection[11].CVal = _fbs.CRecup.RecInMeasureTrh.Value;
                         _menusEntities.GenerateInterfaceTable(7);
                         IsRecupSettingsPage = true;
                         IsFBSettingsPage = true;
@@ -932,15 +933,17 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.EDeltaTime.Value;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.SupPTa.Value;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.EPTa.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.ITaReg.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[10].CVal = _fbs.ThmSps.KPolKoef.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[11].CVal = _fbs.ThmSps.BPolKoef.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[12].CVal = _fbs.ThmSps.KClKoef.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[13].CVal = _fbs.ThmSps.BClKoef.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[14].CVal = _fbs.ThmSps.SupKCold.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[15].CVal = _fbs.ThmSps.SupBCold.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[16].CVal = _fbs.ThmSps.EKCold.Value;
-                        _menusEntities.StartMenuCollection[10].StrSetsCollection[17].CVal = _fbs.ThmSps.EBCold.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.FailMeasureCount.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[10].CVal = _fbs.ThmSps.ITaReg.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[11].CVal = _fbs.ThmSps.KPolKoef.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[12].CVal = _fbs.ThmSps.BPolKoef.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[13].CVal = _fbs.ThmSps.KClKoef.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[14].CVal = _fbs.ThmSps.BClKoef.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[15].CVal = _fbs.ThmSps.SupKCold.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[16].CVal = _fbs.ThmSps.SupBCold.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[17].CVal = _fbs.ThmSps.EKCold.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[18].CVal = _fbs.ThmSps.EBCold.Value;
+
                         _menusEntities.GenerateInterfaceTable(10);
                     }
                     break;

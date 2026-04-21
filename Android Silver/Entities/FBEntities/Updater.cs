@@ -87,7 +87,7 @@ namespace Android_Silver.Entities.FBEntities
         public char[,] UseCharData;
         public StringBuilder FileContent;
         public List<StringBuilder> FileContentList;
-        public int HexSize = 1024;
+        public int HexSize = 512;//1024;
         public int BinSize;
         PicturesSet _pictureSet;
         public Updater()

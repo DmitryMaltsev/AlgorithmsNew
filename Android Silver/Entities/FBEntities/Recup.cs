@@ -48,6 +48,7 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue TempB;
         public FloatValue TempC;
         public FloatValue TempD;
+        public IntValue RecInMeasureTrh;
         public List<RecPrfofile> RecProfiles = new List<RecPrfofile>();
         public Recup()
         {
@@ -56,6 +57,7 @@ namespace Android_Silver.Entities.FBEntities
             TempB = new FloatValue(-50, 50, 1);
             TempC = new FloatValue(-50, 50, 1);
             TempD = new FloatValue(-50, 50, 1);
+            RecInMeasureTrh = new IntValue(0, 100);
         }
 
     }

@@ -975,6 +975,7 @@ namespace Android_Silver.Pages
         {
 
             CTcpClientService.Disconnect();
+            Task.Delay(200);
             var pickOptions = new PickOptions
             {
                 PickerTitle = "Выберите bin файл прошивки",
@@ -1036,7 +1037,6 @@ namespace Android_Silver.Pages
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
                     CTcpClientService.SendRecieveTask("0100,057");
-                    // TcpClientService.SendRecieveTask("137,4");ё
                 }
                 else
                 {
@@ -1275,7 +1275,7 @@ namespace Android_Silver.Pages
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
-        
+
         private void ExecuteTimeOk(object obj)
         {
             int[] vals = { _timeBuffer.Year, _timeBuffer.Month, _timeBuffer.Day, _timeBuffer.Hour, _timeBuffer.Minute };

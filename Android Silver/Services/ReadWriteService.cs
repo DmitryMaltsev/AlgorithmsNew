@@ -582,6 +582,8 @@ namespace Android_Silver.Services
                 if (buffer >= 0 && buffer <= 1)
                 {
                     _fbs.CUpdater.IsUpdate = (byte)buffer;
+
+
                 }
                 return startIndex;
             }
@@ -2221,6 +2223,11 @@ namespace Android_Silver.Services
 
                 return startIndex;
             }
+            if (startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 11 || startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
+            {
+                GetIntValueResult(_fbs.CRecup.RecInMeasureTrh, value, ref startIndex);
+                return startIndex;
+            }
             #endregion
 
             #region Корректировка датчиков
@@ -2380,6 +2387,12 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 GetFloatValueResult(_fbs.ThmSps.EPTa, value, ref startIndex);
+
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
+            {
+                GetIntValueResult(_fbs.ThmSps.FailMeasureCount, value, ref startIndex);
                 if (_menusEntities.StartMenuCollection.Count > 8 && _servActivePageEntities.LastActivePageState == SActivePageState.TmhSettingsPage)
                 {
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[1].CVal = _fbs.CSensors.TempH1.Value.Value;
@@ -2390,57 +2403,59 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[6].CVal = _fbs.ThmSps.EDeltaTime.Value;
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[7].CVal = _fbs.ThmSps.SupPTa.Value;
                     _menusEntities.StartMenuCollection[10].StrSetsCollection[8].CVal = _fbs.ThmSps.EPTa.Value;
+                    _menusEntities.StartMenuCollection[10].StrSetsCollection[9].CVal = _fbs.ThmSps.FailMeasureCount.Value;
                 }
                 return startIndex;
             }
 
-            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
+
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 GetIntValueResult(_fbs.ThmSps.ITaReg, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
             {
                 GetFloatValueResult(_fbs.ThmSps.KPolKoef, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
             {
                 GetFloatValueResult(_fbs.ThmSps.BPolKoef, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 13 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
             {
                 GetFloatValueResult(_fbs.ThmSps.KClKoef, value, ref startIndex);
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 13 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_fbs.ThmSps.BClKoef, value, ref startIndex);
-                if (_servActivePageEntities.IsLoadingPage)
-                {
-                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
-                }
-                return startIndex;
-            }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 14 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.ThmSps.SupKCold, value, ref startIndex);
+                GetFloatValueResult(_fbs.ThmSps.BClKoef, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 15 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.ThmSps.SupBCold, value, ref startIndex);
+                GetFloatValueResult(_fbs.ThmSps.SupKCold, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 16 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 16 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.ThmSps.EKCold, value, ref startIndex);
+                GetFloatValueResult(_fbs.ThmSps.SupBCold, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 17 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 17 + _menusEntities.WriteOffset)
             {
+                GetFloatValueResult(_fbs.ThmSps.EKCold, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 18 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 18 + _menusEntities.WriteOffset)
+            {
                 GetFloatValueResult(_fbs.ThmSps.EBCold, value, ref startIndex);
+                if (_servActivePageEntities.IsLoadingPage)
+                {
+                    _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
+                }
                 return startIndex;
             }
             #endregion

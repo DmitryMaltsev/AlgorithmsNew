@@ -257,7 +257,7 @@
                                     </Grid.ColumnDefinitions>
                                     <!--IsToggled="{Binding  CFBs.OtherSettings.IsSpecMode, Mode=TwoWay}"-->
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}" />
-                                    <Switch Grid.Row="5" Grid.Column="8"    Grid.ColumnSpan="3"  IsVisible = "{Binding SwitchIsActive}"/>
+                                    <Switch Grid.Row="5" Grid.Column="8"    Grid.ColumnSpan="3"  IsVisible = "{Binding SwitchIsActive}" Rotation="0"/>
                                     <Entry Grid.Row="5"  Grid.Column="12" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                       IsVisible = "{Binding EntryIsVisible}" IsEnabled="{Binding IsEnabled}"/>
                                     <Picker Grid.Row="5"  Grid.Column="12" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" IsEnabled="{Binding IsEnabled}"

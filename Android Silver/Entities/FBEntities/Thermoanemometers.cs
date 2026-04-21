@@ -39,6 +39,9 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue EBCold;
 
 
+        public IntValue FailMeasureCount;
+
+
         public ThermoanemometersSPS()
         {
             SupTHmKoefA = new FloatValue(-100_000, 100_000, 2);
@@ -71,6 +74,8 @@ namespace Android_Silver.Entities.FBEntities
             SupBCold = new FloatValue(-322, 322, 2);
             EKCold = new FloatValue(-322, 322, 2);
             EBCold = new FloatValue(-322, 322, 2);
+
+            FailMeasureCount = new IntValue(0, 100);
         }
 
     }

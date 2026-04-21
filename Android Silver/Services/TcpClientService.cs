@@ -232,7 +232,7 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage1:
                         {
                             //1 44 126
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 239 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 241 };
                             //messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -240,7 +240,7 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage2:
                         {
                             //1 170 121
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 239 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 241 };
                             //messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }

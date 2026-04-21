@@ -146,13 +146,13 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_HUM_SETTINGS_ADDR = ETH_FREON_SETTINGS_ADDR + ETH_FREON_SETTINGS_LENGTH;
             ETH_HUM_SETTINGS_LENGTH = 6;
             ETH_RECUP_SETTINGS_ADDR = ETH_HUM_SETTINGS_ADDR + ETH_HUM_SETTINGS_LENGTH;
-            ETH_RECUP_SETTINGS_LENGTH = 11;
+            ETH_RECUP_SETTINGS_LENGTH = 12;
             ETH_SENS_SETTINGS_ADDR = ETH_RECUP_SETTINGS_ADDR + ETH_RECUP_SETTINGS_LENGTH;
             ETH_SENS_SETTINGS_LENGTH = 5;
             ETH_CONFIG_SETTINGS_ADDR = ETH_SENS_SETTINGS_ADDR + ETH_SENS_SETTINGS_LENGTH;
             ETH_CONFIG_SETTINGS_LENGTH = 8;
             ETH_THM_SETTINGS_ADDR = ETH_CONFIG_SETTINGS_ADDR + ETH_CONFIG_SETTINGS_LENGTH;
-            ETH_THM_SETTINGS_LENGTH = 18;
+            ETH_THM_SETTINGS_LENGTH = 19;
             ETH_MBRECUP_SETTINGS_ADDR = ETH_THM_SETTINGS_ADDR + ETH_THM_SETTINGS_LENGTH;
             ETH_MBRECUP_SETTINGS_LENGTH = 14;
             ETH_SPECMODE_SETTINGS_ADDR = ETH_MBRECUP_SETTINGS_ADDR + ETH_MBRECUP_SETTINGS_LENGTH;
@@ -343,7 +343,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 1000, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 1000, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals,false);
+            sSet = new StrSet(0, 1000, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Минимальный % вент", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
@@ -384,7 +384,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Минимальный % КЗР", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Температура 'зимних процедур'", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals,false);
+            sSet = new StrSet(0, 100, "Температура 'зимних процедур'", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 1, "Проба насоса летом", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
@@ -397,7 +397,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, PidMaxVal, "P коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals,false);
+            sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
@@ -431,7 +431,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CRecup.TEffSP.Min, _fbEntities.CRecup.TEffSP.Max, "Граница темп. авар. КПД, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TEffSP.NumChr, pickVals,false);
+            sSet = new StrSet(_fbEntities.CRecup.TEffSP.Min, _fbEntities.CRecup.TEffSP.Max, "Граница темп. авар. КПД, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TEffSP.NumChr, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Аварийный КПД, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
@@ -446,6 +446,8 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(_fbEntities.CRecup.TempC.Min, _fbEntities.CRecup.TempC.Max, "Температура C, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempC.NumChr, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.TempD.Min, _fbEntities.CRecup.TempD.Max, "Температура D, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TempD.NumChr, pickVals, false);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CRecup.RecInMeasureTrh.Min, _fbEntities.CRecup.RecInMeasureTrh.Max, "Гистерезис режима изм рекуп", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             StartMenuCollection[7].StrSetsCollection = strSets;
             #endregion
@@ -522,6 +524,9 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(_fbEntities.ThmSps.EPTa.Min, _fbEntities.ThmSps.EPTa.Max, "Мощность Та вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
             isEnabled: false, valScale: _fbEntities.ThmSps.EPTa.NumChr, pickVals);
             strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.ThmSps.FailMeasureCount.Min, _fbEntities.ThmSps.FailMeasureCount.Max, "Количество ошибок измерений", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+            isEnabled: false, valScale: 0, pickVals);
+            strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ThmSps.ITaReg.Min, _fbEntities.ThmSps.ITaReg.Max, "I коэф.регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
                 isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
@@ -547,17 +552,17 @@ namespace Android_Silver.Entities.Visual.Menus
                 isEnabled: true, valScale: _fbEntities.ThmSps.EKCold.NumChr, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.ThmSps.EBCold.Min, _fbEntities.ThmSps.EBCold.Max, "Коэф. B холодного Та вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
-                isEnabled: true, valScale: _fbEntities.ThmSps.EBCold.NumChr, pickVals,false);
+                isEnabled: true, valScale: _fbEntities.ThmSps.EBCold.NumChr, pickVals, false);
             strSets.Add(sSet);
             StartMenuCollection[10].StrSetsCollection = strSets;
             #endregion
             #region Modbus рекуператор
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "SR_OPEN", "SR_Close", "SR_vFoc" };
-            sSet = new StrSet(0, 2, "Режим работы", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals,false);
+            sSet = new StrSet(0, 2, "Режим работы", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Да" };
-            sSet = new StrSet(0, 1, "Тест вращения 1", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals,false);
+            sSet = new StrSet(0, 1, "Тест вращения 1", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Да" };
             sSet = new StrSet(0, 1, "Тест вращения 2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
@@ -569,7 +574,7 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 1, "Направление вращения 2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Да" };
-            sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals,false);
+            sSet = new StrSet(0, 1, "Притирка ротора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 10_000, "Номинальный ток, ма", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
@@ -595,11 +600,11 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Текущая производительность притока", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: false, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Максимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals,false);
+            sSet = new StrSet(0, 100, "Максимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Минимальная производительность вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Текущая производительность вытяжки", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals,false);
+            sSet = new StrSet(0, 100, "Текущая производительность вытяжки", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Максимальная производительность вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
@@ -930,7 +935,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets = new ObservableCollection<StrSet>();
             sSet = new StrSet(_fbEntities.CSensors.OutdoorTemp.Value.Min, _fbEntities.CSensors.OutdoorTemp.Value.Max,
             "Темп. улицы", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-                 valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals,true);
+                 valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals, true);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.SupTemp.Value.Min, _fbEntities.CSensors.SupTemp.Value.Max,
             "Темп. канала", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
