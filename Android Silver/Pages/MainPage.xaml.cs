@@ -542,6 +542,16 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.DownloadBut.Current = ViewModel.CPictureSet.DownloadBut.Default;
         }
 
+        private void Reset_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.ResetBut.Current = ViewModel.CPictureSet.ResetBut.Selected;
+        }
+
+        private void Reset_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.ResetBut.Current = ViewModel.CPictureSet.ResetBut.Default;
+        }
+
         private void ArrowButLeft_Pressed(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.ArrowButLeft.Current = ViewModel.CPictureSet.ArrowButLeft.Selected;

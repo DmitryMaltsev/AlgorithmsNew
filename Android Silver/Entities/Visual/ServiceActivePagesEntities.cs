@@ -943,6 +943,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[16].CVal = _fbs.ThmSps.SupBCold.Value;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[17].CVal = _fbs.ThmSps.EKCold.Value;
                         _menusEntities.StartMenuCollection[10].StrSetsCollection[18].CVal = _fbs.ThmSps.EBCold.Value;
+                        _menusEntities.StartMenuCollection[10].StrSetsCollection[19].CVal = _fbs.ThmSps.ColdDeltaMax.Value;
 
                         _menusEntities.GenerateInterfaceTable(10);
                     }

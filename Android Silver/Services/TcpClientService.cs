@@ -1,14 +1,9 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
-using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 
-
-using System;
-using System.Collections;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 
@@ -225,14 +220,14 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 0, 100, 0, 116 };
+                            _readValuesArr = new byte[] { 1, 3, 0, 100, 0, 118};
                             // messToClient = "0100,058\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage1:
                         {
                             //1 44 126
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 241 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 242 };
                             //messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -240,7 +235,7 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage2:
                         {
                             //1 170 121
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 241 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 242 };
                             //messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -416,7 +411,7 @@ namespace Android_Silver.Services
                                 ushort startIndex = 0;
                                 for (ushort i = startAddress; i < startAddress + addrCount; i++)
                                 {
-                                    startIndex = _readWriteService.EthernetData_Read(data, i+_menusEntities.WriteOffset, startIndex, func);
+                                    startIndex = _readWriteService.EthernetData_Read(data, i + _menusEntities.WriteOffset, startIndex, func);
                                 }
                                 WriteValuesList.Clear();
                             }
@@ -473,7 +468,7 @@ namespace Android_Silver.Services
             _stream.Dispose();
         }
 
-    
+
         private bool StringToFloat(string val, int precision, ref float result)
         {
 

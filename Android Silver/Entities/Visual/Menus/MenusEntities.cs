@@ -152,7 +152,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_CONFIG_SETTINGS_ADDR = ETH_SENS_SETTINGS_ADDR + ETH_SENS_SETTINGS_LENGTH;
             ETH_CONFIG_SETTINGS_LENGTH = 8;
             ETH_THM_SETTINGS_ADDR = ETH_CONFIG_SETTINGS_ADDR + ETH_CONFIG_SETTINGS_LENGTH;
-            ETH_THM_SETTINGS_LENGTH = 19;
+            ETH_THM_SETTINGS_LENGTH = 20;
             ETH_MBRECUP_SETTINGS_ADDR = ETH_THM_SETTINGS_ADDR + ETH_THM_SETTINGS_LENGTH;
             ETH_MBRECUP_SETTINGS_LENGTH = 14;
             ETH_SPECMODE_SETTINGS_ADDR = ETH_MBRECUP_SETTINGS_ADDR + ETH_MBRECUP_SETTINGS_LENGTH;
@@ -554,6 +554,10 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(_fbEntities.ThmSps.EBCold.Min, _fbEntities.ThmSps.EBCold.Max, "Коэф. B холодного Та вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
                 isEnabled: true, valScale: _fbEntities.ThmSps.EBCold.NumChr, pickVals, false);
             strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.ThmSps.ColdDeltaMax.Min, _fbEntities.ThmSps.ColdDeltaMax.Max, "Макс дельта хол датчика для расчета", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
+            isEnabled: true, valScale: _fbEntities.ThmSps.ColdDeltaMax.NumChr, pickVals, false);
+            strSets.Add(sSet);
+
             StartMenuCollection[10].StrSetsCollection = strSets;
             #endregion
             #region Modbus рекуператор
@@ -598,7 +602,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets = new ObservableCollection<StrSet>();
             sSet = new StrSet(0, 100, "Минимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Текущая производительность притока", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: false, valScale: 0, pickVals, false);
+            sSet = new StrSet(0, 100, "Текущая производительность притока", isVisible: false, pickerIsVisible: true, entryIsVisible: false, isEnabled: false, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Максимальная производительность притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);

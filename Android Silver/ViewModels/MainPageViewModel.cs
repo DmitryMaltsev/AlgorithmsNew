@@ -211,6 +211,7 @@ namespace Android_Silver.Pages
         public ICommand UpdateCommand { get; private set; }
         public ICommand ChangeFilterCommand { get; private set; }
         public ICommand DownloadCommand { get; private set; }
+        public ICommand ResetCommand { get; private set; }
         #endregion
         #region Humidity commands
         public ICommand HumidityReturnCommand { get; private set; }
@@ -309,6 +310,7 @@ namespace Android_Silver.Pages
             ChangeFilterCommand = new Command(ExecuteChangeFilter);
             UpdateCommand = new Command(ExecuteUpdate);
             DownloadCommand = new Command(ExecuteDownload);
+            ResetCommand = new Command(ExecuteReset);
             TimeBuffer = new();
             Value = 15;
 
@@ -398,7 +400,6 @@ namespace Android_Silver.Pages
             // object obj = 0;
             // ExecuteUpdate(obj);
         }
-
 
         async private void ExecuteConnect()
         {
@@ -970,6 +971,11 @@ namespace Android_Silver.Pages
             }
         }
 
+        private void ExecuteReset(object obj)
+        {
+            int[] reset = { 1 };
+            CTcpClientService.SetCommandToServer(298, reset);
+        }
 
         private void ExecuteDownload(object obj)
         {

@@ -64,6 +64,30 @@ namespace Android_Silver.Entities.FBEntities
             }
         }
 
+        private ushort _sFlowFail;
+
+        public ushort SFlowFail
+        {
+            get { return _sFlowFail; }
+            set
+            {
+                _sFlowFail = value;
+                OnPropertyChanged(nameof(SFlowFail));
+            }
+        }
+
+        private ushort _eFlowFail;
+
+        public ushort EFlowFail
+        {
+            get { return _eFlowFail; }
+            set
+            {
+                _eFlowFail = value;
+                OnPropertyChanged(nameof(EFlowFail));
+            }
+        }
+
         private ushort _sPersent;
 
         public ushort SPercent

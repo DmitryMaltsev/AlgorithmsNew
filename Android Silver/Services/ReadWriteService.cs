@@ -771,7 +771,7 @@ namespace Android_Silver.Services
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Hour = buffer;
                 return startIndex;
             }
-            if (startAddr == 188)
+            if (startAddr == 198)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Minute = buffer;
@@ -884,6 +884,27 @@ namespace Android_Silver.Services
                 return startIndex;
             }
             #endregion
+
+            if (startAddr == 216)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 65535)
+                {
+                    _fbs.CFans.SFlowFail = buffer;
+                }
+                return startIndex;
+            }
+
+            if (startAddr == 217)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 65535)
+                {
+                    _fbs.CFans.EFlowFail = buffer;
+                }
+                return startIndex;
+            }
+
             #endregion
 
             #region Основной интерфейс запись
@@ -1575,6 +1596,12 @@ namespace Android_Silver.Services
                 {
                     _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
                 }
+                return startIndex;
+            }
+
+            if (startAddr == 298 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
             #endregion
@@ -2452,6 +2479,11 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 18 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 18 + _menusEntities.WriteOffset)
             {
                 GetFloatValueResult(_fbs.ThmSps.EBCold, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 19 || startAddr == _menusEntities.ETH_THM_SETTINGS_ADDR + 19 + _menusEntities.WriteOffset)
+            {
+                GetFloatValueResult(_fbs.ThmSps.ColdDeltaMax, value, ref startIndex);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);

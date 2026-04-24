@@ -441,10 +441,13 @@
                                                                                IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding  CFBs.CFans.SFlow,StringFormat='{0}м3/час'}"  Grid.Row="22"  Grid.Column="6" Style="{StaticResource MiscellText2}"
                                                                                           IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding  CFBs.CFans.SFlowFail,StringFormat='{0}м3/час'}"  Grid.Row="22"  Grid.Column="8" Style="{StaticResource MiscellText2}"
+                                                                                IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <Label Text="Произв притока %"  Grid.Row="22"  Grid.Column="12" Style="{StaticResource MiscellText3}"
                                                                    IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding CFBs.CFans.SPercent,StringFormat='{0}%'}"  Grid.Row="22"  Grid.Column="12" Style="{StaticResource MiscellText2}"
                                                                                 IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
+
             <!--#endregion-->
             <!--#region Расход вытяжки -->
 
@@ -454,6 +457,8 @@
                                                         IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding  CFBs.CFans.EFlow,StringFormat='{0}м3/час'}"  Grid.Row="23"  Grid.Column="6" Style="{StaticResource MiscellText2}"
                                                                                 IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
+            <Label Text="{Binding  CFBs.CFans.EFlowFail,StringFormat='{0}м3/час'}"  Grid.Row="23"  Grid.Column="8" Style="{StaticResource MiscellText2}"
+                                                                        IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <Label Text="Произв выт %"  Grid.Row="23"  Grid.Column="12" Style="{StaticResource MiscellText3}"
                                                         IsVisible = "{Binding CActivePagesEntities.IsMainPage}"/>
             <Label Text="{Binding CFBs.CFans.EPercent,StringFormat='{0}%'}"  Grid.Row="23"  Grid.Column="12" Style="{StaticResource MiscellText2}"
@@ -873,8 +878,15 @@
                                                                                                     IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <Button Grid.Row="17" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.UpdaterBut.Current}" Command="{Binding UpdateCommand}"
              Pressed="Updater_Pressed" Released="Updater_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
-            <Label Text="{Binding  CFBs.CUpdater.ResultPackets}" Grid.Row="18" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
-                                                                                                        IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
+            <Label Text="{Binding  CFBs.CUpdater.ResultPackets}" Grid.Row="18" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
+            <!--Блок сброска контроллера-->
+            <Label Text="Перезагрузка контроллера" Grid.Row="19" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
+            <Label Text="Перезагрузить" Grid.Row="19" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
+                                                                                           IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
+            <Button Grid.Row="19" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.ResetBut.Current}" Command="{Binding ResetCommand}"
+                                                        Pressed="Reset_Pressed" Released="Reset_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
+
+
             <!--#endregion-->
 
             <!--#endregion-->
