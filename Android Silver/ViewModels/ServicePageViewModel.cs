@@ -54,6 +54,7 @@ namespace Android_Silver.ViewModels
         public ICommand CommonSettingsCommand { get; private set; }
         public ICommand ToSettingsCommand { get; private set; }
         public ICommand SetSettingsCommand { get; private set; }
+        public ICommand SetEntryCommand { get; private set; }
         #endregion
 
         private string _cString;
@@ -97,7 +98,14 @@ namespace Android_Silver.ViewModels
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CFBs = DIContainer.Resolve<FBs>();
             CMenusEntities = DIContainer.Resolve<MenusEntities>();
-            _fileSystemService=DIContainer.Resolve<FileSystemService>();
+            foreach (StrSet strSet in CMenusEntities.StartMenuCollection[15].StrSetsCollection)
+            {
+                strSet.SwitchIsOnAction -= ExecuteSetSwitch;
+                strSet.SwitchIsOnAction += ExecuteSetSwitch;
+            }
+
+
+            _fileSystemService = DIContainer.Resolve<FileSystemService>();
             EntryPassedCommand = new Command(ExecuteEntryPass);
             StartPageConnectCommand = new Command(ExecuteConnect);
             StartPageDisconnectCommand = new Command(ExecuteDisconnect);
@@ -113,11 +121,13 @@ namespace Android_Silver.ViewModels
             IncreaseMenuItemsCommand = new Command(ExecuteIncrease);
             ToSettingsCommand = new Command(ExecuteToSettingsWindow);
             SetSettingsCommand = new Command(ExecuteSetSettings);
+            SetEntryCommand = new Command<StrSet>(ExecuteSetEntry);
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
             _fileSystemService.GetIPFromFile();
             //StartTimer();
         }
+
 
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
@@ -328,7 +338,7 @@ namespace Android_Silver.ViewModels
                 {
                     if (mItem.StrSetsCollection[i].EntryIsVisible)
                     {
-                        if (mItem.StrSetsCollection[i].CVal>=0)
+                        if (mItem.StrSetsCollection[i].CVal >= 0)
                             values[i] = (int)((mItem.StrSetsCollection[i].CVal + 0.5 / Math.Pow(10, mItem.StrSetsCollection[i].ValScale)) * Math.Pow(10, mItem.StrSetsCollection[i].ValScale));
                         else
                             values[i] = (int)((mItem.StrSetsCollection[i].CVal - 0.5 / Math.Pow(10, mItem.StrSetsCollection[i].ValScale)) * Math.Pow(10, mItem.StrSetsCollection[i].ValScale));
@@ -364,6 +374,26 @@ namespace Android_Silver.ViewModels
             {
                 CActivePagesEntities.SetActivePageState(SActivePageState.StartPage);
             }
+        }
+
+        private void ExecuteSetEntry(StrSet cStroke)
+        {
+            int val = 0;
+            if (cStroke.CVal >= 0)
+                val = (int)((cStroke.CVal + 0.5 / Math.Pow(10, cStroke.ValScale)) * Math.Pow(10, cStroke.ValScale));
+            else
+                val = (int)((cStroke.CVal - 0.5 / Math.Pow(10, cStroke.ValScale)) * Math.Pow(10, cStroke.ValScale));
+            int[] arr = { val };
+            CTcpClientService.SetCommandToServer(cStroke.Entry2Address, arr);
+        }
+
+        private void ExecuteSetSwitch(StrSet cStroke)
+        {
+            //Совмесмтить ControllerCheck и StrSet
+            CFBs.CControllerCheck.ServosOverridesList[cStroke.SwitchIndex]=cStroke.SwitchIsOn;
+            CFBs.CControllerCheck.SetOverrides();
+            int[] arr = { CFBs.CControllerCheck.OverrideIsActive1 };
+            CTcpClientService.SetCommandToServer(CMenusEntities.ETH_CONTROLLER_SWITCH1_ADDR, arr);
         }
 
         Timer timer;

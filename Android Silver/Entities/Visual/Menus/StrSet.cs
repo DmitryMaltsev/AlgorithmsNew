@@ -10,10 +10,13 @@ namespace Android_Silver.Entities.Visual.Menus
 {
     public class StrSet : BindableBase
     {
-       public Action<int> PickValAction;
+        public Action<int> PickValAction;
+        public Action<StrSet> SwitchIsOnAction;
 
         private float _minVal;
         private float _maxVal;
+
+        #region Rising properties
 
         private string _name;
         public string Name
@@ -145,8 +148,33 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
+        private bool _switchIsOn;
 
-        public StrSet(float minVal, float maxVal, string name, bool isVisible, bool pickerIsVisible, bool entryIsVisible, bool isEnabled, byte valScale, List<string> pickVals, bool switchIsActive=false)
+        public bool SwitchIsOn
+        {
+            get { return _switchIsOn; }
+            set
+            {
+                if (_switchIsOn != value)
+                {
+                    _switchIsOn = value;
+                    SwitchIsOnAction?.Invoke(this);
+                }
+                OnPropertyChanged(nameof(SwitchIsOn));
+            }
+        }
+
+        #endregion
+
+        public int Entry1Address { get; private set; }
+
+        public int Entry2Address { get; private set; }
+
+        public int SwitchIndex { get; private set; }
+
+
+        public StrSet(float minVal, float maxVal, string name, bool isVisible, bool pickerIsVisible, bool entryIsVisible, bool isEnabled, byte valScale, 
+                                        List<string> pickVals, bool switchIsActive = false, int startAddress = 0, int switchIndex = 0)
         {
             PickVals = pickVals;
             CPickVal = 0;
@@ -158,8 +186,14 @@ namespace Android_Silver.Entities.Visual.Menus
             EntryIsVisible = entryIsVisible;
             IsEnabled = isEnabled;
             ValScale = valScale;
-            SwitchIsActive= switchIsActive;
-        }
+            SwitchIsActive = switchIsActive;
+            if (startAddress != 0)
+            {
+                Entry1Address = startAddress;
+                Entry2Address = startAddress;
 
+            }
+            SwitchIndex = switchIndex;
+        }
     }
 }

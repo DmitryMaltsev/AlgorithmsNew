@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:local="clr-namespace:Android_Silver.Services"
-             x:Class="Android_Silver.Pages.ServicePage"
-             x:Name="SPage"
+              xmlns:context="clr-namespace:Android_Silver.Pages"
+              x:Class="Android_Silver.Pages.ServicePage"
+              x:Name="SPage"
                BackgroundImageSource="{Binding CPictureSet.Background}">
 
     <ContentPage.Resources>
@@ -257,9 +258,11 @@
                                     </Grid.ColumnDefinitions>
                                     <!--IsToggled="{Binding  CFBs.OtherSettings.IsSpecMode, Mode=TwoWay}"-->
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}" />
-                                    <Switch Grid.Row="5" Grid.Column="8"    Grid.ColumnSpan="3"  IsVisible = "{Binding SwitchIsActive}" Rotation="0"/>
+                                    <Switch Grid.Row="5" Grid.Column="8"    Grid.ColumnSpan="3"  IsVisible = "{Binding SwitchIsActive}"  IsToggled="{Binding SwitchIsOn}" />
                                     <Entry Grid.Row="5"  Grid.Column="12" Style="{StaticResource EntryNum}" Text="{Binding CVal}"
-                                      IsVisible = "{Binding EntryIsVisible}" IsEnabled="{Binding IsEnabled}"/>
+                                      IsVisible = "{Binding EntryIsVisible}" IsEnabled="{Binding IsEnabled}" 
+                                           ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type context:ServicePage}},Path=BindingContext.SetEntryCommand}" 
+                                           ReturnCommandParameter="{Binding .}" />
                                     <Picker Grid.Row="5"  Grid.Column="12" Style="{StaticResource ConfPicker}"  IsVisible = "{Binding PickerIsVisible}" IsEnabled="{Binding IsEnabled}"
                                                      SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" 
                                             SelectedIndex="{Binding CPickVal}"/>

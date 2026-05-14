@@ -32,7 +32,5 @@ namespace Android_Silver.Entities.FBEntities
         public ushort CalPos;
         public ushort CloseAngle;
         public ushort OpenAngle;
-
-
     }
 }

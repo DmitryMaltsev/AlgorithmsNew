@@ -6,8 +6,8 @@ namespace Android_Silver.Pages;
 public partial class ServicePage : ContentPage
 {
     ServicePageViewModel _servicePageViewModel;
-	public ServicePage()
-	{
+    public ServicePage()
+    {
         InitializeComponent();
         _servicePageViewModel = new ServicePageViewModel();
         BindingContext = _servicePageViewModel;
@@ -52,7 +52,7 @@ public partial class ServicePage : ContentPage
     {
         Button item = sender as Button;
         MItem mItem = item.BindingContext as MItem;
-        _servicePageViewModel.CPictureSet.BaseSettings1ButCollection[mItem.ID-1].Current = _servicePageViewModel.CPictureSet.BaseSettings1ButCollection[mItem.ID - 1].Selected;
+        _servicePageViewModel.CPictureSet.BaseSettings1ButCollection[mItem.ID - 1].Current = _servicePageViewModel.CPictureSet.BaseSettings1ButCollection[mItem.ID - 1].Selected;
     }
 
     private void BaseSettings1Released(object sender, EventArgs e)
@@ -79,6 +79,7 @@ public partial class ServicePage : ContentPage
     {
         Picker picker = sender as Picker;
         picker.Unfocus();
-     
+
     }
+
 }

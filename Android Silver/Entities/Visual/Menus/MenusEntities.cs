@@ -1,6 +1,8 @@
 ﻿using Android_Silver.Entities.FBEntities;
 using Android_Silver.ViewModels;
 
+using Microsoft.Maui.Layouts;
+
 using System.Collections.ObjectModel;
 
 namespace Android_Silver.Entities.Visual.Menus
@@ -58,6 +60,9 @@ namespace Android_Silver.Entities.Visual.Menus
 
         public int ETH_CONTROLLER_CHECK_ADDR;
         public int ETH_CONTROLLER_CHECK_LENGTH;
+
+        public int ETH_CONTROLLER_SWITCH1_ADDR;
+        public int ETH_CONTROLLER_SWITCH2_ADDR;
 
         //Основная таблица 
         public List<MItem> StartMenuCollection { get; set; }
@@ -134,7 +139,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_COMMON_SETTINGS_ADDR = 300;
             ETH_COMMON_SETTINGS_LENGTH = 15;
             ETH_DAMPER_SETTINGS_ADDR = ETH_COMMON_SETTINGS_ADDR + ETH_COMMON_SETTINGS_LENGTH;
-            ETH_DAMPER_SETTINGS_LENGTH = 23;
+            ETH_DAMPER_SETTINGS_LENGTH = 18;
             ETH_FAN_SETTINGS_ADDR = ETH_DAMPER_SETTINGS_ADDR + ETH_DAMPER_SETTINGS_LENGTH;
             ETH_FAN_SETTINGS_LENGTH = 12;
             ETH_WH_SETTINGS_ADDR = ETH_FAN_SETTINGS_ADDR + ETH_FAN_SETTINGS_LENGTH;
@@ -164,7 +169,9 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_RECUP_CURRENTSETTINGS_ADDR = ETH_TCONST_THM_ADDR + ETH_TCONST_LENGTH;
             ETH_RECUP_CURRENTSETTINGS_LENGTH = 40;
             ETH_CONTROLLER_CHECK_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
-            ETH_CONTROLLER_CHECK_LENGTH = 10;
+            ETH_CONTROLLER_CHECK_LENGTH = 5;
+
+            ETH_CONTROLLER_SWITCH1_ADDR = ETH_CONTROLLER_CHECK_ADDR + 4;
             InterfaceStrCollection = new ObservableCollection<StrSet>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             StartMenuCollection = new List<MItem>();
@@ -304,16 +311,6 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 90, "Сервопривод 4  положение 1 градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 90, "Сервопривод 4 положение 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);
-            sSet = new StrSet(0, 1, "Тестовый режим", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Калибровка серво 1 0-100%", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Калибровка серво 2 0-100%", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Калибровка серво 3 0-100%", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
-            strSets.Add(sSet);
-            sSet = new StrSet(0, 100, "Калибровка серво 4 0-100%", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[2].StrSetsCollection = strSets;
 
@@ -935,39 +932,124 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             StartMenuCollection[14].StrSetsCollection = strSets;
             #endregion
+
             #region Проверка контроллера
             strSets = new ObservableCollection<StrSet>();
+            sSet = new StrSet(0, 100, "Угол серво 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+             valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Поз серво 1 овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+             valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR, switchIndex: 0);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Угол серво 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+             valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Поз серво 2 овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 1, switchIndex: 1);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Угол серво 3", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Поз серво 3 овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 2, switchIndex: 2);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Угол серво 4", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Поз серво 4 овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 3, switchIndex: 3);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "Привод 220в 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+           valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 4, switchIndex: 4);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "Привод 220в 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+           valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 5, switchIndex: 5);
+            strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.OutdoorTemp.Value.Min, _fbEntities.CSensors.OutdoorTemp.Value.Max,
             "Темп. улицы", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-                 valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals, true);
+                 valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 6, switchIndex: 6);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.SupTemp.Value.Min, _fbEntities.CSensors.SupTemp.Value.Max,
             "Темп. канала", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-                valScale: _fbEntities.CSensors.SupTemp.Value.NumChr, pickVals, true);
+                valScale: _fbEntities.CSensors.SupTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 7, switchIndex: 7);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.RoomTemp.Value.Min, _fbEntities.CSensors.RoomTemp.Value.Max,
             "Темп. комнаты", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-             valScale: _fbEntities.CSensors.RoomTemp.Value.NumChr, pickVals, true);
+             valScale: _fbEntities.CSensors.RoomTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 8, switchIndex: 8);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.TempH1.Value.Min, _fbEntities.CSensors.TempH1.Value.Max,
-            "Темп. гор. датчика притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-             valScale: _fbEntities.CSensors.TempH1.Value.NumChr, pickVals, true);
+            "Темп. гор датч прит", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+             valScale: _fbEntities.CSensors.TempH1.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 9, switchIndex: 9);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.TempC1.Value.Min, _fbEntities.CSensors.TempC1.Value.Max,
-            "Темп. хол. датчика притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.TempC1.Value.NumChr, pickVals, true);
+            "Темп. хол датч прит", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: _fbEntities.CSensors.TempC1.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 10, switchIndex: 10);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.TempH2.Value.Min, _fbEntities.CSensors.TempH2.Value.Max,
-            "Темп. гор. датчика вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.TempH2.Value.NumChr, pickVals, true);
+            "Темп. гор датч выт", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: _fbEntities.CSensors.TempH2.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 11, switchIndex: 11);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.TempC2.Value.Min, _fbEntities.CSensors.TempC2.Value.Max,
-            "Темп. хол. датчика вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.TempC2.Value.NumChr, pickVals, true);
+            "Темп. хол датч выт", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: _fbEntities.CSensors.TempC2.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 12, switchIndex: 12);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.ReturnTemp.Value.Min, _fbEntities.CSensors.ReturnTemp.Value.Max,
             "Темп. обр. воды", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-           valScale: _fbEntities.CSensors.ReturnTemp.Value.NumChr, pickVals, true);
+            valScale: _fbEntities.CSensors.ReturnTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 13, switchIndex: 13);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Вент притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 14, switchIndex: 14);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Мощн Та прит", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 15, switchIndex: 15);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Вент вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 16, switchIndex: 16);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Мощн Та выт", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 17, switchIndex: 17);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Рекуператор", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 18, switchIndex: 18);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 100, "Мощн эл кал", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 19, switchIndex: 19);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "DI 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+             valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 20, switchIndex: 20);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "DI 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+             valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 21, switchIndex: 21);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "Термореле", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 22, switchIndex: 22);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "DOut 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 23, switchIndex: 23);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "DOut 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 24, switchIndex: 24);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 10, "AI 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 1, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 25, switchIndex: 25);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 10, "AI 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+             valScale: 1, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 26, switchIndex: 26);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 10, "AI 3", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 1, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 27, switchIndex: 27);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 0, "AI 4", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 1, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 28, switchIndex: 28);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 0, "AO 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 1, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 29, switchIndex: 29);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 0, "AO 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 1, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 30, switchIndex: 30);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "Уф лампа", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
+            valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 31, switchIndex: 31);
             strSets.Add(sSet);
             StartMenuCollection[15].StrSetsCollection = strSets;
             #endregion

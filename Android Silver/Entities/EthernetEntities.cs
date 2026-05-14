@@ -14,6 +14,7 @@ namespace Android_Silver.Entities
         ShedMessage,
         ServiceMessage1,
         ServiceMessage2,
+        ControllerCheck,
         UpdaterMessage
     }
 

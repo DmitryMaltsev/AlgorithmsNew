@@ -26,7 +26,8 @@ namespace Android_Silver.Entities.Visual
         HumidityPage,
         TimePage,
         SwipePage,
-        ShedulerPage
+        ShedulerPage,
+        BootloaderPage
     }
 
     public class ActivePagesEntities : BindableBase
@@ -213,6 +214,17 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private bool _isBootloaderPage;
+        public bool IsBootloaderPage
+        {
+            get { return _isBootloaderPage; }
+            set
+            {
+                _isBootloaderPage = value;
+                OnPropertyChanged(nameof(IsBootloaderPage));
+            }
+        }
+
         public int QueryStep { get; set; } = 0;
 
         #endregion
@@ -245,6 +257,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.MainPage:
@@ -264,6 +277,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.ChooseModePage:
@@ -283,6 +297,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.LoadingPage:
@@ -302,6 +317,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
 
                         if (pageState == 0)
                         {
@@ -343,6 +359,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                         _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour;
                     }
                     break;
@@ -363,6 +380,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                         //_modesEntities.Mode1ValuesList[1].SupplySPUI = _modesEntities.Mode1ValuesList[1].SypplySP.Value;
                         //_modesEntities.Mode1ValuesList[1].ExhaustSPUI = _modesEntities.Mode1ValuesList[1].ExhaustSP.Value;
                         //_modesEntities.Mode1ValuesList[1].TempSPUI = _modesEntities.Mode1ValuesList[1].TempSP.Value;
@@ -387,6 +405,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.JournalPage:
@@ -406,6 +425,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.TSettingsPage:
@@ -425,6 +445,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.SetTSettingsPage:
@@ -444,6 +465,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.OtherSettingsPage:
@@ -463,6 +485,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.HumidityPage:
@@ -482,6 +505,7 @@ namespace Android_Silver.Entities.Visual
                         IsTimePage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.TimePage:
@@ -501,6 +525,7 @@ namespace Android_Silver.Entities.Visual
                         IsStartPage = false;
                         IsSwipePage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.SwipePage:
@@ -520,6 +545,7 @@ namespace Android_Silver.Entities.Visual
                         IsMainPage = false;
                         IsStartPage = false;
                         IsShedulerPage = false;
+                        IsBootloaderPage = false;
                     }
                     break;
                 case ActivePageState.ShedulerPage:
@@ -539,6 +565,27 @@ namespace Android_Silver.Entities.Visual
                         IsChooseModePage = false;
                         IsMainPage = false;
                         IsStartPage = false;
+                        IsBootloaderPage = false;
+                        break;
+                    }
+                case ActivePageState.BootloaderPage:
+                    {
+                        IsShedulerPage = false;
+                        IsSwipePage = false;
+                        IsTimePage = false;
+                        IsHumidityPage = false;
+                        IsOtherSettingsPage = false;
+                        IsSetTSettingsPage = false;
+                        IsTSettingsPage = false;
+                        IsJournalPage = false;
+                        IsSettingsPage = false;
+                        IsSetPointsPage = false;
+                        IsKitchenTimerPage = false;
+                        IsLoadingPage = false;
+                        IsChooseModePage = false;
+                        IsMainPage = false;
+                        IsStartPage = false;
+                        IsBootloaderPage = true;
                         break;
                     }
             }

@@ -862,34 +862,14 @@
             <Button Grid.Row="13" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.HumidityBut.Current}" Command="{Binding HumidityCommand}"
              Pressed="Humidity_Pressed" Released="Humidity_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
             <!--#endregion-->
-
-            <!--#region Обновление прошивки контроллера -->
             <Label Text="{Binding CFilesEntities.SystemMessage}" Grid.Row="15"  Style="{StaticResource OtherSettingsLabel}"
-                                                                    IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
-            <Label Text="Загрузить .bin" Grid.Row="15" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
-                                                                              IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
-            <Button Grid.Row="15" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.DownloadBut.Current}" Command="{Binding DownloadCommand}"
-                                  Pressed="Download_Pressed" Released="Download_Released"  IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" 
-                            IsEnabled="{Binding CFBs.CUpdater.NotIsUpdate}">
-
-            </Button>
-            <Label Text="Копирование прошивки на контроллер" Grid.Row="17" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
-            <Label Text="Копировать" Grid.Row="17" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
-                                                                                                    IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
-            <Button Grid.Row="17" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.UpdaterBut.Current}" Command="{Binding UpdateCommand}"
-             Pressed="Updater_Pressed" Released="Updater_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
-            <Label Text="{Binding  CFBs.CUpdater.ResultPackets}" Grid.Row="18" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
-            <!--Блок сброска контроллера-->
-            <Label Text="Перезагрузка контроллера" Grid.Row="19" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
-            <Label Text="Перезагрузить" Grid.Row="19" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
-                                                                                           IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
-            <Button Grid.Row="19" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.ResetBut.Current}" Command="{Binding ResetCommand}"
-                                                        Pressed="Reset_Pressed" Released="Reset_Released" IsVisible = "{Binding   CActivePagesEntities.IsOtherSettingsPage}"/>
-
-
-            <!--#endregion-->
-
-            <!--#endregion-->
+                                               IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
+            <Label Text="Обновление прошивки" Grid.Row="15" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
+                                                         IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
+            <Button Grid.Row="15" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.DownloadBut.Current}"
+             Pressed="Download_Pressed" Released="Download_Released"  IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" 
+                                                                                                                     IsEnabled="{Binding CFBs.CUpdater.NotIsUpdate}">
+                <!--#endregion-->
 
             <!--#region Humidity page -->
             <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}" Style="{StaticResource HeaderBut}" Command="{Binding HomeCommand}" 
@@ -989,6 +969,35 @@
             <!--#endregion-->
             <!--#endregion-->
 
+            <!--#region BootloaderPage -->
+            <Button  ImageSource="{Binding CPictureSet.HomeButton.Current}"   Command="{Binding HomeCommand}"
+                                Style="{StaticResource HeaderBut}"  Pressed="HomeButton_SPPressed" Released="HomeButton_SPReleased"  
+                                                                          IsVisible = "{Binding  CActivePagesEntities.IsBootloaderPage}"/>
+            <!--#region Обновление прошивки контроллера -->
+            <Label Text="{Binding CFilesEntities.SystemMessage}" Grid.Row="15"  Style="{StaticResource OtherSettingsLabel}"
+                                                          IsVisible = "{Binding CActivePagesEntities.IsBootloaderPage}" />
+            <Label Text="Загрузить .bin" Grid.Row="15" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
+                                                                    IsVisible = "{Binding CActivePagesEntities.IsBootloaderPage}" />
+            <Button Grid.Row="15" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.DownloadBut.Current}" Command="{Binding DownloadCommand}"
+                        Pressed="Download_Pressed" Released="Download_Released"  IsVisible = "{Binding CActivePagesEntities.IsBootloaderPage}" 
+                  IsEnabled="{Binding CFBs.CUpdater.NotIsUpdate}">
+
+            </Button>
+            <Label Text="Копирование прошивки на контроллер" Grid.Row="17" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsBootloaderPage}"/>
+            <Label Text="Копировать" Grid.Row="17" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
+                                                                                          IsVisible = "{Binding CActivePagesEntities.IsBootloaderPage}" />
+            <Button Grid.Row="17" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.UpdaterBut.Current}" Command="{Binding UpdateCommand}"
+                Pressed="Updater_Pressed" Released="Updater_Released" IsVisible = "{Binding   CActivePagesEntities.IsBootloaderPage}"/>
+            <Label Text="{Binding  CFBs.CUpdater.ResultPackets}" Grid.Row="18" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsBootloaderPage}" />
+            <!--Блок сброска контроллера-->
+            <Label Text="Перезагрузка контроллера" Grid.Row="19" Style="{StaticResource OtherSettingsLabel}" IsVisible = "{Binding CActivePagesEntities.IsBootloaderPage}"/>
+            <Label Text="Перезагрузить" Grid.Row="19" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
+                                                                                 IsVisible = "{Binding CActivePagesEntities.IsBootloaderPage}" />
+            <Button Grid.Row="19" Grid.Column="8"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.ResetBut.Current}" Command="{Binding ResetCommand}"
+                                              Pressed="Reset_Pressed" Released="Reset_Released" IsVisible = "{Binding   CActivePagesEntities.IsBootloaderPage}"/>
+            <!--#endregion-->
+
+            <!--#endregion-->
             <Button  ImageSource="{Binding CPictureSet.OkButton.Current}" Command="{Binding TimeOkCommand}" Grid.Row="10" Grid.Column="5" 
             Style="{StaticResource OKCancelBut}"  Pressed="OK_SPPressed" Released="Ok_SPReleased" IsVisible = "{Binding CActivePagesEntities.IsTimePage}"/>
         </Grid>

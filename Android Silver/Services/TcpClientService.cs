@@ -198,6 +198,10 @@ namespace Android_Silver.Services
             else
             if (_ethernetEntities.PagesTab == 1)
             {
+                if (_servActivePageEntities.IsControllerCheckPage) {
+                    _ethernetEntities.CMessageState = MessageStates.ControllerCheck;
+                }
+                else
                 if (_ethernetEntities.CMessageState != MessageStates.ServiceMessage1)
                 {
                     _ethernetEntities.CMessageState = MessageStates.ServiceMessage1;
@@ -207,6 +211,7 @@ namespace Android_Silver.Services
                 {
                     _ethernetEntities.CMessageState = MessageStates.ServiceMessage2;
                 }
+              
             }
         }
 
@@ -227,7 +232,7 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage1:
                         {
                             //1 44 126
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 242 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 237 };
                             //messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -235,9 +240,14 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage2:
                         {
                             //1 170 121
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 242 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 237 };
                             //messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
+                        }
+                        break;
+                    case MessageStates.ControllerCheck:
+                        {
+                            _readValuesArr = new byte[] { 1, 3, 2, 25, 0, 10};
                         }
                         break;
                     case MessageStates.UpdaterMessage:
@@ -452,9 +462,6 @@ namespace Android_Silver.Services
             return false;
         }
 
-
-
-
         public void Disconnect()
         {
             _fbs.CUpdater.IsUpdate = 0;
@@ -469,20 +476,6 @@ namespace Android_Silver.Services
         }
 
 
-        private bool StringToFloat(string val, int precision, ref float result)
-        {
-
-            if (float.TryParse(val, out float buffer))
-            {
-                result = buffer / 10;
-                return true;
-            }
-            else
-            {
-                _ethernetEntities.SystemMessage = "Неверный формат сообщения";
-                return false;
-            }
-        }
 
         /// <summary>
         /// Основной метод передачи данных на сервер
@@ -502,53 +495,7 @@ namespace Android_Silver.Services
             }
         }
 
-        #region Получение временнных режимов
-        private void GetTModeDay(int m2Num, int tModeNum, string valueString)
-        {
-            if (int.TryParse(valueString, out int val))
-            {
-                if (val >= 0 && val <= 8)
-                {
-                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].DayNum = val;
-                }
-            }
-        }
-
-        private void GetTModeHours(int m2Num, int tModeNum, string valueString)
-        {
-            if (int.TryParse(valueString, out int val))
-            {
-                if (val >= 0 && val <= 23)
-                {
-                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Hour = val;
-                }
-            }
-        }
-
-        private void GetTModeMinutes(int m2Num, int tModeNum, string valueString)
-        {
-            if (int.TryParse(valueString, out int val))
-            {
-                if (val >= 0 && val <= 60)
-                {
-                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].Minute = val;
-                }
-            }
-        }
-
-        private void GetTModeCMode1(int m2Num, int tModeNum, string valueString)
-        {
-            if (int.TryParse(valueString, out int val))
-            {
-                if (val >= 0 && val <= 5 && _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1.Num != val)
-                {
-
-                    _modesEntities.Mode2ValuesList[m2Num].TimeModeValues[tModeNum].CMode1 = _modesEntities.Mode1ValuesList[val];
-                }
-            }
-        }
-        #endregion
-
+     
         #region OtherSettings callbacks
         private void SpecModeCallback(bool val)
         {

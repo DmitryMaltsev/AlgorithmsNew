@@ -34,7 +34,7 @@ namespace Android_Silver.Entities.FBEntities
         public UFLeds UFLeds { get; set; }
 
         public Updater CUpdater {get; set;}
-
+        public ControllerCheck CControllerCheck {get;set;}
 
 
         public FBs()
@@ -74,6 +74,7 @@ namespace Android_Silver.Entities.FBEntities
             SupCalibrateThm = new SPCalibrateThm();
             ExhaustCalibrateThm = new SPCalibrateThm();
             CUpdater = new Updater();
+            CControllerCheck = new ControllerCheck();
         }
     }
 }
