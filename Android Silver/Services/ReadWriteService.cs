@@ -583,7 +583,6 @@ namespace Android_Silver.Services
                 {
                     _fbs.CUpdater.IsUpdate = (byte)buffer;
 
-
                 }
                 return startIndex;
             }
@@ -904,6 +903,123 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
+
+            #region Версии загрузчиков
+            if (startAddr == 218)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerCur[0] = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == 219)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerCur[1] = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == 220)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerCur[2] = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == 221)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerCur[3] = (byte)buffer;
+                }
+                _fbs.CUpdater.SetFWCur(_fbs.CUpdater.FWVerCur);
+                return startIndex;
+            }
+
+            if (startAddr == 222)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerNew[0] = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == 223)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerNew[1] = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == 224)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerNew[2] = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == 225)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerNew[3] = (byte)buffer;
+                }
+                _fbs.CUpdater.SetFWNew(_fbs.CUpdater.FWVerNew);
+                return startIndex;
+            }
+            if (startAddr == 226)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerBkp[0] = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == 227)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerBkp[1] = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == 228)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerBkp[2] = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == 229)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CUpdater.FWVerBkp[3] = (byte)buffer;
+                }
+                _fbs.CUpdater.SetFWBkp(_fbs.CUpdater.FWVerBkp);
+                return startIndex;
+            }
+           
+            #endregion
+
 
             #endregion
 
@@ -1598,6 +1714,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
+
 
             if (startAddr == 298 + _menusEntities.WriteOffset)
             {

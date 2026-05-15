@@ -6,8 +6,19 @@ using System.Text;
 
 namespace Android_Silver.Entities.FBEntities
 {
+    enum AutoUpdateState
+    {
+        BOOTCTRL_AUTOUPD_OFF,
+        BOOTCTRL_AUTOUPD_NEWFW,
+        BOOTCTRL_AUTOUPD_BKPFW,
+        VCHAL_BOOTCTRL_AUTOUPD_MAX,
+        BOOTCTRL_AUTOUPD_ERROR=255
+    }
     public class Updater : BindableBase
     {
+    
+
+        #region Rising properties
         private byte _isUpdate;
 
         public byte IsUpdate
@@ -29,8 +40,8 @@ namespace Android_Silver.Entities.FBEntities
             set
             {
 
-                    _notIsUpdate = value;
-                    OnPropertyChanged(nameof(NotIsUpdate));
+                _notIsUpdate = value;
+                OnPropertyChanged(nameof(NotIsUpdate));
             }
         }
 
@@ -82,6 +93,96 @@ namespace Android_Silver.Entities.FBEntities
             }
         }
 
+        private List<byte> _fwVerCur;
+
+        public List<byte> FWVerCur
+        {
+            get { return _fwVerCur; }
+            set
+            {
+                _fwVerCur = value;
+            }
+        }
+
+        private List<byte> _fwVerNew;
+        public List<byte> FWVerNew
+        {
+            get { return _fwVerNew; }
+            set
+            {
+                _fwVerNew = value;
+            }
+        }
+
+        private List<byte> _fwVerBkp;
+        public List<byte> FWVerBkp
+        {
+            get { return _fwVerBkp; }
+            set
+            {
+                _fwVerBkp = value;
+            }
+        }
+
+        private string _fwVerСurWord=String.Empty;
+
+        public string FWVerCurWord
+        {
+            get { return _fwVerСurWord; }
+            set
+            {
+                _fwVerСurWord = value;
+                OnPropertyChanged(nameof(FWVerCurWord));
+            }
+        }
+
+        private string _fwVerNewWord = String.Empty;
+
+        public string FWVerNewWord
+        {
+            get { return _fwVerNewWord; }
+            set
+            {
+                _fwVerNewWord = value;
+                OnPropertyChanged(nameof(FWVerNewWord));
+            }
+        }
+
+        private string _fwVerBkpWord = String.Empty;
+
+        public string FWVerBkpWord
+        {
+            get { return _fwVerBkpWord; }
+            set
+            {
+                _fwVerBkpWord = value;
+                OnPropertyChanged(nameof(FWVerBkpWord));
+            }
+        }
+
+        private int _autoUpdIndex;
+
+        public int AutoUpdIndex
+        {
+            get { return _autoUpdIndex; }
+            set {
+                _autoUpdIndex = value;
+                OnPropertyChanged(nameof(AutoUpdIndex));
+            }
+        }
+        private List<string> _autoUpdList= new List<string>() { "Отключено", "Новая прошивка", "Резервная прошивка" };
+
+        public List<string> AutoUpdList
+        {
+            get { return _autoUpdList; }
+            set { 
+                _autoUpdList = value;
+                OnPropertyChanged(nameof(AutoUpdList));
+            }
+        }
+
+
+        #endregion
         public string[] SplittedPacket;
         public byte[] BinaryData;
         public char[,] UseCharData;
@@ -98,7 +199,53 @@ namespace Android_Silver.Entities.FBEntities
             FileContentList = new List<StringBuilder>();
             BinSize = HexSize / 2;
             _pictureSet = DIContainer.Resolve<PicturesSet>();
+            FWVerCur = [0, 0, 0, 0];
+            FWVerNew = [0, 0, 0, 0];
+            FWVerBkp = [0, 0, 0, 0];
+            SetFWCur(FWVerCur);
+            SetFWNew(FWVerCur);
+            SetFWBkp(FWVerCur);
         }
+
+        public void SetFWCur(List<byte> fwVer)
+        {
+            FWVerCurWord=String.Empty;
+            for (int i = 0; i < fwVer.Count; i++)
+            {
+                FWVerCurWord += fwVer[i];
+                if (i < fwVer.Count - 1)
+                {
+                    FWVerCurWord += ".";
+                }
+            }
+        }
+
+        public void SetFWBkp(List<byte> fwVer)
+        {
+            FWVerBkpWord = String.Empty;
+            for (int i = 0; i < fwVer.Count; i++)
+            {
+                FWVerBkpWord += fwVer[i];
+                if (i < fwVer.Count - 1)
+                {
+                    FWVerBkpWord += ".";
+                }
+            }
+        }
+
+        public void SetFWNew(List<byte> fwVer)
+        {
+            FWVerNewWord = String.Empty;
+            for (int i = 0; i < fwVer.Count; i++)
+            {
+                FWVerNewWord += fwVer[i];
+                if (i < fwVer.Count - 1)
+                {
+                    FWVerNewWord += ".";
+                }
+            }
+        }
+
 
     }
 }

@@ -579,7 +579,11 @@ namespace Android_Silver.Pages
             base.OnAppearing();
         }
 
-
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Picker picker = sender as Picker;
+            picker.Unfocus();
+        }
     }
 
 }

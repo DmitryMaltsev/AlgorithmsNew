@@ -5,7 +5,6 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
-
 using System.Globalization;
 using System.Windows.Input;
 
@@ -208,10 +207,8 @@ namespace Android_Silver.Pages
         public ICommand ContactArrRightCommand { get; private set; }
         public ICommand HumidityCommand { get; private set; }
         public ICommand SetTimeCommand { get; private set; }
-        public ICommand UpdateCommand { get; private set; }
         public ICommand ChangeFilterCommand { get; private set; }
-        public ICommand DownloadCommand { get; private set; }
-        public ICommand ResetCommand { get; private set; }
+        public ICommand BootloaderCommand { get; private set; }
         #endregion
         #region Humidity commands
         public ICommand HumidityReturnCommand { get; private set; }
@@ -241,6 +238,11 @@ namespace Android_Silver.Pages
         public ICommand TimeBtnUpCommand4 { get; private set; }
         public ICommand TimeBtnDnCommand4 { get; private set; }
         public ICommand TimeOkCommand { get; private set; }
+        #endregion
+        #region BootloaderCommand
+        public ICommand UpdateCommand { get; private set; }
+        public ICommand DownloadCommand { get; private set; }
+        public ICommand ResetCommand { get; private set; }
         #endregion
         // public ICommand SettingsCommand { get; private set; }
         #endregion
@@ -278,7 +280,9 @@ namespace Android_Silver.Pages
             _fileSystemService = DIContainer.Resolve<FileSystemService>();
             _menuesEntities = DIContainer.Resolve<MenusEntities>();
             _mathService = DIContainer.Resolve<MathService>();
-
+            //CFBs.CUpdater.FWVerWord
+            // CFBs.CUpdater.AutoUpdList
+            //CFBs.CUpdater.AutoUpdIndex
 #if ANDROID
             AndroidEntity.WifiStateChanged -= EthernetEntities.WifiStateChangeCallback;
             AndroidEntity.WifiStateChanged += EthernetEntities.WifiStateChangeCallback;
@@ -311,6 +315,7 @@ namespace Android_Silver.Pages
             UpdateCommand = new Command(ExecuteUpdate);
             DownloadCommand = new Command(ExecuteDownload);
             ResetCommand = new Command(ExecuteReset);
+            BootloaderCommand = new Command(ExecuteBootloader);
             TimeBuffer = new();
             Value = 15;
 
@@ -400,6 +405,8 @@ namespace Android_Silver.Pages
             // object obj = 0;
             // ExecuteUpdate(obj);
         }
+
+
 
         async private void ExecuteConnect()
         {
@@ -973,7 +980,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteReset(object obj)
         {
-            int[] reset = { 1 };
+            int[] reset = { CFBs.CUpdater.AutoUpdIndex };
             CTcpClientService.SetCommandToServer(298, reset);
         }
 
@@ -1039,7 +1046,7 @@ namespace Android_Silver.Pages
                 if (EthernetEntities.IsConnected)
                 {
                     CModesEntities.ShedCountQueues = 0;
-                    CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+                    CActivePagesEntities.SetActivePageState(ActivePageState.BootloaderPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
                     CTcpClientService.SendRecieveTask("0100,057");
@@ -1071,6 +1078,11 @@ namespace Android_Silver.Pages
         {
             int[] vals = { 1 };
             CTcpClientService.SetCommandToServer(163, vals);
+        }
+
+        private void ExecuteBootloader(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.BootloaderPage);
         }
         #endregion
 
