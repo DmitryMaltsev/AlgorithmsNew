@@ -390,10 +390,10 @@ namespace Android_Silver.ViewModels
         private void ExecuteSetSwitch(StrSet cStroke)
         {
             //Совмесмтить ControllerCheck и StrSet
-            CFBs.CControllerCheck.ServosOverridesList[cStroke.SwitchIndex]=cStroke.SwitchIsOn;
+            CFBs.CControllerCheck.ServosOverridesList[cStroke.SwitchIndex] = cStroke.SwitchIsOn;
             CFBs.CControllerCheck.SetOverrides();
-            int[] arr = { CFBs.CControllerCheck.OverrideIsActive1 };
-            CTcpClientService.SetCommandToServer(CMenusEntities.ETH_CONTROLLER_SWITCH1_ADDR, arr);
+            int[] arr = { CFBs.CControllerCheck.OverrideIsActive1, CFBs.CControllerCheck.OverrideIsActive2 };
+            CTcpClientService.SetCommandToServer(CMenusEntities.ETH_CONTROLLER_SWITCH_ADDR, arr);
         }
 
         Timer timer;

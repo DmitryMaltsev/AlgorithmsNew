@@ -247,7 +247,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ControllerCheck:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 2, 25, 0, 10};
+                            _readValuesArr = new byte[] { 1, 3, 2, 25, 0, 14};
                         }
                         break;
                     case MessageStates.UpdaterMessage:

@@ -56,6 +56,28 @@ namespace Android_Silver.Entities.FBEntities
             }
         }
 
+        private IntValue _damper1Opened;
+        public IntValue Damper1Opened
+        {
+            get { return _damper1Opened; }
+            set
+            {
+                _damper1Opened = value;
+                OnPropertyChanged(nameof(Damper1Opened));
+            }
+        }
+
+        private IntValue _damper2Opened;
+        public IntValue Damper2Opened
+        {
+            get { return _damper2Opened; }
+            set
+            {
+                _damper2Opened = value;
+                OnPropertyChanged(nameof(Damper2Opened));
+            }
+        }
+
         public ushort OverrideIsActive1;
         public ushort OverrideIsActive2;
 
@@ -98,6 +120,8 @@ namespace Android_Silver.Entities.FBEntities
             Servo2Pos = new IntValue(0, 100);
             Servo3Pos = new IntValue(0, 100);
             Servo4Pos = new IntValue(0, 100);
+            Damper1Opened = new IntValue(0, 1);
+            Damper2Opened = new IntValue(0, 1);
         }
 
         public void GetOverrides()

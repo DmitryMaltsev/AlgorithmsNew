@@ -13,6 +13,8 @@ namespace Android_Silver.Entities.FBEntities
         public int DamperOpenTime;
         public int DamperHeatingTime;
         public List<ServoDamer> ServoDampers;
+        public ushort Damper1Opened;
+        public ushort Damper2Opened;
         public byte isTest;
         public DamperSetPoints()
         {

@@ -1017,7 +1017,7 @@ namespace Android_Silver.Services
                 _fbs.CUpdater.SetFWBkp(_fbs.CUpdater.FWVerBkp);
                 return startIndex;
             }
-           
+
             #endregion
 
 
@@ -3273,6 +3273,8 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[2].CVal = _fbs.CDamperSetPoints.ServoDampers[1].CAngle;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[4].CVal = _fbs.CDamperSetPoints.ServoDampers[2].CAngle;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[6].CVal = _fbs.CDamperSetPoints.ServoDampers[3].CAngle;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[8].CVal = _fbs.CDamperSetPoints.Damper1Opened;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[10].CVal = _fbs.CDamperSetPoints.Damper2Opened;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[1].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[0];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[3].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[1];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[5].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[2];
@@ -3328,6 +3330,30 @@ namespace Android_Silver.Services
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _fbs.CControllerCheck.Servo4Pos.Value = buffer;
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 10 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 10 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.CDamperSetPoints.Damper1Opened = buffer;
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 11 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 11 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.CControllerCheck.Damper1Opened.Value = buffer;
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 12 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 12 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.CDamperSetPoints.Damper2Opened = buffer;
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 13 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 13 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.CControllerCheck.Damper2Opened.Value = buffer;
                 return startIndex;
             }
             #endregion
