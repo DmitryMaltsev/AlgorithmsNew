@@ -970,37 +970,74 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
 
             sSet = new StrSet(_fbEntities.CSensors.OutdoorTemp.Value.Min, _fbEntities.CSensors.OutdoorTemp.Value.Max,
-            "Темп. улицы", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-                 valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 6, switchIndex: 6);
+            "Темп. улицы", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.OutdoorTemp.Value.Min, _fbEntities.CSensors.OutdoorTemp.Value.Max,
+           "Темп. улицы овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+                 valScale: _fbEntities.CSensors.OutdoorTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 15, switchIndex: 6);
+            strSets.Add(sSet);
+
+            sSet = new StrSet(_fbEntities.CSensors.SupTemp.Value.Min, _fbEntities.CSensors.SupTemp.Value.Max,
+            "Темп. канала", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: _fbEntities.CSensors.SupTemp.Value.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.SupTemp.Value.Min, _fbEntities.CSensors.SupTemp.Value.Max,
-            "Темп. канала", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-                valScale: _fbEntities.CSensors.SupTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 7, switchIndex: 7);
+           "Темп. канала овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+               valScale: _fbEntities.CSensors.SupTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 17, switchIndex: 7);
+            strSets.Add(sSet);
+
+            sSet = new StrSet(_fbEntities.CSensors.RoomTemp.Value.Min, _fbEntities.CSensors.RoomTemp.Value.Max,
+            "Темп. комнаты", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: _fbEntities.CSensors.RoomTemp.Value.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.RoomTemp.Value.Min, _fbEntities.CSensors.RoomTemp.Value.Max,
-            "Темп. комнаты", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-             valScale: _fbEntities.CSensors.RoomTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 8, switchIndex: 8);
+           "Темп. комнаты овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: _fbEntities.CSensors.RoomTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 19, switchIndex: 8);
+            strSets.Add(sSet);
+
+            sSet = new StrSet(_fbEntities.CSensors.TempH1.Value.Min, _fbEntities.CSensors.TempH1.Value.Max,
+            "Темп. гор датч прит", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,valScale: _fbEntities.CSensors.TempH1.Value.NumChr, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CSensors.TempH1.Value.Min, _fbEntities.CSensors.TempH1.Value.Max,
-            "Темп. гор датч прит", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-             valScale: _fbEntities.CSensors.TempH1.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 9, switchIndex: 9);
+           "Темп. гор датч прит овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: _fbEntities.CSensors.TempH1.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 21, switchIndex: 9);
             strSets.Add(sSet);
+
             sSet = new StrSet(_fbEntities.CSensors.TempC1.Value.Min, _fbEntities.CSensors.TempC1.Value.Max,
             "Темп. хол датч прит", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.TempC1.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 10, switchIndex: 10);
+            valScale: _fbEntities.CSensors.TempC1.Value.NumChr, pickVals);
             strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.TempC1.Value.Min, _fbEntities.CSensors.TempC1.Value.Max,
+           "Темп. хол датч прит овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+          valScale: _fbEntities.CSensors.TempC1.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 23, switchIndex: 10);
+            strSets.Add(sSet);
+
+
             sSet = new StrSet(_fbEntities.CSensors.TempH2.Value.Min, _fbEntities.CSensors.TempH2.Value.Max,
             "Темп. гор датч выт", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.TempH2.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 11, switchIndex: 11);
+            valScale: _fbEntities.CSensors.TempH2.Value.NumChr, pickVals);
             strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.TempH2.Value.Min, _fbEntities.CSensors.TempH2.Value.Max,
+           "Темп. гор датч выт овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+           valScale: _fbEntities.CSensors.TempH2.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 25, switchIndex: 11);
+            strSets.Add(sSet);
+
             sSet = new StrSet(_fbEntities.CSensors.TempC2.Value.Min, _fbEntities.CSensors.TempC2.Value.Max,
             "Темп. хол датч выт", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.TempC2.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 12, switchIndex: 12);
+            valScale: _fbEntities.CSensors.TempC2.Value.NumChr, pickVals);
             strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.TempC2.Value.Min, _fbEntities.CSensors.TempC2.Value.Max,
+           "Темп. хол датч выт овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+           valScale: _fbEntities.CSensors.TempC2.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 27, switchIndex: 12);
+            strSets.Add(sSet);
+
             sSet = new StrSet(_fbEntities.CSensors.ReturnTemp.Value.Min, _fbEntities.CSensors.ReturnTemp.Value.Max,
             "Темп. обр. воды", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
-            valScale: _fbEntities.CSensors.ReturnTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 13, switchIndex: 13);
+            valScale: _fbEntities.CSensors.ReturnTemp.Value.NumChr, pickVals);
             strSets.Add(sSet);
+            sSet = new StrSet(_fbEntities.CSensors.ReturnTemp.Value.Min, _fbEntities.CSensors.ReturnTemp.Value.Max,
+            "Темп. обр. воды овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: _fbEntities.CSensors.ReturnTemp.Value.NumChr, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 29, switchIndex: 13);
+            strSets.Add(sSet);
+
             sSet = new StrSet(0, 100, "Вент притока", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 14, switchIndex: 14);
             strSets.Add(sSet);
