@@ -15,6 +15,8 @@ namespace Android_Silver.Entities.FBEntities
 
         public List<bool> ServosOverridesList = new List<bool>();
 
+        #region Rising properties
+
         private IntValue _servo1Pos;
         public IntValue Servo1Pos
         {
@@ -77,6 +79,9 @@ namespace Android_Silver.Entities.FBEntities
                 OnPropertyChanged(nameof(Damper2Opened));
             }
         }
+        #endregion
+
+
 
         public ushort OverrideIsActive1;
         public ushort OverrideIsActive2;
@@ -89,7 +94,10 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue Thm2_CTemp;
         public FloatValue ExhaustTemp;
         public FloatValue ReturnWaterTemp;
-
+        public IntValue SFanPerc;
+        public IntValue EFanPerc;
+        public FloatValue STaVal;
+        public FloatValue ETaVal;
 
         public ControllerCheck()
         {
@@ -140,7 +148,12 @@ namespace Android_Silver.Entities.FBEntities
             Thm2_HTemp = new FloatValue(-100, 100, 1); ;
             Thm2_CTemp = new FloatValue(-100, 100, 1); ;
             ExhaustTemp = new FloatValue(-100, 100, 1); ;
-            ReturnWaterTemp = new FloatValue(-100, 100, 1); ;
+            ReturnWaterTemp = new FloatValue(-100, 100, 1); 
+
+            SFanPerc = new IntValue(0, 100);
+            EFanPerc = new IntValue(0, 100);
+            STaVal = new FloatValue(0, 100, 2);
+            ETaVal = new FloatValue(0, 100, 2);
         }
 
         public void GetOverrides()
@@ -184,6 +197,7 @@ namespace Android_Silver.Entities.FBEntities
         public void SetOverrides()
         {
             OverrideIsActive1 = 0;
+            OverrideIsActive2 = 0;
             if (ServosOverridesList[0])
                 OverrideIsActive1 |= 1;
             if (ServosOverridesList[1])

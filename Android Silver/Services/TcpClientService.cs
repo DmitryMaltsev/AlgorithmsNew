@@ -74,8 +74,8 @@ namespace Android_Silver.Services
             try
             {
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 1000;
-                _ethernetEntities.Client.SendTimeout = 1000;
+                _ethernetEntities.Client.ReceiveTimeout = 600;
+                _ethernetEntities.Client.SendTimeout = 600;
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = true;
                 _ethernetEntities.CanTryToConnect = !IsConnecting;
@@ -247,7 +247,7 @@ namespace Android_Silver.Services
                         break;
                     case MessageStates.ControllerCheck:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 2, 25, 0, 30 };
+                            _readValuesArr = new byte[] { 1, 3, 2, 25, 0, 38 };
                         }
                         break;
                     case MessageStates.UpdaterMessage:

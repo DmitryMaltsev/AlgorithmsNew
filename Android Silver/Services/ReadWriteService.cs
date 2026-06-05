@@ -3279,15 +3279,34 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[14].CVal = _fbs.CSensors.SupTemp.Value.Value;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[16].CVal = _fbs.CSensors.RoomTemp.Value.Value;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[18].CVal = _fbs.CSensors.TempH1.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[20].CVal = _fbs.CSensors.TempC1.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[22].CVal = _fbs.CSensors.TempH2.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[24].CVal = _fbs.CSensors.TempC2.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[26].CVal = _fbs.CSensors.ReturnTemp.Value.Value;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[20].CVal = _fbs.ThmSps.SupPTa.Value;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[22].CVal = _fbs.CSensors.TempC1.Value.Value;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[24].CVal = _fbs.CSensors.TempH2.Value.Value;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[26].CVal = _fbs.ThmSps.EPTa.Value;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[28].CVal = _fbs.CSensors.TempC2.Value.Value;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[30].CVal = _fbs.CSensors.ReturnTemp.Value.Value;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[32].CVal = _fbs.CFans.SPercent;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[34].CVal = _fbs.CFans.EPercent;
+
 
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[1].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[0];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[3].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[1];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[5].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[2];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[7].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[3];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[9].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[4];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[11].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[5];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[13].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[6];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[15].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[7];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[17].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[8];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[19].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[9];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[21].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[10];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[23].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[11];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[25].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[12];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[27].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[13];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[29].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[14];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[31].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[15];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[33].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[16];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[35].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[17];
                 }
                 return startIndex;
             }
@@ -3407,42 +3426,85 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 22 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 22 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.CSensors.TempC1.Value, value, ref startIndex);
+                GetFloatValueResult(_fbs.ThmSps.SupPTa, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 23 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 23 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.CControllerCheck.Thm1_CTemp, value, ref startIndex);
+                GetFloatValueResult(_fbs.CControllerCheck.STaVal, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 24 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 24 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.CSensors.TempH2.Value, value, ref startIndex);
+                GetFloatValueResult(_fbs.CSensors.TempC1.Value, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 25 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 25 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.CControllerCheck.Thm2_HTemp, value, ref startIndex);
+                GetFloatValueResult(_fbs.CControllerCheck.Thm1_CTemp, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 26 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 26 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.CSensors.TempC2.Value, value, ref startIndex);
+                GetFloatValueResult(_fbs.CSensors.TempH2.Value, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 27 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 27 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.CControllerCheck.Thm2_CTemp, value, ref startIndex);
+                GetFloatValueResult(_fbs.CControllerCheck.Thm2_HTemp, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 28 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 28 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.CSensors.ReturnTemp.Value, value, ref startIndex);
+                GetFloatValueResult(_fbs.ThmSps.EPTa, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 29 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 29 + _menusEntities.WriteOffset)
             {
+                GetFloatValueResult(_fbs.CControllerCheck.ETaVal, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 30 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 30 + _menusEntities.WriteOffset)
+            {
+                GetFloatValueResult(_fbs.CSensors.TempC2.Value, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 31 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 31 + _menusEntities.WriteOffset)
+            {
+                GetFloatValueResult(_fbs.CControllerCheck.Thm2_CTemp, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 32 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 32 + _menusEntities.WriteOffset)
+            {
+                GetFloatValueResult(_fbs.CSensors.ReturnTemp.Value, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 33 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 33 + _menusEntities.WriteOffset)
+            {
                 GetFloatValueResult(_fbs.CControllerCheck.ReturnWaterTemp, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 34 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 34 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.CFans.SPercent = buffer;
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 35 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 35 + _menusEntities.WriteOffset)
+            {
+                GetIntValueResult(_fbs.CControllerCheck.SFanPerc, value, ref startIndex);
+                return startIndex;
+            }
+
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 36 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 36 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.CFans.EPercent = buffer;
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 37 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 37 + _menusEntities.WriteOffset)
+            {
+                GetIntValueResult(_fbs.CControllerCheck.EFanPerc, value, ref startIndex);
                 return startIndex;
             }
             #endregion

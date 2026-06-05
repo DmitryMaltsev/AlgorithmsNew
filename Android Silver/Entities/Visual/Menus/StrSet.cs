@@ -158,9 +158,9 @@ namespace Android_Silver.Entities.Visual.Menus
                 if (_switchIsOn != value)
                 {
                     _switchIsOn = value;
+                    OnPropertyChanged(nameof(SwitchIsOn));
                     SwitchIsOnAction?.Invoke(this);
                 }
-                OnPropertyChanged(nameof(SwitchIsOn));
             }
         }
 
