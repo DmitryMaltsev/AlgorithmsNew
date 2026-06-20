@@ -877,8 +877,7 @@
             <Label Text="Настроить" Grid.Row="15" Grid.Column="8" Style="{StaticResource OtherSettingsLabel}"
                                                          IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" />
             <Button Grid.Row="15" Grid.Column="8" Command="{Binding BootloaderCommand}"  Style="{StaticResource OtherSettingsBut}" ImageSource="{Binding CPictureSet.DownloadBut.Current}"
-             Pressed="Download_Pressed" Released="Download_Released"  IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}" 
-                                                                                                                     IsEnabled="{Binding CFBs.CUpdater.NotIsUpdate}"/>
+             Pressed="Download_Pressed" Released="Download_Released"  IsVisible = "{Binding CActivePagesEntities.IsOtherSettingsPage}"/>
             <!--#endregion-->
 
             <!--#endregion-->

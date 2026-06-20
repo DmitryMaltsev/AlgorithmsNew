@@ -74,8 +74,8 @@ namespace Android_Silver.Services
             try
             {
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 600;
-                _ethernetEntities.Client.SendTimeout = 600;
+                _ethernetEntities.Client.ReceiveTimeout = 800;
+                _ethernetEntities.Client.SendTimeout = 800;
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = true;
                 _ethernetEntities.CanTryToConnect = !IsConnecting;
@@ -433,8 +433,8 @@ namespace Android_Silver.Services
                 }
                 catch
                 {
-                    // _stream?.Close();
-                    _trySendcounter += 1;
+                        // _stream?.Close();
+                        _trySendcounter += 1;
                     //Thread.Sleep(200);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
 
