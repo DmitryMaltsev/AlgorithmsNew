@@ -69,6 +69,7 @@ namespace Android_Silver.Services
             //RecieveData(100,8);
         }
 
+
         public async Task Connect()
         {
             try

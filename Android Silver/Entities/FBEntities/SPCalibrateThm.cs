@@ -55,14 +55,14 @@ namespace Android_Silver.Entities.FBEntities
             DeltaTCalibrates = new float[7];
             PCalibratesLimits = new FloatValue(0, 100, 2);
             PCalibrates = new float[7];
-            FlowCalibratesLimits = new FloatValue(0, 100_000, 0);
+            FlowCalibratesLimits = new FloatValue(0, 65535, 0);
             FlowCalibrates = new float[7];
             CavType = new IntValue(0, 1);
             CalibrateDeltaT = new FloatValue(10, 50, 0);
             PUReg = new IntValue(0, 10_000);
             IUReg = new IntValue(0, 10_000);
             DUReg = new IntValue(0, 10_000);
-            DeltaHCalibratesLimits = new FloatValue(-150, 150, 2);
+            DeltaHCalibratesLimits = new FloatValue(0, 100, 2);
             DeltaHCalibrates = new float[7];
             HotTHmdelayS = new IntValue(0, 1000);
             ColdThmDelayS = new IntValue(0, 1000);

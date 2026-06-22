@@ -227,7 +227,7 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 20, "Аналоговый вход 0-10В AR3", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Драйвер", "Modbus", "MB1+MB2" };
-            sSet = new StrSet(0, 4, "Рекуператор", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 3, "Рекуператор", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[0].StrSetsCollection = strSets;
             #endregion
@@ -309,21 +309,18 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 90, "Сервопривод 4  положение 1 градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 90, "Сервопривод 4 положение 2", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 90, "Сервопривод 4 положение 2 градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[2].StrSetsCollection = strSets;
-
-
-
             #endregion
             #region Вентилятор
             strSets = new ObservableCollection<StrSet>();
             pickVals = new List<string>() { "Откл", "Вкл" };
             //sSet = new StrSet(0, 1, "Вентилятор вытяжки", isVisible: true, pickerIsVisible: true, entryIsVisible: false, pickVals);
             //strStes.Add(sSet);
-            sSet = new StrSet(0, 100000, "Номин.расход вент. прит, м3/ч", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
+            sSet = new StrSet(0, 65535, "Номин.расход вент. прит, м3/ч", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 100000, "Номин.расход вент. вытяжки, м3/ч", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
+            sSet = new StrSet(0, 65535, "Номин.расход вент. вытяжки, м3/ч", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Нижняя граница запрета, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
@@ -607,7 +604,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Максимальная производительность вытяжки", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 40, "Уставка температуры", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
+            sSet = new StrSet(15, 40, "Уставка температуры", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Ограничение мощности", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);

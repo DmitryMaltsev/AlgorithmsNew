@@ -12,7 +12,6 @@ namespace Android_Silver.Entities.FBEntities
 {
     public class CommonSetPoints:BindableBase
     {
-
         private FloatValue _spTemp;
         public FloatValue SPTempR
         {
@@ -39,9 +38,9 @@ namespace Android_Silver.Entities.FBEntities
             SPTempMinCh = new FloatValue(0, 100, 1);
             SPTempAlarm = new FloatValue(0, 100, 1);
             TControlDelayS = new IntValue(0, 65535);
-            SPSeason = new FloatValue(0, 30, 1);
+            SPSeason = new FloatValue(-10, 30, 1);
             HystSeason = new FloatValue(0, 20, 1);
-            SeasonMode = new IntValue(0, 4);
+            SeasonMode = new IntValue(0, 2);
             RoomSPPReg = new IntValue(0, 10_000);
             RoomSPIReg = new IntValue(0, 10_000);
             RoomSPDReg = new IntValue(0, 10_000);
