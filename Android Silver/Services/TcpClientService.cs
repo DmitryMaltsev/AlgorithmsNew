@@ -75,8 +75,8 @@ namespace Android_Silver.Services
             try
             {
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 800;
-                _ethernetEntities.Client.SendTimeout = 800;
+                _ethernetEntities.Client.ReceiveTimeout = 1000;
+                _ethernetEntities.Client.SendTimeout = 1000;
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = true;
                 _ethernetEntities.CanTryToConnect = !IsConnecting;
@@ -226,14 +226,14 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 0, 100, 0, 130};
+                            _readValuesArr = new byte[] { 1, 3, 0, 1, 0, 167};
                             // messToClient = "0100,058\r\n";
                         }
                         break;
                     case MessageStates.ServiceMessage1:
                         {
                             //1 44 126
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 237 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 238 };
                             //messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -241,14 +241,14 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage2:
                         {
                             //1 170 121
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 237 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 238 };
                             //messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
                     case MessageStates.ControllerCheck:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 2, 25, 0, 38 };
+                            _readValuesArr = new byte[] { 1, 3, 2, 26, 0, 38 };
                         }
                         break;
                     case MessageStates.UpdaterMessage:

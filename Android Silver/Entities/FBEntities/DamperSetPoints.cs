@@ -15,18 +15,20 @@ namespace Android_Silver.Entities.FBEntities
         public List<ServoDamer> ServoDampers;
         public ushort Damper1Opened;
         public ushort Damper2Opened;
+        public ushort ServoOpenTime;
         public byte isTest;
         public DamperSetPoints()
         {
-            ServoDampers=new List<ServoDamer>();
+            ServoDampers = new List<ServoDamer>();
             ServoDampers.Add(new ServoDamer());
             ServoDampers.Add(new ServoDamer());
             ServoDampers.Add(new ServoDamer());
             ServoDampers.Add(new ServoDamer());
+            ServoOpenTime = 5000;
         }
     }
 
-    public class ServoDamer:BindableBase
+    public class ServoDamer : BindableBase
     {
         public ushort StartPos;
         public ushort EndPos;

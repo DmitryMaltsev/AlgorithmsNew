@@ -981,7 +981,7 @@ namespace Android_Silver.Pages
         private void ExecuteReset(object obj)
         {
             int[] reset = { CFBs.CUpdater.AutoUpdIndex };
-            CTcpClientService.SetCommandToServer(298, reset);
+            CTcpClientService.SetCommandToServer(168, reset);
         }
 
         private void ExecuteDownload(object obj)

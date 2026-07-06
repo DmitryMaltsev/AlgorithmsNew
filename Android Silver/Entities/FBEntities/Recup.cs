@@ -39,7 +39,7 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue BPolKoef;
         public int PReg;
         public int IReg;
-        public int DReg;
+        public FloatValue ReductKoef;
         public FloatValue TEffSP;
         public int EffFailValue;
         public int EffFailDelay;
@@ -57,6 +57,7 @@ namespace Android_Silver.Entities.FBEntities
             TempB = new FloatValue(-50, 50, 1);
             TempC = new FloatValue(-50, 50, 1);
             TempD = new FloatValue(-50, 50, 1);
+            ReductKoef = new FloatValue(0, 100, 1);
             RecInMeasureTrh = new IntValue(0, 100);
         }
 

@@ -138,7 +138,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_COMMON_SETTINGS_ADDR = 300;
             ETH_COMMON_SETTINGS_LENGTH = 15;
             ETH_DAMPER_SETTINGS_ADDR = ETH_COMMON_SETTINGS_ADDR + ETH_COMMON_SETTINGS_LENGTH;
-            ETH_DAMPER_SETTINGS_LENGTH = 18;
+            ETH_DAMPER_SETTINGS_LENGTH = 19;
             ETH_FAN_SETTINGS_ADDR = ETH_DAMPER_SETTINGS_ADDR + ETH_DAMPER_SETTINGS_LENGTH;
             ETH_FAN_SETTINGS_LENGTH = 12;
             ETH_WH_SETTINGS_ADDR = ETH_FAN_SETTINGS_ADDR + ETH_FAN_SETTINGS_LENGTH;
@@ -169,7 +169,6 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_RECUP_CURRENTSETTINGS_LENGTH = 40;
             ETH_CONTROLLER_CHECK_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
             ETH_CONTROLLER_CHECK_LENGTH = 5;
-
             ETH_CONTROLLER_SWITCH_ADDR = ETH_CONTROLLER_CHECK_ADDR;
             InterfaceStrCollection = new ObservableCollection<StrSet>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
@@ -278,6 +277,8 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 65000, "Время открытия, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 65000, "Время прогрева", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            sSet = new StrSet(0, 60, "Время открытия серво, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Сервопривод 1 начальная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
@@ -422,7 +423,8 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, PidMaxVal, "D коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
+            sSet = new StrSet(_fbEntities.CRecup.ReductKoef.Min, _fbEntities.CRecup.ReductKoef.Max, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true, 
+                isEnabled: true, valScale: _fbEntities.CRecup.ReductKoef.NumChr, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.TEffSP.Min, _fbEntities.CRecup.TEffSP.Max, "Граница темп. авар. КПД, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TEffSP.NumChr, pickVals, false);
             strSets.Add(sSet);

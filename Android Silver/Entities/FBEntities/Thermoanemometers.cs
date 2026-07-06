@@ -76,7 +76,7 @@ namespace Android_Silver.Entities.FBEntities
             EBCold = new FloatValue(-322, 322, 2);
 
             FailMeasureCount = new IntValue(0, 100);
-            ColdDeltaMax = new FloatValue(0, 10, 1);
+            ColdDeltaMax = new FloatValue(-10, 10, 1);
         }
 
     }

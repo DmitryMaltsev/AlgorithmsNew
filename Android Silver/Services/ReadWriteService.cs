@@ -35,877 +35,16 @@ namespace Android_Silver.Services
 
             _fbs = DIContainer.Resolve<FBs>();
         }
-
         public ushort EthernetData_Read(byte[] value, int startAddr, ushort startIndex, byte func)
         {
-            #region Основной интерфейс
-            if (startAddr == 100)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CRecup.FreqHZ = buffer;
-                return startIndex;
-            }
-            if (startAddr == 101)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CEHSetPoints.CPower = buffer;
-                return startIndex;
-            }
-            if (startAddr == 102)
-            {
-                GetFloatValueResult(_fbs.CCommonSetPoints.SPTempR, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 103)
-            {
-                GetFloatValueResult(_fbs.CSensors.OutdoorTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 104)
-            {
-                GetFloatValueResult(_fbs.CSensors.SupTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 105)
-            {
-                GetFloatValueResult(_fbs.CSensors.ExhaustTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 106)
-            {
-                GetFloatValueResult(_fbs.CSensors.RoomTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 107)
-            {
-                GetFloatValueResult(_fbs.CSensors.ReturnTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            //Режим 1
-            if (startAddr == 108)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.SetMode1ValuesByIndex(buffer);
-                if (func == 16)
-                {
-                    _activePageEntities.SetActivePageState(ActivePageState.MainPage);
-                }
-                return startIndex;
-            }
-            //Режим 2
-            if (startAddr == 109)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.SetMode2ValuesByIndex(buffer);
-                return startIndex;
-            }
+            #region Вкладка 1
 
-            #region Минимальный
-            if (startAddr == 110)
+            if (startAddr < 150)
             {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].SypplySP, value, ref startIndex);
+                startIndex += 2;
                 return startIndex;
             }
-            if (startAddr == 111)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 112)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[1].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 113)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 114)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 115)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Номинальный
-            if (startAddr == 116)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 117)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 118)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[2].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 119)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 120)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 121)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Максимальный
-            if (startAddr == 122)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 123)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 124)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[3].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 125)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 126)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 127)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Режим кухни
-            if (startAddr == 128)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 129)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 130)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[4].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 131)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 132)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 133)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Режим отпуска
-            if (startAddr == 134)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 135)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 136)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[5].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 137)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 138)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 139)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Настройка спец режима
-            if (startAddr == 140)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[8].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 141)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[8].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 142)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[8].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 143)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[8].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            if (startAddr == 144)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 145)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (_fbs.CAlarms.Alarms1 != buffer)
-                {
-                    _fbs.CAlarms.Alarms1 = buffer;
-                    _fbs.CAlarms.Alarms1Changed = true;
-                }
-
-                return startIndex;
-            }
-            if (startAddr == 146)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (_fbs.CAlarms.Alarms2 != buffer)
-                {
-                    _fbs.CAlarms.Alarms2 = buffer;
-                    _fbs.CAlarms.Alarms2Changed = true;
-                }
-                if (_fbs.CAlarms.Alarms1Changed || _fbs.CAlarms.Alarms2Changed)
-                {
-                    MainThread.BeginInvokeOnMainThread(() =>
-                    {
-                        _fbs.CAlarms.AlarmsCollection.Clear();
-                    });
-                    BitArray bitArrrayBuf = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms1);
-                    _fbs.CAlarms.ConverBitArrayToAlarms(bitArrrayBuf, 0);
-                    bitArrrayBuf = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms2);
-                    _fbs.CAlarms.ConverBitArrayToAlarms(bitArrrayBuf, 1);
-                    _fbs.CAlarms.Alarms1Changed = false;
-                    _fbs.CAlarms.Alarms2Changed = false;
-                }
-                return startIndex;
-            }
-            //Режим по контакту
-            if (startAddr == 147)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(4, 0, buffer);
-                return startIndex;
-            }
-            if (startAddr == 148)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CHumiditySPS.HumiditySP = buffer;
-                return startIndex;
-            }
-            //Включен ли спец режим
-            if (startAddr == 149)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                bool isSpec = buffer > 0 ? true : false;
-                _fbs.OtherSettings.IsSpecMode = isSpec;
-                return startIndex;
-            }
-            //Включен ли режим многоэтажки
             if (startAddr == 150)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                bool isMF = buffer > 0 ? true : false;
-                _fbs.OtherSettings.IsMF = isMF;
-                return startIndex;
-            }
-            if (startAddr == 151)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 99)
-                {
-                    _fbs.CTime.Year = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 152)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 12)
-                {
-                    _fbs.CTime.Month = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 153)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 31)
-                {
-                    _fbs.CTime.Day = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 154)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 60)
-                {
-                    _fbs.CTime.Hour = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 155)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 60)
-                {
-                    _fbs.CTime.Minute = buffer;
-                    _fbs.CTime.SetTimerInterface();
-                }
-                return startIndex;
-            }
-            if (startAddr == 156)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CTime.DayOfWeek = buffer;
-                return startIndex;
-            }
-            if (startAddr == 157)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 100)
-                {
-                    _fbs.CRecup.Efficiency = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 158)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 100)
-                {
-                    _fbs.CFilterVals.FilterClearPercent = buffer;
-                    if (_fbs.CFilterVals.FilterClearPercent >= 0 && _fbs.CFilterVals.FilterClearPercent <= 20)
-                    {
-                        if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter0Header)
-                        {
-                            _pictureSet.FilterCurrentHeader = _pictureSet.Filter0Header;
-                        }
-                    }
-                    else
-                    if (_fbs.CFilterVals.FilterClearPercent >= 21 && _fbs.CFilterVals.FilterClearPercent <= 40)
-                    {
-                        if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter20Header)
-                        {
-                            _pictureSet.FilterCurrentHeader = _pictureSet.Filter20Header;
-                        }
-
-                    }
-                    else
-                    if (_fbs.CFilterVals.FilterClearPercent >= 41 && _fbs.CFilterVals.FilterClearPercent <= 60)
-                    {
-                        if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter40Header)
-                        {
-                            _pictureSet.FilterCurrentHeader = _pictureSet.Filter40Header;
-                        }
-
-                    }
-                    if (_fbs.CFilterVals.FilterClearPercent >= 61 && _fbs.CFilterVals.FilterClearPercent <= 80)
-                    {
-                        if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter60Header)
-                        {
-                            _pictureSet.FilterCurrentHeader = _pictureSet.Filter60Header;
-                        }
-
-                    }
-                    else
-                      if (_fbs.CFilterVals.FilterClearPercent >= 81 && _fbs.CFilterVals.FilterClearPercent <= 100)
-                    {
-                        if (_pictureSet.FilterCurrentHeader != _pictureSet.Filter80Header)
-                        {
-                            _pictureSet.FilterCurrentHeader = _pictureSet.Filter80Header;
-                        }
-
-                    }
-                }
-                return startIndex;
-            }
-            if (startAddr == 159)
-            {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                if (_fbs.CAlarms.IsRecupLowTurns)
-                {
-                    if (_pictureSet.RecuperatorHeaderCurrent != _pictureSet.RecuperatorHeaderAlarm)
-                        _pictureSet.RecuperatorHeaderCurrent = _pictureSet.RecuperatorHeaderAlarm;
-                }
-                else
-                if (buffer > 0)
-                {
-                    if (_pictureSet.RecuperatorHeaderCurrent != _pictureSet.RecuperatorHeaderWork)
-                        _pictureSet.RecuperatorHeaderCurrent = _pictureSet.RecuperatorHeaderWork;
-                }
-                else
-                {
-                    if (_pictureSet.RecuperatorHeaderCurrent != "")
-                        _pictureSet.RecuperatorHeaderCurrent = "";
-                }
-                return startIndex;
-            }
-            if (startAddr == 160)
-            {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 100)
-                {
-                    if (buffer > 0)
-                    {
-                        _pictureSet.SetPicureSetIfNeed(_pictureSet.EHeaterHeader, _pictureSet.EHeaterHeader.Selected);
-                    }
-                    else
-                    {
-                        _pictureSet.SetPicureSetIfNeed(_pictureSet.EHeaterHeader, _pictureSet.EHeaterHeader.Default);
-                    }
-                }
-                return startIndex;
-            }
-            //Напряжение вентиляторов
-            if (startAddr == 161)
-            {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 10)
-                {
-                    if (buffer > 0)
-                    {
-                        _pictureSet.SetPicureSetIfNeed(_pictureSet.FanHeader, _pictureSet.FanHeader.Selected);
-                    }
-                    else
-                    {
-                        _pictureSet.SetPicureSetIfNeed(_pictureSet.FanHeader, _pictureSet.FanHeader.Default);
-                    }
-                }
-                return startIndex;
-            }
-            //Предуреждение активно
-            if (startAddr == 162)
-            {
-                int buffer = (int)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 1)
-                {
-                    if (buffer > 0)
-                    {
-                        _pictureSet.SetPicureSetIfNeed(_pictureSet.AlarmMainIcon, _pictureSet.AlarmMainIcon.Selected);
-                    }
-                    else
-                    {
-                        _pictureSet.SetPicureSetIfNeed(_pictureSet.AlarmMainIcon, _pictureSet.AlarmMainIcon.Default);
-                    }
-                }
-                return startIndex;
-            }
-            if (startAddr == 163)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 65535)
-                {
-                    _fbs.CFans.SFlow = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 164)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 65535)
-                {
-                    _fbs.CFans.EFlow = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 165)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 100)
-                {
-                    _fbs.CFans.SPercent = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 166)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 100)
-                {
-                    _fbs.CFans.EPercent = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 167)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 1)
-                {
-                    _fbs.CUpdater.IsUpdate = (byte)buffer;
-
-                }
-                return startIndex;
-            }
-            #region Отпуск
-            if (startAddr == 168)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[0].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 169)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[0].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 170)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[0].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 171)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(2, 0, buffer);
-                return startIndex;
-            }
-            if (startAddr == 172)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[1].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 173)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 174)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 175)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(2, 1, buffer);
-                return startIndex;
-            }
-            if (startAddr == 176)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[2].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 177)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[2].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 178)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[2].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 179)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(2, 2, buffer);
-                return startIndex;
-            }
-            if (startAddr == 180)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[3].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 181)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[3].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 182)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[3].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 183)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(2, 3, buffer);
-                return startIndex;
-            }
-            #endregion
-
-            #region Расписание
-            if (startAddr == 184)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[0].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 185)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 186)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 187)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(3, 0, buffer);
-                return startIndex;
-            }
-            if (startAddr == 188)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[1].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 189)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 190)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 191)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(3, 1, buffer);
-                return startIndex;
-            }
-            if (startAddr == 192)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[2].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 193)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 194)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 195)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(3, 2, buffer);
-                return startIndex;
-            }
-            if (startAddr == 196)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[3].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 197)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 198)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 199)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(3, 3, buffer);
-                return startIndex;
-            }
-            if (startAddr == 200)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[4].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 201)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 202)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 203)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(3, 4, buffer);
-                return startIndex;
-            }
-            if (startAddr == 204)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[5].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 205)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 206)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 207)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(3, 5, buffer);
-                return startIndex;
-            }
-            if (startAddr == 208)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[6].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 209)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 210)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 211)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(3, 6, buffer);
-                return startIndex;
-            }
-            if (startAddr == 212)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[7].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 213)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 214)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 215)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(3, 7, buffer);
-                if (_activePageEntities.IsLoadingPage)
-                {
-                    _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
-                }
-                return startIndex;
-            }
-            #endregion
-
-            if (startAddr == 216)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 65535)
-                {
-                    _fbs.CFans.SFlowFail = buffer;
-                }
-                return startIndex;
-            }
-
-            if (startAddr == 217)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 65535)
-                {
-                    _fbs.CFans.EFlowFail = buffer;
-                }
-                return startIndex;
-            }
-
-            #region Версии загрузчиков
-            if (startAddr == 218)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -914,7 +53,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 219)
+            if (startAddr == 151)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -923,7 +62,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 220)
+            if (startAddr == 152)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -932,7 +71,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 221)
+            if (startAddr == 153)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -943,7 +82,7 @@ namespace Android_Silver.Services
                 return startIndex;
             }
 
-            if (startAddr == 222)
+            if (startAddr == 154)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -952,7 +91,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 223)
+            if (startAddr == 155)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -961,7 +100,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 224)
+            if (startAddr == 156)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -970,7 +109,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 225)
+            if (startAddr == 157)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -980,7 +119,7 @@ namespace Android_Silver.Services
                 _fbs.CUpdater.SetFWNew(_fbs.CUpdater.FWVerNew);
                 return startIndex;
             }
-            if (startAddr == 226)
+            if (startAddr == 158)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -989,7 +128,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 227)
+            if (startAddr == 159)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -998,7 +137,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 228)
+            if (startAddr == 160)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -1007,7 +146,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 229)
+            if (startAddr == 161)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
@@ -1017,408 +156,19 @@ namespace Android_Silver.Services
                 _fbs.CUpdater.SetFWBkp(_fbs.CUpdater.FWVerBkp);
                 return startIndex;
             }
+            if (startAddr > 161 && startAddr < 167)
+            {
+                startIndex += 2;
+                return startIndex;
+            }
+            if (startAddr == 167)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 1)
+                {
+                    _fbs.CUpdater.IsUpdate = (byte)buffer;
 
-            #endregion
-
-
-            #endregion
-
-            #region Основной интерфейс запись
-            if (startAddr == 100 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CRecup.FreqHZ = buffer;
-                return startIndex;
-            }
-            if (startAddr == 101 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CEHSetPoints.CPower = buffer;
-                return startIndex;
-            }
-            if (startAddr == 102 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_fbs.CCommonSetPoints.SPTempR, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 103 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_fbs.CSensors.OutdoorTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 104 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_fbs.CSensors.SupTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 105 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_fbs.CSensors.ExhaustTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 106 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_fbs.CSensors.RoomTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 107 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_fbs.CSensors.ReturnTemp.Value, value, ref startIndex);
-                return startIndex;
-            }
-            //Режим 1
-            if (startAddr == 108 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.SetMode1ValuesByIndex(buffer);
-                _activePageEntities.SetActivePageState(ActivePageState.MainPage);
-                return startIndex;
-            }
-            //Режим 2
-            if (startAddr == 109 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.SetMode2ValuesByIndex(buffer);
-                return startIndex;
-            }
-
-            #region Минимальный
-            if (startAddr == 110 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 111 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 112 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[1].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 113 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 114 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 115 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[1].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Номинальный
-            if (startAddr == 116 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 117 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 118 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[2].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 119 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 120 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 121 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[2].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Максимальный
-            if (startAddr == 122 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 123 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 124 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[3].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 125 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 126 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 127 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[3].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Режим кухни
-            if (startAddr == 128 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 129 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 130 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[4].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 131 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 132 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 133 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[4].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Режим отпуска
-            if (startAddr == 134 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 135 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 136 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[5].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 137 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 138 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].SFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 139 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[5].EFanCorr, value, ref startIndex);
-                return startIndex;
-            }
-
-
-            #endregion
-
-            #region Настройка спец режима
-            if (startAddr == 140 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[8].SypplySP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 141 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[8].ExhaustSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 142 + _menusEntities.WriteOffset)
-            {
-                GetFloatValueResult(_modesEntities.Mode1ValuesList[8].TempSP, value, ref startIndex);
-                return startIndex;
-            }
-            if (startAddr == 143 + _menusEntities.WriteOffset)
-            {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[8].PowerLimitSP, value, ref startIndex);
-                return startIndex;
-            }
-            #endregion
-
-            #region Активация кухни
-            //Время активации
-            if (startAddr == 144 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[4].TimeModeValues[0].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 145 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                return startIndex;
-            }
-            if (startAddr == 146 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                return startIndex;
-            }
-
-            #endregion
-
-            //Ресет аварий
-            if (startAddr == 147 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                return startIndex;
-            }
-
-            #region Отпуск
-            if (startAddr == 148 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[0].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 149 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[0].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 150 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[0].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 151 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(2, 0, buffer);
-                return startIndex;
-            }
-            if (startAddr == 152 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[1].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 153 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 154 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[1].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 155 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(2, 1, buffer);
-                return startIndex;
-            }
-            if (startAddr == 156 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[2].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 157 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[2].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 158 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[2].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 159 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(2, 2, buffer);
-                return startIndex;
-            }
-            if (startAddr == 160 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[3].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 161 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[3].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 162 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[2].TimeModeValues[3].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 163 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(2, 3, buffer);
-                return startIndex;
-            }
-            #endregion
-
-            //Режим по контакту
-            if (startAddr == 164 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                GetTModeCMode1(4, 0, buffer);
-                return startIndex;
-            }
-
-            if (startAddr == 165 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CHumiditySPS.HumiditySP = buffer;
-                return startIndex;
-            }
-            //Демо режим
-            if (startAddr == 166 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                bool isSpecMode = buffer > 0 ? true : false;
-                _fbs.OtherSettings.IsSpecMode = isSpecMode;
+                }
                 return startIndex;
             }
             //Прошивка
@@ -1432,297 +182,11 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            //Текущая дата
             if (startAddr == 168 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 99)
-                {
-                    _fbs.CTime.Year = buffer;
-                }
                 return startIndex;
-            }
-            if (startAddr == 169 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 12)
-                {
-                    _fbs.CTime.Month = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 170 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 31)
-                {
-                    _fbs.CTime.Day = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 171 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 23)
-                {
-                    _fbs.CTime.Hour = buffer;
-                }
-                return startIndex;
-            }
-            if (startAddr == 172 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 59)
-                {
-                    _fbs.CTime.Minute = buffer;
-                    _fbs.CTime.SetTimerInterface();
-                }
-                return startIndex;
-            }
-            if (startAddr == 173 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                return startIndex;
-            }
-
-            #region Расписание
-            //Строка 1
-            if (startAddr == 174 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[0].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 175 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 176 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 177 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 5)
-                {
-                    _modesEntities.Mode2ValuesList[3].TimeModeValues[0].CMode1 = _modesEntities.Mode1ValuesList[buffer];
-                }
-                return startIndex;
-            }
-            //Строка 2
-            if (startAddr == 178 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[1].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 179 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 180 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 181 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 5)
-                {
-                    _modesEntities.Mode2ValuesList[3].TimeModeValues[1].CMode1 = _modesEntities.Mode1ValuesList[buffer];
-                }
-                return startIndex;
-            }
-            //Строка 3
-            if (startAddr == 182 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[2].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 183 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 184 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 185 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 5)
-                {
-                    _modesEntities.Mode2ValuesList[3].TimeModeValues[2].CMode1 = _modesEntities.Mode1ValuesList[buffer];
-                }
-                return startIndex;
-            }
-            //Строка 4
-            if (startAddr == 186 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[3].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 187 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 188 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 189 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 5)
-                {
-                    _modesEntities.Mode2ValuesList[3].TimeModeValues[3].CMode1 = _modesEntities.Mode1ValuesList[buffer];
-                }
-                return startIndex;
-            }
-            //Строка 5
-            if (startAddr == 190 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[4].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 191 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 192 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 193 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 5)
-                {
-                    _modesEntities.Mode2ValuesList[3].TimeModeValues[4].CMode1 = _modesEntities.Mode1ValuesList[buffer];
-                }
-                return startIndex;
-            }
-            //Строка 6
-            if (startAddr == 194 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[5].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 195 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 196 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 197 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 5)
-                {
-                    _modesEntities.Mode2ValuesList[3].TimeModeValues[5].CMode1 = _modesEntities.Mode1ValuesList[buffer];
-                }
-                return startIndex;
-            }
-            //Строка 7
-            if (startAddr == 198 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[6].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 199 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 200 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 201 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 5)
-                {
-                    _modesEntities.Mode2ValuesList[3].TimeModeValues[6].CMode1 = _modesEntities.Mode1ValuesList[buffer];
-                }
-                return startIndex;
-            }
-            //Строка 8
-            if (startAddr == 202 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[7].DayNum = buffer;
-                return startIndex;
-            }
-            if (startAddr == 203 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Hour = buffer;
-                return startIndex;
-            }
-            if (startAddr == 204 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Minute = buffer;
-                return startIndex;
-            }
-            if (startAddr == 205 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 5)
-                {
-                    _modesEntities.Mode2ValuesList[3].TimeModeValues[7].CMode1 = _modesEntities.Mode1ValuesList[buffer];
-                }
-                if (_activePageEntities.IsLoadingPage)
-                {
-                    _activePageEntities.SetActivePageState(ActivePageState.TSettingsPage);
-                }
-                return startIndex;
-            }
-
-
-            if (startAddr == 298 + _menusEntities.WriteOffset)
-            {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                return startIndex;
-            }
-            #endregion
-
+            } 
             #endregion
 
             #region Общие настройки
@@ -1838,112 +302,119 @@ namespace Android_Silver.Services
                 _fbs.CDamperSetPoints.DamperHeatingTime = buffer;
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 2 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
+            if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 2 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + _menusEntities.WriteOffset + 2)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer <= 100)
-                    _fbs.CDamperSetPoints.ServoDampers[0].StartPos = buffer;
+                if (buffer <= 60)
+                    _fbs.CDamperSetPoints.ServoOpenTime = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 3 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 100)
-                    _fbs.CDamperSetPoints.ServoDampers[0].EndPos = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[0].StartPos = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 4 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 100)
-                    _fbs.CDamperSetPoints.ServoDampers[1].StartPos = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[0].EndPos = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 5 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 100)
-                    _fbs.CDamperSetPoints.ServoDampers[1].EndPos = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[1].StartPos = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 6 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 6 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 100)
-                    _fbs.CDamperSetPoints.ServoDampers[2].StartPos = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[1].EndPos = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 7 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 100)
-                    _fbs.CDamperSetPoints.ServoDampers[2].EndPos = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[2].StartPos = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 8 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 100)
-                    _fbs.CDamperSetPoints.ServoDampers[3].StartPos = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[2].EndPos = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 9 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 100)
-                    _fbs.CDamperSetPoints.ServoDampers[3].EndPos = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[3].StartPos = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 10 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 100)
-                    _fbs.CDamperSetPoints.ServoDampers[0].CloseAngle = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[3].EndPos = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 11 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer <= 90)
-                    _fbs.CDamperSetPoints.ServoDampers[0].OpenAngle = buffer;
+                if (buffer <= 100)
+                    _fbs.CDamperSetPoints.ServoDampers[0].CloseAngle = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 12 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 90)
-                    _fbs.CDamperSetPoints.ServoDampers[1].CloseAngle = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[0].OpenAngle = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 13 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 13 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 90)
-                    _fbs.CDamperSetPoints.ServoDampers[1].OpenAngle = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[1].CloseAngle = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 14 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 14 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 90)
-                    _fbs.CDamperSetPoints.ServoDampers[2].CloseAngle = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[1].OpenAngle = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 15 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 15 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 90)
-                    _fbs.CDamperSetPoints.ServoDampers[2].OpenAngle = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[2].CloseAngle = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 16 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 16 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 90)
-                    _fbs.CDamperSetPoints.ServoDampers[3].CloseAngle = buffer;
+                    _fbs.CDamperSetPoints.ServoDampers[2].OpenAngle = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 17 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 17 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer <= 90)
+                    _fbs.CDamperSetPoints.ServoDampers[3].CloseAngle = buffer;
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 18 || startAddr == _menusEntities.ETH_DAMPER_SETTINGS_ADDR + 18 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer <= 90)
@@ -2275,8 +746,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 2 || startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CRecup.DReg = buffer;
+                GetFloatValueResult(_fbs.CRecup.ReductKoef, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 3 || startAddr == _menusEntities.ETH_RECUP_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
@@ -3511,6 +1981,7 @@ namespace Android_Silver.Services
 
             return startIndex;
         }
+
 
 
         private bool GetIntValueResult(IntValue intVal, byte[] array, ref ushort startIndex)
