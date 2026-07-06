@@ -20,6 +20,7 @@ namespace Android_Silver.Entities
 
     public class EthernetEntities : BindableBase
     {
+        private int Version = 1;
         public int PagesTab;
         public MessageStates CMessageState;
 
