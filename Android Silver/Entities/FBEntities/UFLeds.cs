@@ -11,6 +11,7 @@ namespace Android_Silver.Entities.FBEntities
     public class UFLeds
     {
         public FloatValue LEDsI;
+        public byte UfLedIn;
 
         public UFLeds()
         {

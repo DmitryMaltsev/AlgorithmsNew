@@ -36,7 +36,7 @@ namespace Android_Silver.Entities.FBEntities
         public Updater CUpdater {get; set;}
         public ControllerCheck CControllerCheck {get;set;}
 
-
+        public InputsOutputs CInputsOutputs { get; set;}
         public FBs()
         {
             CAlarms = new Alarms();
@@ -74,6 +74,7 @@ namespace Android_Silver.Entities.FBEntities
             SupCalibrateThm = new SPCalibrateThm();
             ExhaustCalibrateThm = new SPCalibrateThm();
             CUpdater = new Updater();
+            CInputsOutputs = new InputsOutputs();
             CControllerCheck = new ControllerCheck();
         }
     }

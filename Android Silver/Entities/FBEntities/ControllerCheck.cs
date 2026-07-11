@@ -85,6 +85,7 @@ namespace Android_Silver.Entities.FBEntities
 
         public ushort OverrideIsActive1;
         public ushort OverrideIsActive2;
+        public ushort OverrideIsActive3;
         public FloatValue OutdoorTemp;
         public FloatValue SupplyTemp;
         public FloatValue RoomTemp;
@@ -98,9 +99,42 @@ namespace Android_Silver.Entities.FBEntities
         public IntValue EFanPerc;
         public FloatValue STaVal;
         public FloatValue ETaVal;
-
+        public IntValue FreqHz;
+        public IntValue EHPower;
+        public byte DI1;
+        public byte DI2;
+        public byte DInOverheat;
+        public byte DOut1;
+        public byte DOut2;
+        public FloatValue ET1;
+        public FloatValue ET2;
+        public FloatValue AR1;
+        public FloatValue AR2;
+        public FloatValue AR3;
+        public FloatValue AR4;
+        public byte UfLefIn;
         public ControllerCheck()
         {
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
+            ServosOverridesList.Add(false);
             ServosOverridesList.Add(false);
             ServosOverridesList.Add(false);
             ServosOverridesList.Add(false);
@@ -154,6 +188,14 @@ namespace Android_Silver.Entities.FBEntities
             EFanPerc = new IntValue(0, 100);
             STaVal = new FloatValue(0, 100, 2);
             ETaVal = new FloatValue(0, 100, 2);
+            FreqHz=new IntValue(0, 100);
+            EHPower = new IntValue(0, 100);
+            ET1 = new FloatValue(0, 10, 1);
+            ET2 = new FloatValue(0, 10, 1);
+            AR1 = new FloatValue(0, 10, 1);
+            AR2 = new FloatValue(0, 10, 1);
+            AR3 = new FloatValue(0, 10, 1);
+            AR4 = new FloatValue(0, 10, 1);
         }
 
         public void GetOverrides()
@@ -192,6 +234,23 @@ namespace Android_Silver.Entities.FBEntities
             ServosOverridesList[29] = bitArray[13];
             ServosOverridesList[30] = bitArray[14];
             ServosOverridesList[31] = bitArray[15];
+            bitArray = new BitArray(BitConverter.GetBytes(OverrideIsActive3));
+            ServosOverridesList[32] = bitArray[0];
+            ServosOverridesList[33] = bitArray[1];
+            ServosOverridesList[34] = bitArray[2];
+            ServosOverridesList[35] = bitArray[3];
+            ServosOverridesList[36] = bitArray[4];
+            ServosOverridesList[37] = bitArray[5];
+            ServosOverridesList[38] = bitArray[6];
+            ServosOverridesList[39] = bitArray[7];
+            ServosOverridesList[40] = bitArray[8];
+            ServosOverridesList[41] = bitArray[9];
+            ServosOverridesList[42] = bitArray[10];
+            ServosOverridesList[43] = bitArray[11];
+            ServosOverridesList[44] = bitArray[12];
+            ServosOverridesList[45] = bitArray[13];
+            ServosOverridesList[46] = bitArray[14];
+            ServosOverridesList[47] = bitArray[15];
         }
 
         public void SetOverrides()
@@ -263,6 +322,39 @@ namespace Android_Silver.Entities.FBEntities
                 OverrideIsActive2 |= 1 << 14;
             if (ServosOverridesList[31])
                 OverrideIsActive2 |= 1 << 15;
+
+            if (ServosOverridesList[32])
+                OverrideIsActive3 |= 1;
+            if (ServosOverridesList[33])
+                OverrideIsActive3 |= 1 << 1;
+            if (ServosOverridesList[34])
+                OverrideIsActive3 |= 1 << 2;
+            if (ServosOverridesList[35])
+                OverrideIsActive3 |= 1 << 3;
+            if (ServosOverridesList[36])
+                OverrideIsActive3 |= 1 << 4;
+            if (ServosOverridesList[37])
+                OverrideIsActive3 |= 1 << 5;
+            if (ServosOverridesList[38])
+                OverrideIsActive3 |= 1 << 6;
+            if (ServosOverridesList[39])
+                OverrideIsActive3 |= 1 << 7;
+            if (ServosOverridesList[40])
+                OverrideIsActive3 |= 1 << 8;
+            if (ServosOverridesList[41])
+                OverrideIsActive3 |= 1 << 9;
+            if (ServosOverridesList[42])
+                OverrideIsActive3 |= 1 << 10;
+            if (ServosOverridesList[43])
+                OverrideIsActive3 |= 1 << 11;
+            if (ServosOverridesList[44])
+                OverrideIsActive3 |= 1 << 12;
+            if (ServosOverridesList[45])
+                OverrideIsActive3 |= 1 << 13;
+            if (ServosOverridesList[46])
+                OverrideIsActive3 |= 1 << 14;
+            if (ServosOverridesList[47])
+                OverrideIsActive3 |= 1 << 15;
         }
 
 
