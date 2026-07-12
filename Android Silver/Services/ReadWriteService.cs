@@ -1761,10 +1761,10 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[26].CVal = _fbs.ThmSps.EPTa.Value;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[28].CVal = _fbs.CSensors.TempC2.Value.Value;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[30].CVal = _fbs.CSensors.ReturnTemp.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[32].CVal = _fbs.CRecup.FreqHZ;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[34].CVal = _fbs.CEHSetPoints.CPower;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[36].CVal = _fbs.CInputsOutputs.DI1;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[38].CVal = _fbs.CInputsOutputs.DI1;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[32].CVal = _fbs.CFans.SPercent;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[34].CVal = _fbs.CFans.EPercent;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[36].CVal = _fbs.CRecup.FreqHZ;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[38].CVal = _fbs.CEHSetPoints.CPower;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[40].CVal = _fbs.CInputsOutputs.DI1;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[42].CVal = _fbs.CInputsOutputs.DI2;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[44].CVal = _fbs.CInputsOutputs.DInOverheat;
