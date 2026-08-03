@@ -297,14 +297,30 @@
             <!--#region StartPage -->
             <Label Text="{Binding EthernetEntities.EthernetMessage}" Grid.Row="5" FontSize="15" Grid.ColumnSpan="18"  HorizontalTextAlignment="Center" 
                    IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
-            <Entry  Grid.Row="8" Grid.Column="3" Text="{Binding EthernetEntities.IP1}" Placeholder="192" Style="{StaticResource EntryIP}"
-                    IsVisible="{Binding CActivePagesEntities.IsStartPage}"/>
-            <Entry  Grid.Row="8" Grid.Column="6"  Text="{Binding EthernetEntities.IP2}"  Placeholder="168" Style="{StaticResource EntryIP}"
-                    IsVisible="{Binding CActivePagesEntities.IsStartPage}"/>
-            <Entry  Grid.Row="8" Grid.Column="9"  Text="{Binding EthernetEntities.IP3}" Placeholder="0" Style="{StaticResource EntryIP}"
-                    IsVisible="{Binding CActivePagesEntities.IsStartPage}"/>
-            <Entry  Grid.Row="8" Grid.Column="12" Text="{Binding EthernetEntities.IP4}" Placeholder="50" Style="{StaticResource EntryIP}"
-                    IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
+            <Border  Grid.Row="8" Grid.Column="3"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" IsEnabled="{Binding IsEnabled}" Style="{StaticResource PassBorder}">
+                <Border.StrokeShape>
+                    <RoundRectangle/>
+                </Border.StrokeShape>
+                <Entry Text="{Binding EthernetEntities.IP1}" Placeholder="192" Style="{StaticResource EntryIP}"/>
+            </Border>
+            <Border  Grid.Row="8" Grid.Column="6"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" IsEnabled="{Binding IsEnabled}"  Style="{StaticResource PassBorder}">
+                <Border.StrokeShape>
+                    <RoundRectangle/>
+                </Border.StrokeShape>
+                <Entry Text="{Binding EthernetEntities.IP2}"  Placeholder="168" Style="{StaticResource EntryIP}"/>
+            </Border>
+            <Border Grid.Row="8" Grid.Column="9"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" IsEnabled="{Binding IsEnabled}"  Style="{StaticResource PassBorder}">
+                <Border.StrokeShape>
+                    <RoundRectangle/>
+                </Border.StrokeShape>
+                <Entry Text="{Binding EthernetEntities.IP3}" Placeholder="0" Style="{StaticResource EntryIP}"/>
+            </Border>
+            <Border  Grid.Row="8" Grid.Column="12"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" IsEnabled="{Binding IsEnabled}"  Style="{StaticResource PassBorder}">
+                <Border.StrokeShape>
+                    <RoundRectangle/>
+                </Border.StrokeShape>
+                <Entry Text="{Binding EthernetEntities.IP4}" Placeholder="50" Style="{StaticResource EntryIP}"/>
+            </Border>
             <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding StartPageConnectCommand}"  Grid.Row="11" Grid.Column="5" 
                      Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
                                                  IsVisible="{Binding CActivePagesEntities.IsStartPage}" />

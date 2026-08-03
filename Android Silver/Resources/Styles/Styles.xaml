@@ -14,11 +14,23 @@
     </Style>
 
     <Style TargetType="Border">
-        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
-        <Setter Property="StrokeShape" Value="Rectangle"/>
+        <Setter Property="WidthRequest" Value="110"/>
+        <Setter Property="HeightRequest" Value="40"/>
+        <Setter Property="Grid.ColumnSpan" Value="4"/>
+        <Setter Property="Stroke" Value="Black"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+    </Style>
+    <Style TargetType="Border" x:Key="PassBorder">
+        <Setter Property="WidthRequest" Value="60"/>
+        <Setter Property="HeightRequest" Value="40"/>
+        <Setter Property="Grid.ColumnSpan" Value="3"/>
+        <Setter Property="Stroke" Value="Black"/>
         <Setter Property="StrokeThickness" Value="1"/>
     </Style>
-
+    <Style TargetType="RoundRectangle">
+        <Setter Property="CornerRadius" Value="5"/>
+    </Style>
     <Style TargetType="BoxView">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>

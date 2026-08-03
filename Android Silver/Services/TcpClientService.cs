@@ -69,7 +69,6 @@ namespace Android_Silver.Services
             //RecieveData(100,8);
         }
 
-
         public async Task Connect()
         {
             try
@@ -432,7 +431,7 @@ namespace Android_Silver.Services
                     ResieveCounter += 1;
                     return true;
                 }
-                catch
+                catch(Exception ex)
                 {
                         // _stream?.Close();
                         _trySendcounter += 1;

@@ -101,7 +101,6 @@ namespace Android_Silver.Entities
             }
         }
 
-
         private string _subnet = String.Empty;
         public string Subnet
         {
