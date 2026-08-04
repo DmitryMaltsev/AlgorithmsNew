@@ -448,7 +448,6 @@ namespace Android_Silver.Entities.Visual
                     break;
                 case SActivePageState.BaseSettingsPage:
                     {
-                        _menusEntities.GenerateBaseTable();
                         IsBaseSettingsPage = true;
                         IsMainMenuPage = false;
                         IsEntryPage = false;
@@ -473,6 +472,7 @@ namespace Android_Silver.Entities.Visual
                         IsTConstThmPage = false;
                         IsThmHSettingsPage = false;
                         IsControllerCheckPage = false;
+                        _menusEntities.GenerateBaseTable();
                     }
                     break;
                 case SActivePageState.ConfigPage:

@@ -4,6 +4,7 @@ using Android_Silver.ViewModels;
 using Microsoft.Maui.Layouts;
 
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.Visual.Menus
 {
@@ -104,26 +105,24 @@ namespace Android_Silver.Entities.Visual.Menus
         public void GenerateBaseTable()
         {
             MenusCollection = new ObservableCollection<MItem>();
-            foreach (var stroke in StartMenuCollection)
+            foreach (var item in StartMenuCollection)
             {
-                if (stroke.MenuIsVisible)
-                {
-                    MenusCollection.Add(stroke);
-                }
+                if(item.MenuIsVisible)
+                MenusCollection.Add(item);
             }
+            //  MenusCollection = collection;
+
         }
 
         public void GenerateInterfaceTable(int index)
         {
-
             InterfaceStrCollection = new ObservableCollection<StrSet>();
-            foreach (var strSet in StartMenuCollection[index].StrSetsCollection)
+            foreach (var item in MenusCollection[index].StrSetsCollection)
             {
-                if (strSet.IsVisible)
-                {
-                    InterfaceStrCollection.Add(strSet);
-                }
+                if(item.IsVisible)
+                InterfaceStrCollection.Add(item);
             }
+             // InterfaceStrCollection = collection;
         }
 
         private int PidMaxVal = 10_000;
@@ -276,7 +275,7 @@ namespace Android_Silver.Entities.Visual.Menus
             pickVals = new List<string>() { "Нет", "Да" };
             sSet = new StrSet(0, 65000, "Время открытия, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65000, "Время прогрева", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 65000, "Время прогрева", isVisible: false, pickerIsVisible: false, entryIsVisible: false, isEnabled: false, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 60, "Время открытия серво, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
@@ -321,7 +320,7 @@ namespace Android_Silver.Entities.Visual.Menus
             //strStes.Add(sSet);
             sSet = new StrSet(0, 65535, "Номин.расход вент. прит, м3/ч", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 65535, "Номин.расход вент. вытяжки, м3/ч", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
+            sSet = new StrSet(0, 65535, "Номин.расход вент. вытяжки, м3/ч", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: false, valScale: 0, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Нижняя граница запрета, %", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
@@ -423,7 +422,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, PidMaxVal, "I коэф. регулятора", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
-            sSet = new StrSet(_fbEntities.CRecup.ReductKoef.Min, _fbEntities.CRecup.ReductKoef.Max, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true, 
+            sSet = new StrSet(_fbEntities.CRecup.ReductKoef.Min, _fbEntities.CRecup.ReductKoef.Max, "Коэффициент редукции", isVisible: true, pickerIsVisible: false, entryIsVisible: true,
                 isEnabled: true, valScale: _fbEntities.CRecup.ReductKoef.NumChr, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(_fbEntities.CRecup.TEffSP.Min, _fbEntities.CRecup.TEffSP.Max, "Граница темп. авар. КПД, °С", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: _fbEntities.CRecup.TEffSP.NumChr, pickVals, false);

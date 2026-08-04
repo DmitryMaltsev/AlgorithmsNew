@@ -55,6 +55,7 @@ namespace Android_Silver.ViewModels
         public ICommand ToSettingsCommand { get; private set; }
         public ICommand SetSettingsCommand { get; private set; }
         public ICommand SetEntryCommand { get; private set; }
+        public ICommand LoadingReturnCommand { get; private set; }
         #endregion
 
         private string _cString;
@@ -116,7 +117,6 @@ namespace Android_Silver.ViewModels
             SensorsSettingsCommand = new Command(ExecuteSensorsSettings);
             FanReturnCommand = new Command(ExecuteFanReturn);
             HomeCommand = new Command(ExecuteHome);
-            CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
             DecreseMenuItemsCommand = new Command(ExecuteDecreaseMenus);
             IncreaseMenuItemsCommand = new Command(ExecuteIncrease);
             ToSettingsCommand = new Command(ExecuteToSettingsWindow);
@@ -263,6 +263,7 @@ namespace Android_Silver.ViewModels
         private void ExecuteToSettingsWindow(object obj)
         {
             ushort id = (ushort)obj;
+            //CMenusEntities.StartMenuCollection[id - 1].MenuIsEnabled = false;
             SActivePageState page = CMenusEntities.StartMenuCollection[id - 1].CactivePageState;
             CActivePagesEntities.SetActivePageState(page);
 
@@ -336,7 +337,7 @@ namespace Android_Silver.ViewModels
                 int[] values = new int[mItem.StrSetsCollection.Count];
                 for (int i = 0; i < mItem.StrSetsCollection.Count; i++)
                 {
-                    if (mItem.StrSetsCollection[i].EntryIsVisible)
+                    if (mItem.StrSetsCollection[i].EIsVisible)
                     {
                         if (mItem.StrSetsCollection[i].CVal >= 0)
                             values[i] = (int)((mItem.StrSetsCollection[i].CVal + 0.5 / Math.Pow(10, mItem.StrSetsCollection[i].ValScale)) * Math.Pow(10, mItem.StrSetsCollection[i].ValScale));

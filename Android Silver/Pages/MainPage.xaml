@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Android_Silver.Services"
              BackgroundImageSource="{Binding CPictureSet.Background}"
-             Title=""
              x:Name="mPage"
              x:Class="Android_Silver.Pages.MainPage">
     <ContentPage.Resources>
@@ -297,25 +296,25 @@
             <!--#region StartPage -->
             <Label Text="{Binding EthernetEntities.EthernetMessage}" Grid.Row="5" FontSize="15" Grid.ColumnSpan="18"  HorizontalTextAlignment="Center" 
                    IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
-            <Border  Grid.Row="8" Grid.Column="3"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" IsEnabled="{Binding IsEnabled}" Style="{StaticResource PassBorder}">
+            <Border  Grid.Row="8" Grid.Column="3"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" Style="{StaticResource PassBorder}">
                 <Border.StrokeShape>
                     <RoundRectangle/>
                 </Border.StrokeShape>
                 <Entry Text="{Binding EthernetEntities.IP1}" Placeholder="192" Style="{StaticResource EntryIP}"/>
             </Border>
-            <Border  Grid.Row="8" Grid.Column="6"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" IsEnabled="{Binding IsEnabled}"  Style="{StaticResource PassBorder}">
+            <Border  Grid.Row="8" Grid.Column="6"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" Style="{StaticResource PassBorder}">
                 <Border.StrokeShape>
                     <RoundRectangle/>
                 </Border.StrokeShape>
                 <Entry Text="{Binding EthernetEntities.IP2}"  Placeholder="168" Style="{StaticResource EntryIP}"/>
             </Border>
-            <Border Grid.Row="8" Grid.Column="9"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" IsEnabled="{Binding IsEnabled}"  Style="{StaticResource PassBorder}">
+            <Border Grid.Row="8" Grid.Column="9"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" Style="{StaticResource PassBorder}">
                 <Border.StrokeShape>
                     <RoundRectangle/>
                 </Border.StrokeShape>
                 <Entry Text="{Binding EthernetEntities.IP3}" Placeholder="0" Style="{StaticResource EntryIP}"/>
             </Border>
-            <Border  Grid.Row="8" Grid.Column="12"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" IsEnabled="{Binding IsEnabled}"  Style="{StaticResource PassBorder}">
+            <Border  Grid.Row="8" Grid.Column="12"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" Style="{StaticResource PassBorder}">
                 <Border.StrokeShape>
                     <RoundRectangle/>
                 </Border.StrokeShape>

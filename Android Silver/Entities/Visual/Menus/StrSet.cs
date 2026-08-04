@@ -100,14 +100,14 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
-        private bool _entryIsVisible;
-        public bool EntryIsVisible
+        private bool _eIsVisible;
+        public bool EIsVisible
         {
-            get { return _entryIsVisible; }
+            get { return _eIsVisible; }
             set
             {
-                _entryIsVisible = value;
-                OnPropertyChanged(nameof(EntryIsVisible));
+                _eIsVisible = value;
+                OnPropertyChanged(nameof(EIsVisible));
             }
         }
 
@@ -183,7 +183,7 @@ namespace Android_Silver.Entities.Visual.Menus
             Name = name;
             IsVisible = isVisible;
             PickerIsVisible = pickerIsVisible;
-            EntryIsVisible = entryIsVisible;
+            EIsVisible = entryIsVisible;
             IsEnabled = isEnabled;
             ValScale = valScale;
             SwitchIsActive = switchIsActive;

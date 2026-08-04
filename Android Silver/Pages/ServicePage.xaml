@@ -6,7 +6,6 @@
               x:Class="Android_Silver.Pages.ServicePage"
               x:Name="SPage"
                BackgroundImageSource="{Binding CPictureSet.Background}">
-
     <ContentPage.Resources>
         <local:InvertBoolConverter x:Key="InvertBoolConverter"/>
         <Style TargetType="Entry" x:Key="EntryPass">
@@ -30,7 +29,7 @@
             <Setter Property="MaxLength" Value="3"/>
             <Setter Property="Grid.ColumnSpan" Value="3"/>
             <Setter Property="MaximumWidthRequest" Value="100"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="Keyboard" Value="Numeric"/>
         </Style>
@@ -40,12 +39,13 @@
             <Setter Property="MaximumWidthRequest" Value="140"/>
             <Setter Property="MaximumHeightRequest" Value="40"/>
             <Setter Property="MaxLength" Value="6"/>
+            <Setter Property="BackgroundColor" Value="White"/>
         </Style>
         <Style TargetType="Picker" x:Key="ConfPicker">
             <Setter Property="FontSize" Value="17" />
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="Grid.ColumnSpan" Value="5"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="MaximumWidthRequest" Value="140"/>
             <Setter Property="MaximumHeightRequest" Value="40"/>
@@ -68,6 +68,8 @@
             <Setter Property="MaximumHeightRequest" Value="100" />
             <Setter Property="MaximumWidthRequest" Value="400" />
             <Setter Property="BorderWidth" Value="0"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="ZIndex" Value="1"/>
         </Style>
         <Style TargetType="Label" x:Key="OtherSettingsLabel">
             <Setter Property="TextColor" Value="Black" />
@@ -77,6 +79,7 @@
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="Grid.ColumnSpan" Value="14"/>
             <Setter Property="Grid.RowSpan" Value="1"/>
+            <Setter Property="ZIndex" Value="0"/>
         </Style>
         <Style TargetType="Label" x:Key="FanSettingsLabel" BasedOn="{StaticResource OtherSettingsLabel}">
             <Setter Property="HorizontalOptions" Value="Start" />
@@ -211,13 +214,13 @@
                                     </Grid.ColumnDefinitions>
                                     <Button  Grid.Column="2" Style="{StaticResource BaseSettingsBut}" ImageSource="{Binding ImgSource.Current}" 
                                              Command="{Binding Source={x:Reference SPage}, Path=BindingContext.ToSettingsCommand}"
-                                             CommandParameter="{Binding ID}" Pressed="BaseSettings1Pressed" Released="BaseSettings1Released"  IsVisible="{Binding MenuIsVisible}" />
-                                    <Label Text="{Binding Name}"  Grid.Column="2" Style="{StaticResource OtherSettingsLabel}" IsVisible="{Binding MenuIsVisible}"/>
+                                             CommandParameter="{Binding ID}" Pressed="BaseSettings1Pressed" Released="BaseSettings1Released"  IsVisible="{Binding MenuIsVisible}"/>
+                                    <Label Text="{Binding Name}"  Grid.Column="2" Style="{StaticResource OtherSettingsLabel}" IsVisible="{Binding MenuIsVisible}" IsEnabled="{Binding MenuIsEnabled}" />
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </ListView.ItemTemplate> 
             </ListView>
             <HorizontalStackLayout Grid.Row="10" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="4" IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}">
                 <Label Text="{Binding EthernetEntities.SystemMessage}"/>
@@ -238,8 +241,51 @@
             <Label Text="{Binding CMenusEntities.Title}"  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="0" Style="{StaticResource Title}"
                                                     IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}"/>
             <!--#endregion-->
-            <ListView ItemsSource="{Binding  CMenusEntities.InterfaceStrCollection}" Grid.Row="5" 
-                Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsFBSettingsPage}">
+            <CollectionView ItemsSource="{Binding  CMenusEntities.InterfaceStrCollection}" Grid.Row="5" 
+                Style="{StaticResource CollectionViews}"  IsVisible="{Binding CActivePagesEntities.IsFBSettingsPage}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="10">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <!--IsToggled="{Binding  CFBs.OtherSettings.IsSpecMode, Mode=TwoWay}"-->
+                                <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}" />
+                                <Switch Grid.Row="5" Grid.Column="8"    Grid.ColumnSpan="3"  IsVisible = "{Binding SwitchIsActive}"  IsToggled="{Binding SwitchIsOn}" />
+                                <Entry Style="{StaticResource EntryNum}" Text="{Binding CVal}"
+                                           ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type context:ServicePage}},Path=BindingContext.SetEntryCommand}" 
+                                           ReturnCommandParameter="{Binding .}"
+                                           Grid.Row="5"  Grid.Column="12" IsVisible = "{Binding EIsVisible}" IsEnabled="{Binding IsEnabled}" />
+                                <Picker Style="{StaticResource ConfPicker}"  SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" 
+                                            SelectedIndex="{Binding CPickVal}"
+                                                Grid.Row="5"  Grid.Column="12"  IsVisible = "{Binding PickerIsVisible}" IsEnabled="{Binding IsEnabled}"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <!--<ListView ItemsSource="{Binding  CMenusEntities.ControllerCheckCollection}" Grid.Row="5" 
+            Style="{StaticResource TableViews}"  IsVisible="{Binding CActivePagesEntities.IsControlerCheckSettings}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -265,30 +311,19 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <!--IsToggled="{Binding  CFBs.OtherSettings.IsSpecMode, Mode=TwoWay}"-->
+                                    --><!--IsToggled="{Binding  CFBs.OtherSettings.IsSpecMode, Mode=TwoWay}"--><!--
                                     <Label Text="{Binding Name}" Grid.Row="5" Style="{StaticResource FanSettingsLabel}" IsVisible = "{Binding IsVisible}" />
-                                    <Switch Grid.Row="5" Grid.Column="8"    Grid.ColumnSpan="3"  IsVisible = "{Binding SwitchIsActive}"  IsToggled="{Binding SwitchIsOn}" />
-                                    <Border  Grid.Row="5"  Grid.Column="12" IsVisible = "{Binding EntryIsVisible}" IsEnabled="{Binding IsEnabled}">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle/>
-                                        </Border.StrokeShape>
-                                        <Entry Style="{StaticResource EntryNum}" Text="{Binding CVal}"
-                                           ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type context:ServicePage}},Path=BindingContext.SetEntryCommand}" 
-                                           ReturnCommandParameter="{Binding .}" />
-                                    </Border>
-                                    <Border  Grid.Row="5"  Grid.Column="12"  IsVisible = "{Binding PickerIsVisible}" IsEnabled="{Binding IsEnabled}">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle/>
-                                        </Border.StrokeShape>
-                                        <Picker Style="{StaticResource ConfPicker}"  SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" 
-                                            SelectedIndex="{Binding CPickVal}"/>
-                                    </Border>
+                                    <Entry Style="{StaticResource EntryNum}" Text="{Binding CVal}"
+                                            ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type context:ServicePage}},Path=BindingContext.SetEntryCommand}" 
+                                            ReturnCommandParameter="{Binding .}"
+                                            Grid.Row="5"  Grid.Column="12" IsVisible = "{Binding EIsVisible}" IsEnabled="{Binding IsEnabled}" />
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
+            
             <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding  SetSettingsCommand}"  
             Grid.Row="7" Grid.Column="5" Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
                                         IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}" />

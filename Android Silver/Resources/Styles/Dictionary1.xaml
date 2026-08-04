@@ -38,5 +38,12 @@
         <Setter Property="RowHeight" Value="60" />
         <Setter Property="VerticalOptions" Value="Start"/>
     </Style>
-    
+    <Style TargetType="CollectionView" x:Key="CollectionViews">
+        <Setter Property="SelectionMode" Value="None"/>
+        <Setter Property="Grid.ColumnSpan" Value="18"/>
+        <Setter Property="Grid.RowSpan" Value="0" />
+        <Setter Property="MinimumHeightRequest" Value="500"/>
+        <Setter Property="MaximumHeightRequest" Value="500"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+    </Style>
 </ResourceDictionary>

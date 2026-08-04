@@ -6,18 +6,15 @@
     xmlns:local="clr-namespace:Android_Silver.Pages"
       WidthRequest="400" HeightRequest="800"
     Shell.FlyoutBehavior="Disabled"
-    TabBarBackgroundColor="Black"
-    TabBarTitleColor="White"
-
-    TabBarUnselectedColor ="Green" >
+    TabBarBackgroundColor="White"
+    TabBarTitleColor="Black"
+    TabBarUnselectedColor ="Black">
 
     <TabBar>
-
         <ShellContent Appearing="ShellContent_Appearing"
         Title="Настройки пользователя"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="mainPage"/>
-
         <ShellContent Appearing="ShellContent_Appearing_1"
         Title="Сервисные настройки"
          ContentTemplate="{DataTemplate local:ServicePage}"

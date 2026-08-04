@@ -62,8 +62,27 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
+        private ushort _id;
 
+        public ushort ID
+        {
+            get { return _id; }
+            set { _id = value;
+                OnPropertyChanged(nameof(ID));
+            }
+        }
 
+        private bool _menuUsEnabled;
+
+        public bool MenuIsEnabled
+        {
+            get { return _menuUsEnabled; }
+            set {
+                _menuUsEnabled = value;
+                OnPropertyChanged(nameof(MenuIsEnabled));
+            }
+        }
+                
         #endregion
 
 
@@ -79,11 +98,10 @@ namespace Android_Silver.Entities.Visual.Menus
             CactivePageState = sactivePageState;
             ID = id;
             Address = startAddress;
+            MenuIsEnabled = true;
             // ToSettingsCommand = new Command(ExecuteToSettingsWindow);
             //  SetSettingsCommand = new Command(ExecuteSetSettings);
         }
-
-        public ushort ID { get; private set; }
 
 
 
