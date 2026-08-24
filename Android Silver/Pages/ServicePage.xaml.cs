@@ -82,4 +82,19 @@ public partial class ServicePage : ContentPage
 
     }
 
+    protected override void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+        if (height>width)
+        {
+            _servicePageViewModel.MainMenuHeight = 550;
+            _servicePageViewModel.MenuHeight = 550;
+        }
+        else
+        {
+            _servicePageViewModel.MainMenuHeight = 150;
+            _servicePageViewModel.MenuHeight = 150;
+        }
+    }
+
 }

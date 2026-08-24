@@ -4,29 +4,39 @@
              x:Class="Android_Silver.Resources.Styles.Dictionary1">
 
     <Style TargetType="Button" x:Key="MiniButtons">
-        <Setter Property="Grid.Row" Value="1"/>
+        <Setter Property="Grid.Row" Value="0"/>
         <Setter Property="Grid.ColumnSpan" Value="4"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
-        <Setter Property="WidthRequest" Value="40"/>
-        <Setter Property="HeightRequest" Value="40"/>
-        <Setter Property="Margin"  Value="0,30,0,0" />
+        <Setter Property="WidthRequest" Value="60"/>
+        <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="Margin"  Value="30,30,0,0" />
     </Style>
     <Style TargetType="Button" x:Key="HeaderBut" BasedOn="{StaticResource MiniButtons}">
+        <Setter Property="Margin"  Value="0,0,0,0" />
+        <Setter Property="WidthRequest" Value="160"/>
+        <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="Grid.RowSpan" Value="1"/>
+        <Setter Property="Grid.Column" Value="12"/>
+        <Setter Property="Grid.ColumnSpan" Value="4"/>
+    </Style>
+    <Style TargetType="Button" x:Key="BackBut" BasedOn="{StaticResource MiniButtons}">
         <Setter Property="Margin"  Value="0,0,0,0" />
         <Setter Property="WidthRequest" Value="60"/>
         <Setter Property="HeightRequest" Value="60"/>
         <Setter Property="Grid.RowSpan" Value="1"/>
-        <Setter Property="Grid.Column" Value="7"/>
+        <Setter Property="Grid.Column" Value="2"/>
+        <Setter Property="Grid.ColumnSpan" Value="1"/>
     </Style>
     <Style TargetType="Button" x:Key="OKCancelBut">
-        <Setter Property="WidthRequest" Value="190"/>
+        <Setter Property="WidthRequest" Value="80"/>
         <Setter Property="HeightRequest" Value="60"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
-        <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Grid.ColumnSpan" Value="8" />
+        <Setter Property="Grid.ColumnSpan" Value="18" />
         <Setter Property="Grid.RowSpan" Value="1"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Margin"  Value="0,0,0,0" />
     </Style>
     <Style TargetType="ListView" x:Key="TableViews">
         <Setter Property="SeparatorVisibility" Value="None"/>
@@ -36,14 +46,6 @@
         <Setter Property="HasUnevenRows" Value="False" />
         <Setter Property="MinimumHeightRequest" Value="100"/>
         <Setter Property="RowHeight" Value="60" />
-        <Setter Property="VerticalOptions" Value="Start"/>
-    </Style>
-    <Style TargetType="CollectionView" x:Key="CollectionViews">
-        <Setter Property="SelectionMode" Value="None"/>
-        <Setter Property="Grid.ColumnSpan" Value="18"/>
-        <Setter Property="Grid.RowSpan" Value="0" />
-        <Setter Property="MinimumHeightRequest" Value="500"/>
-        <Setter Property="MaximumHeightRequest" Value="500"/>
         <Setter Property="VerticalOptions" Value="Start"/>
     </Style>
 </ResourceDictionary>

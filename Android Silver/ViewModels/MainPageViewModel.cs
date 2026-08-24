@@ -318,7 +318,6 @@ namespace Android_Silver.Pages
             BootloaderCommand = new Command(ExecuteBootloader);
             TimeBuffer = new();
             Value = 15;
-
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
@@ -692,7 +691,7 @@ namespace Android_Silver.Pages
             index = index > 0 && index < 6 ? index : 1;
 
             Mode1Values bufVals = CModesEntities.Mode1ValuesList[index];
-            M1Values = new Mode1Values(bufVals.Num, bufVals.ActiveModePics,
+            M1Values = new Mode1Values(bufVals.Num, bufVals.ActiveModePicture,
                       bufVals.SelectModePics,
                       bufVals.ModeIcons,
                       bufVals.ModeSettingsRoute,

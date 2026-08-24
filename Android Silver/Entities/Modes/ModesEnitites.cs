@@ -64,7 +64,6 @@ namespace Android_Silver.Entities.Modes
         public ModesEntities()
         {
             _cPicturesSet = DIContainer.Resolve<PicturesSet>();
-
             Mode1ValuesList = new List<Mode1Values>();
             for (int i = 0; i < 9; i++)
             {
@@ -81,10 +80,10 @@ namespace Android_Silver.Entities.Modes
             Mode2ValuesList.Add(new Mode2Values(2, 4, _cPicturesSet.ActiveMode2Pics[2], Mode1ValuesList[0], 148));
             //Режим  календаря
             Mode2ValuesList.Add(new Mode2Values(3, 8, _cPicturesSet.ActiveMode2Pics[3], Mode1ValuesList[0], 174));
-            //Режим по контакту
-            Mode2ValuesList.Add(new Mode2Values(4, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
-            //Специальный режим
-            Mode2ValuesList.Add(new Mode2Values(5, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
+            ////Режим по контакту
+            //Mode2ValuesList.Add(new Mode2Values(4, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
+            ////Специальный режим
+            //Mode2ValuesList.Add(new Mode2Values(5, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
             CMode1 = Mode1ValuesList[0];
             CMode2 = Mode2ValuesList[0];
         }

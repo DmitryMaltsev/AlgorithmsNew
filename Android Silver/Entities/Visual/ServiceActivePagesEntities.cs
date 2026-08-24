@@ -43,6 +43,7 @@ namespace Android_Silver.Entities.Visual
         FBs _fbs;
         ModesEntities _modesEntities;
         public bool EntryIsEntered = false;
+
         public SActivePageState LastActivePageState { get; set; } = SActivePageState.EntryPage;
 
         #region Rising properties

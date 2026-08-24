@@ -79,6 +79,26 @@ namespace Android_Silver.ViewModels
                 OnPropertyChanged(nameof(MenuNum));
             }
         }
+        private int _mainMenuHeight;
+
+        public int MainMenuHeight
+        {
+            get { return _mainMenuHeight; }
+            set { _mainMenuHeight = value;
+                OnPropertyChanged(nameof(MainMenuHeight));
+            }
+        }
+
+        private int _menuHeight;
+
+        public int MenuHeight
+        {
+            get { return _menuHeight; }
+            set { _menuHeight = value; 
+                OnPropertyChanged($"{nameof(MenuHeight)}");
+            }
+        }
+
 
         public TcpClientService CTcpClientService { get; set; }
         public PicturesSet CPictureSet { get; set; }
@@ -125,6 +145,7 @@ namespace Android_Silver.ViewModels
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
             _fileSystemService.GetIPFromFile();
+
             //StartTimer();
         }
 
@@ -214,17 +235,20 @@ namespace Android_Silver.ViewModels
             if (!CActivePagesEntities.EntryIsEntered)
             {
                 CActivePagesEntities.SetActivePageState(SActivePageState.EntryPage);
+                CPictureSet.Background = CPictureSet.Background;
             }
             else
             if (!EthernetEntities.IsConnected)
             {
                 CActivePagesEntities.SetActivePageState(SActivePageState.StartPage);
+                CPictureSet.Background = CPictureSet.Background;
             }
             else
             {
                 CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
 
             }
+         //   CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }
 
 

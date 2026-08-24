@@ -73,7 +73,7 @@ namespace Android_Silver.ViewModels
             index = index > 0 ? index : 1;
 
             Mode1Values bufVals = CModesEntities.Mode1ValuesList[index];
-            M1Values = new Mode1Values(bufVals.Num, bufVals.ActiveModePics,
+            M1Values = new Mode1Values(bufVals.Num, bufVals.ActiveModePicture,
                       bufVals.SelectModePics,
                       bufVals.ModeIcons,
                       bufVals.ModeSettingsRoute,

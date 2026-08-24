@@ -82,16 +82,6 @@ namespace Android_Silver.Entities.Visual
         #endregion
 
         #region Главное окно
-        private PicByStates _substrate;
-        public PicByStates Substrate
-        {
-            get { return _substrate; }
-            set
-            {
-                _substrate = value;
-                OnPropertyChanged(nameof(Substrate));
-            }
-        }
 
         private PicByStates _eHeaterHeader;
 
@@ -117,72 +107,15 @@ namespace Android_Silver.Entities.Visual
         }
 
         #region Filters
-        private string _filterCurrentHeader;
-
-        public string FilterCurrentHeader
+        private PicByStates _filterHeader;
+       
+        public PicByStates FilterHeader
         {
-            get { return _filterCurrentHeader; }
-            set { 
-                _filterCurrentHeader = value;
-                OnPropertyChanged(nameof(FilterCurrentHeader));
-            }
-        }
-
-
-
-        private string _filter0Header;
-
-        public string Filter0Header
-        {
-            get { return _filter0Header; }
+            get { return _filterHeader; }
             set
             {
-                _filter0Header = value;
-                OnPropertyChanged(nameof(Filter0Header));
-            }
-        }
-        private string _filter20Header;
-
-        public string Filter20Header
-        {
-            get { return _filter20Header; }
-            set
-            {
-                _filter20Header = value;
-                OnPropertyChanged(nameof(Filter20Header));
-            }
-        }
-        private string _filter40Header;
-
-        public string Filter40Header
-        {
-            get { return _filter40Header; }
-            set
-            {
-                _filter40Header = value;
-                OnPropertyChanged(nameof(Filter40Header));
-            }
-        }
-        private string _filter60Header;
-
-        public string Filter60Header
-        {
-            get { return _filter60Header; }
-            set
-            {
-                _filter60Header = value;
-                OnPropertyChanged(nameof(Filter60Header));
-            }
-        }
-        private string _filter80Header;
-
-        public string Filter80Header
-        {
-            get { return _filter80Header; }
-            set
-            {
-                _filter80Header = value;
-                OnPropertyChanged(nameof(Filter80Header));
+                _filterHeader = value;
+                OnPropertyChanged(nameof(FilterHeader));
             }
         }
 
@@ -199,33 +132,23 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-        #region Recuperator header
-        private string _recuperatorHeaderWork;
-        public string RecuperatorHeaderWork
-        {
-            get { return _recuperatorHeaderWork; }
-            set { _recuperatorHeaderWork = value; }
-        }
-        private string _recuperatorHeaderAlarm;
-        public string RecuperatorHeaderAlarm
-        {
-            get { return _recuperatorHeaderAlarm; }
-            set { _recuperatorHeaderAlarm = value; }
-        }
+        private PicByStates _mode1Select;
 
-        private string _recuperatorHeaderCurrent="";
-
-        public string RecuperatorHeaderCurrent
+        public PicByStates Mode1Select
         {
-            get { return _recuperatorHeaderCurrent; }
-            set { _recuperatorHeaderCurrent = value; 
-                OnPropertyChanged(nameof(RecuperatorHeaderCurrent));
+            get { return _mode1Select; }
+            set { _mode1Select = value;
+                OnPropertyChanged(nameof(Mode1Select));
             }
         }
-
-        #endregion
-
-
+        private PicByStates _recuperatorHeader;
+        public PicByStates RecuperatorHeader
+        {
+            get { return _recuperatorHeader; }
+            set { _recuperatorHeader = value;
+                OnPropertyChanged(nameof(RecuperatorHeader));
+            }
+        }
 
 
         private PicByStates _filter100MainIcon;
@@ -705,11 +628,34 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private string _flowIcon;
+
+        public string FlowIcon
+        {
+            get { return _flowIcon; }
+            set { 
+                _flowIcon = value;
+                OnPropertyChanged(nameof(FlowIcon));
+            }
+        }
+
+        private string _tempIcon;
+
+        public string TempIcon
+        {
+            get { return _tempIcon; }
+            set { 
+                _tempIcon = value;
+                OnPropertyChanged(nameof(TempIcon));
+            }
+        }
+
+
         #endregion
 
-        private ObservableCollection<PicByStates> _activeModesPics = new ObservableCollection<PicByStates>();
+        private ObservableCollection<string> _activeModesPics = new ObservableCollection<string>();
 
-        public ObservableCollection<PicByStates> ActiveModesPics
+        public ObservableCollection<string> ActiveModesPics
         {
             get { return _activeModesPics; }
             set
@@ -843,33 +789,28 @@ namespace Android_Silver.Entities.Visual
             {
                 case PicturesSetStates.Base:
                     {
-                        IPBut = new PicByStates("ok_but_off_base.png", "ok_but_on_base.png");
+                        IPBut = new PicByStates("ok_but_off_base.jpg", "ok_but_on_base.jpg");
                         Background = "background_base.png";
-                        Loading = "loading_base.jpg";
-                        LoadingPic = "loading_pic_base.png";
-                        Substrate = new PicByStates(def: "substrate_off_base.png", selected: "substrate_on_base.png");
+                        Loading = "loading_pic_base_sign.jpg";
+                        LoadingPic = "loading_pic_base_sign.jpg";
                         Title = "title_base.png";
-                        BackButton = new PicByStates("back_arrow_off_base.png", "back_arrow_on_base.png");
+                        BackButton = new PicByStates("back_pic.png", "back_pick_selected.png");
                         ResetButton = new PicByStates("reset_but_off_base.png", "reset_but_on_base.png");
                         JournalStroke = "journal_stroke_base.png";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
                         TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
                         TimeDigitalImage = "time_dig_img_base.png";
                         #region Главное окно
+                        Mode1Select = new PicByStates("select_mode_base_off.jpg", "select_mode_base_on.jpg");
                         AlarmMainIcon = new PicByStates("", "alarm_main_base.png");
-                        Filter100MainIcon = new PicByStates("", "filter_100_main_base.png");
-                        EHeaterHeader = new PicByStates("", "eheater_header_base.png");
-                        FanHeader = new PicByStates("", "fan_header_base.png");
-                        FilterCurrentHeader = "";
-                        Filter0Header = "filter_flow0_header_base.jpg";
-                        Filter20Header = "filter_flow20_header_base.jpg";
-                        Filter40Header = "filter_flow40_header_base.jpg";
-                        Filter60Header = "filter_flow60_header_base.jpg";
-                        Filter80Header = "filter_flow80_header_base.jpg";
+                        EHeaterHeader = new PicByStates("eheater_header_base.jpg", "");
+                        FanHeader = new PicByStates("fan_header_base.jpg", "");
+                        FilterHeader = new PicByStates("filter_header_base.jpg", "");
+                        RecuperatorHeader = new PicByStates("recup_header_base.jpg", "");
                         LinkHeader = new PicByStates("", "link_header_base.png");
-                        RecuperatorHeaderCurrent = "";
-                        RecuperatorHeaderWork = "recup_work_header_base.jpg";//new PicByStates("", "recuperator_header_base.png");.
-                        RecuperatorHeaderAlarm = "recup_fail_header_base.jpg";
+
+                        TempIcon = "temp_icon_base.jpg";
+                        FlowIcon = "flow_icon_base.jpg";
                         #endregion
                         #region Разное
                         FilterPol = "filter_pol_base.png";
@@ -913,20 +854,20 @@ namespace Android_Silver.Entities.Visual
                         #region Уставки
                         HomeButton = new PicByStates("home_but_off_base.png", "home_but_on_base.png");
                         NextButton = new PicByStates("next_but_off_base.png", "next_but_on_base.png");
-                        OkButton = new PicByStates("ok_but_off_base.png", "ok_but_on_base.png");
-                        SettingsButton = new PicByStates("settings_but_off_base.png", "settings_but_on_base.png");
+                        OkButton = new PicByStates("ok_but_off_base.jpg", "ok_but_on_base.jpg");
+                        SettingsButton = new PicByStates("settings_base_off.jpg", "settings_base_on.jpg");
                         #endregion
-                        #region Кнопки активных режимов
-                        ActiveModesPics = new ObservableCollection<PicByStates>();
-                        ActiveModesPics.Add(new PicByStates("turnoff_but_on_base.png", "turnoff_but_off_base.png"));
-                        ActiveModesPics.Add(new PicByStates("min_but_on_base.png", "min_but_off_base.png"));
-                        ActiveModesPics.Add(new PicByStates("norm_but_on_base.png", "norm_but_off_base.png"));
-                        ActiveModesPics.Add(new PicByStates("max_but_on_base.png", "max_but_off_base.png"));
-                        ActiveModesPics.Add(new PicByStates("kitchen_but_on_base.png", "kitchen_but_off_base.png"));
-                        ActiveModesPics.Add(new PicByStates("vac_but_on_base.png", "vac_but_off_base.png"));
-                        ActiveModesPics.Add(new PicByStates("spec_but_on_base.png", "spec_but_off_base.png"));
-                        ActiveModesPics.Add(new PicByStates("alarm_but_on_base.png", "alarm_but_off_base.png"));
-                        ActiveModesPics.Add(new PicByStates("spec_but_on_base.png", "spec_but_off_base.png"));
+                        #region Картинки активных режимов
+                        ActiveModesPics = new ObservableCollection<string>();
+                        ActiveModesPics.Add("turn_off_but_base.png");
+                        ActiveModesPics.Add("min_but_base.png");
+                        ActiveModesPics.Add("norm_but_base.png");
+                        ActiveModesPics.Add("max_but_base.png");
+                        ActiveModesPics.Add("kitchen_but_base.png");
+                        ActiveModesPics.Add("vac_but_base.png");
+                        ActiveModesPics.Add("spec_but_base.png");
+                        ActiveModesPics.Add("alarm_but_base.png");
+                        ActiveModesPics.Add("spec_but_base.png");
                         #endregion
                         #region Иконки актиыный режимов 2
                         ActiveMode2Pics = new ObservableCollection<string>();
@@ -994,9 +935,9 @@ namespace Android_Silver.Entities.Visual
                         BaseSettings1ButCollection = new List<PicByStates>();
                         for (int i = 0; i < 20; i++)
                         {
-                            BaseSettings1ButCollection.Add(new PicByStates("base_settings_but_off_base.png", "base_settings_but_on_base.png"));
+                            BaseSettings1ButCollection.Add(new PicByStates("settings_base_off.jpg", "settings_base_on.jpg"));
                         }
-                        BaseSettings2But = new PicByStates("base_settings_but_off_base.png", "base_settings_but_on_base.png");
+                        BaseSettings2But = new PicByStates("settings_base_off.jpg", "settings_base_on.jpg");
 
                         #endregion
                     }

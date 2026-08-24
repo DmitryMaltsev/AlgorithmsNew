@@ -111,14 +111,14 @@ namespace Android_Silver.Entities.Modes
 
 
         #region Адреса картинок для текущего режима
-        private PicByStates _activeModePics;
-        public PicByStates ActiveModePics
+        private string _activeModePicture;
+        public string ActiveModePicture
         {
-            get { return _activeModePics; }
+            get { return _activeModePicture; }
             set
             {
-                _activeModePics = value;
-                OnPropertyChanged(nameof(ActiveModePics));
+                _activeModePicture = value;
+                OnPropertyChanged(nameof(ActiveModePicture));
             }
         }
 
@@ -175,16 +175,16 @@ namespace Android_Silver.Entities.Modes
         /// Задаем текущему режиму соответветствующие значения.
         /// </summary>
         /// <param name="num"></param>
-        /// <param name="activeModePics"></param>картинка активная
+        /// <param name="activeModePicture"></param>картинка активная
         /// <param name="selectModePics"></param>картинка активная с названием
         /// <param name="modeIcons"></param>
         /// <param name="modeSettingsRoute"></param>
         /// <param name="startAddress"></param>
         ///  /// <param name="miniIcon"></param>картинка, как активная пока что, может измениться в дальнейшейм
-        public Mode1Values(int num, PicByStates activeModePics, PicByStates selectModePics, PicByStates modeIcons, string modeSettingsRoute, int startAddress, string miniIcon)
+        public Mode1Values(int num, string activeModePicture, PicByStates selectModePics, PicByStates modeIcons, string modeSettingsRoute, int startAddress, string miniIcon)
         {
             Num = num;
-            ActiveModePics = activeModePics;
+            ActiveModePicture = activeModePicture;
             SelectModePics = selectModePics;
             ModeIcons = modeIcons;
             ModeSettingsRoute = modeSettingsRoute;

@@ -51,26 +51,16 @@ namespace Android_Silver.Pages
 
         #endregion
 
-        private void Substrate_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.Substrate.Current = ViewModel.CPictureSet.Substrate.Selected;
-        }
-
-        private void Substrate_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.Substrate.Current = ViewModel.CPictureSet.Substrate.Default;
-        }
-
         private void ActiveMode_Pressed(object sender, EventArgs e)
         {
-            ViewModel.CModesEntities.CMode1.ActiveModePics.Current =
-                ViewModel.CModesEntities.CMode1.ActiveModePics.Selected;
+            ViewModel.CPictureSet.Mode1Select.Current =
+                ViewModel.CPictureSet.Mode1Select.Selected;
         }
 
         private void ActiveMode_Released(object sender, EventArgs e)
         {
-            ViewModel.CModesEntities.CMode1.ActiveModePics.Current =
-                ViewModel.CModesEntities.CMode1.ActiveModePics.Default;
+            ViewModel.CPictureSet.Mode1Select.Current =
+               ViewModel.CPictureSet.Mode1Select.Default ;
         }
 
         private void BackButton_Pressed(object sender, EventArgs e)
