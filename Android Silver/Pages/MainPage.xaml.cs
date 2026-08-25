@@ -402,24 +402,15 @@ namespace Android_Silver.Pages
         #endregion
 
         #region SETTINGS PAGE
-        private void Journal_Pressed(object sender, EventArgs e)
+
+        private void ShedSettings_Pressed(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.JournalBut.Current = ViewModel.CPictureSet.JournalBut.Selected;
+            ViewModel.CPictureSet.ShedSetBut.Current = ViewModel.CPictureSet.ShedSetBut.Selected;
         }
 
-        private void Journal_Released(object sender, EventArgs e)
+        private void ShedSettings_Released(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.JournalBut.Current = ViewModel.CPictureSet.JournalBut.Default;
-        }
-
-        private void OtherSettings_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.SettingsOtherBut.Current = ViewModel.CPictureSet.SettingsOtherBut.Selected;
-        }
-
-        private void OtherSettings_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.SettingsOtherBut.Current = ViewModel.CPictureSet.SettingsOtherBut.Default;
+            ViewModel.CPictureSet.ShedSetBut.Current = ViewModel.CPictureSet.ShedSetBut.Default;
         }
 
         private void SPSettings_Pressed(object sender, EventArgs e)
@@ -432,25 +423,48 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.ModesSetBut.Current = ViewModel.CPictureSet.ModesSetBut.Default;
         }
 
-        private void ShedSettings_Pressed(object sender, EventArgs e)
+        private void OtherSettings_Pressed(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.ShedSetBut.Current = ViewModel.CPictureSet.ShedSetBut.Selected;
+            ViewModel.CPictureSet.SettingsOtherBut.Current = ViewModel.CPictureSet.SettingsOtherBut.Selected;
         }
 
-        private void ShedSettings_Released(object sender, EventArgs e)
+        private void OtherSettings_Released(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.ShedSetBut.Current = ViewModel.CPictureSet.ShedSetBut.Default;
+            ViewModel.CPictureSet.SettingsOtherBut.Current = ViewModel.CPictureSet.SettingsOtherBut.Default;
+        }
+        private void InformationSettings_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.InformationBut.Current = ViewModel.CPictureSet.InformationBut.Selected;
         }
 
-        private void VacSettings_Pressed(object sender, EventArgs e)
+        private void InformationSettings_Released(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.VacSetBut.Current = ViewModel.CPictureSet.VacSetBut.Selected;
+            ViewModel.CPictureSet.InformationBut.Current = ViewModel.CPictureSet.InformationBut.Default;
         }
 
-        private void VacSettings_Released(object sender, EventArgs e)
+        private void Journal_Pressed(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.VacSetBut.Current = ViewModel.CPictureSet.VacSetBut.Default;
+            ViewModel.CPictureSet.JournalBut.Current = ViewModel.CPictureSet.JournalBut.Selected;
         }
+
+        private void Journal_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.JournalBut.Current = ViewModel.CPictureSet.JournalBut.Default;
+        }
+
+
+
+
+        private void HelperSettings_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.HelperBut.Current = ViewModel.CPictureSet.HelperBut.Selected;
+        }
+
+        private void HelperSettings_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.HelperBut.Current = ViewModel.CPictureSet.HelperBut.Default;
+        }
+
         #endregion
 
         #region  JOURNAL PAGE

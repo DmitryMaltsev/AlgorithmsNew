@@ -184,6 +184,8 @@ namespace Android_Silver.Pages
         public ICommand JournalCommand { get; private set; }
         public ICommand VacationTableCommand { get; private set; }
         public ICommand ShedulerTableCommand { get; private set; }
+
+        public ICommand InformationCommand { get; private set; }   
         #endregion
         #region TSettingsCommands
         public ICommand TRetCommand { get; private set; }
@@ -365,6 +367,7 @@ namespace Android_Silver.Pages
             #endregion
             #region Settings commands
             OtherSettingsCommand = new Command(ExecuteOtherSettings);
+            InformationCommand = new Command(ExecuteInformation);
             #endregion
             #region Other settings commands
             OtherSettingsReturnCommand = new Command(ExecuteOtherSettingsReturn);
@@ -454,7 +457,6 @@ namespace Android_Silver.Pages
         {
             SetM1ValuesByIndex(CModesEntities.CMode1.Num);
             CActivePagesEntities.SetActivePageState(ActivePageState.SetPointsPage);
-
         }
 
         private void ExecuteDisconnect()
@@ -733,6 +735,11 @@ namespace Android_Silver.Pages
         private void ExecuteOtherSettings(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+        }
+
+        private void ExecuteInformation(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.InformationPage);
         }
         #endregion
 

@@ -271,6 +271,16 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private string _isSpecMode;
+
+        public string IsSpecMode
+        {
+            get { return _isSpecMode; }
+            set {
+                _isSpecMode = value; 
+                OnPropertyChanged(nameof(IsSpecMode));
+            }
+        }
 
         #endregion
 
@@ -717,14 +727,15 @@ namespace Android_Silver.Entities.Visual
         }
 
         #region Settings pics
-        private PicByStates _journalBut;
-        public PicByStates JournalBut
+
+        private PicByStates _shedSetBut;
+        public PicByStates ShedSetBut
         {
-            get { return _journalBut; }
+            get { return _shedSetBut; }
             set
             {
-                _journalBut = value;
-                OnPropertyChanged(nameof(JournalBut));
+                _shedSetBut = value;
+                OnPropertyChanged($"{nameof(ShedSetBut)}");
             }
         }
 
@@ -740,7 +751,6 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-
         private PicByStates _settingsOtherBut;
         public PicByStates SettingsOtherBut
         {
@@ -752,32 +762,100 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
+        private PicByStates _informationBut;
 
-        private PicByStates shedSetSut;
-
-        public PicByStates ShedSetBut
+        public PicByStates InformationBut
         {
-            get { return shedSetSut; }
-            set
-            {
-                shedSetSut = value;
-                OnPropertyChanged($"{nameof(ShedSetBut)}");
+            get { return _informationBut; }
+            set {
+                _informationBut = value; 
+                OnPropertyChanged($"{nameof(InformationBut)}");
             }
         }
 
-        private PicByStates _vacSetBut;
-
-        public PicByStates VacSetBut
+        private PicByStates _journalBut;
+        public PicByStates JournalBut
         {
-            get { return _vacSetBut; }
+            get { return _journalBut; }
             set
             {
-                _vacSetBut = value;
-                OnPropertyChanged(nameof(VacSetBut));
+                _journalBut = value;
+                OnPropertyChanged(nameof(JournalBut));
+            }
+        }
+
+        private PicByStates _helpterBut;
+        public PicByStates HelperBut
+        {
+            get { return _helpterBut; }
+            set { _helpterBut = value;
+                OnPropertyChanged(nameof(HelperBut));
             }
         }
         #endregion
 
+        #region InfoPics
+
+        private string _ventInfo;
+
+        public string VentInfo
+        {
+            get { return _ventInfo; }
+            set { 
+                _ventInfo = value;
+                OnPropertyChanged(nameof(VentInfo));
+            }
+        }
+
+        private string _tempInfo;
+
+        public string TempInfo
+        {
+            get { return _tempInfo; }
+            set {
+                _tempInfo = value;
+                OnPropertyChanged(nameof(TempInfo));
+                }
+        }
+
+
+
+        private string _recupInfo;
+
+        public string RecupInfo
+        {
+            get { return _recupInfo; }
+            set
+            {
+                _recupInfo = value;
+                OnPropertyChanged(nameof(RecupInfo));
+            }
+        }
+        private string _eHeaterInfo;
+        public string EHeaterInfo
+        {
+            get { return _eHeaterInfo; }
+            set { 
+                _eHeaterInfo = value;
+                OnPropertyChanged(nameof(EHeaterInfo));
+            }
+        }
+
+        private string _otherInfo;
+        public string OtherInfo
+        {
+            get { return _otherInfo; }
+            set { 
+                _otherInfo = value;
+                OnPropertyChanged(nameof(OtherInfo));
+            }
+        }
+
+ 
+
+
+
+        #endregion
         public PicturesSet()
         {
             Init(PicturesSetStates.Base);
@@ -914,11 +992,19 @@ namespace Android_Silver.Entities.Visual
                         MiniIconsPics.Add("");
                         #endregion
                         #region Кнопки настроек
-                        JournalBut = new PicByStates("journal_but_off_base.png", "journal_but_on_base.png");
-                        ModesSetBut = new PicByStates("modes_set_but_off_base.png", "modes_set_but_on_base.png");
-                        SettingsOtherBut = new PicByStates("settings_other_but_off_base.png", "settings_other_but_on_base.png");
-                        ShedSetBut = new PicByStates("shed_set_but_off_base.png", "shed_set_but_on_base.png");
-                        VacSetBut = new PicByStates("vac_set_but_off_base.png", "vac_set_but_on_base.png");
+                        ShedSetBut = new PicByStates("shed_set_but_off_base.jpg", "shed_set_but_on_base.jpg");
+                        ModesSetBut = new PicByStates("modes_set_but_off_base.jpg", "modes_set_but_on_base.jpg");
+                        SettingsOtherBut = new PicByStates("settings_other_but_off_base.jpg", "settings_other_but_on_base.jpg");
+                        InformationBut = new PicByStates("information_but_off_base.jpg", "information_but_on_base.jpg");
+                        JournalBut = new PicByStates("journal_but_off_base.jpg", "journal_but_on_base.jpg");
+                        HelperBut = new PicByStates("helper_but_off_base.jpg", "helper_but_on_base.jpg");
+                        #endregion
+                        #region Информационный экран
+                        VentInfo = "vent_info_icon.jpg";
+                        RecupInfo = "recup_info_icon.jpg";
+                        TempInfo = "temp_info_icon.jpg";
+                        EHeaterInfo = "eheater_info_icon.jpg";
+                        OtherInfo = "other_info_icon.jpg";
                         #endregion
                         #region Другие настройки
                         FilterChangedBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
@@ -938,7 +1024,7 @@ namespace Android_Silver.Entities.Visual
                             BaseSettings1ButCollection.Add(new PicByStates("settings_base_off.jpg", "settings_base_on.jpg"));
                         }
                         BaseSettings2But = new PicByStates("settings_base_off.jpg", "settings_base_on.jpg");
-
+                        IsSpecMode = "is_sheduler_base.png";
                         #endregion
                     }
                     break;
