@@ -1,5 +1,6 @@
 ﻿using Android_Silver.Entities.Visual;
 using Android_Silver.ViewModels;
+
 using System.Collections.ObjectModel;
 
 namespace Android_Silver.Entities.Modes
@@ -67,8 +68,9 @@ namespace Android_Silver.Entities.Modes
             Mode1ValuesList = new List<Mode1Values>();
             for (int i = 0; i < 9; i++)
             {
-                Mode1ValuesList.Add(new Mode1Values(i, _cPicturesSet.ActiveModesPics[i],
-            _cPicturesSet.SelectModesPics[i], _cPicturesSet.IconsPics[i], "settingsPage", 104 + i * 6, _cPicturesSet.MiniIconsPics[i]));
+                Mode1ValuesList.Add(new Mode1Values(num:i,activeModePicture:_cPicturesSet.ActiveModesPics[i],
+            selectModePics:_cPicturesSet.SelectModesPics[i], modeIcons: _cPicturesSet.IconsPics[i], 
+            modeSettingsRoute:"settingsPage",startAddress: 104 + i * 6,miniIcon: _cPicturesSet.MiniIconsPics[i]));
             }
             CMode1 = Mode1ValuesList[0];
             Mode2ValuesList = new List<Mode2Values>();
@@ -79,13 +81,14 @@ namespace Android_Silver.Entities.Modes
             //Режим отпуска
             Mode2ValuesList.Add(new Mode2Values(2, 4, _cPicturesSet.ActiveMode2Pics[2], Mode1ValuesList[0], 148));
             //Режим  календаря
-            Mode2ValuesList.Add(new Mode2Values(3, 8, _cPicturesSet.ActiveMode2Pics[3], Mode1ValuesList[0], 174));
+            Mode2ValuesList.Add(new Mode2Values(3, 14, _cPicturesSet.ActiveMode2Pics[3], Mode1ValuesList[0], 174));
             ////Режим по контакту
-            //Mode2ValuesList.Add(new Mode2Values(4, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
+            Mode2ValuesList.Add(new Mode2Values(4, 1, _cPicturesSet.ActiveModesPics[0], Mode1ValuesList[0], 0));
             ////Специальный режим
             //Mode2ValuesList.Add(new Mode2Values(5, 1, _cPicturesSet.ActiveModesPics[0].Default, Mode1ValuesList[0], 0));
             CMode1 = Mode1ValuesList[0];
             CMode2 = Mode2ValuesList[0];
+            CTimeModeValues = Mode2ValuesList[3].TimeModeValues;
         }
 
         public void SetMode1ValuesByIndex(ushort index)

@@ -162,25 +162,6 @@ namespace Android_Silver.Pages
         #endregion
 
         #region Kitchen callbacks
-        private void UpDigit_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.KitchenButtonUp.Current = ViewModel.CPictureSet.KitchenButtonUp.Selected;
-        }
-
-        private void UpDigit_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.KitchenButtonUp.Current = ViewModel.CPictureSet.KitchenButtonUp.Default;
-        }
-
-        private void DnDigit_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.KitchenButtonDn.Current = ViewModel.CPictureSet.KitchenButtonDn.Selected;
-        }
-
-        private void DnDigit_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.KitchenButtonDn.Current = ViewModel.CPictureSet.KitchenButtonDn.Default;
-        }
 
         private void Next_Pressed(object sender, EventArgs e)
         {
@@ -202,171 +183,10 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.HomeButton.Current = ViewModel.CPictureSet.HomeButton.Default;
         }
 
-        private void AcceptButton_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.AcceptButton.Current = ViewModel.CPictureSet.AcceptButton.Selected;
-        }
 
-        private void AcceptButton_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.AcceptButton.Current = ViewModel.CPictureSet.AcceptButton.Default;
-        }
-
-        private void CancelButton_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.CancelButton.Current = ViewModel.CPictureSet.CancelButton.Selected;
-        }
-
-        private void CancelButton_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.CancelButton.Current = ViewModel.CPictureSet.CancelButton.Default;
-        }
         #endregion
 
         #region SetPointsCallbacks
-
-        private void UpDigit_Pressed0(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsUp[0].Current = ViewModel.CPictureSet.DigitalButtonsUp[0].Selected;
-        }
-
-        private void UpDigit_Released0(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsUp[0].Current = ViewModel.CPictureSet.DigitalButtonsUp[0].Default;
-        }
-
-        private void UpDigit_Pressed1(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsUp[1].Current = ViewModel.CPictureSet.DigitalButtonsUp[1].Selected;
-        }
-
-        private void UpDigit_Released1(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsUp[1].Current = ViewModel.CPictureSet.DigitalButtonsUp[1].Default;
-        }
-
-        private void UpDigit_Pressed2(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsUp[2].Current = ViewModel.CPictureSet.DigitalButtonsUp[2].Selected;
-        }
-
-        private void UpDigit_Released2(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsUp[2].Current = ViewModel.CPictureSet.DigitalButtonsUp[2].Default;
-        }
-
-        private void UpDigit_Pressed3(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsUp[3].Current = ViewModel.CPictureSet.DigitalButtonsUp[3].Selected;
-        }
-
-        private void UpDigit_Released3(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsUp[3].Current = ViewModel.CPictureSet.DigitalButtonsUp[3].Default;
-        }
-
-        private void UpDigit_Pressed4(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsUp[4].Current = ViewModel.CPictureSet.DigitalButtonsUp[3].Selected;
-        }
-
-        private void UpDigit_Released4(object sender, EventArgs e)
-        {
-            Button button = new Button();
-            ViewModel.CPictureSet.DigitalButtonsUp[4].Current = ViewModel.CPictureSet.DigitalButtonsUp[3].Default;
-        }
-
-        private void DnDigit_Pressed0(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[0].Current = ViewModel.CPictureSet.DigitalButtonsDn[0].Selected;
-        }
-
-        private void DnDigit_Released0(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[0].Current = ViewModel.CPictureSet.DigitalButtonsDn[0].Default;
-        }
-
-
-        private void DnDigit_Pressed1(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[1].Current = ViewModel.CPictureSet.DigitalButtonsDn[1].Selected;
-        }
-
-        private void DnDigit_Released1(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[1].Current = ViewModel.CPictureSet.DigitalButtonsDn[1].Default;
-        }
-
-
-        private void DnDigit_Pressed2(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[2].Current = ViewModel.CPictureSet.DigitalButtonsDn[2].Selected;
-        }
-
-        private void DnDigit_Released2(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[2].Current = ViewModel.CPictureSet.DigitalButtonsDn[2].Default;
-        }
-
-
-        private void DnDigit_Pressed3(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[3].Current = ViewModel.CPictureSet.DigitalButtonsDn[3].Selected;
-        }
-
-        private void DnDigit_Released3(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[3].Current = ViewModel.CPictureSet.DigitalButtonsDn[3].Default;
-        }
-
-        private void DnDigit_Pressed4(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[4].Current = ViewModel.CPictureSet.DigitalButtonsDn[3].Selected;
-        }
-
-        private void DnDigit_Released4(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.DigitalButtonsDn[4].Current = ViewModel.CPictureSet.DigitalButtonsDn[3].Default;
-        }
-
-        private void SFanCorrLeft_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.SFanCorrLeftBut.Current = ViewModel.CPictureSet.SFanCorrLeftBut.Selected;
-        }
-
-        private void SFanCorrLeft_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.SFanCorrLeftBut.Current = ViewModel.CPictureSet.SFanCorrLeftBut.Default;
-        }
-
-        private void SFanCorrRight_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.SFanCorrRightBut.Current = ViewModel.CPictureSet.SFanCorrRightBut.Selected;
-        }
-
-        private void SFanCorrRight_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.SFanCorrRightBut.Current = ViewModel.CPictureSet.SFanCorrRightBut.Default;
-        }
-
-        private void EFanCorrLeft_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.EFanCorrLeftBut.Current = ViewModel.CPictureSet.EFanCorrLeftBut.Selected;
-        }
-
-        private void EFanCorrLeft_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.EFanCorrLeftBut.Current = ViewModel.CPictureSet.EFanCorrLeftBut.Default;
-        }
-        private void EFanCorrRight_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.EFanCorrRightBut.Current = ViewModel.CPictureSet.EFanCorrRightBut.Selected;
-        }
-
-        private void EFanCorrRight_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.EFanCorrRightBut.Current = ViewModel.CPictureSet.EFanCorrRightBut.Default;
-        }
 
         private void Next_SPPressed(object sender, EventArgs e)
         {
@@ -378,16 +198,140 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.NextButton.Current = ViewModel.CPictureSet.NextButton.Default;
         }
 
-        private void HomeButton_SPPressed(object sender, EventArgs e)
+        private void Prev_SPPressed(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.HomeButton.Current = ViewModel.CPictureSet.HomeButton.Selected;
+            ViewModel.CPictureSet.PrevButton.Current = ViewModel.CPictureSet.PrevButton.Selected;
         }
 
-        private void HomeButton_SPReleased(object sender, EventArgs e)
+        private void Prev_SPReleased(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.HomeButton.Current = ViewModel.CPictureSet.HomeButton.Default;
+            ViewModel.CPictureSet.PrevButton.Current = ViewModel.CPictureSet.PrevButton.Default;
         }
 
+        private void Next_SPPressed1(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.NextButton1.Current = ViewModel.CPictureSet.NextButton1.Selected;
+        }
+
+        private void Next_SPReleased1(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.NextButton1.Current = ViewModel.CPictureSet.NextButton1.Default;
+        }
+
+        private void Prev_SPPressed1(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.PrevButton1.Current = ViewModel.CPictureSet.PrevButton1.Selected;
+        }
+
+        private void Prev_SPReleased1(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.PrevButton1.Current = ViewModel.CPictureSet.PrevButton1.Default;
+        }
+
+        private void AddBut_Pressed0(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[0].Current = ViewModel.CPictureSet.AddButs[0].Selected;
+        }
+
+        private void AddBut_Released0(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[0].Current = ViewModel.CPictureSet.AddButs[0].Default;
+        }
+
+        private void SubBut_Pressed0(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[0].Current = ViewModel.CPictureSet.SubButs[0].Selected;
+        }
+
+        private void SubBut_Released0(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[0].Current = ViewModel.CPictureSet.SubButs[0].Default;
+        }
+
+        private void AddBut_Pressed1(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[1].Current = ViewModel.CPictureSet.AddButs[1].Selected;
+        }
+
+        private void AddBut_Released1(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[1].Current = ViewModel.CPictureSet.AddButs[1].Default;
+        }
+
+        private void SubBut_Pressed1(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[1].Current = ViewModel.CPictureSet.SubButs[1].Selected;
+        }
+
+        private void SubBut_Released1(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[1].Current = ViewModel.CPictureSet.SubButs[1].Default;
+        }
+
+        private void AddBut_Pressed2(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[2].Current = ViewModel.CPictureSet.AddButs[2].Selected;
+        }
+
+        private void AddBut_Released2(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[2].Current = ViewModel.CPictureSet.AddButs[2].Default;
+        }
+
+        private void SubBut_Pressed2(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[2].Current = ViewModel.CPictureSet.SubButs[2].Selected;
+        }
+
+        private void SubBut_Released2(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[2].Current = ViewModel.CPictureSet.SubButs[2].Default;
+        }
+
+
+        private void AddBut_Pressed3(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[3].Current = ViewModel.CPictureSet.AddButs[3].Selected;
+        }
+
+        private void AddBut_Released3(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[3].Current = ViewModel.CPictureSet.AddButs[3].Default;
+        }
+
+
+        private void SubBut_Pressed3(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[3].Current = ViewModel.CPictureSet.SubButs[3].Selected;
+        }
+
+        private void SubBut_Released3(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[3].Current = ViewModel.CPictureSet.SubButs[3].Default;
+        }
+
+
+        private void AddBut_Pressed4(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[4].Current = ViewModel.CPictureSet.AddButs[4].Selected;
+        }
+
+        private void Addbut_Released4(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.AddButs[4].Current = ViewModel.CPictureSet.AddButs[4].Default;
+        }
+
+        private void SubBut_Pressed4(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[4].Current = ViewModel.CPictureSet.SubButs[4].Selected;
+        }
+
+        private void SubBut_Released4(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.SubButs[4].Current = ViewModel.CPictureSet.SubButs[4].Default;
+        }
+
+     
         private void OK_SPPressed(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.OkButton.Current = ViewModel.CPictureSet.OkButton.Selected;
@@ -397,8 +341,6 @@ namespace Android_Silver.Pages
         {
             ViewModel.CPictureSet.OkButton.Current = ViewModel.CPictureSet.OkButton.Default;
         }
-
-
         #endregion
 
         #region SETTINGS PAGE
@@ -497,43 +439,45 @@ namespace Android_Silver.Pages
         #endregion
 
         #region OtherSettings Page
-        private void FilterChanged_Pressed(object sender, EventArgs e)
+
+        private void ClockSettings_Pressed(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.FilterChangedBut.Current = ViewModel.CPictureSet.FilterChangedBut.Selected;
+            ViewModel.CPictureSet.ClocksSettingsBut.Current = ViewModel.CPictureSet.ClocksSettingsBut.Selected;
         }
 
-        private void FilterChanged_Released(object sender, EventArgs e)
+        private void ClockSettings_Released(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.FilterChangedBut.Current = ViewModel.CPictureSet.FilterChangedBut.Default;
-        }
-        private void Time_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.TimeBut.Current = ViewModel.CPictureSet.TimeBut.Selected;
+            ViewModel.CPictureSet.ClocksSettingsBut.Current = ViewModel.CPictureSet.ClocksSettingsBut.Default;
         }
 
-        private void Time_Released(object sender, EventArgs e)
+        private void UpdaterSettings_Pressed(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.TimeBut.Current = ViewModel.CPictureSet.TimeBut.Default;
+            ViewModel.CPictureSet.UpdaterSettingsBut.Current = ViewModel.CPictureSet.UpdaterSettingsBut.Selected;
+        }
+
+        private void UpdaterSettings_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.UpdaterSettingsBut.Current = ViewModel.CPictureSet.UpdaterSettingsBut.Default;
+        }
+
+        private void CorrSettings_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.CorrSettingsBut.Current = ViewModel.CPictureSet.CorrSettingsBut.Selected;
+        }
+
+        private void CorrSettings_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.CorrSettingsBut.Current = ViewModel.CPictureSet.CorrSettingsBut.Default;
         }
 
         private void Humidity_Pressed(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.HumidityBut.Current = ViewModel.CPictureSet.HumidityBut.Selected;
+            ViewModel.CPictureSet.CorrSettingsBut.Current = ViewModel.CPictureSet.CorrSettingsBut.Selected;
         }
 
         private void Humidity_Released(object sender, EventArgs e)
         {
-            ViewModel.CPictureSet.HumidityBut.Current = ViewModel.CPictureSet.HumidityBut.Default;
-        }
-
-        private void Updater_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.UpdaterBut.Current = ViewModel.CPictureSet.UpdaterBut.Selected;
-        }
-
-        private void Updater_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.UpdaterBut.Current = ViewModel.CPictureSet.UpdaterBut.Default;
+            ViewModel.CPictureSet.CorrSettingsBut.Current = ViewModel.CPictureSet.CorrSettingsBut.Default;
         }
 
         private void Download_Pressed(object sender, EventArgs e)
@@ -555,25 +499,13 @@ namespace Android_Silver.Pages
         {
             ViewModel.CPictureSet.ResetBut.Current = ViewModel.CPictureSet.ResetBut.Default;
         }
-
-        private void ArrowButLeft_Pressed(object sender, EventArgs e)
+        private void Switch_Toggled(object sender, ToggledEventArgs e)
         {
-            ViewModel.CPictureSet.ArrowButLeft.Current = ViewModel.CPictureSet.ArrowButLeft.Selected;
-        }
-
-        private void ArrowButLeft_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.ArrowButLeft.Current = ViewModel.CPictureSet.ArrowButLeft.Default;
-        }
-
-        private void ArrowButRight_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.ArrowButRight.Current = ViewModel.CPictureSet.ArrowButRight.Selected;
-        }
-
-        private void ArrowButRight_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.ArrowButRight.Current = ViewModel.CPictureSet.ArrowButRight.Default;
+            Microsoft.Maui.Controls.Switch thisSwitch = sender as Microsoft.Maui.Controls.Switch;
+            if (thisSwitch != null && thisSwitch.IsToggled)
+                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Selected;
+            else
+                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Default;
         }
 
         #endregion

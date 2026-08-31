@@ -4,13 +4,11 @@
              x:Class="Android_Silver.Resources.Styles.Dictionary1">
 
     <Style TargetType="Button" x:Key="MiniButtons">
-        <Setter Property="Grid.Row" Value="0"/>
-        <Setter Property="Grid.ColumnSpan" Value="4"/>
+        <Setter Property="Grid.ColumnSpan" Value="1"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
         <Setter Property="WidthRequest" Value="60"/>
         <Setter Property="HeightRequest" Value="60"/>
-        <Setter Property="Margin"  Value="30,30,0,0" />
     </Style>
     <Style TargetType="Button" x:Key="HeaderBut" BasedOn="{StaticResource MiniButtons}">
         <Setter Property="Margin"  Value="0,0,0,0" />
@@ -24,6 +22,7 @@
         <Setter Property="Margin"  Value="0,0,0,0" />
         <Setter Property="WidthRequest" Value="60"/>
         <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="Grid.Row" Value="1"/>
         <Setter Property="Grid.RowSpan" Value="1"/>
         <Setter Property="Grid.Column" Value="2"/>
         <Setter Property="Grid.ColumnSpan" Value="1"/>
@@ -32,13 +31,23 @@
         <Setter Property="WidthRequest" Value="80"/>
         <Setter Property="HeightRequest" Value="60"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
-        <Setter Property="Grid.ColumnSpan" Value="18" />
+        <Setter Property="Grid.Column" Value="15"/>
+        <Setter Property="Grid.ColumnSpan" Value="1" />
+        <Setter Property="Grid.Row" Value="1"/>
         <Setter Property="Grid.RowSpan" Value="1"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="Margin"  Value="0,0,0,0" />
     </Style>
-    <Style TargetType="ListView" x:Key="TableViews">
+    <Style TargetType="Button" x:Key="OKCancelButBot" BasedOn="{StaticResource OKCancelBut}">
+        <Setter Property="WidthRequest" Value="150"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="Grid.Column" Value="0"/>
+        <Setter Property="Grid.ColumnSpan" Value="8"/>
+        <Setter Property="Grid.Row" Value="10"/>
+        <Setter Property="Grid.RowSpan" Value="1"/>
+    </Style>
+        <Style TargetType="ListView" x:Key="TableViews">
         <Setter Property="SeparatorVisibility" Value="None"/>
         <Setter Property="SelectionMode" Value="None"/>
         <Setter Property="Grid.ColumnSpan" Value="18"/>
@@ -48,4 +57,128 @@
         <Setter Property="RowHeight" Value="60" />
         <Setter Property="VerticalOptions" Value="Start"/>
     </Style>
+
+    <Style TargetType="Label" x:Key="Title">
+        <Setter Property="Grid.Column" Value="0"/>
+        <Setter Property="Grid.ColumnSpan" Value="18"/>
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+
+
+    <Style TargetType="Label" x:Key="SPsText">
+        <Setter Property="Grid.Column" Value="6"/>
+        <Setter Property="Grid.ColumnSpan" Value="6"/>
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="0,5,0,-5" />
+    </Style>
+    <Style TargetType="Image" x:Key="MiniIcons">
+        <Setter Property="WidthRequest" Value="40"/>
+        <Setter Property="HeightRequest" Value="40"/>
+    </Style>
+    <Style TargetType="Image" x:Key="Icons">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="WidthRequest" Value="120"/>
+        <Setter Property="HeightRequest" Value="120"/>
+    </Style>
+
+
+    <!--#region SetPoints -->
+    <Style TargetType="Label" x:Key="SPsNames" BasedOn="{StaticResource Title}">
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="Grid.Column" Value="6"/>
+        <Setter Property="Grid.ColumnSpan" Value="6"/>
+        <Setter Property="Grid.RowSpan" Value="1"/>
+        <Setter Property="Margin" Value="0,-20,0,20" />
+        <Setter Property="TextColor" Value="#8DBFD6"/>
+    </Style>
+    <Style TargetType="Image" x:Key="SpBackground">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="WidthRequest" Value="200"/>
+        <Setter Property="Grid.Column" Value="8" />
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+    </Style>
+    <Style TargetType="Image" x:Key="SPIcon">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="Grid.Column" Value="6"/>
+        <Setter Property="Grid.ColumnSpan" Value="6"/>
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="Margin" Value="0,5,0,-5" />
+    </Style>
+    
+    <!--#endregion-->
+    
+    <!--#region OtherSettings -->
+    <Style TargetType="Label" x:Key="OtherSettingsLabel">
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Grid.Column" Value="0"/>
+        <Setter Property="Grid.ColumnSpan" Value="8"/>
+    </Style>
+    <Style TargetType="Image" x:Key="OtherSettingsImg">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <!--<Setter Property="MinimumHeightRequest" Value="60" />
+        <Setter Property="MinimumWidthRequest" Value="200"/>-->
+        <Setter Property="HeightRequest" Value="70"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Grid.ColumnSpan" Value="9" />
+        <Setter Property="Grid.RowSpan" Value="1"  />
+    </Style>
+    <Style TargetType="Image" x:Key="OtherSettingsBg">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="Grid.Column" Value="12" />
+        <Setter Property="Grid.ColumnSpan" Value="1"/>
+    </Style>
+    <Style TargetType="Button" x:Key="LeftOtherBut" BasedOn="{StaticResource MiniButtons}">
+        <!--<Setter Property="Margin" Value="0,0,15,0" />-->
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+    </Style>
+    <Style TargetType="Button" x:Key="RightOtherBut" BasedOn="{StaticResource MiniButtons}">
+        <!--<Setter Property="Margin" Value="15,0,0,0" />-->
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="OtherSettingsBut">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="ZIndex" Value="2"/>
+        <!--<Setter Property="MinimumHeightRequest" Value="60" />
+            <Setter Property="MinimumWidthRequest" Value="200"/>-->
+        <Setter Property="HeightRequest" Value="70"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Grid.ColumnSpan" Value="1" />
+        <Setter Property="Grid.RowSpan" Value="1"  />
+        <Setter Property="WidthRequest" Value="110"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal">
+                        <!-- Состояние по умолчанию -->
+                    </VisualState>
+                    <VisualState Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.8" />
+                            <!-- Здесь можно изменить ImageSource: -->
+                            <!-- <Setter Property="ImageSource" Value="disabled_icon.png" /> -->
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    <!--#endregion-->
 </ResourceDictionary>

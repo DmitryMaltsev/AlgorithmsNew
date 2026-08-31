@@ -5,6 +5,7 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
+
 using System.Globalization;
 using System.Windows.Input;
 
@@ -136,7 +137,7 @@ namespace Android_Silver.Pages
         public ICommand ConnectCommand { get; private set; }
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
-        public ICommand SPCommand { get; private set; }
+      
         public ICommand SettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
         public ICommand GoToPageCommand { get; private set; }
@@ -172,20 +173,21 @@ namespace Android_Silver.Pages
         public ICommand BtnUpCommand3 { get; private set; }
         public ICommand BtnDnCommand3 { get; private set; }
 
-        public ICommand SFanLeftCommand { get; private set; }
-        public ICommand SFanRightCommand { get; private set; }
-        public ICommand EFanLeftCommand { get; private set; }
-        public ICommand EFanRightCommand { get; private set; }
+        public ICommand SFanCorrSubCommand { get; private set; }
+        public ICommand SFanCorrAddCommand { get; private set; }
+        public ICommand EFanCorrSubCommand { get; private set; }
+        public ICommand EFanFanCorrAddCommand { get; private set; }
 
 
         #endregion
         #region Settings commands
         public ICommand OtherSettingsCommand { get; private set; }
         public ICommand JournalCommand { get; private set; }
-        public ICommand VacationTableCommand { get; private set; }
         public ICommand ShedulerTableCommand { get; private set; }
+        public ICommand SetSPCommand { get; private set; }
 
-        public ICommand InformationCommand { get; private set; }   
+        public ICommand SetCorrSPCommand { get; private set; }
+        public ICommand InformationCommand { get; private set; }
         #endregion
         #region TSettingsCommands
         public ICommand TRetCommand { get; private set; }
@@ -292,7 +294,8 @@ namespace Android_Silver.Pages
             StartPageConnectCommand = new Command(ExecuteConnect);
             ConnectCommand = new Command(ExecuteConnect);
             DisconnectCommand = new Command(ExecuteDisconnect);
-            SPCommand = new Command(ExecuteSetSP);
+            SetSPCommand = new Command(ExecuteSetSP);
+            SetCorrSPCommand = new Command(ExecuteSetCorrSP);
             ChooseModeCommand = new Command(ExecuteChooseMode);
             SettingsCommand = new Command(ExecuiteSettings);
             MinModeCommand = new Command(ExecuteMinMode);
@@ -303,7 +306,6 @@ namespace Android_Silver.Pages
             VacationModeCommand = new Command(ExecuteVacationMode);
             TurnOffModeCommand = new Command(ExecuteTurnOffMode);
             JournalCommand = new Command(ExecuteJournal);
-            VacationTableCommand = new Command(ExecuteVacationTable);
             ShedulerTableCommand = new Command(ExecuteShedulerTable);
             HomeCommand = new Command(ExecuteHomeCommand);
             ResetJournalCommand = new Command(ExecuteResetJournal);
@@ -311,7 +313,6 @@ namespace Android_Silver.Pages
             JournalReturnCommand = new Command(ExecuteJournalReturn);
             ContactArrLeftCommand = new Command(ExecuteContactArrLeft);
             ContactArrRightCommand = new Command(ExecuteContactArrRight);
-            HumidityCommand = new Command(ExecuteHumidity);
             TimeReturnCommand = new Command(ExecuteTimeReturn);
             ChangeFilterCommand = new Command(ExecuteChangeFilter);
             UpdateCommand = new Command(ExecuteUpdate);
@@ -342,10 +343,10 @@ namespace Android_Silver.Pages
             BtnUpCommand3 = new Command(ExecuteBtnUP3);
             BtnDnCommand3 = new Command(ExecuteBtnDn3);
             SPReturnCommand = new Command(ExecuteSPReturn);
-            SFanLeftCommand = new Command(ExecuteSFanLeft);
-            SFanRightCommand = new Command(ExecuteSFanRight);
-            EFanLeftCommand = new Command(ExecuteEFanLeft);
-            EFanRightCommand = new Command(ExecuteEFanRight);
+            SFanCorrSubCommand = new Command(ExecuteSFanCorrSub);
+            SFanCorrAddCommand = new Command(ExecuteSFanCorrAdd);
+            EFanCorrSubCommand = new Command(ExecuteEFanCorrSub);
+            EFanFanCorrAddCommand = new Command(ExecuteEFanCorrAdd);
             #endregion
             #region Vac commands
             SetTDataCommand = new Command(ExecuteSetTData);
@@ -372,13 +373,14 @@ namespace Android_Silver.Pages
             #region Other settings commands
             OtherSettingsReturnCommand = new Command(ExecuteOtherSettingsReturn);
             SetTimeCommand = new Command(ExecuteSetTime);
+            HumidityBtnUpCommand = new Command(ExecuteHumidityBtnUp);
+            HumidityBtnDnCommand = new Command(ExecuteHumidityBtnDn);
             #endregion
             #region Humidity commands
             HumidityReturnCommand = new Command(ExecuteHumidityReturn);
             OkHumidityCommand = new Command(ExecuteOkHumidity);
             CancelHumidityCommand = new Command(CancelHumidity);
-            HumidityBtnUpCommand = new Command(ExecuteHumidityBtnUp);
-            HumidityBtnDnCommand = new Command(ExecuteHumidityBtnDn);
+         
             #endregion
             #region Time commands
             TimeBtnUpCommand0 = new Command(ExecuteTimeBtnUp0);
@@ -394,21 +396,13 @@ namespace Android_Silver.Pages
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
 
-
             _fileSystemService.GetIPFromFile();
             SetTValuesByIndex(0, 0);//?????
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
-            // StartTimer();
-            // CModesEntities.Mode2ValuesList[2].TimeModeValues[2].CMode1.MiniIconV
-            //ContactModeImg = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.MiniIcon;
-            // byte[] values = { 0x10, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x20, 0xA9, 0x29, 0x00, 0x08, 0xD5, 0x28, 0x00, 0x08, 0xD7, 0x28, 0x00, 0x08 };
-            // var result = _fileSystemService.CalculateChecksum(values);
-            // object obj = 0;
-            // ExecuteUpdate(obj);
         }
 
-
+   
 
         async private void ExecuteConnect()
         {
@@ -594,7 +588,6 @@ namespace Android_Silver.Pages
         #endregion
 
         #region SetPoints execute commands
-
         private void ExecuteBtnUP0(object obj)
         {
             if (M1Values != null)
@@ -642,22 +635,22 @@ namespace Android_Silver.Pages
             if (M1Values != null)
                 M1Values.PowerLimitSP.Value = M1Values.PowerLimitSP.Value - 5 > 0 ? M1Values.PowerLimitSP.Value - 5 : 0;
         }
-        private void ExecuteSFanLeft(object obj)
+        private void ExecuteSFanCorrSub(object obj)
         {
             if (M1Values != null)
                 M1Values.SFanCorr.Value = M1Values.SFanCorr.Value - 1 > M1Values.SFanCorr.Min ? M1Values.SFanCorr.Value - 1 : M1Values.SFanCorr.Min;
         }
-        private void ExecuteSFanRight(object obj)
+        private void ExecuteSFanCorrAdd(object obj)
         {
             if (M1Values != null)
                 M1Values.SFanCorr.Value = M1Values.SFanCorr.Value + 1 < M1Values.SFanCorr.Max ? M1Values.SFanCorr.Value + 1 : M1Values.SFanCorr.Max;
         }
-        private void ExecuteEFanLeft(object obj)
+        private void ExecuteEFanCorrSub(object obj)
         {
             if (M1Values != null)
                 M1Values.EFanCorr.Value = M1Values.EFanCorr.Value - 1 > M1Values.EFanCorr.Min ? M1Values.EFanCorr.Value - 1 : M1Values.EFanCorr.Min;
         }
-        private void ExecuteEFanRight(object obj)
+        private void ExecuteEFanCorrAdd(object obj)
         {
             if (M1Values != null)
                 M1Values.EFanCorr.Value = M1Values.EFanCorr.Value + 1 < M1Values.EFanCorr.Max ? M1Values.EFanCorr.Value + 1 : M1Values.EFanCorr.Max;
@@ -690,10 +683,11 @@ namespace Android_Silver.Pages
         }
         private void SetM1ValuesByIndex(int index)
         {
+
             index = index > 0 && index < 6 ? index : 1;
 
             Mode1Values bufVals = CModesEntities.Mode1ValuesList[index];
-            M1Values = new Mode1Values(bufVals.Num, bufVals.ActiveModePicture,
+            M1Values = new Mode1Values(bufVals.Num, activeModePicture: bufVals.ActiveModePicture,
                       bufVals.SelectModePics,
                       bufVals.ModeIcons,
                       bufVals.ModeSettingsRoute,
@@ -717,19 +711,25 @@ namespace Android_Silver.Pages
         #region Settings execute methods
         private void ExecuteJournal(object obj)
         {
+            CFBs.CAlarms.AlarmsCollection.Clear();
+            var bits = CFBs.CAlarms.GetAlarmsByBits(1023);
+            CFBs.CAlarms.ConverBitArrayToAlarms(bits, 0);
             CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
-        }
-
-        private void ExecuteVacationTable(object obj)
-        {
-            CModesEntities.TTitle = "Отпуск";
-            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 0);
         }
 
         private void ExecuteShedulerTable(object obj)
         {
             CModesEntities.TTitle = "Расписание";
-            CActivePagesEntities.SetActivePageState(ActivePageState.LoadingPage, 1);
+            for (int i = 0; i < CModesEntities.CTimeModeValues.Count; i++)
+            {
+                CModesEntities.CTimeModeValues[i].StrokeImg.Current =
+               CModesEntities.CTimeModeValues[i].StrokeImg.Default;
+            }
+            CActivePagesEntities.SetActivePageState(ActivePageState.ShedulerPage);
+            //int tIndex = 0;//(int)obj - 1;
+            //int mode2Num = tIndex / 100;
+            //int tNum = tIndex - mode2Num * 100;
+            //SetTValuesByIndex(mode2Num, 3);
         }
 
         private void ExecuteOtherSettings(object obj)
@@ -753,6 +753,15 @@ namespace Android_Silver.Pages
         #endregion
 
         #region Execute other settings
+        private void ExecuteHumidityBtnUp(object obj)
+        {
+            HumiditySP = HumiditySP + 5 <= 40 ? HumiditySP + 5 : 40;
+        }
+        private void ExecuteHumidityBtnDn(object obj)
+        {
+            HumiditySP = HumiditySP - 5 >= 0 ? HumiditySP - 5 : 0;
+        }
+
         private void ExecuteContactArrLeft(object obj)
         {
             var contactTMode = CModesEntities.Mode2ValuesList[4].TimeModeValues[0];
@@ -766,7 +775,7 @@ namespace Android_Silver.Pages
         {
             var contactTMode = CModesEntities.Mode2ValuesList[4].TimeModeValues[0];
             int contactM1Num = contactTMode.CMode1.Num;
-            contactM1Num = contactM1Num < 5 ? contactM1Num + 1 : 5;
+            contactM1Num = contactM1Num < 3 ? contactM1Num + 1 : 3;
             contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
             int[] vals = { contactM1Num };
             CTcpClientService.SetCommandToServer(164, vals);
@@ -782,10 +791,10 @@ namespace Android_Silver.Pages
             throw new NotImplementedException();
         }
 
-        private void ExecuteHumidity(object obj)
+        private void ExecuteSetCorrSP(object obj)
         {
-            CActivePagesEntities.SetActivePageState(ActivePageState.HumidityPage);
-            HumiditySP = CFBs.CHumiditySPS.HumiditySP;
+            SetM1ValuesByIndex(CModesEntities.CMode1.Num);
+            CActivePagesEntities.SetActivePageState(ActivePageState.CorrSetPointsPage);
         }
 
         private void ExecuteUpdate(object obj)
@@ -1180,8 +1189,14 @@ namespace Android_Silver.Pages
             if (TValues != null)
             {
                 int val = TValues.Mode2Num == 2 ? 0 : 1;
-                CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage, val);
+                CActivePagesEntities.SetActivePageState(ActivePageState.ShedulerPage, val);
             }
+            for (int i = 0; i < CModesEntities.CTimeModeValues.Count; i++)
+            {
+                CModesEntities.CTimeModeValues[i].StrokeImg.Current =
+               CModesEntities.CTimeModeValues[i].StrokeImg.Default;
+            }
+
         }
 
         private void TSetExecuteOK(object obj)
@@ -1191,7 +1206,7 @@ namespace Android_Silver.Pages
                 int[] values = { TValues.DayNum, TValues.Hour, TValues.Minute, TValues.CMode1.Num };
                 CTcpClientService.SetCommandToServer(TValues.WriteAddress, values);
                 int val = TValues.Mode2Num == 2 ? 0 : 1;
-                CActivePagesEntities.SetActivePageState(ActivePageState.TSettingsPage, val);
+                CActivePagesEntities.SetActivePageState(ActivePageState.ShedulerPage, val);
             }
         }
 
@@ -1228,14 +1243,7 @@ namespace Android_Silver.Pages
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
 
-        private void ExecuteHumidityBtnUp(object obj)
-        {
-            HumiditySP = HumiditySP + 5 <= 40 ? HumiditySP + 5 : 40;
-        }
-        private void ExecuteHumidityBtnDn(object obj)
-        {
-            HumiditySP = HumiditySP - 5 >= 0 ? HumiditySP - 5 : 0;
-        }
+
         #endregion
 
         #region Time

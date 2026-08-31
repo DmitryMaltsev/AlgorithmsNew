@@ -1,5 +1,4 @@
 ﻿using Android_Silver.ViewModels;
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -108,7 +107,7 @@ namespace Android_Silver.Entities.Visual
 
         #region Filters
         private PicByStates _filterHeader;
-       
+
         public PicByStates FilterHeader
         {
             get { return _filterHeader; }
@@ -137,7 +136,9 @@ namespace Android_Silver.Entities.Visual
         public PicByStates Mode1Select
         {
             get { return _mode1Select; }
-            set { _mode1Select = value;
+            set
+            {
+                _mode1Select = value;
                 OnPropertyChanged(nameof(Mode1Select));
             }
         }
@@ -145,7 +146,9 @@ namespace Android_Silver.Entities.Visual
         public PicByStates RecuperatorHeader
         {
             get { return _recuperatorHeader; }
-            set { _recuperatorHeader = value;
+            set
+            {
+                _recuperatorHeader = value;
                 OnPropertyChanged(nameof(RecuperatorHeader));
             }
         }
@@ -178,7 +181,8 @@ namespace Android_Silver.Entities.Visual
         public string Miscellaneous
         {
             get { return _miscellaneous; }
-            set { 
+            set
+            {
                 _miscellaneous = value;
                 OnPropertyChanged(nameof(Miscellaneous));
             }
@@ -200,8 +204,18 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-        private PicByStates _nextButton;
+        private PicByStates _nextButton1;
+        public PicByStates NextButton1
+        {
+            get { return _nextButton1; }
+            set
+            {
+                _nextButton1 = value;
+                OnPropertyChanged(nameof(NextButton1));
+            }
+        }
 
+        private PicByStates _nextButton;
         public PicByStates NextButton
         {
             get { return _nextButton; }
@@ -211,6 +225,29 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged(nameof(NextButton));
             }
         }
+
+        private PicByStates _prevButton;
+        public PicByStates PrevButton
+        {
+            get { return _prevButton; }
+            set
+            {
+                _prevButton = value;
+                OnPropertyChanged(nameof(PrevButton));
+            }
+        }
+
+        private PicByStates _prevButton1;
+        public PicByStates PrevButton1
+        {
+            get { return _prevButton1; }
+            set
+            {
+                _prevButton1 = value;
+                OnPropertyChanged(nameof(PrevButton1));
+            }
+        }
+
 
         private PicByStates _okButton;
 
@@ -276,149 +313,162 @@ namespace Android_Silver.Entities.Visual
         public string IsSpecMode
         {
             get { return _isSpecMode; }
-            set {
-                _isSpecMode = value; 
+            set
+            {
+                _isSpecMode = value;
                 OnPropertyChanged(nameof(IsSpecMode));
             }
         }
 
         #endregion
 
-        #region Кухня+влажность
-        private PicByStates _acceptButton;
+        #region Кнопки и картинки уставок
 
-        public PicByStates AcceptButton
+        private string _strokeImg;
+
+        public string StrokeImg
         {
-            get { return _acceptButton; }
+            get { return _strokeImg; }
             set
             {
-                _acceptButton = value;
-                OnPropertyChanged(nameof(AcceptButton));
+                _strokeImg = value;
+                OnPropertyChanged(nameof(StrokeImg));
             }
         }
 
-        private PicByStates _cancelButton;
-        public PicByStates CancelButton
+        private List<PicByStates> _subButs;
+        public List<PicByStates> SubButs
         {
-            get { return _cancelButton; }
+            get { return _subButs; }
             set
             {
-                _cancelButton = value;
-                OnPropertyChanged(nameof(AcceptButton));
+                _subButs = value;
+                OnPropertyChanged(nameof(SubButs));
             }
         }
 
-        private List<PicByStates> _digitalButtonsUp;
+        private List<PicByStates> _addButs;
 
-        public List<PicByStates> DigitalButtonsUp
+        public List<PicByStates> AddButs
         {
-            get { return _digitalButtonsUp; }
+            get { return _addButs; }
             set
             {
-                _digitalButtonsUp = value;
-                OnPropertyChanged(nameof(DigitalButtonsUp));
+                _addButs = value;
+                OnPropertyChanged(nameof(AddButs));
             }
         }
 
-        private PicByStates _kitchenButtonUp;
+        private PicByStates _leftBut;
 
-        public PicByStates KitchenButtonUp
+        public PicByStates LeftBut
         {
-            get { return _kitchenButtonUp; }
-            set
-            {
-                _kitchenButtonUp = value;
-                OnPropertyChanged(nameof(KitchenButtonUp));
-            }
-        }
-
-        private PicByStates _kitchenButtonDn;
-
-        public PicByStates KitchenButtonDn
-        {
-            get { return _kitchenButtonDn; }
-            set
-            {
-                _kitchenButtonDn = value;
-                OnPropertyChanged(nameof(KitchenButtonDn));
-            }
-        }
-
-        private List<PicByStates> _digitalButtonsDn;
-
-        public List<PicByStates> DigitalButtonsDn
-        {
-            get { return _digitalButtonsDn; }
-            set
-            {
-                _digitalButtonsDn = value;
-                OnPropertyChanged(nameof(DigitalButtonsDn));
-            }
-        }
-
-        private PicByStates _sFanCorrLeftBut;
-        public PicByStates SFanCorrLeftBut
-        {
-            get { return _sFanCorrLeftBut; }
+            get { return _leftBut; }
             set {
-                _sFanCorrLeftBut = value;
-                OnPropertyChanged(nameof(SFanCorrLeftBut));
-            }
-        }
-        private PicByStates _sFanCorrRightBut;
-        public PicByStates SFanCorrRightBut
-        {
-            get { return _sFanCorrRightBut; }
-            set
-            {
-                _sFanCorrRightBut = value;
-                OnPropertyChanged(nameof(SFanCorrRightBut));
-            }
-        }
-        private PicByStates _eFanCorrLeftBut;
-        public PicByStates EFanCorrLeftBut
-        {
-            get { return _eFanCorrLeftBut; }
-            set
-            {
-                _eFanCorrLeftBut = value;
-                OnPropertyChanged(nameof(EFanCorrLeftBut));
-            }
-        }
-        private PicByStates _eFanCorrRightBut;
-        public PicByStates EFanCorrRightBut
-        {
-            get { return _eFanCorrRightBut; }
-            set
-            {
-                _eFanCorrRightBut = value;
-                OnPropertyChanged(nameof(EFanCorrRightBut));
-            }
-        }
-        
-        private string _digitalImage;
-
-        public string DigitalImage
-        {
-            get { return _digitalImage; }
-            set
-            {
-                _digitalImage = value;
-                OnPropertyChanged($"{nameof(DigitalImage)}");
+                _leftBut = value; 
+                OnPropertyChanged(nameof(LeftBut));
             }
         }
 
-        private string _timeDigitalImage;
+        private PicByStates _rightBut;
 
-        public string TimeDigitalImage
+        public PicByStates RightBut
         {
-            get { return _timeDigitalImage; }
-            set
-            {
-                _timeDigitalImage = value;
-                OnPropertyChanged($"{nameof(TimeDigitalImage)}");
+            get { return _rightBut; }
+            set { 
+                _rightBut = value; 
+                OnPropertyChanged(nameof(RightBut));
             }
         }
+
+        //private PicByStates _sFanRightBut;
+        //public PicByStates SFanRightBut
+        //{
+        //    get { return _sFanRightBut; }
+        //    set { 
+        //        _sFanRightBut = value;
+
+        //    }
+        //}
+
+        //private PicByStates _sFanLeftBut;
+        //public PicByStates SFanLeftBut
+        //{
+        //    get { return _sFanLeftBut; }
+        //    set { _sFanLeftBut = value; }
+        //}
+
+        //private PicByStates _eFanRightBut;
+        //public PicByStates EFanRightBut
+        //{
+        //    get { return _eFanRightBut; }
+        //    set { 
+        //        _eFanRightBut = value;
+        //        OnPropertyChanged(nameof(EFanRightBut));
+        //    }
+        //}
+
+        //private PicByStates _eFanLeftBut;
+        //public PicByStates EFanLeftBut
+        //{
+        //    get { return _eFanLeftBut; }
+        //    set { _eFanLeftBut = value; }
+        //}
+
+        //private PicByStates _tempSPRightBut;
+        //public PicByStates TempSPRightBut
+        //{
+        //    get { return _tempSPRightBut; }
+        //    set { _tempSPRightBut = value; }
+        //}
+
+        //private PicByStates _tempSPLeftBut;
+        //public PicByStates TempSPLeftBut
+        //{
+        //    get { return _tempSPLeftBut; }
+        //    set { _tempSPLeftBut = value; }
+        //}
+
+
+        //private PicByStates _sFanCorrLeftBut;
+        //public PicByStates SFanCorrLeftBut
+        //{
+        //    get { return _sFanCorrLeftBut; }
+        //    set {
+        //        _sFanCorrLeftBut = value;
+        //        OnPropertyChanged(nameof(SFanCorrLeftBut));
+        //    }
+        //}
+        //private PicByStates _sFanCorrRightBut;
+        //public PicByStates SFanCorrRightBut
+        //{
+        //    get { return _sFanCorrRightBut; }
+        //    set
+        //    {
+        //        _sFanCorrRightBut = value;
+        //        OnPropertyChanged(nameof(SFanCorrRightBut));
+        //    }
+        //}
+        //private PicByStates _eFanCorrLeftBut;
+        //public PicByStates EFanCorrLeftBut
+        //{
+        //    get { return _eFanCorrLeftBut; }
+        //    set
+        //    {
+        //        _eFanCorrLeftBut = value;
+        //        OnPropertyChanged(nameof(EFanCorrLeftBut));
+        //    }
+        //}
+        //private PicByStates _eFanCorrRightBut;
+        //public PicByStates EFanCorrRightBut
+        //{
+        //    get { return _eFanCorrRightBut; }
+        //    set
+        //    {
+        //        _eFanCorrRightBut = value;
+        //        OnPropertyChanged(nameof(EFanCorrRightBut));
+        //    }
+        //}
         #endregion
 
         #region Временные режимы
@@ -438,47 +488,58 @@ namespace Android_Silver.Entities.Visual
         #endregion
 
         #region Настройки прочие
-        private string _contactBackGround;
-        public string ContactBackGround
+        private string _contactBackground;
+        public string ContactBackground
         {
-            get { return _contactBackGround; }
+            get { return _contactBackground; }
             set
             {
-                _contactBackGround = value;
-                OnPropertyChanged(nameof(ContactBackGround));
+                _contactBackground = value;
+                OnPropertyChanged(nameof(ContactBackground));
             }
         }
 
-        private PicByStates _filterChangedBut;
-        public PicByStates FilterChangedBut
+        private string _humidityBackground;
+
+        public string HumidityBackground
         {
-            get { return _filterChangedBut; }
-            set
-            {
-                _filterChangedBut = value;
-                OnPropertyChanged(nameof(FilterChangedBut));
+            get { return _humidityBackground; }
+            set { 
+                _humidityBackground = value;
+                OnPropertyChanged(nameof(HumidityBackground));
             }
         }
 
-        private PicByStates _timeBut;
-        public PicByStates TimeBut
+        private PicByStates _clocksSettingsBut;
+        public PicByStates ClocksSettingsBut
         {
-            get { return _timeBut; }
+            get { return _clocksSettingsBut; }
             set
             {
-                _timeBut = value;
-                OnPropertyChanged(nameof(TimeBut));
+                _clocksSettingsBut = value;
+                OnPropertyChanged(nameof(ClocksSettingsBut));
             }
         }
 
-        private PicByStates _humidityBut;
-        public PicByStates HumidityBut
+        private PicByStates _updaterSettingsBut;
+        public PicByStates UpdaterSettingsBut
         {
-            get { return _humidityBut; }
+            get { return _updaterSettingsBut; }
             set
             {
-                _humidityBut = value;
-                OnPropertyChanged(nameof(HumidityBut));
+                _updaterSettingsBut = value;
+                OnPropertyChanged(nameof(UpdaterSettingsBut));
+            }
+        }
+
+        private PicByStates _corrSettingsBut;
+        public PicByStates CorrSettingsBut
+        {
+            get { return _corrSettingsBut; }
+            set
+            {
+                _corrSettingsBut = value;
+                OnPropertyChanged(nameof(CorrSettingsBut));
             }
         }
 
@@ -487,8 +548,9 @@ namespace Android_Silver.Entities.Visual
         public PicByStates UpdaterBut
         {
             get { return _updaterBut; }
-            set {
-                _updaterBut = value; 
+            set
+            {
+                _updaterBut = value;
                 OnPropertyChanged(nameof(UpdaterBut));
             }
         }
@@ -511,35 +573,25 @@ namespace Android_Silver.Entities.Visual
         public PicByStates DownloadBut
         {
             get { return _downloadBut; }
-            set { 
+            set
+            {
                 _downloadBut = value;
                 OnPropertyChanged(nameof(DownloadBut));
             }
         }
 
+        private PicByStates _specModeSwitch;
 
-        private PicByStates _arrowButLeft;
-        public PicByStates ArrowButLeft
+        public PicByStates SpecModeSwitch
         {
-            get { return _arrowButLeft; }
-            set
-            {
-                _arrowButLeft = value;
-                OnPropertyChanged(nameof(_arrowButLeft));
+            get { return _specModeSwitch; }
+            set {
+                _specModeSwitch = value;
+                OnPropertyChanged(nameof(SpecModeSwitch));
             }
         }
 
-        private PicByStates _arrowButRight;
 
-        public PicByStates ArrowButRight
-        {
-            get { return _arrowButRight; }
-            set
-            {
-                _arrowButRight = value;
-                OnPropertyChanged($"{nameof(ArrowButRight)}");
-            }
-        }
         #endregion
 
         #region Разное
@@ -643,7 +695,8 @@ namespace Android_Silver.Entities.Visual
         public string FlowIcon
         {
             get { return _flowIcon; }
-            set { 
+            set
+            {
                 _flowIcon = value;
                 OnPropertyChanged(nameof(FlowIcon));
             }
@@ -654,7 +707,8 @@ namespace Android_Silver.Entities.Visual
         public string TempIcon
         {
             get { return _tempIcon; }
-            set { 
+            set
+            {
                 _tempIcon = value;
                 OnPropertyChanged(nameof(TempIcon));
             }
@@ -680,12 +734,13 @@ namespace Android_Silver.Entities.Visual
         public ObservableCollection<string> ActiveMode2Pics
         {
             get { return _activeMode2Pics; }
-            set {
+            set
+            {
                 _activeMode2Pics = value;
                 OnPropertyChanged(nameof(ActiveMode2Pics));
             }
         }
-            
+
 
         private ObservableCollection<PicByStates> _selectModesPics = new ObservableCollection<PicByStates>();
 
@@ -767,8 +822,9 @@ namespace Android_Silver.Entities.Visual
         public PicByStates InformationBut
         {
             get { return _informationBut; }
-            set {
-                _informationBut = value; 
+            set
+            {
+                _informationBut = value;
                 OnPropertyChanged($"{nameof(InformationBut)}");
             }
         }
@@ -788,7 +844,9 @@ namespace Android_Silver.Entities.Visual
         public PicByStates HelperBut
         {
             get { return _helpterBut; }
-            set { _helpterBut = value;
+            set
+            {
+                _helpterBut = value;
                 OnPropertyChanged(nameof(HelperBut));
             }
         }
@@ -801,7 +859,8 @@ namespace Android_Silver.Entities.Visual
         public string VentInfo
         {
             get { return _ventInfo; }
-            set { 
+            set
+            {
                 _ventInfo = value;
                 OnPropertyChanged(nameof(VentInfo));
             }
@@ -812,10 +871,11 @@ namespace Android_Silver.Entities.Visual
         public string TempInfo
         {
             get { return _tempInfo; }
-            set {
+            set
+            {
                 _tempInfo = value;
                 OnPropertyChanged(nameof(TempInfo));
-                }
+            }
         }
 
 
@@ -835,7 +895,8 @@ namespace Android_Silver.Entities.Visual
         public string EHeaterInfo
         {
             get { return _eHeaterInfo; }
-            set { 
+            set
+            {
                 _eHeaterInfo = value;
                 OnPropertyChanged(nameof(EHeaterInfo));
             }
@@ -845,17 +906,19 @@ namespace Android_Silver.Entities.Visual
         public string OtherInfo
         {
             get { return _otherInfo; }
-            set { 
+            set
+            {
                 _otherInfo = value;
                 OnPropertyChanged(nameof(OtherInfo));
             }
         }
 
- 
+
 
 
 
         #endregion
+
         public PicturesSet()
         {
             Init(PicturesSetStates.Base);
@@ -872,12 +935,11 @@ namespace Android_Silver.Entities.Visual
                         Loading = "loading_pic_base_sign.jpg";
                         LoadingPic = "loading_pic_base_sign.jpg";
                         Title = "title_base.png";
-                        BackButton = new PicByStates("back_pic.png", "back_pick_selected.png");
-                        ResetButton = new PicByStates("reset_but_off_base.png", "reset_but_on_base.png");
-                        JournalStroke = "journal_stroke_base.png";
+                        BackButton = new PicByStates("back_but_off_base.png", "back_but_on_base.png");
+                        ResetButton = new PicByStates("reset_but_off_base.jpg", "reset_but_on_base.jpg");
+                        JournalStroke = "journal_stroke_base.jpg";
                         SelectStroke = new PicByStates("journal_stroke_base.png", "test.jpg");
-                        TModeStroke = new PicByStates("tmode_stroke_off_base.png", "tmode_stroke_on_base.png");
-                        TimeDigitalImage = "time_dig_img_base.png";
+                        TModeStroke = new PicByStates("tmode_stroke_off_base.jpg", "");
                         #region Главное окно
                         Mode1Select = new PicByStates("select_mode_base_off.jpg", "select_mode_base_on.jpg");
                         AlarmMainIcon = new PicByStates("", "alarm_main_base.png");
@@ -886,7 +948,6 @@ namespace Android_Silver.Entities.Visual
                         FilterHeader = new PicByStates("filter_header_base.jpg", "");
                         RecuperatorHeader = new PicByStates("recup_header_base.jpg", "");
                         LinkHeader = new PicByStates("", "link_header_base.png");
-
                         TempIcon = "temp_icon_base.jpg";
                         FlowIcon = "flow_icon_base.jpg";
                         #endregion
@@ -899,39 +960,27 @@ namespace Android_Silver.Entities.Visual
                         RoomTemp = "room_temp_base.png";
                         Miscellaneous = "miscel_base.png";
                         #endregion
-                        #region Кухня, счетчики
-                        AcceptButton = new PicByStates("accept_but_off_base.png", "accept_but_on_base.png");
-                        CancelButton = new PicByStates("cancel_but_off_base.png", "cancel_but_on_base.png");
-                        DigitalImage = "dig_img_base.png";
-                        #region 4 кнопки вверх+низ
-                        DigitalButtonsUp = new List<PicByStates>();
-
-                        DigitalButtonsUp.Add(new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png"));
-                        DigitalButtonsUp.Add(new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png"));
-                        DigitalButtonsUp.Add(new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png"));
-                        DigitalButtonsUp.Add(new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png"));
-                        DigitalButtonsUp.Add(new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png"));
-
-                        DigitalButtonsDn = new List<PicByStates>();
-                        DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
-                        DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
-                        DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
-                        DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
-                        DigitalButtonsDn.Add(new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png"));
-
-                        SFanCorrLeftBut = new PicByStates("but_left_off_base.png", "but_left_on_base.png");
-                        SFanCorrRightBut = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
-                        EFanCorrLeftBut = new PicByStates("but_left_off_base.png", "but_left_on_base.png");
-                        EFanCorrRightBut = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
-
-                        KitchenButtonUp = new PicByStates("dig_but_up_off_base.png", "dig_but_up_on_base.png");
-                        KitchenButtonDn = new PicByStates("dig_but_dn_off_base.png", "dig_but_dn_on_base.png");
-                        #endregion
-
+                        #region Уставки
+                        SubButs = [new PicByStates("sub_but_off_base.jpg", "sub_but_on_base.jpg"), 
+                                   new PicByStates("sub_but_off_base.jpg", "sub_but_on_base.jpg"),
+                                   new PicByStates("sub_but_off_base.jpg", "sub_but_on_base.jpg"),
+                                   new PicByStates("sub_but_off_base.jpg", "sub_but_on_base.jpg"),
+                                   new PicByStates("sub_but_off_base.jpg", "sub_but_on_base.jpg")];
+                        AddButs = [new PicByStates("add_but_off_base.jpg", "add_but_on_base.jpg"),
+                                   new PicByStates("add_but_off_base.jpg", "add_but_on_base.jpg"),
+                                   new PicByStates("add_but_off_base.jpg", "add_but_on_base.jpg"),
+                                   new PicByStates("add_but_off_base.jpg", "add_but_on_base.jpg"),
+                                   new PicByStates("add_but_off_base.jpg", "add_but_on_base.jpg")];
+                        LeftBut = new PicByStates("left_but_off_base.jpg", "left_but_on_base.jpg");
+                        RightBut = new PicByStates("right_but_off_base.jpg", "right_but_on_base.jpg");
+                        StrokeImg = "stroke_img_base.jpg";
                         #endregion
                         #region Уставки
                         HomeButton = new PicByStates("home_but_off_base.png", "home_but_on_base.png");
-                        NextButton = new PicByStates("next_but_off_base.png", "next_but_on_base.png");
+                        NextButton = new PicByStates("right_but_off_base.jpg", "right_but_on_base.jpg");
+                        NextButton1 = new PicByStates("right_but_off_base.jpg", "right_but_on_base.jpg");
+                        PrevButton = new PicByStates("left_but_off_base.jpg", "left_but_on_base.jpg");
+                        PrevButton1 = new PicByStates("left_but_off_base.jpg", "left_but_on_base.jpg");
                         OkButton = new PicByStates("ok_but_off_base.jpg", "ok_but_on_base.jpg");
                         SettingsButton = new PicByStates("settings_base_off.jpg", "settings_base_on.jpg");
                         #endregion
@@ -987,7 +1036,7 @@ namespace Android_Silver.Entities.Visual
                         MiniIconsPics.Add("max_icon_off_base.png");
                         MiniIconsPics.Add("kitchen_icon_off_base.png");
                         MiniIconsPics.Add("vac_icon_off_base.png");
-                        MiniIconsPics.Add("spec_but_off_base.png");
+                        MiniIconsPics.Add("");
                         MiniIconsPics.Add("");
                         MiniIconsPics.Add("");
                         #endregion
@@ -1007,15 +1056,15 @@ namespace Android_Silver.Entities.Visual
                         OtherInfo = "other_info_icon.jpg";
                         #endregion
                         #region Другие настройки
-                        FilterChangedBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
-                        TimeBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
-                        HumidityBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
+                        ContactBackground = "other_settings_stroke_base.jpg";
+                        HumidityBackground = "other_settings_stroke_base.jpg";
+                        ClocksSettingsBut = new PicByStates("clocks_settings_but_off_base.jpg", "clocks_settings_but_on_base.jpg");
+                        UpdaterSettingsBut = new PicByStates("updater_settings_but_off.jpg", "updater_settings_but_on.jpg");
+                        CorrSettingsBut = new PicByStates("corr_settings_but_off_base.jpg", "corr_settings_but_on_base.jpg");
                         UpdaterBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
                         DownloadBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
                         ResetBut = new PicByStates("other_set_but_off_base.png", "other_set_but_on_base.png");
-                        ArrowButLeft = new PicByStates("but_left_off_base.png", "but_left_on_base.png");
-                        ArrowButRight = new PicByStates("but_right_off_base.png", "but_right_on_base.png");
-                        ContactBackGround = "other_set_but_off_base.png";
+                        SpecModeSwitch = new PicByStates("spec_mode_off_base.jpg", "spec_mode_on_base.jpg");
                         #endregion
                         #region Основные настройки
                         BaseSettings1ButCollection = new List<PicByStates>();
