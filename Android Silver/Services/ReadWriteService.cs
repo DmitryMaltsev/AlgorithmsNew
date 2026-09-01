@@ -1182,7 +1182,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 || startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[6].SypplySP, value, ref startIndex);
+                GetIntValueResult(_modesEntities.Mode1ValuesList[6].SupplySP, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 || startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)

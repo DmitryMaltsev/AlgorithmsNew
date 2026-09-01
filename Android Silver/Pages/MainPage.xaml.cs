@@ -34,7 +34,7 @@ namespace Android_Silver.Pages
             // Add the gestures to your content 
             //  ContentView.GestureRecognizers.Add(swipeLeft);
             //  ContentView.GestureRecognizers.Add(swipeRight)
-  
+
         }
 
 
@@ -60,7 +60,7 @@ namespace Android_Silver.Pages
         private void ActiveMode_Released(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.Mode1Select.Current =
-               ViewModel.CPictureSet.Mode1Select.Default ;
+               ViewModel.CPictureSet.Mode1Select.Default;
         }
 
         private void BackButton_Pressed(object sender, EventArgs e)
@@ -142,15 +142,6 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.SelectModesPics[5].Current = ViewModel.CPictureSet.SelectModesPics[5].Default;
         }
 
-        private void Shed_Pressed(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.SelectModesPics[6].Current = ViewModel.CPictureSet.SelectModesPics[6].Selected;
-        }
-        private void Shed_Released(object sender, EventArgs e)
-        {
-            ViewModel.CPictureSet.SelectModesPics[6].Current = ViewModel.CPictureSet.SelectModesPics[6].Default;
-        }
-
         private void TurnOff_Pressed(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SelectModesPics[0].Current = ViewModel.CPictureSet.SelectModesPics[0].Selected;
@@ -158,6 +149,16 @@ namespace Android_Silver.Pages
         private void TurnOff_Released(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SelectModesPics[0].Current = ViewModel.CPictureSet.SelectModesPics[0].Default;
+        }
+
+        private void ShedSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+            Microsoft.Maui.Controls.Switch thisSwitch = sender as Microsoft.Maui.Controls.Switch;
+            thisSwitch.CancelAnimations();
+            if (thisSwitch != null && thisSwitch.IsToggled)
+                ViewModel.CPictureSet.SelectModesPics[6].Current = ViewModel.CPictureSet.SelectModesPics[6].Selected;
+            else
+                ViewModel.CPictureSet.SelectModesPics[6].Current = ViewModel.CPictureSet.SelectModesPics[6].Default;
         }
         #endregion
 
@@ -331,7 +332,7 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.SubButs[4].Current = ViewModel.CPictureSet.SubButs[4].Default;
         }
 
-     
+
         private void OK_SPPressed(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.OkButton.Current = ViewModel.CPictureSet.OkButton.Selected;
@@ -439,7 +440,6 @@ namespace Android_Silver.Pages
         #endregion
 
         #region OtherSettings Page
-
         private void ClockSettings_Pressed(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.ClocksSettingsBut.Current = ViewModel.CPictureSet.ClocksSettingsBut.Selected;
@@ -479,7 +479,17 @@ namespace Android_Silver.Pages
         {
             ViewModel.CPictureSet.CorrSettingsBut.Current = ViewModel.CPictureSet.CorrSettingsBut.Default;
         }
+        private void Switch_Toggled(object sender, ToggledEventArgs e)
+        {
+            Microsoft.Maui.Controls.Switch thisSwitch = sender as Microsoft.Maui.Controls.Switch;
+            if (thisSwitch != null && thisSwitch.IsToggled)
+                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Selected;
+            else
+                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Default;
+        }
+        #endregion
 
+        #region Updater
         private void Download_Pressed(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.DownloadBut.Current = ViewModel.CPictureSet.DownloadBut.Selected;
@@ -488,6 +498,16 @@ namespace Android_Silver.Pages
         private void Download_Released(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.DownloadBut.Current = ViewModel.CPictureSet.DownloadBut.Default;
+        }
+
+        private void Updater_Pressed(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.UpdaterBut.Current = ViewModel.CPictureSet.ResetBut.Selected;
+        }
+
+        private void Updater_Released(object sender, EventArgs e)
+        {
+            ViewModel.CPictureSet.UpdaterBut.Current = ViewModel.CPictureSet.ResetBut.Default;
         }
 
         private void Reset_Pressed(object sender, EventArgs e)
@@ -499,16 +519,10 @@ namespace Android_Silver.Pages
         {
             ViewModel.CPictureSet.ResetBut.Current = ViewModel.CPictureSet.ResetBut.Default;
         }
-        private void Switch_Toggled(object sender, ToggledEventArgs e)
-        {
-            Microsoft.Maui.Controls.Switch thisSwitch = sender as Microsoft.Maui.Controls.Switch;
-            if (thisSwitch != null && thisSwitch.IsToggled)
-                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Selected;
-            else
-                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Default;
-        }
-
+    
         #endregion
+
+
 
         protected override void OnAppearing()
         {

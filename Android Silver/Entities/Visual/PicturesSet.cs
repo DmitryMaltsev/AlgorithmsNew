@@ -840,16 +840,29 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-        private PicByStates _helpterBut;
+        private PicByStates _helpperBut;
         public PicByStates HelperBut
         {
-            get { return _helpterBut; }
+            get { return _helpperBut; }
             set
             {
-                _helpterBut = value;
+                _helpperBut = value;
                 OnPropertyChanged(nameof(HelperBut));
             }
         }
+
+        private string _qrHelperImg;
+
+        public string QRHelperImg
+        {
+            get { return _qrHelperImg; }
+            set { 
+                _qrHelperImg = value;
+                OnPropertyChanged(nameof(QRHelperImg));
+            }
+        }
+
+
         #endregion
 
         #region InfoPics
@@ -1054,6 +1067,9 @@ namespace Android_Silver.Entities.Visual
                         TempInfo = "temp_info_icon.jpg";
                         EHeaterInfo = "eheater_info_icon.jpg";
                         OtherInfo = "other_info_icon.jpg";
+                        #endregion
+                        #region Экран информации
+                        QRHelperImg = "qr_base.jpg";
                         #endregion
                         #region Другие настройки
                         ContactBackground = "other_settings_stroke_base.jpg";

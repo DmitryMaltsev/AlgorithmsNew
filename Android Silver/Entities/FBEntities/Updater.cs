@@ -17,7 +17,6 @@ namespace Android_Silver.Entities.FBEntities
     public class Updater : BindableBase
     {
     
-
         #region Rising properties
         private byte _isUpdate;
 
@@ -170,7 +169,7 @@ namespace Android_Silver.Entities.FBEntities
                 OnPropertyChanged(nameof(AutoUpdIndex));
             }
         }
-        private List<string> _autoUpdList= new List<string>() { "Отключено", "Новая прошивка", "Резервная прошивка" };
+        private List<string> _autoUpdList= new List<string>() { "Отключено", "Новая прошивка", "Рез прошивка" };
 
         public List<string> AutoUpdList
         {

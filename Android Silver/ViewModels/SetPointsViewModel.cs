@@ -79,7 +79,7 @@ namespace Android_Silver.ViewModels
                       bufVals.ModeSettingsRoute,
                       bufVals.StartAddress,
                       bufVals.MiniIcon);
-            M1Values.SypplySP = bufVals.SypplySP;
+            M1Values.SupplySP = bufVals.SupplySP;
             M1Values.ExhaustSP = bufVals.ExhaustSP;
             M1Values.TempSP = bufVals.TempSP;
             M1Values.PowerLimitSP = bufVals.PowerLimitSP;
@@ -89,7 +89,7 @@ namespace Android_Silver.ViewModels
 
         async void ExecuteOk(object obj)
         {
-            int[] values = { M1Values.SypplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, M1Values.PowerLimitSP.Value };
+            int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, M1Values.PowerLimitSP.Value };
             _tcpClientService.SetCommandToServer(M1Values.StartAddress, values);
             await Shell.Current.GoToAsync("mainPage");
         }
@@ -117,11 +117,11 @@ namespace Android_Silver.ViewModels
         private void ExecuteBtnUP0(object obj)
         {
 
-            M1Values.SypplySP.Value = M1Values.SypplySP.Value + 5 < 100 ? M1Values.SypplySP.Value + 5 : 100;
+            M1Values.SupplySP.Value = M1Values.SupplySP.Value + 5 < 100 ? M1Values.SupplySP.Value + 5 : 100;
         }
         private void ExecuteBtnDn0(object obj)
         {
-            M1Values.SypplySP.Value = M1Values.SypplySP.Value - 5 > 0 ? M1Values.SypplySP.Value - 5 : 0;
+            M1Values.SupplySP.Value = M1Values.SupplySP.Value - 5 > 0 ? M1Values.SupplySP.Value - 5 : 0;
         }
 
         private void ExecuteBtnUP1(object obj)

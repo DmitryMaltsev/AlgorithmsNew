@@ -163,20 +163,17 @@ namespace Android_Silver.Pages
         public ICommand NextSetPointsCommand { get; private set; }
         public ICommand SPReturnCommand { get; private set; }
         public ICommand SPOkCommand { get; private set; }
-        public ICommand BtnUpCommand0 { get; private set; }
-        public ICommand BtnDnCommand0 { get; private set; }
-        public ICommand BtnUpCommand1 { get; private set; }
-        public ICommand BtnDnCommand1 { get; private set; }
+        public ICommand SPAdd0Command { get; private set; }
+        public ICommand SPSub0Command { get; private set; }
+        public ICommand SPAdd1Command { get; private set; }
+        public ICommand SPSub1Command { get; private set; }
 
-        public ICommand BtnUpCommand2 { get; private set; }
-        public ICommand BtnDnCommand2 { get; private set; }
-        public ICommand BtnUpCommand3 { get; private set; }
-        public ICommand BtnDnCommand3 { get; private set; }
-
-        public ICommand SFanCorrSubCommand { get; private set; }
-        public ICommand SFanCorrAddCommand { get; private set; }
-        public ICommand EFanCorrSubCommand { get; private set; }
-        public ICommand EFanFanCorrAddCommand { get; private set; }
+        public ICommand SPAdd2Command { get; private set; }
+        public ICommand SPSub2Command { get; private set; }
+        public ICommand SPSub3Command { get; private set; }
+        public ICommand SPAdd3Command { get; private set; }
+        public ICommand SPSub4Command { get; private set; }
+        public ICommand SPAdd4Command { get; private set; }
 
 
         #endregion
@@ -188,6 +185,7 @@ namespace Android_Silver.Pages
 
         public ICommand SetCorrSPCommand { get; private set; }
         public ICommand InformationCommand { get; private set; }
+        public ICommand HelperCommand { get; private set; }
         #endregion
         #region TSettingsCommands
         public ICommand TRetCommand { get; private set; }
@@ -212,7 +210,7 @@ namespace Android_Silver.Pages
         public ICommand HumidityCommand { get; private set; }
         public ICommand SetTimeCommand { get; private set; }
         public ICommand ChangeFilterCommand { get; private set; }
-        public ICommand BootloaderCommand { get; private set; }
+        public ICommand BootloaderSetCommand { get; private set; }
         #endregion
         #region Humidity commands
         public ICommand HumidityReturnCommand { get; private set; }
@@ -306,6 +304,7 @@ namespace Android_Silver.Pages
             VacationModeCommand = new Command(ExecuteVacationMode);
             TurnOffModeCommand = new Command(ExecuteTurnOffMode);
             JournalCommand = new Command(ExecuteJournal);
+            HelperCommand = new Command(ExecuteHelper);
             ShedulerTableCommand = new Command(ExecuteShedulerTable);
             HomeCommand = new Command(ExecuteHomeCommand);
             ResetJournalCommand = new Command(ExecuteResetJournal);
@@ -318,7 +317,7 @@ namespace Android_Silver.Pages
             UpdateCommand = new Command(ExecuteUpdate);
             DownloadCommand = new Command(ExecuteDownload);
             ResetCommand = new Command(ExecuteReset);
-            BootloaderCommand = new Command(ExecuteBootloader);
+            BootloaderSetCommand = new Command(ExecuteBootloaderSet);
             TimeBuffer = new();
             Value = 15;
             #region Kitchen timer commands
@@ -333,20 +332,18 @@ namespace Android_Silver.Pages
             #endregion
             #region Set ponts commands
             NextSetPointsCommand = new Command(ExecuteNextSetPoints);
+            SPAdd0Command = new Command(ExecuteSPAdd0);
+            SPSub0Command = new Command(ExecuteSPSub0);
+            SPAdd1Command = new Command(ExecuteSPAdd1);
+            SPSub1Command = new Command(ExecuteSPSub1);
+            SPAdd2Command = new Command(ExecuteSPAdd2);
+            SPSub2Command = new Command(ExecuteSPSub2);
+            SPAdd3Command = new Command(ExecuteSPAdd3);
+            SPSub3Command = new Command(ExecuteSPSub3);
+            SPAdd4Command = new Command(ExecuteSPAdd4);
+            SPSub4Command = new Command(ExecuteSPSub4);
             SPOkCommand = new Command(ExecuteSPSOK);
-            BtnUpCommand0 = new Command(ExecuteBtnUP0);
-            BtnDnCommand0 = new Command(ExecuteBtnDn0);
-            BtnUpCommand1 = new Command(ExecuteBtnUP1);
-            BtnDnCommand1 = new Command(ExecuteBtnDn1);
-            BtnUpCommand2 = new Command(ExecuteBtnUP2);
-            BtnDnCommand2 = new Command(ExecuteBtnDn2);
-            BtnUpCommand3 = new Command(ExecuteBtnUP3);
-            BtnDnCommand3 = new Command(ExecuteBtnDn3);
             SPReturnCommand = new Command(ExecuteSPReturn);
-            SFanCorrSubCommand = new Command(ExecuteSFanCorrSub);
-            SFanCorrAddCommand = new Command(ExecuteSFanCorrAdd);
-            EFanCorrSubCommand = new Command(ExecuteEFanCorrSub);
-            EFanFanCorrAddCommand = new Command(ExecuteEFanCorrAdd);
             #endregion
             #region Vac commands
             SetTDataCommand = new Command(ExecuteSetTData);
@@ -401,8 +398,6 @@ namespace Android_Silver.Pages
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
         }
-
-   
 
         async private void ExecuteConnect()
         {
@@ -588,69 +583,59 @@ namespace Android_Silver.Pages
         #endregion
 
         #region SetPoints execute commands
-        private void ExecuteBtnUP0(object obj)
+        private void ExecuteSPAdd0(object obj)
         {
             if (M1Values != null)
-                M1Values.SypplySP.Value = M1Values.SypplySP.Value + 5 < 100 ? M1Values.SypplySP.Value + 5 : 100;
+                M1Values.SupplySP.Value = M1Values.SupplySP.Value + 5 < 100 ? M1Values.SupplySP.Value + 5 : 100;
         }
-        private void ExecuteBtnDn0(object obj)
+        private void ExecuteSPSub0(object obj)
         {
             if (M1Values != null)
-                M1Values.SypplySP.Value = M1Values.SypplySP.Value - 5 > 0 ? M1Values.SypplySP.Value - 5 : 0;
-        }
-
-        private void ExecuteBtnUP1(object obj)
-        {
-            if (M1Values != null)
-                M1Values.ExhaustSP.Value = M1Values.ExhaustSP.Value + 5 < 100 ? M1Values.ExhaustSP.Value + 5 : 100;
-        }
-        private void ExecuteBtnDn1(object obj)
-        {
-            if (M1Values != null)
-                M1Values.ExhaustSP.Value = M1Values.ExhaustSP.Value - 5 > 0 ? M1Values.ExhaustSP.Value - 5 : 0;
+                M1Values.SupplySP.Value = M1Values.SupplySP.Value - 5 > 0 ? M1Values.SupplySP.Value - 5 : 0;
         }
 
-        private void ExecuteBtnUP2(object obj)
+        private void ExecuteSPAdd1(object obj)
+        {
+            if (M1Values != null)
+                M1Values.ExhaustSP.Value = M1Values.ExhaustSP.Value + 1 < 30 ? M1Values.ExhaustSP.Value + 1 : 30;
+        }
+        private void ExecuteSPSub1(object obj)
+        {
+            if (M1Values != null)
+                M1Values.ExhaustSP.Value = M1Values.ExhaustSP.Value - 1 > -30 ? M1Values.ExhaustSP.Value - 1 : -30;
+        }
+
+        private void ExecuteSPAdd2(object obj)
         {
             if (M1Values != null)
             {
-                M1Values.TempSP.Value = M1Values.TempSP.Value + 1 < 34 ? M1Values.TempSP.Value + 1 : 34;
+                M1Values.TempSP.Value = M1Values.TempSP.Value + 1 < 34 ? M1Values.TempSP.Value + 1 : 30;
                 if (M1Values.TempSP.Value < 16) M1Values.TempSP.Value = 16;
 
             }
         }
-        private void ExecuteBtnDn2(object obj)
+        private void ExecuteSPSub2(object obj)
         {
             if (M1Values != null)
                 M1Values.TempSP.Value = M1Values.TempSP.Value - 1 > 16 ? M1Values.TempSP.Value - 1 : 16;
         }
 
-        private void ExecuteBtnUP3(object obj)
-        {
-            if (M1Values != null)
-                M1Values.PowerLimitSP.Value = M1Values.PowerLimitSP.Value + 5 < 100 ? M1Values.PowerLimitSP.Value + 5 : 100;
-        }
-        private void ExecuteBtnDn3(object obj)
-        {
-            if (M1Values != null)
-                M1Values.PowerLimitSP.Value = M1Values.PowerLimitSP.Value - 5 > 0 ? M1Values.PowerLimitSP.Value - 5 : 0;
-        }
-        private void ExecuteSFanCorrSub(object obj)
+        private void ExecuteSPSub3(object obj)
         {
             if (M1Values != null)
                 M1Values.SFanCorr.Value = M1Values.SFanCorr.Value - 1 > M1Values.SFanCorr.Min ? M1Values.SFanCorr.Value - 1 : M1Values.SFanCorr.Min;
         }
-        private void ExecuteSFanCorrAdd(object obj)
+        private void ExecuteSPAdd3(object obj)
         {
             if (M1Values != null)
                 M1Values.SFanCorr.Value = M1Values.SFanCorr.Value + 1 < M1Values.SFanCorr.Max ? M1Values.SFanCorr.Value + 1 : M1Values.SFanCorr.Max;
         }
-        private void ExecuteEFanCorrSub(object obj)
+        private void ExecuteSPSub4(object obj)
         {
             if (M1Values != null)
                 M1Values.EFanCorr.Value = M1Values.EFanCorr.Value - 1 > M1Values.EFanCorr.Min ? M1Values.EFanCorr.Value - 1 : M1Values.EFanCorr.Min;
         }
-        private void ExecuteEFanCorrAdd(object obj)
+        private void ExecuteSPAdd4(object obj)
         {
             if (M1Values != null)
                 M1Values.EFanCorr.Value = M1Values.EFanCorr.Value + 1 < M1Values.EFanCorr.Max ? M1Values.EFanCorr.Value + 1 : M1Values.EFanCorr.Max;
@@ -661,7 +646,8 @@ namespace Android_Silver.Pages
         {
             if (M1Values != null)
             {
-                int[] values = { M1Values.SypplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, M1Values.PowerLimitSP.Value, M1Values.SFanCorr.Value, M1Values.EFanCorr.Value };
+                int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, 
+                    M1Values.PowerLimitSP.Value, M1Values.SFanCorr.Value, M1Values.EFanCorr.Value };
                 CTcpClientService.SetCommandToServer(M1Values.StartAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             }
@@ -692,7 +678,7 @@ namespace Android_Silver.Pages
                       bufVals.ModeIcons,
                       bufVals.ModeSettingsRoute,
                       bufVals.StartAddress, bufVals.MiniIcon);
-            M1Values.SypplySP.Value = bufVals.SypplySP.Value;
+            M1Values.SupplySP.Value = bufVals.SupplySP.Value;
             M1Values.ExhaustSP.Value = bufVals.ExhaustSP.Value;
             M1Values.TempSP.Value = bufVals.TempSP.Value;
             M1Values.PowerLimitSP.Value = bufVals.PowerLimitSP.Value;
@@ -702,8 +688,10 @@ namespace Android_Silver.Pages
 
         private void ExecuteSPReturn(object obj)
         {
-
-            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+            if(CActivePagesEntities.IsCorrSetPointsPage)
+                CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+            else
+                CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
         }
 
         #endregion
@@ -740,6 +728,11 @@ namespace Android_Silver.Pages
         private void ExecuteInformation(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.InformationPage);
+        }
+
+        private void ExecuteHelper(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.HelperPage);
         }
         #endregion
 
@@ -1095,7 +1088,7 @@ namespace Android_Silver.Pages
             CTcpClientService.SetCommandToServer(163, vals);
         }
 
-        private void ExecuteBootloader(object obj)
+        private void ExecuteBootloaderSet(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.BootloaderPage);
         }

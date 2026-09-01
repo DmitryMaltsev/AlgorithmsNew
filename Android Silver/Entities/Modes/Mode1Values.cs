@@ -50,7 +50,7 @@ namespace Android_Silver.Entities.Modes
 
         #region Уставки
         private IntValue _supplySP;
-        public IntValue SypplySP
+        public IntValue SupplySP
         {
             get { return _supplySP; }
             set
@@ -231,7 +231,7 @@ namespace Android_Silver.Entities.Modes
                     break;
             }
             StartAddress = startAddress;
-            SypplySP = new IntValue(0, 100);
+            SupplySP = new IntValue(0, 100);
             ExhaustSP = new IntValue(0, 100);
             TempSP = new FloatValue(0, 100, 0);
             PowerLimitSP = new IntValue(0, 100);
