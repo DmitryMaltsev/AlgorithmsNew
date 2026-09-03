@@ -70,6 +70,15 @@ namespace Android_Silver.Entities.Modes
             }
         }
 
+        private IntValue _exhaustDisb;
+
+        public IntValue ExhaustDisb
+        {
+            get { return _exhaustDisb; }
+            set { _exhaustDisb = value; }
+        }
+
+
         private FloatValue _tempSP;
         public FloatValue TempSP
         {
@@ -81,7 +90,7 @@ namespace Android_Silver.Entities.Modes
         }
 
         private IntValue _powerLimitSP;
-        public IntValue PowerLimitSP
+        public IntValue ThreshPerc
         {
             get { return _powerLimitSP; }
             set
@@ -233,8 +242,8 @@ namespace Android_Silver.Entities.Modes
             StartAddress = startAddress;
             SupplySP = new IntValue(0, 100);
             ExhaustSP = new IntValue(0, 100);
+            ExhaustDisb = new IntValue(-30, 30);
             TempSP = new FloatValue(0, 100, 0);
-            PowerLimitSP = new IntValue(0, 100);
             SFanCorr = new IntValue(-100,100);
             EFanCorr = new IntValue(-100,100);
         }

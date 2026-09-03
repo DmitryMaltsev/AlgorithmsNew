@@ -12,17 +12,38 @@ namespace Android_Silver.Entities.FBEntities
     public class HumiditySPS:BindableBase
     {
 
-		private int _humidtitySP;
-		public int HumiditySP
+		private int _spPerc;
+		public int SPPerc
 		{
-			get { return _humidtitySP; }
+			get { return _spPerc; }
 			set { 
-				_humidtitySP = value;
-				OnPropertyChanged(nameof(HumiditySP));
+				_spPerc = value;
+				OnPropertyChanged(nameof(SPPerc));
 			}
 		}
 
-        public int Stage1OnS;
+		private ushort _valPerc;
+		public ushort ValPerc
+		{
+			get { return _valPerc; }
+			set { 
+				_valPerc = value;
+				OnPropertyChanged(nameof(_valPerc));
+			}
+		}
+
+		private ushort _sensPerc;
+
+		public ushort SensPerc
+		{
+			get { return _sensPerc; }
+			set { 
+				_sensPerc = value;
+				OnPropertyChanged(nameof(SensPerc));
+			}
+		}
+
+		public int Stage1OnS;
         public int Stage1OffS;
         public int PReg;
         public int IReg;

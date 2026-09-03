@@ -26,15 +26,27 @@ namespace Android_Silver.Entities.FBEntities
         }
 
         private int _freqHZ;
-        public int FreqHZ
+        public int RecPerc
         {
             get { return _freqHZ; }
             set
             {
-                OnPropertyChanged(nameof(FreqHZ));
+                OnPropertyChanged(nameof(RecPerc));
                 _freqHZ = value;
             }
         }
+
+        private float _turns;
+
+        public float Turns
+        {
+            get { return _turns; }
+            set {
+                _turns = value;
+                OnPropertyChanged(nameof(Turns));
+            }
+        }
+
 
         public FloatValue BPolKoef;
         public int PReg;

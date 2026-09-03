@@ -27,22 +27,14 @@ namespace Android_Silver.Entities.FBEntities
             }
 		}
 
-
-		private bool _isMF;
-		public bool IsMF
+		private bool _isScheduler;
+		public bool IsScheduler
 		{
-			get { return _isMF; }
+			get { return _isScheduler; }
 			set {
-				if (_isMF != value)
-				{
-                    _isMF = value;
-                    OnPropertyChanged(nameof(IsMF));
-					MFloorAction?.Invoke(_isMF);
-                }
+				_isScheduler = value;
+				OnPropertyChanged(nameof(IsScheduler));
 			}
 		}
-
-
-
 	}
 }

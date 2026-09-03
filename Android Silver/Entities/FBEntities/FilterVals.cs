@@ -56,5 +56,17 @@ namespace Android_Silver.Entities.FBEntities
                 OnPropertyChanged($"{nameof(FilterClearPercent)}");
             }
         }
+
+        private ushort _polPerc;
+
+        public ushort PolPerc
+        {
+            get { return _polPerc; }
+            set { 
+                _polPerc = value;
+                OnPropertyChanged(nameof(PolPerc));
+            }
+        }
+
     }
 }

@@ -3,6 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Android_Silver.Resources.Styles.Dictionary1">
 
+    <!--#region Сommon styles -->
+    <Style TargetType="Label" x:Key="CommonLabel">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="Grid.ColumnSpan" Value="18"/>
+    </Style>
+    <Style TargetType="Button" x:Key="OKBut">
+        <Setter Property="WidthRequest" Value="80"/>
+        <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Grid.Column" Value="15"/>
+        <Setter Property="Grid.ColumnSpan" Value="1" />
+        <Setter Property="Grid.Row" Value="1"/>
+        <Setter Property="Grid.RowSpan" Value="1"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Margin"  Value="0,0,0,0" />
+    </Style>
+    <Style TargetType="Button" x:Key="OKButBot" BasedOn="{StaticResource OKBut}">
+        <Setter Property="WidthRequest" Value="150"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="Grid.Column" Value="0"/>
+        <Setter Property="Grid.ColumnSpan" Value="18"/>
+        <Setter Property="Grid.Row" Value="7"/>
+        <Setter Property="Grid.RowSpan" Value="1"/>
+    </Style>
     <Style TargetType="Button" x:Key="MiniButtons">
         <Setter Property="Grid.ColumnSpan" Value="1"/>
         <Setter Property="Padding" Value="0"/>
@@ -27,37 +54,6 @@
         <Setter Property="Grid.Column" Value="1"/>
         <Setter Property="Grid.ColumnSpan" Value="1"/>
     </Style>
-    <Style TargetType="Button" x:Key="OKCancelBut">
-        <Setter Property="WidthRequest" Value="80"/>
-        <Setter Property="HeightRequest" Value="60"/>
-        <Setter Property="BackgroundColor" Value="Transparent"/>
-        <Setter Property="Grid.Column" Value="15"/>
-        <Setter Property="Grid.ColumnSpan" Value="1" />
-        <Setter Property="Grid.Row" Value="1"/>
-        <Setter Property="Grid.RowSpan" Value="1"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Margin"  Value="0,0,0,0" />
-    </Style>
-    <Style TargetType="Button" x:Key="OKCancelButBot" BasedOn="{StaticResource OKCancelBut}">
-        <Setter Property="WidthRequest" Value="150"/>
-        <Setter Property="HorizontalOptions" Value="Center"/>
-        <Setter Property="Grid.Column" Value="0"/>
-        <Setter Property="Grid.ColumnSpan" Value="8"/>
-        <Setter Property="Grid.Row" Value="10"/>
-        <Setter Property="Grid.RowSpan" Value="1"/>
-    </Style>
-        <Style TargetType="ListView" x:Key="TableViews">
-        <Setter Property="SeparatorVisibility" Value="None"/>
-        <Setter Property="SelectionMode" Value="None"/>
-        <Setter Property="Grid.ColumnSpan" Value="18"/>
-        <Setter Property="Grid.RowSpan" Value="0" />
-        <Setter Property="HasUnevenRows" Value="False" />
-        <Setter Property="MinimumHeightRequest" Value="100"/>
-        <Setter Property="RowHeight" Value="60" />
-        <Setter Property="VerticalOptions" Value="Start"/>
-    </Style>
-
     <Style TargetType="Label" x:Key="Title">
         <Setter Property="Grid.Column" Value="0"/>
         <Setter Property="Grid.ColumnSpan" Value="18"/>
@@ -67,26 +63,25 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="Margin" Value="0,0,0,0"/>
     </Style>
+    <!--#endregion-->
 
+    <!--#region IP Styles -->
+    <Style TargetType="Entry" x:Key="EntryIP">
+        <Setter Property="MaxLength" Value="3"/>
+        <Setter Property="Grid.ColumnSpan" Value="3"/>
+        <Setter Property="MaximumWidthRequest" Value="80"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="Keyboard" Value="Numeric"/>
+    </Style>
+    <!--#endregion-->
 
-    <Style TargetType="Label" x:Key="SPsText">
-        <Setter Property="Grid.Column" Value="6"/>
-        <Setter Property="Grid.ColumnSpan" Value="6"/>
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="FontSize" Value="15" />
-        <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="Margin" Value="0,5,0,-5" />
+    <!--#region MainPage styles-->
+    <Style TargetType="Image" x:Key="MainPageHeader">
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="HeightRequest" Value="50"/>
     </Style>
-    <Style TargetType="Image" x:Key="MiniIcons">
-        <Setter Property="WidthRequest" Value="40"/>
-        <Setter Property="HeightRequest" Value="40"/>
-    </Style>
-    <Style TargetType="Image" x:Key="Icons">
-        <Setter Property="HorizontalOptions" Value="Center"/>
-        <Setter Property="WidthRequest" Value="120"/>
-        <Setter Property="HeightRequest" Value="120"/>
-    </Style>
+    <!--#endregion-->
 
     <!--#region Choose Mode styles -->
     <Style TargetType="Button" x:Key="ChooseModeBut">
@@ -98,13 +93,23 @@
         <Setter Property="BackgroundColor" Value="Transparent"/>
     </Style>
     <!--#endregion-->
-    <!--#region SettingsStyle -->
+
+    <!--#region Settings style -->
     <Style TargetType="Button" x:Key="SettingsButtons" BasedOn="{StaticResource ChooseModeBut}">
         <Setter Property="WidthRequest" Value="120"/>
     </Style>
     <!--#endregion-->
-    
-    <!--#region SetPoints -->
+
+    <!--#region SetPoints styles-->
+    <Style TargetType="Label" x:Key="SPsText">
+        <Setter Property="Grid.Column" Value="6"/>
+        <Setter Property="Grid.ColumnSpan" Value="6"/>
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="0,5,0,-5" />
+    </Style>
     <Style TargetType="Label" x:Key="SPsNames" BasedOn="{StaticResource Title}">
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="HorizontalOptions" Value="Center"/>
@@ -113,6 +118,11 @@
         <Setter Property="Grid.RowSpan" Value="1"/>
         <Setter Property="Margin" Value="0,-20,0,20" />
         <Setter Property="TextColor" Value="#8DBFD6"/>
+    </Style>
+    <Style TargetType="Image" x:Key="SPIcons">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="WidthRequest" Value="120"/>
+        <Setter Property="HeightRequest" Value="120"/>
     </Style>
     <Style TargetType="Image" x:Key="SpBackground">
         <Setter Property="HorizontalOptions" Value="Center"/>
@@ -128,10 +138,10 @@
         <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="Margin" Value="0,5,0,-5" />
     </Style>
-    
+
     <!--#endregion-->
-    
-    <!--#region OtherSettings -->
+
+    <!--#region OtherSettings Styles-->
     <Style TargetType="Label" x:Key="OtherSettingsLabel">
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="VerticalOptions" Value="Center" />
@@ -196,8 +206,40 @@
         </Setter>
     </Style>
     <!--#endregion-->
-    
-    <!--#region Updater Settings -->
+
+    <!--#region Journal styles -->
+    <Style TargetType="ListView" x:Key="TableViews">
+        <Setter Property="SeparatorVisibility" Value="None"/>
+        <Setter Property="SelectionMode" Value="None"/>
+        <Setter Property="Grid.ColumnSpan" Value="18"/>
+        <Setter Property="Grid.RowSpan" Value="0" />
+        <Setter Property="HasUnevenRows" Value="False" />
+        <Setter Property="MinimumHeightRequest" Value="100"/>
+        <Setter Property="RowHeight" Value="60" />
+        <Setter Property="VerticalOptions" Value="Start"/>
+    </Style>
+    <!--#endregion-->
+
+    <!--#region InfoSettings styles-->
+    <Style TargetType="Image" x:Key="InfoImage">
+        <Setter Property="WidthRequest" Value="30"/>
+        <Setter Property="HeightRequest" Value="30"/>
+        <Setter Property="IsVisible" Value="{Binding CActivePagesEntities.IsInformationPage}"/>
+    </Style>
+    <Style TargetType="Label" x:Key="InfoTopic">
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="TextColor" Value="#8DBFD6"/>
+        <Setter Property="IsVisible" Value="{Binding CActivePagesEntities.IsInformationPage}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+    <Style TargetType="Label" x:Key="InfoLabel" BasedOn="{StaticResource InfoTopic}">
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontAttributes" Value="None"/>
+    </Style>
+    <!--#endregion-->
+
+    <!--#region UpdaterSettings styles-->
     <Style TargetType="Picker" x:Key="ConfPicker">
         <Setter Property="BackgroundColor" Value="AliceBlue"/>
         <Setter Property="FontSize" Value="17" />
@@ -215,13 +257,15 @@
     <Style TargetType="Label" x:Key="UpdaterLabel">
         <Setter Property="Grid.Column" Value="9"/>
         <Setter Property="Grid.ColumnSpan" Value="9"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
         <Setter Property="TextColor" Value="Black"/>
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="InputTransparent" Value="True"/>
         <Setter Property="FontSize" Value="15"/>
     </Style>
     <!--#endregion-->
-    <!--#region Helper Settings -->
+
+    <!--#region HelperSettings styles-->
     <Style TargetType="Label" x:Key="HelperLabel">
         <Setter Property="Grid.Column" Value="0"/>
         <Setter Property="Grid.ColumnSpan" Value="18"/>

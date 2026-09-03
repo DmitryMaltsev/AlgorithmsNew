@@ -82,14 +82,14 @@ namespace Android_Silver.ViewModels
             M1Values.SupplySP = bufVals.SupplySP;
             M1Values.ExhaustSP = bufVals.ExhaustSP;
             M1Values.TempSP = bufVals.TempSP;
-            M1Values.PowerLimitSP = bufVals.PowerLimitSP;
+            M1Values.ThreshPerc = bufVals.ThreshPerc;
         }
 
         #region ExecuteCommands
 
         async void ExecuteOk(object obj)
         {
-            int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, M1Values.PowerLimitSP.Value };
+            int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, M1Values.ThreshPerc.Value };
             _tcpClientService.SetCommandToServer(M1Values.StartAddress, values);
             await Shell.Current.GoToAsync("mainPage");
         }
@@ -145,11 +145,11 @@ namespace Android_Silver.ViewModels
 
         private void ExecuteBtnUP3(object obj)
         {
-            M1Values.PowerLimitSP.Value = M1Values.PowerLimitSP.Value + 5 < 100 ? M1Values.PowerLimitSP.Value + 5 : 100;
+            M1Values.ThreshPerc.Value = M1Values.ThreshPerc.Value + 5 < 100 ? M1Values.ThreshPerc.Value + 5 : 100;
         }
         private void ExecuteBtnDn3(object obj)
         {
-            M1Values.PowerLimitSP.Value = M1Values.PowerLimitSP.Value - 5 > 0 ? M1Values.PowerLimitSP.Value - 5 : 0;
+            M1Values.ThreshPerc.Value = M1Values.ThreshPerc.Value - 5 > 0 ? M1Values.ThreshPerc.Value - 5 : 0;
         }
         #endregion
     }

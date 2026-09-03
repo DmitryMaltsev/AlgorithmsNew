@@ -647,7 +647,7 @@ namespace Android_Silver.Pages
             if (M1Values != null)
             {
                 int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, 
-                    M1Values.PowerLimitSP.Value, M1Values.SFanCorr.Value, M1Values.EFanCorr.Value };
+                    M1Values.ThreshPerc.Value, M1Values.SFanCorr.Value, M1Values.EFanCorr.Value };
                 CTcpClientService.SetCommandToServer(M1Values.StartAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
             }
@@ -681,7 +681,7 @@ namespace Android_Silver.Pages
             M1Values.SupplySP.Value = bufVals.SupplySP.Value;
             M1Values.ExhaustSP.Value = bufVals.ExhaustSP.Value;
             M1Values.TempSP.Value = bufVals.TempSP.Value;
-            M1Values.PowerLimitSP.Value = bufVals.PowerLimitSP.Value;
+            M1Values.ThreshPerc = bufVals.ThreshPerc;
             M1Values.SFanCorr.Value = bufVals.SFanCorr.Value;
             M1Values.EFanCorr.Value = bufVals.EFanCorr.Value;
         }
@@ -1221,7 +1221,7 @@ namespace Android_Silver.Pages
         private void ExecuteHumidityReturn(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
-            HumiditySP = CFBs.CHumiditySPS.HumiditySP;
+            HumiditySP = CFBs.CHumiditySP.SPPerc;
         }
 
         private void CancelHumidity(object obj)

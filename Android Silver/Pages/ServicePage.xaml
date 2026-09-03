@@ -7,7 +7,6 @@
               x:Name="SPage"
                BackgroundImageSource="{Binding CPictureSet.Background}">
     <ContentPage.Resources>
-        <local:InvertBoolConverter x:Key="InvertBoolConverter"/>
         <Style TargetType="Entry" x:Key="EntryPass">
             <Setter Property="MaxLength" Value="4"/>
             <Setter Property="IsPassword" Value="true" />
@@ -15,38 +14,23 @@
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="Keyboard" Value="Numeric"/>
         </Style>
-        <Style TargetType="Label">
-            <Setter Property="HorizontalOptions" Value="Center"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="FontSize" Value="9"/>
-            <Setter Property="Margin" Value="10,4"/>
-            <Setter Property="TextColor" Value="Black"/>
-        </Style>
-        <Style TargetType="Entry" x:Key="EntryIP">
-            <Setter Property="MaxLength" Value="3"/>
-            <Setter Property="Grid.ColumnSpan" Value="3"/>
-            <Setter Property="MaximumWidthRequest" Value="100"/>
-            <Setter Property="Background" Value="WhiteSmoke"/>
-            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="Keyboard" Value="Numeric"/>
-        </Style>
-        <Style TargetType="Entry" x:Key="EntryNum" BasedOn="{StaticResource EntryIP}">
-            <Setter Property="FontSize" Value="17" />
-            <Setter Property="Grid.ColumnSpan" Value="5"/>
-            <Setter Property="MaximumWidthRequest" Value="140"/>
-            <Setter Property="MaximumHeightRequest" Value="40"/>
-            <Setter Property="MaxLength" Value="6"/>
-            <Setter Property="BackgroundColor" Value="White"/>
-        </Style>
         <Style TargetType="Picker" x:Key="ConfPicker">
             <Setter Property="FontSize" Value="17" />
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="Grid.ColumnSpan" Value="5"/>
             <Setter Property="Background" Value="WhiteSmoke"/>
-            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="MaximumWidthRequest" Value="140"/>
+            <Setter Property="WidthRequest" Value="140"/>
             <Setter Property="MaximumHeightRequest" Value="40"/>
         </Style>
+        <Style TargetType="Entry" x:Key="EntryNum">
+            <Setter Property="Grid.Column" Value="12"/>
+            <Setter Property="Grid.ColumnSpan" Value="5"/>
+            <Setter Property="WidthRequest" Value="140"/>
+            <Setter Property="MaximumHeightRequest" Value="40"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+        
         <Style TargetType="Button" x:Key="BaseSettingsBut">
             <Setter Property="Padding" Value="0"/>
             <Setter Property="VerticalOptions" Value="Center" />
@@ -56,21 +40,6 @@
             <Setter Property="Grid.RowSpan" Value="1"  />
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="TextColor" Value="Black"/>
-        </Style>
-        <Style TargetType="Label" x:Key="OtherSettingsLabel">
-            <Setter Property="TextColor" Value="Black" />
-            <Setter Property="VerticalOptions" Value="Center" />
-            <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="17"/>
-            <Setter Property="Grid.ColumnSpan" Value="14"/>
-            <Setter Property="Grid.RowSpan" Value="1"/>
-            <Setter Property="ZIndex" Value="0"/>
-        </Style>
-        <Style TargetType="Label" x:Key="FanSettingsLabel" BasedOn="{StaticResource OtherSettingsLabel}">
-            <Setter Property="HorizontalOptions" Value="Start" />
-            <Setter Property="HorizontalTextAlignment" Value="Start"/>
-            <Setter Property="Grid.ColumnSpan" Value="12"/>
         </Style>
         <Style TargetType="Label" x:Key="ServiceTitle">
             <Setter Property="Grid.Row" Value="0"/>
@@ -159,9 +128,20 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <!--#region Entry page -->
+        <Label Text="{Binding EntryMessage}" Grid.Row="2"  Style="{StaticResource CommonLabel}" IsVisible="{Binding CActivePagesEntities.IsEntryPage}"/>
+        <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="18" Grid.RowSpan="2"  IsVisible="{Binding CActivePagesEntities.IsEntryPage}">
+            <Border.StrokeShape>
+                <RoundRectangle/>
+            </Border.StrokeShape>
+            <Entry Placeholder="****" Text="{Binding EntryPass}"  Style="{StaticResource EntryPass}"/>
+        </Border>
+
+        <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding EntryPassedCommand}"
+                    Style="{StaticResource OKButBot}"  IsVisible="{Binding CActivePagesEntities.IsEntryPage}" />
+        <!--#endregion-->
         <!--#region StartPage -->
-        <Label Text="{Binding EthernetEntities.EthernetMessage}" Grid.Row="2" FontSize="15" Grid.ColumnSpan="18"  HorizontalTextAlignment="Center" 
-                   IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
+        <Label Text="{Binding EthernetEntities.EthernetMessage}" Grid.Row="2" Style="{StaticResource CommonLabel}" IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
         <Border  Grid.Row="4" Grid.RowSpan="2" Grid.Column="3"  IsVisible="{Binding CActivePagesEntities.IsStartPage}" Style="{StaticResource PassBorder}">
             <Border.StrokeShape>
                 <RoundRectangle/>
@@ -186,25 +166,9 @@
             </Border.StrokeShape>
             <Entry Text="{Binding EthernetEntities.IP4}" Placeholder="50" Style="{StaticResource EntryIP}"/>
         </Border>
-        <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding StartPageConnectCommand}"  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="18"
-                     Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
-                                                 IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
+        <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding StartPageConnectCommand}"
+                     Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKButBot}" IsVisible="{Binding CActivePagesEntities.IsStartPage}" />
         <!--#endregion-->
-        <!--#region Entry page -->
-        <Label Text="{Binding EntryMessage}" Grid.Row="2" FontSize="15" Grid.Column="0" Grid.ColumnSpan="18"  
-                                                                      IsVisible="{Binding CActivePagesEntities.IsEntryPage}"/>
-        <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="18" Grid.RowSpan="2"  IsVisible="{Binding CActivePagesEntities.IsEntryPage}">
-            <Border.StrokeShape>
-                <RoundRectangle/>
-            </Border.StrokeShape>
-            <Entry Placeholder="****" Text="{Binding EntryPass}"  Style="{StaticResource EntryPass}"/>
-        </Border>
-
-        <Button  ImageSource="{Binding CPictureSet.IPBut.Current}"  Command="{Binding EntryPassedCommand}"
-                    Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="18"
-                    Style="{StaticResource OKCancelBut}"  IsVisible="{Binding CActivePagesEntities.IsEntryPage}" />
-        <!--#endregion-->
-        
         <!--#region Base settings page -->
         <Label Text="Окно настроек"  Grid.Row="1" Style="{StaticResource Title}"
                                           IsVisible = "{Binding CActivePagesEntities.IsBaseSettingsPage}"/>
@@ -252,9 +216,8 @@
                                                 IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}"/>
         <Label Text="{Binding CMenusEntities.Title}" Style="{StaticResource ServiceTitle}" 
                                                             IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}"/>
-        <Button  ImageSource="{Binding CPictureSet.IPBut.Current}" Grid.Row="1"  Command="{Binding  SetSettingsCommand}"  
-        Pressed="IPButton_Pressed" Released="IPButton_Released" Style="{StaticResource OKCancelBut}"
-                                                                                                IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}" />
+        <Button  ImageSource="{Binding CPictureSet.IPBut.Current}" Grid.Row="1"  Command="{Binding  SetSettingsCommand}"  Style="{StaticResource OKBut}"
+        Pressed="IPButton_Pressed" Released="IPButton_Released"  IsVisible = "{Binding CActivePagesEntities.IsFBSettingsPage}"/>
         <!--#endregion-->
         <CollectionView ItemsSource="{Binding  CMenusEntities.InterfaceStrCollection}" Grid.Row="2" 
                 Style="{StaticResource CollectionViews}"  IsVisible="{Binding CActivePagesEntities.IsFBSettingsPage}">
@@ -287,7 +250,7 @@
                             <Switch Grid.Column="8" Grid.ColumnSpan="3"  IsVisible = "{Binding SwitchIsActive}"  IsToggled="{Binding SwitchIsOn}" />
                             <Entry Style="{StaticResource EntryNum}" Text="{Binding CVal}"
                                            ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type context:ServicePage}},Path=BindingContext.SetEntryCommand}" 
-                                           ReturnCommandParameter="{Binding .}" Grid.Column="12" IsVisible = "{Binding EIsVisible}" IsEnabled="{Binding IsEnabled}" />
+                                           ReturnCommandParameter="{Binding .}" IsVisible = "{Binding EIsVisible}" IsEnabled="{Binding IsEnabled}" />
                             <Picker Style="{StaticResource ConfPicker}"  SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" 
                                             SelectedIndex="{Binding CPickVal}" Grid.Column="12"  IsVisible = "{Binding PickerIsVisible}" IsEnabled="{Binding IsEnabled}"/>
                         </Grid>
@@ -302,10 +265,10 @@
         <Image Source="{Binding  CPictureSet.LoadingPic}" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"
                                                  Grid.Row="3"  Grid.RowSpan="4" Grid.Column="8" Grid.ColumnSpan="2"  WidthRequest="400"
                    HorizontalOptions="Center"/>
-        <Label Text="Загрузка..." Grid.Row="7" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="18" FontSize="30" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"/>
+        <Label Text="Загрузка..." Grid.Row="7" Grid.RowSpan="2" FontSize="30" Style="{StaticResource CommonLabel}" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"/>
         <!--#endregion-->
 
-        <Label Text="{Binding EthernetEntities.SystemMessage}"  Grid.Row="13" Grid.RowSpan="1"  Grid.Column="0" Grid.ColumnSpan="8"
+        <Label Text="{Binding EthernetEntities.SystemMessage}"  Grid.Row="13" Grid.RowSpan="1"  Grid.Column="1" Grid.ColumnSpan="15"
              IsVisible="{Binding CActivePagesEntities.IsBaseSettingsPage}"/>
     </Grid>
 </ContentPage>

@@ -814,12 +814,12 @@ namespace Android_Silver.Entities.Visual
                 case SActivePageState.HumSettingsPage:
                     {
                         _menusEntities.Title = _menusEntities.StartMenuCollection[8].Name;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[0].CVal = _fbs.CHumiditySPS.PReg;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[1].CVal = _fbs.CHumiditySPS.IReg;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[2].CVal = _fbs.CHumiditySPS.DReg;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[3].CVal = _fbs.CHumiditySPS.Stage1OnS;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[4].CVal = _fbs.CHumiditySPS.Stage1OffS;
-                        _menusEntities.StartMenuCollection[8].StrSetsCollection[5].CVal = _fbs.CHumiditySPS.Hyst;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[0].CVal = _fbs.CHumiditySP.PReg;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[1].CVal = _fbs.CHumiditySP.IReg;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[2].CVal = _fbs.CHumiditySP.DReg;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[3].CVal = _fbs.CHumiditySP.Stage1OnS;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[4].CVal = _fbs.CHumiditySP.Stage1OffS;
+                        _menusEntities.StartMenuCollection[8].StrSetsCollection[5].CVal = _fbs.CHumiditySP.Hyst;
                         _menusEntities.GenerateInterfaceTable(8);
                         IsHumSettingsPage = true;
                         IsFBSettingsPage = true;
@@ -1049,7 +1049,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[12].StrSetsCollection[3].CVal = _modesEntities.Mode1ValuesList[6].ExhaustMinVal;
                         _menusEntities.StartMenuCollection[12].StrSetsCollection[5].CVal = _modesEntities.Mode1ValuesList[6].ExhaustMaxVal;
                         _menusEntities.StartMenuCollection[12].StrSetsCollection[6].CVal = _modesEntities.Mode1ValuesList[6].TempSP.Value;
-                        _menusEntities.StartMenuCollection[12].StrSetsCollection[7].CVal = _modesEntities.Mode1ValuesList[6].PowerLimitSP.Value;
+                        _menusEntities.StartMenuCollection[12].StrSetsCollection[7].CVal = _modesEntities.Mode1ValuesList[6].ThreshPerc.Value;
                         _menusEntities.GenerateInterfaceTable(12);
                     }
                     break;

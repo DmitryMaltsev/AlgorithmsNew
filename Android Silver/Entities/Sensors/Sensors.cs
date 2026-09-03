@@ -1,6 +1,5 @@
 ﻿using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.ViewModels;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +8,28 @@ using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.Srs
 {
-    public class Sensors
+    public class Sensors:BindableBase
     {
         public TempSenor OutdoorTemp {  get; set; }
         public TempSenor SupTemp { get; set; }
         public TempSenor ExhaustTemp { get; set; }
         public TempSenor RoomTemp { get; set; }
         public TempSenor ReturnTemp { get; set; }
+
+        private ushort _airQualityPerc;
+
         Sensor HumiditySensor { get; set; }
-        Sensor AirQualitySensor { get; set; }
+        private ushort _airQualitySensor;
+
+        public ushort AirQualitySensor
+        {
+            get { return _airQualitySensor; }
+            set { 
+                _airQualitySensor = value;
+                OnPropertyChanged(nameof(AirQualitySensor));
+            }
+        }
+
 
         public TempSenor TempH1;
         public TempSenor TempC1;
@@ -32,7 +44,6 @@ namespace Android_Silver.Entities.Srs
             RoomTemp = new TempSenor(-150, 150, 1);
             ReturnTemp = new TempSenor(-150, 150, 1);
             HumiditySensor = new Sensor(0,100,1);   
-            AirQualitySensor = new Sensor(0,100,1);
 
             TempH1 = new TempSenor(-100, 120, 1);
             TempC1 = new TempSenor(-100, 120, 1);

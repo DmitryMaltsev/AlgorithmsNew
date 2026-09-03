@@ -12,7 +12,7 @@ namespace Android_Silver.Entities.FBEntities
     public class FBs : BindableBase
     {
         public Alarms CAlarms { get; set; }
-        public HumiditySPS CHumiditySPS { get; set; }
+        public HumiditySPS CHumiditySP { get; set; }
         public FilterVals CFilterVals { get; set; }
         public OtherSettings OtherSettings { get; set; }
         public Time CTime { get; set; }
@@ -40,7 +40,7 @@ namespace Android_Silver.Entities.FBEntities
         public FBs()
         {
             CAlarms = new Alarms();
-            CHumiditySPS = new HumiditySPS();
+            CHumiditySP = new HumiditySPS();
             CFilterVals = new FilterVals();
             OtherSettings = new OtherSettings();
             CTime = new Time();

@@ -38,8 +38,385 @@ namespace Android_Silver.Services
         public ushort EthernetData_Read(byte[] value, int startAddr, ushort startIndex, byte func)
         {
             #region Вкладка 1
+            if (startAddr == 1)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _modesEntities.CMode1.TempSP.Value = buffer;
+            }
+            if (startAddr == 2)
+            {
+                GetFloatValueResult(_fbs.CSensors.OutdoorTemp.Value, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 3)
+            {
+                GetFloatValueResult(_fbs.CSensors.SupTemp.Value, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 4)
+            {
+                GetFloatValueResult(_fbs.CSensors.ExhaustTemp.Value, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 5)
+            {
+                GetFloatValueResult(_fbs.CSensors.RoomTemp.Value, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 6)
+            {
+                GetFloatValueResult(_fbs.CSensors.ReturnTemp.Value, value, ref startIndex);
+                return startIndex;
+            }
+            #region Вентиляторы
+            if (startAddr == 7)
+            {
+                _modesEntities.CMode1.SupplySP.Value = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 8)
+            {
+                _modesEntities.CMode1.ExhaustSP.Value = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 9)
+            {
+                _fbs.CFans.SPercent = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 10)
+            {
+                _fbs.CFans.EPercent = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 11)
+            {
+                _fbs.CFans.SFlow = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 12)
+            {
+                _fbs.CFans.EFlow = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            #endregion
+            #region Рекуператор
+            if (startAddr == 13)
+            {
+                _fbs.CRecup.RecPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 14)
+            {
+                _fbs.CRecup.Efficiency = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 15)
+            {
+                _fbs.CRecup.Turns = ((float)(value[startIndex++] << 8 | value[startIndex++])) / 10;
+                return startIndex;
+            }
+            #endregion
+            #region Нагреватели
+            if (startAddr == 16)
+            {
+                _fbs.CEHSetPoints.CPower = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 17)
+            {
+                _modesEntities.CMode1.ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 18)
+            {
+                _fbs.CWHSetPoints.DamperPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+            }
+            #endregion
+            #region Прочие
+            if (startAddr == 19)
+            {
+                ushort m1Index = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (m1Index < 8)
+                {
+                    _modesEntities.SetMode1ValuesByIndex(m1Index);
+                }
+                return startIndex;
+            }
+            if (startAddr == 20)
+            {
+                _fbs.CFreonCoolerSP.ValPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 21)
+            {
+                _fbs.CHumiditySP.ValPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 22)
+            {
+                _fbs.CHumiditySP.SensPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 23)
+            {
+                _fbs.CHumiditySP.SPPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                return startIndex;
+            }
+            if (startAddr == 24)
+            {
+                ushort schedVal = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.OtherSettings.IsScheduler = schedVal > 0 ? true : false;
+                return startIndex;
+            }
+            if (startAddr == 25)
+            {
+                ushort contactM1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (contactM1 < 6)
+                {
+                    _modesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.Num = contactM1;
+                }
+            }
+            if (startAddr == 26)
+            {
+                ushort specVal = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.OtherSettings.IsSpecMode = specVal > 0 ? true : false;
+                return startIndex;
+            }
+            if (startAddr == 27)
+            {
+                ushort filterPolPerc = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CFilterVals.PolPerc = filterPolPerc;
+                return startIndex;
+            }
+            if (startAddr == 28)
+            {
+                _fbs.CSensors.AirQualitySensor = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+            #endregion
+            #region  иконки
+            if (startAddr == 29)
+            {
+                ushort fanIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _pictureSet.FanHeader.Current = fanIsActive > 0 ? _pictureSet.FanHeader.Selected : _pictureSet.FanHeader.Default;
+                return startIndex;
+            }
+            if (startAddr == 30)
+            {
+                ushort recupIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _pictureSet.RecuperatorHeader.Current = recupIsActive > 0 ? _pictureSet.RecuperatorHeader.Selected : _pictureSet.RecuperatorHeader.Default;
+                return startIndex;
+            }
+            if (startAddr == 31)
+            {
+                ushort filterIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                //_pictureSet.FilterHeader
+                _pictureSet.FilterHeader.Current = filterIsActive > 0 ? _pictureSet.FilterHeader.Selected : _pictureSet.FilterHeader.Default;
+                return startIndex;
+            }
+            if (startAddr == 32)
+            {
+                ushort eHeaterIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _pictureSet.EHeaterHeader.Current = eHeaterIsActive > 0 ? _pictureSet.EHeaterHeader.Selected : _pictureSet.EHeaterHeader.Default;
+                return startIndex;
+            }
+            #endregion
 
-            if (startAddr < 150)
+            #region Минимальный режим
+            if (startAddr == 33)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].SupplySP, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 34)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].ExhaustDisb, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 35)
+            {
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[1].TempSP, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 36)
+            {
+                _modesEntities.Mode1ValuesList[1].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+            if (startAddr == 37)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].SFanCorr, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 38)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[1].EFanCorr, value, ref startIndex);
+                return startIndex;
+            }
+            #endregion
+            #region Номинальный режим
+            if (startAddr == 39)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].SupplySP, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 40)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].ExhaustDisb, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 41)
+            {
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[2].TempSP, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 42)
+            {
+                _modesEntities.Mode1ValuesList[2].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+            if (startAddr == 43)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].SFanCorr, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 44)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[2].EFanCorr, value, ref startIndex);
+                return startIndex;
+            }
+            #endregion
+
+            #region Максимальный режим
+            if (startAddr == 45)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].SupplySP, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 46)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].ExhaustDisb, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 47)
+            {
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[3].TempSP, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 48)
+            {
+                _modesEntities.Mode1ValuesList[3].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+            if (startAddr == 49)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].SFanCorr, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 50)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[3].EFanCorr, value, ref startIndex);
+                return startIndex;
+            }
+            #endregion
+
+            #region Кухня
+            if (startAddr == 51)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].SupplySP, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 52)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].ExhaustDisb, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 53)
+            {
+                GetFloatValueResult(_modesEntities.Mode1ValuesList[4].TempSP, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 54)
+            {
+                _modesEntities.Mode1ValuesList[4].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+            if (startAddr == 55)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].SFanCorr, value, ref startIndex);
+                return startIndex;
+            }
+            if (startAddr == 56)
+            {
+                GetIntValueResult(_modesEntities.Mode1ValuesList[4].EFanCorr, value, ref startIndex);
+                return startIndex;
+            }
+            #endregion
+
+            #region Время
+            if (startAddr == 57)
+            {
+                _fbs.CTime.Year = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+
+            if (startAddr == 58)
+            {
+                _fbs.CTime.Month = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+
+            if (startAddr == 59)
+            {
+                _fbs.CTime.Day = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+
+            if (startAddr == 60)
+            {
+                _fbs.CTime.Hour = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+
+            if (startAddr == 61)
+            {
+                _fbs.CTime.Minute = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                return startIndex;
+            }
+            #endregion
+
+            #region Аварии
+            if (startAddr == 62)
+            {
+                _fbs.CAlarms.Alarms1 = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CAlarms.GetAlarmsByBits (_fbs.CAlarms.Alarms1);
+                return startIndex;
+            }
+            if (startAddr == 63)
+            {
+                _fbs.CAlarms.Alarms2 = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms2);
+                return startIndex;
+            }
+            if (startAddr == 64)
+            {
+                startIndex += 2;
+                return startIndex;
+            }
+            #endregion
+            if (startAddr > 64 && startAddr < 80)
+            {
+                return startIndex += 2;
+            }
+            #region Расписание
+            if (startAddr == 80)
+            {
+               // _modesEntities.Mode2ValuesList[3].TimeModeValues[0].DayNum;
+            }
+                #endregion
+
+                if (startAddr < 150)
             {
                 startIndex += 2;
                 return startIndex;
@@ -692,37 +1069,37 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR || startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CHumiditySPS.PReg = buffer;
+                _fbs.CHumiditySP.PReg = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 1 || startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 1 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CHumiditySPS.IReg = buffer;
+                _fbs.CHumiditySP.IReg = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 2 || startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 2 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CHumiditySPS.DReg = buffer;
+                _fbs.CHumiditySP.DReg = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 3 || startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CHumiditySPS.Stage1OnS = buffer;
+                _fbs.CHumiditySP.Stage1OnS = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 4 || startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 4 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CHumiditySPS.Stage1OffS = buffer;
+                _fbs.CHumiditySP.Stage1OffS = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 5 || startAddr == _menusEntities.ETH_HUM_SETTINGS_ADDR + 5 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CHumiditySPS.Hyst = buffer;
+                _fbs.CHumiditySP.Hyst = buffer;
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -1224,7 +1601,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 || startAddr == _menusEntities.ETH_SPECMODE_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
-                GetIntValueResult(_modesEntities.Mode1ValuesList[6].PowerLimitSP, value, ref startIndex);
+                _modesEntities.Mode1ValuesList[6].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (_servActivePageEntities.IsLoadingPage)
                 {
                     _servActivePageEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
@@ -1763,7 +2140,7 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[30].CVal = _fbs.CSensors.ReturnTemp.Value.Value;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[32].CVal = _fbs.CFans.SPercent;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[34].CVal = _fbs.CFans.EPercent;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[36].CVal = _fbs.CRecup.FreqHZ;
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[36].CVal = _fbs.CRecup.RecPerc;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[38].CVal = _fbs.CEHSetPoints.CPower;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[40].CVal = _fbs.CInputsOutputs.DI1;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[42].CVal = _fbs.CInputsOutputs.DI2;
@@ -2011,7 +2388,7 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 39 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 39 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CRecup.FreqHZ = buffer;
+                _fbs.CRecup.RecPerc = buffer;
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 40 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 40 + _menusEntities.WriteOffset)

@@ -1,5 +1,5 @@
 ﻿using Android_Silver.Entities.ValuesEntities;
-
+using Android_Silver.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Android_Silver.Entities.FBEntities
 {
-    public class WHSetPoints
+    public class WHSetPoints:BindableBase
     {
         public int SSMaxIntervalS;
         public FloatValue TRetStart;
@@ -25,6 +25,18 @@ namespace Android_Silver.Entities.FBEntities
         public int IRet;
         public int DRet;
         public int IsSummerTestPump;
+
+        private ushort _damperPerc;
+
+        public ushort DamperPerc
+        {
+            get { return _damperPerc; }
+            set { 
+                _damperPerc = value;
+                OnPropertyChanged(nameof(DamperPerc));
+            }
+        }
+
 
         public WHSetPoints()
         {
