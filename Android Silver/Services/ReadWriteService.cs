@@ -186,7 +186,7 @@ namespace Android_Silver.Services
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
-            } 
+            }
             #endregion
 
             #region Общие настройки
@@ -1814,7 +1814,7 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-                if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 3 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 3 + _menusEntities.WriteOffset)
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 3 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 3 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _fbs.CDamperSetPoints.ServoDampers[0].CAngle = buffer;
@@ -2092,7 +2092,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 53 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 53 + _menusEntities.WriteOffset)
             {
-                GetFloatValueResult(_fbs.CInputsOutputs.AR1,value, ref startIndex);
+                GetFloatValueResult(_fbs.CInputsOutputs.AR1, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 54 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 54 + _menusEntities.WriteOffset)
@@ -2152,7 +2152,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 65 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 65 + _menusEntities.WriteOffset)
             {
-                ushort buffer =(ushort) (value[startIndex++]<<8 | value[startIndex++]);
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _fbs.UFLeds.UfLedIn = (byte)buffer;
                 return startIndex;
             }

@@ -198,7 +198,8 @@ namespace Android_Silver.Services
             else
             if (_ethernetEntities.PagesTab == 1)
             {
-                if (_servActivePageEntities.IsControllerCheckPage) {
+                if (_servActivePageEntities.IsControllerCheckPage)
+                {
                     _ethernetEntities.CMessageState = MessageStates.ControllerCheck;
                 }
                 else
@@ -211,7 +212,7 @@ namespace Android_Silver.Services
                 {
                     _ethernetEntities.CMessageState = MessageStates.ServiceMessage2;
                 }
-              
+
             }
         }
 
@@ -225,7 +226,7 @@ namespace Android_Silver.Services
                 {
                     case MessageStates.UserMessage:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 0, 1, 0, 167};
+                            _readValuesArr = new byte[] { 1, 3, 0, 1, 0, 167 };
                             // messToClient = "0100,058\r\n";
                         }
                         break;
@@ -431,10 +432,10 @@ namespace Android_Silver.Services
                     ResieveCounter += 1;
                     return true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                        // _stream?.Close();
-                        _trySendcounter += 1;
+                    // _stream?.Close();
+                    _trySendcounter += 1;
                     //Thread.Sleep(200);
                     _ethernetEntities.SystemMessage = $"количество попыток {_trySendcounter}";
 
@@ -495,7 +496,7 @@ namespace Android_Silver.Services
             }
         }
 
-     
+
         #region OtherSettings callbacks
         private void SpecModeCallback(bool val)
         {

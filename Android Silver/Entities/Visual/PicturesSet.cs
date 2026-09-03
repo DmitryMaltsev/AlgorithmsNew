@@ -1086,7 +1086,7 @@ namespace Android_Silver.Entities.Visual
                         BaseSettings1ButCollection = new List<PicByStates>();
                         for (int i = 0; i < 20; i++)
                         {
-                            BaseSettings1ButCollection.Add(new PicByStates("settings_base_off.jpg", "settings_base_on.jpg"));
+                            BaseSettings1ButCollection.Add(new PicByStates("service_stroke_off_base.jpg","service_stroke_on_base.jpg"));
                         }
                         BaseSettings2But = new PicByStates("settings_base_off.jpg", "settings_base_on.jpg");
                         IsSpecMode = "is_sheduler_base.png";

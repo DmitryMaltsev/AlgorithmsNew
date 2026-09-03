@@ -160,6 +160,14 @@ namespace Android_Silver.Pages
             else
                 ViewModel.CPictureSet.SelectModesPics[6].Current = ViewModel.CPictureSet.SelectModesPics[6].Default;
         }
+
+        private void Sheduler_Pressed(object sender, EventArgs e)
+        {
+            if (ViewModel.CPictureSet.SelectModesPics[6].Current == ViewModel.CPictureSet.SelectModesPics[6].Default)
+                ViewModel.CPictureSet.SelectModesPics[6].Current = ViewModel.CPictureSet.SelectModesPics[6].Selected;
+            else
+                ViewModel.CPictureSet.SelectModesPics[6].Current = ViewModel.CPictureSet.SelectModesPics[6].Default;
+        }
         #endregion
 
         #region Kitchen callbacks
@@ -479,13 +487,17 @@ namespace Android_Silver.Pages
         {
             ViewModel.CPictureSet.CorrSettingsBut.Current = ViewModel.CPictureSet.CorrSettingsBut.Default;
         }
-        private void Switch_Toggled(object sender, ToggledEventArgs e)
+
+        private void SpecMode_Pressed(object sender, EventArgs e)
         {
-            Microsoft.Maui.Controls.Switch thisSwitch = sender as Microsoft.Maui.Controls.Switch;
-            if (thisSwitch != null && thisSwitch.IsToggled)
-                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Selected;
-            else
+            if (ViewModel.CPictureSet.SpecModeSwitch.Current == ViewModel.CPictureSet.SpecModeSwitch.Selected)
+            {
                 ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Default;
+            }
+            else
+            {
+                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Selected;
+            }
         }
         #endregion
 
@@ -519,7 +531,7 @@ namespace Android_Silver.Pages
         {
             ViewModel.CPictureSet.ResetBut.Current = ViewModel.CPictureSet.ResetBut.Default;
         }
-    
+
         #endregion
 
 
@@ -534,6 +546,8 @@ namespace Android_Silver.Pages
             Picker picker = sender as Picker;
             picker.Unfocus();
         }
+
+
     }
 
 }

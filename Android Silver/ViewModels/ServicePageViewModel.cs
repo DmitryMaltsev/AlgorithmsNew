@@ -55,7 +55,6 @@ namespace Android_Silver.ViewModels
         public ICommand ToSettingsCommand { get; private set; }
         public ICommand SetSettingsCommand { get; private set; }
         public ICommand SetEntryCommand { get; private set; }
-        public ICommand LoadingReturnCommand { get; private set; }
         #endregion
 
         private string _cString;
@@ -145,11 +144,10 @@ namespace Android_Silver.ViewModels
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
             _fileSystemService.GetIPFromFile();
-
             //StartTimer();
         }
 
-
+    
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
         private void ExecuteIncrease(object obj)
