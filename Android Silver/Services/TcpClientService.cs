@@ -227,7 +227,7 @@ namespace Android_Silver.Services
                     case MessageStates.UserMessage:
                         {
                             //167
-                            _readValuesArr = new byte[] { 1, 3, 0, 1, 0, 65 };
+                            _readValuesArr = new byte[] { 1, 3, 0, 1, 0, 167 };
                             // messToClient = "0100,058\r\n";
                         }
                         break;

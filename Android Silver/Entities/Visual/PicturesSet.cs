@@ -990,10 +990,10 @@ namespace Android_Silver.Entities.Visual
                         #region Главное окно
                         Mode1Select = new PicByStates("select_mode_base_off.jpg", "select_mode_base_on.jpg");
                         AlarmMainIcon = new PicByStates("", "alarm_main_base.png");
-                        EHeaterHeader = new PicByStates("eheater_header_base.jpg", "");
-                        FanHeader = new PicByStates("fan_header_base.jpg", "");
-                        FilterHeader = new PicByStates("filter_header_base.jpg", "");
-                        RecupHeader = new PicByStates("recup_header_base.jpg", "");
+                        EHeaterHeader = new PicByStates("", "eheater_header_base.jpg");
+                        FanHeader = new PicByStates("", "fan_header_base.jpg");
+                        FilterHeader = new PicByStates("", "filter_header_base.jpg");
+                        RecupHeader = new PicByStates("", "recup_header_base.jpg");
                         LinkHeader = new PicByStates("", "link_header_base.png");
                         TempIcon = "temp_icon_base.jpg";
                         FlowIcon = "flow_icon_base.jpg";

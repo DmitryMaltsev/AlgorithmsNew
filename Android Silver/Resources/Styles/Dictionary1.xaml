@@ -100,6 +100,15 @@
     </Style>
     <!--#endregion-->
 
+    <!--#region NewRegion -->
+    <Style TargetType="Label" x:Key="TSettingsLabel">
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="Grid.ColumnSpan" Value="1"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="InputTransparent" Value="True"/>
+    </Style>
+    <!--#endregion-->
+
     <!--#region SetPoints styles-->
     <Style TargetType="Label" x:Key="SPsText">
         <Setter Property="Grid.Column" Value="6"/>

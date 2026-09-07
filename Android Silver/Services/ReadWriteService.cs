@@ -125,7 +125,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 17)
             {
-               ushort val = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                ushort val = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.CMode1.ThreshPerc.Value = val;
                 return startIndex;
             }
@@ -179,7 +179,7 @@ namespace Android_Silver.Services
                 ushort contactM1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (contactM1 < 6)
                 {
-                    _modesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.Num = contactM1;
+                    _modesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1 = _modesEntities.Mode1ValuesList[contactM1];
                 }
                 return startIndex;
             }
@@ -302,7 +302,6 @@ namespace Android_Silver.Services
                 return startIndex;
             }
             #endregion
-
             #region Максимальный режим
             if (startAddr == 45)
             {
@@ -397,6 +396,7 @@ namespace Android_Silver.Services
             if (startAddr == 61)
             {
                 _fbs.CTime.Minute = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.CTime.SetTimerInterface();
                 return startIndex;
             }
             #endregion
@@ -404,14 +404,16 @@ namespace Android_Silver.Services
             #region Аварии
             if (startAddr == 62)
             {
+               // _fbs.CAlarms.AlarmsCollection.Clear();
                 _fbs.CAlarms.Alarms1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms1);
                 return startIndex;
             }
             if (startAddr == 63)
             {
                 _fbs.CAlarms.Alarms2 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms2);
+                BitArray bits = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms1);
+                BitArray bits2 = _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms2);
+                _fbs.CAlarms.ConverBitArrayToAlarms(bits,bits2);
                 return startIndex;
             }
             if (startAddr == 64)
@@ -426,16 +428,23 @@ namespace Android_Silver.Services
                 {
                     _modesEntities.SetMode2ValuesByIndex(m2Index);
                 }
-                if (m2Index == 4)
-                    _pictureSet.IsMode2Active = _pictureSet.IsContactActive;
+                if (_fbs.OtherSettings.IsContact)
+                {
+                    if (_pictureSet.IsMode2Active != _pictureSet.IsContactActive)
+                        _pictureSet.IsMode2Active = _pictureSet.IsContactActive;
+                }
                 else
                 if (_fbs.OtherSettings.IsScheduler)
-                    _pictureSet.IsMode2Active = _pictureSet.IsSchedulerActive;
+                {
+                    if (_pictureSet.IsMode2Active != _pictureSet.IsSchedulerActive)
+                        _pictureSet.IsMode2Active = _pictureSet.IsSchedulerActive;
+                }
                 else
-                    _pictureSet.IsMode2Active = _pictureSet.IsContactActive;
+                    _pictureSet.IsMode2Active = "";
                 return startIndex;
             }
             #endregion
+
             if (startAddr > 64 && startAddr < 80)
             {
                 startIndex += 2;
@@ -444,12 +453,427 @@ namespace Android_Silver.Services
             #region Расписание
             if (startAddr == 80)
             {
-                startIndex += 2;
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[0].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 81)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 82)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 83)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[0].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[0].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 84)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[1].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 85)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 86)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 87)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[1].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[1].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 88)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[2].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 89)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 90)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 91)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[2].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[2].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 92)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[3].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 93)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 94)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 95)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[3].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[3].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 96)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[4].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 97)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 98)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 99)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[4].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[4].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 100)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[5].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 101)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 102)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 103)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[5].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[5].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 104)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[6].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 105)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 106)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 107)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[6].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[6].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 108)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[7].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 109)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 110)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 111)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[7].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[7].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 112)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[8].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 113)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[8].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 114)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[8].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 115)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[8].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[8].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 116)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[9].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 117)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[9].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 118)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[9].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 119)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[9].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[9].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 120)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[10].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 121)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[10].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 122)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[10].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 123)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[10].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[10].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 124)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[11].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 125)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[11].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 126)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[11].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 127)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[11].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[11].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 128)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[12].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 129)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[12].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 130)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[12].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 131)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[12].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[12].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
+                return startIndex;
+            }
+            if (startAddr == 132)
+            {
+                ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (dayNum < 10)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[13].DayNum = dayNum;
+                return startIndex;
+            }
+            if (startAddr == 133)
+            {
+                ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (hours < 24)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[13].Hour = hours;
+                return startIndex;
+            }
+            if (startAddr == 134)
+            {
+                ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (minutes < 60)
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[13].Minute = minutes;
+                return startIndex;
+            }
+            if (startAddr == 135)
+            {
+                ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[13].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
+                {
+                    _modesEntities.Mode2ValuesList[3].TimeModeValues[13].CMode1 = _modesEntities.Mode1ValuesList[cMode1];
+                }
                 return startIndex;
             }
             #endregion
 
-            if (startAddr < 150)
+            if (startAddr > 135 && startAddr < 150)
             {
                 startIndex += 2;
                 return startIndex;

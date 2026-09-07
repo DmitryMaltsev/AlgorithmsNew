@@ -5,6 +5,8 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
+
+using System.Collections;
 using System.Globalization;
 using System.Windows.Input;
 
@@ -121,7 +123,17 @@ namespace Android_Silver.Pages
             }
         }
 
+        private Mode1Values _contactMode1Buf;
 
+        public Mode1Values ContactMode1Buf
+        {
+            get { return _contactMode1Buf; }
+            set
+            {
+                _contactMode1Buf = value;
+                OnPropertyChanged(nameof(ContactMode1Buf));
+            }
+        }
 
         #endregion
 
@@ -136,7 +148,7 @@ namespace Android_Silver.Pages
         public ICommand ConnectCommand { get; private set; }
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
-      
+
         public ICommand SettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
         public ICommand GoToPageCommand { get; private set; }
@@ -160,6 +172,7 @@ namespace Android_Silver.Pages
         #endregion
         #region SPCommands
         public ICommand NextSetPointsCommand { get; private set; }
+        public ICommand PrevSetPointsCommand { get; private set; }
         public ICommand SPReturnCommand { get; private set; }
         public ICommand SPOkCommand { get; private set; }
         public ICommand SPAdd0Command { get; private set; }
@@ -212,7 +225,6 @@ namespace Android_Silver.Pages
         public ICommand BootloaderSetCommand { get; private set; }
         #endregion
         #region Humidity commands
-        public ICommand HumidityReturnCommand { get; private set; }
         public ICommand OkHumidityCommand { get; private set; }
         public ICommand CancelHumidityCommand { get; private set; }
         public ICommand HumidityBtnUpCommand { get; private set; }
@@ -244,6 +256,7 @@ namespace Android_Silver.Pages
         public ICommand UpdateCommand { get; private set; }
         public ICommand DownloadCommand { get; private set; }
         public ICommand ResetCommand { get; private set; }
+        public ICommand BootloaderBackCommand { get; private set; }
         #endregion
         // public ICommand SettingsCommand { get; private set; }
         #endregion
@@ -271,8 +284,8 @@ namespace Android_Silver.Pages
         private IDispatcherTimer _fileResultTimer { get; set; }
         public MainPageViewModel()
         {
-           
-             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
+      
+           EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
@@ -318,8 +331,10 @@ namespace Android_Silver.Pages
             DownloadCommand = new Command(ExecuteDownload);
             ResetCommand = new Command(ExecuteReset);
             BootloaderSetCommand = new Command(ExecuteBootloaderSet);
+            BootloaderBackCommand = new Command(ExecuteBootLoaderBack);
             TimeBuffer = new();
             Value = 15;
+
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
@@ -330,8 +345,9 @@ namespace Android_Silver.Pages
             LoadingReturnCommand = new Command(ExecuteLoadingReturn);
 
             #endregion
-            #region Set ponts commands
+            #region Set points commands
             NextSetPointsCommand = new Command(ExecuteNextSetPoints);
+            PrevSetPointsCommand = new Command(ExecutePrevSetPoints);
             SPAdd0Command = new Command(ExecuteSPAdd0);
             SPSub0Command = new Command(ExecuteSPSub0);
             SPAdd1Command = new Command(ExecuteSPAdd1);
@@ -374,10 +390,9 @@ namespace Android_Silver.Pages
             HumidityBtnDnCommand = new Command(ExecuteHumidityBtnDn);
             #endregion
             #region Humidity commands
-            HumidityReturnCommand = new Command(ExecuteHumidityReturn);
             OkHumidityCommand = new Command(ExecuteOkHumidity);
             CancelHumidityCommand = new Command(CancelHumidity);
-         
+
             #endregion
             #region Time commands
             TimeBtnUpCommand0 = new Command(ExecuteTimeBtnUp0);
@@ -392,11 +407,13 @@ namespace Android_Silver.Pages
             TimeBtnDnCommand4 = new Command(ExecuteTimeBtnDn4);
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
+
             _fileSystemService.GetIPFromFile();
             SetTValuesByIndex(0, 0);//?????
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
-            CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
+            CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;;
         }
+
 
         async private void ExecuteConnect()
         {
@@ -645,7 +662,7 @@ namespace Android_Silver.Pages
         {
             if (M1Values != null)
             {
-                int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value, 
+                int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value,
                     M1Values.ThreshPerc.Value, M1Values.SFanCorr.Value, M1Values.EFanCorr.Value };
                 CTcpClientService.SetCommandToServer(M1Values.StartAddress, values);
                 CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
@@ -655,22 +672,37 @@ namespace Android_Silver.Pages
         private void ExecuteNextSetPoints(object obj)
         {
             int ind = 0;
-            if (M1Values.Num == 0 || M1Values.Num == 5)
+            if (M1Values.Num == 3)
             {
                 ind = 1;
             }
             else
-            if (M1Values.Num < 5)
+            if (M1Values.Num < 3)
             {
                 ind = M1Values.Num + 1;
             }
             SetM1ValuesByIndex(ind);
         }
+
+        private void ExecutePrevSetPoints(object obj)
+        {
+            int ind = 0;
+            if (M1Values.Num == 1)
+            {
+                ind = 3;
+            }
+            else
+            if (M1Values.Num > 0)
+            {
+                ind = M1Values.Num - 1;
+            }
+            SetM1ValuesByIndex(ind);
+        }
+
         private void SetM1ValuesByIndex(int index)
         {
 
             index = index > 0 && index < 6 ? index : 1;
-
             Mode1Values bufVals = CModesEntities.Mode1ValuesList[index];
             M1Values = new Mode1Values(bufVals.Num, activeModePicture: bufVals.ActiveModePicture,
                       bufVals.SelectModePics,
@@ -679,6 +711,7 @@ namespace Android_Silver.Pages
                       bufVals.StartAddress, bufVals.MiniIcon);
             M1Values.SupplySP.Value = bufVals.SupplySP.Value;
             M1Values.ExhaustSP.Value = bufVals.ExhaustSP.Value;
+            M1Values.ExhaustDisb.Value = bufVals.ExhaustDisb.Value;
             M1Values.TempSP.Value = bufVals.TempSP.Value;
             M1Values.ThreshPerc = bufVals.ThreshPerc;
             M1Values.SFanCorr.Value = bufVals.SFanCorr.Value;
@@ -687,7 +720,7 @@ namespace Android_Silver.Pages
 
         private void ExecuteSPReturn(object obj)
         {
-            if(CActivePagesEntities.IsCorrSetPointsPage)
+            if (CActivePagesEntities.IsCorrSetPointsPage)
                 CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
             else
                 CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
@@ -698,9 +731,7 @@ namespace Android_Silver.Pages
         #region Settings execute methods
         private void ExecuteJournal(object obj)
         {
-            CFBs.CAlarms.AlarmsCollection.Clear();
-            var bits = CFBs.CAlarms.GetAlarmsByBits(1023);
-            CFBs.CAlarms.ConverBitArrayToAlarms(bits, 0);
+
             CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
         }
 
@@ -721,6 +752,9 @@ namespace Android_Silver.Pages
 
         private void ExecuteOtherSettings(object obj)
         {
+            HumiditySP = CFBs.CHumiditySP.SPPerc;
+            ContactMode1Buf = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1;
+            CPictureSet.SpecModeSwitch.Current = CFBs.OtherSettings.IsSpecMode ? CPictureSet.SpecModeSwitch.Selected : CPictureSet.SpecModeSwitch.Default;
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
 
@@ -985,6 +1019,7 @@ namespace Android_Silver.Pages
             }
         }
 
+        #region Set bootloader
         private void ExecuteReset(object obj)
         {
             int[] reset = { CFBs.CUpdater.AutoUpdIndex };
@@ -1069,6 +1104,13 @@ namespace Android_Silver.Pages
                 EthernetEntities.SystemMessage = "В данный момент подключаемся";
             }
         }
+
+        private void ExecuteBootLoaderBack(object obj)
+        {
+            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+        }
+
+        #endregion
 
         private void ExecuteSetTime(object obj)
         {
@@ -1217,11 +1259,6 @@ namespace Android_Silver.Pages
         #endregion
 
         #region Execute humidity
-        private void ExecuteHumidityReturn(object obj)
-        {
-            CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
-            HumiditySP = CFBs.CHumiditySP.SPPerc;
-        }
 
         private void CancelHumidity(object obj)
         {
