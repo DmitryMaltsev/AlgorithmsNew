@@ -246,6 +246,7 @@ namespace Android_Silver.Entities.Modes
             TempSP = new FloatValue(0, 100, 0);
             SFanCorr = new IntValue(-100,100);
             EFanCorr = new IntValue(-100,100);
+            ThreshPerc = new IntValue(0,100);
         }
     }
 }

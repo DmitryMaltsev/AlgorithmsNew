@@ -23,7 +23,7 @@ namespace Android_Silver.Entities.Modes
 
         private PicturesSet _pictureSet;
 
-        public int CNum { get; private set; }
+        public int Num { get; private set; }
 
         public string Mode2Icon { get; set; }
 
@@ -35,7 +35,7 @@ namespace Android_Silver.Entities.Modes
         public Mode2Values(int cNum, int tModesCount, string mode2Icon, Mode1Values defaultMode1, int startAddress)
         {
             Mode2Icon = mode2Icon;
-            CNum=cNum;
+            Num=cNum;
             StartAddress = startAddress;
             TimeModeValues = SetTModes(tModesCount, defaultMode1);
         }
@@ -46,7 +46,7 @@ namespace Android_Silver.Entities.Modes
             ObservableCollection<TimeModeValues> tModeList = new ObservableCollection<TimeModeValues>();
             for (int i = 0; i < count; i++)
             {
-                tModeList.Add(new TimeModeValues(i, defaultM1, StartAddress + i*4, i+1, CNum));
+                tModeList.Add(new TimeModeValues(i, defaultM1, StartAddress + i*4, i+1, Num));
                 tModeList[i].StrokeImg = new PicByStates(_pictureSet.TModeStroke.Default, _pictureSet.TModeStroke.Selected);
             }
             return tModeList;

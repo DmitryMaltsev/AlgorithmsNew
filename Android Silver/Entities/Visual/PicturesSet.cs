@@ -143,13 +143,13 @@ namespace Android_Silver.Entities.Visual
             }
         }
         private PicByStates _recuperatorHeader;
-        public PicByStates RecuperatorHeader
+        public PicByStates RecupHeader
         {
             get { return _recuperatorHeader; }
             set
             {
                 _recuperatorHeader = value;
-                OnPropertyChanged(nameof(RecuperatorHeader));
+                OnPropertyChanged(nameof(RecupHeader));
             }
         }
 
@@ -308,9 +308,9 @@ namespace Android_Silver.Entities.Visual
             }
         }
 
-        private string _isSpecMode;
+        private PicByStates _isSpecMode;
 
-        public string IsSpecMode
+        public PicByStates IsSpecMode
         {
             get { return _isSpecMode; }
             set
@@ -319,6 +319,40 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged(nameof(IsSpecMode));
             }
         }
+
+        private string _isContactActive;
+
+        public string IsContactActive
+        {
+            get { return _isContactActive; }
+            set { 
+                _isContactActive = value; 
+                OnPropertyChanged(nameof(IsContactActive));
+            }
+        }
+
+        private string _isSchedulerActive;
+
+        public string IsSchedulerActive
+        {
+            get { return _isSchedulerActive; }
+            set { 
+                _isSchedulerActive = value;
+                OnPropertyChanged(nameof(IsSchedulerActive));
+            }
+        }
+
+        private string _isMode2Active;
+
+        public string IsMode2Active
+        {
+            get { return _isMode2Active; }
+            set {
+                _isMode2Active = value;
+                OnPropertyChanged(nameof(IsMode2Active));
+            }
+        }
+
 
         #endregion
 
@@ -959,10 +993,12 @@ namespace Android_Silver.Entities.Visual
                         EHeaterHeader = new PicByStates("eheater_header_base.jpg", "");
                         FanHeader = new PicByStates("fan_header_base.jpg", "");
                         FilterHeader = new PicByStates("filter_header_base.jpg", "");
-                        RecuperatorHeader = new PicByStates("recup_header_base.jpg", "");
+                        RecupHeader = new PicByStates("recup_header_base.jpg", "");
                         LinkHeader = new PicByStates("", "link_header_base.png");
                         TempIcon = "temp_icon_base.jpg";
                         FlowIcon = "flow_icon_base.jpg";
+                        IsContactActive = "is_contact_base.png";
+                        IsSchedulerActive =  "is_sheduler_base.png";
                         #endregion
                         #region Разное
                         FilterPol = "filter_pol_base.png";
@@ -1089,7 +1125,7 @@ namespace Android_Silver.Entities.Visual
                             BaseSettings1ButCollection.Add(new PicByStates("service_stroke_off_base.jpg","service_stroke_on_base.jpg"));
                         }
                         BaseSettings2But = new PicByStates("settings_base_off.jpg", "settings_base_on.jpg");
-                        IsSpecMode = "is_sheduler_base.png";
+                       
                         #endregion
                     }
                     break;

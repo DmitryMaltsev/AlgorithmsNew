@@ -5,7 +5,6 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
-
 using System.Globalization;
 using System.Windows.Input;
 
@@ -272,7 +271,8 @@ namespace Android_Silver.Pages
         private IDispatcherTimer _fileResultTimer { get; set; }
         public MainPageViewModel()
         {
-            EthernetEntities = DIContainer.Resolve<EthernetEntities>();
+           
+             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
@@ -392,7 +392,6 @@ namespace Android_Silver.Pages
             TimeBtnDnCommand4 = new Command(ExecuteTimeBtnDn4);
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
-
             _fileSystemService.GetIPFromFile();
             SetTValuesByIndex(0, 0);//?????
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;

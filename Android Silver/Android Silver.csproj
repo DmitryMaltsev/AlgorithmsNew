@@ -84,6 +84,7 @@
 		<MauiImage Include="Resources\Images\base\Информационный экран\recup_info_icon.jpg" />
 		<MauiImage Include="Resources\Images\base\Информационный экран\temp_info_icon.jpg" />
 		<MauiImage Include="Resources\Images\base\Информационный экран\vent_info_icon.jpg" />
+		<MauiImage Include="Resources\Images\base\Кнопки активных режимов\alarm_but_base.png" />
 		<MauiImage Include="Resources\Images\base\Кнопки активных режимов\kitchen_but_base.png" />
 		<MauiImage Include="Resources\Images\base\Кнопки активных режимов\max_but_base.png" />
 		<MauiImage Include="Resources\Images\base\Кнопки активных режимов\min_but_base.png" />
@@ -122,7 +123,6 @@
 		<MauiImage Include="Resources\Images\base\Настройки\shed_set_but_on_base.jpg" />
 		<MauiImage Include="Resources\Images\base\общие кнопки\add_but_off_base.jpg" />
 		<MauiImage Include="Resources\Images\base\общие кнопки\add_but_on_base.jpg" />
-		<MauiImage Include="Resources\Images\base\Загрузка\loading_pic_base.jpg" />
 		<MauiImage Include="Resources\Images\base\общие кнопки\back_but_off_base.png" />
 		<MauiImage Include="Resources\Images\base\общие кнопки\back_but_on_base.png" />
 		<MauiImage Include="Resources\Images\base\общие кнопки\left_but_off_base.jpg" />
@@ -197,7 +197,6 @@
 	  <None Remove="Resources\Images\base\Журнал\journal_stroke_base.jpg" />
 	  <None Remove="Resources\Images\base\Журнал\reset_but_off_base.jpg" />
 	  <None Remove="Resources\Images\base\Журнал\reset_but_on_base.jpg" />
-	  <None Remove="Resources\Images\base\Загрузка\loading_pic_base.jpg" />
 	  <None Remove="Resources\Images\base\Загрузка\loading_pic_base_sign.jpg" />
 	  <None Remove="Resources\Images\base\Иконки выбора режимов\kitchen_icon_off_base.png" />
 	  <None Remove="Resources\Images\base\Иконки выбора режимов\max_icon_off_base.png" />
@@ -292,8 +291,6 @@
 	  <None Remove="Resources\Images\base\общие кнопки\stroke_img_base.jpg" />
 	  <None Remove="Resources\Images\base\общие кнопки\sub_but_off_base.jpg" />
 	  <None Remove="Resources\Images\base\общие кнопки\sub_but_on_base.jpg" />
-	  <None Remove="Resources\Images\base\Основные настройки\base_settings_but_off_base.png" />
-	  <None Remove="Resources\Images\base\Основные настройки\base_settings_but_on_base.png" />
 	  <None Remove="Resources\Images\base\Режим времени\tmode_stroke_off_base.jpg" />
 	  <None Remove="Resources\Images\base\Сервисные настройки\service_stroke_off_base.jpg" />
 	  <None Remove="Resources\Images\base\Сервисные настройки\service_stroke_on_base.jpg" />
@@ -304,9 +301,6 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\base\background_base.png" />
-	  <MauiImage Include="Resources\Images\base\loading_base.png" />
-	  <MauiImage Include="Resources\Images\base\test.jpg" />
-	  <MauiImage Include="Resources\Images\base\title_base.png" />
 	  <MauiImage Include="Resources\Images\base\Иконки выбора режимов\kitchen_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\base\Иконки выбора режимов\max_icon_off_base.png" />
 	  <MauiImage Include="Resources\Images\base\Иконки выбора режимов\min_icon_off_base.png" />
@@ -329,8 +323,6 @@
 	  <MauiImage Include="Resources\Images\base\Кнопки выбора режимов\vac_but_select_on_base.png" />
 	  <MauiImage Include="Resources\Images\base\общие кнопки\ok_but_off_base.jpg" />
 	  <MauiImage Include="Resources\Images\base\общие кнопки\ok_but_on_base.jpg" />
-	  <MauiImage Include="Resources\Images\base\Основные настройки\base_settings_but_off_base.png" />
-	  <MauiImage Include="Resources\Images\base\Основные настройки\base_settings_but_on_base.png" />
 	</ItemGroup>
 
 	<ItemGroup>

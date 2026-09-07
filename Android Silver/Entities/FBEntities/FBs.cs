@@ -28,9 +28,9 @@ namespace Android_Silver.Entities.FBEntities
         public CommonSetPoints CCommonSetPoints { get; set; }
         public DamperSetPoints CDamperSetPoints;
         public ElementsConfig CEConfig;
-        public WHSetPoints CWHSetPoints;
+        public WHSetPoints CWHSetPoints { get; set; }
         public EHSetPoints CEHSetPoints { get; set; }
-        public FreonCoolerSP CFreonCoolerSP;
+        public FreonCoolerSP CFreonCoolerSP { get; set; }
         public UFLeds UFLeds { get; set; }
 
         public Updater CUpdater {get; set;}

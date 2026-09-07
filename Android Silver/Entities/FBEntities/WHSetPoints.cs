@@ -46,6 +46,7 @@ namespace Android_Silver.Entities.FBEntities
             TRetMin = new FloatValue(0,100,1);
             TRetF = new FloatValue(0,100,1);
             SPWinterProcess = new FloatValue(0, 100, 1);
+            DamperPerc = 0;
         }
     }
 }

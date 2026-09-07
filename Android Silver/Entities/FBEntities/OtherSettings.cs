@@ -36,5 +36,17 @@ namespace Android_Silver.Entities.FBEntities
 				OnPropertyChanged(nameof(IsScheduler));
 			}
 		}
+
+		private bool _isContact;
+
+		public bool IsContact
+		{
+			get { return _isContact; }
+			set { 
+				_isContact = value;
+				OnPropertyChanged(nameof(IsContact));			
+			}
+		}
+
 	}
 }

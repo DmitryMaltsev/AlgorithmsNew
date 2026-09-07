@@ -1,5 +1,4 @@
-﻿
-using Android_Silver.Entities;
+﻿using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.ValuesEntities;
@@ -42,6 +41,7 @@ namespace Android_Silver.Services
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _modesEntities.CMode1.TempSP.Value = buffer;
+                return startIndex;
             }
             if (startAddr == 2)
             {
@@ -125,12 +125,15 @@ namespace Android_Silver.Services
             }
             if (startAddr == 17)
             {
-                _modesEntities.CMode1.ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+               ushort val = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _modesEntities.CMode1.ThreshPerc.Value = val;
                 return startIndex;
             }
             if (startAddr == 18)
             {
-                _fbs.CWHSetPoints.DamperPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                ushort val = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.CWHSetPoints.DamperPerc = val;
+                return startIndex;
             }
             #endregion
             #region Прочие
@@ -163,12 +166,14 @@ namespace Android_Silver.Services
                 _fbs.CHumiditySP.SPPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
+            //Активно ли расписание
             if (startAddr == 24)
             {
-                ushort schedVal = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                _fbs.OtherSettings.IsScheduler = schedVal > 0 ? true : false;
+                ushort isSched = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.OtherSettings.IsScheduler = isSched == 0 ? false : true;
                 return startIndex;
             }
+            //Режим 1 по контакту
             if (startAddr == 25)
             {
                 ushort contactM1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
@@ -176,49 +181,59 @@ namespace Android_Silver.Services
                 {
                     _modesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1.Num = contactM1;
                 }
+                return startIndex;
             }
+            //Активен ли спецрежим
             if (startAddr == 26)
             {
-                ushort specVal = (ushort)(value[startIndex++] << 8 | value[startIndex]);
-                _fbs.OtherSettings.IsSpecMode = specVal > 0 ? true : false;
+                ushort specVal = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.OtherSettings.IsSpecMode = specVal == 0 ? false : true;
                 return startIndex;
             }
             if (startAddr == 27)
             {
-                ushort filterPolPerc = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                ushort filterPolPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _fbs.CFilterVals.PolPerc = filterPolPerc;
                 return startIndex;
             }
             if (startAddr == 28)
             {
-                _fbs.CSensors.AirQualitySensor = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CSensors.AirQualitySensor = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
             #endregion
-            #region  иконки
+
+            #region Иконки
             if (startAddr == 29)
             {
-                ushort fanIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex]);
-                _pictureSet.FanHeader.Current = fanIsActive > 0 ? _pictureSet.FanHeader.Selected : _pictureSet.FanHeader.Default;
+                ushort fanIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                string fanHeaderPic = fanIsActive > 0 ? _pictureSet.FanHeader.Selected : _pictureSet.FanHeader.Default;
+                if (_pictureSet.FanHeader.Current != fanHeaderPic)
+                    _pictureSet.FanHeader.Current = fanHeaderPic;
                 return startIndex;
             }
             if (startAddr == 30)
             {
-                ushort recupIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex]);
-                _pictureSet.RecuperatorHeader.Current = recupIsActive > 0 ? _pictureSet.RecuperatorHeader.Selected : _pictureSet.RecuperatorHeader.Default;
+                ushort recupIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                string recupHeaderPic = recupIsActive > 0 ? _pictureSet.RecupHeader.Selected : _pictureSet.RecupHeader.Default;
+                if (_pictureSet.RecupHeader.Current != recupHeaderPic)
+                    _pictureSet.RecupHeader.Current = recupHeaderPic;
                 return startIndex;
             }
             if (startAddr == 31)
             {
-                ushort filterIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex]);
-                //_pictureSet.FilterHeader
-                _pictureSet.FilterHeader.Current = filterIsActive > 0 ? _pictureSet.FilterHeader.Selected : _pictureSet.FilterHeader.Default;
+                ushort filterIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                string filterHeaderPic = filterIsActive > 0 ? _pictureSet.FilterHeader.Selected : _pictureSet.FilterHeader.Default;
+                if (_pictureSet.FilterHeader.Current != filterHeaderPic)
+                    _pictureSet.FilterHeader.Current = filterHeaderPic;
                 return startIndex;
             }
             if (startAddr == 32)
             {
-                ushort eHeaterIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex]);
-                _pictureSet.EHeaterHeader.Current = eHeaterIsActive > 0 ? _pictureSet.EHeaterHeader.Selected : _pictureSet.EHeaterHeader.Default;
+                ushort eHeaterIsActive = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                string eHeaterHeaderPic = eHeaterIsActive > 0 ? _pictureSet.EHeaterHeader.Selected : _pictureSet.EHeaterHeader.Default;
+                if (_pictureSet.EHeaterHeader.Current != eHeaterHeaderPic)
+                    _pictureSet.EHeaterHeader.Current = eHeaterHeaderPic;
                 return startIndex;
             }
             #endregion
@@ -241,7 +256,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 36)
             {
-                _modesEntities.Mode1ValuesList[1].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _modesEntities.Mode1ValuesList[1].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
             if (startAddr == 37)
@@ -273,7 +288,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 42)
             {
-                _modesEntities.Mode1ValuesList[2].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _modesEntities.Mode1ValuesList[2].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
             if (startAddr == 43)
@@ -306,7 +321,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 48)
             {
-                _modesEntities.Mode1ValuesList[3].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _modesEntities.Mode1ValuesList[3].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
             if (startAddr == 49)
@@ -339,7 +354,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == 54)
             {
-                _modesEntities.Mode1ValuesList[4].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _modesEntities.Mode1ValuesList[4].ThreshPerc.Value = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
             if (startAddr == 55)
@@ -357,31 +372,31 @@ namespace Android_Silver.Services
             #region Время
             if (startAddr == 57)
             {
-                _fbs.CTime.Year = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CTime.Year = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
 
             if (startAddr == 58)
             {
-                _fbs.CTime.Month = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CTime.Month = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
 
             if (startAddr == 59)
             {
-                _fbs.CTime.Day = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CTime.Day = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
 
             if (startAddr == 60)
             {
-                _fbs.CTime.Hour = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CTime.Hour = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
 
             if (startAddr == 61)
             {
-                _fbs.CTime.Minute = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CTime.Minute = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
             #endregion
@@ -389,13 +404,13 @@ namespace Android_Silver.Services
             #region Аварии
             if (startAddr == 62)
             {
-                _fbs.CAlarms.Alarms1 = (ushort)(value[startIndex++] << 8 | value[startIndex]);
-                _fbs.CAlarms.GetAlarmsByBits (_fbs.CAlarms.Alarms1);
+                _fbs.CAlarms.Alarms1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms1);
                 return startIndex;
             }
             if (startAddr == 63)
             {
-                _fbs.CAlarms.Alarms2 = (ushort)(value[startIndex++] << 8 | value[startIndex]);
+                _fbs.CAlarms.Alarms2 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _fbs.CAlarms.GetAlarmsByBits(_fbs.CAlarms.Alarms2);
                 return startIndex;
             }
@@ -404,19 +419,37 @@ namespace Android_Silver.Services
                 startIndex += 2;
                 return startIndex;
             }
+            if (startAddr == 65)
+            {
+                ushort m2Index = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (m2Index < 5)
+                {
+                    _modesEntities.SetMode2ValuesByIndex(m2Index);
+                }
+                if (m2Index == 4)
+                    _pictureSet.IsMode2Active = _pictureSet.IsContactActive;
+                else
+                if (_fbs.OtherSettings.IsScheduler)
+                    _pictureSet.IsMode2Active = _pictureSet.IsSchedulerActive;
+                else
+                    _pictureSet.IsMode2Active = _pictureSet.IsContactActive;
+                return startIndex;
+            }
             #endregion
             if (startAddr > 64 && startAddr < 80)
             {
-                return startIndex += 2;
+                startIndex += 2;
+                return startIndex;
             }
             #region Расписание
             if (startAddr == 80)
             {
-               // _modesEntities.Mode2ValuesList[3].TimeModeValues[0].DayNum;
+                startIndex += 2;
+                return startIndex;
             }
-                #endregion
+            #endregion
 
-                if (startAddr < 150)
+            if (startAddr < 150)
             {
                 startIndex += 2;
                 return startIndex;
