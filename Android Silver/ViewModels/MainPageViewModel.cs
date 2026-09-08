@@ -6,6 +6,7 @@ using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
+using System;
 using System.Globalization;
 using System.Windows.Input;
 
@@ -132,19 +133,20 @@ namespace Android_Silver.Pages
             }
         }
 
-        private OtherSettings _otherSettings = new OtherSettings();
 
-        public OtherSettings OtherSettings
+
+        private OtherSettings _cOtherSettings = new OtherSettings();
+
+        public OtherSettings COtherSettings
         {
-            get { return _otherSettings; }
+            get { return _cOtherSettings; }
             set
             {
-                _otherSettings = value;
-                OnPropertyChanged(nameof(OtherSettings));
+                _cOtherSettings = value;
+                OnPropertyChanged(nameof(COtherSettings));
             }
         }
-
-
+     
         #endregion
 
         #region Commands
@@ -215,22 +217,23 @@ namespace Android_Silver.Pages
         #region SetTSettingsCommands
         public ICommand TSetReturnCommand { get; private set; }
         public ICommand TSetOkCommand { get; private set; }
-        public ICommand TSetBtnUpCommand0 { get; private set; }
-        public ICommand TSetBtnDnCommand0 { get; private set; }
-        public ICommand TSetBtnUpCommand1 { get; private set; }
-        public ICommand TSetBtnDnCommand1 { get; private set; }
-        public ICommand TSetBtnUpCommand2 { get; private set; }
-        public ICommand TSetBtnDnCommand2 { get; private set; }
-        public ICommand TSetBtnUpCommand3 { get; private set; }
-        public ICommand TSetBtnDnCommand3 { get; private set; }
+        public ICommand TSetBtnLeftCommand0 { get; private set; }
+        public ICommand TSetBtnRightCommand0 { get; private set; }
+        public ICommand TSetBtnLeftCommand1 { get; private set; }
+        public ICommand TSetBtnRightCommand1 { get; private set; }
+        public ICommand TSetBtnLeftCommand2 { get; private set; }
+        public ICommand TSetBtnRightCommand2 { get; private set; }
+        public ICommand TSetBtnLeftCommand3 { get; private set; }
+        public ICommand TSetBtnRightCommand3 { get; private set; }
         #endregion
         #region Other settings commands
         public ICommand OtherSettingsReturnCommand { get; private set; }
-        public ICommand NextOtherSettingsCommand { get; private set; }
+        public ICommand SetOtherSettingsCommand { get; private set; }
         public ICommand ContactArrLeftCommand { get; private set; }
         public ICommand ContactArrRightCommand { get; private set; }
         public ICommand HumidityCommand { get; private set; }
         public ICommand SetTimeCommand { get; private set; }
+        public ICommand IsSpecModeCommand { get; private set; } 
         public ICommand ChangeFilterCommand { get; private set; }
         public ICommand BootloaderSetCommand { get; private set; }
         #endregion
@@ -333,7 +336,7 @@ namespace Android_Silver.Pages
             ShedulerTableCommand = new Command(ExecuteShedulerTable);
             HomeCommand = new Command(ExecuteHomeCommand);
             ResetJournalCommand = new Command(ExecuteResetJournal);
-            NextOtherSettingsCommand = new Command(ExecuteNextOtherSettings);
+            SetOtherSettingsCommand = new Command(ExecuteSetOtherSettings);
             JournalReturnCommand = new Command(ExecuteJournalReturn);
             ContactArrLeftCommand = new Command(ExecuteContactArrLeft);
             ContactArrRightCommand = new Command(ExecuteContactArrRight);
@@ -381,14 +384,14 @@ namespace Android_Silver.Pages
             #endregion
             #region TSet commands
             TSetOkCommand = new Command(TSetExecuteOK);
-            TSetBtnUpCommand0 = new Command(TSetExecuteBtnUP0);
-            TSetBtnDnCommand0 = new Command(TSetExecuteBtnDn0);
-            TSetBtnUpCommand1 = new Command(TSetExecuteBtnUP1);
-            TSetBtnDnCommand1 = new Command(TSetExecuteBtnDn1);
-            TSetBtnUpCommand2 = new Command(TSetExecuteBtnUP2);
-            TSetBtnDnCommand2 = new Command(TSetExecuteBtnDn2);
-            TSetBtnUpCommand3 = new Command(TSetExecuteBtnUP3);
-            TSetBtnDnCommand3 = new Command(TSetExecuteBtnDn3);
+            TSetBtnLeftCommand0 = new Command(TSetExecuteBtnLeft0);
+            TSetBtnRightCommand0 = new Command(TSetExecuteBtnRight0);
+            TSetBtnLeftCommand1 = new Command(TSetExecuteBtnLeft1);
+            TSetBtnRightCommand1 = new Command(TSetExecuteBtnRight1);
+            TSetBtnLeftCommand2 = new Command(TSetExecuteBtnLeft2);
+            TSetBtnRightCommand2 = new Command(TSetExecuteBtnRight2);
+            TSetBtnLeftCommand3 = new Command(TSetExecuteBtnLeft3);
+            TSetBtnRightCommand3 = new Command(TSetExecuteBtnRight3);
             TSetReturnCommand = new Command(TSetExecuteReturn);
             #endregion
             #region Settings commands
@@ -400,6 +403,7 @@ namespace Android_Silver.Pages
             SetTimeCommand = new Command(ExecuteSetTime);
             HumidityBtnUpCommand = new Command(ExecuteHumidityBtnUp);
             HumidityBtnDnCommand = new Command(ExecuteHumidityBtnDn);
+            IsSpecModeCommand = new Command(ExecuteIsSpecMode);
             #endregion
             #region Humidity commands
             OkHumidityCommand = new Command(ExecuteOkHumidity);
@@ -425,6 +429,7 @@ namespace Android_Silver.Pages
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback; ;
         }
+
 
 
         async private void ExecuteConnect()
@@ -491,15 +496,6 @@ namespace Android_Silver.Pages
 
         private void ExecuteChooseMode(object obj)
         {
-            /* Page[] stack = Shell.Current.Navigation.NavigationStack.ToArray();
-             for (int i = stack.Length - 1; i > 0; i--)
-             {
-                 Shell.Current.Navigation.RemovePage(stack[i]);
-                 Shell.Current.Navigation.RemovePage(stack[i]);
-             }
-             await Task.Delay(1);
-             await Shell.Current.Navigation.PopToRootAsync(false);
-             await Task.Delay(1);*/
             if (CModesEntities.CMode1.Num == 7)
             {
                 CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
@@ -507,10 +503,9 @@ namespace Android_Silver.Pages
             else
             {
                 CActivePagesEntities.SetActivePageState(ActivePageState.ChooseModePage);
-                _otherSettings.IsScheduler = CFBs.OtherSettings.IsScheduler;
-                CPictureSet.SelectModesPics[6].Current = _otherSettings.IsScheduler ? CPictureSet.SelectModesPics[6].Selected : CPictureSet.SelectModesPics[6].Default;
+                COtherSettings.IsScheduler = CFBs.OtherSettings.IsScheduler;
+                CPictureSet.SelectModesPics[6].Current = COtherSettings.IsScheduler ? CPictureSet.SelectModesPics[6].Selected : CPictureSet.SelectModesPics[6].Default;
             }
-            //  await Shell.Current.GoToAsync("chooseModePage", false);
         }
         #endregion
 
@@ -559,9 +554,9 @@ namespace Android_Silver.Pages
 
         private void ExecuteIsSheduler(object obj)
         {
-            _otherSettings.IsScheduler = !CFBs.OtherSettings.IsScheduler;
-            CPictureSet.SelectModesPics[6].Current = _otherSettings.IsScheduler ? CPictureSet.SelectModesPics[6].Selected : CPictureSet.SelectModesPics[6].Default;
-            int indexBuf = _otherSettings.IsScheduler ? 1 : 0;
+            COtherSettings.IsScheduler = !CFBs.OtherSettings.IsScheduler;
+            CPictureSet.SelectModesPics[6].Current = COtherSettings.IsScheduler ? CPictureSet.SelectModesPics[6].Selected : CPictureSet.SelectModesPics[6].Default;
+            int indexBuf = COtherSettings.IsScheduler ? 1 : 0;
             int[] index = { indexBuf };
             CTcpClientService.SetCommandToServer(24, index);
             // CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
@@ -675,7 +670,6 @@ namespace Android_Silver.Pages
                 M1Values.EFanCorr.Value = M1Values.EFanCorr.Value + 1 < M1Values.EFanCorr.Max ? M1Values.EFanCorr.Value + 1 : M1Values.EFanCorr.Max;
         }
 
-
         private void ExecuteSPSOK(object obj)
         {
             if (M1Values != null)
@@ -769,10 +763,11 @@ namespace Android_Silver.Pages
         }
 
         private void ExecuteOtherSettings(object obj)
-        {
+        {            
             HumiditySP = CFBs.CHumiditySP.SPPerc;
             ContactMode1Buf = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1;
-            CPictureSet.SpecModeSwitch.Current = CFBs.OtherSettings.IsSpecMode ? CPictureSet.SpecModeSwitch.Selected : CPictureSet.SpecModeSwitch.Default;
+            COtherSettings.IsSpecMode = CFBs.OtherSettings.IsSpecMode;
+            CPictureSet.SpecModeSwitch.Current = COtherSettings.IsSpecMode ? CPictureSet.SpecModeSwitch.Selected : CPictureSet.SpecModeSwitch.Default;
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
 
@@ -808,21 +803,21 @@ namespace Android_Silver.Pages
 
         private void ExecuteContactArrLeft(object obj)
         {
-            var contactTMode = CModesEntities.Mode2ValuesList[4].TimeModeValues[0];
-            int contactM1Num = contactTMode.CMode1.Num;
+            int contactM1Num = ContactMode1Buf.Num;
             contactM1Num = contactM1Num > 0 ? contactM1Num - 1 : 0;
-            contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
-            int[] vals = { contactM1Num };
-            CTcpClientService.SetCommandToServer(164, vals);
+            ContactMode1Buf = CModesEntities.Mode1ValuesList[contactM1Num];
         }
         private void ExecuteContactArrRight(object obj)
         {
-            var contactTMode = CModesEntities.Mode2ValuesList[4].TimeModeValues[0];
-            int contactM1Num = contactTMode.CMode1.Num;
+            int contactM1Num = ContactMode1Buf.Num;
             contactM1Num = contactM1Num < 3 ? contactM1Num + 1 : 3;
-            contactTMode.CMode1 = CModesEntities.Mode1ValuesList[contactM1Num];
-            int[] vals = { contactM1Num };
-            CTcpClientService.SetCommandToServer(164, vals);
+            ContactMode1Buf = CModesEntities.Mode1ValuesList[contactM1Num];
+        }
+
+        private void ExecuteIsSpecMode(object obj)
+        {
+            COtherSettings.IsSpecMode = !COtherSettings.IsSpecMode;
+            CPictureSet.SpecModeSwitch.Current = COtherSettings.IsSpecMode ? CPictureSet.SpecModeSwitch.Selected : CPictureSet.SpecModeSwitch.Default;
         }
 
         private void ExecuteOtherSettingsReturn(object obj)
@@ -830,10 +825,15 @@ namespace Android_Silver.Pages
             CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
         }
 
-        private void ExecuteNextOtherSettings(object obj)
+        private void ExecuteSetOtherSettings(object obj)
         {
-            throw new NotImplementedException();
+            int isSpecMode = COtherSettings.IsSpecMode ? 1 : 0;
+            int isScheduler = CFBs.OtherSettings.IsScheduler ? 1 : 0;
+            int[] val = { HumiditySP, isScheduler, ContactMode1Buf.Num,isSpecMode };
+            CTcpClientService.SetCommandToServer(23, val);
         }
+
+
 
         private void ExecuteSetCorrSP(object obj)
         {
@@ -1153,7 +1153,7 @@ namespace Android_Silver.Pages
         }
         #endregion
 
-        #region TSettings execute methods
+        #region TSettings  methods
         private void ExecuteSetTData(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.SetTSettingsPage);
@@ -1184,54 +1184,56 @@ namespace Android_Silver.Pages
         #endregion
 
         #region TSet execute methods
-        private void TSetExecuteBtnUP0(object obj)
-        {
-            if (TValues != null)
-                TValues.DayNum = TValues.DayNum + 1 <= 8 ? TValues.DayNum + 1 : 8;
-        }
-        private void TSetExecuteBtnDn0(object obj)
+        private void TSetExecuteBtnLeft0(object obj)
         {
             if (TValues != null)
                 TValues.DayNum = TValues.DayNum - 1 >= 0 ? TValues.DayNum - 1 : 0;
         }
-
-        private void TSetExecuteBtnUP1(object obj)
+        private void TSetExecuteBtnRight0(object obj)
         {
             if (TValues != null)
-                TValues.Hour = TValues.Hour + 1 <= 23 ? TValues.Hour + 1 : 23;
+                TValues.DayNum = TValues.DayNum + 1 <= 8 ? TValues.DayNum + 1 : 8;
         }
-        private void TSetExecuteBtnDn1(object obj)
+
+        private void TSetExecuteBtnLeft1(object obj)
         {
             if (TValues != null)
                 TValues.Hour = TValues.Hour - 1 >= 0 ? TValues.Hour - 1 : 0;
         }
+        private void TSetExecuteBtnRight1(object obj)
+        {
+            if (TValues != null)
+                TValues.Hour = TValues.Hour + 1 <= 23 ? TValues.Hour + 1 : 23;
+        }
 
-        private void TSetExecuteBtnUP2(object obj)
+        private void TSetExecuteBtnLeft2(object obj)
+        {
+            if (TValues != null)
+                TValues.Minute = TValues.Minute - 1 >= 0 ? TValues.Minute - 1 : 0;
+
+        }
+        private void TSetExecuteBtnRight2(object obj)
         {
             if (TValues != null)
                 TValues.Minute = TValues.Minute + 1 <= 60 ? TValues.Minute + 1 : 60;
         }
-        private void TSetExecuteBtnDn2(object obj)
-        {
-            if (TValues != null)
-                TValues.Minute = TValues.Minute - 1 >= 0 ? TValues.Minute - 1 : 0;
-        }
 
-        private void TSetExecuteBtnUP3(object obj)
-        {
-            if (TValues != null)
-            {
-                int mode1Num = TValues.CMode1.Num;
-                mode1Num = mode1Num + 1 <= 5 ? mode1Num + 1 : 5;
-                TValues.CMode1 = CModesEntities.Mode1ValuesList[mode1Num];
-            }
-        }
-        private void TSetExecuteBtnDn3(object obj)
+        private void TSetExecuteBtnLeft3(object obj)
         {
             if (TValues != null)
             {
                 int mode1Num = TValues.CMode1.Num;
                 mode1Num = mode1Num - 1 >= 0 ? mode1Num - 1 : 0;
+                TValues.CMode1 = CModesEntities.Mode1ValuesList[mode1Num];
+            }
+
+        }
+        private void TSetExecuteBtnRight3(object obj)
+        {
+            if (TValues != null)
+            {
+                int mode1Num = TValues.CMode1.Num;
+                mode1Num = mode1Num + 1 <= 3 ? mode1Num + 1 : 3;
                 TValues.CMode1 = CModesEntities.Mode1ValuesList[mode1Num];
             }
         }
@@ -1259,6 +1261,11 @@ namespace Android_Silver.Pages
                 CTcpClientService.SetCommandToServer(TValues.WriteAddress, values);
                 int val = TValues.Mode2Num == 2 ? 0 : 1;
                 CActivePagesEntities.SetActivePageState(ActivePageState.ShedulerPage, val);
+            }
+            for (int i = 0; i < CModesEntities.CTimeModeValues.Count; i++)
+            {
+                CModesEntities.CTimeModeValues[i].StrokeImg.Current =
+               CModesEntities.CTimeModeValues[i].StrokeImg.Default;
             }
         }
 
@@ -1358,7 +1365,7 @@ namespace Android_Silver.Pages
         private void ExecuteTimeOk(object obj)
         {
             int[] vals = { _timeBuffer.Year, _timeBuffer.Month, _timeBuffer.Day, _timeBuffer.Hour, _timeBuffer.Minute };
-            CTcpClientService.SetCommandToServer(168, vals);
+            CTcpClientService.SetCommandToServer(57, vals);
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
         #endregion

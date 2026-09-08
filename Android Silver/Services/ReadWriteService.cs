@@ -369,31 +369,31 @@ namespace Android_Silver.Services
             }
             #endregion
             #region Время
-            if (startAddr == 57)
+            if (startAddr == 57 || startAddr == 57 + _menusEntities.WriteOffset)
             {
                 _fbs.CTime.Year = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
 
-            if (startAddr == 58)
+            if (startAddr == 58 || startAddr == 58 + _menusEntities.WriteOffset)
             {
                 _fbs.CTime.Month = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
 
-            if (startAddr == 59)
+            if (startAddr == 59 || startAddr == 59 + _menusEntities.WriteOffset)
             {
                 _fbs.CTime.Day = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
 
-            if (startAddr == 60)
+            if (startAddr == 60 || startAddr == 60 + _menusEntities.WriteOffset)
             {
                 _fbs.CTime.Hour = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
             }
 
-            if (startAddr == 61)
+            if (startAddr == 61 || startAddr == 61 + _menusEntities.WriteOffset)
             {
                 _fbs.CTime.Minute = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _fbs.CTime.SetTimerInterface();
@@ -450,28 +450,28 @@ namespace Android_Silver.Services
                 return startIndex;
             }
             #region Расписание
-            if (startAddr == 80)
+            if (startAddr == 80 || startAddr == 80 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[0].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 81)
+            if (startAddr == 81 || startAddr == 81 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 82)
+            if (startAddr == 82 || startAddr == 82 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[0].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 83)
+            if (startAddr == 83 || startAddr == 83 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[0].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -480,28 +480,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 84)
+            if (startAddr == 84 || startAddr == 84 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[1].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 85)
+            if (startAddr == 85 || startAddr == 85 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 86)
+            if (startAddr == 86 || startAddr == 86 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[1].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 87)
+            if (startAddr == 87 || startAddr == 87 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[1].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -510,28 +510,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 88)
+            if (startAddr == 88 || startAddr == 88 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[2].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 89)
+            if (startAddr == 89 || startAddr == 89 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 90)
+            if (startAddr == 90 || startAddr == 90 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[2].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 91)
+            if (startAddr == 91 || startAddr == 91 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[2].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -540,28 +540,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 92)
+            if (startAddr == 92 || startAddr == 92 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[3].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 93)
+            if (startAddr == 93 || startAddr == 93 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 94)
+            if (startAddr == 94 || startAddr == 94 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[3].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 95)
+            if (startAddr == 95 || startAddr == 95 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[3].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -570,28 +570,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 96)
+            if (startAddr == 96 || startAddr == 96 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[4].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 97)
+            if (startAddr == 97 || startAddr == 97 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 98)
+            if (startAddr == 98 || startAddr == 98 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[4].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 99)
+            if (startAddr == 99 || startAddr == 99 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[4].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -600,28 +600,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 100)
+            if (startAddr == 100 || startAddr == 100 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[5].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 101)
+            if (startAddr == 101 || startAddr == 101 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 102)
+            if (startAddr == 102 || startAddr == 102 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[5].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 103)
+            if (startAddr == 103 || startAddr == 103 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[5].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -630,28 +630,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 104)
+            if (startAddr == 104 || startAddr == 104 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[6].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 105)
+            if (startAddr == 105 || startAddr == 105 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 106)
+            if (startAddr == 106 || startAddr == 106 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[6].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 107)
+            if (startAddr == 107 || startAddr == 107 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[6].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -660,28 +660,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 108)
+            if (startAddr == 108 || startAddr == 108 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[7].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 109)
+            if (startAddr == 109 || startAddr == 109 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 110)
+            if (startAddr == 110 || startAddr == 110 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[7].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 111)
+            if (startAddr == 111 || startAddr == 111 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[7].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -690,28 +690,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 112)
+            if (startAddr == 112 || startAddr == 112 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[8].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 113)
+            if (startAddr == 113 || startAddr == 113 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[8].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 114)
+            if (startAddr == 114 || startAddr == 114 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[8].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 115)
+            if (startAddr == 115 || startAddr == 115 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[8].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -720,28 +720,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 116)
+            if (startAddr == 116 || startAddr == 116 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[9].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 117)
+            if (startAddr == 117 || startAddr == 117 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[9].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 118)
+            if (startAddr == 118 || startAddr == 118 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[9].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 119)
+            if (startAddr == 119 || startAddr == 119 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[9].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -750,28 +750,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 120)
+            if (startAddr == 120 || startAddr == 120 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[10].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 121)
+            if (startAddr == 121 || startAddr == 121 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[10].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 122)
+            if (startAddr == 122 || startAddr == 122 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[10].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 123)
+            if (startAddr == 123 || startAddr == 123 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[10].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -780,28 +780,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 124)
+            if (startAddr == 124 || startAddr == 124 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[11].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 125)
+            if (startAddr == 125 || startAddr == 125 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[11].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 126)
+            if (startAddr == 126 || startAddr == 126 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[11].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 127)
+            if (startAddr == 127 || startAddr == 127 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[11].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -810,28 +810,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 128)
+            if (startAddr == 128 || startAddr == 128 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[12].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 129)
+            if (startAddr == 129 || startAddr == 129 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[12].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 130)
+            if (startAddr == 130 || startAddr == 130 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[12].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 131)
+            if (startAddr == 131 || startAddr == 131 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[12].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -840,28 +840,28 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-            if (startAddr == 132)
+            if (startAddr == 132 || startAddr == 132 + _menusEntities.WriteOffset)
             {
                 ushort dayNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (dayNum < 10)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[13].DayNum = dayNum;
                 return startIndex;
             }
-            if (startAddr == 133)
+            if (startAddr == 133 || startAddr == 133 + _menusEntities.WriteOffset)
             {
                 ushort hours = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (hours < 24)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[13].Hour = hours;
                 return startIndex;
             }
-            if (startAddr == 134)
+            if (startAddr == 134 || startAddr == 134 + _menusEntities.WriteOffset)
             {
                 ushort minutes = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (minutes < 60)
                     _modesEntities.Mode2ValuesList[3].TimeModeValues[13].Minute = minutes;
                 return startIndex;
             }
-            if (startAddr == 135)
+            if (startAddr == 135 || startAddr == 135 + _menusEntities.WriteOffset)
             {
                 ushort cMode1 = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (cMode1 < 4 && _modesEntities.Mode2ValuesList[3].TimeModeValues[13].CMode1 != _modesEntities.Mode1ValuesList[cMode1])
@@ -2999,8 +2999,6 @@ namespace Android_Silver.Services
 
             return startIndex;
         }
-
-
 
         private bool GetIntValueResult(IntValue intVal, byte[] array, ref ushort startIndex)
         {

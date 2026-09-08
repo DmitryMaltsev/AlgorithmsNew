@@ -83,7 +83,7 @@ namespace Android_Silver.Entities.Modes
             //Режим отпуска
             Mode2ValuesList.Add(new Mode2Values(2, 4, _cPicturesSet.ActiveMode2Pics[2], Mode1ValuesList[0], 148));
             //Режим  календаря
-            Mode2ValuesList.Add(new Mode2Values(3, 14, _cPicturesSet.ActiveMode2Pics[3], Mode1ValuesList[0], 174));
+            Mode2ValuesList.Add(new Mode2Values(3, 14, _cPicturesSet.ActiveMode2Pics[3], Mode1ValuesList[0], 80));
             ////Режим по контакту
             Mode2ValuesList.Add(new Mode2Values(4, 1, _cPicturesSet.ActiveModesPics[0], Mode1ValuesList[0], 0));
             ////Специальный режим

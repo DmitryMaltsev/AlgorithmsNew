@@ -106,6 +106,7 @@
         <Setter Property="Grid.ColumnSpan" Value="1"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="InputTransparent" Value="True"/>
+        <Setter Property="ZIndex" Value="0"/>
     </Style>
     <!--#endregion-->
 

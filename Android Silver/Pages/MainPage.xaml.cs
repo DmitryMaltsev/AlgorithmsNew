@@ -488,17 +488,6 @@ namespace Android_Silver.Pages
             ViewModel.CPictureSet.CorrSettingsBut.Current = ViewModel.CPictureSet.CorrSettingsBut.Default;
         }
 
-        private void SpecMode_Pressed(object sender, EventArgs e)
-        {
-            if (ViewModel.CPictureSet.SpecModeSwitch.Current == ViewModel.CPictureSet.SpecModeSwitch.Selected)
-            {
-                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Default;
-            }
-            else
-            {
-                ViewModel.CPictureSet.SpecModeSwitch.Current = ViewModel.CPictureSet.SpecModeSwitch.Selected;
-            }
-        }
         #endregion
 
         #region Updater
