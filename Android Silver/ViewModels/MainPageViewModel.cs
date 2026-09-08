@@ -284,8 +284,8 @@ namespace Android_Silver.Pages
         private IDispatcherTimer _fileResultTimer { get; set; }
         public MainPageViewModel()
         {
-      
-           EthernetEntities = DIContainer.Resolve<EthernetEntities>();
+
+            EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
             CActivePagesEntities = DIContainer.Resolve<ActivePagesEntities>();
@@ -411,7 +411,7 @@ namespace Android_Silver.Pages
             _fileSystemService.GetIPFromFile();
             SetTValuesByIndex(0, 0);//?????
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
-            CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;;
+            CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback; ;
         }
 
 
@@ -430,7 +430,7 @@ namespace Android_Silver.Pages
                     CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
-                    CTcpClientService.SendRecieveTask("0100,057");
+                    CTcpClientService.SendRecieveTask();
                     // TcpClientService.SendRecieveTask("137,4");ё
                 }
                 else
@@ -498,56 +498,55 @@ namespace Android_Silver.Pages
         }
         #endregion
 
-        #region Execute modes
+        #region ExecuteSetModes
 
         private void ExecuteTurnOffMode(object obj)
         {
             int[] index = { 0 };
-            CTcpClientService.SetCommandToServer(108, index);
+            CTcpClientService.SetCommandToServer(19, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
         private void ExecuteMinMode(object obj)
         {
-            int[] index = { 1, 0 };
-            CTcpClientService.SetCommandToServer(108, index);
+            int[] index = { 1};
+            CTcpClientService.SetCommandToServer(19, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         private void ExecuteNormal(object obj)
         {
-            int[] index = { 2, 0 };
-            CTcpClientService.SetCommandToServer(108, index);
+            int[] index = { 2 };
+            CTcpClientService.SetCommandToServer(19, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         private void ExecuteMaxMode(object obj)
         {
-            int[] index = { 3, 0 };
-            CTcpClientService.SetCommandToServer(108, index);
+            int[] index = { 3 };
+            CTcpClientService.SetCommandToServer(19, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         private void ExecuteKitchenMode(object obj)
         {
-            //      int[] index = { 1 };
-            //      TcpClientService.SetCommandToServer(309, index);
-            CActivePagesEntities.SetActivePageState(ActivePageState.KithchenTimerPage);
+            int[] index = { 4 };
+            CTcpClientService.SetCommandToServer(19, index);
+            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+            ;
         }
 
         private void ExecuteVacationMode(object obj)
         {
-            int[] index = { 2 };
-            CTcpClientService.SetCommandToServer(109, index);
+            int[] index = { 5 };
+            CTcpClientService.SetCommandToServer(19, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
-            CModesEntities.TTitle = "Расписание для отпуска";
         }
 
         private void ExecuteSheduler(object obj)
         {
             int[] index = { 3 };
-            CTcpClientService.SetCommandToServer(109, index);
+            CTcpClientService.SetCommandToServer(19, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
-            CModesEntities.TTitle = "Расписание";
         }
 
         void ExecuteHomeCommand(object obj)
@@ -602,30 +601,30 @@ namespace Android_Silver.Pages
         private void ExecuteSPAdd0(object obj)
         {
             if (M1Values != null)
-                M1Values.SupplySP.Value = M1Values.SupplySP.Value + 5 < 100 ? M1Values.SupplySP.Value + 5 : 100;
+                M1Values.SupplySP.Value = M1Values.SupplySP.Value + 1 < 100 ? M1Values.SupplySP.Value + 1 : 100;
         }
         private void ExecuteSPSub0(object obj)
         {
             if (M1Values != null)
-                M1Values.SupplySP.Value = M1Values.SupplySP.Value - 5 > 0 ? M1Values.SupplySP.Value - 5 : 0;
+                M1Values.SupplySP.Value = M1Values.SupplySP.Value - 1 > 0 ? M1Values.SupplySP.Value - 1 : 0;
         }
 
         private void ExecuteSPAdd1(object obj)
         {
             if (M1Values != null)
-                M1Values.ExhaustSP.Value = M1Values.ExhaustSP.Value + 1 < 30 ? M1Values.ExhaustSP.Value + 1 : 30;
+                M1Values.ExhaustDisb.Value = M1Values.ExhaustDisb.Value + 1 < 30 ? M1Values.ExhaustDisb.Value + 1 : 30;
         }
         private void ExecuteSPSub1(object obj)
         {
             if (M1Values != null)
-                M1Values.ExhaustSP.Value = M1Values.ExhaustSP.Value - 1 > -30 ? M1Values.ExhaustSP.Value - 1 : -30;
+                M1Values.ExhaustDisb.Value = M1Values.ExhaustDisb.Value - 1 > -30 ? M1Values.ExhaustDisb.Value - 1 : -30;
         }
 
         private void ExecuteSPAdd2(object obj)
         {
             if (M1Values != null)
             {
-                M1Values.TempSP.Value = M1Values.TempSP.Value + 1 < 34 ? M1Values.TempSP.Value + 1 : 30;
+                M1Values.TempSP.Value = M1Values.TempSP.Value + 1 < 30 ? M1Values.TempSP.Value + 1 : 30;
                 if (M1Values.TempSP.Value < 16) M1Values.TempSP.Value = 16;
 
             }
@@ -662,10 +661,10 @@ namespace Android_Silver.Pages
         {
             if (M1Values != null)
             {
-                int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustSP.Value, (int)M1Values.TempSP.Value,
+                int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustDisb.Value, (int)M1Values.TempSP.Value,
                     M1Values.ThreshPerc.Value, M1Values.SFanCorr.Value, M1Values.EFanCorr.Value };
                 CTcpClientService.SetCommandToServer(M1Values.StartAddress, values);
-                CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+                CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
             }
         }
 
@@ -1091,7 +1090,7 @@ namespace Android_Silver.Pages
                     CActivePagesEntities.SetActivePageState(ActivePageState.BootloaderPage);
                     CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
                     await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
-                    CTcpClientService.SendRecieveTask("0100,057");
+                    CTcpClientService.SendRecieveTask();
                 }
                 else
                 {

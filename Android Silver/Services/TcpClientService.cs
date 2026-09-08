@@ -74,8 +74,8 @@ namespace Android_Silver.Services
             try
             {
                 _ethernetEntities.Client = new TcpClient();
-                _ethernetEntities.Client.ReceiveTimeout = 1000;
-                _ethernetEntities.Client.SendTimeout = 1000;
+                _ethernetEntities.Client.ReceiveTimeout = 800;
+                _ethernetEntities.Client.SendTimeout = 800;
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = true;
                 _ethernetEntities.CanTryToConnect = !IsConnecting;
@@ -125,7 +125,7 @@ namespace Android_Silver.Services
 
         StringBuilder sbResult;
 
-        public void SendRecieveTask(string val)
+        public void SendRecieveTask()
         {
             Task.Run(() =>
              {

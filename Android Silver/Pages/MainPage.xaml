@@ -107,7 +107,7 @@
                             BackgroundColor="Transparent"
                              Grid.Row="1"  Grid.RowSpan="4" Grid.Column="0"    Grid.ColumnSpan="18" Pressed="ActiveMode_Pressed" Released="ActiveMode_Released"
                              IsVisible="{Binding Source={x:Reference mPage}, Path=BindingContext.CActivePagesEntities.IsMainPage}"/>
-            <Image Source="{Binding CModesEntities.CMode1.ActiveModePicture}" Grid.Row="2"  Grid.Column="6"  Grid.ColumnSpan="6" WidthRequest="180"
+            <Image Source="{Binding CModesEntities.CMode1.ActiveModePicture}" Grid.Row="2" Grid.RowSpan="2" Grid.Column="6"  Grid.ColumnSpan="6" WidthRequest="180"
                                                           IsVisible="{Binding CActivePagesEntities.IsMainPage}" InputTransparent="True"/>
             <Image Source="{Binding CPictureSet.IsMode2Active}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="18" WidthRequest="130" 
                                                                      IsVisible="{Binding CActivePagesEntities.IsMainPage}" InputTransparent="True"/>
@@ -440,7 +440,8 @@
             <Label Text="Поддержка" Grid.Row="1" Style="{StaticResource Title}" IsVisible = "{Binding CActivePagesEntities.IsHelperPage}"/>
             <Button  ImageSource="{Binding  CPictureSet.BackButton.Current}" Style="{StaticResource BackBut}"
                  Command="{Binding SettingsCommand}" Pressed="BackButton_Pressed" Released="BackButton_Released" IsVisible="{Binding CActivePagesEntities.IsHelperPage}"/>
-            <Label  Text="Скачать документацию" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="18" FontSize="15" IsVisible="{Binding CActivePagesEntities.IsHelperPage}"/>
+            <Label  Text="Скачать документацию" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="18" FontSize="15" HorizontalOptions="Center"
+                                                                                                                  IsVisible="{Binding CActivePagesEntities.IsHelperPage}"/>
             <Image Source="{Binding CPictureSet.QRHelperImg}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="18"
                                     WidthRequest="300" HeightRequest="300"  IsVisible = "{Binding CActivePagesEntities.IsHelperPage}"/>
             <VerticalStackLayout Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="18" InputTransparent="True">

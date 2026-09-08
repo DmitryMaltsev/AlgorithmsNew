@@ -9,6 +9,7 @@ namespace Android_Silver.Entities.Modes
     {
         public int ShedCountQueues = 0;
 
+        #region Rising properties
         private ObservableCollection<TimeModeValues> _cTimeModeValues;
 
         public ObservableCollection<TimeModeValues> CTimeModeValues
@@ -56,7 +57,8 @@ namespace Android_Silver.Entities.Modes
                 _cMode2 = value;
                 OnPropertyChanged(nameof(CMode2));
             }
-        }
+        } 
+        #endregion
 
         public List<Mode2Values> Mode2ValuesList { get; set; } = new List<Mode2Values>();
 
@@ -70,7 +72,7 @@ namespace Android_Silver.Entities.Modes
             {
                 Mode1ValuesList.Add(new Mode1Values(num:i,activeModePicture:_cPicturesSet.ActiveModesPics[i],
             selectModePics:_cPicturesSet.SelectModesPics[i], modeIcons: _cPicturesSet.IconsPics[i], 
-            modeSettingsRoute:"settingsPage",startAddress: 104 + i * 6,miniIcon: _cPicturesSet.MiniIconsPics[i]));
+            modeSettingsRoute:"settingsPage",startAddress: 27 + i * 6,miniIcon: _cPicturesSet.MiniIconsPics[i]));
             }
             CMode1 = Mode1ValuesList[0];
             Mode2ValuesList = new List<Mode2Values>();

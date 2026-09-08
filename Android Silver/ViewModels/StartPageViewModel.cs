@@ -45,7 +45,7 @@ public class StartPageViewModel : BindableBase
             if (EthernetEntities.IsConnected)
             {
                 await Shell.Current.GoToAsync("mainPage");
-                TcpClientService.SendRecieveTask("100,08");
+                TcpClientService.SendRecieveTask();
             }
         }
         else
