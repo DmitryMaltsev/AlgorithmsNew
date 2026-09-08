@@ -6,7 +6,6 @@ using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
 
-using System.Collections;
 using System.Globalization;
 using System.Windows.Input;
 
@@ -99,7 +98,6 @@ namespace Android_Silver.Pages
             }
         }
 
-
         private int _humiditySP;
 
         public int HumiditySP
@@ -124,7 +122,6 @@ namespace Android_Silver.Pages
         }
 
         private Mode1Values _contactMode1Buf;
-
         public Mode1Values ContactMode1Buf
         {
             get { return _contactMode1Buf; }
@@ -134,6 +131,19 @@ namespace Android_Silver.Pages
                 OnPropertyChanged(nameof(ContactMode1Buf));
             }
         }
+
+        private OtherSettings _otherSettings = new OtherSettings();
+
+        public OtherSettings OtherSettings
+        {
+            get { return _otherSettings; }
+            set
+            {
+                _otherSettings = value;
+                OnPropertyChanged(nameof(OtherSettings));
+            }
+        }
+
 
         #endregion
 
@@ -159,7 +169,7 @@ namespace Android_Silver.Pages
         public ICommand NormalModeCommand { get; private set; }
         public ICommand MaxModeCommand { get; private set; }
         public ICommand KitchenModeCommand { get; private set; }
-        public ICommand ShedulerModeCommand { get; private set; }
+        public ICommand IsShedulerCommand { get; private set; }
         public ICommand VacationModeCommand { get; private set; }
         public ICommand TurnOffModeCommand { get; private set; }
         public ICommand HomeCommand { get; private set; }
@@ -281,6 +291,8 @@ namespace Android_Silver.Pages
 
         public FilesEntities CFilesEntities { get; set; }
 
+
+
         private IDispatcherTimer _fileResultTimer { get; set; }
         public MainPageViewModel()
         {
@@ -313,7 +325,7 @@ namespace Android_Silver.Pages
             NormalModeCommand = new Command(ExecuteNormal);
             MaxModeCommand = new Command(ExecuteMaxMode);
             KitchenModeCommand = new Command(ExecuteKitchenMode);
-            ShedulerModeCommand = new Command(ExecuteSheduler);
+            IsShedulerCommand = new Command(ExecuteIsSheduler);
             VacationModeCommand = new Command(ExecuteVacationMode);
             TurnOffModeCommand = new Command(ExecuteTurnOffMode);
             JournalCommand = new Command(ExecuteJournal);
@@ -493,7 +505,11 @@ namespace Android_Silver.Pages
                 CActivePagesEntities.SetActivePageState(ActivePageState.JournalPage);
             }
             else
+            {
                 CActivePagesEntities.SetActivePageState(ActivePageState.ChooseModePage);
+                _otherSettings.IsScheduler = CFBs.OtherSettings.IsScheduler;
+                CPictureSet.SelectModesPics[6].Current = _otherSettings.IsScheduler ? CPictureSet.SelectModesPics[6].Selected : CPictureSet.SelectModesPics[6].Default;
+            }
             //  await Shell.Current.GoToAsync("chooseModePage", false);
         }
         #endregion
@@ -508,7 +524,7 @@ namespace Android_Silver.Pages
         }
         private void ExecuteMinMode(object obj)
         {
-            int[] index = { 1};
+            int[] index = { 1 };
             CTcpClientService.SetCommandToServer(19, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
@@ -532,7 +548,6 @@ namespace Android_Silver.Pages
             int[] index = { 4 };
             CTcpClientService.SetCommandToServer(19, index);
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
-            ;
         }
 
         private void ExecuteVacationMode(object obj)
@@ -542,11 +557,14 @@ namespace Android_Silver.Pages
             CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
-        private void ExecuteSheduler(object obj)
+        private void ExecuteIsSheduler(object obj)
         {
-            int[] index = { 3 };
-            CTcpClientService.SetCommandToServer(19, index);
-            CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
+            _otherSettings.IsScheduler = !CFBs.OtherSettings.IsScheduler;
+            CPictureSet.SelectModesPics[6].Current = _otherSettings.IsScheduler ? CPictureSet.SelectModesPics[6].Selected : CPictureSet.SelectModesPics[6].Default;
+            int indexBuf = _otherSettings.IsScheduler ? 1 : 0;
+            int[] index = { indexBuf };
+            CTcpClientService.SetCommandToServer(24, index);
+            // CActivePagesEntities.SetActivePageState(ActivePageState.MainPage);
         }
 
         void ExecuteHomeCommand(object obj)
@@ -629,6 +647,7 @@ namespace Android_Silver.Pages
 
             }
         }
+
         private void ExecuteSPSub2(object obj)
         {
             if (M1Values != null)

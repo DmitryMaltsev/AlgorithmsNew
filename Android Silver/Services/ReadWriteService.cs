@@ -170,7 +170,7 @@ namespace Android_Silver.Services
                 return startIndex;
             }
             //Активно ли расписание
-            if (startAddr == 24)
+            if (startAddr == 24 || startAddr == 24 + _menusEntities.WriteOffset)
             {
                 ushort isSched = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 _fbs.OtherSettings.IsScheduler = isSched == 0 ? false : true;

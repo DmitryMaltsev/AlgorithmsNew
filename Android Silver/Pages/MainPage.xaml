@@ -159,8 +159,9 @@
                Command="{Binding VacationModeCommand}"  Pressed="Vac_Pressed" Released="Vac_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
             <Button ImageSource="{Binding  CPictureSet.SelectModesPics[0].Current}"    Grid.Row="6"   Grid.Column="14" Style="{StaticResource ChooseModeBut}"
                Command="{Binding TurnOffModeCommand}"  Pressed="TurnOff_Pressed" Released="TurnOff_Released" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
-            <Button ImageSource="{Binding CPictureSet.SelectModesPics[6].Current}" Grid.Row="8" Grid.Column="6" Grid.ColumnSpan="6" BackgroundColor="Transparent"
-                   WidthRequest="250"  VerticalOptions="Center"  Pressed="Sheduler_Pressed" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
+            <Button ImageSource="{Binding CPictureSet.SelectModesPics[6].Current}" Command="{Binding IsShedulerCommand}"
+                    Grid.Row="8" Grid.Column="6" Grid.ColumnSpan="6" BackgroundColor="Transparent"
+                   WidthRequest="250"  VerticalOptions="Center" IsVisible="{Binding CActivePagesEntities.IsChooseModePage}"/>
             <!--IsToggled="{Binding  CFBs.OtherSettings.IsSpecMode, Mode=TwoWay}"-->
             <!--#endregion-->
 
