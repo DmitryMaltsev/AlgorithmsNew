@@ -5,10 +5,11 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 using Android_Silver.ViewModels;
-
+using System.Timers;
 using System;
 using System.Globalization;
 using System.Windows.Input;
+using Timer = System.Timers.Timer;
 
 namespace Android_Silver.Pages
 {
@@ -146,10 +147,12 @@ namespace Android_Silver.Pages
                 OnPropertyChanged(nameof(COtherSettings));
             }
         }
-     
+
         #endregion
 
         #region Commands
+
+        public ICommand TestCommand { get; private set; }
         public ICommand StartPageConnectCommand { get; private set; }
         #region MainPageCommands
 
@@ -160,7 +163,6 @@ namespace Android_Silver.Pages
         public ICommand ConnectCommand { get; private set; }
         public ICommand DisconnectCommand { get; private set; }
         public ICommand GetIPCommand { get; private set; }
-
         public ICommand SettingsCommand { get; private set; }
         public ICommand ChooseModeCommand { get; private set; }
         public ICommand GoToPageCommand { get; private set; }
@@ -191,15 +193,24 @@ namespace Android_Silver.Pages
         public ICommand SPSub0Command { get; private set; }
         public ICommand SPAdd1Command { get; private set; }
         public ICommand SPSub1Command { get; private set; }
-
         public ICommand SPAdd2Command { get; private set; }
         public ICommand SPSub2Command { get; private set; }
         public ICommand SPSub3Command { get; private set; }
         public ICommand SPAdd3Command { get; private set; }
         public ICommand SPSub4Command { get; private set; }
         public ICommand SPAdd4Command { get; private set; }
-
-
+        #endregion
+        #region SPTimers
+        public Timer SubBut0Timer;
+        public Timer AddBut0Timer;
+        public Timer SubBut1Timer;
+        public Timer AddBut1Timer;
+        public Timer SubBut2Timer;
+        public Timer AddBut2Timer;
+        public Timer SubBut3Timer;
+        public Timer AddBut3Timer;
+        public Timer SubBut4Timer;
+        public Timer AddBut4Timer;
         #endregion
         #region Settings commands
         public ICommand OtherSettingsCommand { get; private set; }
@@ -233,7 +244,7 @@ namespace Android_Silver.Pages
         public ICommand ContactArrRightCommand { get; private set; }
         public ICommand HumidityCommand { get; private set; }
         public ICommand SetTimeCommand { get; private set; }
-        public ICommand IsSpecModeCommand { get; private set; } 
+        public ICommand IsSpecModeCommand { get; private set; }
         public ICommand ChangeFilterCommand { get; private set; }
         public ICommand BootloaderSetCommand { get; private set; }
         #endregion
@@ -245,7 +256,6 @@ namespace Android_Silver.Pages
         #endregion
         #region ResetCommand
         public ICommand ResetJournalCommand { get; private set; }
-
         #endregion
         #region MyRegion
         public ICommand JournalReturnCommand { get; private set; }
@@ -293,8 +303,6 @@ namespace Android_Silver.Pages
         private MathService _mathService { get; set; }
 
         public FilesEntities CFilesEntities { get; set; }
-
-
 
         private IDispatcherTimer _fileResultTimer { get; set; }
         public MainPageViewModel()
@@ -349,7 +357,6 @@ namespace Android_Silver.Pages
             BootloaderBackCommand = new Command(ExecuteBootLoaderBack);
             TimeBuffer = new();
             Value = 15;
-
             #region Kitchen timer commands
             UpMInutesCommand = new Command(ExecuteUpMinutes);
             DnMinutesCommand = new Command(ExecuteDnMinutes);
@@ -375,6 +382,39 @@ namespace Android_Silver.Pages
             SPSub4Command = new Command(ExecuteSPSub4);
             SPOkCommand = new Command(ExecuteSPSOK);
             SPReturnCommand = new Command(ExecuteSPReturn);
+            #endregion
+            #region Set points timers
+            AddBut0Timer = new Timer(150);
+            AddBut0Timer.Elapsed -= AddBut0Timer_Elapsed;
+            AddBut0Timer.Elapsed += AddBut0Timer_Elapsed;
+            SubBut0Timer = new Timer(150);
+            SubBut0Timer.Elapsed -= SubBut0Timer_Elapsed;
+            SubBut0Timer.Elapsed += SubBut0Timer_Elapsed;
+            AddBut1Timer = new Timer(150);
+            AddBut1Timer.Elapsed -= AddBut1Timer_Elapsed;
+            AddBut1Timer.Elapsed += AddBut1Timer_Elapsed;
+            SubBut1Timer = new Timer(150);
+            SubBut1Timer.Elapsed -= SubBut1Timer_Elapsed;
+            SubBut1Timer.Elapsed += SubBut1Timer_Elapsed;
+            AddBut2Timer = new Timer(150);
+            AddBut2Timer.Elapsed -= AddBut2Timer_Elapsed;
+            AddBut2Timer.Elapsed += AddBut2Timer_Elapsed;
+            SubBut2Timer = new Timer(150);
+            SubBut2Timer.Elapsed -= SubBut2Timer_Elapsed;
+            SubBut2Timer.Elapsed += SubBut2Timer_Elapsed;
+            AddBut3Timer = new Timer(150);
+            AddBut3Timer.Elapsed -= AddBut3Timer_Elapsed;
+            AddBut3Timer.Elapsed += AddBut3Timer_Elapsed;
+            SubBut3Timer = new Timer(150);
+            SubBut3Timer.Elapsed -= SubBut3Timer_Elapsed;
+            SubBut3Timer.Elapsed += SubBut3Timer_Elapsed;
+            AddBut4Timer = new Timer(150);
+            AddBut4Timer.Elapsed -= AddBut4Timer_Elapsed;
+            AddBut4Timer.Elapsed += AddBut4Timer_Elapsed;
+            SubBut4Timer = new Timer(150);
+            SubBut4Timer.Elapsed -= SubBut4Timer_Elapsed;
+            SubBut4Timer.Elapsed += SubBut4Timer_Elapsed;
+
             #endregion
             #region Vac commands
             SetTDataCommand = new Command(ExecuteSetTData);
@@ -423,14 +463,13 @@ namespace Android_Silver.Pages
             TimeBtnDnCommand4 = new Command(ExecuteTimeBtnDn4);
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
-
             _fileSystemService.GetIPFromFile();
             SetTValuesByIndex(0, 0);//?????
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback; ;
         }
 
-
+       
 
         async private void ExecuteConnect()
         {
@@ -619,7 +658,7 @@ namespace Android_Silver.Pages
         private void ExecuteSPSub0(object obj)
         {
             if (M1Values != null)
-                M1Values.SupplySP.Value = M1Values.SupplySP.Value - 1 > 0 ? M1Values.SupplySP.Value - 1 : 0;
+                M1Values.SupplySP.Value = M1Values.SupplySP.Value - 1 > 20 ? M1Values.SupplySP.Value - 1 : 20;
         }
 
         private void ExecuteSPAdd1(object obj)
@@ -642,7 +681,6 @@ namespace Android_Silver.Pages
 
             }
         }
-
         private void ExecuteSPSub2(object obj)
         {
             if (M1Values != null)
@@ -677,7 +715,7 @@ namespace Android_Silver.Pages
                 int[] values = { M1Values.SupplySP.Value, M1Values.ExhaustDisb.Value, (int)M1Values.TempSP.Value,
                     M1Values.ThreshPerc.Value, M1Values.SFanCorr.Value, M1Values.EFanCorr.Value };
                 CTcpClientService.SetCommandToServer(M1Values.StartAddress, values);
-                CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
+                // CActivePagesEntities.SetActivePageState(ActivePageState.SettingsPage);
             }
         }
 
@@ -740,6 +778,72 @@ namespace Android_Silver.Pages
 
         #endregion
 
+        #region SetPoints callback timers
+        private void SubBut0Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPSub0(new object());
+            TSetExecuteBtnLeft1(new object());
+            ExecuteTimeBtnDn0(new object());
+        }
+
+        private void AddBut0Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPAdd0(new object());
+            TSetExecuteBtnRight1(new object());
+            ExecuteTimeBtnUp0(new object());
+        }
+        private void SubBut1Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPSub1(new object());
+            TSetExecuteBtnLeft2(new object());
+            ExecuteTimeBtnDn1(new object());
+        }
+
+        private void AddBut1Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPAdd1(new object());
+            TSetExecuteBtnRight2(new object());
+            ExecuteTimeBtnUp1(new object());
+        }
+        private void SubBut2Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPSub2(new object());
+            TSetExecuteBtnLeft3(new object());
+            ExecuteTimeBtnDn2(new object());
+        }
+
+        private void AddBut2Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPAdd2(new object());
+            TSetExecuteBtnRight3(new object());
+            ExecuteTimeBtnUp2(new object());
+        }
+
+        private void SubBut3Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPSub3(new object());
+            ExecuteTimeBtnDn3(new object());
+        }
+
+        private void AddBut3Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPAdd3(new object());
+            ExecuteTimeBtnUp3(new object());
+        }
+
+        private void SubBut4Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPSub4(new object());
+            ExecuteTimeBtnDn4(new object());
+        }
+
+        private void AddBut4Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            ExecuteSPAdd4(new object());
+            ExecuteTimeBtnUp4(new object());
+        }
+        #endregion
+
         #region Settings execute methods
         private void ExecuteJournal(object obj)
         {
@@ -763,7 +867,7 @@ namespace Android_Silver.Pages
         }
 
         private void ExecuteOtherSettings(object obj)
-        {            
+        {
             HumiditySP = CFBs.CHumiditySP.SPPerc;
             ContactMode1Buf = CModesEntities.Mode2ValuesList[4].TimeModeValues[0].CMode1;
             COtherSettings.IsSpecMode = CFBs.OtherSettings.IsSpecMode;
@@ -787,7 +891,7 @@ namespace Android_Silver.Pages
         {
 
             int[] arr = { 1 };
-            CTcpClientService.SetCommandToServer(147, arr);
+            CTcpClientService.SetCommandToServer(64, arr);
         }
         #endregion
 
@@ -829,7 +933,7 @@ namespace Android_Silver.Pages
         {
             int isSpecMode = COtherSettings.IsSpecMode ? 1 : 0;
             int isScheduler = CFBs.OtherSettings.IsScheduler ? 1 : 0;
-            int[] val = { HumiditySP, isScheduler, ContactMode1Buf.Num,isSpecMode };
+            int[] val = { HumiditySP, isScheduler, ContactMode1Buf.Num, isSpecMode };
             CTcpClientService.SetCommandToServer(23, val);
         }
 
@@ -1047,20 +1151,23 @@ namespace Android_Silver.Pages
         private void ExecuteDownload(object obj)
         {
 
-            CTcpClientService.Disconnect();
-            Task.Delay(200);
-            var pickOptions = new PickOptions
+            if (CFBs.CUpdater.IsUpdate != 1)
             {
-                PickerTitle = "Выберите bin файл прошивки",
-            };
-            CFilesEntities.CFileResult = FilePicker.Default.PickAsync(pickOptions);
-            // Создаем таймер
-            _fileResultTimer = Dispatcher.GetForCurrentThread().CreateTimer();
-            _fileResultTimer.Interval = TimeSpan.FromSeconds(1);
-            _fileResultTimer.Tick -= OnTimerTick;
-            _fileResultTimer.Tick += OnTimerTick;
-            CFilesEntities.FileIsReading = true;
-            _fileResultTimer.Start();
+                CTcpClientService.Disconnect();
+                Task.Delay(200);
+                var pickOptions = new PickOptions
+                {
+                    PickerTitle = "Выберите bin файл прошивки",
+                };
+                CFilesEntities.CFileResult = FilePicker.Default.PickAsync(pickOptions);
+                // Создаем таймер
+                _fileResultTimer = Dispatcher.GetForCurrentThread().CreateTimer();
+                _fileResultTimer.Interval = TimeSpan.FromSeconds(1);
+                _fileResultTimer.Tick -= OnTimerTick;
+                _fileResultTimer.Tick += OnTimerTick;
+                CFilesEntities.FileIsReading = true;
+                _fileResultTimer.Start();
+            }
         }
 
         private void OnTimerTick(object sender, EventArgs e)
@@ -1084,12 +1191,17 @@ namespace Android_Silver.Pages
                 catch
                 {
                     CFilesEntities.SystemMessage = "Отмена загрузки";
+                    _fileResultTimer.Stop();
                 }
-                CFilesEntities.FileIsReading = false;
-                //
-                ExecuteFileConnect();
-                // CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
-                _fileResultTimer.Stop();
+                finally
+                {
+                    CFilesEntities.FileIsReading = false;
+                    //
+                    ExecuteFileConnect();
+                    // CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
+                    _fileResultTimer.Stop();
+                }
+
             }
         }
 
@@ -1378,21 +1490,5 @@ namespace Android_Silver.Pages
             }
         }
 
-        Timer timer;
-
-        private void StartTimer()
-        {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                timer = new Timer(obj =>
-                {
-                    MainThread.InvokeOnMainThreadAsync(() =>
-                    {
-                        EthernetEntities.SystemMessage = $"Счетчик принятий ={CTcpClientService.ResieveCounter}";
-                    });
-                },
-                null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
-            });
-        }
     }
 }

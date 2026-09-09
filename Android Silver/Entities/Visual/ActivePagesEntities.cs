@@ -28,7 +28,7 @@ namespace Android_Silver.Entities.Visual
         TimePage,
         SwipePage,
         ShedulerPage,
-        BootloaderPage
+        BootloaderPage,
     }
 
     public class ActivePagesEntities : BindableBase
@@ -251,8 +251,17 @@ namespace Android_Silver.Entities.Visual
                 OnPropertyChanged(nameof(IsBootloaderPage));
             }
         }
+        private bool _isSystemMessage;
 
-        public int QueryStep { get; set; } = 0;
+        public bool IsSystemMessage
+        {
+            get { return _isSystemMessage; }
+            set { 
+                _isSystemMessage = value;
+                OnPropertyChanged(nameof(IsSystemMessage));
+            }
+        }
+
 
         #endregion
 
@@ -287,6 +296,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.MainPage:
@@ -309,6 +319,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage=true;
                     }
                     break;
                 case ActivePageState.ChooseModePage:
@@ -331,6 +342,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.LoadingPage:
@@ -353,6 +365,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.KithchenTimerPage:
@@ -375,6 +388,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                         _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Minute = _modesEntities.Mode2ValuesList[1].TimeModeValues[0].Hour;
                     }
                     break;
@@ -398,6 +412,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                         //_modesEntities.Mode1ValuesList[1].SupplySPUI = _modesEntities.Mode1ValuesList[1].SypplySP.Value;
                         //_modesEntities.Mode1ValuesList[1].ExhaustSPUI = _modesEntities.Mode1ValuesList[1].ExhaustSP.Value;
                         //_modesEntities.Mode1ValuesList[1].TempSPUI = _modesEntities.Mode1ValuesList[1].TempSP.Value;
@@ -426,6 +441,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.SettingsPage:
@@ -448,6 +464,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.InformationPage:
@@ -470,6 +487,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = true;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.JournalPage:
@@ -492,6 +510,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.SetTSettingsPage:
@@ -514,6 +533,8 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.OtherSettingsPage:
@@ -536,6 +557,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.TimePage:
@@ -558,6 +580,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.SwipePage:
@@ -602,6 +625,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = false;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
                 case ActivePageState.BootloaderPage:
@@ -624,6 +648,7 @@ namespace Android_Silver.Entities.Visual
                         IsBootloaderPage = true;
                         IsInformationPage = false;
                         IsHelperPage = false;
+                        IsSystemMessage = true;
                     }
                     break;
                 case ActivePageState.HelperPage:
@@ -646,6 +671,7 @@ namespace Android_Silver.Entities.Visual
                         IsStartPage = false;
                         IsBootloaderPage = false;
                         IsInformationPage = false;
+                        IsSystemMessage = false;
                     }
                     break;
             }

@@ -208,41 +208,50 @@ namespace Android_Silver.Entities.FBEntities
 
         public void SetFWCur(List<byte> fwVer)
         {
-            FWVerCurWord=String.Empty;
+            string fwCurBuf = String.Empty;
+           // FWVerCurWord=String.Empty;
             for (int i = 0; i < fwVer.Count; i++)
             {
-                FWVerCurWord += fwVer[i];
+                fwCurBuf += fwVer[i];
                 if (i < fwVer.Count - 1)
                 {
-                    FWVerCurWord += ".";
+                    fwCurBuf += ".";
                 }
             }
+            if (String.Compare(FWVerCurWord, fwCurBuf) != 0)
+                FWVerCurWord = fwCurBuf;
         }
 
         public void SetFWBkp(List<byte> fwVer)
         {
-            FWVerBkpWord = String.Empty;
+            string fwBackBuf = String.Empty;
             for (int i = 0; i < fwVer.Count; i++)
             {
-                FWVerBkpWord += fwVer[i];
+                fwBackBuf += fwVer[i];
                 if (i < fwVer.Count - 1)
                 {
-                    FWVerBkpWord += ".";
+                    fwBackBuf += ".";
                 }
             }
+
+            if(String.Compare(FWVerCurWord, fwBackBuf) != 0)
+                FWVerBkpWord = fwBackBuf;
         }
 
         public void SetFWNew(List<byte> fwVer)
         {
-            FWVerNewWord = String.Empty;
+            string fwNewBuf = String.Empty;
             for (int i = 0; i < fwVer.Count; i++)
             {
-                FWVerNewWord += fwVer[i];
+                fwNewBuf += fwVer[i];
                 if (i < fwVer.Count - 1)
                 {
-                    FWVerNewWord += ".";
+                    fwNewBuf += ".";
                 }
             }
+
+            if (String.Compare(FWVerNewWord, fwNewBuf) != 0)
+                FWVerNewWord = fwNewBuf;
         }
 
 

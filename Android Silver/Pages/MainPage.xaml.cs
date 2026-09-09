@@ -240,104 +240,124 @@ namespace Android_Silver.Pages
         private void AddBut_Pressed0(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[0].Current = ViewModel.CPictureSet.AddButs[0].Selected;
+            ViewModel.AddBut0Timer.Start();
         }
 
         private void AddBut_Released0(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[0].Current = ViewModel.CPictureSet.AddButs[0].Default;
+            ViewModel.AddBut0Timer.Stop();
         }
 
         private void SubBut_Pressed0(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[0].Current = ViewModel.CPictureSet.SubButs[0].Selected;
+            ViewModel.SubBut0Timer.Start();
         }
 
         private void SubBut_Released0(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[0].Current = ViewModel.CPictureSet.SubButs[0].Default;
+            ViewModel.SubBut0Timer.Stop();
         }
 
         private void AddBut_Pressed1(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[1].Current = ViewModel.CPictureSet.AddButs[1].Selected;
+            ViewModel.AddBut1Timer.Start();
         }
 
         private void AddBut_Released1(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[1].Current = ViewModel.CPictureSet.AddButs[1].Default;
+            ViewModel.AddBut1Timer.Stop();
         }
 
         private void SubBut_Pressed1(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[1].Current = ViewModel.CPictureSet.SubButs[1].Selected;
+            ViewModel.SubBut1Timer.Start();
         }
 
         private void SubBut_Released1(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[1].Current = ViewModel.CPictureSet.SubButs[1].Default;
+            ViewModel.SubBut1Timer.Stop();
         }
 
         private void AddBut_Pressed2(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[2].Current = ViewModel.CPictureSet.AddButs[2].Selected;
+            ViewModel.AddBut2Timer.Start();
         }
 
         private void AddBut_Released2(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[2].Current = ViewModel.CPictureSet.AddButs[2].Default;
+            ViewModel.AddBut2Timer.Stop();
         }
 
         private void SubBut_Pressed2(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[2].Current = ViewModel.CPictureSet.SubButs[2].Selected;
+            ViewModel.SubBut2Timer.Start();
         }
 
         private void SubBut_Released2(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[2].Current = ViewModel.CPictureSet.SubButs[2].Default;
+            ViewModel.SubBut2Timer.Stop();
         }
 
 
         private void AddBut_Pressed3(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[3].Current = ViewModel.CPictureSet.AddButs[3].Selected;
+            ViewModel.AddBut3Timer.Start();
         }
 
         private void AddBut_Released3(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[3].Current = ViewModel.CPictureSet.AddButs[3].Default;
+            ViewModel.AddBut3Timer.Stop();
         }
 
 
         private void SubBut_Pressed3(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[3].Current = ViewModel.CPictureSet.SubButs[3].Selected;
+            ViewModel.SubBut3Timer.Start();
         }
 
         private void SubBut_Released3(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[3].Current = ViewModel.CPictureSet.SubButs[3].Default;
+            ViewModel.SubBut3Timer.Stop();
         }
 
 
         private void AddBut_Pressed4(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[4].Current = ViewModel.CPictureSet.AddButs[4].Selected;
+            ViewModel.AddBut4Timer.Start();
         }
 
         private void Addbut_Released4(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.AddButs[4].Current = ViewModel.CPictureSet.AddButs[4].Default;
+            ViewModel.AddBut4Timer.Stop();
         }
 
         private void SubBut_Pressed4(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[4].Current = ViewModel.CPictureSet.SubButs[4].Selected;
+            ViewModel.SubBut4Timer.Start();
         }
 
         private void SubBut_Released4(object sender, EventArgs e)
         {
             ViewModel.CPictureSet.SubButs[4].Current = ViewModel.CPictureSet.SubButs[4].Default;
+            ViewModel.SubBut4Timer.Stop();
         }
 
 
