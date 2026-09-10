@@ -263,16 +263,16 @@ namespace Android_Silver.Pages
         #endregion
         #region Time command
         public ICommand TimeReturnCommand { get; private set; }
-        public ICommand TimeBtnUpCommand0 { get; private set; }
-        public ICommand TimeBtnDnCommand0 { get; private set; }
-        public ICommand TimeBtnUpCommand1 { get; private set; }
-        public ICommand TimeBtnDnCommand1 { get; private set; }
-        public ICommand TimeBtnUpCommand2 { get; private set; }
-        public ICommand TimeBtnDnCommand2 { get; private set; }
-        public ICommand TimeBtnUpCommand3 { get; private set; }
-        public ICommand TimeBtnDnCommand3 { get; private set; }
-        public ICommand TimeBtnUpCommand4 { get; private set; }
-        public ICommand TimeBtnDnCommand4 { get; private set; }
+        public ICommand TimeAdd0Command { get; private set; }
+        public ICommand TimeSub0Command { get; private set; }
+        public ICommand TimeAdd1Command { get; private set; }
+        public ICommand TimeSub1Command { get; private set; }
+        public ICommand TimeAdd2Command { get; private set; }
+        public ICommand TimeSub2Command { get; private set; }
+        public ICommand TimeAdd3Command { get; private set; }
+        public ICommand TimeSub3Command { get; private set; }
+        public ICommand TimeAdd4Command { get; private set; }
+        public ICommand TimeSub4Command { get; private set; }
         public ICommand TimeOkCommand { get; private set; }
         #endregion
         #region BootloaderCommand
@@ -307,7 +307,6 @@ namespace Android_Silver.Pages
         private IDispatcherTimer _fileResultTimer { get; set; }
         public MainPageViewModel()
         {
-
             EthernetEntities = DIContainer.Resolve<EthernetEntities>();
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CModesEntities = DIContainer.Resolve<ModesEntities>();
@@ -448,19 +447,18 @@ namespace Android_Silver.Pages
             #region Humidity commands
             OkHumidityCommand = new Command(ExecuteOkHumidity);
             CancelHumidityCommand = new Command(CancelHumidity);
-
             #endregion
             #region Time commands
-            TimeBtnUpCommand0 = new Command(ExecuteTimeBtnUp0);
-            TimeBtnDnCommand0 = new Command(ExecuteTimeBtnDn0);
-            TimeBtnUpCommand1 = new Command(ExecuteTimeBtnUp1);
-            TimeBtnDnCommand1 = new Command(ExecuteTimeBtnDn1);
-            TimeBtnUpCommand2 = new Command(ExecuteTimeBtnUp2);
-            TimeBtnDnCommand2 = new Command(ExecuteTimeBtnDn2);
-            TimeBtnUpCommand3 = new Command(ExecuteTimeBtnUp3);
-            TimeBtnDnCommand3 = new Command(ExecuteTimeBtnDn3);
-            TimeBtnUpCommand4 = new Command(ExecuteTimeBtnUp4);
-            TimeBtnDnCommand4 = new Command(ExecuteTimeBtnDn4);
+            TimeAdd0Command = new Command(ExecuteTimeAdd0);
+            TimeSub0Command = new Command(ExecuteTimeSub0);
+            TimeAdd1Command = new Command(ExecuteTimeAdd1);
+            TimeSub1Command = new Command(ExecuteTimeSub1);
+            TimeAdd2Command = new Command(ExecuteTimeAdd2);
+            TimeSub2Command = new Command(ExecuteTimeSub2);
+            TimeAdd3Command = new Command(ExecuteTimeAdd3);
+            TimeSub3Command = new Command(ExecuteTimeSub3);
+            TimeAdd4Command = new Command(ExecuteTimeAdd4);
+            TimeSub4Command = new Command(ExecuteTimeSub4);
             TimeOkCommand = new Command(ExecuteTimeOk);
             #endregion
             _fileSystemService.GetIPFromFile();
@@ -468,8 +466,6 @@ namespace Android_Silver.Pages
             CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
             CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback; ;
         }
-
-       
 
         async private void ExecuteConnect()
         {
@@ -778,69 +774,69 @@ namespace Android_Silver.Pages
 
         #endregion
 
-        #region SetPoints callback timers
+        #region Timers SetPoints callbacks 
         private void SubBut0Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPSub0(new object());
             TSetExecuteBtnLeft1(new object());
-            ExecuteTimeBtnDn0(new object());
+            ExecuteTimeSub0(new object());
         }
 
         private void AddBut0Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPAdd0(new object());
             TSetExecuteBtnRight1(new object());
-            ExecuteTimeBtnUp0(new object());
+            ExecuteTimeAdd0(new object());
         }
         private void SubBut1Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPSub1(new object());
             TSetExecuteBtnLeft2(new object());
-            ExecuteTimeBtnDn1(new object());
+            ExecuteTimeSub1(new object());
         }
 
         private void AddBut1Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPAdd1(new object());
             TSetExecuteBtnRight2(new object());
-            ExecuteTimeBtnUp1(new object());
+            ExecuteTimeAdd1(new object());
         }
         private void SubBut2Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPSub2(new object());
             TSetExecuteBtnLeft3(new object());
-            ExecuteTimeBtnDn2(new object());
+            ExecuteTimeSub2(new object());
         }
 
         private void AddBut2Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPAdd2(new object());
             TSetExecuteBtnRight3(new object());
-            ExecuteTimeBtnUp2(new object());
+            ExecuteTimeAdd2(new object());
         }
 
         private void SubBut3Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPSub3(new object());
-            ExecuteTimeBtnDn3(new object());
+            ExecuteTimeSub3(new object());
         }
 
         private void AddBut3Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPAdd3(new object());
-            ExecuteTimeBtnUp3(new object());
+            ExecuteTimeAdd3(new object());
         }
 
         private void SubBut4Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPSub4(new object());
-            ExecuteTimeBtnDn4(new object());
+            ExecuteTimeSub4(new object());
         }
 
         private void AddBut4Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ExecuteSPAdd4(new object());
-            ExecuteTimeBtnUp4(new object());
+            ExecuteTimeAdd4(new object());
         }
         #endregion
 
@@ -944,7 +940,9 @@ namespace Android_Silver.Pages
             SetM1ValuesByIndex(CModesEntities.CMode1.Num);
             CActivePagesEntities.SetActivePageState(ActivePageState.CorrSetPointsPage);
         }
+        #endregion
 
+        #region Execute Updater
         private void ExecuteUpdate(object obj)
         {
             bool isRequiredState = CModesEntities.CMode1.Num == 0 || CModesEntities.CMode1.Num == 7;
@@ -1239,7 +1237,6 @@ namespace Android_Silver.Pages
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
-
         #endregion
 
         private void ExecuteSetTime(object obj)
@@ -1396,7 +1393,6 @@ namespace Android_Silver.Pages
         #endregion
 
         #region Execute humidity
-
         private void CancelHumidity(object obj)
         {
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
@@ -1408,62 +1404,60 @@ namespace Android_Silver.Pages
             CTcpClientService.SetCommandToServer(165, vals);
             CActivePagesEntities.SetActivePageState(ActivePageState.OtherSettingsPage);
         }
-
-
         #endregion
 
         #region Time
-        private void ExecuteTimeBtnUp0(object obj)
+        private void ExecuteTimeAdd0(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Year = TimeBuffer.Year + 1 < 99 ? TimeBuffer.Year + 1 : 99;
         }
-        private void ExecuteTimeBtnDn0(object obj)
+        private void ExecuteTimeSub0(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Year = TimeBuffer.Year - 1 > 0 ? TimeBuffer.Year - 1 : 0;
         }
 
-        private void ExecuteTimeBtnUp1(object obj)
+        private void ExecuteTimeAdd1(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Month = TimeBuffer.Month + 1 < 12 ? TimeBuffer.Month + 1 : 12;
         }
-        private void ExecuteTimeBtnDn1(object obj)
+        private void ExecuteTimeSub1(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Month = TimeBuffer.Month - 1 > 0 ? TimeBuffer.Month - 1 : 0;
         }
 
-        private void ExecuteTimeBtnUp2(object obj)
+        private void ExecuteTimeAdd2(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Day = TimeBuffer.Day + 1 < 31 ? TimeBuffer.Day + 1 : 31;
         }
-        private void ExecuteTimeBtnDn2(object obj)
+        private void ExecuteTimeSub2(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Day = TimeBuffer.Day - 1 > 0 ? TimeBuffer.Day - 1 : 0;
         }
 
-        private void ExecuteTimeBtnUp3(object obj)
+        private void ExecuteTimeAdd3(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Hour = TimeBuffer.Hour + 1 < 60 ? TimeBuffer.Hour + 1 : 60;
         }
-        private void ExecuteTimeBtnDn3(object obj)
+        private void ExecuteTimeSub3(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Hour = TimeBuffer.Hour - 1 > 0 ? TimeBuffer.Hour - 1 : 0;
         }
 
-        private void ExecuteTimeBtnUp4(object obj)
+        private void ExecuteTimeAdd4(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Minute = TimeBuffer.Minute + 1 < 60 ? TimeBuffer.Minute + 1 : 60;
         }
 
-        private void ExecuteTimeBtnDn4(object obj)
+        private void ExecuteTimeSub4(object obj)
         {
             if (TimeBuffer != null)
                 TimeBuffer.Minute = TimeBuffer.Minute - 1 > 0 ? TimeBuffer.Minute - 1 : 0;

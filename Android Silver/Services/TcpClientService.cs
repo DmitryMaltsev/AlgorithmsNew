@@ -302,6 +302,7 @@ namespace Android_Silver.Services
                         byte id0 = 0;
                         byte id1 = 0;
                         ushort id = 0;
+                        bool isRightResponse = false;
                         if (result2.Length == 2)
                         {
                             id0 = _mathService.GetByteFromHexChar(result2[0][0], result2[0][1]);
@@ -313,6 +314,7 @@ namespace Android_Silver.Services
                         bool isAllDataSender = false;
                         if (result2[1].Contains("OK") && id == _fbs.CUpdater.CurrentPacket)
                         {
+                            isRightResponse = true;
                             if (_fbs.CUpdater.CurrentPacket < _fbs.CUpdater.PacketsCount.Value)
                             {
                                 isRightPacket = true;
@@ -349,7 +351,9 @@ namespace Android_Silver.Services
                                 _fbs.CUpdater.CurrentPacket = 0;
                             }
                         }
-                        _ethernetEntities.SystemMessage = result;
+                        if(!isRightResponse)
+                            _ethernetEntities.SystemMessage = "Ошибка пакета";
+
                     }
                     else
                     {
@@ -393,8 +397,7 @@ namespace Android_Silver.Services
                         //Принятие после отправленного пакета
                         byte[] data = new byte[2200];
                         int bytes = _stream.Read(data, 0, data.Length);
-                        while (_stream.DataAvailable) { }
-                    ;
+                        while (_stream.DataAvailable) { };
                         if (IsModbusDataRight(data, (ushort)(bytes)))
                         {
                             byte func = data[1];
