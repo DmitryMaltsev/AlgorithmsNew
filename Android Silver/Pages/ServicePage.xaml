@@ -263,9 +263,9 @@
         <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding HomeCommand}" 
                 Style="{StaticResource BackBut}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" IsVisible = "{Binding CActivePagesEntities.IsLoadingPage}"/>
         <Image Source="{Binding  CPictureSet.LoadingPic}" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"
-                                                 Grid.Row="3"  Grid.RowSpan="4" Grid.Column="8" Grid.ColumnSpan="2"  WidthRequest="400"
+                                                Grid.Row="4"  Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="16"  WidthRequest="400"
                    HorizontalOptions="Center"/>
-        <Label Text="Загрузка..." Grid.Row="7" Grid.RowSpan="2" FontSize="30" Style="{StaticResource CommonLabel}" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"/>
+        <Label Text="Загрузка..." Grid.Row="8" Grid.RowSpan="2" FontSize="30" Style="{StaticResource CommonLabel}" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"/>
         <!--#endregion-->
 
         <Label Text="{Binding EthernetEntities.SystemMessage}"  Grid.Row="13" Grid.RowSpan="1"  Grid.Column="1" Grid.ColumnSpan="15"
