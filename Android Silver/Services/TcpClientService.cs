@@ -3,7 +3,6 @@ using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
-
 using System.Net.Sockets;
 using System.Text;
 

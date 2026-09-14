@@ -8,10 +8,10 @@
     <ContentPage.Resources>
         <Style TargetType="Label" x:Key="MainPageLabel">
             <Setter Property="TextColor" Value="Black"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="13"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="Grid.ColumnSpan" Value="7"/>
+            <Setter Property="Grid.ColumnSpan" Value="5"/>
             <Setter Property="IsVisible" Value="{Binding CActivePagesEntities.IsMainPage}"/>
         </Style>
     </ContentPage.Resources>
@@ -133,7 +133,7 @@
                 <Label Text="Уставка"  Style="{StaticResource MainPageLabel}" />
             </VerticalStackLayout>
             <Label Grid.Row="8"  Grid.Column="0" Text="{Binding CFBs.CFans.SFlow,StringFormat='{0} куб/час'}" Style="{StaticResource MainPageLabel}"/>
-            <Label Grid.Row="8"  Grid.Column="6" Text="{Binding CFBs.CSensors.RoomTemp.Value.Value, StringFormat='{0}°C помещение'}" Style="{StaticResource MainPageLabel}"/>
+            <Label Grid.Row="8"  Grid.Column="5" Grid.ColumnSpan="7" Text="{Binding CFBs.CSensors.RoomTemp.Value.Value, StringFormat='{0}°C помещение'}" Style="{StaticResource MainPageLabel}"/>
             <Label Grid.Row="8"  Grid.Column="12" Text="{Binding CFBs.CSensors.SupTemp.Value.Value,StringFormat='{0}°C канал'}" Style="{StaticResource MainPageLabel}"/>
 
             <HorizontalStackLayout Grid.Row="11" Grid.RowSpan="2"  Grid.Column="1" Grid.ColumnSpan="15">
