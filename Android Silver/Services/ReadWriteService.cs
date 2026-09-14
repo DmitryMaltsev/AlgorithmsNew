@@ -427,13 +427,19 @@ namespace Android_Silver.Services
                 {
                     _modesEntities.SetMode2ValuesByIndex(m2Index);
                 }
-                if (_fbs.OtherSettings.IsContact)
+                return startIndex;
+            }
+            if (startAddr == 66)
+            {
+                ushort shedIsActiveNum = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                _fbs.OtherSettings.ShedulerIsActive = shedIsActiveNum == 0 ? false : true;
+                if (_modesEntities.CMode2.Num == 4)
                 {
                     if (_pictureSet.IsMode2Active != _pictureSet.IsContactActive)
                         _pictureSet.IsMode2Active = _pictureSet.IsContactActive;
                 }
                 else
-                if (_fbs.OtherSettings.IsScheduler)
+             if (_fbs.OtherSettings.ShedulerIsActive)
                 {
                     if (_pictureSet.IsMode2Active != _pictureSet.IsSchedulerActive)
                         _pictureSet.IsMode2Active = _pictureSet.IsSchedulerActive;

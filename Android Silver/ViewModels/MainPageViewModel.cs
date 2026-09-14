@@ -151,7 +151,6 @@ namespace Android_Silver.Pages
         #endregion
 
         #region Commands
-
         public ICommand TestCommand { get; private set; }
         public ICommand StartPageConnectCommand { get; private set; }
         #region MainPageCommands

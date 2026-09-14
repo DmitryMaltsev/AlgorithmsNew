@@ -36,6 +36,7 @@ namespace Android_Silver.Entities.FBEntities
 				OnPropertyChanged(nameof(IsScheduler));
 			}
 		}
+		public bool ShedulerIsActive { get; set; }
 
 		private bool _isContact;
 
