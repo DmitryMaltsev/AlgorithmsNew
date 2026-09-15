@@ -1742,6 +1742,15 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 || startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 1)
+                {
+                    _fbs.CEConfig.EHeaterConfig = buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 8 || startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 3)
                 {
                     _fbs.CEConfig.Recup = buffer;
@@ -2561,7 +2570,6 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-
             #endregion
 
             #region Проверка контроллера

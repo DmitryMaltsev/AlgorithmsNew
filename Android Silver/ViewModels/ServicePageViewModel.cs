@@ -4,6 +4,7 @@ using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
 
+using System.Globalization;
 using System.Windows.Input;
 
 namespace Android_Silver.ViewModels
@@ -361,6 +362,10 @@ namespace Android_Silver.ViewModels
                 {
                     if (mItem.StrSetsCollection[i].EIsVisible)
                     {
+                        if (float.TryParse(mItem.StrSetsCollection[i].CValString, CultureInfo.InvariantCulture, out float value))
+                        {
+                            mItem.StrSetsCollection[i].CVal = value;
+                        }
                         if (mItem.StrSetsCollection[i].CVal >= 0)
                             values[i] = (int)((mItem.StrSetsCollection[i].CVal + 0.5 / Math.Pow(10, mItem.StrSetsCollection[i].ValScale)) * Math.Pow(10, mItem.StrSetsCollection[i].ValScale));
                         else

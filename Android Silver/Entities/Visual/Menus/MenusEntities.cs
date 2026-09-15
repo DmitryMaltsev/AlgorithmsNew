@@ -130,7 +130,6 @@ namespace Android_Silver.Entities.Visual.Menus
         private PicturesSet _pictureSet { get; set; }
 
         FBs _fbEntities;
-
         public MenusEntities()
         {
             _fbEntities = DIContainer.Resolve<FBs>();
@@ -153,7 +152,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_SENS_SETTINGS_ADDR = ETH_RECUP_SETTINGS_ADDR + ETH_RECUP_SETTINGS_LENGTH;
             ETH_SENS_SETTINGS_LENGTH = 5;
             ETH_CONFIG_SETTINGS_ADDR = ETH_SENS_SETTINGS_ADDR + ETH_SENS_SETTINGS_LENGTH;
-            ETH_CONFIG_SETTINGS_LENGTH = 8;
+            ETH_CONFIG_SETTINGS_LENGTH = 9;
             ETH_THM_SETTINGS_ADDR = ETH_CONFIG_SETTINGS_ADDR + ETH_CONFIG_SETTINGS_LENGTH;
             ETH_THM_SETTINGS_LENGTH = 20;
             ETH_MBRECUP_SETTINGS_ADDR = ETH_THM_SETTINGS_ADDR + ETH_THM_SETTINGS_LENGTH;
@@ -223,6 +222,9 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 20, "Аналоговый вход 0-10В AR2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 20, "Аналоговый вход 0-10В AR3", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "Нет", "Да" };
+            sSet = new StrSet(0, 1, "Эл. калорифер в работе", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Драйвер", "Modbus", "MB1+MB2" };
             sSet = new StrSet(0, 3, "Рекуператор", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);

@@ -248,7 +248,7 @@
                             <!--IsToggled="{Binding  CFBs.OtherSettings.IsSpecMode, Mode=TwoWay}"-->
                             <Entry Text="{Binding Name}" Style="{StaticResource EntryText}" IsVisible = "{Binding IsVisible}"  IsReadOnly="True"/>
                             <Switch Grid.Column="8" Grid.ColumnSpan="3"  IsVisible = "{Binding SwitchIsActive}"  IsToggled="{Binding SwitchIsOn}" />
-                            <Entry Style="{StaticResource EntryNum}" Text="{Binding CVal}"
+                            <Entry Style="{StaticResource EntryNum}" Text="{Binding CValString}" 
                                            ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type context:ServicePage}},Path=BindingContext.SetEntryCommand}" 
                                            ReturnCommandParameter="{Binding .}" IsVisible = "{Binding EIsVisible}" IsEnabled="{Binding IsEnabled}" />
                             <Picker Style="{StaticResource ConfPicker}"  SelectedIndexChanged="Picker_SelectedIndexChanged" ItemsSource="{Binding PickVals}" 

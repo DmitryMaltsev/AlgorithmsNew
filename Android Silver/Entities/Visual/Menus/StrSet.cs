@@ -87,6 +87,21 @@ namespace Android_Silver.Entities.Visual.Menus
             }
         }
 
+        private string _cValString;
+        public string CValString
+        {
+            get { return _cValString; }
+            set { 
+                _cValString = value;
+                OnPropertyChanged(nameof(CValString));
+                
+                //CVal = float.Parse(CValString);
+            }
+        }
+
+
+        
+
         public byte ValScale;
 
         private bool _pickerIsVisible;
