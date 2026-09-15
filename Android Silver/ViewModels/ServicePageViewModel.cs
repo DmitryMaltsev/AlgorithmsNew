@@ -362,7 +362,8 @@ namespace Android_Silver.ViewModels
                 {
                     if (mItem.StrSetsCollection[i].EIsVisible)
                     {
-                        if (float.TryParse(mItem.StrSetsCollection[i].CValString, CultureInfo.InvariantCulture, out float value))
+                        string strVal = mItem.StrSetsCollection[i].CValString.Replace(',', '.');
+                        if (float.TryParse(strVal, CultureInfo.InvariantCulture, out float value))
                         {
                             mItem.StrSetsCollection[i].CVal = value;
                         }
