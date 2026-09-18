@@ -1147,7 +1147,6 @@ namespace Android_Silver.Pages
 
         private void ExecuteDownload(object obj)
         {
-
             if (CFBs.CUpdater.IsUpdate != 1)
             {
                 CTcpClientService.Disconnect();

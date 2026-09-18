@@ -297,21 +297,21 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Сервопривод 4 конечная поз", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 90, "Сервопривод 1 положение 1 градусов", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 90, "Сервопривод 1 положение закр градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 90, "Сервопривод 1 положение 2 градусов", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 90, "Сервопривод 1 положение откр градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 90, "Сервопривод 2 положение 1 градусов", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 90, "Сервопривод 2 положение закр градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 90, "Сервопривод 2 положение 2 градусов", isVisible: false, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 90, "Сервопривод 2 положение откр градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 90, "Сервопривод 3 положение 1 градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 90, "Сервопривод 3 положение закр градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 90, "Сервопривод 3 положение 2 градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 90, "Сервопривод 3 положение откр градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 90, "Сервопривод 4  положение 1 градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 90, "Сервопривод 4  положение закр градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            sSet = new StrSet(0, 90, "Сервопривод 4 положение 2 градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            sSet = new StrSet(0, 90, "Сервопривод 4 положение откр                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   градусов", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[2].StrSetsCollection = strSets;
             #endregion
@@ -1139,7 +1139,11 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 1, "УФ лампа в работе овр", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 66, switchIndex: 31);
             strSets.Add(sSet);
+            sSet = new StrSet(0, 1, "Сброс EEprom и перезагрузка", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
+            valScale: 0, pickVals,switchIsActive:false,startAddress: ETH_CONTROLLER_CHECK_ADDR + 67);
+            strSets.Add(sSet);
             StartMenuCollection[15].StrSetsCollection = strSets;
+
             #endregion
         }
     }

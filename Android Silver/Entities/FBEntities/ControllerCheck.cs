@@ -112,6 +112,7 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue AR2;
         public FloatValue AR3;
         public FloatValue AR4;
+        public byte ResetEEProm;
         public byte UfLefIn;
         public ControllerCheck()
         {

@@ -193,6 +193,8 @@ namespace Android_Silver.Entities.Visual.Menus
         {
             PickVals = pickVals;
             CPickVal = 0;
+            CVal = 0;
+            CValString = CVal.ToString();
             _minVal = minVal;
             _maxVal = maxVal;
             Name = name;

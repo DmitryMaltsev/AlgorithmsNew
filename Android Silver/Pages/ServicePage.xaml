@@ -30,7 +30,6 @@
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
         </Style>
-        
         <Style TargetType="Button" x:Key="BaseSettingsBut">
             <Setter Property="Padding" Value="0"/>
             <Setter Property="VerticalOptions" Value="Center" />
@@ -208,7 +207,6 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <!--#endregion-->
-        <!--#endregion-->
         <!--#region  Settings page -->
         <!--#region Header -->
         <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding FanReturnCommand}" Grid.Row="1"
@@ -263,8 +261,7 @@
         <Button ImageSource="{Binding CPictureSet.BackButton.Current}"  Command="{Binding HomeCommand}" 
                 Style="{StaticResource BackBut}"  Pressed="BackButton_Pressed"  Released="BackButton_Released" IsVisible = "{Binding CActivePagesEntities.IsLoadingPage}"/>
         <Image Source="{Binding  CPictureSet.LoadingPic}" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"
-                                                Grid.Row="4"  Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="16"  WidthRequest="400"
-                   HorizontalOptions="Center"/>
+                                                Grid.Row="4"  Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="16"  WidthRequest="400" HorizontalOptions="Center"/>
         <Label Text="Загрузка..." Grid.Row="8" Grid.RowSpan="2" FontSize="30" Style="{StaticResource CommonLabel}" IsVisible="{Binding CActivePagesEntities.IsLoadingPage}"/>
         <!--#endregion-->
 

@@ -11,7 +11,6 @@ namespace Android_Silver.ViewModels
 {
     class ServicePageViewModel : BindableBase
     {
-
         #region Rising properties
         private int _entryPass = 1111;
         public int EntryPass
@@ -35,28 +34,6 @@ namespace Android_Silver.ViewModels
                 OnPropertyChanged(nameof(EntryMessage));
             }
         }
-        #endregion
-
-        #region Commands
-        public ICommand EntryPassedCommand { get; private set; }
-        public ICommand StartPageConnectCommand { get; private set; }
-        public ICommand StartPageDisconnectCommand { get; private set; }
-        public ICommand DamperSettingsCommand { get; private set; }
-        public ICommand FanSettingsCommand { get; private set; }
-        public ICommand WHSettingsCommand { get; private set; }
-        public ICommand EHSettingsCommand { get; private set; }
-        public ICommand FreonCoolerSettingsCommand { get; private set; }
-        public ICommand RecupSettingsCommand { get; private set; }
-        public ICommand HumSettingsCommand { get; private set; }
-        public ICommand SensorsSettingsCommand { get; private set; }
-        public ICommand HomeCommand { get; private set; }
-        public ICommand FanReturnCommand { get; private set; }
-        public ICommand FansAcceptCommand { get; private set; }
-        public ICommand CommonSettingsCommand { get; private set; }
-        public ICommand ToSettingsCommand { get; private set; }
-        public ICommand SetSettingsCommand { get; private set; }
-        public ICommand SetEntryCommand { get; private set; }
-        #endregion
 
         private string _cString;
         public string CString
@@ -84,7 +61,9 @@ namespace Android_Silver.ViewModels
         public int MainMenuHeight
         {
             get { return _mainMenuHeight; }
-            set { _mainMenuHeight = value;
+            set
+            {
+                _mainMenuHeight = value;
                 OnPropertyChanged(nameof(MainMenuHeight));
             }
         }
@@ -94,11 +73,34 @@ namespace Android_Silver.ViewModels
         public int MenuHeight
         {
             get { return _menuHeight; }
-            set { _menuHeight = value; 
+            set
+            {
+                _menuHeight = value;
                 OnPropertyChanged($"{nameof(MenuHeight)}");
             }
         }
+        #endregion
 
+        #region Commands
+        public ICommand EntryPassedCommand { get; private set; }
+        public ICommand StartPageConnectCommand { get; private set; }
+        public ICommand StartPageDisconnectCommand { get; private set; }
+        public ICommand DamperSettingsCommand { get; private set; }
+        public ICommand FanSettingsCommand { get; private set; }
+        public ICommand WHSettingsCommand { get; private set; }
+        public ICommand EHSettingsCommand { get; private set; }
+        public ICommand FreonCoolerSettingsCommand { get; private set; }
+        public ICommand RecupSettingsCommand { get; private set; }
+        public ICommand HumSettingsCommand { get; private set; }
+        public ICommand SensorsSettingsCommand { get; private set; }
+        public ICommand HomeCommand { get; private set; }
+        public ICommand FanReturnCommand { get; private set; }
+        public ICommand FansAcceptCommand { get; private set; }
+        public ICommand CommonSettingsCommand { get; private set; }
+        public ICommand ToSettingsCommand { get; private set; }
+        public ICommand SetSettingsCommand { get; private set; }
+        public ICommand SetEntryCommand { get; private set; }
+        #endregion
 
         public TcpClientService CTcpClientService { get; set; }
         public PicturesSet CPictureSet { get; set; }
@@ -142,13 +144,11 @@ namespace Android_Silver.ViewModels
             ToSettingsCommand = new Command(ExecuteToSettingsWindow);
             SetSettingsCommand = new Command(ExecuteSetSettings);
             SetEntryCommand = new Command<StrSet>(ExecuteSetEntry);
-            CTcpClientService.ClientDisconnected -= ClientDisceonnectedCallback;
-            CTcpClientService.ClientDisconnected += ClientDisceonnectedCallback;
+            CTcpClientService.ClientDisconnected -= ClientDisconnectedCallback;
+            CTcpClientService.ClientDisconnected += ClientDisconnectedCallback;
             _fileSystemService.GetIPFromFile();
             //StartTimer();
         }
-
-    
 
         public ICommand IncreaseMenuItemsCommand { get; private set; }
         private void ExecuteIncrease(object obj)
@@ -396,7 +396,7 @@ namespace Android_Silver.ViewModels
         }
 
 
-        private void ClientDisceonnectedCallback()
+        private void ClientDisconnectedCallback()
         {
 
             if (CActivePagesEntities != null)
@@ -407,6 +407,11 @@ namespace Android_Silver.ViewModels
 
         private void ExecuteSetEntry(StrSet cStroke)
         {
+            string buffer = cStroke.CValString.Replace(",", ".");
+            if (float.TryParse(buffer,CultureInfo.InvariantCulture, out float value))
+            {
+                cStroke.CVal = value;
+            }
             int val = 0;
             if (cStroke.CVal >= 0)
                 val = (int)((cStroke.CVal + 0.5 / Math.Pow(10, cStroke.ValScale)) * Math.Pow(10, cStroke.ValScale));
@@ -423,23 +428,6 @@ namespace Android_Silver.ViewModels
             CFBs.CControllerCheck.SetOverrides();
             int[] arr = { CFBs.CControllerCheck.OverrideIsActive1, CFBs.CControllerCheck.OverrideIsActive2 };
             CTcpClientService.SetCommandToServer(CMenusEntities.ETH_CONTROLLER_SWITCH_ADDR, arr);
-        }
-
-        Timer timer;
-
-        private void StartTimer()
-        {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                timer = new Timer(obj =>
-                {
-                    MainThread.InvokeOnMainThreadAsync(() =>
-                    {
-                        EthernetEntities.PacketsMessage = $"Счетчик принятий ={CTcpClientService.ResieveCounter}";
-                    });
-                },
-                null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
-            });
         }
 
     }

@@ -1,6 +1,5 @@
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.ViewModels;
-
 namespace Android_Silver.Pages;
 
 public partial class ServicePage : ContentPage
@@ -12,9 +11,6 @@ public partial class ServicePage : ContentPage
         _servicePageViewModel = new ServicePageViewModel();
         BindingContext = _servicePageViewModel;
     }
-
-
-
 
     private void BackButton_Pressed(object sender, EventArgs e)
     {
