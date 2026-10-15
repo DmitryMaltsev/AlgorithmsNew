@@ -233,7 +233,7 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage1:
                         {
                             //1 44 126
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 240 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 239 };
                             //messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -241,7 +241,7 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage2:
                         {
                             //1 170 121
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 240 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 239};
                             //messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -350,7 +350,7 @@ namespace Android_Silver.Services
                                 _fbs.CUpdater.CurrentPacket = 0;
                             }
                         }
-                        if(!isRightResponse)
+                        if (!isRightResponse)
                             _ethernetEntities.SystemMessage = "Ошибка пакета";
 
                     }
@@ -396,7 +396,8 @@ namespace Android_Silver.Services
                         //Принятие после отправленного пакета
                         byte[] data = new byte[2200];
                         int bytes = _stream.Read(data, 0, data.Length);
-                        while (_stream.DataAvailable) { };
+                        while (_stream.DataAvailable) { }
+                        ;
                         if (IsModbusDataRight(data, (ushort)(bytes)))
                         {
                             byte func = data[1];
@@ -429,6 +430,12 @@ namespace Android_Silver.Services
                                 }
                                 WriteValuesList.Clear();
                             }
+                        }
+                        else
+                        {
+                            IsSending = false;
+                            ResieveCounter += 1;
+                            return false;
                         }
                     }
                     IsSending = false;

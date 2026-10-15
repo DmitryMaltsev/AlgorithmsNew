@@ -487,6 +487,7 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[0].StrSetsCollection[6].CPickVal = _fbs.CEConfig.AR3;
                         _menusEntities.StartMenuCollection[0].StrSetsCollection[7].CPickVal = _fbs.CEConfig.EHeaterConfig;
                         _menusEntities.StartMenuCollection[0].StrSetsCollection[8].CPickVal = _fbs.CEConfig.Recup;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[9].CPickVal = _fbs.CEConfig.FanExhaustConfig;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[0].Name;
                         _menusEntities.GenerateInterfaceTable(0);
                         IsConfigPage = true;
@@ -718,8 +719,8 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[4].StrSetsCollection[9].CValString = _fbs.CWHSetPoints.TRetF.Value.ToString();
                         _menusEntities.StartMenuCollection[4].StrSetsCollection[10].CVal = _fbs.CWHSetPoints.TRetStart.Value;
                         _menusEntities.StartMenuCollection[4].StrSetsCollection[10].CValString = _fbs.CWHSetPoints.TRetStart.Value.ToString();
-                        _menusEntities.StartMenuCollection[4].StrSetsCollection[11].CVal = _fbs.CWHSetPoints.TRetStart.Value;
-                        _menusEntities.StartMenuCollection[4].StrSetsCollection[11].CValString = _fbs.CWHSetPoints.TRetStart.Value.ToString();
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[11].CVal = _fbs.CWHSetPoints.SPSeason.Value;
+                        _menusEntities.StartMenuCollection[4].StrSetsCollection[11].CValString = _fbs.CWHSetPoints.SPSeason.Value.ToString();
                         _menusEntities.StartMenuCollection[4].StrSetsCollection[12].CVal = _fbs.CWHSetPoints.SSMaxIntervalS;
                         _menusEntities.StartMenuCollection[4].StrSetsCollection[12].CValString = _fbs.CWHSetPoints.SSMaxIntervalS.ToString();
                         _menusEntities.StartMenuCollection[4].StrSetsCollection[13].CVal = _fbs.CWHSetPoints.MinDamperPerc;

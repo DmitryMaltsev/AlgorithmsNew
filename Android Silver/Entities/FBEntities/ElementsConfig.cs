@@ -28,5 +28,6 @@ namespace Android_Silver.Entities.FBEntities
         public int OUT1;
         public int OUT2;
         public int Recup;
+        public int FanExhaustConfig;
     }
 }

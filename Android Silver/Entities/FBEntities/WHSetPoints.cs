@@ -17,6 +17,7 @@ namespace Android_Silver.Entities.FBEntities
         public FloatValue TRetMin;
         public FloatValue TRetF;
         public FloatValue SPWinterProcess;
+        public FloatValue SPSeason;
         public int MinDamperPerc;
         public int PWork;
         public int IWork;
@@ -46,6 +47,7 @@ namespace Android_Silver.Entities.FBEntities
             TRetMin = new FloatValue(0,100,1);
             TRetF = new FloatValue(0,100,1);
             SPWinterProcess = new FloatValue(0, 100, 1);
+            SPSeason = new FloatValue(2, 30, 1);
             DamperPerc = 0;
         }
     }

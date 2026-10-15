@@ -107,8 +107,8 @@ namespace Android_Silver.Entities.Visual.Menus
             MenusCollection = new ObservableCollection<MItem>();
             foreach (var item in StartMenuCollection)
             {
-                if(item.MenuIsVisible)
-                MenusCollection.Add(item);
+                if (item.MenuIsVisible)
+                    MenusCollection.Add(item);
             }
             //  MenusCollection = collection;
 
@@ -119,10 +119,10 @@ namespace Android_Silver.Entities.Visual.Menus
             InterfaceStrCollection = new ObservableCollection<StrSet>();
             foreach (var item in MenusCollection[index].StrSetsCollection)
             {
-                if(item.IsVisible)
-                InterfaceStrCollection.Add(item);
+                if (item.IsVisible)
+                    InterfaceStrCollection.Add(item);
             }
-             // InterfaceStrCollection = collection;
+            // InterfaceStrCollection = collection;
         }
 
         private int PidMaxVal = 10_000;
@@ -152,7 +152,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_SENS_SETTINGS_ADDR = ETH_RECUP_SETTINGS_ADDR + ETH_RECUP_SETTINGS_LENGTH;
             ETH_SENS_SETTINGS_LENGTH = 5;
             ETH_CONFIG_SETTINGS_ADDR = ETH_SENS_SETTINGS_ADDR + ETH_SENS_SETTINGS_LENGTH;
-            ETH_CONFIG_SETTINGS_LENGTH = 9;
+            ETH_CONFIG_SETTINGS_LENGTH = 10;
             ETH_THM_SETTINGS_ADDR = ETH_CONFIG_SETTINGS_ADDR + ETH_CONFIG_SETTINGS_LENGTH;
             ETH_THM_SETTINGS_LENGTH = 20;
             ETH_MBRECUP_SETTINGS_ADDR = ETH_THM_SETTINGS_ADDR + ETH_THM_SETTINGS_LENGTH;
@@ -162,7 +162,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_CALIBRATE_THM_ADDR = ETH_SPECMODE_SETTINGS_ADDR + ETH_SPECMODE_SETTINGS_LENGTH;
             ETH_CALIBRATE_THM_LENGTH = 34;
             ETH_TCONST_THM_ADDR = ETH_CALIBRATE_THM_ADDR + ETH_CALIBRATE_THM_LENGTH;
-            ETH_TCONST_LENGTH = 18;
+            ETH_TCONST_LENGTH = 17;
             ETH_RECUP_CURRENTSETTINGS_ADDR = ETH_TCONST_THM_ADDR + ETH_TCONST_LENGTH;
             ETH_RECUP_CURRENTSETTINGS_LENGTH = 40;
             ETH_CONTROLLER_CHECK_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
@@ -207,7 +207,7 @@ namespace Android_Silver.Entities.Visual.Menus
             #endregion
             #region Конфигурация
             ObservableCollection<StrSet> strSets = new ObservableCollection<StrSet>();
-            List<string> pickVals = new List<string>() { "Нет", "Вод нагр 1", "Вод нагр 2", "Фр охл 1", "Фр охл 2", "Увл 1", "Увл 2" };
+            List<string> pickVals = new List<string>() { "Нет", "Вод нагр 1", "Вод нагр 2(Тест)", "Фр охл 1", "Фр охл 2", "Увл 1", "Увл 2" };
             StrSet sSet = new StrSet(0, 20, "Аналоговый выход ET1", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             sSet = new StrSet(0, 20, "Аналоговый выход ET2", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
@@ -223,11 +223,14 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 20, "Аналоговый вход 0-10В AR3", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            pickVals = new List<string>() { "Нет", "Да" };
+            pickVals = new List<string>() { "Нет", "1 ступень", "2 ступени" };
             sSet = new StrSet(0, 1, "Эл. калорифер в работе", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Драйвер", "Modbus", "MB1+MB2" };
             sSet = new StrSet(0, 3, "Рекуператор", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "Нет", "Да" };
+            sSet = new StrSet(0, 1, "Наличие вытяжного вентилятора", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             StartMenuCollection[0].StrSetsCollection = strSets;
             #endregion
@@ -372,8 +375,7 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             sSet = new StrSet(0, 100, "Пусковая темп. обратной воды, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
-            // не отображаем, потом потом удалить
-            sSet = new StrSet(0, 100, "Пусковая темп. обратной воды2, °C", isVisible: false, pickerIsVisible: false, entryIsVisible: false, isEnabled: true, valScale: 1, pickVals, false);
+            sSet = new StrSet(_fbEntities.CWHSetPoints.SPSeason.Min, _fbEntities.CWHSetPoints.SPSeason.Max, "Зимняя температура для вод нагр, °C", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 1, pickVals, false);
             strSets.Add(sSet);
             sSet = new StrSet(0, 65_000, "Время мягкого пуска, сек", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals, false);
             strSets.Add(sSet);
@@ -1140,7 +1142,7 @@ namespace Android_Silver.Entities.Visual.Menus
             valScale: 0, pickVals, switchIsActive: true, startAddress: ETH_CONTROLLER_CHECK_ADDR + 66, switchIndex: 31);
             strSets.Add(sSet);
             sSet = new StrSet(0, 1, "Сброс EEprom и перезагрузка", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
-            valScale: 0, pickVals,switchIsActive:false,startAddress: ETH_CONTROLLER_CHECK_ADDR + 67);
+            valScale: 0, pickVals, switchIsActive: false, startAddress: ETH_CONTROLLER_CHECK_ADDR + 67);
             strSets.Add(sSet);
             StartMenuCollection[15].StrSetsCollection = strSets;
 

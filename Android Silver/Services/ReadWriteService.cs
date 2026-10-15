@@ -11,7 +11,6 @@ namespace Android_Silver.Services
 {
     public class ReadWriteService
     {
-
         MenusEntities _menusEntities { get; set; }
         private ServiceActivePagesEntities _servActivePageEntities { get; set; }
 
@@ -1414,7 +1413,7 @@ namespace Android_Silver.Services
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 11 || startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 11 + _menusEntities.WriteOffset)
             {
-                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                GetFloatValueResult(_fbs.CWHSetPoints.SPSeason, value, ref startIndex);
                 return startIndex;
             }
             if (startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 12 || startAddr == _menusEntities.ETH_WH_SETTINGS_ADDR + 12 + _menusEntities.WriteOffset)
@@ -1743,7 +1742,7 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 || startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 7 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
-                if (buffer >= 0 && buffer <= 1)
+                if (buffer >= 0 && buffer <= 2)
                 {
                     _fbs.CEConfig.EHeaterConfig = buffer;
                 }
@@ -1755,6 +1754,15 @@ namespace Android_Silver.Services
                 if (buffer >= 0 && buffer <= 3)
                 {
                     _fbs.CEConfig.Recup = buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 9 || startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 1)
+                {
+                    _fbs.CEConfig.FanExhaustConfig = buffer;
                 }
                 if (_servActivePageEntities.IsLoadingPage)
                 {
@@ -2625,7 +2633,7 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[20].CVal = _fbs.ThmSps.SupPTa.Value;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[20].CValString = _fbs.ThmSps.SupPTa.Value.ToString();
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[22].CVal = _fbs.CSensors.TempC1.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[22].CValString = _fbs.CSensors.TempC1.Value.Value.ToString(); 
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[22].CValString = _fbs.CSensors.TempC1.Value.Value.ToString();
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[24].CVal = _fbs.CSensors.TempH2.Value.Value;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[24].CValString = _fbs.CSensors.TempH2.Value.Value.ToString();
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[26].CVal = _fbs.ThmSps.EPTa.Value;
@@ -2667,7 +2675,7 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[62].CVal = _fbs.UFLeds.UfLedIn;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[62].CValString = _fbs.UFLeds.UfLedIn.ToString();
 
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[1].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[0];
+                   /* _menusEntities.StartMenuCollection[15].StrSetsCollection[1].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[0];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[3].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[1];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[5].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[2];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[7].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[3];
@@ -2700,7 +2708,7 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[59].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[29];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[61].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[30];
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[63].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[31];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[64].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[32];
+                    _menusEntities.StartMenuCollection[15].StrSetsCollection[64].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[32];*/
                 }
                 return startIndex;
             }
@@ -3052,7 +3060,7 @@ namespace Android_Silver.Services
                 _fbs.CControllerCheck.UfLefIn = (byte)buffer;
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 67|| startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 67 + _menusEntities.WriteOffset)
+            if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 67 || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + 67 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 return startIndex;
