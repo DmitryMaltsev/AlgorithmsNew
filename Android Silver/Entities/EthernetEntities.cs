@@ -149,6 +149,19 @@ namespace Android_Silver.Entities
             }
         }
 
+        private int _updateErrs;
+
+        public int UpdateErrs
+        {
+            get { return _updateErrs; }
+            set
+            {
+                _updateErrs = value;
+                OnPropertyChanged(nameof(UpdateErrs));
+            }
+        }
+
+
         private string _packetsMessage;
         public string PacketsMessage
         {
@@ -176,11 +189,12 @@ namespace Android_Silver.Entities
             }
         }
 
-        private bool _canTryToConnect=true;
+        private bool _canTryToConnect = true;
         public bool CanTryToConnect
         {
             get { return _canTryToConnect; }
-            set { 
+            set
+            {
                 _canTryToConnect = value;
                 OnPropertyChanged(nameof(CanTryToConnect));
             }

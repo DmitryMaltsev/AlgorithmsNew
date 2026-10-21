@@ -233,7 +233,7 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage1:
                         {
                             //1 44 126
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 239 };
+                            _readValuesArr = new byte[] { 1, 3, 1, 44, 1, 24 };
                             //messToClient = "0300,126\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -241,14 +241,14 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage2:
                         {
                             //1 170 121
-                            _readValuesArr = new byte[] { 1, 3, 1, 44, 0, 239};
+                            _readValuesArr = new byte[] { 1, 3, 2, 68, 0, 252};
                             //messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
                         break;
                     case MessageStates.ControllerCheck:
                         {
-                            _readValuesArr = new byte[] { 1, 3, 2, 26, 0, 69 };
+                            _readValuesArr = new byte[] { 1, 3, 3, 64, 0, 68 };
                         }
                         break;
                     case MessageStates.UpdaterMessage:
@@ -351,7 +351,11 @@ namespace Android_Silver.Services
                             }
                         }
                         if (!isRightResponse)
+                        { 
+                     
                             _ethernetEntities.SystemMessage = "Ошибка пакета";
+                            _ethernetEntities.UpdateErrs += 1;
+                        }
 
                     }
                     else

@@ -22,7 +22,6 @@ namespace Android_Silver.Services
 
         private ActivePagesEntities _activePageEntities { get; set; }
 
-
         public ReadWriteService()
         {
             _servActivePageEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
@@ -2675,40 +2674,40 @@ namespace Android_Silver.Services
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[62].CVal = _fbs.UFLeds.UfLedIn;
                     _menusEntities.StartMenuCollection[15].StrSetsCollection[62].CValString = _fbs.UFLeds.UfLedIn.ToString();
 
-                   /* _menusEntities.StartMenuCollection[15].StrSetsCollection[1].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[0];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[3].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[1];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[5].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[2];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[7].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[3];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[9].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[4];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[11].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[5];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[13].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[6];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[15].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[7];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[17].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[8];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[19].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[9];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[21].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[10];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[23].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[11];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[25].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[12];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[27].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[13];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[29].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[14];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[31].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[15];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[33].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[16];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[35].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[17];
+                    /* _menusEntities.StartMenuCollection[15].StrSetsCollection[1].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[0];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[3].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[1];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[5].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[2];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[7].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[3];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[9].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[4];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[11].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[5];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[13].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[6];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[15].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[7];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[17].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[8];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[19].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[9];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[21].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[10];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[23].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[11];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[25].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[12];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[27].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[13];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[29].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[14];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[31].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[15];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[33].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[16];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[35].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[17];
 
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[37].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[18];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[39].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[19];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[41].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[20];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[43].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[21];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[45].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[22];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[47].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[23];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[49].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[24];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[51].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[25];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[53].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[26];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[55].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[27];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[57].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[28];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[59].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[29];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[61].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[30];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[63].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[31];
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[64].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[32];*/
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[37].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[18];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[39].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[19];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[41].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[20];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[43].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[21];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[45].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[22];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[47].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[23];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[49].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[24];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[51].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[25];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[53].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[26];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[55].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[27];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[57].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[28];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[59].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[29];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[61].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[30];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[63].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[31];
+                     _menusEntities.StartMenuCollection[15].StrSetsCollection[64].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[32];*/
                 }
                 return startIndex;
             }

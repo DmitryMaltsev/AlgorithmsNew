@@ -138,6 +138,8 @@
 
             <HorizontalStackLayout Grid.Row="11" Grid.RowSpan="2"  Grid.Column="1" Grid.ColumnSpan="15">
                 <Label Text="{Binding Source={x:Reference mPage},Path=BindingContext.EthernetEntities.SystemMessage}" IsVisible="{Binding CActivePagesEntities.IsSystemMessage}"/>
+                <Label Text="{Binding Source={x:Reference mPage},Path=BindingContext.EthernetEntities.UpdateErrs}" IsVisible="{Binding CActivePagesEntities.IsSystemMessage}" 
+                                                                                                                                                            Margin="10,0,0,0"/>
             </HorizontalStackLayout>
             <!--#endregion-->
             <!--#endregion-->
