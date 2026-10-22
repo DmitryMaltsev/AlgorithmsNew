@@ -6,7 +6,6 @@ using Android_Silver.Entities.Visual.Menus;
 using System.Net.Sockets;
 using System.Text;
 
-
 namespace Android_Silver.Services
 {
     public class TcpClientService
