@@ -37,6 +37,8 @@ namespace Android_Silver.Entities.FBEntities
         public ControllerCheck CControllerCheck {get;set;}
 
         public InputsOutputs CInputsOutputs { get; set;}
+
+        public Mb2Settings CMb2Settings {  get; set; } 
         public FBs()
         {
             CAlarms = new Alarms();
@@ -76,6 +78,7 @@ namespace Android_Silver.Entities.FBEntities
             CUpdater = new Updater();
             CInputsOutputs = new InputsOutputs();
             CControllerCheck = new ControllerCheck();
+            CMb2Settings = new Mb2Settings();
         }
     }
 }

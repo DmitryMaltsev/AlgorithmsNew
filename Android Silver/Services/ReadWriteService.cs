@@ -2588,7 +2588,49 @@ namespace Android_Silver.Services
                 return startIndex;
             }
             #endregion
+            #region Настройки модбас
+            if (startAddr == _menusEntities.ETH_MB2SETTINGS_ADDR || startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + _menusEntities.WriteOffset)
+            {
 
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 255)
+                {
+                    _fbs.CMb2Settings.MbAddress = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MB2SETTINGS_ADDR + 1 || startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + _menusEntities.WriteOffset + 1)
+            {
+
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= _fbs.CMb2Settings.MbSpeed.Min && buffer <= _fbs.CMb2Settings.MbSpeed.Max)
+                {
+                    _fbs.CMb2Settings.MbSpeed.Value = buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MB2SETTINGS_ADDR + 2 || startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + _menusEntities.WriteOffset + 2)
+            {
+
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 2)
+                {
+                    _fbs.CMb2Settings.Parity = (byte)buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_MB2SETTINGS_ADDR + 3 || startAddr == _menusEntities.ETH_RECUP_CURRENTSETTINGS_ADDR + _menusEntities.WriteOffset + 3)
+            {
+
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 1)
+                {
+                    _fbs.CMb2Settings.StpBits = (byte)buffer;
+                }
+                return startIndex;
+            }
+
+            #endregion
             #region Проверка контроллера
             if (startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR || startAddr == _menusEntities.ETH_CONTROLLER_CHECK_ADDR + _menusEntities.WriteOffset)
             {
@@ -2609,70 +2651,70 @@ namespace Android_Silver.Services
                 _fbs.CControllerCheck.GetOverrides();
                 if (_menusEntities.StartMenuCollection.Count > 14 && _servActivePageEntities.LastActivePageState == SActivePageState.ControllerCheckPage)
                 {
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[0].CVal = _fbs.CDamperSetPoints.ServoDampers[0].CAngle;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[0].CValString = _fbs.CDamperSetPoints.ServoDampers[0].CAngle.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[2].CVal = _fbs.CDamperSetPoints.ServoDampers[1].CAngle;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[2].CValString = _fbs.CDamperSetPoints.ServoDampers[1].CAngle.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[4].CVal = _fbs.CDamperSetPoints.ServoDampers[2].CAngle;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[4].CValString = _fbs.CDamperSetPoints.ServoDampers[2].CAngle.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[6].CVal = _fbs.CDamperSetPoints.ServoDampers[3].CAngle;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[6].CValString = _fbs.CDamperSetPoints.ServoDampers[3].CAngle.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[8].CVal = _fbs.CDamperSetPoints.Damper1Opened;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[8].CValString = _fbs.CDamperSetPoints.Damper1Opened.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[10].CVal = _fbs.CDamperSetPoints.Damper2Opened;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[10].CValString = _fbs.CDamperSetPoints.Damper2Opened.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[12].CVal = _fbs.CSensors.OutdoorTemp.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[12].CValString = _fbs.CSensors.OutdoorTemp.Value.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[14].CVal = _fbs.CSensors.SupTemp.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[14].CValString = _fbs.CSensors.SupTemp.Value.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[16].CVal = _fbs.CSensors.RoomTemp.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[16].CValString = _fbs.CSensors.RoomTemp.Value.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[18].CVal = _fbs.CSensors.TempH1.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[18].CValString = _fbs.CSensors.TempH1.Value.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[20].CVal = _fbs.ThmSps.SupPTa.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[20].CValString = _fbs.ThmSps.SupPTa.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[22].CVal = _fbs.CSensors.TempC1.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[22].CValString = _fbs.CSensors.TempC1.Value.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[24].CVal = _fbs.CSensors.TempH2.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[24].CValString = _fbs.CSensors.TempH2.Value.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[26].CVal = _fbs.ThmSps.EPTa.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[26].CValString = _fbs.ThmSps.EPTa.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[28].CVal = _fbs.CSensors.TempC2.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[28].CValString = _fbs.CSensors.TempC2.Value.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[30].CVal = _fbs.CSensors.ReturnTemp.Value.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[30].CValString = _fbs.CSensors.ReturnTemp.Value.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[32].CVal = _fbs.CFans.SPercent;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[32].CValString = _fbs.CFans.SPercent.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[34].CVal = _fbs.CFans.EPercent;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[34].CValString = _fbs.CFans.EPercent.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[36].CVal = _fbs.CRecup.RecPerc;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[36].CValString = _fbs.CRecup.RecPerc.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[38].CVal = _fbs.CEHSetPoints.CPower;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[38].CValString = _fbs.CEHSetPoints.CPower.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[40].CVal = _fbs.CInputsOutputs.DI1;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[40].CValString = _fbs.CInputsOutputs.DI1.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[42].CVal = _fbs.CInputsOutputs.DI2;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[42].CValString = _fbs.CInputsOutputs.DI2.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[44].CVal = _fbs.CInputsOutputs.DInOverheat;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[44].CValString = _fbs.CInputsOutputs.DInOverheat.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[46].CVal = _fbs.CInputsOutputs.DOut1;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[46].CValString = _fbs.CInputsOutputs.DOut1.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[48].CVal = _fbs.CInputsOutputs.DOut2;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[48].CValString = _fbs.CInputsOutputs.DOut2.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[50].CVal = _fbs.CInputsOutputs.AR1.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[50].CValString = _fbs.CInputsOutputs.AR1.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[52].CVal = _fbs.CInputsOutputs.AR2.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[52].CValString = _fbs.CInputsOutputs.AR2.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[54].CVal = _fbs.CInputsOutputs.AR3.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[54].CValString = _fbs.CInputsOutputs.AR3.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[56].CVal = _fbs.CInputsOutputs.AR4.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[56].CValString = _fbs.CInputsOutputs.AR4.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[58].CVal = _fbs.CInputsOutputs.ET1.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[58].CValString = _fbs.CInputsOutputs.ET1.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[60].CVal = _fbs.CInputsOutputs.ET2.Value;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[60].CValString = _fbs.CInputsOutputs.ET2.Value.ToString();
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[62].CVal = _fbs.UFLeds.UfLedIn;
-                    _menusEntities.StartMenuCollection[15].StrSetsCollection[62].CValString = _fbs.UFLeds.UfLedIn.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[0].CVal = _fbs.CDamperSetPoints.ServoDampers[0].CAngle;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[0].CValString = _fbs.CDamperSetPoints.ServoDampers[0].CAngle.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[2].CVal = _fbs.CDamperSetPoints.ServoDampers[1].CAngle;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[2].CValString = _fbs.CDamperSetPoints.ServoDampers[1].CAngle.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[4].CVal = _fbs.CDamperSetPoints.ServoDampers[2].CAngle;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[4].CValString = _fbs.CDamperSetPoints.ServoDampers[2].CAngle.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[6].CVal = _fbs.CDamperSetPoints.ServoDampers[3].CAngle;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[6].CValString = _fbs.CDamperSetPoints.ServoDampers[3].CAngle.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[8].CVal = _fbs.CDamperSetPoints.Damper1Opened;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[8].CValString = _fbs.CDamperSetPoints.Damper1Opened.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[10].CVal = _fbs.CDamperSetPoints.Damper2Opened;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[10].CValString = _fbs.CDamperSetPoints.Damper2Opened.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[12].CVal = _fbs.CSensors.OutdoorTemp.Value.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[12].CValString = _fbs.CSensors.OutdoorTemp.Value.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[14].CVal = _fbs.CSensors.SupTemp.Value.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[14].CValString = _fbs.CSensors.SupTemp.Value.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[16].CVal = _fbs.CSensors.RoomTemp.Value.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[16].CValString = _fbs.CSensors.RoomTemp.Value.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[18].CVal = _fbs.CSensors.TempH1.Value.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[18].CValString = _fbs.CSensors.TempH1.Value.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[20].CVal = _fbs.ThmSps.SupPTa.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[20].CValString = _fbs.ThmSps.SupPTa.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[22].CVal = _fbs.CSensors.TempC1.Value.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[22].CValString = _fbs.CSensors.TempC1.Value.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[24].CVal = _fbs.CSensors.TempH2.Value.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[24].CValString = _fbs.CSensors.TempH2.Value.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[26].CVal = _fbs.ThmSps.EPTa.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[26].CValString = _fbs.ThmSps.EPTa.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[28].CVal = _fbs.CSensors.TempC2.Value.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[28].CValString = _fbs.CSensors.TempC2.Value.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[30].CVal = _fbs.CSensors.ReturnTemp.Value.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[30].CValString = _fbs.CSensors.ReturnTemp.Value.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[32].CVal = _fbs.CFans.SPercent;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[32].CValString = _fbs.CFans.SPercent.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[34].CVal = _fbs.CFans.EPercent;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[34].CValString = _fbs.CFans.EPercent.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[36].CVal = _fbs.CRecup.RecPerc;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[36].CValString = _fbs.CRecup.RecPerc.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[38].CVal = _fbs.CEHSetPoints.CPower;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[38].CValString = _fbs.CEHSetPoints.CPower.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[40].CVal = _fbs.CInputsOutputs.DI1;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[40].CValString = _fbs.CInputsOutputs.DI1.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[42].CVal = _fbs.CInputsOutputs.DI2;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[42].CValString = _fbs.CInputsOutputs.DI2.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[44].CVal = _fbs.CInputsOutputs.DInOverheat;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[44].CValString = _fbs.CInputsOutputs.DInOverheat.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[46].CVal = _fbs.CInputsOutputs.DOut1;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[46].CValString = _fbs.CInputsOutputs.DOut1.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[48].CVal = _fbs.CInputsOutputs.DOut2;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[48].CValString = _fbs.CInputsOutputs.DOut2.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[50].CVal = _fbs.CInputsOutputs.AR1.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[50].CValString = _fbs.CInputsOutputs.AR1.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[52].CVal = _fbs.CInputsOutputs.AR2.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[52].CValString = _fbs.CInputsOutputs.AR2.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[54].CVal = _fbs.CInputsOutputs.AR3.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[54].CValString = _fbs.CInputsOutputs.AR3.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[56].CVal = _fbs.CInputsOutputs.AR4.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[56].CValString = _fbs.CInputsOutputs.AR4.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[58].CVal = _fbs.CInputsOutputs.ET1.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[58].CValString = _fbs.CInputsOutputs.ET1.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[60].CVal = _fbs.CInputsOutputs.ET2.Value;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[60].CValString = _fbs.CInputsOutputs.ET2.Value.ToString();
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[62].CVal = _fbs.UFLeds.UfLedIn;
+                    _menusEntities.StartMenuCollection[16].StrSetsCollection[62].CValString = _fbs.UFLeds.UfLedIn.ToString();
 
                     /* _menusEntities.StartMenuCollection[15].StrSetsCollection[1].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[0];
                      _menusEntities.StartMenuCollection[15].StrSetsCollection[3].SwitchIsOn = _fbs.CControllerCheck.ServosOverridesList[1];

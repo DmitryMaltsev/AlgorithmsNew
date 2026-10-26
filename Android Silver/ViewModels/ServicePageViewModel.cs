@@ -349,6 +349,11 @@ namespace Android_Silver.ViewModels
                         SendMItemSettings(CMenusEntities.StartMenuCollection[14]);
                     }
                     break;
+                case SActivePageState.Mb2SettingsPage:
+                    {
+                        SendMItemSettings(CMenusEntities.StartMenuCollection[15]);
+                    }
+                    break;
             }
             CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }

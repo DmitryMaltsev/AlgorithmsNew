@@ -59,6 +59,9 @@ namespace Android_Silver.Entities.Visual.Menus
         public int ETH_RECUP_CURRENTSETTINGS_ADDR;
         public int ETH_RECUP_CURRENTSETTINGS_LENGTH;
 
+        public int ETH_MB2SETTINGS_ADDR;
+        public int ETH_MB2SETTINGS_LENGTH;
+
         public int ETH_CONTROLLER_CHECK_ADDR;
         public int ETH_CONTROLLER_CHECK_LENGTH;
 
@@ -162,7 +165,9 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_CALIBRATE_THM_ADDR = ETH_SPECMODE_SETTINGS_ADDR + ETH_SPECMODE_SETTINGS_LENGTH;
             ETH_CALIBRATE_THM_LENGTH = 82;
             ETH_RECUP_CURRENTSETTINGS_ADDR = ETH_CALIBRATE_THM_ADDR + ETH_CALIBRATE_THM_LENGTH;
-            ETH_RECUP_CURRENTSETTINGS_LENGTH = 70;
+            ETH_RECUP_CURRENTSETTINGS_LENGTH = 65;
+            ETH_MB2SETTINGS_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
+            ETH_MB2SETTINGS_LENGTH = 5;
             ETH_CONTROLLER_CHECK_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
             ETH_CONTROLLER_CHECK_LENGTH = 68;
             ETH_CONTROLLER_SWITCH_ADDR = ETH_CONTROLLER_CHECK_ADDR;
@@ -200,7 +205,9 @@ namespace Android_Silver.Entities.Visual.Menus
             StartMenuCollection.Add(mItem);
             mItem = new MItem("Настройка профилей шаг мотора", isVisible: true, _pictureSet.BaseSettings1ButCollection[14], SActivePageState.RecupCurrentPage, id: 15, startAddress: ETH_RECUP_CURRENTSETTINGS_ADDR);
             StartMenuCollection.Add(mItem);
-            mItem = new MItem("Проверка работы контроллера", isVisible: true, _pictureSet.BaseSettings1ButCollection[15], SActivePageState.ControllerCheckPage, id: 16, startAddress: ETH_CONTROLLER_CHECK_ADDR);
+            mItem = new MItem("Настройка канала мб 2", isVisible: true, _pictureSet.BaseSettings1ButCollection[15], SActivePageState.Mb2SettingsPage, id: 16, startAddress: ETH_MB2SETTINGS_ADDR);
+            StartMenuCollection.Add(mItem);
+            mItem = new MItem("Проверка работы контроллера", isVisible: true, _pictureSet.BaseSettings1ButCollection[16], SActivePageState.ControllerCheckPage, id: 17, startAddress: ETH_CONTROLLER_CHECK_ADDR);
             StartMenuCollection.Add(mItem);
             #endregion
             #region Конфигурация
@@ -930,6 +937,25 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             StartMenuCollection[14].StrSetsCollection = strSets;
             #endregion
+            #region Настройка канала модбас 2
+            strSets = new ObservableCollection<StrSet>();
+            sSet = new StrSet(0, 255,
+                 "Модбас адрес", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "9600", "19200", "38400", "57600","115200"};
+            sSet = new StrSet(0, 4,
+                 "Скорость", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "Четный", "Нечетный", "Нет четности"};
+            sSet = new StrSet(0, 2,
+                "Четность", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "1", "2"};
+            sSet = new StrSet(0, 1,
+                "Стоп бит", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            StartMenuCollection[15].StrSetsCollection = strSets;
+            #endregion
             #region Проверка контроллера
             strSets = new ObservableCollection<StrSet>();
             sSet = new StrSet(0, 100, "Угол серво 1", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: false,
@@ -1142,7 +1168,7 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 1, "Сброс EEprom и перезагрузка", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true,
             valScale: 0, pickVals, switchIsActive: false, startAddress: ETH_CONTROLLER_CHECK_ADDR + 67);
             strSets.Add(sSet);
-            StartMenuCollection[15].StrSetsCollection = strSets;
+            StartMenuCollection[16].StrSetsCollection = strSets;
 
             #endregion
         }
