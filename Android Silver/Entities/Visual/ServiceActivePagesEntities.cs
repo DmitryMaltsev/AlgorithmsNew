@@ -502,8 +502,9 @@ namespace Android_Silver.Entities.Visual
                         _menusEntities.StartMenuCollection[0].StrSetsCollection[5].CPickVal = _fbs.CEConfig.AR2;
                         _menusEntities.StartMenuCollection[0].StrSetsCollection[6].CPickVal = _fbs.CEConfig.AR3;
                         _menusEntities.StartMenuCollection[0].StrSetsCollection[7].CPickVal = _fbs.CEConfig.EHeaterConfig;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[8].CPickVal = _fbs.CEConfig.Recup;
-                        _menusEntities.StartMenuCollection[0].StrSetsCollection[9].CPickVal = _fbs.CEConfig.FanExhaustConfig;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[8].CPickVal = _fbs.CEConfig.ThermostatAlarmConfig;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[9].CPickVal = _fbs.CEConfig.Recup;
+                        _menusEntities.StartMenuCollection[0].StrSetsCollection[10].CPickVal = _fbs.CEConfig.FanExhaustConfig;
                         _menusEntities.Title = _menusEntities.StartMenuCollection[0].Name;
                         _menusEntities.GenerateInterfaceTable(0);
                         IsConfigPage = true;
@@ -1485,7 +1486,7 @@ namespace Android_Silver.Entities.Visual
                         IsThmHSettingsPage = false;
                         IsControllerCheckPage = true;
                         IsMbSettingsPage = false;
-                        _menusEntities.Title = _menusEntities.StartMenuCollection[15].Name;
+                        _menusEntities.Title = _menusEntities.StartMenuCollection[16].Name;
                         //_menusEntities.StartMenuCollection[15].StrSetsCollection[0].CValString = _fbs.CDamperSetPoints.ServoDampers[0].CAngle;
                         //_menusEntities.StartMenuCollection[15].StrSetsCollection[1].CValString = _fbs.CControllerCheck.Servo1Pos.Value;
                         //_menusEntities.StartMenuCollection[15].StrSetsCollection[2].CValString = _fbs.CDamperSetPoints.ServoDampers[1].CAngle;

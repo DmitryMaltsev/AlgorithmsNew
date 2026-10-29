@@ -1750,13 +1750,22 @@ namespace Android_Silver.Services
             if (startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 8 || startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 8 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 1)
+                {
+                    _fbs.CEConfig.ThermostatAlarmConfig = buffer;
+                }
+                return startIndex;
+            }
+            if (startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 9 || startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
+            {
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 3)
                 {
                     _fbs.CEConfig.Recup = buffer;
                 }
                 return startIndex;
             }
-            if (startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 9 || startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 9 + _menusEntities.WriteOffset)
+            if (startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 10 || startAddr == _menusEntities.ETH_CONFIG_SETTINGS_ADDR + 10 + _menusEntities.WriteOffset)
             {
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 1)

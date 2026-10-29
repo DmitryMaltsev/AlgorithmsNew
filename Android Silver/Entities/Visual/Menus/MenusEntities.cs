@@ -168,7 +168,7 @@ namespace Android_Silver.Entities.Visual.Menus
             ETH_RECUP_CURRENTSETTINGS_LENGTH = 65;
             ETH_MB2SETTINGS_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
             ETH_MB2SETTINGS_LENGTH = 5;
-            ETH_CONTROLLER_CHECK_ADDR = ETH_RECUP_CURRENTSETTINGS_ADDR + ETH_RECUP_CURRENTSETTINGS_LENGTH;
+            ETH_CONTROLLER_CHECK_ADDR = ETH_MB2SETTINGS_ADDR + ETH_MB2SETTINGS_LENGTH;
             ETH_CONTROLLER_CHECK_LENGTH = 68;
             ETH_CONTROLLER_SWITCH_ADDR = ETH_CONTROLLER_CHECK_ADDR;
             InterfaceStrCollection = new ObservableCollection<StrSet>();
@@ -230,6 +230,9 @@ namespace Android_Silver.Entities.Visual.Menus
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "1 ступень", "2 ступени" };
             sSet = new StrSet(0, 1, "Эл. калорифер в работе", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
+            strSets.Add(sSet);
+            pickVals = new List<string>() { "Нет", "Да" };
+            sSet = new StrSet(0, 1, "Наличие предаварийного термостата", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
             pickVals = new List<string>() { "Нет", "Драйвер", "Modbus", "MB1+MB2" };
             sSet = new StrSet(0, 3, "Рекуператор", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
@@ -942,15 +945,15 @@ namespace Android_Silver.Entities.Visual.Menus
             sSet = new StrSet(0, 255,
                  "Модбас адрес", isVisible: true, pickerIsVisible: false, entryIsVisible: true, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            pickVals = new List<string>() { "9600", "19200", "38400", "57600","115200"};
+            pickVals = new List<string>() { "9600", "19200", "38400", "57600", "115200" };
             sSet = new StrSet(0, 4,
                  "Скорость", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            pickVals = new List<string>() { "Четный", "Нечетный", "Нет четности"};
+            pickVals = new List<string>() { "Четный", "Нечетный", "Нет четности" };
             sSet = new StrSet(0, 2,
                 "Четность", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);
-            pickVals = new List<string>() { "1", "2"};
+            pickVals = new List<string>() { "1", "2" };
             sSet = new StrSet(0, 1,
                 "Стоп бит", isVisible: true, pickerIsVisible: true, entryIsVisible: false, isEnabled: true, valScale: 0, pickVals);
             strSets.Add(sSet);

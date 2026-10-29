@@ -29,5 +29,6 @@ namespace Android_Silver.Entities.FBEntities
         public int OUT2;
         public int Recup;
         public int FanExhaustConfig;
+        public int ThermostatAlarmConfig;
     }
 }
