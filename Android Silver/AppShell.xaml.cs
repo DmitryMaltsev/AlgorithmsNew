@@ -55,5 +55,10 @@ namespace Android_Silver
                 spViewModel.SetActivePageIfNeed();
             }
         }
+
+        private void ShellContent_Appearing_2(object sender, EventArgs e)
+        {
+
+        }
     }
 }

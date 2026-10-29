@@ -468,7 +468,6 @@ namespace Android_Silver.Pages
 
         async private void ExecuteConnect()
         {
-
             EthernetEntities.ConnectIP =
                  $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
             EthernetEntities.SystemMessage = "Check";

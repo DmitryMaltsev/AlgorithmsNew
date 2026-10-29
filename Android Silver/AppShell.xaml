@@ -19,6 +19,10 @@
         Title="Сервисные настройки"
          ContentTemplate="{DataTemplate local:ServicePage}"
          Route="servicePage"/>
+        <ShellContent Appearing="ShellContent_Appearing_2"
+         Title="Настройки MQTT"
+          ContentTemplate="{DataTemplate local:MQTTPage}"
+         Route="mqttPage"/>
     </TabBar>
-    
+
 </Shell>
