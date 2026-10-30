@@ -1,6 +1,6 @@
 ﻿using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
-
+using Android_Silver.Entities.MQTT;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
@@ -29,6 +29,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<MathService>();
             _container.RegisterSingleton<FilesEntities>();
             _container.RegisterSingleton<ReadWriteService>();
+            _container.RegisterSingleton<MQTTRoot>();
         }
 
         public static T Resolve<T>()
