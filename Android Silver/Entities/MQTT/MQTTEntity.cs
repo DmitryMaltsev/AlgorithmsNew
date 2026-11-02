@@ -11,8 +11,8 @@ namespace Android_Silver.Entities.MQTT
     public class MQTTEntity:BindableBase
     {
       
-        public string Address { get; set; }
-        public int Port { get; set; }
+        public string server { get; set; }
+        public int port { get; set; }
 
         private string _token { get; set; } = "gTKZKsSHJeTdbmEWOpNEF4Ntk81YJf4Hhtv2LaYUBxkTcocCzEWM4MQc";
 
@@ -24,8 +24,8 @@ namespace Android_Silver.Entities.MQTT
             }
         }
 
-        public string User { get; set; }    
-        public string Password { get; set; }
+        public string user { get; set; }    
+        public string password { get; set; }
         public MQTTRoot Root { get; set; }
         public MQTTEntity()
         {

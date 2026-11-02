@@ -3,6 +3,7 @@ using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
+
 using System.Net.Sockets;
 using System.Text;
 
@@ -69,7 +70,7 @@ namespace Android_Silver.Services
 
         public async Task Connect()
         {
-            try
+             try
             {
                 _ethernetEntities.Client = new TcpClient();
                 _ethernetEntities.Client.ReceiveTimeout = 800;
@@ -77,23 +78,28 @@ namespace Android_Silver.Services
                 _ethernetEntities.IsConnected = false;
                 IsConnecting = true;
                 _ethernetEntities.CanTryToConnect = !IsConnecting;
+                using var cts = new CancellationTokenSource();
                 Task connectTask = _ethernetEntities.Client.ConnectAsync(_ethernetEntities.ConnectIP, _ethernetEntities.ConnectPort);
-                if (await Task.WhenAny(connectTask, Task.Delay(3000)) != connectTask)
+                var completed = await Task.WhenAny(connectTask, Task.Delay(3000, cts.Token));
+                if (completed != connectTask)
                 {
-                    _ethernetEntities.IsConnected = false;
-                    _ethernetEntities.Client.Close();
-                    IsConnecting = false;
-                    _ethernetEntities.CanTryToConnect = !IsConnecting;
-                    _ethernetEntities.EthernetMessage = "Не удалось подключиться модулю WI-FI";
-                    if (connectTask.Status == TaskStatus.RanToCompletion || connectTask.Status == TaskStatus.Faulted
-                        || connectTask.Status == TaskStatus.Canceled)
-                    {
-                        connectTask.Dispose();
-                    }
-                    throw new Exception("Не удалось подключиться модулю WI-FI");
+                    cts.Cancel();
+                    ConnectExeption("Не удалось подключиться за указаный период");
+                  
+                 
                 }
                 else
                 {
+                    cts.Cancel();
+                    try
+                    {
+                        await connectTask;
+                    }
+                    catch (Exception ex)
+                    {
+                        ConnectExeption("Не удалось подключиться за указаный период");
+                    }
+
                     if (_ethernetEntities.PagesTab == 1)
                     {
                         _servActivePageEntities.SetActivePageState(SActivePageState.LoadingPage);
@@ -104,22 +110,25 @@ namespace Android_Silver.Services
                     IsConnecting = false;
                     _ethernetEntities.CanTryToConnect = !IsConnecting;
                 }
-                //await Task.Run(() =>
-                //{
-                //    Task.Delay(3000);
-                //   _ethernetEntities.CanTryToConnect = true;
-                //});
             }
             catch (Exception ex)
             {
-                _ethernetEntities.Client.Close();
-                _ethernetEntities.Client.Dispose();
-                _ethernetEntities.SystemMessage = ex.Message;
-                _ethernetEntities.IsConnected = false;
-                IsConnecting = false;
-                _ethernetEntities.CanTryToConnect = !IsConnecting;
+                ConnectExeption(ex.Message);
             }
         }
+
+        private void ConnectExeption(string message)
+        {
+            _ethernetEntities.Client.Close();
+            _ethernetEntities.Client.Dispose();
+            _ethernetEntities.SystemMessage = message;
+            _ethernetEntities.IsConnected = false;
+            IsConnecting = false;
+            _ethernetEntities.CanTryToConnect = !IsConnecting;
+            _ethernetEntities.EthernetMessage = message;
+         
+        }
+
 
         StringBuilder sbResult;
 
@@ -240,7 +249,7 @@ namespace Android_Silver.Services
                     case MessageStates.ServiceMessage2:
                         {
                             //1 170 121
-                            _readValuesArr = new byte[] { 1, 3, 2, 68, 0, 252};
+                            _readValuesArr = new byte[] { 1, 3, 2, 68, 0, 252 };
                             //messToClient = "0426,137\r\n";
                             //messToClient = "300,050\r\n";
                         }
@@ -350,8 +359,8 @@ namespace Android_Silver.Services
                             }
                         }
                         if (!isRightResponse)
-                        { 
-                     
+                        {
+
                             _ethernetEntities.SystemMessage = "Ошибка пакета";
                             _ethernetEntities.UpdateErrs += 1;
                         }
@@ -463,7 +472,7 @@ namespace Android_Silver.Services
                 if (_ethernetEntities.IsConnected == true)
                 {
                     _ethernetEntities.SystemMessage = "Превышено максимальное количество попыток - 20";
-                    _ethernetEntities.EthernetMessage = "Превышено максимальное количество попыток передачи данных. Подключитесь повторно";
+                    _ethernetEntities.EthernetMessage = "Превышено максимальное количество попыток передачи данных.\r\nПодключитесь повторно.";
                     ClientDisconnected?.Invoke();
                     _activePageEntities.SetActivePageState(ActivePageState.StartPage);
                     Disconnect();
@@ -485,8 +494,11 @@ namespace Android_Silver.Services
             //SystemMessage = "Соединение разорвано";
             _ethernetEntities.Client.Close();
             _ethernetEntities.Client.Dispose();
-            _stream.Close();
-            _stream.Dispose();
+            if (_stream != null)
+            {
+                _stream.Close();
+                _stream.Dispose();
+            }
         }
 
 

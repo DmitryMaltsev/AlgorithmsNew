@@ -17,27 +17,21 @@ namespace Android_Silver.Entities.MQTT
         public List<Range> range { get; private set; }
         public List<SensorFloat> sensors_float { get; private set; }
         public List<Mode> mode { get; set; }
-
         public MQTTRoot()
         {
-            name = "Тестовый вентилятор";
-            type = 28;
-            room = "Общая";
+            name = "Вентиляция";
+            type = 29;
+            room = "";
             on_off = new List<OnOff>();
             on_off.Add(new OnOff() { cmd_on = "1", cmd_off = "0", topic_cmd = "Vent/Switch/Write", topic_state = "Vent/Switch/Read" });
             range = new List<Range>();
-            range.Add(new Range() { type = 4, topic_cmd = "Vent/TempSP/Write", topic_state = "Vent/TempSP/Read", max = 100, min = 17, precision = 1, multiplier = 1 });
+            range.Add(new Range() { type = 4, topic_cmd = "Vent/TempSP/Write", topic_state = "Vent/TempSP/Read", max = 25, min = 17, precision = 1, multiplier = 1 });
             sensors_float = new List<SensorFloat>();
-            sensors_float.Add(new SensorFloat() { multiplier = 0.1f, type = 0, topic = "RoomTemp" });
+            sensors_float.Add(new SensorFloat() { multiplier = 0.1f, type = 0, topic = "SupplyTemp" });
             mode = new List<Mode>();
             Mode mode1 = new Mode();
-            mode1.options = new List<string>();
-            mode1.options.Add("one=1");
-            mode1.options.Add("two=2");
-            mode1.options.Add("three=3");
-            mode1.options.Add("four=4");
-            mode1.options.Add("five=5");
-            mode.Add(new Mode());
+            mode1.options = "min=1,normal=2,max=3,multicooker=4,eco=5";
+            mode.Add(mode1);
         }
     }
 
@@ -78,17 +72,23 @@ namespace Android_Silver.Entities.MQTT
         public string topic_cmd { get; set; } = "Vent/Mode1/Write";
         public string topic_state { get; set; } = "Vent/Mode1/Read";
 
-        public List<string> options { get; set; }
+        public string options { get; set; }
+      //  public List<string> options2 { get; set; }
 
     }
 
     public class SensorFloat
     {
-
         public int type { get; set; }
         public string topic { get; set; }
         public float multiplier { get; set; }
     }
 
+    public class Device
+    {
+        int id { get; set;}
+        int type {  get; set; }
+        string name {  get; set; }
+    }
 
 }

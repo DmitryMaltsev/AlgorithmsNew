@@ -57,25 +57,34 @@ namespace Android_Silver.ViewModels
             //MyData result = Task.Run(() => AsyncSend()).GetAwaiter().GetResult();
         }
 
+
         public void AsyncSend()
         {
+            MQTTSendGet("");
 
-            //if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-            //    return;
-            //using HttpClient client = new HttpClient();
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //string? tokenString = Token.ToString();
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", tokenString);
-            //try
-            //{
-            //    SystemMessage = client.GetStringAsync("https://dash.wqtt.ru/api/devices/82116 ").GetAwaiter().GetResult();
+            //MQTTSendGet("https://dash.wqtt.ru/api/devices/82116");
+            MQTTSendGet("https://dash.wqtt.ru/api/broker");
+            // MQTTSendGet("https://dash.wqtt.ru/api/devices");
 
-            //    testData = client.GetFromJsonAsync<MyData>("https://dash.wqtt.ru/api/devices/82116 ").GetAwaiter().GetResult();
-            //}
-            //catch (Exception ex)
-            //{
-            //    SystemMessage = ex.Message;
-            //}
+        }
+
+        private void MQTTSendGet(string address)
+        {
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return;
+            using HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string? tokenString = CMQTTEntity.Token.ToString();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", tokenString);
+            try
+            {
+                SystemMessage = client.GetStringAsync(address).GetAwaiter().GetResult();
+                CMQTTEntity = client.GetFromJsonAsync<MQTTEntity>(address).GetAwaiter().GetResult();
+            }
+            catch (Exception ex)
+            {
+                SystemMessage = ex.Message;
+            }
         }
 
         public void ExecuteSendPost()
