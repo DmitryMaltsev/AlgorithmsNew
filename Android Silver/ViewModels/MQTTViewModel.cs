@@ -1,4 +1,6 @@
-﻿using Android_Silver.Entities.Modes;
+﻿using Android_Silver.Entities;
+using Android_Silver.Entities.Modes;
+using Android_Silver.Entities.MQTT;
 
 using System;
 using System.Collections.Generic;
@@ -20,17 +22,6 @@ namespace Android_Silver.ViewModels
 
         #region Riging proprty
 
-        private string _token = "gTKZKsSHJeTdbmEWOpNEF4Ntk81YJf4Hhtv2LaYUBxkTcocCzEWM4MQc";
-        public string Token
-        {
-            get { return _token; }
-            set
-            {
-                _token = value;
-                OnPropertyChanged(nameof(Token));
-            }
-        }
-
         private string _systemMessage = "{\r\n    " +
             "\"server\": \"m8.wqtt.ru\",\r\n   " +
             " \"port\": 21710,\r\n    \"port_tls\": 21711,\r\n    " +
@@ -51,21 +42,16 @@ namespace Android_Silver.ViewModels
         public ICommand SendCommand { get; private set; }
         public ICommand SendPostCommand { get; private set; }
 
-        public AsyncCommand ConnectCommand { get; private set; }
-
+        public MQTTEntity CMQTTEntity { get; set; }
         public MQTTViewModel()
         {
-          //  testData = new MyData();
+            //  testData = new MyData();
             SendCommand = new Command(AsyncSend);
             SendPostCommand = new Command(ExecuteSendPost);
+            CMQTTEntity = DIContainer.Resolve<MQTTEntity>();
             //   ConnectCommand = new Command(ExecuteConnect);
         }
 
-        private void ExecuteConnect(object obj)
-        {
-
-        }
-        //MyData testData;
         private void ExecuteSend()
         {
             //MyData result = Task.Run(() => AsyncSend()).GetAwaiter().GetResult();
@@ -101,33 +87,17 @@ namespace Android_Silver.ViewModels
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 WriteIndented = true
             };
-            //Root root = new Root();
-            //root.name = "Тестовый вентилятор";
-            //root.type = 28;
-            //root.room = "Общая";
-            //root.on_off = new List<OnOff>();
-            //root.on_off.Add(new OnOff() { cmd_on = "1", cmd_off = "0", topic_cmd = "topic/#" });
-            //root.range = new List<Range>();
-            //root.range.Add(new Range() { type = 4, topic_cmd = "topic/write", topic_state = "topic/read", max = 100, min = 0, precision = 10, multiplier = 1 });
-            //root.sensors_float = new List<SensorFloat>();
-            //root.sensors_float.Add(new SensorFloat() {multiplier=0.1f, type=0,topic="asd"});
-            //root.mode= new List<Mode>();
-            //root.mode.Add(new Mode());
-
-
-
-
             using HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string? tokenString = Token.ToString();
+            string? tokenString = CMQTTEntity.Token.ToString();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", tokenString);
-         //   string jsonPayload = JsonSerializer.Serialize(root, _serializerOptions);
-         //   StringContent content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");
+            string jsonPayload = JsonSerializer.Serialize(CMQTTEntity.Root, _serializerOptions);
+            StringContent content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");
             try
             {
-           //     HttpResponseMessage resp = client.PostAsync("https://dash.wqtt.ru/api/devices", content).GetAwaiter().GetResult();
-           //     resp.EnsureSuccessStatusCode();
-          //      SystemMessage = resp.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                HttpResponseMessage resp = client.PostAsync("https://dash.wqtt.ru/api/devices", content).GetAwaiter().GetResult();
+                resp.EnsureSuccessStatusCode();
+                SystemMessage = resp.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {

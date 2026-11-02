@@ -29,7 +29,7 @@ namespace Android_Silver.Entities
             _container.RegisterSingleton<MathService>();
             _container.RegisterSingleton<FilesEntities>();
             _container.RegisterSingleton<ReadWriteService>();
-            _container.RegisterSingleton<MQTTRoot>();
+            _container.RegisterSingleton<MQTTEntity>();
         }
 
         public static T Resolve<T>()
