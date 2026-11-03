@@ -1,6 +1,8 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.Modes;
 using Android_Silver.Entities.MQTT;
+using Android_Silver.Entities.Visual;
+using Android_Silver.Services;
 
 using System;
 using System.Collections.Generic;
@@ -43,12 +45,22 @@ namespace Android_Silver.ViewModels
         public ICommand SendPostCommand { get; private set; }
 
         public MQTTEntity CMQTTEntity { get; set; }
+        public EthernetEntities EthernetEntities { get; }
+        public TcpClientService CTcpClientService { get; }
+        public PicturesSet CPictureSet { get; }
+
+        private FileSystemService _fileSystemService { get; set; }
+
         public MQTTViewModel()
         {
             //  testData = new MyData();
             SendCommand = new Command(AsyncSend);
             SendPostCommand = new Command(ExecuteSendPost);
             CMQTTEntity = DIContainer.Resolve<MQTTEntity>();
+            EthernetEntities = DIContainer.Resolve<EthernetEntities>();
+            CTcpClientService = DIContainer.Resolve<TcpClientService>();
+            CPictureSet = DIContainer.Resolve<PicturesSet>();
+            _fileSystemService = DIContainer.Resolve<FileSystemService>();
             //   ConnectCommand = new Command(ExecuteConnect);
         }
 
@@ -58,14 +70,46 @@ namespace Android_Silver.ViewModels
         }
 
 
-        public void AsyncSend()
+        public async void AsyncSend()
         {
-            MQTTSendGet("");
+            CTcpClientService.Disconnect();
+            await ExecuteConnect();
+            if (EthernetEntities.IsConnected)
+            {
+                int[] index = { 1 };
+                CTcpClientService.SetCommandToServer(149, index);
+            }
+            //MQTTSendGet("");
+            ////MQTTSendGet("https://dash.wqtt.ru/api/devices/82116");
+            //MQTTSendGet("https://dash.wqtt.ru/api/broker");
+            //// MQTTSendGet("https://dash.wqtt.ru/api/devices");
+        }
 
-            //MQTTSendGet("https://dash.wqtt.ru/api/devices/82116");
-            MQTTSendGet("https://dash.wqtt.ru/api/broker");
-            // MQTTSendGet("https://dash.wqtt.ru/api/devices");
+        async private Task ExecuteConnect()
+        {
+            EthernetEntities.ConnectIP =
+                 $"{EthernetEntities.IP1}.{EthernetEntities.IP2}.{EthernetEntities.IP3}.{EthernetEntities.IP4}";
 
+            if (!CTcpClientService.IsConnecting)
+            {
+                await CTcpClientService.Connect();
+                if (EthernetEntities.IsConnected)
+                {
+                    CPictureSet.SetPicureSetIfNeed(CPictureSet.LinkHeader, CPictureSet.LinkHeader.Selected);
+                    await _fileSystemService.SaveToFileAsync("ConnectIP", EthernetEntities.ConnectIP);
+                    CTcpClientService.SendRecieveTask();
+                    SystemMessage = "Подключение успешно";
+                    // TcpClientService.SendRecieveTask("137,4");ё
+                }
+                else
+                {
+                    SystemMessage = "Ошибка подключения";
+                }
+            }
+            else
+            {
+                SystemMessage = "В данный момент подключаемся";
+            }
         }
 
         private void MQTTSendGet(string address)

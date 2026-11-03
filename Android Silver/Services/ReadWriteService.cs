@@ -877,7 +877,12 @@ namespace Android_Silver.Services
             }
             #endregion
 
-            if (startAddr > 135 && startAddr < 150)
+            if (startAddr > 135 && startAddr < 149)
+            {
+                startIndex += 2;
+                return startIndex;
+            }
+            if (startAddr ==149)
             {
                 startIndex += 2;
                 return startIndex;

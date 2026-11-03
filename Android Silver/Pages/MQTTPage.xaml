@@ -2,16 +2,74 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Android_Silver.Pages.MQTTPage"
-             Title="MQTTPage">
-    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <HorizontalStackLayout>
-            <Label Text="Введите токен"  VerticalOptions="Center"/>
-            <Entry Text="{Binding CMQTTEntity.Token}" WidthRequest="400" Margin="10,0"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout HorizontalOptions="Center">
-            <Button Text="Отправить" Command="{Binding SendCommand}" WidthRequest="150" Margin="0,20"/>
-            <Button Text="Отправить Post" Command="{Binding SendPostCommand}" WidthRequest="150" Margin="0,20"/>
-        </HorizontalStackLayout>
-        <Label Text="{Binding SystemMessage}" HeightRequest="700" WidthRequest="300" HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="MQTT">
+    <Grid x:Name="MQTTGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Text="IP адрес контроллера" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Style="{StaticResource CommonLabel}"/>
+        <Border  Grid.Row="1" Grid.Column="6" Style="{StaticResource PassBorder}">
+            <Border.StrokeShape>
+                <RoundRectangle/>
+            </Border.StrokeShape>
+            <Entry Text="{Binding EthernetEntities.IP1}" Placeholder="192" Style="{StaticResource EntryIP}"/>
+        </Border>
+        <Border  Grid.Row="1" Grid.Column="9" Style="{StaticResource PassBorder}" >
+            <Border.StrokeShape>
+                <RoundRectangle/>
+            </Border.StrokeShape>
+            <Entry Text="{Binding EthernetEntities.IP2}"  Placeholder="168" Style="{StaticResource EntryIP}"/>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="12" Style="{StaticResource PassBorder}" >
+            <Border.StrokeShape>
+                <RoundRectangle/>
+            </Border.StrokeShape>
+            <Entry Text="{Binding EthernetEntities.IP3}" Placeholder="0" Style="{StaticResource EntryIP}"/>
+        </Border>
+        <Border  Grid.Row="1" Grid.Column="15" Style="{StaticResource PassBorder}" >
+            <Border.StrokeShape>
+                <RoundRectangle/>
+            </Border.StrokeShape>
+            <Entry Text="{Binding EthernetEntities.IP4}" Placeholder="225" Style="{StaticResource EntryIP}"/>
+        </Border>
+        <Label Text="Токен"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  VerticalOptions="Center" HorizontalOptions="Center"/>
+        <Entry Text="{Binding CMQTTEntity.Token}" Grid.Row="2"  Grid.Column="3" Grid.ColumnSpan="14" HeightRequest="30" WidthRequest="500"/>
+        <Button Text="Отправить" Command="{Binding SendCommand}" WidthRequest="150" HeightRequest="50"  Grid.Row="4" Grid.Column="6"/>
+        <Button Text="Инит MQTT" Command="{Binding SendPostCommand}" WidthRequest="150" HeightRequest="50"  Grid.Row="4" Grid.Column="12"/>
+        <Label Text="{Binding SystemMessage}"   HorizontalOptions="Center"  Grid.Row="6" Grid.RowSpan="6" Grid.Column="0" Grid.ColumnSpan="18"/>
+        <Label Text="{Binding EthernetEntities.SystemMessage}"   HorizontalOptions="Center"  Grid.Row="8" Grid.RowSpan="6" Grid.Column="0" Grid.ColumnSpan="18"/>
+    </Grid>
 </ContentPage>

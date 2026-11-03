@@ -70,7 +70,7 @@ namespace Android_Silver.Services
 
         public async Task Connect()
         {
-             try
+            try
             {
                 _ethernetEntities.Client = new TcpClient();
                 _ethernetEntities.Client.ReceiveTimeout = 800;
@@ -85,8 +85,6 @@ namespace Android_Silver.Services
                 {
                     cts.Cancel();
                     ConnectExeption("Не удалось подключиться за указаный период");
-                  
-                 
                 }
                 else
                 {
@@ -94,21 +92,20 @@ namespace Android_Silver.Services
                     try
                     {
                         await connectTask;
+                        if (_ethernetEntities.PagesTab == 1)
+                        {
+                            _servActivePageEntities.SetActivePageState(SActivePageState.LoadingPage);
+                        }
+                        _ethernetEntities.EthernetMessage = "Успешное подключение";
+                        _ethernetEntities.SystemMessage = "Успешное подключение";
+                        _ethernetEntities.IsConnected = true;
+                        IsConnecting = false;
+                        _ethernetEntities.CanTryToConnect = !IsConnecting;
                     }
                     catch (Exception ex)
                     {
                         ConnectExeption("Не удалось подключиться за указаный период");
                     }
-
-                    if (_ethernetEntities.PagesTab == 1)
-                    {
-                        _servActivePageEntities.SetActivePageState(SActivePageState.LoadingPage);
-                    }
-                    _ethernetEntities.EthernetMessage = "Успешное подключение";
-                    _ethernetEntities.SystemMessage = "Успешное подключение";
-                    _ethernetEntities.IsConnected = true;
-                    IsConnecting = false;
-                    _ethernetEntities.CanTryToConnect = !IsConnecting;
                 }
             }
             catch (Exception ex)
@@ -126,7 +123,7 @@ namespace Android_Silver.Services
             IsConnecting = false;
             _ethernetEntities.CanTryToConnect = !IsConnecting;
             _ethernetEntities.EthernetMessage = message;
-         
+
         }
 
 
@@ -492,8 +489,12 @@ namespace Android_Silver.Services
             _fbs.CUpdater.PacketsCount.Value = 0;
             _ethernetEntities.IsConnected = false;
             //SystemMessage = "Соединение разорвано";
-            _ethernetEntities.Client.Close();
-            _ethernetEntities.Client.Dispose();
+            if (_ethernetEntities.Client != null)
+            {
+                _ethernetEntities.Client.Close();
+                _ethernetEntities.Client.Dispose();
+            }
+           
             if (_stream != null)
             {
                 _stream.Close();
