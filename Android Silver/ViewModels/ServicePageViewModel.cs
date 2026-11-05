@@ -121,7 +121,7 @@ namespace Android_Silver.ViewModels
             CTcpClientService = DIContainer.Resolve<TcpClientService>();
             CFBs = DIContainer.Resolve<FBs>();
             CMenusEntities = DIContainer.Resolve<MenusEntities>();
-            foreach (StrSet strSet in CMenusEntities.StartMenuCollection[15].StrSetsCollection)
+            foreach (StrSet strSet in CMenusEntities.StartMenuCollection[16].StrSetsCollection)
             {
                 strSet.SwitchIsOnAction -= ExecuteSetSwitch;
                 strSet.SwitchIsOnAction += ExecuteSetSwitch;
