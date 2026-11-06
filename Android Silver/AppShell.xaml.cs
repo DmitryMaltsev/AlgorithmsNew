@@ -58,7 +58,7 @@ namespace Android_Silver
 
         private void ShellContent_Appearing_2(object sender, EventArgs e)
         {
-
+            _ethernetEntities.PagesTab = 2;
         }
     }
 }

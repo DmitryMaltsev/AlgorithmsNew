@@ -1480,6 +1480,5 @@ namespace Android_Silver.Pages
                 CActivePagesEntities.SetActivePageState(ActivePageState.StartPage);
             }
         }
-
     }
 }

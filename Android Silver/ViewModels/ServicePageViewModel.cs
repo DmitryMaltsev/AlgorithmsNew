@@ -3,7 +3,6 @@ using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
 using Android_Silver.Services;
-
 using System.Globalization;
 using System.Windows.Input;
 
@@ -247,21 +246,17 @@ namespace Android_Silver.ViewModels
                 CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
 
             }
-         //   CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
+            //   CActivePagesEntities.SetActivePageState(SActivePageState.LoadingPage);
         }
 
 
         #endregion
 
         #region Base settings
-
-
         private void ExecuteEHSettings(object obj)
         {
             CActivePagesEntities.SetActivePageState(SActivePageState.EHSettingsPage);
         }
-
-
         private void ExecuteFreonCoolerSettings(object obj)
         {
             CActivePagesEntities.SetActivePageState(SActivePageState.FreonSettingsPage);
@@ -281,7 +276,6 @@ namespace Android_Silver.ViewModels
         {
             CActivePagesEntities.SetActivePageState(SActivePageState.SensorsSettingPage);
         }
-
 
         private void ExecuteToSettingsWindow(object obj)
         {
@@ -386,8 +380,6 @@ namespace Android_Silver.ViewModels
                 CTcpClientService.SetCommandToServer(mItem.Address, values);
             }
         }
-
-
         #endregion
 
         private void ExecuteHome(object obj)
@@ -399,7 +391,6 @@ namespace Android_Silver.ViewModels
         {
             CActivePagesEntities.SetActivePageState(SActivePageState.BaseSettingsPage);
         }
-
 
         private void ClientDisconnectedCallback()
         {
@@ -413,7 +404,7 @@ namespace Android_Silver.ViewModels
         private void ExecuteSetEntry(StrSet cStroke)
         {
             string buffer = cStroke.CValString.Replace(",", ".");
-            if (float.TryParse(buffer,CultureInfo.InvariantCulture, out float value))
+            if (float.TryParse(buffer, CultureInfo.InvariantCulture, out float value))
             {
                 cStroke.CVal = value;
             }
@@ -434,6 +425,5 @@ namespace Android_Silver.ViewModels
             int[] arr = { CFBs.CControllerCheck.OverrideIsActive1, CFBs.CControllerCheck.OverrideIsActive2 };
             CTcpClientService.SetCommandToServer(CMenusEntities.ETH_CONTROLLER_SWITCH_ADDR, arr);
         }
-
     }
 }

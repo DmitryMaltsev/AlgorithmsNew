@@ -1,6 +1,7 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
+using Android_Silver.Entities.MQTT;
 using Android_Silver.Entities.ValuesEntities;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
@@ -22,6 +23,8 @@ namespace Android_Silver.Services
 
         private ActivePagesEntities _activePageEntities { get; set; }
 
+        private MQTTEntity _mqttEntities { get; set; }
+
         public ReadWriteService()
         {
             _servActivePageEntities = DIContainer.Resolve<ServiceActivePagesEntities>();
@@ -29,7 +32,7 @@ namespace Android_Silver.Services
             _modesEntities = DIContainer.Resolve<ModesEntities>();
             _pictureSet = DIContainer.Resolve<PicturesSet>();
             _activePageEntities = DIContainer.Resolve<ActivePagesEntities>();
-
+            _mqttEntities = DIContainer.Resolve<MQTTEntity>();
             _fbs = DIContainer.Resolve<FBs>();
         }
         public ushort EthernetData_Read(byte[] value, int startAddr, ushort startIndex, byte func)
@@ -144,9 +147,6 @@ namespace Android_Silver.Services
                 }
                 return startIndex;
             }
-
-
-
             if (startAddr == 20)
             {
                 _fbs.CFreonCoolerSP.ValPerc = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
@@ -882,9 +882,13 @@ namespace Android_Silver.Services
                 startIndex += 2;
                 return startIndex;
             }
-            if (startAddr ==149)
+            if (startAddr == 149 || startAddr == 149 + _menusEntities.WriteOffset)
             {
-                startIndex += 2;
+                ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
+                if (buffer >= 0 && buffer <= 1)
+                {
+                    _mqttEntities.MQTTInited = (byte)buffer;
+                }
                 return startIndex;
             }
             if (startAddr == 150)
@@ -892,6 +896,7 @@ namespace Android_Silver.Services
                 ushort buffer = (ushort)(value[startIndex++] << 8 | value[startIndex++]);
                 if (buffer >= 0 && buffer <= 255)
                 {
+
                     _fbs.CUpdater.FWVerCur[0] = (byte)buffer;
                 }
                 return startIndex;

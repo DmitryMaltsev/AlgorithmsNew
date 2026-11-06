@@ -10,12 +10,14 @@ namespace Android_Silver.Entities.MQTT
 {
     public class MQTTEntity:BindableBase
     {
-      
+        public int DeviceID { get; set; }
+        public int Tag { get; set; }
+
+        public int MQTTInited;
         public string server { get; set; }
         public int port { get; set; }
-
+        public byte CRC { get; set; }
         private string _token { get; set; } = "gTKZKsSHJeTdbmEWOpNEF4Ntk81YJf4Hhtv2LaYUBxkTcocCzEWM4MQc";
-
         public string Token
         {
             get{ return _token;}

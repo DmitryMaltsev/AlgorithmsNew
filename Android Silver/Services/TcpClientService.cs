@@ -1,8 +1,10 @@
 ﻿using Android_Silver.Entities;
 using Android_Silver.Entities.FBEntities;
 using Android_Silver.Entities.Modes;
+using Android_Silver.Entities.MQTT;
 using Android_Silver.Entities.Visual;
 using Android_Silver.Entities.Visual.Menus;
+using Android_Silver.ViewModels;
 
 using System.Net.Sockets;
 using System.Text;
@@ -50,6 +52,7 @@ namespace Android_Silver.Services
         public List<ushort> WriteValuesList = new List<ushort>();
         private byte[] _readValuesArr;
 
+        private MQTTEntity _mqttEntitty { get; set; }
         public TcpClientService()
         {
             _ethernetEntities = DIContainer.Resolve<EthernetEntities>();
@@ -64,6 +67,7 @@ namespace Android_Silver.Services
             _filesEntities = DIContainer.Resolve<FilesEntities>();
             _fbs.OtherSettings.SpecModeAction += SpecModeCallback;
             _readWriteService = DIContainer.Resolve<ReadWriteService>();
+            _mqttEntitty = DIContainer.Resolve<MQTTEntity>();
             //isConnected=TryConnect(tcpClient, ip, port, ref _systemMessage);
             //RecieveData(100,8);
         }
@@ -123,7 +127,6 @@ namespace Android_Silver.Services
             IsConnecting = false;
             _ethernetEntities.CanTryToConnect = !IsConnecting;
             _ethernetEntities.EthernetMessage = message;
-
         }
 
 
@@ -216,6 +219,17 @@ namespace Android_Silver.Services
                 {
                     _ethernetEntities.CMessageState = MessageStates.ServiceMessage2;
                 }
+            }
+            if (_ethernetEntities.PagesTab == 2)
+            {
+                if (_mqttEntitty.MQTTInited == 1)
+                {
+                    _ethernetEntities.CMessageState = MessageStates.MQTTMessage;
+                }
+                else
+                {
+                    _ethernetEntities.CMessageState = MessageStates.UserMessage;
+                }
 
             }
         }
@@ -262,8 +276,29 @@ namespace Android_Silver.Services
                             for (int i = 0; i < _fbs.CUpdater.UseCharData.GetLength(1); i++)
                             {
                                 messToClient += _fbs.CUpdater.UseCharData[_fbs.CUpdater.CurrentPacket - 1, i];
+                                
                             }
                             messToClient += "\r\n";
+                        }
+                        break;
+                    case MessageStates.MQTTMessage:
+                        {
+                            messToClient = String.Empty;
+                            // "," + _mqttEntitty.CRC + 
+                            if (_mqttEntitty.Tag == 1)
+                            {
+                                messToClient = _mqttEntitty.Tag.ToString() + "," + _mqttEntitty.server + ","
+                                    + _mqttEntitty.port + "," + _mqttEntitty.user + "," + _mqttEntitty.password;
+                                byte[] bytes = System.Text.Encoding.ASCII.GetBytes(messToClient);
+                                byte result = _mathService.CalculateChecksum(bytes);
+                                char[] crcChar = _mathService.GetHexCharsFromByte(result);
+                                messToClient +=","+crcChar[0]+crcChar[1]+"\r\n";
+                            }
+                            else
+                            if (_mqttEntitty.Tag == 2)
+                            {
+                                messToClient = _mqttEntitty.Tag.ToString() + "\r\n";
+                            }
                         }
                         break;
                 }
@@ -361,92 +396,133 @@ namespace Android_Silver.Services
                             _ethernetEntities.SystemMessage = "Ошибка пакета";
                             _ethernetEntities.UpdateErrs += 1;
                         }
-
                     }
                     else
+                    if (_mqttEntitty.MQTTInited == 1)
                     {
-                        //Запись в контроллер
-                        if (WriteValuesList.Count > 0)
-                        {
-                            byte[] buffer = new byte[8 + (WriteValuesList.Count - 1) * 2];
+                        byte[] buffer = new byte[2200];
+                        StreamWriter writer = new StreamWriter(_stream, Encoding.ASCII);
+                        writer.WriteLine(command);
+                        writer.Flush();
+                        byte[] respData = new byte[2200];
 
-                            buffer[0] = 1;
-                            buffer[1] = 16;
-                            //Начальный регистр
-                            buffer[2] = (byte)(WriteValuesList[0] >> 8);
-                            buffer[3] = (byte)(WriteValuesList[0]);
-                            //Количество регистров
-                            buffer[4] = (byte)((WriteValuesList.Count - 1) >> 8);
-                            buffer[5] = (byte)(WriteValuesList.Count - 1);
-                            byte addressIndex = 6;
-                            for (int i = 1; i < WriteValuesList.Count; i++)
-                            {
-                                buffer[addressIndex++] = (byte)(WriteValuesList[i] >> 8);
-                                buffer[addressIndex++] = (byte)(WriteValuesList[i]);
-                            }
-                            ushort crc = GetCRC(buffer, (ushort)(buffer.Length - 2));
-                            buffer[buffer.Length - 2] = (byte)(crc & 0xff);
-                            buffer[buffer.Length - 1] = (byte)(crc >> 8);
-                            _stream.Write(buffer, 0, buffer.Length);
-                        }
-                        else
+                        int sBytes = _stream.Read(respData, 0, respData.Length);
+
+                        string result = string.Empty;
+                        do
                         {
-                            //Чтение из контроллера
-                            ushort crc = GetCRC(_readValuesArr, (ushort)_readValuesArr.Length);
-                            byte[] sendData = new byte[_readValuesArr.Length + 2];
-                            for (int i = 0; i < _readValuesArr.Length; i++)
-                            {
-                                sendData[i] = _readValuesArr[i];
-                            }
-                            sendData[sendData.Length - 2] = (byte)(crc & 0xff);
-                            sendData[sendData.Length - 1] = (byte)(crc >> 8);
-                            _stream.Write(sendData, 0, sendData.Length);
+                            result += (Encoding.ASCII.GetString(respData, 0, sBytes));
                         }
-                        //Принятие после отправленного пакета
-                        byte[] data = new byte[2200];
-                        int bytes = _stream.Read(data, 0, data.Length);
-                        while (_stream.DataAvailable) { }
-                        ;
-                        if (IsModbusDataRight(data, (ushort)(bytes)))
+                        while (_stream.DataAvailable);
+
+                        //Парсинг ответа
+                        if (_mqttEntitty.Tag == 1)
                         {
-                            byte func = data[1];
-                            ushort addr1 = (ushort)(data[2] << 8);
-                            ushort addr2 = data[3];
-                            startAddress = (ushort)(data[2] << 8 | data[3]); //(ushort)(addr1 | addr2);//(ushort)(data[2] << 8) | (ushort)(data[3]);
-                            ushort regsCount = (ushort)(data[4] << 8 | data[5]);
-                            if (func == 3)
+                            string responseCheck = _mqttEntitty.Tag.ToString() + "," + _mqttEntitty.server + "," + _mqttEntitty.port + ","
+                                                + _mqttEntitty.user + "," + _mqttEntitty.password + "\r\n\r\n";
+                            if (result == responseCheck)
                             {
-                                ushort bufferLength = 6;
-                                for (ushort i = startAddress; i < startAddress + regsCount; i++)
-                                {
-                                    bufferLength = _readWriteService.EthernetData_Read(data, i, bufferLength, func);
-                                }
-                            }
-                            else if (func == 16)
-                            {
-                                int addrCount = WriteValuesList.Count - 1;
-                                data = new byte[addrCount * 2];
-                                int index = 0;
-                                for (int j = 1; j < WriteValuesList.Count; j++)
-                                {
-                                    data[index++] = (byte)(WriteValuesList[j] >> 8);
-                                    data[index++] = (byte)WriteValuesList[j];
-                                }
-                                ushort startIndex = 0;
-                                for (ushort i = startAddress; i < startAddress + addrCount; i++)
-                                {
-                                    startIndex = _readWriteService.EthernetData_Read(data, i + _menusEntities.WriteOffset, startIndex, func);
-                                }
-                                WriteValuesList.Clear();
+                                _mqttEntitty.Tag = 2;
                             }
                         }
                         else
+                        if (_mqttEntitty.Tag == 2)
                         {
-                            IsSending = false;
-                            ResieveCounter += 1;
-                            return false;
+                            var result2 = result.Split(',');
+                            if (result2[0] == "\u0002")
+                            {
+                                if (result2[1] == "OK\r\n\0")
+                                {
+                                    _mqttEntitty.Tag = 1;
+                                    // _mqttEntitty.MQTTInited = 0;
+                                }
+                            }
                         }
                     }
+                        else
+                        {
+                            //Запись в контроллер
+                            if (WriteValuesList.Count > 0)
+                            {
+                                byte[] buffer = new byte[8 + (WriteValuesList.Count - 1) * 2];
+
+                                buffer[0] = 1;
+                                buffer[1] = 16;
+                                //Начальный регистр
+                                buffer[2] = (byte)(WriteValuesList[0] >> 8);
+                                buffer[3] = (byte)(WriteValuesList[0]);
+                                //Количество регистров
+                                buffer[4] = (byte)((WriteValuesList.Count - 1) >> 8);
+                                buffer[5] = (byte)(WriteValuesList.Count - 1);
+                                byte addressIndex = 6;
+                                for (int i = 1; i < WriteValuesList.Count; i++)
+                                {
+                                    buffer[addressIndex++] = (byte)(WriteValuesList[i] >> 8);
+                                    buffer[addressIndex++] = (byte)(WriteValuesList[i]);
+                                }
+                                ushort crc = GetCRC(buffer, (ushort)(buffer.Length - 2));
+                                buffer[buffer.Length - 2] = (byte)(crc & 0xff);
+                                buffer[buffer.Length - 1] = (byte)(crc >> 8);
+                                _stream.Write(buffer, 0, buffer.Length);
+                            }
+                            else
+                            {
+                                //Чтение из контроллера
+                                ushort crc = GetCRC(_readValuesArr, (ushort)_readValuesArr.Length);
+                                byte[] sendData = new byte[_readValuesArr.Length + 2];
+                                for (int i = 0; i < _readValuesArr.Length; i++)
+                                {
+                                    sendData[i] = _readValuesArr[i];
+                                }
+                                sendData[sendData.Length - 2] = (byte)(crc & 0xff);
+                                sendData[sendData.Length - 1] = (byte)(crc >> 8);
+                                _stream.Write(sendData, 0, sendData.Length);
+                            }
+                            //Принятие после отправленного пакета
+                            byte[] data = new byte[2200];
+                            int bytes = _stream.Read(data, 0, data.Length);
+                            while (_stream.DataAvailable) { }
+                            ;
+                            if (IsModbusDataRight(data, (ushort)(bytes)))
+                            {
+                                byte func = data[1];
+                                ushort addr1 = (ushort)(data[2] << 8);
+                                ushort addr2 = data[3];
+                                startAddress = (ushort)(data[2] << 8 | data[3]); //(ushort)(addr1 | addr2);//(ushort)(data[2] << 8) | (ushort)(data[3]);
+                                ushort regsCount = (ushort)(data[4] << 8 | data[5]);
+                                if (func == 3)
+                                {
+                                    ushort bufferLength = 6;
+                                    for (ushort i = startAddress; i < startAddress + regsCount; i++)
+                                    {
+                                        bufferLength = _readWriteService.EthernetData_Read(data, i, bufferLength, func);
+                                    }
+                                }
+                                else if (func == 16)
+                                {
+                                    int addrCount = WriteValuesList.Count - 1;
+                                    data = new byte[addrCount * 2];
+                                    int index = 0;
+                                    for (int j = 1; j < WriteValuesList.Count; j++)
+                                    {
+                                        data[index++] = (byte)(WriteValuesList[j] >> 8);
+                                        data[index++] = (byte)WriteValuesList[j];
+                                    }
+                                    ushort startIndex = 0;
+                                    for (ushort i = startAddress; i < startAddress + addrCount; i++)
+                                    {
+                                        startIndex = _readWriteService.EthernetData_Read(data, i + _menusEntities.WriteOffset, startIndex, func);
+                                    }
+                                    WriteValuesList.Clear();
+                                }
+                            }
+                            else
+                            {
+                                IsSending = false;
+                                ResieveCounter += 1;
+                                return false;
+                            }
+                        }
                     IsSending = false;
                     ResieveCounter += 1;
                     return true;
@@ -494,15 +570,13 @@ namespace Android_Silver.Services
                 _ethernetEntities.Client.Close();
                 _ethernetEntities.Client.Dispose();
             }
-           
+
             if (_stream != null)
             {
                 _stream.Close();
                 _stream.Dispose();
             }
         }
-
-
 
         /// <summary>
         /// Основной метод передачи данных на сервер
@@ -521,7 +595,6 @@ namespace Android_Silver.Services
                 }
             }
         }
-
 
         #region OtherSettings callbacks
         private void SpecModeCallback(bool val)

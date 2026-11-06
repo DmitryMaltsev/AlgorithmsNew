@@ -15,7 +15,8 @@ namespace Android_Silver.Entities
         ServiceMessage1,
         ServiceMessage2,
         ControllerCheck,
-        UpdaterMessage
+        UpdaterMessage,
+        MQTTMessage
     }
 
     public class EthernetEntities : BindableBase

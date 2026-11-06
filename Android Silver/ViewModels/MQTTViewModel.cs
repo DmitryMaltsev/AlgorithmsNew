@@ -62,6 +62,13 @@ namespace Android_Silver.ViewModels
             CPictureSet = DIContainer.Resolve<PicturesSet>();
             _fileSystemService = DIContainer.Resolve<FileSystemService>();
             //   ConnectCommand = new Command(ExecuteConnect);
+            CMQTTEntity.server = "https://dash.wqtt.ru";
+            CMQTTEntity.port = 21710;
+            CMQTTEntity.CRC = 23;
+            CMQTTEntity.user = "u_I59LTD";
+            CMQTTEntity.password = "HojKCWkv";
+            CMQTTEntity.DeviceID = 83738;
+            CMQTTEntity.Tag = 1;
         }
 
         private void ExecuteSend()
@@ -69,15 +76,15 @@ namespace Android_Silver.ViewModels
             //MyData result = Task.Run(() => AsyncSend()).GetAwaiter().GetResult();
         }
 
-
         public async void AsyncSend()
         {
             CTcpClientService.Disconnect();
             await ExecuteConnect();
             if (EthernetEntities.IsConnected)
             {
-                int[] index = { 1 };
-                CTcpClientService.SetCommandToServer(149, index);
+                CMQTTEntity.MQTTInited = 1;
+               // int[] index = { 1 };
+               //  CTcpClientService.SetCommandToServer(149, index);
             }
             //MQTTSendGet("");
             ////MQTTSendGet("https://dash.wqtt.ru/api/devices/82116");
